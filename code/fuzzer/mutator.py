@@ -188,8 +188,6 @@ class NoSQLInjectionParamMutator(ParamMutator):
         if random.random() < 0.05:
             payload = '{"$ne":null}'
         elif random.random() < 0.05:
-            payload = "cats"
-        elif random.random() < 0.05:
             payload = '%7B%22%24ne%22%3Anull%7D'
         else:
             return None
