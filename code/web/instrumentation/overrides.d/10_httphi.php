@@ -9,28 +9,13 @@ uopz_set_return(
         $httphi = false;
         try{
             $result = header($string);
-
-            $headers = headers_list();
-            foreach ($headers as $header_line) {
-                if (
-                    stripos($header_line, "Location: ") === 0 ||
-                    stripos($header_line, "Content-Type: ") === 0 ||
-                    stripos($header_line, "Cache-Control: ") === 0
-                ) {
-                    if (str_contains($header_line, $string)) {
-                        $httphi = true;
-                        break;
-                    }
-                }
-            }
-
             $the_exception = null;
         }catch(Throwable $e) {
             $result = false;
             $the_exception = $e;
         }
 
-        if ($result === false || $httphi === true) {
+        if (preg_match('/[\0\r\n]/', $string)) {
             if($the_exception) {
                 $errno = -1;
                 $errstr = $the_exception->getMessage();
@@ -63,24 +48,13 @@ uopz_set_return(
         $httphi = false;
         try {
             $result = setcookie($name, $value, $expires, $path, $domain, $secure, $httponly);
-
-            $headers = headers_list();
-            foreach ($headers as $header_line) {
-                if (stripos($header_line, "Set-Cookie: ") === 0) {
-                    if (str_contains($header_line, $string)) {
-                        $httphi = true;
-                        break;
-                    }
-                }
-            }
-
             $the_exception = false;
         } catch(Throwable $e) {
             $result = false;
             $the_exception = $e;
         }
 
-        if ($result === false || $httphi === true) {
+        if ($result === false) {
             $json = json_encode(
                 [
                     'function' => 'setcookie',
