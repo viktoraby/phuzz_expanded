@@ -6,7 +6,6 @@
 uopz_set_return(
     'header',
     function ($string) {
-        $httphi = false;
         try{
             $result = header($string);
             $the_exception = null;
@@ -45,7 +44,6 @@ uopz_set_return(
 uopz_set_return(
     'setcookie',
     function ($name, $value = "", $expires = 0, $path = "", $domain = "", $secure = false, $httponly = false) {
-        $httphi = false;
         try {
             $result = setcookie($name, $value, $expires, $path, $domain, $secure, $httponly);
             $the_exception = false;
