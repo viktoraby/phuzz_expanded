@@ -156,6 +156,18 @@ class LDAPInjectionParamMutator(ParamMutator):
             return None
 
         return payload
+
+class HTTPHeaderInjectionParamMutator(ParamMutator):
+    def mutate(self, string):
+        if random.random() < 0.05:
+            payload = "\r\n"
+        elif random.random() < 0.05:
+            payload = "\0"
+        else:
+            return None
+        
+        index = random.randint(0, len(string))
+        return string[:index] + payload + string[index:]
     
 class ServerSideTemplateInjectionParamMutator(ParamMutator):
     def mutate(self, string):
@@ -292,7 +304,8 @@ class DefaultMutator(Mutator):
             LDAPInjectionParamMutator(),
             ServerSideTemplateInjectionParamMutator(),
             ServerSideRequestForgeryParamMutator(),
-            NoSQLInjectionParamMutator()
+            NoSQLInjectionParamMutator(),
+            HTTPHeaderInjectionParamMutator()
         ]
 
 class SingleMutator(Mutator):
@@ -315,7 +328,8 @@ class SingleMutator(Mutator):
             LDAPInjectionParamMutator(),
             ServerSideTemplateInjectionParamMutator(),
             ServerSideRequestForgeryParamMutator(),
-            NoSQLInjectionParamMutator()
+            NoSQLInjectionParamMutator(),
+            HTTPHeaderInjectionParamMutator()
         ]
 
         self.iterator = self.mutation_iterator()
