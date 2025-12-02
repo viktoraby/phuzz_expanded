@@ -683,10 +683,6 @@ class ImageSSRFVulnCheck(VulnCheck):
         try:
             response_bytes = candidate.response.content
 
-            # Schneller Check: Enthält der Response den Payload-Link selbst?
-            if test_payload in candidate.response.text:
-                return True
-
             # Toleranzvergleich
             similarity = SequenceMatcher(
                 None,
