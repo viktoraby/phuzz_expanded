@@ -39,7 +39,7 @@ services:
       context: ./web
       dockerfile: Dockerfile
     environment:
-      APPLICATION_TYPE: bwapp
+      APPLICATION_TYPE: nosql
       FUZZER_COVERAGE_PATH: /var/www/html/
       FUZZER_COMPRESS: 1
       REQUIRES_DB: 1
@@ -265,7 +265,7 @@ services:
     environment:
       PYTHONUNBUFFERED: 1
       FUZZER_NODE_ID: 8
-      FUZZER_CONFIG: bwapp/rlfi
+      FUZZER_CONFIG: nosql/nosqli
       FUZZER_CLEANUP: 1
       FUZZER_COMPRESS: 1
     volumes:

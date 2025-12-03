@@ -739,49 +739,6 @@ class NoSQLiVulnCheck(VulnCheck):
         if os.path.isfile(nosqli_file):
             return True
         return False
-
-class ParamBasedNoSQLInjectionVulnCheck(VulnCheck):
-    NAME = "NoSQLi"
-
-    def __init__(self, nosqli_errors_folder):
-        self.nosqli_errors_folder = nosqli_errors_folder
-
-    def check(self, candidate):
-        # Prüfen, ob der Parameter {"$ne": null} in den Fuzz-Parametern enthalten ist
-        for vuln_type in candidate.fuzz_params.keys():
-            for pkey, pval in candidate.fuzz_params[vuln_type].items():
-                if pval == '{"$ne":null}' or pval == "cats" or pval == "%7B%22%24ne%22%3Anull%7D":
-                   if candidate.response:
-                        # Debugging: Ausgabe der gesamten Antwort für eine genauere Prüfung
-                        
-                        # 1. Prüfen, ob der Fehlercode im Text enthalten ist
-                        if "unknown top level operator: $ne" in candidate.response.text:
-                            print("Fehlercode gefunden im Text!")  # Debugging
-                            return True
-                        
-                        # 2. Falls die Antwort im HTML-Format vorliegt, durchsuchen wir die HTML-Struktur nach dem Fehler
-                        if "<html>" in candidate.response.text.lower():  # Falls es sich um HTML handelt
-                            if "unknown top level operator: $ne" in candidate.response.text:
-                                print("Fehlercode in HTML gefunden!")  # Debugging
-                                return True
-                        
-                        # 3. Versuch, Fehler im Header zu finden, falls PHP Fehler in den Headern ausgibt
-                        if "X-PHP-Error" in candidate.response.headers:
-                            error_message = candidate.response.headers["X-PHP-Error"]
-                            if "unknown top level operator: $ne" in error_message:
-                                print("Fehlercode im PHP-Header gefunden!")  # Debugging
-                                return True
-                        
-                        # 4. Versuch, Antwort als JSON zu parsen (falls PHP Fehler in einem strukturierten Format gibt)
-                        try:
-                            response_json = candidate.response.json()
-                            if "error" in response_json and "message" in response_json:
-                                if "unknown top level operator: $ne" in response_json["message"]:
-                                    print("Fehlercode im JSON gefunden!")  # Debugging
-                                    return True
-                        except ValueError:
-                            pass  # Falls es kein gültiges JSON ist
-        return False
     
 class BrokenParamBasedNoSQLiVulnCheck(VulnCheck):
     NAME = "NoSQLi"
