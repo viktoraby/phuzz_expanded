@@ -190,6 +190,8 @@ class ServerSideRequestForgeryParamMutator(ParamMutator):
     def mutate(self, string):
         if random.random() < 0.05:
             payload = "https://raw.githubusercontent.com/gehaxelt/phuzz/refs/heads/main/code/web/applications/bwapp/images/evil_bee.png"
+        elif random.random() < 0.05:
+            payload = "https://testytesttestestestest.com/hahahaha.jpg"
         else:
             return None
         
