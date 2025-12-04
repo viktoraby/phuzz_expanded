@@ -22,8 +22,8 @@ if (!getenv("FUZZER_SETUP") && isset($_SERVER['HTTP_X_FUZZER_COVID'])) {
 	define('__FUZZER__XXE_ERRORS_PATH', '/shared-tmpfs/xxe-error-reports/');
 	define('__FUZZER__LDAPI_ERRORS_PATH', '/shared-tmpfs/ldapi-error-reports/');
 	define('__FUZZER__SSTI_ERRORS_PATH', '/shared-tmpfs/ssti-error-reports/');
-	define('__FUZZER__SSRF_ERRORS_PATH', '/shared-tmpfs/ssrf-error-reports/');
 	define('__FUZZER__HTTPHI_ERRORS_PATH', '/shared-tmpfs/httphi-error-reports/');
+	define('__FUZZER__SSRF_ERRORS_PATH', '/shared-tmpfs/ssrf-error-reports/');
 	define('__FUZZER__NOSQLI_ERRORS_PATH', '/shared-tmpfs/nosqli-error-reports/');
 
 	define('__FUZZER__COVID', $_SERVER['HTTP_X_FUZZER_COVID']);
