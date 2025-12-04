@@ -726,6 +726,9 @@ uopz_set_return(
             );
             __fuzzer_file_put_contents(__FUZZER__PATHTRAVERSAL_ERRORS_PATH . __FUZZER__COVID . ".json", $json . "\n", FILE_APPEND);
             chmod(__FUZZER__PATHTRAVERSAL_ERRORS_PATH . __FUZZER__COVID . ".json", 0777);
+
+            __fuzzer_file_put_contents(__FUZZER__SSRF_ERRORS_PATH . __FUZZER__COVID . ".json", $json . "\n", FILE_APPEND);
+            chmod(__FUZZER__SSRF_ERRORS_PATH . __FUZZER__COVID . ".json", 0777);
             if($the_exception != null) {
                 throw $the_exception;
             }
@@ -1382,38 +1385,4 @@ uopz_set_return(
     },
     true
 );
-
-uopz_set_return(
-    'include',
-    function ($filename) {
-        try {
-            $result = include($filename);
-            $the_exception = false;
-        } catch (Throwable $e) {
-            $result = false;
-            $the_exception = $e;
-        }
-
-        if ($result === false) {
-            $json = json_encode(
-                [
-                    'function' => 'include',
-                    'params' => [$filename],
-                    'error' => $the_exception ? $e->getMessage() : 'unknown'
-                ]
-            );
-            __fuzzer_file_put_contents(__FUZZER__SSRF_ERRORS_PATH . __FUZZER__COVID . ".json", $json . "\n", FILE_APPEND);
-            chmod(__FUZZER__SSRF_ERRORS_PATH . __FUZZER__COVID . ".json", 0777);
-
-            if ($the_exception != null) {
-                throw $the_exception;
-            }
-        }
-
-        return $result;
-    },
-    true
-);
-
-
 ?>
