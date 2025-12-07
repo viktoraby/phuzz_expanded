@@ -4,7 +4,7 @@ services:
       context: ./wfuzz
       dockerfile: Dockerfile
     environment:
-      FUZZER_CONFIG: dvwa/sqli_blind_high
+      FUZZER_CONFIG: bwapp/pathtraversal
     volumes:
       - ./fuzzer:/app
       - ./wfuzz/data:/home/wfuzz/data
