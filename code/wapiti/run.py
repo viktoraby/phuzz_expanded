@@ -39,7 +39,15 @@ if preq.body:
 
 URL = preq.url
 
-cmd = ["wapiti","--flush-session", "-f", "html", "-dr", "-o", f"{output_dir}/", "--log", f"{output_dir}/output.log", "-u", URL]
+cmd = [
+    "wapiti",
+    "--flush-session",
+    "-f", "html",
+    "-dr", "1",
+    "-o", f"{output_dir}/",
+    "--log", f"{output_dir}/output.log",
+    "-u", URL
+]
 cmd += args
 print(cmd)
 subprocess.run(cmd)
