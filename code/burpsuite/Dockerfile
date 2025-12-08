@@ -1,7 +1,7 @@
 FROM ubuntu:latest@sha256:77906da86b60585ce12215807090eb327e7386c8fafb5402369e421f44eff17e
 
-RUN apt-get -y update --fix-missing && apt-get -y upgrade
-RUN apt-get -y install jython wget openssl ca-certificates openjdk-17-jdk --no-install-recommends
+RUN apt -y update --fix-missing && apt -y upgrade
+RUN apt -y install jython wget openssl ca-certificates openjdk-21-jdk openjdk-21-demo openjdk-21-doc openjdk-21-jre-headless openjdk-21-source --no-install-recommends
 
 RUN groupadd -r burp && useradd -r -g burp burp
 WORKDIR /home/burp/

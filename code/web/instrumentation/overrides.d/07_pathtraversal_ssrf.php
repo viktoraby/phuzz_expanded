@@ -726,9 +726,7 @@ uopz_set_return(
             );
             __fuzzer_file_put_contents(__FUZZER__PATHTRAVERSAL_ERRORS_PATH . __FUZZER__COVID . ".json", $json . "\n", FILE_APPEND);
             chmod(__FUZZER__PATHTRAVERSAL_ERRORS_PATH . __FUZZER__COVID . ".json", 0777);
-
-            __fuzzer_file_put_contents(__FUZZER__SSRF_ERRORS_PATH . __FUZZER__COVID . ".json", $json . "\n", FILE_APPEND);
-            chmod(__FUZZER__SSRF_ERRORS_PATH . __FUZZER__COVID . ".json", 0777);
+            
             if($the_exception != null) {
                 throw $the_exception;
             }
