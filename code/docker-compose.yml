@@ -39,7 +39,7 @@ services:
       context: ./web
       dockerfile: Dockerfile
     environment:
-      APPLICATION_TYPE: bwapp
+      APPLICATION_TYPE: xvwa
       FUZZER_COVERAGE_PATH: /var/www/html/
       FUZZER_COMPRESS: 1
       REQUIRES_DB: 1
@@ -108,7 +108,7 @@ services:
       context: ./burpsuite
       dockerfile: Dockerfile
     environment:
-      FUZZER_CONFIG: bwapp/sqli_get_search
+      FUZZER_CONFIG: xvwa/ssti
     volumes:
       - ./fuzzer:/app
       - ./burpsuite/data:/home/burp/data
@@ -121,7 +121,7 @@ services:
       context: ./zap
       dockerfile: Dockerfile
     environment:
-      FUZZER_CONFIG: bwapp/sqli_get_search
+      FUZZER_CONFIG: xvwa/ssti
     volumes:
       - ./fuzzer:/app
       - ./zap/data:/zap/data
@@ -133,7 +133,7 @@ services:
       context: ./wapiti
       dockerfile: Dockerfile
     environment:
-      FUZZER_CONFIG: bwapp/sqli_get_search
+      FUZZER_CONFIG: xvwa/ssti
     volumes:
       - ./fuzzer:/app
       - ./wapiti/data:/home/wapiti/data
@@ -145,7 +145,7 @@ services:
       context: ./wfuzz
       dockerfile: Dockerfile
     environment:
-      FUZZER_CONFIG: bwapp/sqli_get_search
+      FUZZER_CONFIG: xvwa/ssti
     volumes:
       - ./fuzzer:/app
       - ./wfuzz/data:/home/wfuzz/data
@@ -265,7 +265,7 @@ services:
     environment:
       PYTHONUNBUFFERED: 1
       FUZZER_NODE_ID: 8
-      FUZZER_CONFIG: bwapp/sqli_get_search
+      FUZZER_CONFIG: xvwa/ssti
       FUZZER_CLEANUP: 1
       FUZZER_COMPRESS: 1
     volumes:
