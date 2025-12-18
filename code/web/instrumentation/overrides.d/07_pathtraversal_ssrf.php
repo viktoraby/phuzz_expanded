@@ -1383,4 +1383,36 @@ uopz_set_return(
     },
     true
 );
+uopz_set_return(
+    'simplexml_load_string',
+    function ($data, $options = 0, $namespace = "", $isPrefix = false) {
+        try {
+            $result = simplexml_load_string($data, null, $options, $namespace, $isPrefix);
+            $the_exception = false;
+        } catch (Throwable $e) {
+            $result = false;
+            $the_exception = $e;
+        }
+
+        if ($result === false) {
+            $json = json_encode(
+                [
+                    'function' => 'simplexml_load_string',
+                    'params' => [$data],
+                    'error' => $the_exception ? $the_exception->getMessage() : 'unknown'
+                ]
+            );
+
+            __fuzzer_file_put_contents(__FUZZER__SSRF_ERRORS_PATH . __FUZZER__COVID . ".json", $json . "\n", FILE_APPEND);
+            chmod(__FUZZER__SSRF_ERRORS_PATH . __FUZZER__COVID . ".json", 0777);
+
+            if ($the_exception != null) {
+                throw $the_exception;
+            }
+        }
+
+        return $result;
+    },
+    true
+);
 ?>
