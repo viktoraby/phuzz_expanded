@@ -108,7 +108,7 @@ services:
       context: ./burpsuite
       dockerfile: Dockerfile
     environment:
-      FUZZER_CONFIG: bwapp/xxe2
+      FUZZER_CONFIG: bwapp/xxe
     volumes:
       - ./fuzzer:/app
       - ./burpsuite/data:/home/burp/data
@@ -121,7 +121,7 @@ services:
       context: ./zap
       dockerfile: Dockerfile
     environment:
-      FUZZER_CONFIG: bwapp/xxe2
+      FUZZER_CONFIG: bwapp/xxe
     volumes:
       - ./fuzzer:/app
       - ./zap/data:/zap/data
@@ -133,7 +133,7 @@ services:
       context: ./wapiti
       dockerfile: Dockerfile
     environment:
-      FUZZER_CONFIG: bwapp/xxe2
+      FUZZER_CONFIG: bwapp/xxe
     volumes:
       - ./fuzzer:/app
       - ./wapiti/data:/home/wapiti/data
@@ -145,7 +145,7 @@ services:
       context: ./wfuzz
       dockerfile: Dockerfile
     environment:
-      FUZZER_CONFIG: bwapp/xxe2
+      FUZZER_CONFIG: bwapp/xxe
     volumes:
       - ./fuzzer:/app
       - ./wfuzz/data:/home/wfuzz/data
@@ -265,7 +265,7 @@ services:
     environment:
       PYTHONUNBUFFERED: 1
       FUZZER_NODE_ID: 8
-      FUZZER_CONFIG: bwapp/xxe2
+      FUZZER_CONFIG: bwapp/xxe
       FUZZER_CLEANUP: 1
       FUZZER_COMPRESS: 1
     volumes:
