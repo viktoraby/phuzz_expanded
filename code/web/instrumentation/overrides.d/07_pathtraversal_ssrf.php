@@ -1383,6 +1383,7 @@ uopz_set_return(
     },
     true
 );
+
 uopz_set_return(
     'simplexml_load_string',
     function ($data, $options = 0, $namespace = "", $isPrefix = false) {
@@ -1399,6 +1400,76 @@ uopz_set_return(
                 [
                     'function' => 'simplexml_load_string',
                     'params' => [$data],
+                    'error' => $the_exception ? $the_exception->getMessage() : 'unknown'
+                ]
+            );
+
+            __fuzzer_file_put_contents(__FUZZER__SSRF_ERRORS_PATH . __FUZZER__COVID . ".json", $json . "\n", FILE_APPEND);
+            chmod(__FUZZER__SSRF_ERRORS_PATH . __FUZZER__COVID . ".json", 0777);
+
+            if ($the_exception != null) {
+                throw $the_exception;
+            }
+        }
+
+        return $result;
+    },
+    true
+);
+
+uopz_set_return(
+    'curl_setopt',
+    function ($ch, $option, $value) {
+        try {
+            $result = curl_setopt($ch, $option, $value);
+            $the_exception = false;
+        } catch (Throwable $e) {
+            $result = false;
+            $the_exception = $e;
+        }
+
+        if ($result === false) {
+            $json = json_encode(
+                [
+                    'function' => 'curl_setopt',
+                    'params' => [
+                        'ch' => (string) $ch,
+                        'option' => $option,
+                        'value' => $value
+                    ],
+                    'error' => $the_exception ? $the_exception->getMessage() : 'unknown'
+                ]
+            );
+
+            __fuzzer_file_put_contents(__FUZZER__SSRF_ERRORS_PATH . __FUZZER__COVID . ".json", $json . "\n", FILE_APPEND);
+            chmod(__FUZZER__SSRF_ERRORS_PATH . __FUZZER__COVID . ".json", 0777);
+
+            if ($the_exception != null) {
+                throw $the_exception;
+            }
+        }
+
+        return $result;
+    },
+    true
+);
+
+uopz_set_return(
+    'fpassthru',
+    function ($handle) {
+        try {
+            $result = fpassthru($handle);
+            $the_exception = false;
+        } catch (Throwable $e) {
+            $result = false;
+            $the_exception = $e;
+        }
+
+        if ($result === false) {
+            $json = json_encode(
+                [
+                    'function' => 'fpassthru',
+                    'params' => [$handle],
                     'error' => $the_exception ? $the_exception->getMessage() : 'unknown'
                 ]
             );
