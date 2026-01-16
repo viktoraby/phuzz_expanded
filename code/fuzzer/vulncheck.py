@@ -573,20 +573,16 @@ class ParamBasedSSTIVulnCheck(VulnCheck):
         self.ssti_errors_folder = ssti_errors_folder
 
     def check(self, candidate):
-        # Unterstützte SSTI-Payloads
-        payloads = ["{{99901 * 99991}}", "#{99901*99991}", "{{99901*'99991'}}"]
+        number1 = "99901"
+        number2 = "99991"
         rendered_value = "9989200891"
 
-        # Durchsuche alle Fuzz-Parameter in der Anfrage
         for param_type in candidate.fuzz_params:
             for param, value in candidate.fuzz_params[param_type].items():
-                # Prüfen, ob einer der Payloads in einem Parameter vorkommt
-                if any(payload in value for payload in payloads):
-                    # Wenn die Antwort existiert und das erwartete Ergebnis enthält
+                if number1 in value and number2 in value:
                     if candidate.response and rendered_value in candidate.response.text:
                         return True
 
-        # Keine Übereinstimmung gefunden
         return False
     
 class HTTPHeaderInjectionVulnCheck(VulnCheck):
@@ -650,20 +646,15 @@ class ImageSSRFVulnCheck(VulnCheck):
         self.ssrf_errors_folder = ssrf_errors_folder
 
     def check(self, candidate):
-
-        # Bild wird geladen
         test_payload = "https://raw.githubusercontent.com/gehaxelt/phuzz/refs/heads/main/code/web/applications/bwapp/images/evil_bee.png"
 
-        # Originalbild laden (zum Vergleich)
         try:
             evil_bee_data = requests.get(test_payload, timeout=5).content
         except Exception:
             evil_bee_data = None
 
-        # === Phase 1: Prüfen, ob der Payload gesendet wurde ===
         payload_sent = False
 
-        # Durchsuche alle Fuzzing-Parameter (headers, cookies, query_params, body_params)
         for param_type, params in candidate.fuzz_params.items():
             for key, value in params.items():
                 if isinstance(value, str) and test_payload in value:
@@ -673,29 +664,24 @@ class ImageSSRFVulnCheck(VulnCheck):
                 break
 
         if not payload_sent:
-            # Kein Anzeichen für SSRF-Versuch
             return False
 
-        # === Phase 2: Prüfen, ob das Bild (oder ähnlicher Inhalt) in der Response vorkommt ===
         if not candidate.response or not evil_bee_data:
             return False
 
         try:
             response_bytes = candidate.response.content
 
-            # Toleranzvergleich
             similarity = SequenceMatcher(
                 None,
                 evil_bee_data,
                 response_bytes
             ).ratio()
 
-            # Wenn die Ähnlichkeit groß genug ist, gilt SSRF als erkannt
             if similarity > 0.7:
                 return True
 
         except Exception:
-            # Falls Response fehlerhaft oder unlesbar ist
             pass
 
         return False
