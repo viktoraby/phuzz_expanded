@@ -43,6 +43,10 @@ sudo docker-compose up fuzzer-dvwa-sqli-low-1 --build --force-recreate
 less fuzzer/output/fuzzer-1/vulnerable-candidates.json
 ```
 
+## Problems
+
+If you encounter issues with write permissions, the `chmod 777` command may help. Apply it to all directories and subdirectories within the project folder.
+
 ## References
 
 - [0] https://dl.acm.org/doi/10.1145/3634737.3661137
