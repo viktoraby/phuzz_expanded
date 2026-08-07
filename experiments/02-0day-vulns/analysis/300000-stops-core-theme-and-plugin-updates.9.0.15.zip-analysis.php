@@ -5,46 +5,9 @@
 *Found functions:4
 *Extracted functions:4
 *Total parameter names extracted: 3
-*Overview: {'updraft_taskmanager_ajax': {'updraft_taskmanager_ajax'}, 'axios_ajax_handler': {'eum_axios_ajax'}, 'easy_updates_manager_ajax_handler': {'easy_updates_manager_ajax'}, 'ajax_handler': {'eum_ajax'}}
+*Overview: {'axios_ajax_handler': {'eum_axios_ajax'}, 'easy_updates_manager_ajax_handler': {'easy_updates_manager_ajax'}, 'ajax_handler': {'eum_ajax'}, 'updraft_taskmanager_ajax': {'updraft_taskmanager_ajax'}}
 *
 ***/
-
-/** Function updraft_taskmanager_ajax() called by wp_ajax hooks: {'updraft_taskmanager_ajax'} **/
-/** Parameters found in function updraft_taskmanager_ajax(): {"request": ["nonce", "subaction", "action_data"]} **/
-function updraft_taskmanager_ajax() {
-
-		$nonce = empty($_REQUEST['nonce']) ? '' : $_REQUEST['nonce'];
-
-		if (!wp_verify_nonce($nonce, 'updraft-task-manager-ajax-nonce') || empty($_REQUEST['subaction']))
-			die('Security check failed');
-
-		$subaction = $_REQUEST['subaction'];
-
-		$allowed_commands = Updraft_Task_Manager_Commands_1_0::get_allowed_ajax_commands();
-		
-		if (in_array($subaction, $allowed_commands)) {
-
-			if (isset($_REQUEST['action_data']))
-				$data = $_REQUEST['action_data'];
-
-			$results = call_user_func(array($this->commands, $subaction), $data);
-			
-			if (is_wp_error($results)) {
-				$results = array(
-					'result' => false,
-					'error_code' => $results->get_error_code(),
-					'error_message' => $results->get_error_message(),
-					'error_data' => $results->get_error_data(),
-				);
-			}
-			
-			echo json_encode($results);
-		} else {
-			echo json_encode("{'error' : 'No such command found'}");
-		}
-		die;
-	}
-
 
 /** Function axios_ajax_handler() called by wp_ajax hooks: {'eum_axios_ajax'} **/
 /** No params detected :-/ **/
@@ -140,6 +103,43 @@ function ajax_handler() {
 
 		die;
 
+	}
+
+
+/** Function updraft_taskmanager_ajax() called by wp_ajax hooks: {'updraft_taskmanager_ajax'} **/
+/** Parameters found in function updraft_taskmanager_ajax(): {"request": ["nonce", "subaction", "action_data"]} **/
+function updraft_taskmanager_ajax() {
+
+		$nonce = empty($_REQUEST['nonce']) ? '' : $_REQUEST['nonce'];
+
+		if (!wp_verify_nonce($nonce, 'updraft-task-manager-ajax-nonce') || empty($_REQUEST['subaction']))
+			die('Security check failed');
+
+		$subaction = $_REQUEST['subaction'];
+
+		$allowed_commands = Updraft_Task_Manager_Commands_1_0::get_allowed_ajax_commands();
+		
+		if (in_array($subaction, $allowed_commands)) {
+
+			if (isset($_REQUEST['action_data']))
+				$data = $_REQUEST['action_data'];
+
+			$results = call_user_func(array($this->commands, $subaction), $data);
+			
+			if (is_wp_error($results)) {
+				$results = array(
+					'result' => false,
+					'error_code' => $results->get_error_code(),
+					'error_message' => $results->get_error_message(),
+					'error_data' => $results->get_error_data(),
+				);
+			}
+			
+			echo json_encode($results);
+		} else {
+			echo json_encode("{'error' : 'No such command found'}");
+		}
+		die;
 	}
 
 

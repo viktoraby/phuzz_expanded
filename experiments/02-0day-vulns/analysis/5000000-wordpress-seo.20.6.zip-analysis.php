@@ -5,7 +5,7 @@
 *Found functions:18
 *Extracted functions:17
 *Total parameter names extracted: 8
-*Overview: {'wpseo_set_option': {'wpseo_set_option'}, 'do_filter': {'wpseo_filter_shortcodes'}, 'Yoast_Notification_Center': {'yoast_dismiss_notification'}, 'wpseo_save_all_titles': {'wpseo_save_all_titles'}, 'ajax_restore_notification': {'yoast_restore_notification'}, 'save_postdata': {'wpseo_elementor_save'}, 'ajax_get_keyword_usage_and_post_types': {'get_focus_keyword_usage_and_post_types'}, 'dismiss_old_premium_notice': {'dismiss_old_premium_notice'}, 'ajax_get_term_keyword_usage': {'get_term_keyword_usage'}, 'wpseo_save_title': {'wpseo_save_title'}, 'dismiss_first_time_configuration_notice': {'dismiss_first_time_configuration_notice'}, 'wpseo_save_all_descriptions': {'wpseo_save_all_descriptions'}, 'dismiss_premium_deactivated_notice': {'dismiss_premium_deactivated_notice'}, 'wpseo_set_ignore': {'wpseo_set_ignore'}, 'dismiss_notice': {'wpseo_dismiss_plugin_conflict'}, 'wpseo_save_description': {'wpseo_save_metadesc'}, 'ajax_dismiss_notification': {'yoast_dismiss_notification'}, 'ajax_get_notifications': {'yoast_get_notifications'}}
+*Overview: {'wpseo_set_option': {'wpseo_set_option'}, 'wpseo_save_all_descriptions': {'wpseo_save_all_descriptions'}, 'ajax_dismiss_notification': {'yoast_dismiss_notification'}, 'ajax_restore_notification': {'yoast_restore_notification'}, 'dismiss_first_time_configuration_notice': {'dismiss_first_time_configuration_notice'}, 'wpseo_save_title': {'wpseo_save_title'}, 'wpseo_save_description': {'wpseo_save_metadesc'}, 'ajax_get_term_keyword_usage': {'get_term_keyword_usage'}, 'ajax_get_notifications': {'yoast_get_notifications'}, 'save_postdata': {'wpseo_elementor_save'}, 'wpseo_save_all_titles': {'wpseo_save_all_titles'}, 'dismiss_premium_deactivated_notice': {'dismiss_premium_deactivated_notice'}, 'do_filter': {'wpseo_filter_shortcodes'}, 'dismiss_notice': {'wpseo_dismiss_plugin_conflict'}, 'wpseo_set_ignore': {'wpseo_set_ignore'}, 'ajax_get_keyword_usage_and_post_types': {'get_focus_keyword_usage_and_post_types'}, 'Yoast_Notification_Center': {'yoast_dismiss_notification'}, 'dismiss_old_premium_notice': {'dismiss_old_premium_notice'}}
 *
 ***/
 
@@ -32,47 +32,122 @@ function wpseo_set_option() {
 }
 
 
-/** Function do_filter() called by wp_ajax hooks: {'wpseo_filter_shortcodes'} **/
-/** Parameters found in function do_filter(): {"post": ["data"]} **/
-function do_filter() {
-		check_ajax_referer( 'wpseo-filter-shortcodes', 'nonce' );
-
-		if ( ! isset( $_POST['data'] ) || ! is_array( $_POST['data'] ) ) {
-			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Reason: WPSEO_Utils::format_json_encode is considered safe.
-			wp_die( WPSEO_Utils::format_json_encode( [] ) );
-		}
-
-		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Reason: $shortcodes is getting sanitized later, before it's used.
-		$shortcodes        = wp_unslash( $_POST['data'] );
-		$parsed_shortcodes = [];
-
-		foreach ( $shortcodes as $shortcode ) {
-			if ( $shortcode !== sanitize_text_field( $shortcode ) ) {
-				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Reason: WPSEO_Utils::format_json_encode is considered safe.
-				wp_die( WPSEO_Utils::format_json_encode( [] ) );
-			}
-
-			$parsed_shortcodes[] = [
-				'shortcode' => $shortcode,
-				'output'    => do_shortcode( $shortcode ),
-			];
-		}
-
-		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Reason: WPSEO_Utils::format_json_encode is considered safe.
-		wp_die( WPSEO_Utils::format_json_encode( $parsed_shortcodes ) );
-	}
-
-
-/** Function Yoast_Notification_Center() called by wp_ajax hooks: {'yoast_dismiss_notification'} **/
-/** No function found :-/ **/
-
-
-/** Function wpseo_save_all_titles() called by wp_ajax hooks: {'wpseo_save_all_titles'} **/
+/** Function wpseo_save_all_descriptions() called by wp_ajax hooks: {'wpseo_save_all_descriptions'} **/
 /** No params detected :-/ **/
+
+
+/** Function ajax_dismiss_notification() called by wp_ajax hooks: {'yoast_dismiss_notification'} **/
+/** Parameters found in function ajax_dismiss_notification(): {"post": ["notification", "nonce"]} **/
+function ajax_dismiss_notification() {
+		$notification_center = self::get();
+
+		if ( ! isset( $_POST['notification'] ) || ! is_string( $_POST['notification'] ) ) {
+			die( '-1' );
+		}
+
+		$notification_id = sanitize_text_field( wp_unslash( $_POST['notification'] ) );
+
+		if ( empty( $notification_id ) ) {
+			die( '-1' );
+		}
+
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Reason: We are using the variable as a nonce.
+		if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( wp_unslash( $_POST['nonce'] ), $notification_id ) ) {
+			die( '-1' );
+		}
+
+		$notification = $notification_center->get_notification_by_id( $notification_id );
+		if ( ( $notification instanceof Yoast_Notification ) === false ) {
+
+			// Permit legacy.
+			$options      = [
+				'id'            => $notification_id,
+				'dismissal_key' => $notification_id,
+			];
+			$notification = new Yoast_Notification( '', $options );
+		}
+
+		if ( self::maybe_dismiss_notification( $notification ) ) {
+			die( '1' );
+		}
+
+		die( '-1' );
+	}
 
 
 /** Function ajax_restore_notification() called by wp_ajax hooks: {'yoast_restore_notification'} **/
 /** No params detected :-/ **/
+
+
+/** Function dismiss_first_time_configuration_notice() called by wp_ajax hooks: {'dismiss_first_time_configuration_notice'} **/
+/** No params detected :-/ **/
+
+
+/** Function wpseo_save_title() called by wp_ajax hooks: {'wpseo_save_title'} **/
+/** No params detected :-/ **/
+
+
+/** Function wpseo_save_description() called by wp_ajax hooks: {'wpseo_save_metadesc'} **/
+/** No params detected :-/ **/
+
+
+/** Function ajax_get_term_keyword_usage() called by wp_ajax hooks: {'get_term_keyword_usage'} **/
+/** Parameters found in function ajax_get_term_keyword_usage(): {"post": ["post_id", "keyword", "taxonomy"]} **/
+function ajax_get_term_keyword_usage() {
+	check_ajax_referer( 'wpseo-keyword-usage', 'nonce' );
+
+	if ( ! isset( $_POST['post_id'], $_POST['keyword'], $_POST['taxonomy'] ) || ! is_string( $_POST['keyword'] ) || ! is_string( $_POST['taxonomy'] ) ) {
+		wp_die( -1 );
+	}
+
+	// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Reason: We are casting the unsafe input to an integer.
+	$post_id = (int) wp_unslash( $_POST['post_id'] );
+
+	if ( $post_id === 0 ) {
+		wp_die( -1 );
+	}
+
+	$keyword       = sanitize_text_field( wp_unslash( $_POST['keyword'] ) );
+	$taxonomy_name = sanitize_text_field( wp_unslash( $_POST['taxonomy'] ) );
+
+	$taxonomy = get_taxonomy( $taxonomy_name );
+
+	if ( ! $taxonomy ) {
+		wp_die( 0 );
+	}
+
+	if ( ! current_user_can( $taxonomy->cap->edit_terms ) ) {
+		wp_die( -1 );
+	}
+
+	$usage = WPSEO_Taxonomy_Meta::get_keyword_usage( $keyword, $post_id, $taxonomy_name );
+
+	// Normalize the result so it is the same as the post keyword usage AJAX request.
+	$usage = $usage[ $keyword ];
+
+	wp_die(
+		// phpcs:ignore WordPress.Security.EscapeOutput -- Reason: WPSEO_Utils::format_json_encode is safe.
+		WPSEO_Utils::format_json_encode( $usage )
+	);
+}
+
+
+/** Function ajax_get_notifications() called by wp_ajax hooks: {'yoast_get_notifications'} **/
+/** Parameters found in function ajax_get_notifications(): {"post": ["version"]} **/
+function ajax_get_notifications() {
+		$echo = false;
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Reason: We are not processing form data.
+		if ( isset( $_POST['version'] ) && is_string( $_POST['version'] ) ) {
+			// phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Reason: We are only comparing the variable in a condition.
+			$echo = wp_unslash( $_POST['version'] ) === '2';
+		}
+
+		// Display the notices.
+		$this->display_notifications( $echo );
+
+		// AJAX die.
+		exit;
+	}
 
 
 /** Function save_postdata() called by wp_ajax hooks: {'wpseo_elementor_save'} **/
@@ -172,6 +247,69 @@ function save_postdata( $post_id ) {
 	}
 
 
+/** Function wpseo_save_all_titles() called by wp_ajax hooks: {'wpseo_save_all_titles'} **/
+/** No params detected :-/ **/
+
+
+/** Function dismiss_premium_deactivated_notice() called by wp_ajax hooks: {'dismiss_premium_deactivated_notice'} **/
+/** No params detected :-/ **/
+
+
+/** Function do_filter() called by wp_ajax hooks: {'wpseo_filter_shortcodes'} **/
+/** Parameters found in function do_filter(): {"post": ["data"]} **/
+function do_filter() {
+		check_ajax_referer( 'wpseo-filter-shortcodes', 'nonce' );
+
+		if ( ! isset( $_POST['data'] ) || ! is_array( $_POST['data'] ) ) {
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Reason: WPSEO_Utils::format_json_encode is considered safe.
+			wp_die( WPSEO_Utils::format_json_encode( [] ) );
+		}
+
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Reason: $shortcodes is getting sanitized later, before it's used.
+		$shortcodes        = wp_unslash( $_POST['data'] );
+		$parsed_shortcodes = [];
+
+		foreach ( $shortcodes as $shortcode ) {
+			if ( $shortcode !== sanitize_text_field( $shortcode ) ) {
+				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Reason: WPSEO_Utils::format_json_encode is considered safe.
+				wp_die( WPSEO_Utils::format_json_encode( [] ) );
+			}
+
+			$parsed_shortcodes[] = [
+				'shortcode' => $shortcode,
+				'output'    => do_shortcode( $shortcode ),
+			];
+		}
+
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Reason: WPSEO_Utils::format_json_encode is considered safe.
+		wp_die( WPSEO_Utils::format_json_encode( $parsed_shortcodes ) );
+	}
+
+
+/** Function dismiss_notice() called by wp_ajax hooks: {'wpseo_dismiss_plugin_conflict'} **/
+/** No params detected :-/ **/
+
+
+/** Function wpseo_set_ignore() called by wp_ajax hooks: {'wpseo_set_ignore'} **/
+/** Parameters found in function wpseo_set_ignore(): {"post": ["option"]} **/
+function wpseo_set_ignore() {
+	if ( ! current_user_can( 'manage_options' ) ) {
+		die( '-1' );
+	}
+
+	check_ajax_referer( 'wpseo-ignore' );
+
+	if ( ! isset( $_POST['option'] ) || ! is_string( $_POST['option'] ) ) {
+		die( '-1' );
+	}
+
+	$ignore_key = sanitize_text_field( wp_unslash( $_POST['option'] ) );
+	WPSEO_Options::set( 'ignore_' . $ignore_key, true );
+
+	die( '1' );
+}
+
+
 /** Function ajax_get_keyword_usage_and_post_types() called by wp_ajax hooks: {'get_focus_keyword_usage_and_post_types'} **/
 /** Parameters found in function ajax_get_keyword_usage_and_post_types(): {"post": ["post_id", "keyword"]} **/
 function ajax_get_keyword_usage_and_post_types() {
@@ -211,149 +349,11 @@ function ajax_get_keyword_usage_and_post_types() {
 }
 
 
+/** Function Yoast_Notification_Center() called by wp_ajax hooks: {'yoast_dismiss_notification'} **/
+/** No function found :-/ **/
+
+
 /** Function dismiss_old_premium_notice() called by wp_ajax hooks: {'dismiss_old_premium_notice'} **/
 /** No params detected :-/ **/
-
-
-/** Function ajax_get_term_keyword_usage() called by wp_ajax hooks: {'get_term_keyword_usage'} **/
-/** Parameters found in function ajax_get_term_keyword_usage(): {"post": ["post_id", "keyword", "taxonomy"]} **/
-function ajax_get_term_keyword_usage() {
-	check_ajax_referer( 'wpseo-keyword-usage', 'nonce' );
-
-	if ( ! isset( $_POST['post_id'], $_POST['keyword'], $_POST['taxonomy'] ) || ! is_string( $_POST['keyword'] ) || ! is_string( $_POST['taxonomy'] ) ) {
-		wp_die( -1 );
-	}
-
-	// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Reason: We are casting the unsafe input to an integer.
-	$post_id = (int) wp_unslash( $_POST['post_id'] );
-
-	if ( $post_id === 0 ) {
-		wp_die( -1 );
-	}
-
-	$keyword       = sanitize_text_field( wp_unslash( $_POST['keyword'] ) );
-	$taxonomy_name = sanitize_text_field( wp_unslash( $_POST['taxonomy'] ) );
-
-	$taxonomy = get_taxonomy( $taxonomy_name );
-
-	if ( ! $taxonomy ) {
-		wp_die( 0 );
-	}
-
-	if ( ! current_user_can( $taxonomy->cap->edit_terms ) ) {
-		wp_die( -1 );
-	}
-
-	$usage = WPSEO_Taxonomy_Meta::get_keyword_usage( $keyword, $post_id, $taxonomy_name );
-
-	// Normalize the result so it is the same as the post keyword usage AJAX request.
-	$usage = $usage[ $keyword ];
-
-	wp_die(
-		// phpcs:ignore WordPress.Security.EscapeOutput -- Reason: WPSEO_Utils::format_json_encode is safe.
-		WPSEO_Utils::format_json_encode( $usage )
-	);
-}
-
-
-/** Function wpseo_save_title() called by wp_ajax hooks: {'wpseo_save_title'} **/
-/** No params detected :-/ **/
-
-
-/** Function dismiss_first_time_configuration_notice() called by wp_ajax hooks: {'dismiss_first_time_configuration_notice'} **/
-/** No params detected :-/ **/
-
-
-/** Function wpseo_save_all_descriptions() called by wp_ajax hooks: {'wpseo_save_all_descriptions'} **/
-/** No params detected :-/ **/
-
-
-/** Function dismiss_premium_deactivated_notice() called by wp_ajax hooks: {'dismiss_premium_deactivated_notice'} **/
-/** No params detected :-/ **/
-
-
-/** Function wpseo_set_ignore() called by wp_ajax hooks: {'wpseo_set_ignore'} **/
-/** Parameters found in function wpseo_set_ignore(): {"post": ["option"]} **/
-function wpseo_set_ignore() {
-	if ( ! current_user_can( 'manage_options' ) ) {
-		die( '-1' );
-	}
-
-	check_ajax_referer( 'wpseo-ignore' );
-
-	if ( ! isset( $_POST['option'] ) || ! is_string( $_POST['option'] ) ) {
-		die( '-1' );
-	}
-
-	$ignore_key = sanitize_text_field( wp_unslash( $_POST['option'] ) );
-	WPSEO_Options::set( 'ignore_' . $ignore_key, true );
-
-	die( '1' );
-}
-
-
-/** Function dismiss_notice() called by wp_ajax hooks: {'wpseo_dismiss_plugin_conflict'} **/
-/** No params detected :-/ **/
-
-
-/** Function wpseo_save_description() called by wp_ajax hooks: {'wpseo_save_metadesc'} **/
-/** No params detected :-/ **/
-
-
-/** Function ajax_dismiss_notification() called by wp_ajax hooks: {'yoast_dismiss_notification'} **/
-/** Parameters found in function ajax_dismiss_notification(): {"post": ["notification", "nonce"]} **/
-function ajax_dismiss_notification() {
-		$notification_center = self::get();
-
-		if ( ! isset( $_POST['notification'] ) || ! is_string( $_POST['notification'] ) ) {
-			die( '-1' );
-		}
-
-		$notification_id = sanitize_text_field( wp_unslash( $_POST['notification'] ) );
-
-		if ( empty( $notification_id ) ) {
-			die( '-1' );
-		}
-
-		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Reason: We are using the variable as a nonce.
-		if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( wp_unslash( $_POST['nonce'] ), $notification_id ) ) {
-			die( '-1' );
-		}
-
-		$notification = $notification_center->get_notification_by_id( $notification_id );
-		if ( ( $notification instanceof Yoast_Notification ) === false ) {
-
-			// Permit legacy.
-			$options      = [
-				'id'            => $notification_id,
-				'dismissal_key' => $notification_id,
-			];
-			$notification = new Yoast_Notification( '', $options );
-		}
-
-		if ( self::maybe_dismiss_notification( $notification ) ) {
-			die( '1' );
-		}
-
-		die( '-1' );
-	}
-
-
-/** Function ajax_get_notifications() called by wp_ajax hooks: {'yoast_get_notifications'} **/
-/** Parameters found in function ajax_get_notifications(): {"post": ["version"]} **/
-function ajax_get_notifications() {
-		$echo = false;
-		// phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Reason: We are not processing form data.
-		if ( isset( $_POST['version'] ) && is_string( $_POST['version'] ) ) {
-			// phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Reason: We are only comparing the variable in a condition.
-			$echo = wp_unslash( $_POST['version'] ) === '2';
-		}
-
-		// Display the notices.
-		$this->display_notifications( $echo );
-
-		// AJAX die.
-		exit;
-	}
 
 

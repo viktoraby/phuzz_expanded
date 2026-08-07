@@ -5,9 +5,13 @@
 *Found functions:9
 *Extracted functions:9
 *Total parameter names extracted: 7
-*Overview: {'tnpc_render_callback': {'tnpc_render'}, 'hook_wp_ajax_tnpc_delete_preset': {'tnpc_delete_preset'}, 'hook_wp_ajax_tnpc_options': {'tnpc_options'}, 'tnpc_preview_callback': {'tnpc_preview'}, 'ajax_get_all_presets': {'tnpc_get_all_presets'}, 'tnpc_css_callback': {'tnpc_css'}, 'hook_wp_ajax_newsletter_users_export': {'newsletter_users_export'}, 'ajax_get_preset': {'tnpc_get_preset'}, 'hook_wp_ajax_tnpc_regenerate_email': {'tnpc_regenerate_email'}}
+*Overview: {'ajax_get_all_presets': {'tnpc_get_all_presets'}, 'tnpc_render_callback': {'tnpc_render'}, 'tnpc_preview_callback': {'tnpc_preview'}, 'hook_wp_ajax_tnpc_options': {'tnpc_options'}, 'hook_wp_ajax_newsletter_users_export': {'newsletter_users_export'}, 'tnpc_css_callback': {'tnpc_css'}, 'ajax_get_preset': {'tnpc_get_preset'}, 'hook_wp_ajax_tnpc_regenerate_email': {'tnpc_regenerate_email'}, 'hook_wp_ajax_tnpc_delete_preset': {'tnpc_delete_preset'}}
 *
 ***/
+
+/** Function ajax_get_all_presets() called by wp_ajax hooks: {'tnpc_get_all_presets'} **/
+/** No params detected :-/ **/
+
 
 /** Function tnpc_render_callback() called by wp_ajax hooks: {'tnpc_render'} **/
 /** Parameters found in function tnpc_render_callback(): {"post": ["id", "full", "composer"]} **/
@@ -25,31 +29,19 @@ function tnpc_render_callback() {
     }
 
 
-/** Function hook_wp_ajax_tnpc_delete_preset() called by wp_ajax hooks: {'tnpc_delete_preset'} **/
-/** Parameters found in function hook_wp_ajax_tnpc_delete_preset(): {"request": ["presetId"]} **/
-function hook_wp_ajax_tnpc_delete_preset() {
+/** Function tnpc_preview_callback() called by wp_ajax hooks: {'tnpc_preview'} **/
+/** Parameters found in function tnpc_preview_callback(): {"request": ["id"]} **/
+function tnpc_preview_callback() {
+        $email = Newsletter::instance()->get_email($_REQUEST['id'], ARRAY_A);
 
-        if (!check_ajax_referer('preset')) {
-            wp_die('Invalid nonce', 403);
+        if (empty($email)) {
+            echo 'Wrong email identifier';
+            return;
         }
 
+        echo $email['message'];
 
-        $preset_id = (int) $_REQUEST['presetId'];
-
-        $newsletter = Newsletter::instance();
-
-        if ($preset_id > 0) {
-            $preset = $newsletter->get_email($preset_id);
-
-            if ($preset && $preset->type === self::PRESET_EMAIL_TYPE) {
-                Newsletter::instance()->delete_email($preset_id);
-                wp_send_json_success();
-            } else {
-                wp_send_json_error(__('Is not a preset!', 'newsletter'));
-            }
-        } else {
-            wp_send_json_error();
-        }
+        wp_die();
     }
 
 
@@ -97,31 +89,11 @@ function hook_wp_ajax_tnpc_options() {
     }
 
 
-/** Function tnpc_preview_callback() called by wp_ajax hooks: {'tnpc_preview'} **/
-/** Parameters found in function tnpc_preview_callback(): {"request": ["id"]} **/
-function tnpc_preview_callback() {
-        $email = Newsletter::instance()->get_email($_REQUEST['id'], ARRAY_A);
-
-        if (empty($email)) {
-            echo 'Wrong email identifier';
-            return;
-        }
-
-        echo $email['message'];
-
-        wp_die();
-    }
-
-
-/** Function ajax_get_all_presets() called by wp_ajax hooks: {'tnpc_get_all_presets'} **/
+/** Function hook_wp_ajax_newsletter_users_export() called by wp_ajax hooks: {'newsletter_users_export'} **/
 /** No params detected :-/ **/
 
 
 /** Function tnpc_css_callback() called by wp_ajax hooks: {'tnpc_css'} **/
-/** No params detected :-/ **/
-
-
-/** Function hook_wp_ajax_newsletter_users_export() called by wp_ajax hooks: {'newsletter_users_export'} **/
 /** No params detected :-/ **/
 
 
@@ -164,6 +136,34 @@ function hook_wp_ajax_tnpc_regenerate_email() {
             'content' => $regenerated_content,
             'message' => __('Successfully updated', 'newsletter')
         ]);
+    }
+
+
+/** Function hook_wp_ajax_tnpc_delete_preset() called by wp_ajax hooks: {'tnpc_delete_preset'} **/
+/** Parameters found in function hook_wp_ajax_tnpc_delete_preset(): {"request": ["presetId"]} **/
+function hook_wp_ajax_tnpc_delete_preset() {
+
+        if (!check_ajax_referer('preset')) {
+            wp_die('Invalid nonce', 403);
+        }
+
+
+        $preset_id = (int) $_REQUEST['presetId'];
+
+        $newsletter = Newsletter::instance();
+
+        if ($preset_id > 0) {
+            $preset = $newsletter->get_email($preset_id);
+
+            if ($preset && $preset->type === self::PRESET_EMAIL_TYPE) {
+                Newsletter::instance()->delete_email($preset_id);
+                wp_send_json_success();
+            } else {
+                wp_send_json_error(__('Is not a preset!', 'newsletter'));
+            }
+        } else {
+            wp_send_json_error();
+        }
     }
 
 

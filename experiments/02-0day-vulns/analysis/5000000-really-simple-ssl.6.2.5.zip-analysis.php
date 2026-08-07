@@ -5,65 +5,35 @@
 *Found functions:7
 *Extracted functions:6
 *Total parameter names extracted: 6
-*Overview: {'process_ajax_package_information': {'rsp_upgrade_package_information'}, 'process_ajax_activate_license': {'rsp_upgrade_activate_license'}, 'rsssl_rest_api_fallback': {'rsssl_rest_api_fallback'}, 'process_ajax_activate_plugin': {'rsp_upgrade_activate_plugin'}, 'process_ajax_install_plugin': {'rsp_upgrade_install_plugin'}, 'process_ajax_destination_clear': {'rsp_upgrade_destination_clear'}, 'dismiss_review_notice_callback': {'rsssl_dismiss_review_notice'}}
+*Overview: {'process_ajax_activate_plugin': {'rsp_upgrade_activate_plugin'}, 'rsssl_rest_api_fallback': {'rsssl_rest_api_fallback'}, 'process_ajax_package_information': {'rsp_upgrade_package_information'}, 'process_ajax_install_plugin': {'rsp_upgrade_install_plugin'}, 'dismiss_review_notice_callback': {'rsssl_dismiss_review_notice'}, 'process_ajax_activate_license': {'rsp_upgrade_activate_license'}, 'process_ajax_destination_clear': {'rsp_upgrade_destination_clear'}}
 *
 ***/
 
-/** Function process_ajax_package_information() called by wp_ajax hooks: {'rsp_upgrade_package_information'} **/
-/** Parameters found in function process_ajax_package_information(): {"get": ["token", "license", "item_id"]} **/
-function process_ajax_package_information()
+/** Function process_ajax_activate_plugin() called by wp_ajax hooks: {'rsp_upgrade_activate_plugin'} **/
+/** Parameters found in function process_ajax_activate_plugin(): {"get": ["token", "plugin"]} **/
+function process_ajax_activate_plugin()
 		{
 			if ( !rsssl_user_can_manage() ) {
-				return false;
+				return;
 			}
 
-			if ( isset($_GET['token']) && wp_verify_nonce($_GET['token'], 'upgrade_to_pro_nonce') && isset($_GET['license']) && isset($_GET['item_id']) ) {
-				$api = $this->api_request();
-				if ( $api && isset($api->download_link) ) {
+			if ( isset($_GET['token']) && wp_verify_nonce($_GET['token'], 'upgrade_to_pro_nonce') && isset($_GET['plugin']) ) {
+				$networkwide = is_multisite() && rsssl_is_networkwide_active();
+				$result = activate_plugin( $this->slug, '', $networkwide  );
+				if ( !is_wp_error($result) ) {
 					$response = [
 						'success' => true,
-						'download_link' => $api->download_link,
 					];
 				} else {
 					$response = [
 						'success' => false,
-						'download_link' => "",
 					];
 				}
 				$response = json_encode($response);
 				header("Content-Type: application/json");
 				echo $response;
 				exit;
-
 			}
-		}
-
-
-/** Function process_ajax_activate_license() called by wp_ajax hooks: {'rsp_upgrade_activate_license'} **/
-/** Parameters found in function process_ajax_activate_license(): {"get": ["token", "license", "item_id"]} **/
-function process_ajax_activate_license()
-		{
-			$error = false;
-			$response = [
-				'success' => false,
-				'message' => '',
-			];
-
-			if ( !rsssl_user_can_manage() ) {
-				$error = true;
-			}
-
-			if (!$error && isset($_GET['token']) && wp_verify_nonce($_GET['token'], 'upgrade_to_pro_nonce') && isset($_GET['license']) && isset($_GET['item_id']) ) {
-				$license  = sanitize_title($_GET['license']);
-				$item_id = (int) $_GET['item_id'];
-				$response = $this->validate($license, $item_id);
-				update_site_option($this->prefix.'auto_installed_license', $license);
-			}
-
-			$response = json_encode($response);
-			header("Content-Type: application/json");
-			echo $response;
-			exit;
 		}
 
 
@@ -126,30 +96,32 @@ function rsssl_rest_api_fallback(){
 }
 
 
-/** Function process_ajax_activate_plugin() called by wp_ajax hooks: {'rsp_upgrade_activate_plugin'} **/
-/** Parameters found in function process_ajax_activate_plugin(): {"get": ["token", "plugin"]} **/
-function process_ajax_activate_plugin()
+/** Function process_ajax_package_information() called by wp_ajax hooks: {'rsp_upgrade_package_information'} **/
+/** Parameters found in function process_ajax_package_information(): {"get": ["token", "license", "item_id"]} **/
+function process_ajax_package_information()
 		{
 			if ( !rsssl_user_can_manage() ) {
-				return;
+				return false;
 			}
 
-			if ( isset($_GET['token']) && wp_verify_nonce($_GET['token'], 'upgrade_to_pro_nonce') && isset($_GET['plugin']) ) {
-				$networkwide = is_multisite() && rsssl_is_networkwide_active();
-				$result = activate_plugin( $this->slug, '', $networkwide  );
-				if ( !is_wp_error($result) ) {
+			if ( isset($_GET['token']) && wp_verify_nonce($_GET['token'], 'upgrade_to_pro_nonce') && isset($_GET['license']) && isset($_GET['item_id']) ) {
+				$api = $this->api_request();
+				if ( $api && isset($api->download_link) ) {
 					$response = [
 						'success' => true,
+						'download_link' => $api->download_link,
 					];
 				} else {
 					$response = [
 						'success' => false,
+						'download_link' => "",
 					];
 				}
 				$response = json_encode($response);
 				header("Content-Type: application/json");
 				echo $response;
 				exit;
+
 			}
 		}
 
@@ -196,6 +168,38 @@ function process_ajax_install_plugin()
 				echo $response;
 				exit;
 			}
+		}
+
+
+/** Function dismiss_review_notice_callback() called by wp_ajax hooks: {'rsssl_dismiss_review_notice'} **/
+/** No function found :-/ **/
+
+
+/** Function process_ajax_activate_license() called by wp_ajax hooks: {'rsp_upgrade_activate_license'} **/
+/** Parameters found in function process_ajax_activate_license(): {"get": ["token", "license", "item_id"]} **/
+function process_ajax_activate_license()
+		{
+			$error = false;
+			$response = [
+				'success' => false,
+				'message' => '',
+			];
+
+			if ( !rsssl_user_can_manage() ) {
+				$error = true;
+			}
+
+			if (!$error && isset($_GET['token']) && wp_verify_nonce($_GET['token'], 'upgrade_to_pro_nonce') && isset($_GET['license']) && isset($_GET['item_id']) ) {
+				$license  = sanitize_title($_GET['license']);
+				$item_id = (int) $_GET['item_id'];
+				$response = $this->validate($license, $item_id);
+				update_site_option($this->prefix.'auto_installed_license', $license);
+			}
+
+			$response = json_encode($response);
+			header("Content-Type: application/json");
+			echo $response;
+			exit;
 		}
 
 
@@ -247,9 +251,5 @@ function process_ajax_destination_clear()
 			echo $response;
 			exit;
 		}
-
-
-/** Function dismiss_review_notice_callback() called by wp_ajax hooks: {'rsssl_dismiss_review_notice'} **/
-/** No function found :-/ **/
 
 

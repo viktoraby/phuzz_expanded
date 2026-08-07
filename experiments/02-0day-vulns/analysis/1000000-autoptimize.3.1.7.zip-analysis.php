@@ -5,152 +5,9 @@
 *Found functions:11
 *Extracted functions:11
 *Total parameter names extracted: 7
-*Overview: {'ao_ccss_saverules_callback': {'ao_ccss_saverules'}, 'critcss_fetch_callback': {'fetch_critcss'}, 'critcss_rm_callback': {'rm_critcss'}, 'ao_ccss_export_callback': {'ao_ccss_export'}, 'ao_ccss_import_callback': {'ao_ccss_import'}, 'ao_metabox_generateccss_callback': {'ao_metabox_ccss_addjob'}, 'critcss_rm_all_callback': {'rm_critcss_all'}, 'ao_ccss_queuerunner_callback': {'ao_ccss_queuerunner'}, 'dismiss_admin_notice': {'dismiss_admin_notice'}, 'critcss_save_callback': {'save_critcss'}, 'delete_cache': {'autoptimize_delete_cache'}}
+*Overview: {'ao_ccss_import_callback': {'ao_ccss_import'}, 'ao_ccss_export_callback': {'ao_ccss_export'}, 'ao_ccss_saverules_callback': {'ao_ccss_saverules'}, 'ao_metabox_generateccss_callback': {'ao_metabox_ccss_addjob'}, 'dismiss_admin_notice': {'dismiss_admin_notice'}, 'critcss_rm_all_callback': {'rm_critcss_all'}, 'ao_ccss_queuerunner_callback': {'ao_ccss_queuerunner'}, 'critcss_rm_callback': {'rm_critcss'}, 'critcss_save_callback': {'save_critcss'}, 'critcss_fetch_callback': {'fetch_critcss'}, 'delete_cache': {'autoptimize_delete_cache'}}
 *
 ***/
-
-/** Function ao_ccss_saverules_callback() called by wp_ajax hooks: {'ao_ccss_saverules'} **/
-/** Parameters found in function ao_ccss_saverules_callback(): {"post": ["critcssrules"]} **/
-function ao_ccss_saverules_callback() {
-        check_ajax_referer( 'ao_ccss_saverules_nonce', 'ao_ccss_saverules_nonce' );
-
-        // save rules over AJAX, too many users forget to press "save changes".
-        if ( current_user_can( 'manage_options' ) ) {
-            if ( array_key_exists( 'critcssrules', $_POST ) ) {
-                $rules = stripslashes( $_POST['critcssrules'] ); // ugly, but seems correct as per https://developer.wordpress.org/reference/functions/stripslashes_deep/#comment-1045 .
-                if ( ! empty( $rules ) ) {
-                    $_unsafe_rules_array = json_decode( wp_strip_all_tags( $rules ), true );
-                    if ( ! empty( $_unsafe_rules_array ) && is_array( $_unsafe_rules_array ) ) {
-                        $_safe_rules_array = array();
-                        if ( array_key_exists( 'paths', $_unsafe_rules_array ) ) {
-                            $_safe_rules_array['paths'] = $_unsafe_rules_array['paths'];
-                        }
-                        if ( array_key_exists( 'types', $_unsafe_rules_array ) ) {
-                            $_safe_rules_array['types'] = $_unsafe_rules_array['types'];
-                        }
-                        $_safe_rules = json_encode( $_safe_rules_array, JSON_FORCE_OBJECT );
-                        if ( ! empty( $_safe_rules ) ) {
-                            update_option( 'autoptimize_ccss_rules', $_safe_rules );
-                            $response['code'] = '200';
-                            $response['msg']  = 'Rules saved';
-                        } else {
-                            $_error = 'Could not auto-save rules (safe rules empty)';
-                        }
-                    } else {
-                        $_error = 'Could not auto-save rules (rules could not be json_decoded)';
-                    }
-                } else {
-                    $_error = 'Could not auto-save rules (rules empty)';
-                }
-            } else {
-                $_error = 'Could not auto-save rules (rules not in $_POST)';
-            }
-        } else {
-            $_error = 'Not allowed';
-        }
-
-        if ( ! isset( $response ) && $_error ) {
-            $response['code'] = '500';
-            $response['msg']  = $_error;
-        }
-
-        // Dispatch respose.
-        echo json_encode( $response );
-
-        // Close ajax request.
-        wp_die();
-    }
-
-
-/** Function critcss_fetch_callback() called by wp_ajax hooks: {'fetch_critcss'} **/
-/** Parameters found in function critcss_fetch_callback(): {"post": ["critcssfile"]} **/
-function critcss_fetch_callback() {
-        // Ajax handler to obtain a critical CSS file from the filesystem.
-        // Check referer.
-        check_ajax_referer( 'fetch_critcss_nonce', 'critcss_fetch_nonce' );
-
-        // Initialize error flag.
-        $error = true;
-
-        // Allow no content for MANUAL rules (as they may not exist just yet).
-        if ( current_user_can( 'manage_options' ) && empty( $_POST['critcssfile'] ) ) {
-            $content = '';
-            $error   = false;
-        } elseif ( current_user_can( 'manage_options' ) && $this->critcss_check_filename( $_POST['critcssfile'] ) ) {
-            // Or check user permissios and filename.
-            // Set file path and obtain its content.
-            $critcssfile = AO_CCSS_DIR . strip_tags( $_POST['critcssfile'] );
-            if ( file_exists( $critcssfile ) ) {
-                $content = file_get_contents( $critcssfile );
-                $error   = false;
-            }
-        }
-
-        // Prepare response.
-        if ( $error ) {
-            $response['code']   = '500';
-            $response['string'] = 'Error reading file ' . $critcssfile . '.';
-        } else {
-            $response['code']   = '200';
-            $response['string'] = $content;
-        }
-
-        // Dispatch respose.
-        echo json_encode( $response );
-
-        // Close ajax request.
-        wp_die();
-    }
-
-
-/** Function critcss_rm_callback() called by wp_ajax hooks: {'rm_critcss'} **/
-/** Parameters found in function critcss_rm_callback(): {"post": ["critcssfile"]} **/
-function critcss_rm_callback() {
-        // Ajax handler to delete a critical CSS from the filesystem
-        // Check referer.
-        check_ajax_referer( 'rm_critcss_nonce', 'critcss_rm_nonce' );
-
-        // Initialize error and status flags.
-        $error  = true;
-        $status = false;
-
-        // Allow no file for MANUAL rules (as they may not exist just yet).
-        if ( current_user_can( 'manage_options' ) && empty( $_POST['critcssfile'] ) ) {
-            $error = false;
-        } elseif ( current_user_can( 'manage_options' ) && $this->critcss_check_filename( $_POST['critcssfile'] ) ) {
-            // Or check user permissios and filename
-            // Set file path and delete it.
-            $critcssfile = AO_CCSS_DIR . strip_tags( $_POST['critcssfile'] );
-            if ( file_exists( $critcssfile ) ) {
-                $status = unlink( $critcssfile );
-                $error  = false;
-            }
-        }
-
-        // Prepare response.
-        if ( $error ) {
-            $response['code']   = '500';
-            $response['string'] = 'Error removing file ' . $critcssfile . '.';
-        } else {
-            $response['code'] = '200';
-            if ( $status ) {
-                $response['string'] = 'File ' . $critcssfile . ' removed.';
-            } else {
-                $response['string'] = 'No file to be removed.';
-            }
-        }
-
-        // Dispatch respose.
-        echo json_encode( $response );
-
-        // Close ajax request.
-        wp_die();
-    }
-
-
-/** Function ao_ccss_export_callback() called by wp_ajax hooks: {'ao_ccss_export'} **/
-/** No params detected :-/ **/
-
 
 /** Function ao_ccss_import_callback() called by wp_ajax hooks: {'ao_ccss_import'} **/
 /** Parameters found in function ao_ccss_import_callback(): {"files": ["file"]} **/
@@ -277,6 +134,63 @@ function ao_ccss_import_callback() {
     }
 
 
+/** Function ao_ccss_export_callback() called by wp_ajax hooks: {'ao_ccss_export'} **/
+/** No params detected :-/ **/
+
+
+/** Function ao_ccss_saverules_callback() called by wp_ajax hooks: {'ao_ccss_saverules'} **/
+/** Parameters found in function ao_ccss_saverules_callback(): {"post": ["critcssrules"]} **/
+function ao_ccss_saverules_callback() {
+        check_ajax_referer( 'ao_ccss_saverules_nonce', 'ao_ccss_saverules_nonce' );
+
+        // save rules over AJAX, too many users forget to press "save changes".
+        if ( current_user_can( 'manage_options' ) ) {
+            if ( array_key_exists( 'critcssrules', $_POST ) ) {
+                $rules = stripslashes( $_POST['critcssrules'] ); // ugly, but seems correct as per https://developer.wordpress.org/reference/functions/stripslashes_deep/#comment-1045 .
+                if ( ! empty( $rules ) ) {
+                    $_unsafe_rules_array = json_decode( wp_strip_all_tags( $rules ), true );
+                    if ( ! empty( $_unsafe_rules_array ) && is_array( $_unsafe_rules_array ) ) {
+                        $_safe_rules_array = array();
+                        if ( array_key_exists( 'paths', $_unsafe_rules_array ) ) {
+                            $_safe_rules_array['paths'] = $_unsafe_rules_array['paths'];
+                        }
+                        if ( array_key_exists( 'types', $_unsafe_rules_array ) ) {
+                            $_safe_rules_array['types'] = $_unsafe_rules_array['types'];
+                        }
+                        $_safe_rules = json_encode( $_safe_rules_array, JSON_FORCE_OBJECT );
+                        if ( ! empty( $_safe_rules ) ) {
+                            update_option( 'autoptimize_ccss_rules', $_safe_rules );
+                            $response['code'] = '200';
+                            $response['msg']  = 'Rules saved';
+                        } else {
+                            $_error = 'Could not auto-save rules (safe rules empty)';
+                        }
+                    } else {
+                        $_error = 'Could not auto-save rules (rules could not be json_decoded)';
+                    }
+                } else {
+                    $_error = 'Could not auto-save rules (rules empty)';
+                }
+            } else {
+                $_error = 'Could not auto-save rules (rules not in $_POST)';
+            }
+        } else {
+            $_error = 'Not allowed';
+        }
+
+        if ( ! isset( $response ) && $_error ) {
+            $response['code'] = '500';
+            $response['msg']  = $_error;
+        }
+
+        // Dispatch respose.
+        echo json_encode( $response );
+
+        // Close ajax request.
+        wp_die();
+    }
+
+
 /** Function ao_metabox_generateccss_callback() called by wp_ajax hooks: {'ao_metabox_ccss_addjob'} **/
 /** Parameters found in function ao_metabox_generateccss_callback(): {"post": ["path", "type"]} **/
 function ao_metabox_generateccss_callback()
@@ -314,14 +228,6 @@ function ao_metabox_generateccss_callback()
     }
 
 
-/** Function critcss_rm_all_callback() called by wp_ajax hooks: {'rm_critcss_all'} **/
-/** No params detected :-/ **/
-
-
-/** Function ao_ccss_queuerunner_callback() called by wp_ajax hooks: {'ao_ccss_queuerunner'} **/
-/** No params detected :-/ **/
-
-
 /** Function dismiss_admin_notice() called by wp_ajax hooks: {'dismiss_admin_notice'} **/
 /** Parameters found in function dismiss_admin_notice(): {"post": ["option_name", "dismissible_length"]} **/
 function dismiss_admin_notice() {
@@ -338,6 +244,59 @@ function dismiss_admin_notice() {
 			self::set_admin_notice_cache( $option_name, $dismissible_length );
 			wp_die();
 		}
+
+
+/** Function critcss_rm_all_callback() called by wp_ajax hooks: {'rm_critcss_all'} **/
+/** No params detected :-/ **/
+
+
+/** Function ao_ccss_queuerunner_callback() called by wp_ajax hooks: {'ao_ccss_queuerunner'} **/
+/** No params detected :-/ **/
+
+
+/** Function critcss_rm_callback() called by wp_ajax hooks: {'rm_critcss'} **/
+/** Parameters found in function critcss_rm_callback(): {"post": ["critcssfile"]} **/
+function critcss_rm_callback() {
+        // Ajax handler to delete a critical CSS from the filesystem
+        // Check referer.
+        check_ajax_referer( 'rm_critcss_nonce', 'critcss_rm_nonce' );
+
+        // Initialize error and status flags.
+        $error  = true;
+        $status = false;
+
+        // Allow no file for MANUAL rules (as they may not exist just yet).
+        if ( current_user_can( 'manage_options' ) && empty( $_POST['critcssfile'] ) ) {
+            $error = false;
+        } elseif ( current_user_can( 'manage_options' ) && $this->critcss_check_filename( $_POST['critcssfile'] ) ) {
+            // Or check user permissios and filename
+            // Set file path and delete it.
+            $critcssfile = AO_CCSS_DIR . strip_tags( $_POST['critcssfile'] );
+            if ( file_exists( $critcssfile ) ) {
+                $status = unlink( $critcssfile );
+                $error  = false;
+            }
+        }
+
+        // Prepare response.
+        if ( $error ) {
+            $response['code']   = '500';
+            $response['string'] = 'Error removing file ' . $critcssfile . '.';
+        } else {
+            $response['code'] = '200';
+            if ( $status ) {
+                $response['string'] = 'File ' . $critcssfile . ' removed.';
+            } else {
+                $response['string'] = 'No file to be removed.';
+            }
+        }
+
+        // Dispatch respose.
+        echo json_encode( $response );
+
+        // Close ajax request.
+        wp_die();
+    }
 
 
 /** Function critcss_save_callback() called by wp_ajax hooks: {'save_critcss'} **/
@@ -387,6 +346,47 @@ function critcss_save_callback() {
             } else {
                 $response['string'] = 'Empty content does not need to be saved.';
             }
+        }
+
+        // Dispatch respose.
+        echo json_encode( $response );
+
+        // Close ajax request.
+        wp_die();
+    }
+
+
+/** Function critcss_fetch_callback() called by wp_ajax hooks: {'fetch_critcss'} **/
+/** Parameters found in function critcss_fetch_callback(): {"post": ["critcssfile"]} **/
+function critcss_fetch_callback() {
+        // Ajax handler to obtain a critical CSS file from the filesystem.
+        // Check referer.
+        check_ajax_referer( 'fetch_critcss_nonce', 'critcss_fetch_nonce' );
+
+        // Initialize error flag.
+        $error = true;
+
+        // Allow no content for MANUAL rules (as they may not exist just yet).
+        if ( current_user_can( 'manage_options' ) && empty( $_POST['critcssfile'] ) ) {
+            $content = '';
+            $error   = false;
+        } elseif ( current_user_can( 'manage_options' ) && $this->critcss_check_filename( $_POST['critcssfile'] ) ) {
+            // Or check user permissios and filename.
+            // Set file path and obtain its content.
+            $critcssfile = AO_CCSS_DIR . strip_tags( $_POST['critcssfile'] );
+            if ( file_exists( $critcssfile ) ) {
+                $content = file_get_contents( $critcssfile );
+                $error   = false;
+            }
+        }
+
+        // Prepare response.
+        if ( $error ) {
+            $response['code']   = '500';
+            $response['string'] = 'Error reading file ' . $critcssfile . '.';
+        } else {
+            $response['code']   = '200';
+            $response['string'] = $content;
         }
 
         // Dispatch respose.

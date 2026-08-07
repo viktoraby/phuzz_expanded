@@ -5,9 +5,86 @@
 *Found functions:6
 *Extracted functions:6
 *Total parameter names extracted: 5
-*Overview: {'api_request': {'cn_api_request'}, 'ajax_purge_cache': {'cn_purge_cache'}, 'welcome_screen': {'cn_welcome_screen'}, 'get_group_rule_values': {'cn-get-group-rules-values'}, 'deactivate_plugin': {'cn-deactivate-plugin'}, 'ajax_dismiss_admin_notice': {'cn_dismiss_notice'}}
+*Overview: {'ajax_dismiss_admin_notice': {'cn_dismiss_notice'}, 'get_group_rule_values': {'cn-get-group-rules-values'}, 'api_request': {'cn_api_request'}, 'welcome_screen': {'cn_welcome_screen'}, 'deactivate_plugin': {'cn-deactivate-plugin'}, 'ajax_purge_cache': {'cn_purge_cache'}}
 *
 ***/
+
+/** Function ajax_dismiss_admin_notice() called by wp_ajax hooks: {'cn_dismiss_notice'} **/
+/** Parameters found in function ajax_dismiss_admin_notice(): {"post": ["nonce", "notice_action", "cn_network", "param"]} **/
+function ajax_dismiss_admin_notice() {
+		if ( ! current_user_can( 'install_plugins' ) )
+			return;
+
+		if ( wp_verify_nonce( $_POST['nonce'], 'cn_dismiss_notice' ) ) {
+			// get notice action
+			$notice_action = ! empty( $_POST['notice_action'] ) ? sanitize_key( $_POST['notice_action'] ) : 'dismiss';
+
+			$cn_network = isset( $_POST['cn_network'] ) ? (int) $_POST['cn_network'] : false;
+
+			// network?
+			$network = is_multisite() && $cn_network === 1;
+
+			switch ( $notice_action ) {
+				// threshold notice
+				case 'threshold':
+					// set delay period last cycle day
+					$delay = isset( $_POST['param'] ) ? (int) $_POST['param'] : 0;
+
+					$this->options['general']['update_threshold_date'] = $delay + DAY_IN_SECONDS;
+
+					// update options
+					if ( $network )
+						update_site_option( 'cookie_notice_options', $this->options['general'] );
+					else
+						update_option( 'cookie_notice_options', $this->options['general'] );
+					break;
+
+				// delay notice
+				case 'delay':
+					// set delay period to 1 week from now
+					$this->options['general']['update_delay_date'] = time() + 1209600;
+
+					// update options
+					if ( $network )
+						update_site_option( 'cookie_notice_options', $this->options['general'] );
+					else
+						update_option( 'cookie_notice_options', $this->options['general'] );
+					break;
+
+				// hide notice
+				case 'approve':
+				default:
+					$this->options['general']['update_notice'] = false;
+					$this->options['general']['update_delay_date'] = 0;
+
+					// update options
+					if ( $network ) {
+						$this->options['general']['update_notice_diss'] = true;
+
+						update_site_option( 'cookie_notice_options', $this->options['general'] );
+					} else
+						update_option( 'cookie_notice_options', $this->options['general'] );
+			}
+		}
+
+		exit;
+	}
+
+
+/** Function get_group_rule_values() called by wp_ajax hooks: {'cn-get-group-rules-values'} **/
+/** Parameters found in function get_group_rule_values(): {"post": ["action", "cn_param", "cn_nonce"]} **/
+function get_group_rule_values() {
+		if ( isset( $_POST['action'], $_POST['cn_param'], $_POST['cn_nonce'] ) && wp_verify_nonce( $_POST['cn_nonce'], 'cn-get-group-values' ) !== false ) {
+			echo wp_json_encode(
+				[
+					'select'	=> $this->prepare_values( sanitize_key( $_POST['cn_param'] ) )
+				]
+			);
+		}
+
+		exit;
+	}
+
 
 /** Function api_request() called by wp_ajax hooks: {'cn_api_request'} **/
 /** Parameters found in function api_request(): {"post": ["request", "cn_payment_nonce", "cn_nonce", "subscriptionID", "payment_nonce", "plan", "method", "cn_payment_identifier", "terms", "email", "pass", "pass2", "language"]} **/
@@ -890,10 +967,6 @@ function api_request() {
 	}
 
 
-/** Function ajax_purge_cache() called by wp_ajax hooks: {'cn_purge_cache'} **/
-/** No params detected :-/ **/
-
-
 /** Function welcome_screen() called by wp_ajax hooks: {'cn_welcome_screen'} **/
 /** Parameters found in function welcome_screen(): {"request": ["screen"]} **/
 function welcome_screen( $screen, $echo = true ) {
@@ -1524,21 +1597,6 @@ function welcome_screen( $screen, $echo = true ) {
 	}
 
 
-/** Function get_group_rule_values() called by wp_ajax hooks: {'cn-get-group-rules-values'} **/
-/** Parameters found in function get_group_rule_values(): {"post": ["action", "cn_param", "cn_nonce"]} **/
-function get_group_rule_values() {
-		if ( isset( $_POST['action'], $_POST['cn_param'], $_POST['cn_nonce'] ) && wp_verify_nonce( $_POST['cn_nonce'], 'cn-get-group-values' ) !== false ) {
-			echo wp_json_encode(
-				[
-					'select'	=> $this->prepare_values( sanitize_key( $_POST['cn_param'] ) )
-				]
-			);
-		}
-
-		exit;
-	}
-
-
 /** Function deactivate_plugin() called by wp_ajax hooks: {'cn-deactivate-plugin'} **/
 /** Parameters found in function deactivate_plugin(): {"post": ["nonce", "option_id", "other"]} **/
 function deactivate_plugin() {
@@ -1580,65 +1638,7 @@ function deactivate_plugin() {
 	}
 
 
-/** Function ajax_dismiss_admin_notice() called by wp_ajax hooks: {'cn_dismiss_notice'} **/
-/** Parameters found in function ajax_dismiss_admin_notice(): {"post": ["nonce", "notice_action", "cn_network", "param"]} **/
-function ajax_dismiss_admin_notice() {
-		if ( ! current_user_can( 'install_plugins' ) )
-			return;
-
-		if ( wp_verify_nonce( $_POST['nonce'], 'cn_dismiss_notice' ) ) {
-			// get notice action
-			$notice_action = ! empty( $_POST['notice_action'] ) ? sanitize_key( $_POST['notice_action'] ) : 'dismiss';
-
-			$cn_network = isset( $_POST['cn_network'] ) ? (int) $_POST['cn_network'] : false;
-
-			// network?
-			$network = is_multisite() && $cn_network === 1;
-
-			switch ( $notice_action ) {
-				// threshold notice
-				case 'threshold':
-					// set delay period last cycle day
-					$delay = isset( $_POST['param'] ) ? (int) $_POST['param'] : 0;
-
-					$this->options['general']['update_threshold_date'] = $delay + DAY_IN_SECONDS;
-
-					// update options
-					if ( $network )
-						update_site_option( 'cookie_notice_options', $this->options['general'] );
-					else
-						update_option( 'cookie_notice_options', $this->options['general'] );
-					break;
-
-				// delay notice
-				case 'delay':
-					// set delay period to 1 week from now
-					$this->options['general']['update_delay_date'] = time() + 1209600;
-
-					// update options
-					if ( $network )
-						update_site_option( 'cookie_notice_options', $this->options['general'] );
-					else
-						update_option( 'cookie_notice_options', $this->options['general'] );
-					break;
-
-				// hide notice
-				case 'approve':
-				default:
-					$this->options['general']['update_notice'] = false;
-					$this->options['general']['update_delay_date'] = 0;
-
-					// update options
-					if ( $network ) {
-						$this->options['general']['update_notice_diss'] = true;
-
-						update_site_option( 'cookie_notice_options', $this->options['general'] );
-					} else
-						update_option( 'cookie_notice_options', $this->options['general'] );
-			}
-		}
-
-		exit;
-	}
+/** Function ajax_purge_cache() called by wp_ajax hooks: {'cn_purge_cache'} **/
+/** No params detected :-/ **/
 
 

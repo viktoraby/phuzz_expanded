@@ -5,15 +5,11 @@
 *Found functions:5
 *Extracted functions:4
 *Total parameter names extracted: 1
-*Overview: {'ajax_save_profile': {'wpmdb_save_profile'}, 'ajax_flush': {'wpmdb_flush'}, 'ajax_migrate_table': {'wpmdb_migrate_table'}, 'ajaxflush': set(), 'ajax_delete_migration_profile': {'wpmdb_delete_migration_profile'}}
+*Overview: {'ajax_delete_migration_profile': {'wpmdb_delete_migration_profile'}, 'ajax_migrate_table': {'wpmdb_migrate_table'}, 'ajax_flush': {'wpmdb_flush'}, 'ajaxflush': set(), 'ajax_save_profile': {'wpmdb_save_profile'}}
 *
 ***/
 
-/** Function ajax_save_profile() called by wp_ajax hooks: {'wpmdb_save_profile'} **/
-/** No params detected :-/ **/
-
-
-/** Function ajax_flush() called by wp_ajax hooks: {'wpmdb_flush'} **/
+/** Function ajax_delete_migration_profile() called by wp_ajax hooks: {'wpmdb_delete_migration_profile'} **/
 /** No params detected :-/ **/
 
 
@@ -205,11 +201,15 @@ function ajax_migrate_table()
     }
 
 
+/** Function ajax_flush() called by wp_ajax hooks: {'wpmdb_flush'} **/
+/** No params detected :-/ **/
+
+
 /** Function ajaxflush() called by wp_ajax hooks: set() **/
 /** No function found :-/ **/
 
 
-/** Function ajax_delete_migration_profile() called by wp_ajax hooks: {'wpmdb_delete_migration_profile'} **/
+/** Function ajax_save_profile() called by wp_ajax hooks: {'wpmdb_save_profile'} **/
 /** No params detected :-/ **/
 
 

@@ -5,9 +5,17 @@
 *Found functions:14
 *Extracted functions:14
 *Total parameter names extracted: 10
-*Overview: {'updraft_ajax_importsettings': {'updraft_importsettings'}, 'updraft_download_backup': {'updraft_download_backup'}, 'wp_ajax_updraftcentral_receivepublickey': {'updraftcentral_receivepublickey', 'nopriv_updraftcentral_receivepublickey'}, 'updraftplus_user_notice_ajax': {'updraftplus_user_notice_ajax'}, 'updraft_ajax_handler': {'updraft_ajax'}, 'updraft_taskmanager_ajax': {'updraft_taskmanager_ajax'}, 'plupload_action': {'plupload_action'}, 'updraft_ajaxrestore': {'updraft_ajaxrestore', 'nopriv_updraft_ajaxrestore', 'nopriv_updraft_ajaxrestore_continue', 'updraft_ajaxrestore_continue'}, 'updraft_ajax_savesettings': {'updraft_savesettings'}, 'plupload_action2': {'plupload_action2'}, 'updraft_central_ajax_handler': {'updraft_central_ajax'}, 'wp_ajax_dashboard_widgets_high_priority': {'dashboard-widgets'}, 'updraftplus_dash_notice_ajax': {'updraftplus_dash_notice_ajax'}, 'wp_ajax_dashboard_widgets_low_priority': {'dashboard-widgets'}}
+*Overview: {'wp_ajax_dashboard_widgets_low_priority': {'dashboard-widgets'}, 'updraftplus_dash_notice_ajax': {'updraftplus_dash_notice_ajax'}, 'updraft_ajax_importsettings': {'updraft_importsettings'}, 'wp_ajax_dashboard_widgets_high_priority': {'dashboard-widgets'}, 'updraft_ajax_savesettings': {'updraft_savesettings'}, 'updraft_ajax_handler': {'updraft_ajax'}, 'updraft_ajaxrestore': {'updraft_ajaxrestore', 'nopriv_updraft_ajaxrestore_continue', 'updraft_ajaxrestore_continue', 'nopriv_updraft_ajaxrestore'}, 'updraftplus_user_notice_ajax': {'updraftplus_user_notice_ajax'}, 'plupload_action': {'plupload_action'}, 'updraft_taskmanager_ajax': {'updraft_taskmanager_ajax'}, 'plupload_action2': {'plupload_action2'}, 'wp_ajax_updraftcentral_receivepublickey': {'nopriv_updraftcentral_receivepublickey', 'updraftcentral_receivepublickey'}, 'updraft_download_backup': {'updraft_download_backup'}, 'updraft_central_ajax_handler': {'updraft_central_ajax'}}
 *
 ***/
+
+/** Function wp_ajax_dashboard_widgets_low_priority() called by wp_ajax hooks: {'dashboard-widgets'} **/
+/** No params detected :-/ **/
+
+
+/** Function updraftplus_dash_notice_ajax() called by wp_ajax hooks: {'updraftplus_dash_notice_ajax'} **/
+/** No params detected :-/ **/
+
 
 /** Function updraft_ajax_importsettings() called by wp_ajax hooks: {'updraft_importsettings'} **/
 /** Parameters found in function updraft_ajax_importsettings(): {"post": ["subaction", "nonce", "settings"]} **/
@@ -37,28 +45,25 @@ function updraft_ajax_importsettings() {
 	}
 
 
-/** Function updraft_download_backup() called by wp_ajax hooks: {'updraft_download_backup'} **/
-/** Parameters found in function updraft_download_backup(): {"request": ["_wpnonce", "timestamp", "type", "findex", "stage", "filepath"]} **/
-function updraft_download_backup() {
-		
-		if (!UpdraftPlus_Options::user_can_manage()) die('Unauthorised.');
-		
+/** Function wp_ajax_dashboard_widgets_high_priority() called by wp_ajax hooks: {'dashboard-widgets'} **/
+/** No params detected :-/ **/
+
+
+/** Function updraft_ajax_savesettings() called by wp_ajax hooks: {'updraft_savesettings'} **/
+/** Parameters found in function updraft_ajax_savesettings(): {"post": ["subaction", "nonce", "settings", "updraftplus_version"]} **/
+function updraft_ajax_savesettings() {
 		try {
-			if (empty($_REQUEST['_wpnonce']) || !wp_verify_nonce($_REQUEST['_wpnonce'], 'updraftplus_download')) die('Unauthorised.');
+			if (empty($_POST) || empty($_POST['subaction']) || 'savesettings' != $_POST['subaction'] || !isset($_POST['nonce']) || !is_user_logged_in() || !UpdraftPlus_Options::user_can_manage() || !wp_verify_nonce($_POST['nonce'], 'updraftplus-settings-nonce')) die('Security check');
 	
-			if (empty($_REQUEST['timestamp']) || !is_numeric($_REQUEST['timestamp']) || empty($_REQUEST['type'])) die;
+			if (empty($_POST['settings']) || !is_string($_POST['settings'])) die('Invalid data');
 	
-			$findexes = empty($_REQUEST['findex']) ? array(0) : $_REQUEST['findex'];
-			$stage = empty($_REQUEST['stage']) ? '' : $_REQUEST['stage'];
-			$file_path = empty($_REQUEST['filepath']) ? '' : $_REQUEST['filepath'];
-	
-			// This call may not actually return, depending upon what mode it is called in
-			$result = $this->do_updraft_download_backup($findexes, $_REQUEST['type'], $_REQUEST['timestamp'], $stage, false, $file_path);
+			parse_str(stripslashes($_POST['settings']), $posted_settings);
+			// We now have $posted_settings as an array
+			if (!empty($_POST['updraftplus_version'])) $posted_settings['updraftplus_version'] = $_POST['updraftplus_version'];
 			
-			// In theory, if a response was already sent, then Connection: close has been issued, and a Content-Length. However, in https://updraftplus.com/forums/topic/pclzip_err_bad_format-10-invalid-archive-structure/ a browser ignores both of these, and then picks up the second output and complains.
-			if (empty($result['already_closed'])) echo json_encode($result);
+			echo json_encode($this->save_settings($posted_settings));
 		} catch (Exception $e) {
-			$log_message = 'PHP Fatal Exception error ('.get_class($e).') has occurred during download backup. Error Message: '.$e->getMessage().' (Code: '.$e->getCode().', line '.$e->getLine().' in '.$e->getFile().')';
+			$log_message = 'PHP Fatal Exception error ('.get_class($e).') has occurred during save settings. Error Message: '.$e->getMessage().' (Code: '.$e->getCode().', line '.$e->getLine().' in '.$e->getFile().')';
 			error_log($log_message);
 			echo json_encode(array(
 				'fatal_error' => true,
@@ -66,66 +71,15 @@ function updraft_download_backup() {
 			));
 		// @codingStandardsIgnoreLine
 		} catch (Error $e) {
-			$log_message = 'PHP Fatal error ('.get_class($e).') has occurred during download backup. Error Message: '.$e->getMessage().' (Code: '.$e->getCode().', line '.$e->getLine().' in '.$e->getFile().')';
+			$log_message = 'PHP Fatal error ('.get_class($e).') has occurred during save settings. Error Message: '.$e->getMessage().' (Code: '.$e->getCode().', line '.$e->getLine().' in '.$e->getFile().')';
 			error_log($log_message);
 			echo json_encode(array(
 				'fatal_error' => true,
 				'fatal_error_message' => $log_message
 			));
 		}
-		die();
-	}
-
-
-/** Function wp_ajax_updraftcentral_receivepublickey() called by wp_ajax hooks: {'updraftcentral_receivepublickey', 'nopriv_updraftcentral_receivepublickey'} **/
-/** Parameters found in function wp_ajax_updraftcentral_receivepublickey(): {"get": ["_wpnonce", "public_key", "updraft_key_index"]} **/
-function wp_ajax_updraftcentral_receivepublickey() {
-		global $updraftcentral_host_plugin;
-	
-		// The actual nonce check is done in the method below
-		if (empty($_GET['_wpnonce']) || empty($_GET['public_key']) || !isset($_GET['updraft_key_index'])) die;
-		
-		$result = $this->receive_public_key();
-		if (!is_array($result) || empty($result['responsetype'])) die;
-
-		$style = 'body {text-align: center;font-family: Helvetica,Arial,Lucida,sans-serif;background-color: #A64C1A;color: #FFF;height: 100%;width: 100%;margin: 0;padding: 0;}#main {height: 100%;width: 100%;display: table;}#wrapper {display: table-cell;height: 100%;vertical-align: middle;}h1 {margin-bottom: 5px;}h2 {margin-top: 0;font-size: 22px;color: #FFF;}#btn-close {color: #FFF;font-size: 20px;font-weight: 500;padding: .3em 1em;line-height: 1.7em !important;background-color: transparent;background-size: cover;background-position: 50%;background-repeat: no-repeat;border: 2px solid;border-radius: 3px;-webkit-transition-duration: .2s;transition-duration: .2s;-webkit-transition-property: all !important;transition-property: all !important;text-decoration: none;}#btn-close:hover {background-color: #DE6726;}';
-
-		echo '<html><head><title>UpdraftCentral</title><style>'.$style.'</style></head><body><div id="main"><div id="wrapper"><img src="'.UPDRAFTCENTRAL_CLIENT_URL.'/images/ud-logo.png" width="60" /> <h1>'.$updraftcentral_host_plugin->retrieve_show_message('updraftcentral_connection').'</h1><h2>'.htmlspecialchars(network_site_url()).'</h2><p>';
-		
-		if ('ok' == $result['responsetype']) {
-			$updraftcentral_host_plugin->retrieve_show_message('updraftcentral_connection_successful', true);
-		} else {
-			echo '<strong>'.$updraftcentral_host_plugin->retrieve_show_message('updraftcentral_connection_failed').'</strong><br>';
-			switch ($result['code']) {
-				case 'unknown_key':
-					$updraftcentral_host_plugin->retrieve_show_message('unknown_key', true);
-					break;
-				case 'not_logged_in':
-					echo $updraftcentral_host_plugin->retrieve_show_message('not_logged_in').' '.$updraftcentral_host_plugin->retrieve_show_message('must_visit_url');
-					break;
-				case 'nonce_failure':
-					$updraftcentral_host_plugin->retrieve_show_message('security_check', true);
-					$updraftcentral_host_plugin->retrieve_show_message('must_visit_link', true);
-					break;
-				case 'already_have':
-					$updraftcentral_host_plugin->retrieve_show_message('connection_already_made', true);
-					break;
-				case 'insufficient_privilege':
-					$updraftcentral_host_plugin->retrieve_show_message('insufficient_privilege', true);
-					break;
-				default:
-					echo htmlspecialchars(print_r($result, true));
-					break;
-			}
-		}
-		
-		echo '</p><p><a id="btn-close" href="'.esc_url($this->get_current_clean_url()).'" onclick="window.close();">'.$updraftcentral_host_plugin->retrieve_show_message('close').'</a></p></div></div>';
 		die;
 	}
-
-
-/** Function updraftplus_user_notice_ajax() called by wp_ajax hooks: {'updraftplus_user_notice_ajax'} **/
-/** No params detected :-/ **/
 
 
 /** Function updraft_ajax_handler() called by wp_ajax hooks: {'updraft_ajax'} **/
@@ -276,41 +230,17 @@ function updraft_ajax_handler() {
 	}
 
 
-/** Function updraft_taskmanager_ajax() called by wp_ajax hooks: {'updraft_taskmanager_ajax'} **/
-/** Parameters found in function updraft_taskmanager_ajax(): {"request": ["nonce", "subaction", "action_data"]} **/
-function updraft_taskmanager_ajax() {
-
-		$nonce = empty($_REQUEST['nonce']) ? '' : $_REQUEST['nonce'];
-
-		if (!wp_verify_nonce($nonce, 'updraft-task-manager-ajax-nonce') || empty($_REQUEST['subaction']))
-			die('Security check failed');
-
-		$subaction = $_REQUEST['subaction'];
-
-		$allowed_commands = Updraft_Task_Manager_Commands_1_0::get_allowed_ajax_commands();
-		
-		if (in_array($subaction, $allowed_commands)) {
-
-			if (isset($_REQUEST['action_data']))
-				$data = $_REQUEST['action_data'];
-
-			$results = call_user_func(array($this->commands, $subaction), $data);
-			
-			if (is_wp_error($results)) {
-				$results = array(
-					'result' => false,
-					'error_code' => $results->get_error_code(),
-					'error_message' => $results->get_error_message(),
-					'error_data' => $results->get_error_data(),
-				);
-			}
-			
-			echo json_encode($results);
-		} else {
-			echo json_encode("{'error' : 'No such command found'}");
-		}
-		die;
+/** Function updraft_ajaxrestore() called by wp_ajax hooks: {'updraft_ajaxrestore', 'nopriv_updraft_ajaxrestore_continue', 'updraft_ajaxrestore_continue', 'nopriv_updraft_ajaxrestore'} **/
+/** Parameters found in function updraft_ajaxrestore(): {"request": ["action", "nonce"]} **/
+function updraft_ajaxrestore() {
+		if ('updraft_ajaxrestore' === $_REQUEST['action'] && (empty($_REQUEST['nonce']) || !wp_verify_nonce($_REQUEST['nonce'], 'updraftplus-credentialtest-nonce'))) die('Security Check');
+		$this->prepare_restore();
+		die();
 	}
+
+
+/** Function updraftplus_user_notice_ajax() called by wp_ajax hooks: {'updraftplus_user_notice_ajax'} **/
+/** No params detected :-/ **/
 
 
 /** Function plupload_action() called by wp_ajax hooks: {'plupload_action'} **/
@@ -444,43 +374,38 @@ function plupload_action() {
 	}
 
 
-/** Function updraft_ajaxrestore() called by wp_ajax hooks: {'updraft_ajaxrestore', 'nopriv_updraft_ajaxrestore', 'nopriv_updraft_ajaxrestore_continue', 'updraft_ajaxrestore_continue'} **/
-/** Parameters found in function updraft_ajaxrestore(): {"request": ["action", "nonce"]} **/
-function updraft_ajaxrestore() {
-		if ('updraft_ajaxrestore' === $_REQUEST['action'] && (empty($_REQUEST['nonce']) || !wp_verify_nonce($_REQUEST['nonce'], 'updraftplus-credentialtest-nonce'))) die('Security Check');
-		$this->prepare_restore();
-		die();
-	}
+/** Function updraft_taskmanager_ajax() called by wp_ajax hooks: {'updraft_taskmanager_ajax'} **/
+/** Parameters found in function updraft_taskmanager_ajax(): {"request": ["nonce", "subaction", "action_data"]} **/
+function updraft_taskmanager_ajax() {
 
+		$nonce = empty($_REQUEST['nonce']) ? '' : $_REQUEST['nonce'];
 
-/** Function updraft_ajax_savesettings() called by wp_ajax hooks: {'updraft_savesettings'} **/
-/** Parameters found in function updraft_ajax_savesettings(): {"post": ["subaction", "nonce", "settings", "updraftplus_version"]} **/
-function updraft_ajax_savesettings() {
-		try {
-			if (empty($_POST) || empty($_POST['subaction']) || 'savesettings' != $_POST['subaction'] || !isset($_POST['nonce']) || !is_user_logged_in() || !UpdraftPlus_Options::user_can_manage() || !wp_verify_nonce($_POST['nonce'], 'updraftplus-settings-nonce')) die('Security check');
-	
-			if (empty($_POST['settings']) || !is_string($_POST['settings'])) die('Invalid data');
-	
-			parse_str(stripslashes($_POST['settings']), $posted_settings);
-			// We now have $posted_settings as an array
-			if (!empty($_POST['updraftplus_version'])) $posted_settings['updraftplus_version'] = $_POST['updraftplus_version'];
+		if (!wp_verify_nonce($nonce, 'updraft-task-manager-ajax-nonce') || empty($_REQUEST['subaction']))
+			die('Security check failed');
+
+		$subaction = $_REQUEST['subaction'];
+
+		$allowed_commands = Updraft_Task_Manager_Commands_1_0::get_allowed_ajax_commands();
+		
+		if (in_array($subaction, $allowed_commands)) {
+
+			if (isset($_REQUEST['action_data']))
+				$data = $_REQUEST['action_data'];
+
+			$results = call_user_func(array($this->commands, $subaction), $data);
 			
-			echo json_encode($this->save_settings($posted_settings));
-		} catch (Exception $e) {
-			$log_message = 'PHP Fatal Exception error ('.get_class($e).') has occurred during save settings. Error Message: '.$e->getMessage().' (Code: '.$e->getCode().', line '.$e->getLine().' in '.$e->getFile().')';
-			error_log($log_message);
-			echo json_encode(array(
-				'fatal_error' => true,
-				'fatal_error_message' => $log_message
-			));
-		// @codingStandardsIgnoreLine
-		} catch (Error $e) {
-			$log_message = 'PHP Fatal error ('.get_class($e).') has occurred during save settings. Error Message: '.$e->getMessage().' (Code: '.$e->getCode().', line '.$e->getLine().' in '.$e->getFile().')';
-			error_log($log_message);
-			echo json_encode(array(
-				'fatal_error' => true,
-				'fatal_error_message' => $log_message
-			));
+			if (is_wp_error($results)) {
+				$results = array(
+					'result' => false,
+					'error_code' => $results->get_error_code(),
+					'error_message' => $results->get_error_message(),
+					'error_data' => $results->get_error_data(),
+				);
+			}
+			
+			echo json_encode($results);
+		} else {
+			echo json_encode("{'error' : 'No such command found'}");
 		}
 		die;
 	}
@@ -565,6 +490,93 @@ function plupload_action2() {
 	}
 
 
+/** Function wp_ajax_updraftcentral_receivepublickey() called by wp_ajax hooks: {'nopriv_updraftcentral_receivepublickey', 'updraftcentral_receivepublickey'} **/
+/** Parameters found in function wp_ajax_updraftcentral_receivepublickey(): {"get": ["_wpnonce", "public_key", "updraft_key_index"]} **/
+function wp_ajax_updraftcentral_receivepublickey() {
+		global $updraftcentral_host_plugin;
+	
+		// The actual nonce check is done in the method below
+		if (empty($_GET['_wpnonce']) || empty($_GET['public_key']) || !isset($_GET['updraft_key_index'])) die;
+		
+		$result = $this->receive_public_key();
+		if (!is_array($result) || empty($result['responsetype'])) die;
+
+		$style = 'body {text-align: center;font-family: Helvetica,Arial,Lucida,sans-serif;background-color: #A64C1A;color: #FFF;height: 100%;width: 100%;margin: 0;padding: 0;}#main {height: 100%;width: 100%;display: table;}#wrapper {display: table-cell;height: 100%;vertical-align: middle;}h1 {margin-bottom: 5px;}h2 {margin-top: 0;font-size: 22px;color: #FFF;}#btn-close {color: #FFF;font-size: 20px;font-weight: 500;padding: .3em 1em;line-height: 1.7em !important;background-color: transparent;background-size: cover;background-position: 50%;background-repeat: no-repeat;border: 2px solid;border-radius: 3px;-webkit-transition-duration: .2s;transition-duration: .2s;-webkit-transition-property: all !important;transition-property: all !important;text-decoration: none;}#btn-close:hover {background-color: #DE6726;}';
+
+		echo '<html><head><title>UpdraftCentral</title><style>'.$style.'</style></head><body><div id="main"><div id="wrapper"><img src="'.UPDRAFTCENTRAL_CLIENT_URL.'/images/ud-logo.png" width="60" /> <h1>'.$updraftcentral_host_plugin->retrieve_show_message('updraftcentral_connection').'</h1><h2>'.htmlspecialchars(network_site_url()).'</h2><p>';
+		
+		if ('ok' == $result['responsetype']) {
+			$updraftcentral_host_plugin->retrieve_show_message('updraftcentral_connection_successful', true);
+		} else {
+			echo '<strong>'.$updraftcentral_host_plugin->retrieve_show_message('updraftcentral_connection_failed').'</strong><br>';
+			switch ($result['code']) {
+				case 'unknown_key':
+					$updraftcentral_host_plugin->retrieve_show_message('unknown_key', true);
+					break;
+				case 'not_logged_in':
+					echo $updraftcentral_host_plugin->retrieve_show_message('not_logged_in').' '.$updraftcentral_host_plugin->retrieve_show_message('must_visit_url');
+					break;
+				case 'nonce_failure':
+					$updraftcentral_host_plugin->retrieve_show_message('security_check', true);
+					$updraftcentral_host_plugin->retrieve_show_message('must_visit_link', true);
+					break;
+				case 'already_have':
+					$updraftcentral_host_plugin->retrieve_show_message('connection_already_made', true);
+					break;
+				case 'insufficient_privilege':
+					$updraftcentral_host_plugin->retrieve_show_message('insufficient_privilege', true);
+					break;
+				default:
+					echo htmlspecialchars(print_r($result, true));
+					break;
+			}
+		}
+		
+		echo '</p><p><a id="btn-close" href="'.esc_url($this->get_current_clean_url()).'" onclick="window.close();">'.$updraftcentral_host_plugin->retrieve_show_message('close').'</a></p></div></div>';
+		die;
+	}
+
+
+/** Function updraft_download_backup() called by wp_ajax hooks: {'updraft_download_backup'} **/
+/** Parameters found in function updraft_download_backup(): {"request": ["_wpnonce", "timestamp", "type", "findex", "stage", "filepath"]} **/
+function updraft_download_backup() {
+		
+		if (!UpdraftPlus_Options::user_can_manage()) die('Unauthorised.');
+		
+		try {
+			if (empty($_REQUEST['_wpnonce']) || !wp_verify_nonce($_REQUEST['_wpnonce'], 'updraftplus_download')) die('Unauthorised.');
+	
+			if (empty($_REQUEST['timestamp']) || !is_numeric($_REQUEST['timestamp']) || empty($_REQUEST['type'])) die;
+	
+			$findexes = empty($_REQUEST['findex']) ? array(0) : $_REQUEST['findex'];
+			$stage = empty($_REQUEST['stage']) ? '' : $_REQUEST['stage'];
+			$file_path = empty($_REQUEST['filepath']) ? '' : $_REQUEST['filepath'];
+	
+			// This call may not actually return, depending upon what mode it is called in
+			$result = $this->do_updraft_download_backup($findexes, $_REQUEST['type'], $_REQUEST['timestamp'], $stage, false, $file_path);
+			
+			// In theory, if a response was already sent, then Connection: close has been issued, and a Content-Length. However, in https://updraftplus.com/forums/topic/pclzip_err_bad_format-10-invalid-archive-structure/ a browser ignores both of these, and then picks up the second output and complains.
+			if (empty($result['already_closed'])) echo json_encode($result);
+		} catch (Exception $e) {
+			$log_message = 'PHP Fatal Exception error ('.get_class($e).') has occurred during download backup. Error Message: '.$e->getMessage().' (Code: '.$e->getCode().', line '.$e->getLine().' in '.$e->getFile().')';
+			error_log($log_message);
+			echo json_encode(array(
+				'fatal_error' => true,
+				'fatal_error_message' => $log_message
+			));
+		// @codingStandardsIgnoreLine
+		} catch (Error $e) {
+			$log_message = 'PHP Fatal error ('.get_class($e).') has occurred during download backup. Error Message: '.$e->getMessage().' (Code: '.$e->getCode().', line '.$e->getLine().' in '.$e->getFile().')';
+			error_log($log_message);
+			echo json_encode(array(
+				'fatal_error' => true,
+				'fatal_error_message' => $log_message
+			));
+		}
+		die();
+	}
+
+
 /** Function updraft_central_ajax_handler() called by wp_ajax hooks: {'updraft_central_ajax'} **/
 /** Parameters found in function updraft_central_ajax_handler(): {"request": ["nonce", "subaction"]} **/
 function updraft_central_ajax_handler() {
@@ -624,17 +636,5 @@ function updraft_central_ajax_handler() {
 		}
 		die;
 	}
-
-
-/** Function wp_ajax_dashboard_widgets_high_priority() called by wp_ajax hooks: {'dashboard-widgets'} **/
-/** No params detected :-/ **/
-
-
-/** Function updraftplus_dash_notice_ajax() called by wp_ajax hooks: {'updraftplus_dash_notice_ajax'} **/
-/** No params detected :-/ **/
-
-
-/** Function wp_ajax_dashboard_widgets_low_priority() called by wp_ajax hooks: {'dashboard-widgets'} **/
-/** No params detected :-/ **/
 
 

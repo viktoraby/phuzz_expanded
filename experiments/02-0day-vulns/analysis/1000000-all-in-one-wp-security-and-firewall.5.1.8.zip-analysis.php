@@ -5,105 +5,12 @@
 *Found functions:6
 *Extracted functions:6
 *Total parameter names extracted: 6
-*Overview: {'handle_ajax_requests': {'aios_ajax'}, 'shared_ajax': {'simbatfa_shared_ajax'}, 'ajax': {'tfa_frontend'}, 'aiowps_ajax_handler': {'aiowps_ajax'}, 'updraft_taskmanager_ajax': {'updraft_taskmanager_ajax'}, 'tfaInitLogin': {'nopriv_simbatfa-init-otp', 'simbatfa-init-otp'}}
+*Overview: {'handle_ajax_requests': {'aios_ajax'}, 'aiowps_ajax_handler': {'aiowps_ajax'}, 'updraft_taskmanager_ajax': {'updraft_taskmanager_ajax'}, 'tfaInitLogin': {'nopriv_simbatfa-init-otp', 'simbatfa-init-otp'}, 'shared_ajax': {'simbatfa_shared_ajax'}, 'ajax': {'tfa_frontend'}}
 *
 ***/
 
 /** Function handle_ajax_requests() called by wp_ajax hooks: {'aios_ajax'} **/
 /** No params detected :-/ **/
-
-
-/** Function shared_ajax() called by wp_ajax hooks: {'simbatfa_shared_ajax'} **/
-/** Parameters found in function shared_ajax(): {"post": ["subaction", "nonce", "device_id"]} **/
-function shared_ajax() {
-
-		if (empty($_POST['subaction']) || empty($_POST['nonce']) || !is_user_logged_in() || !wp_verify_nonce($_POST['nonce'], 'tfa_shared_nonce')) die('Security check (3).');
-
-		global $current_user;
-
-		$subaction = $_POST['subaction'];
-
-		if ('refreshotp' == $subaction) {
-
-			$code = $this->get_controller('totp')->get_current_code($current_user->ID);
-
-			if (false === $code) die(json_encode(array('code' => '')));
-
-			die(json_encode(array('code' => $code)));
-
-		} elseif ('untrust_device' == $subaction && isset($_POST['device_id'])) {
-			$this->untrust_device(stripslashes($_POST['device_id']));
-			ob_start();
-			$this->include_template('trusted-devices-inner-box.php', array('trusted_devices' => $this->user_get_trusted_devices()));
-			echo json_encode(array('trusted_list' => ob_get_clean()));
-		}
-
-		exit;
-
-	}
-
-
-/** Function ajax() called by wp_ajax hooks: {'tfa_frontend'} **/
-/** Parameters found in function ajax(): {"post": ["subaction", "nonce", "settings"]} **/
-function ajax() {
-		$totp_controller = $this->mother->get_controller('totp');
-		global $current_user;
-		
-		$return_array = array();
-		
-		if (empty($_POST) || empty($_POST['subaction']) || !isset($_POST['nonce']) || !is_user_logged_in() || !wp_verify_nonce($_POST['nonce'], 'tfa_frontend_nonce')) die('Security check');
-		
-		if ('savesettings' == $_POST['subaction']) {
-			if (empty($_POST['settings']) || !is_string($_POST['settings'])) die;
-			
-			parse_str(stripslashes($_POST['settings']), $posted_settings);
-			
-			if (isset($posted_settings['tfa_algorithm_type'])) {
-				$old_algorithm = $totp_controller->get_user_otp_algorithm($current_user->ID);
-		
-				if ($old_algorithm != $posted_settings['tfa_algorithm_type'])
-					$totp_controller->changeUserAlgorithmTo($current_user->ID, $posted_settings['tfa_algorithm_type']);
-				
-				//Re-fetch the algorithm type, url and private string
-				$variables = $this->tfa_fetch_assort_vars();
-				
-				$return_array['qr'] = $totp_controller->tfa_qr_code_url($variables['algorithm_type'], $variables['url'], $variables['tfa_priv_key']);
-				$return_array['al_type_disp'] = $this->tfa_algorithm_info($variables['algorithm_type']);
-			}
-			
-			if (isset($posted_settings['tfa_enable_tfa'])) {
-			
-				$allow_enable_or_disable = false;
-			
-				if (empty($posted_settings['require_current']) || !$posted_settings['tfa_enable_tfa']) {
-					$allow_enable_or_disable = true;
-				} else {
-				
-					if (!isset($posted_settings['tfa_enable_current']) || '' == $posted_settings['tfa_enable_current']) {
-						$return_array['message'] = __('To enable TFA, you must enter the current code.', 'all-in-one-wp-security-and-firewall');
-						$return_array['error'] = 'code_absent';
-					} else {
-						// Third parameter: don't allow emergency codes
-						if ($totp_controller->check_code_for_user($current_user->ID, $posted_settings['tfa_enable_current'], false)) {
-							$allow_enable_or_disable = true;
-						} else {
-							$return_array['error'] = 'code_wrong';
-							$return_array['message'] = apply_filters('simba_tfa_message_code_incorrect', __('The TFA code you entered was incorrect.', 'all-in-one-wp-security-and-firewall'));
-						}
-					}
-				
-				}
-				
-				if ($allow_enable_or_disable) $this->mother->change_tfa_enabled_status($current_user->ID, $posted_settings['tfa_enable_tfa']);
-			}
-			
-			$return_array['result'] = 'saved';
-			
-			echo json_encode($return_array);
-		}
-		
-		die;
-	}
 
 
 /** Function aiowps_ajax_handler() called by wp_ajax hooks: {'aiowps_ajax'} **/
@@ -270,6 +177,99 @@ function tfaInitLogin() {
 		echo json_encode($results);
 
 		exit;
+	}
+
+
+/** Function shared_ajax() called by wp_ajax hooks: {'simbatfa_shared_ajax'} **/
+/** Parameters found in function shared_ajax(): {"post": ["subaction", "nonce", "device_id"]} **/
+function shared_ajax() {
+
+		if (empty($_POST['subaction']) || empty($_POST['nonce']) || !is_user_logged_in() || !wp_verify_nonce($_POST['nonce'], 'tfa_shared_nonce')) die('Security check (3).');
+
+		global $current_user;
+
+		$subaction = $_POST['subaction'];
+
+		if ('refreshotp' == $subaction) {
+
+			$code = $this->get_controller('totp')->get_current_code($current_user->ID);
+
+			if (false === $code) die(json_encode(array('code' => '')));
+
+			die(json_encode(array('code' => $code)));
+
+		} elseif ('untrust_device' == $subaction && isset($_POST['device_id'])) {
+			$this->untrust_device(stripslashes($_POST['device_id']));
+			ob_start();
+			$this->include_template('trusted-devices-inner-box.php', array('trusted_devices' => $this->user_get_trusted_devices()));
+			echo json_encode(array('trusted_list' => ob_get_clean()));
+		}
+
+		exit;
+
+	}
+
+
+/** Function ajax() called by wp_ajax hooks: {'tfa_frontend'} **/
+/** Parameters found in function ajax(): {"post": ["subaction", "nonce", "settings"]} **/
+function ajax() {
+		$totp_controller = $this->mother->get_controller('totp');
+		global $current_user;
+		
+		$return_array = array();
+		
+		if (empty($_POST) || empty($_POST['subaction']) || !isset($_POST['nonce']) || !is_user_logged_in() || !wp_verify_nonce($_POST['nonce'], 'tfa_frontend_nonce')) die('Security check');
+		
+		if ('savesettings' == $_POST['subaction']) {
+			if (empty($_POST['settings']) || !is_string($_POST['settings'])) die;
+			
+			parse_str(stripslashes($_POST['settings']), $posted_settings);
+			
+			if (isset($posted_settings['tfa_algorithm_type'])) {
+				$old_algorithm = $totp_controller->get_user_otp_algorithm($current_user->ID);
+		
+				if ($old_algorithm != $posted_settings['tfa_algorithm_type'])
+					$totp_controller->changeUserAlgorithmTo($current_user->ID, $posted_settings['tfa_algorithm_type']);
+				
+				//Re-fetch the algorithm type, url and private string
+				$variables = $this->tfa_fetch_assort_vars();
+				
+				$return_array['qr'] = $totp_controller->tfa_qr_code_url($variables['algorithm_type'], $variables['url'], $variables['tfa_priv_key']);
+				$return_array['al_type_disp'] = $this->tfa_algorithm_info($variables['algorithm_type']);
+			}
+			
+			if (isset($posted_settings['tfa_enable_tfa'])) {
+			
+				$allow_enable_or_disable = false;
+			
+				if (empty($posted_settings['require_current']) || !$posted_settings['tfa_enable_tfa']) {
+					$allow_enable_or_disable = true;
+				} else {
+				
+					if (!isset($posted_settings['tfa_enable_current']) || '' == $posted_settings['tfa_enable_current']) {
+						$return_array['message'] = __('To enable TFA, you must enter the current code.', 'all-in-one-wp-security-and-firewall');
+						$return_array['error'] = 'code_absent';
+					} else {
+						// Third parameter: don't allow emergency codes
+						if ($totp_controller->check_code_for_user($current_user->ID, $posted_settings['tfa_enable_current'], false)) {
+							$allow_enable_or_disable = true;
+						} else {
+							$return_array['error'] = 'code_wrong';
+							$return_array['message'] = apply_filters('simba_tfa_message_code_incorrect', __('The TFA code you entered was incorrect.', 'all-in-one-wp-security-and-firewall'));
+						}
+					}
+				
+				}
+				
+				if ($allow_enable_or_disable) $this->mother->change_tfa_enabled_status($current_user->ID, $posted_settings['tfa_enable_tfa']);
+			}
+			
+			$return_array['result'] = 'saved';
+			
+			echo json_encode($return_array);
+		}
+		
+		die;
 	}
 
 

@@ -5,12 +5,118 @@
 *Found functions:13
 *Extracted functions:13
 *Total parameter names extracted: 7
-*Overview: {'ajax_current_load': {'blc_current_load'}, 'ajax_dismiss': {'blc_dismiss'}, 'ajax_full_status': {'blc_full_status'}, 'ajax_edit': {'blc_edit'}, 'ajax_unlink': {'blc_unlink'}, 'ajax_link_details': {'blc_link_details'}, 'ajax_recheck': {'blc_recheck'}, 'dismiss_multisite_notification': {'wpmudev_blc_multisite_notification_dismiss'}, 'ajax_discard': {'blc_discard'}, 'ajax_undismiss': {'blc_undismiss'}, 'ajax_deredirect': {'blc_deredirect'}, 'ajax_work': {'blc_work'}, 'ajax_dashboard_status': {'blc_dashboard_status'}}
+*Overview: {'ajax_work': {'blc_work'}, 'ajax_recheck': {'blc_recheck'}, 'ajax_undismiss': {'blc_undismiss'}, 'ajax_discard': {'blc_discard'}, 'ajax_dismiss': {'blc_dismiss'}, 'ajax_full_status': {'blc_full_status'}, 'dismiss_multisite_notification': {'wpmudev_blc_multisite_notification_dismiss'}, 'ajax_deredirect': {'blc_deredirect'}, 'ajax_edit': {'blc_edit'}, 'ajax_unlink': {'blc_unlink'}, 'ajax_current_load': {'blc_current_load'}, 'ajax_dashboard_status': {'blc_dashboard_status'}, 'ajax_link_details': {'blc_link_details'}}
 *
 ***/
 
-/** Function ajax_current_load() called by wp_ajax hooks: {'blc_current_load'} **/
+/** Function ajax_work() called by wp_ajax hooks: {'blc_work'} **/
 /** No params detected :-/ **/
+
+
+/** Function ajax_recheck() called by wp_ajax hooks: {'blc_recheck'} **/
+/** Parameters found in function ajax_recheck(): {"post": ["link_id"]} **/
+function ajax_recheck() {
+			if ( ! current_user_can( 'edit_others_posts' ) || ! check_ajax_referer( 'blc_recheck', false, false ) ) {
+				die(
+				json_encode(
+					array(
+						'error' => __( "You're not allowed to do that!", 'broken-link-checker' ),
+					)
+				)
+				);
+			}
+
+			if ( ! isset( $_POST['link_id'] ) || ! is_numeric( $_POST['link_id'] ) ) {
+				die(
+				json_encode(
+					array(
+						'error' => __( 'Error : link_id not specified', 'broken-link-checker' ),
+					)
+				)
+				);
+			}
+
+			$id   = intval( $_POST['link_id'] );
+			$link = new blcLink( $id );
+
+			if ( ! $link->valid() ) {
+				die(
+				json_encode(
+					array(
+						'error' => sprintf( __( "Oops, I can't find the link %d", 'broken-link-checker' ), $id ),
+					)
+				)
+				);
+			}
+
+			$transactionManager = TransactionManager::getInstance();
+			$transactionManager->start();
+
+			//In case the immediate check fails, this will ensure the link is checked during the next work() run.
+			$link->last_check_attempt  = 0;
+			$link->isOptionLinkChanged = true;
+			$link->save();
+
+			//Check the link and save the results.
+			$link->check( true );
+
+			$transactionManager->commit();
+
+			$status   = $link->analyse_status();
+			$response = array(
+				'status_text'    => $status['text'],
+				'status_code'    => $status['code'],
+				'http_code'      => empty( $link->http_code ) ? '' : $link->http_code,
+				'redirect_count' => $link->redirect_count,
+				'final_url'      => $link->final_url,
+			);
+
+			die( json_encode( $response ) );
+		}
+
+
+/** Function ajax_undismiss() called by wp_ajax hooks: {'blc_undismiss'} **/
+/** No params detected :-/ **/
+
+
+/** Function ajax_discard() called by wp_ajax hooks: {'blc_discard'} **/
+/** Parameters found in function ajax_discard(): {"post": ["link_id"]} **/
+function ajax_discard() {
+			if ( ! current_user_can( 'edit_others_posts' ) || ! check_ajax_referer( 'blc_discard', false, false ) ) {
+				die( __( "You're not allowed to do that!", 'broken-link-checker' ) );
+			}
+
+			if ( isset( $_POST['link_id'] ) ) {
+				//Load the link
+				$link = new blcLink( intval( $_POST['link_id'] ) );
+
+				if ( ! $link->valid() ) {
+					printf( __( "Oops, I can't find the link %d", 'broken-link-checker' ), intval( $_POST['link_id'] ) );
+					die();
+				}
+				//Make it appear "not broken"
+				$link->broken             = false;
+				$link->warning            = false;
+				$link->false_positive     = true;
+				$link->last_check_attempt = time();
+				$link->log                = __( 'This link was manually marked as working by the user.', 'broken-link-checker' );
+
+				$link->isOptionLinkChanged = true;
+
+				$transactionManager = TransactionManager::getInstance();
+				$transactionManager->start();
+
+				//Save the changes
+				if ( $link->save() ) {
+					$transactionManager->commit();
+					die( 'OK' );
+				} else {
+					die( __( "Oops, couldn't modify the link!", 'broken-link-checker' ) );
+				}
+			} else {
+				die( __( 'Error : link_id not specified', 'broken-link-checker' ) );
+			}
+		}
 
 
 /** Function ajax_dismiss() called by wp_ajax hooks: {'blc_dismiss'} **/
@@ -19,6 +125,90 @@
 
 /** Function ajax_full_status() called by wp_ajax hooks: {'blc_full_status'} **/
 /** No params detected :-/ **/
+
+
+/** Function dismiss_multisite_notification() called by wp_ajax hooks: {'wpmudev_blc_multisite_notification_dismiss'} **/
+/** No params detected :-/ **/
+
+
+/** Function ajax_deredirect() called by wp_ajax hooks: {'blc_deredirect'} **/
+/** Parameters found in function ajax_deredirect(): {"post": ["link_id"]} **/
+function ajax_deredirect() {
+			if ( ! current_user_can( 'edit_others_posts' ) || ! check_ajax_referer( 'blc_deredirect', false, false ) ) {
+				die(
+				json_encode(
+					array(
+						'error' => __( "You're not allowed to do that!", 'broken-link-checker' ),
+					)
+				)
+				);
+			}
+
+			if ( ! isset( $_POST['link_id'] ) || ! is_numeric( $_POST['link_id'] ) ) {
+				die(
+				json_encode(
+					array(
+						'error' => __( 'Error : link_id not specified', 'broken-link-checker' ),
+					)
+				)
+				);
+			}
+
+			$id   = intval( $_POST['link_id'] );
+			$link = new blcLink( $id );
+
+			if ( ! $link->valid() ) {
+				die(
+				json_encode(
+					array(
+						'error' => sprintf( __( "Oops, I can't find the link %d", 'broken-link-checker' ), $id ),
+					)
+				)
+				);
+			}
+
+			//The actual task is simple; it's error handling that's complicated.
+			$result = $link->deredirect();
+			if ( is_wp_error( $result ) ) {
+				die(
+				json_encode(
+					array(
+						'error' => sprintf( '%s [%s]', $result->get_error_message(), $result->get_error_code() ),
+					)
+				)
+				);
+			}
+
+			$link = $result['new_link'];
+			/** @var blcLink $link */
+
+			$status   = $link->analyse_status();
+			$response = array(
+				'url'         => $link->url,
+				'escaped_url' => esc_url_raw( $link->url ),
+				'new_link_id' => $result['new_link_id'],
+
+				'status_text'    => $status['text'],
+				'status_code'    => $status['code'],
+				'http_code'      => empty( $link->http_code ) ? '' : $link->http_code,
+				'redirect_count' => $link->redirect_count,
+				'final_url'      => $link->final_url,
+
+				'cnt_okay'  => $result['cnt_okay'],
+				'cnt_error' => $result['cnt_error'],
+				'errors'    => array(),
+			);
+
+			//Convert WP_Error's to simple strings.
+			if ( ! empty( $result['errors'] ) ) {
+				foreach ( $result['errors'] as $error ) {
+					/** @var WP_Error $error */
+					$response['errors'][] = $error->get_error_message();
+				}
+			}
+
+			die( json_encode( $response ) );
+		}
 
 
 /** Function ajax_edit() called by wp_ajax hooks: {'blc_edit'} **/
@@ -207,6 +397,14 @@ function ajax_unlink() {
 		}
 
 
+/** Function ajax_current_load() called by wp_ajax hooks: {'blc_current_load'} **/
+/** No params detected :-/ **/
+
+
+/** Function ajax_dashboard_status() called by wp_ajax hooks: {'blc_dashboard_status'} **/
+/** No params detected :-/ **/
+
+
 /** Function ajax_link_details() called by wp_ajax hooks: {'blc_link_details'} **/
 /** Parameters found in function ajax_link_details(): {"get": ["link_id"], "post": ["link_id"]} **/
 function ajax_link_details() {
@@ -245,203 +443,5 @@ function ajax_link_details() {
 				die();
 			}
 		}
-
-
-/** Function ajax_recheck() called by wp_ajax hooks: {'blc_recheck'} **/
-/** Parameters found in function ajax_recheck(): {"post": ["link_id"]} **/
-function ajax_recheck() {
-			if ( ! current_user_can( 'edit_others_posts' ) || ! check_ajax_referer( 'blc_recheck', false, false ) ) {
-				die(
-				json_encode(
-					array(
-						'error' => __( "You're not allowed to do that!", 'broken-link-checker' ),
-					)
-				)
-				);
-			}
-
-			if ( ! isset( $_POST['link_id'] ) || ! is_numeric( $_POST['link_id'] ) ) {
-				die(
-				json_encode(
-					array(
-						'error' => __( 'Error : link_id not specified', 'broken-link-checker' ),
-					)
-				)
-				);
-			}
-
-			$id   = intval( $_POST['link_id'] );
-			$link = new blcLink( $id );
-
-			if ( ! $link->valid() ) {
-				die(
-				json_encode(
-					array(
-						'error' => sprintf( __( "Oops, I can't find the link %d", 'broken-link-checker' ), $id ),
-					)
-				)
-				);
-			}
-
-			$transactionManager = TransactionManager::getInstance();
-			$transactionManager->start();
-
-			//In case the immediate check fails, this will ensure the link is checked during the next work() run.
-			$link->last_check_attempt  = 0;
-			$link->isOptionLinkChanged = true;
-			$link->save();
-
-			//Check the link and save the results.
-			$link->check( true );
-
-			$transactionManager->commit();
-
-			$status   = $link->analyse_status();
-			$response = array(
-				'status_text'    => $status['text'],
-				'status_code'    => $status['code'],
-				'http_code'      => empty( $link->http_code ) ? '' : $link->http_code,
-				'redirect_count' => $link->redirect_count,
-				'final_url'      => $link->final_url,
-			);
-
-			die( json_encode( $response ) );
-		}
-
-
-/** Function dismiss_multisite_notification() called by wp_ajax hooks: {'wpmudev_blc_multisite_notification_dismiss'} **/
-/** No params detected :-/ **/
-
-
-/** Function ajax_discard() called by wp_ajax hooks: {'blc_discard'} **/
-/** Parameters found in function ajax_discard(): {"post": ["link_id"]} **/
-function ajax_discard() {
-			if ( ! current_user_can( 'edit_others_posts' ) || ! check_ajax_referer( 'blc_discard', false, false ) ) {
-				die( __( "You're not allowed to do that!", 'broken-link-checker' ) );
-			}
-
-			if ( isset( $_POST['link_id'] ) ) {
-				//Load the link
-				$link = new blcLink( intval( $_POST['link_id'] ) );
-
-				if ( ! $link->valid() ) {
-					printf( __( "Oops, I can't find the link %d", 'broken-link-checker' ), intval( $_POST['link_id'] ) );
-					die();
-				}
-				//Make it appear "not broken"
-				$link->broken             = false;
-				$link->warning            = false;
-				$link->false_positive     = true;
-				$link->last_check_attempt = time();
-				$link->log                = __( 'This link was manually marked as working by the user.', 'broken-link-checker' );
-
-				$link->isOptionLinkChanged = true;
-
-				$transactionManager = TransactionManager::getInstance();
-				$transactionManager->start();
-
-				//Save the changes
-				if ( $link->save() ) {
-					$transactionManager->commit();
-					die( 'OK' );
-				} else {
-					die( __( "Oops, couldn't modify the link!", 'broken-link-checker' ) );
-				}
-			} else {
-				die( __( 'Error : link_id not specified', 'broken-link-checker' ) );
-			}
-		}
-
-
-/** Function ajax_undismiss() called by wp_ajax hooks: {'blc_undismiss'} **/
-/** No params detected :-/ **/
-
-
-/** Function ajax_deredirect() called by wp_ajax hooks: {'blc_deredirect'} **/
-/** Parameters found in function ajax_deredirect(): {"post": ["link_id"]} **/
-function ajax_deredirect() {
-			if ( ! current_user_can( 'edit_others_posts' ) || ! check_ajax_referer( 'blc_deredirect', false, false ) ) {
-				die(
-				json_encode(
-					array(
-						'error' => __( "You're not allowed to do that!", 'broken-link-checker' ),
-					)
-				)
-				);
-			}
-
-			if ( ! isset( $_POST['link_id'] ) || ! is_numeric( $_POST['link_id'] ) ) {
-				die(
-				json_encode(
-					array(
-						'error' => __( 'Error : link_id not specified', 'broken-link-checker' ),
-					)
-				)
-				);
-			}
-
-			$id   = intval( $_POST['link_id'] );
-			$link = new blcLink( $id );
-
-			if ( ! $link->valid() ) {
-				die(
-				json_encode(
-					array(
-						'error' => sprintf( __( "Oops, I can't find the link %d", 'broken-link-checker' ), $id ),
-					)
-				)
-				);
-			}
-
-			//The actual task is simple; it's error handling that's complicated.
-			$result = $link->deredirect();
-			if ( is_wp_error( $result ) ) {
-				die(
-				json_encode(
-					array(
-						'error' => sprintf( '%s [%s]', $result->get_error_message(), $result->get_error_code() ),
-					)
-				)
-				);
-			}
-
-			$link = $result['new_link'];
-			/** @var blcLink $link */
-
-			$status   = $link->analyse_status();
-			$response = array(
-				'url'         => $link->url,
-				'escaped_url' => esc_url_raw( $link->url ),
-				'new_link_id' => $result['new_link_id'],
-
-				'status_text'    => $status['text'],
-				'status_code'    => $status['code'],
-				'http_code'      => empty( $link->http_code ) ? '' : $link->http_code,
-				'redirect_count' => $link->redirect_count,
-				'final_url'      => $link->final_url,
-
-				'cnt_okay'  => $result['cnt_okay'],
-				'cnt_error' => $result['cnt_error'],
-				'errors'    => array(),
-			);
-
-			//Convert WP_Error's to simple strings.
-			if ( ! empty( $result['errors'] ) ) {
-				foreach ( $result['errors'] as $error ) {
-					/** @var WP_Error $error */
-					$response['errors'][] = $error->get_error_message();
-				}
-			}
-
-			die( json_encode( $response ) );
-		}
-
-
-/** Function ajax_work() called by wp_ajax hooks: {'blc_work'} **/
-/** No params detected :-/ **/
-
-
-/** Function ajax_dashboard_status() called by wp_ajax hooks: {'blc_dashboard_status'} **/
-/** No params detected :-/ **/
 
 

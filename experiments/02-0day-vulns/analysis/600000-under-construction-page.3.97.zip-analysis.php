@@ -5,7 +5,7 @@
 *Found functions:4
 *Extracted functions:4
 *Total parameter names extracted: 3
-*Overview: {'dismiss_pointer_ajax': {'ucp_dismiss_pointer'}, 'dismiss_survey_ajax': {'ucp_dismiss_survey'}, 'submit_survey_ajax': {'ucp_submit_survey'}, 'submit_support_message_ajax': {'ucp_submit_support_message'}}
+*Overview: {'dismiss_pointer_ajax': {'ucp_dismiss_pointer'}, 'submit_support_message_ajax': {'ucp_submit_support_message'}, 'submit_survey_ajax': {'ucp_submit_survey'}, 'dismiss_survey_ajax': {'ucp_dismiss_survey'}}
 *
 ***/
 
@@ -27,26 +27,6 @@ function dismiss_pointer_ajax()
 
         wp_send_json_success();
     }
-
-
-/** Function dismiss_survey_ajax() called by wp_ajax hooks: {'ucp_dismiss_survey'} **/
-/** Parameters found in function dismiss_survey_ajax(): {"post": ["survey"]} **/
-function dismiss_survey_ajax()
-    {
-        check_ajax_referer('ucp_dismiss_survey');
-
-        $surveys = get_option(UCP_SURVEYS_KEY, array());
-        $survey = trim(sanitize_text_field($_POST['survey']));
-
-        $surveys[$survey] = -1;
-        update_option(UCP_SURVEYS_KEY, $surveys);
-
-        wp_send_json_success();
-    }
-
-
-/** Function submit_survey_ajax() called by wp_ajax hooks: {'ucp_submit_survey'} **/
-/** No params detected :-/ **/
 
 
 /** Function submit_support_message_ajax() called by wp_ajax hooks: {'ucp_submit_support_message'} **/
@@ -83,6 +63,26 @@ function submit_support_message_ajax()
         } else {
             wp_send_json_error(esc_attr__('Something is not right with your wp_mail() function. Please email as at ucp@webfactoryltd.com.', 'under-construction-page'));
         }
+    }
+
+
+/** Function submit_survey_ajax() called by wp_ajax hooks: {'ucp_submit_survey'} **/
+/** No params detected :-/ **/
+
+
+/** Function dismiss_survey_ajax() called by wp_ajax hooks: {'ucp_dismiss_survey'} **/
+/** Parameters found in function dismiss_survey_ajax(): {"post": ["survey"]} **/
+function dismiss_survey_ajax()
+    {
+        check_ajax_referer('ucp_dismiss_survey');
+
+        $surveys = get_option(UCP_SURVEYS_KEY, array());
+        $survey = trim(sanitize_text_field($_POST['survey']));
+
+        $surveys[$survey] = -1;
+        update_option(UCP_SURVEYS_KEY, $surveys);
+
+        wp_send_json_success();
     }
 
 

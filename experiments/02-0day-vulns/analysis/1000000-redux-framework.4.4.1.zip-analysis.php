@@ -5,9 +5,43 @@
 *Found functions:5
 *Extracted functions:5
 *Total parameter names extracted: 3
-*Overview: {'timer': {'redux_custom_font_timer'}, 'redux_delete_widget_area_area': {'redux_delete_widget_area'}, 'ajax': {'redux_custom_fonts', 'redux_hide_admin_notice', 'redux_submit_support_data'}, 'admin_ajax': {'redux_activation'}, 'google_fonts_update': {'redux_update_google_fonts'}}
+*Overview: {'admin_ajax': {'redux_activation'}, 'timer': {'redux_custom_font_timer'}, 'redux_delete_widget_area_area': {'redux_delete_widget_area'}, 'ajax': {'redux_custom_fonts', 'redux_hide_admin_notice', 'redux_submit_support_data'}, 'google_fonts_update': {'redux_update_google_fonts'}}
 *
 ***/
+
+/** Function admin_ajax() called by wp_ajax hooks: {'redux_activation'} **/
+/** Parameters found in function admin_ajax(): {"request": ["nonce", "activate"]} **/
+function admin_ajax() {
+
+			// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			$nonce = isset( $_REQUEST['nonce'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['nonce'] ) ) : '';
+
+			if ( empty( $nonce ) || ! wp_verify_nonce( $nonce, $this->nonce ) ) {
+				die( __( 'Security check failed.', 'redux-framework' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			}
+
+			if ( 'false' === $_REQUEST['activate'] ) {
+				echo wp_json_encode(
+					array(
+						'type' => 'close',
+						'msg'  => '',
+					)
+				);
+
+				update_option( 'redux-framework_extendify_plugin_notice', 'hide' );
+
+				die();
+			}
+
+			$res = $this->install_extendify();
+
+			if ( true === $res ) {
+				update_option( 'redux-framework_extendify_plugin_notice', 'hide' );
+			}
+
+			die();
+		}
+
 
 /** Function timer() called by wp_ajax hooks: {'redux_custom_font_timer'} **/
 /** No params detected :-/ **/
@@ -55,40 +89,6 @@ function ajax() {
 					update_user_meta( $userid, 'ignore_' . $id, true );
 				}
 			}
-		}
-
-
-/** Function admin_ajax() called by wp_ajax hooks: {'redux_activation'} **/
-/** Parameters found in function admin_ajax(): {"request": ["nonce", "activate"]} **/
-function admin_ajax() {
-
-			// phpcs:ignore WordPress.Security.NonceVerification.Recommended
-			$nonce = isset( $_REQUEST['nonce'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['nonce'] ) ) : '';
-
-			if ( empty( $nonce ) || ! wp_verify_nonce( $nonce, $this->nonce ) ) {
-				die( __( 'Security check failed.', 'redux-framework' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-			}
-
-			if ( 'false' === $_REQUEST['activate'] ) {
-				echo wp_json_encode(
-					array(
-						'type' => 'close',
-						'msg'  => '',
-					)
-				);
-
-				update_option( 'redux-framework_extendify_plugin_notice', 'hide' );
-
-				die();
-			}
-
-			$res = $this->install_extendify();
-
-			if ( true === $res ) {
-				update_option( 'redux-framework_extendify_plugin_notice', 'hide' );
-			}
-
-			die();
 		}
 
 

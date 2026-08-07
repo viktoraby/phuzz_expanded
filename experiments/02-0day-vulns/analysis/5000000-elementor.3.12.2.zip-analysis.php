@@ -5,9 +5,41 @@
 *Found functions:11
 *Extracted functions:11
 *Total parameter names extracted: 2
-*Overview: {'handle_ajax_request': {'elementor_ajax'}, 'ajax_elementor_clear_cache': {'elementor_clear_cache'}, 'handle_direct_actions': {'elementor_library_direct_actions'}, 'ajax_elementor_recreate_kit': {'elementor_recreate_kit'}, 'download_file': {'elementor_system_info_download_file'}, 'ajax_elementor_deactivate_feedback': {'elementor_deactivate_feedback'}, 'ajax_set_admin_notice_viewed': {'elementor_set_admin_notice_viewed'}, 'get_images_details': {'elementor_get_images_details'}, 'js_log': {'elementor_js_log'}, 'ajax_elementor_replace_url': {'elementor_replace_url'}, 'ajax_reset_api_data': {'elementor_reset_library'}}
+*Overview: {'get_images_details': {'elementor_get_images_details'}, 'ajax_reset_api_data': {'elementor_reset_library'}, 'ajax_elementor_clear_cache': {'elementor_clear_cache'}, 'ajax_elementor_replace_url': {'elementor_replace_url'}, 'handle_direct_actions': {'elementor_library_direct_actions'}, 'ajax_set_admin_notice_viewed': {'elementor_set_admin_notice_viewed'}, 'ajax_elementor_recreate_kit': {'elementor_recreate_kit'}, 'download_file': {'elementor_system_info_download_file'}, 'handle_ajax_request': {'elementor_ajax'}, 'ajax_elementor_deactivate_feedback': {'elementor_deactivate_feedback'}, 'js_log': {'elementor_js_log'}}
 *
 ***/
+
+/** Function get_images_details() called by wp_ajax hooks: {'elementor_get_images_details'} **/
+/** No params detected :-/ **/
+
+
+/** Function ajax_reset_api_data() called by wp_ajax hooks: {'elementor_reset_library'} **/
+/** No params detected :-/ **/
+
+
+/** Function ajax_elementor_clear_cache() called by wp_ajax hooks: {'elementor_clear_cache'} **/
+/** No params detected :-/ **/
+
+
+/** Function ajax_elementor_replace_url() called by wp_ajax hooks: {'elementor_replace_url'} **/
+/** No params detected :-/ **/
+
+
+/** Function handle_direct_actions() called by wp_ajax hooks: {'elementor_library_direct_actions'} **/
+/** No params detected :-/ **/
+
+
+/** Function ajax_set_admin_notice_viewed() called by wp_ajax hooks: {'elementor_set_admin_notice_viewed'} **/
+/** No params detected :-/ **/
+
+
+/** Function ajax_elementor_recreate_kit() called by wp_ajax hooks: {'elementor_recreate_kit'} **/
+/** No params detected :-/ **/
+
+
+/** Function download_file() called by wp_ajax hooks: {'elementor_system_info_download_file'} **/
+/** No params detected :-/ **/
+
 
 /** Function handle_ajax_request() called by wp_ajax hooks: {'elementor_ajax'} **/
 /** Parameters found in function handle_ajax_request(): {"request": ["editor_post_id", "actions"]} **/
@@ -75,31 +107,7 @@ function handle_ajax_request() {
 	}
 
 
-/** Function ajax_elementor_clear_cache() called by wp_ajax hooks: {'elementor_clear_cache'} **/
-/** No params detected :-/ **/
-
-
-/** Function handle_direct_actions() called by wp_ajax hooks: {'elementor_library_direct_actions'} **/
-/** No params detected :-/ **/
-
-
-/** Function ajax_elementor_recreate_kit() called by wp_ajax hooks: {'elementor_recreate_kit'} **/
-/** No params detected :-/ **/
-
-
-/** Function download_file() called by wp_ajax hooks: {'elementor_system_info_download_file'} **/
-/** No params detected :-/ **/
-
-
 /** Function ajax_elementor_deactivate_feedback() called by wp_ajax hooks: {'elementor_deactivate_feedback'} **/
-/** No params detected :-/ **/
-
-
-/** Function ajax_set_admin_notice_viewed() called by wp_ajax hooks: {'elementor_set_admin_notice_viewed'} **/
-/** No params detected :-/ **/
-
-
-/** Function get_images_details() called by wp_ajax hooks: {'elementor_get_images_details'} **/
 /** No params detected :-/ **/
 
 
@@ -135,13 +143,5 @@ function js_log() {
 
 		wp_send_json_success();
 	}
-
-
-/** Function ajax_elementor_replace_url() called by wp_ajax hooks: {'elementor_replace_url'} **/
-/** No params detected :-/ **/
-
-
-/** Function ajax_reset_api_data() called by wp_ajax hooks: {'elementor_reset_library'} **/
-/** No params detected :-/ **/
 
 

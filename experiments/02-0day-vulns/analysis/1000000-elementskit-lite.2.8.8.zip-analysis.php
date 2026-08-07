@@ -5,42 +5,30 @@
 *Found functions:6
 *Extracted functions:6
 *Total parameter names extracted: 5
-*Overview: {'ask_me_later_message': {'wpmet_rating_ask_me_later_message'}, 'never_show_message': {'wpmet_rating_never_show_message'}, 'generate_navigation_markup': {'generate_navigation_markup'}, 'dismiss_ajax_call': {'wpmet-notices'}, 'elementskit_admin_action': {'ekit_admin_action'}, 'ekit_widgetarea_content': {'ekit_widgetarea_content', 'nopriv_ekit_widgetarea_content'}}
+*Overview: {'ekit_widgetarea_content': {'ekit_widgetarea_content', 'nopriv_ekit_widgetarea_content'}, 'dismiss_ajax_call': {'wpmet-notices'}, 'never_show_message': {'wpmet_rating_never_show_message'}, 'ask_me_later_message': {'wpmet_rating_ask_me_later_message'}, 'elementskit_admin_action': {'ekit_admin_action'}, 'generate_navigation_markup': {'generate_navigation_markup'}}
 *
 ***/
 
-/** Function ask_me_later_message() called by wp_ajax hooks: {'wpmet_rating_ask_me_later_message'} **/
-/** Parameters found in function ask_me_later_message(): {"post": ["nonce", "plugin_name"]} **/
-function ask_me_later_message() {
-			
-			if( empty( $_POST['nonce'] ) || !wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'wpmet_rating' ) ){
-				return false;
-			}
-
-			$plugin_name = isset($_POST['plugin_name']) ? sanitize_key( $_POST['plugin_name'] ) : '';
-			if ( get_option( $plugin_name . '_ask_me_later' ) == false ) {
-				add_option( $plugin_name . '_ask_me_later', 'yes' );
-			} else {
-				add_option( $plugin_name . '_never_show', 'yes' );
-			}
+/** Function ekit_widgetarea_content() called by wp_ajax hooks: {'ekit_widgetarea_content', 'nopriv_ekit_widgetarea_content'} **/
+/** Parameters found in function ekit_widgetarea_content(): {"post": ["nonce", "post_id"]} **/
+function ekit_widgetarea_content() {
+		
+		if ( !isset($_POST['nonce']) || !wp_verify_nonce( sanitize_key( wp_unslash( $_POST['nonce'] ) ), 'ekit_pro' ) ) {
+			wp_die();
 		}
 
-
-/** Function never_show_message() called by wp_ajax hooks: {'wpmet_rating_never_show_message'} **/
-/** Parameters found in function never_show_message(): {"post": ["nonce", "plugin_name"]} **/
-function never_show_message() {
-			
-			if( empty( $_POST['nonce'] ) || !wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'wpmet_rating' ) ){
-				return false;
-			}
-
-			$plugin_name = isset($_POST['plugin_name']) ? sanitize_key( $_POST['plugin_name'] ) : '';
-			add_option( $plugin_name . '_never_show', 'yes' );
+		$post_id = isset($_POST['post_id']) ? intval( $_POST['post_id'] ) : 0;
+		
+		if ( isset( $post_id ) ) {
+			$elementor = \Elementor\Plugin::instance();
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped --  Displaying with Elementor content rendering
+			echo str_replace( '#elementor', '', \ElementsKit_Lite\Utils::render_tab_content( $elementor->frontend->get_builder_content_for_display( $post_id ), $post_id ) );
+		} else {
+            echo esc_html__( 'Click on the Edit Content button to edit/add the content.', 'elementskit-lite' );
 		}
-
-
-/** Function generate_navigation_markup() called by wp_ajax hooks: {'generate_navigation_markup'} **/
-/** No params detected :-/ **/
+		
+		wp_die();
+	}
 
 
 /** Function dismiss_ajax_call() called by wp_ajax hooks: {'wpmet-notices'} **/
@@ -66,6 +54,36 @@ function dismiss_ajax_call() {
 			}
 
 			wp_send_json_error();
+		}
+
+
+/** Function never_show_message() called by wp_ajax hooks: {'wpmet_rating_never_show_message'} **/
+/** Parameters found in function never_show_message(): {"post": ["nonce", "plugin_name"]} **/
+function never_show_message() {
+			
+			if( empty( $_POST['nonce'] ) || !wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'wpmet_rating' ) ){
+				return false;
+			}
+
+			$plugin_name = isset($_POST['plugin_name']) ? sanitize_key( $_POST['plugin_name'] ) : '';
+			add_option( $plugin_name . '_never_show', 'yes' );
+		}
+
+
+/** Function ask_me_later_message() called by wp_ajax hooks: {'wpmet_rating_ask_me_later_message'} **/
+/** Parameters found in function ask_me_later_message(): {"post": ["nonce", "plugin_name"]} **/
+function ask_me_later_message() {
+			
+			if( empty( $_POST['nonce'] ) || !wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'wpmet_rating' ) ){
+				return false;
+			}
+
+			$plugin_name = isset($_POST['plugin_name']) ? sanitize_key( $_POST['plugin_name'] ) : '';
+			if ( get_option( $plugin_name . '_ask_me_later' ) == false ) {
+				add_option( $plugin_name . '_ask_me_later', 'yes' );
+			} else {
+				add_option( $plugin_name . '_never_show', 'yes' );
+			}
 		}
 
 
@@ -133,25 +151,7 @@ function elementskit_admin_action() {
 	}
 
 
-/** Function ekit_widgetarea_content() called by wp_ajax hooks: {'ekit_widgetarea_content', 'nopriv_ekit_widgetarea_content'} **/
-/** Parameters found in function ekit_widgetarea_content(): {"post": ["nonce", "post_id"]} **/
-function ekit_widgetarea_content() {
-		
-		if ( !isset($_POST['nonce']) || !wp_verify_nonce( sanitize_key( wp_unslash( $_POST['nonce'] ) ), 'ekit_pro' ) ) {
-			wp_die();
-		}
-
-		$post_id = isset($_POST['post_id']) ? intval( $_POST['post_id'] ) : 0;
-		
-		if ( isset( $post_id ) ) {
-			$elementor = \Elementor\Plugin::instance();
-			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped --  Displaying with Elementor content rendering
-			echo str_replace( '#elementor', '', \ElementsKit_Lite\Utils::render_tab_content( $elementor->frontend->get_builder_content_for_display( $post_id ), $post_id ) );
-		} else {
-            echo esc_html__( 'Click on the Edit Content button to edit/add the content.', 'elementskit-lite' );
-		}
-		
-		wp_die();
-	}
+/** Function generate_navigation_markup() called by wp_ajax hooks: {'generate_navigation_markup'} **/
+/** No params detected :-/ **/
 
 

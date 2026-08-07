@@ -5,37 +5,11 @@
 *Found functions:5
 *Extracted functions:5
 *Total parameter names extracted: 3
-*Overview: {'dismiss_discount_notice': {'kirki_dismiss_discount_notice'}, 'print_googlefonts_json': {'nopriv_kirki_fonts_google_all_get', 'kirki_fonts_google_all_get'}, 'get_standardfonts_json': {'nopriv_kirki_fonts_standard_all_get', 'kirki_fonts_standard_all_get'}, 'prepare_install_udb': {'kirki_prepare_install_udb'}, 'clear_font_cache': {'kirki_clear_font_cache'}}
+*Overview: {'print_googlefonts_json': {'nopriv_kirki_fonts_google_all_get', 'kirki_fonts_google_all_get'}, 'prepare_install_udb': {'kirki_prepare_install_udb'}, 'dismiss_discount_notice': {'kirki_dismiss_discount_notice'}, 'clear_font_cache': {'kirki_clear_font_cache'}, 'get_standardfonts_json': {'nopriv_kirki_fonts_standard_all_get', 'kirki_fonts_standard_all_get'}}
 *
 ***/
 
-/** Function dismiss_discount_notice() called by wp_ajax hooks: {'kirki_dismiss_discount_notice'} **/
-/** Parameters found in function dismiss_discount_notice(): {"post": ["nonce"]} **/
-function dismiss_discount_notice() {
-		$nonce = isset( $_POST['nonce'] ) ? sanitize_text_field( $_POST['nonce'] ) : '';
-
-		if ( ! wp_verify_nonce( $nonce, 'Kirki_Dismiss_Discount_Notice' ) ) {
-			wp_send_json_error( __( 'Invalid nonce', 'kirki' ) );
-		}
-
-		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_send_json_error( __( "You don't have capability to run this action", 'kirki' ) );
-		}
-
-		$notices = get_option( 'kirki_notices', [] );
-
-		$notices['discount_notice'] = 1;
-
-		update_option( 'kirki_notices', $notices );
-		wp_send_json_success( __( 'Discount notice has been dismissed', 'kirki' ) );
-	}
-
-
 /** Function print_googlefonts_json() called by wp_ajax hooks: {'nopriv_kirki_fonts_google_all_get', 'kirki_fonts_google_all_get'} **/
-/** No params detected :-/ **/
-
-
-/** Function get_standardfonts_json() called by wp_ajax hooks: {'nopriv_kirki_fonts_standard_all_get', 'kirki_fonts_standard_all_get'} **/
 /** No params detected :-/ **/
 
 
@@ -79,6 +53,28 @@ function prepare_install_udb() {
 	}
 
 
+/** Function dismiss_discount_notice() called by wp_ajax hooks: {'kirki_dismiss_discount_notice'} **/
+/** Parameters found in function dismiss_discount_notice(): {"post": ["nonce"]} **/
+function dismiss_discount_notice() {
+		$nonce = isset( $_POST['nonce'] ) ? sanitize_text_field( $_POST['nonce'] ) : '';
+
+		if ( ! wp_verify_nonce( $nonce, 'Kirki_Dismiss_Discount_Notice' ) ) {
+			wp_send_json_error( __( 'Invalid nonce', 'kirki' ) );
+		}
+
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( __( "You don't have capability to run this action", 'kirki' ) );
+		}
+
+		$notices = get_option( 'kirki_notices', [] );
+
+		$notices['discount_notice'] = 1;
+
+		update_option( 'kirki_notices', $notices );
+		wp_send_json_success( __( 'Discount notice has been dismissed', 'kirki' ) );
+	}
+
+
 /** Function clear_font_cache() called by wp_ajax hooks: {'kirki_clear_font_cache'} **/
 /** Parameters found in function clear_font_cache(): {"post": ["nonce"]} **/
 function clear_font_cache() {
@@ -111,5 +107,9 @@ function clear_font_cache() {
 		wp_send_json_success( 'Font cache cleared.', 'kirki' );
 
 	}
+
+
+/** Function get_standardfonts_json() called by wp_ajax hooks: {'nopriv_kirki_fonts_standard_all_get', 'kirki_fonts_standard_all_get'} **/
+/** No params detected :-/ **/
 
 

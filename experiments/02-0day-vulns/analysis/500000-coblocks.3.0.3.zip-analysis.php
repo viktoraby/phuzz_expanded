@@ -5,9 +5,13 @@
 *Found functions:3
 *Extracted functions:3
 *Total parameter names extracted: 1
-*Overview: {'get_original_image': {'coblocks_crop_settings_original_image'}, 'api_crop': {'coblocks_crop_settings'}, 'update_design_style': {'site_design_update_design_style'}}
+*Overview: {'update_design_style': {'site_design_update_design_style'}, 'get_original_image': {'coblocks_crop_settings_original_image'}, 'api_crop': {'coblocks_crop_settings'}}
 *
 ***/
+
+/** Function update_design_style() called by wp_ajax hooks: {'site_design_update_design_style'} **/
+/** No params detected :-/ **/
+
 
 /** Function get_original_image() called by wp_ajax hooks: {'coblocks_crop_settings_original_image'} **/
 /** No params detected :-/ **/
@@ -67,9 +71,5 @@ function api_crop() {
 		);
 
 	}
-
-
-/** Function update_design_style() called by wp_ajax hooks: {'site_design_update_design_style'} **/
-/** No params detected :-/ **/
 
 

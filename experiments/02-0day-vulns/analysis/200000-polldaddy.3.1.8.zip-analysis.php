@@ -1,0 +1,117 @@
+<?php
+/***
+*
+*Found actions: 2
+*Found functions:2
+*Extracted functions:2
+*Total parameter names extracted: 2
+*Overview: {'ajax_add_answer': {'polls_add_answer'}, 'ajax_upload_image': {'polls_upload_image'}}
+*
+***/
+
+/** Function ajax_add_answer() called by wp_ajax hooks: {'polls_add_answer'} **/
+/** Parameters found in function ajax_add_answer(): {"post": ["aa", "src", "popup"]} **/
+function ajax_add_answer() {
+		check_admin_referer( 'add-answer' );
+
+		$a     = 0;
+		$popup = 0;
+		$src   = '';
+
+		if ( isset( $_POST['aa'] ) )
+			$a = (int) $_POST['aa'];
+
+		if ( isset( $_POST['src'] ) )
+			$src = $_POST['src'];
+
+		if ( isset( $_POST['popup'] ) )
+			$popup = $_POST['popup'];
+
+		$response = '<li>
+				<table class="answer">
+
+						<tr>
+							<th>
+								<span class="handle" title="' . esc_attr( __( 'click and drag to reorder', 'polldaddy' ) ) . '"><img src="' . $src . 'img/icon-reorder.png" alt="' . esc_attr( __( 'click and drag to reorder', 'polldaddy' ) ) . '" width="6" height="9" /></span>
+							</th>
+							<td class="answer-input">
+								<input type="text" autocomplete="off" placeholder="' . esc_attr( __( 'Enter an answer here', 'polldaddy' ) ) .'" value="" tabindex="2" size="30" name="answer[new' . $a .']" />
+							</td>';
+
+		if ( $popup > 0 ) {
+			$response .= '<td class="answer-media-icons" style="width:55px !important;">
+								<ul class="answer-media" style="min-width: 30px;">
+									<li class="media-preview" style="width: 20px; height: 16px; padding-left: 5px;"></li>
+									<li><a href="#" class="delete-answer delete" title="' . esc_attr( 'delete this answer' ) .'"><img src="' . $src . 'img/icon-clear-search.png" width="16" height="16" /></a></li>
+								</ul>';
+		}
+		else {
+			$response .= '<td class="answer-media-icons">
+								<ul class="answer-media">
+									<li class="media-preview" style="width: 20px; height: 16px; padding-left: 5px;"></li>
+									<li><a title="' . esc_attr( __( 'Add an Image', 'polldaddy' ) ) . '" class="thickbox media image" id="add_poll_image' . $a .'" href="#"><img style="vertical-align:middle;" alt="' . esc_attr( __( 'Add an Image', 'polldaddy' ) ) . '" src="images/media-button-image.gif"></a></a></li>
+									<li><a title="' . esc_attr( __( 'Add Audio', 'polldaddy' ) ) . '" class="thickbox media video" id="add_poll_video' . $a .'" href="#"><img style="vertical-align:middle;" alt="' . esc_attr( __( 'Add Audio', 'polldaddy' ) ) . '" src="images/media-button-video.gif"></a></a></li>
+									<li><a title="' . esc_attr( __( 'Add Video', 'polldaddy' ) ) . '" class="thickbox media audio" id="add_poll_audio' . $a .'" href="#"><img style="vertical-align:middle;" alt="' . esc_attr( __( 'Add Video', 'polldaddy' ) ) . '" src="images/media-button-music.gif"></a></li>
+									<li><a href="#" class="delete-answer delete" title="' . esc_attr( 'delete this answer' ) . '"><img src="' . $src . 'img/icon-clear-search.png" width="16" height="16" /></a></li>
+								</ul>';
+		}
+
+		$response .= '<input type="hidden" value="" id="hMC' . $a .'" name="media[' . $a .']">
+									<input type="hidden" value="" id="hMT' . $a .'" name="mediaType[' . $a .']">
+
+							</td>
+						</tr>
+
+				</table>
+
+			</li>';
+
+		echo $response;
+		die();
+	}
+
+
+/** Function ajax_upload_image() called by wp_ajax hooks: {'polls_upload_image'} **/
+/** Parameters found in function ajax_upload_image(): {"post": ["uc", "url"]} **/
+function ajax_upload_image() {
+		require_once dirname( __FILE__ ) . '/polldaddy-client.php';
+
+		check_admin_referer( 'send-media' );
+
+		$attach_id = $media_id = $user_code = 0;
+		$name = $url = '';
+
+		if ( isset( $_POST['attach-id'] ) )
+			$attach_id = (int) $_POST['attach-id'];
+
+		if ( isset( $_POST['media-id'] ) )
+			$media_id = (int) $_POST['media-id'];
+
+		if ( isset( $_POST['uc'] ) )
+			$user_code = $_POST['uc'];
+
+		if ( isset( $_POST['url'] ) )
+			$url = $_POST['url'];
+
+		$parts     = pathinfo( $url );
+		$name      = preg_replace('/\?.*/', '', $parts['basename']);
+		$polldaddy = new api_client( WP_POLLDADDY__PARTNERGUID, $user_code );
+		$data      = '';
+		
+		if ( function_exists( 'is_private_blog' ) && is_private_blog() ) {
+			if ( get_post_type( $attach_id ) !== 'attachment'
+				|| ! current_user_can( 'read_post', $attach_id ) ) {
+				wp_die( -1, '', array( 'response' => 403 ) );
+			}
+			$file_path = get_attached_file( $attach_id );
+			$data      = base64_encode( @file_get_contents( $file_path ) );
+		}
+		
+		$response  = $polldaddy->upload_image( $name, $url, 'poll', ($media_id>1000?$media_id:0), $data );
+
+		if ( is_a( $response, "PollDaddy_Media" ) )
+			echo urldecode( $response->upload_result ).'||'.$media_id;
+		die();
+	}
+
+

@@ -5,151 +5,9 @@
 *Found functions:50
 *Extracted functions:49
 *Total parameter names extracted: 20
-*Overview: {'remove_icon': {'smush_remove_icon'}, 'smush_bulk': {'wp_smushit_nextgen_bulk'}, 'smush_toggle_lazy_load': {'smush_toggle_lazy_load'}, 'toggle_cdn': {'smush_toggle_cdn'}, 'directory_list': {'smush_get_directory_list'}, 'recheck_api_status': {'recheck_api_status'}, 'get_dir_smush_stats': {'get_dir_smush_stats'}, 'smush_setup': {'smush_setup'}, 'directory_smush_start': {'directory_smush_start'}, 'wp_ajax_frash_act': {'frash_act'}, 'webp_toggle': {'smush_webp_toggle'}, 'hide_api_message': {'hide_api_message'}, 'show_warning_ajax': {'smush_show_warning'}, ' ! is_array( $to_smush ) ) {\n\t\t\t$to_smush = array();\n\t\t}\n\n\t\treturn array_map( function ( $image_id ) {\n\t\t\treturn new Smush_Background_Task(\n\t\t\t\tSmush_Background_Task::TASK_TYPE_SMUSH,\n\t\t\t\t$image_id\n\t\t\t);\n\t\t}, $to_smush );\n\t}\n\n\tprivate function prepare_resmush_tasks() {\n\t\t$core       = WP_Smush::get_instance()->core();\n\t\t$to_resmush = $core->get_resmush_ids();\n\n\t\treturn array_map( function ( $image_id ) {\n\t\t\treturn new Smush_Background_Task(\n\t\t\t\tSmush_Background_Task::TASK_TYPE_RESMUSH,\n\t\t\t\t$image_id\n\t\t\t);\n\t\t}, $to_resmush );\n\t}\n\n\tpublic function localize_background_stats( $script_data ) {\n\t\tglobal $current_screen;\n\t\t$is_bulk_smush_page = isset( $current_screen->id )\n\t\t                      && strpos( $current_screen->id, ': {'$action'}, 'delete_resmush_list': {'delete_resmush_list'}, 'update_stats': {'get_cdn_stats'}, 'save_settings': {'smush_save_settings'}, 'webp_apply_htaccess_rules': {'smush_webp_apply_htaccess_rules'}, 'webp_get_status': {'smush_webp_get_status'}, 'dismiss_update_info': {'dismiss_update_info'}, 'process_smush_request': {'wp_smushit_bulk'}, 'remove_from_skip_list': {'remove_from_skip_list'}, 'hide_new_features_modal': {'hide_new_features'}, 'reset': {'reset_settings'}, 'upload_config': {'smush_upload_config'}, 'restore_image': {'smush_restore_nextgen_image', 'smush_restore_image'}, 'ajax_ignore_all_failed_items': {'wp_smush_ignore_all_failed_items'}, 'hide_tutorials': {'smush_hide_tutorials'}, 'dismiss_upgrade_notice': {'dismiss_upgrade_notice'}, 'dismiss_notice': {'smush_dismiss_notice'}, 'apply_config': {'smush_apply_config'}, 'restore_step': {'restore_step'}, 'directory_smush_finish': {'directory_smush_finish'}, 'directory_smush_check_step': {'directory_smush_check_step'}, 'process_actions': {'wdev_logger_action'}, 'resmush_image': {'smush_resmush_image', 'smush_resmush_nextgen_image'}, 'get_stats': {'get_stats'}, 'scan_images': {'scan_for_resmush'}, 'ignore_bulk_image': {'ignore_bulk_image'}, 'webp_delete_all': {'smush_webp_delete_all'}, 'manual_nextgen': {'smush_manual_nextgen'}, 'directory_smush_cancel': {'directory_smush_cancel'}, 'dismiss_s3support_alert': {'dismiss_s3support_alert'}, 'get_image_count': {'get_image_count'}, 'skip_smush_setup': {'skip_smush_setup'}, 'smush_manual': {'wp_smushit_manual'}, 'save_config': {'smush_save_config'}, 'image_list': {'image_list'}, 'wp_ajax_frash_dismiss': {'frash_dismiss'}, 'webp_toggle_wizard': {'smush_toggle_webp_wizard'}}
+*Overview: {'smush_setup': {'smush_setup'}, 'save_config': {'smush_save_config'}, 'webp_apply_htaccess_rules': {'smush_webp_apply_htaccess_rules'}, 'wp_ajax_frash_dismiss': {'frash_dismiss'}, 'get_image_count': {'get_image_count'}, 'update_stats': {'get_cdn_stats'}, 'delete_resmush_list': {'delete_resmush_list'}, 'webp_toggle': {'smush_webp_toggle'}, 'hide_tutorials': {'smush_hide_tutorials'}, 'ignore_bulk_image': {'ignore_bulk_image'}, 'resmush_image': {'smush_resmush_nextgen_image', 'smush_resmush_image'}, 'reset': {'reset_settings'}, 'directory_smush_cancel': {'directory_smush_cancel'}, 'dismiss_notice': {'smush_dismiss_notice'}, 'ajax_ignore_all_failed_items': {'wp_smush_ignore_all_failed_items'}, 'process_smush_request': {'wp_smushit_bulk'}, 'webp_get_status': {'smush_webp_get_status'}, 'manual_nextgen': {'smush_manual_nextgen'}, 'directory_list': {'smush_get_directory_list'}, 'restore_step': {'restore_step'}, 'recheck_api_status': {'recheck_api_status'}, 'save_settings': {'smush_save_settings'}, 'get_stats': {'get_stats'}, ' ! is_array( $to_smush ) ) {\n\t\t\t$to_smush = array();\n\t\t}\n\n\t\treturn array_map( function ( $image_id ) {\n\t\t\treturn new Smush_Background_Task(\n\t\t\t\tSmush_Background_Task::TASK_TYPE_SMUSH,\n\t\t\t\t$image_id\n\t\t\t);\n\t\t}, $to_smush );\n\t}\n\n\tprivate function prepare_resmush_tasks() {\n\t\t$core       = WP_Smush::get_instance()->core();\n\t\t$to_resmush = $core->get_resmush_ids();\n\n\t\treturn array_map( function ( $image_id ) {\n\t\t\treturn new Smush_Background_Task(\n\t\t\t\tSmush_Background_Task::TASK_TYPE_RESMUSH,\n\t\t\t\t$image_id\n\t\t\t);\n\t\t}, $to_resmush );\n\t}\n\n\tpublic function localize_background_stats( $script_data ) {\n\t\tglobal $current_screen;\n\t\t$is_bulk_smush_page = isset( $current_screen->id )\n\t\t                      && strpos( $current_screen->id, ': {'$action'}, 'dismiss_s3support_alert': {'dismiss_s3support_alert'}, 'webp_delete_all': {'smush_webp_delete_all'}, 'dismiss_upgrade_notice': {'dismiss_upgrade_notice'}, 'skip_smush_setup': {'skip_smush_setup'}, 'directory_smush_start': {'directory_smush_start'}, 'upload_config': {'smush_upload_config'}, 'smush_manual': {'wp_smushit_manual'}, 'webp_toggle_wizard': {'smush_toggle_webp_wizard'}, 'hide_new_features_modal': {'hide_new_features'}, 'hide_api_message': {'hide_api_message'}, 'process_actions': {'wdev_logger_action'}, 'wp_ajax_frash_act': {'frash_act'}, 'toggle_cdn': {'smush_toggle_cdn'}, 'restore_image': {'smush_restore_image', 'smush_restore_nextgen_image'}, 'smush_bulk': {'wp_smushit_nextgen_bulk'}, 'image_list': {'image_list'}, 'directory_smush_check_step': {'directory_smush_check_step'}, 'scan_images': {'scan_for_resmush'}, 'remove_icon': {'smush_remove_icon'}, 'dismiss_update_info': {'dismiss_update_info'}, 'remove_from_skip_list': {'remove_from_skip_list'}, 'get_dir_smush_stats': {'get_dir_smush_stats'}, 'smush_toggle_lazy_load': {'smush_toggle_lazy_load'}, 'directory_smush_finish': {'directory_smush_finish'}, 'apply_config': {'smush_apply_config'}, 'show_warning_ajax': {'smush_show_warning'}}
 *
 ***/
-
-/** Function remove_icon() called by wp_ajax hooks: {'smush_remove_icon'} **/
-/** No params detected :-/ **/
-
-
-/** Function smush_bulk() called by wp_ajax hooks: {'wp_smushit_nextgen_bulk'} **/
-/** Parameters found in function smush_bulk(): {"get": ["attachment_id"], "request": ["is_bulk_resmush"]} **/
-function smush_bulk() {
-		$stats = array();
-
-		check_ajax_referer( 'wp-smush-ajax', '_nonce' );
-
-		// Check For permission.
-		if ( ! Helper::is_user_allowed( 'manage_options' ) ) {
-			wp_die( esc_html__( 'Unauthorized', 'wp-smushit' ), 403 );
-		}
-
-		if ( empty( $_GET['attachment_id'] ) ) {
-			wp_send_json_error(
-				array(
-					'error'         => 'missing_id',
-					'error_message' => esc_html__( 'No attachment ID was received', 'wp-smushit' ),
-					'file_name'     => 'undefined',
-				)
-			);
-		}
-
-		$atchmnt_id = (int) $_GET['attachment_id'];
-
-		$smush = $this->smush_image( $atchmnt_id, '', true );
-
-		if ( is_wp_error( $smush ) ) {
-			$error_message = $smush->get_error_message();
-
-			// Check for timeout error and suggest to filter timeout.
-			if ( strpos( $error_message, 'timed out' ) ) {
-				$error         = 'timeout';
-				$error_message = esc_html__( 'Smush request timed out. You can try setting a higher value ( > 60 ) for `WP_SMUSH_TIMEOUT`.', 'wp-smushit' );
-			}
-
-			$error     = isset( $error ) ? $error : 'other';
-			$file_name = $this->get_nextgen_image_from_id( $atchmnt_id );
-
-			wp_send_json_error(
-				array(
-					'error'         => $error,
-					'stats'         => $stats,
-					'error_message' => $error_message,
-					'file_name'     => isset( $file_name->filename ) ? $file_name->filename : 'undefined',
-				)
-			);
-		}
-
-		// Check if a re-Smush request, update the re-Smush list.
-		if ( ! empty( $_REQUEST['is_bulk_resmush'] ) ) {
-			WP_Smush::get_instance()->core()->mod->smush->update_resmush_list( $atchmnt_id, 'wp-smush-nextgen-resmush-list' );
-		}
-		$stats['is_lossy'] = ! empty( $smush['stats'] ) ? $smush['stats']['lossy'] : 0;
-
-		// Size before and after smush.
-		$stats['size_before'] = ! empty( $smush['stats'] ) ? $smush['stats']['size_before'] : 0;
-		$stats['size_after']  = ! empty( $smush['stats'] ) ? $smush['stats']['size_after'] : 0;
-
-		// Get the re-Smush IDs list.
-		if ( empty( $this->ng_admin->resmush_ids ) ) {
-			$this->ng_admin->resmush_ids = get_option( 'wp-smush-nextgen-resmush-list' );
-		}
-
-		$this->ng_admin->resmush_ids = empty( $this->ng_admin->resmush_ids ) ? get_option( 'wp-smush-nextgen-resmush-list' ) : array();
-		$resmush_count               = ! empty( $this->ng_admin->resmush_ids ) ? count( $this->ng_admin->resmush_ids ) : 0;
-		$smushed_images              = $this->ng_stats->get_ngg_images( 'smushed' );
-
-		// Remove re-Smush IDs from smushed images list.
-		if ( $resmush_count > 0 && is_array( $this->ng_admin->resmush_ids ) ) {
-			foreach ( $smushed_images as $image_k => $image ) {
-				if ( in_array( $image_k, $this->ng_admin->resmush_ids, true ) ) {
-					unset( $smushed_images[ $image_k ] );
-				}
-			}
-		}
-
-		// Get the image count and smushed images count.
-		$image_count   = ! empty( $smush ) && ! empty( $smush['sizes'] ) ? count( $smush['sizes'] ) : 0;
-		$smushed_count = is_array( $smushed_images ) ? count( $smushed_images ) : 0;
-
-		$stats['smushed'] = ! empty( $this->ng_admin->resmush_ids ) ? $smushed_count - $resmush_count : $smushed_count;
-		$stats['count']   = $image_count;
-
-		wp_send_json_success(
-			array(
-				'stats' => $stats,
-			)
-		);
-	}
-
-
-/** Function smush_toggle_lazy_load() called by wp_ajax hooks: {'smush_toggle_lazy_load'} **/
-/** Parameters found in function smush_toggle_lazy_load(): {"post": ["param"]} **/
-function smush_toggle_lazy_load() {
-		check_ajax_referer( 'save_wp_smush_options' );
-
-		if ( ! Helper::is_user_allowed( 'manage_options' ) ) {
-			wp_send_json_error(
-				array(
-					'message' => __( 'User can not modify options', 'wp-smushit' ),
-				),
-				403
-			);
-		}
-
-		$param = isset( $_POST['param'] ) ? sanitize_text_field( wp_unslash( $_POST['param'] ) ) : false;
-
-		if ( 'true' === $param ) {
-			$settings = $this->settings->get_setting( 'wp-smush-lazy_load' );
-
-			// No settings, during init - set defaults.
-			if ( ! $settings ) {
-				$this->settings->init_lazy_load_defaults();
-			}
-		}
-
-		$this->settings->set( 'lazy_load', 'true' === $param );
-
-		wp_send_json_success();
-	}
-
-
-/** Function toggle_cdn() called by wp_ajax hooks: {'smush_toggle_cdn'} **/
-/** No params detected :-/ **/
-
-
-/** Function directory_list() called by wp_ajax hooks: {'smush_get_directory_list'} **/
-/** No params detected :-/ **/
-
-
-/** Function recheck_api_status() called by wp_ajax hooks: {'recheck_api_status'} **/
-/** No params detected :-/ **/
-
-
-/** Function get_dir_smush_stats() called by wp_ajax hooks: {'get_dir_smush_stats'} **/
-/** No params detected :-/ **/
-
 
 /** Function smush_setup() called by wp_ajax hooks: {'smush_setup'} **/
 /** Parameters found in function smush_setup(): {"post": ["smush_settings"]} **/
@@ -208,75 +66,24 @@ function smush_setup() {
 	}
 
 
-/** Function directory_smush_start() called by wp_ajax hooks: {'directory_smush_start'} **/
+/** Function save_config() called by wp_ajax hooks: {'smush_save_config'} **/
 /** No params detected :-/ **/
 
 
-/** Function wp_ajax_frash_act() called by wp_ajax hooks: {'frash_act'} **/
+/** Function webp_apply_htaccess_rules() called by wp_ajax hooks: {'smush_webp_apply_htaccess_rules'} **/
 /** No params detected :-/ **/
 
 
-/** Function webp_toggle() called by wp_ajax hooks: {'smush_webp_toggle'} **/
-/** Parameters found in function webp_toggle(): {"post": ["param"]} **/
-function webp_toggle() {
-		check_ajax_referer( 'save_wp_smush_options' );
-
-		$capability = is_multisite() ? 'manage_network' : 'manage_options';
-		if ( ! Helper::is_user_allowed( $capability ) ) {
-			wp_send_json_error(
-				array(
-					'message' => __( "You don't have permission to do this.", 'wp-smushit' ),
-				),
-				403
-			);
-		}
-
-		$param       = isset( $_POST['param'] ) ? sanitize_text_field( wp_unslash( $_POST['param'] ) ) : '';
-		$enable_webp = 'true' === $param;
-
-		WP_Smush::get_instance()->core()->mod->webp->toggle_webp( $enable_webp );
-
-		wp_send_json_success();
-	}
-
-
-/** Function hide_api_message() called by wp_ajax hooks: {'hide_api_message'} **/
+/** Function wp_ajax_frash_dismiss() called by wp_ajax hooks: {'frash_dismiss'} **/
 /** No params detected :-/ **/
 
 
-/** Function show_warning_ajax() called by wp_ajax hooks: {'smush_show_warning'} **/
+/** Function get_image_count() called by wp_ajax hooks: {'get_image_count'} **/
 /** No params detected :-/ **/
 
 
-/** Function  ! is_array( $to_smush ) ) {
-			$to_smush = array();
-		}
-
-		return array_map( function ( $image_id ) {
-			return new Smush_Background_Task(
-				Smush_Background_Task::TASK_TYPE_SMUSH,
-				$image_id
-			);
-		}, $to_smush );
-	}
-
-	private function prepare_resmush_tasks() {
-		$core       = WP_Smush::get_instance()->core();
-		$to_resmush = $core->get_resmush_ids();
-
-		return array_map( function ( $image_id ) {
-			return new Smush_Background_Task(
-				Smush_Background_Task::TASK_TYPE_RESMUSH,
-				$image_id
-			);
-		}, $to_resmush );
-	}
-
-	public function localize_background_stats( $script_data ) {
-		global $current_screen;
-		$is_bulk_smush_page = isset( $current_screen->id )
-		                      && strpos( $current_screen->id, () called by wp_ajax hooks: {'$action'} **/
-/** No function found :-/ **/
+/** Function update_stats() called by wp_ajax hooks: {'get_cdn_stats'} **/
+/** No params detected :-/ **/
 
 
 /** Function delete_resmush_list() called by wp_ajax hooks: {'delete_resmush_list'} **/
@@ -307,23 +114,129 @@ function delete_resmush_list() {
 	}
 
 
-/** Function update_stats() called by wp_ajax hooks: {'get_cdn_stats'} **/
+/** Function webp_toggle() called by wp_ajax hooks: {'smush_webp_toggle'} **/
+/** Parameters found in function webp_toggle(): {"post": ["param"]} **/
+function webp_toggle() {
+		check_ajax_referer( 'save_wp_smush_options' );
+
+		$capability = is_multisite() ? 'manage_network' : 'manage_options';
+		if ( ! Helper::is_user_allowed( $capability ) ) {
+			wp_send_json_error(
+				array(
+					'message' => __( "You don't have permission to do this.", 'wp-smushit' ),
+				),
+				403
+			);
+		}
+
+		$param       = isset( $_POST['param'] ) ? sanitize_text_field( wp_unslash( $_POST['param'] ) ) : '';
+		$enable_webp = 'true' === $param;
+
+		WP_Smush::get_instance()->core()->mod->webp->toggle_webp( $enable_webp );
+
+		wp_send_json_success();
+	}
+
+
+/** Function hide_tutorials() called by wp_ajax hooks: {'smush_hide_tutorials'} **/
 /** No params detected :-/ **/
 
 
-/** Function save_settings() called by wp_ajax hooks: {'smush_save_settings'} **/
+/** Function ignore_bulk_image() called by wp_ajax hooks: {'ignore_bulk_image'} **/
+/** Parameters found in function ignore_bulk_image(): {"post": ["id"]} **/
+function ignore_bulk_image() {
+		check_ajax_referer( 'wp-smush-ajax' );
+
+		// Check capability.
+		if ( ! Helper::is_user_allowed( 'upload_files' ) ) {
+			wp_send_json_error(
+				array(
+					'error_msg' => esc_html__( "You don't have permission to work with uploaded files.", 'wp-smushit' ),
+				),
+				403
+			);
+		}
+
+		if ( ! isset( $_POST['id'] ) ) {
+			wp_send_json_error();
+		}
+
+		$attachment_id = absint( $_POST['id'] );
+
+		// Ignore image.
+		update_post_meta( $attachment_id, 'wp-smush-ignore-bulk', true );
+
+		wp_send_json_success(
+			array(
+				'links' => WP_Smush::get_instance()->library()->get_optimization_links( $attachment_id ),
+			)
+		);
+	}
+
+
+/** Function resmush_image() called by wp_ajax hooks: {'smush_resmush_nextgen_image', 'smush_resmush_image'} **/
+/** Parameters found in function resmush_image(): {"post": ["attachment_id", "_nonce"]} **/
+function resmush_image() {
+		// Check empty fields.
+		if ( empty( $_POST['attachment_id'] ) || empty( $_POST['_nonce'] ) ) {
+			wp_send_json_error(
+				array(
+					'error_msg' => esc_html__( 'Image not smushed, fields empty.', 'wp-smushit' ),
+				)
+			);
+		}
+
+		// Check nonce.
+		if ( ! wp_verify_nonce( wp_unslash( $_POST['_nonce'] ), 'wp-smush-resmush-' . (int) $_POST['attachment_id'] ) ) { // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+			wp_send_json_error(
+				array(
+					'error_msg' => esc_html__( "Image couldn't be smushed as the nonce verification failed, try reloading the page.", 'wp-smushit' ),
+				)
+			);
+		}
+
+		if ( ! Helper::is_user_allowed( 'upload_files' ) ) {
+			wp_send_json_error(
+				array(
+					'error_msg' => esc_html__( "You don't have permission to work with uploaded files.", 'wp-smushit' ),
+				)
+			);
+		}
+
+		$image_id = (int) $_POST['attachment_id'];
+
+		WP_Smush::get_instance()->core()->mod->smush->smush_single( $image_id );
+	}
+
+
+/** Function reset() called by wp_ajax hooks: {'reset_settings'} **/
 /** No params detected :-/ **/
 
 
-/** Function webp_apply_htaccess_rules() called by wp_ajax hooks: {'smush_webp_apply_htaccess_rules'} **/
+/** Function directory_smush_cancel() called by wp_ajax hooks: {'directory_smush_cancel'} **/
 /** No params detected :-/ **/
 
 
-/** Function webp_get_status() called by wp_ajax hooks: {'smush_webp_get_status'} **/
-/** No params detected :-/ **/
+/** Function dismiss_notice() called by wp_ajax hooks: {'smush_dismiss_notice'} **/
+/** Parameters found in function dismiss_notice(): {"request": ["key"]} **/
+function dismiss_notice() {
+		check_ajax_referer( 'wp-smush-ajax' );
+
+		// Check capability.
+		if ( ! Helper::is_user_allowed( 'manage_options' ) ) {
+			wp_die( esc_html__( 'Unauthorized', 'wp-smushit' ), 403 );
+		}
+
+		if ( empty( $_REQUEST['key'] ) ) {
+			wp_send_json_error();
+		}
+
+		$this->set_notice_dismissed( sanitize_key( $_REQUEST['key'] ) );
+		wp_send_json_success();
+	}
 
 
-/** Function dismiss_update_info() called by wp_ajax hooks: {'dismiss_update_info'} **/
+/** Function ajax_ignore_all_failed_items() called by wp_ajax hooks: {'wp_smush_ignore_all_failed_items'} **/
 /** No params detected :-/ **/
 
 
@@ -439,41 +352,126 @@ function process_smush_request() {
 	}
 
 
-/** Function remove_from_skip_list() called by wp_ajax hooks: {'remove_from_skip_list'} **/
-/** Parameters found in function remove_from_skip_list(): {"post": ["id"]} **/
-function remove_from_skip_list() {
-		check_ajax_referer( 'wp-smush-remove-skipped' );
-
-		if ( ! Helper::is_user_allowed( 'upload_files' ) ) {
-			wp_send_json_error(
-				array(
-					'error_message' => esc_html__( "You don't have permission to work with uploaded files.", 'wp-smushit' ),
-				),
-				403
-			);
-		}
-
-		if ( ! isset( $_POST['id'] ) ) {
-			wp_send_json_error();
-		}
-
-		$attachment_id = absint( $_POST['id'] );
-
-		// Undo ignored file.
-		delete_post_meta( $attachment_id, 'wp-smush-ignore-bulk' );
-		wp_send_json_success(
-			array(
-				'html' => WP_Smush::get_instance()->library()->generate_markup( $attachment_id ),
-			)
-		);
-	}
-
-
-/** Function hide_new_features_modal() called by wp_ajax hooks: {'hide_new_features'} **/
+/** Function webp_get_status() called by wp_ajax hooks: {'smush_webp_get_status'} **/
 /** No params detected :-/ **/
 
 
-/** Function reset() called by wp_ajax hooks: {'reset_settings'} **/
+/** Function manual_nextgen() called by wp_ajax hooks: {'smush_manual_nextgen'} **/
+/** Parameters found in function manual_nextgen(): {"get": ["attachment_id", "_nonce"]} **/
+function manual_nextgen() {
+		$pid   = ! empty( $_GET['attachment_id'] ) ? absint( (int) $_GET['attachment_id'] ) : '';
+		$nonce = ! empty( $_GET['_nonce'] ) ? wp_unslash( $_GET['_nonce'] ) : '';
+
+		// Verify Nonce.
+		if ( ! wp_verify_nonce( $nonce, 'wp_smush_nextgen' ) ) {
+			wp_send_json_error(
+				array(
+					'error' => 'nonce_verification_failed',
+				)
+			);
+		}
+
+		// Check for media upload permission.
+		if ( ! Helper::is_user_allowed( 'upload_files' ) ) {
+			wp_send_json_error(
+				array(
+					'error_msg' => __( "You don't have permission to work with uploaded files.", 'wp-smushit' ),
+				)
+			);
+		}
+
+		if ( empty( $pid ) ) {
+			wp_send_json_error(
+				array(
+					'error_msg' => __( 'No attachment ID was provided.', 'wp-smushit' ),
+				)
+			);
+		}
+
+		$status = $this->smush_image( $pid );
+
+		// Send stats.
+		if ( is_wp_error( $status ) ) {
+			/**
+			 * Not used for bulk smush.
+			 *
+			 * @param WP_Error $smush
+			 */
+			wp_send_json_error( $status->get_error_message() );
+		}
+
+		wp_send_json_success( $status );
+	}
+
+
+/** Function directory_list() called by wp_ajax hooks: {'smush_get_directory_list'} **/
+/** No params detected :-/ **/
+
+
+/** Function restore_step() called by wp_ajax hooks: {'restore_step'} **/
+/** No params detected :-/ **/
+
+
+/** Function recheck_api_status() called by wp_ajax hooks: {'recheck_api_status'} **/
+/** No params detected :-/ **/
+
+
+/** Function save_settings() called by wp_ajax hooks: {'smush_save_settings'} **/
+/** No params detected :-/ **/
+
+
+/** Function get_stats() called by wp_ajax hooks: {'get_stats'} **/
+/** No params detected :-/ **/
+
+
+/** Function  ! is_array( $to_smush ) ) {
+			$to_smush = array();
+		}
+
+		return array_map( function ( $image_id ) {
+			return new Smush_Background_Task(
+				Smush_Background_Task::TASK_TYPE_SMUSH,
+				$image_id
+			);
+		}, $to_smush );
+	}
+
+	private function prepare_resmush_tasks() {
+		$core       = WP_Smush::get_instance()->core();
+		$to_resmush = $core->get_resmush_ids();
+
+		return array_map( function ( $image_id ) {
+			return new Smush_Background_Task(
+				Smush_Background_Task::TASK_TYPE_RESMUSH,
+				$image_id
+			);
+		}, $to_resmush );
+	}
+
+	public function localize_background_stats( $script_data ) {
+		global $current_screen;
+		$is_bulk_smush_page = isset( $current_screen->id )
+		                      && strpos( $current_screen->id, () called by wp_ajax hooks: {'$action'} **/
+/** No function found :-/ **/
+
+
+/** Function dismiss_s3support_alert() called by wp_ajax hooks: {'dismiss_s3support_alert'} **/
+/** No params detected :-/ **/
+
+
+/** Function webp_delete_all() called by wp_ajax hooks: {'smush_webp_delete_all'} **/
+/** No params detected :-/ **/
+
+
+/** Function dismiss_upgrade_notice() called by wp_ajax hooks: {'dismiss_upgrade_notice'} **/
+/** No params detected :-/ **/
+
+
+/** Function skip_smush_setup() called by wp_ajax hooks: {'skip_smush_setup'} **/
+/** No params detected :-/ **/
+
+
+/** Function directory_smush_start() called by wp_ajax hooks: {'directory_smush_start'} **/
 /** No params detected :-/ **/
 
 
@@ -507,102 +505,50 @@ function upload_config() {
 	}
 
 
-/** Function restore_image() called by wp_ajax hooks: {'smush_restore_nextgen_image', 'smush_restore_image'} **/
-/** No params detected :-/ **/
-
-
-/** Function ajax_ignore_all_failed_items() called by wp_ajax hooks: {'wp_smush_ignore_all_failed_items'} **/
-/** No params detected :-/ **/
-
-
-/** Function hide_tutorials() called by wp_ajax hooks: {'smush_hide_tutorials'} **/
-/** No params detected :-/ **/
-
-
-/** Function dismiss_upgrade_notice() called by wp_ajax hooks: {'dismiss_upgrade_notice'} **/
-/** No params detected :-/ **/
-
-
-/** Function dismiss_notice() called by wp_ajax hooks: {'smush_dismiss_notice'} **/
-/** Parameters found in function dismiss_notice(): {"request": ["key"]} **/
-function dismiss_notice() {
-		check_ajax_referer( 'wp-smush-ajax' );
-
-		// Check capability.
-		if ( ! Helper::is_user_allowed( 'manage_options' ) ) {
-			wp_die( esc_html__( 'Unauthorized', 'wp-smushit' ), 403 );
+/** Function smush_manual() called by wp_ajax hooks: {'wp_smushit_manual'} **/
+/** Parameters found in function smush_manual(): {"get": ["attachment_id"]} **/
+function smush_manual() {
+		if ( ! check_ajax_referer( 'wp-smush-ajax', '_nonce', false ) ) {
+			wp_send_json_error(
+				array(
+					'error_msg' => esc_html__( 'Nonce verification failed', 'wp-smushit' ),
+				)
+			);
 		}
 
-		if ( empty( $_REQUEST['key'] ) ) {
-			wp_send_json_error();
+		if ( ! Helper::is_user_allowed( 'upload_files' ) ) {
+			wp_send_json_error(
+				array(
+					'error_msg' => esc_html__( "You don't have permission to work with uploaded files.", 'wp-smushit' ),
+				)
+			);
 		}
 
-		$this->set_notice_dismissed( sanitize_key( $_REQUEST['key'] ) );
-		wp_send_json_success();
+		if ( ! isset( $_GET['attachment_id'] ) ) {
+			wp_send_json_error(
+				array(
+					'error_msg' => esc_html__( 'No attachment ID was provided.', 'wp-smushit' ),
+				)
+			);
+		}
+
+		$attachment_id = (int) $_GET['attachment_id'];
+
+		// Pass on the attachment id to smush single function.
+		WP_Smush::get_instance()->core()->mod->smush->smush_single( $attachment_id );
 	}
 
 
-/** Function apply_config() called by wp_ajax hooks: {'smush_apply_config'} **/
+/** Function webp_toggle_wizard() called by wp_ajax hooks: {'smush_toggle_webp_wizard'} **/
 /** No params detected :-/ **/
 
 
-/** Function restore_step() called by wp_ajax hooks: {'restore_step'} **/
+/** Function hide_new_features_modal() called by wp_ajax hooks: {'hide_new_features'} **/
 /** No params detected :-/ **/
 
 
-/** Function directory_smush_finish() called by wp_ajax hooks: {'directory_smush_finish'} **/
-/** Parameters found in function directory_smush_finish(): {"post": ["items", "failed", "skipped"]} **/
-function directory_smush_finish() {
-		check_ajax_referer( 'wp-smush-ajax' );
-
-		// Check for permission.
-		$capability = is_multisite() ? 'manage_network' : 'manage_options';
-		if ( ! Helper::is_user_allowed( $capability ) ) {
-			wp_die( esc_html__( 'Unauthorized', 'wp-smushit' ), 403 );
-		}
-
-		$items   = isset( $_POST['items'] ) ? absint( $_POST['items'] ) : 0;
-		$failed  = isset( $_POST['failed'] ) ? absint( $_POST['failed'] ) : 0;
-		$skipped = isset( $_POST['skipped'] ) ? absint( $_POST['skipped'] ) : 0;
-
-		// If any images failed to smush, store count.
-		if ( $failed > 0 ) {
-			set_transient( 'wp-smush-dir-scan-failed-items', $failed, 60 * 5 ); // 5 minutes max.
-		}
-
-		if ( $skipped > 0 ) {
-			set_transient( 'wp-smush-dir-scan-skipped-items', $skipped, 60 * 5 ); // 5 minutes max.
-		}
-
-		// Store optimized items count.
-		set_transient( 'wp-smush-show-dir-scan-notice', $items, 60 * 5 ); // 5 minutes max.
-		$this->scanner->reset_scan();
-		wp_send_json_success();
-	}
-
-
-/** Function directory_smush_check_step() called by wp_ajax hooks: {'directory_smush_check_step'} **/
-/** Parameters found in function directory_smush_check_step(): {"post": ["step"]} **/
-function directory_smush_check_step() {
-		check_ajax_referer( 'wp-smush-ajax' );
-
-		// Check for permission.
-		$capability = is_multisite() ? 'manage_network' : 'manage_options';
-		if ( ! Helper::is_user_allowed( $capability ) ) {
-			wp_die( esc_html__( 'Unauthorized', 'wp-smushit' ), 403 );
-		}
-
-		$urls         = $this->get_scanned_images();
-		$current_step = isset( $_POST['step'] ) ? absint( $_POST['step'] ) : 0;
-
-		$this->scanner->update_current_step( $current_step );
-
-		if ( isset( $urls[ $current_step ] ) ) {
-			$this->optimise_image( (int) $urls[ $current_step ]['id'] );
-		}
-
-		wp_send_json_success();
-	}
+/** Function hide_api_message() called by wp_ajax hooks: {'hide_api_message'} **/
+/** No params detected :-/ **/
 
 
 /** Function process_actions() called by wp_ajax hooks: {'wdev_logger_action'} **/
@@ -641,43 +587,170 @@ function process_actions() {
 		}
 
 
-/** Function resmush_image() called by wp_ajax hooks: {'smush_resmush_image', 'smush_resmush_nextgen_image'} **/
-/** Parameters found in function resmush_image(): {"post": ["attachment_id", "_nonce"]} **/
-function resmush_image() {
-		// Check empty fields.
-		if ( empty( $_POST['attachment_id'] ) || empty( $_POST['_nonce'] ) ) {
+/** Function wp_ajax_frash_act() called by wp_ajax hooks: {'frash_act'} **/
+/** No params detected :-/ **/
+
+
+/** Function toggle_cdn() called by wp_ajax hooks: {'smush_toggle_cdn'} **/
+/** No params detected :-/ **/
+
+
+/** Function restore_image() called by wp_ajax hooks: {'smush_restore_image', 'smush_restore_nextgen_image'} **/
+/** No params detected :-/ **/
+
+
+/** Function smush_bulk() called by wp_ajax hooks: {'wp_smushit_nextgen_bulk'} **/
+/** Parameters found in function smush_bulk(): {"get": ["attachment_id"], "request": ["is_bulk_resmush"]} **/
+function smush_bulk() {
+		$stats = array();
+
+		check_ajax_referer( 'wp-smush-ajax', '_nonce' );
+
+		// Check For permission.
+		if ( ! Helper::is_user_allowed( 'manage_options' ) ) {
+			wp_die( esc_html__( 'Unauthorized', 'wp-smushit' ), 403 );
+		}
+
+		if ( empty( $_GET['attachment_id'] ) ) {
 			wp_send_json_error(
 				array(
-					'error_msg' => esc_html__( 'Image not smushed, fields empty.', 'wp-smushit' ),
+					'error'         => 'missing_id',
+					'error_message' => esc_html__( 'No attachment ID was received', 'wp-smushit' ),
+					'file_name'     => 'undefined',
 				)
 			);
 		}
 
-		// Check nonce.
-		if ( ! wp_verify_nonce( wp_unslash( $_POST['_nonce'] ), 'wp-smush-resmush-' . (int) $_POST['attachment_id'] ) ) { // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		$atchmnt_id = (int) $_GET['attachment_id'];
+
+		$smush = $this->smush_image( $atchmnt_id, '', true );
+
+		if ( is_wp_error( $smush ) ) {
+			$error_message = $smush->get_error_message();
+
+			// Check for timeout error and suggest to filter timeout.
+			if ( strpos( $error_message, 'timed out' ) ) {
+				$error         = 'timeout';
+				$error_message = esc_html__( 'Smush request timed out. You can try setting a higher value ( > 60 ) for `WP_SMUSH_TIMEOUT`.', 'wp-smushit' );
+			}
+
+			$error     = isset( $error ) ? $error : 'other';
+			$file_name = $this->get_nextgen_image_from_id( $atchmnt_id );
+
 			wp_send_json_error(
 				array(
-					'error_msg' => esc_html__( "Image couldn't be smushed as the nonce verification failed, try reloading the page.", 'wp-smushit' ),
+					'error'         => $error,
+					'stats'         => $stats,
+					'error_message' => $error_message,
+					'file_name'     => isset( $file_name->filename ) ? $file_name->filename : 'undefined',
 				)
 			);
 		}
 
-		if ( ! Helper::is_user_allowed( 'upload_files' ) ) {
-			wp_send_json_error(
-				array(
-					'error_msg' => esc_html__( "You don't have permission to work with uploaded files.", 'wp-smushit' ),
-				)
-			);
+		// Check if a re-Smush request, update the re-Smush list.
+		if ( ! empty( $_REQUEST['is_bulk_resmush'] ) ) {
+			WP_Smush::get_instance()->core()->mod->smush->update_resmush_list( $atchmnt_id, 'wp-smush-nextgen-resmush-list' );
+		}
+		$stats['is_lossy'] = ! empty( $smush['stats'] ) ? $smush['stats']['lossy'] : 0;
+
+		// Size before and after smush.
+		$stats['size_before'] = ! empty( $smush['stats'] ) ? $smush['stats']['size_before'] : 0;
+		$stats['size_after']  = ! empty( $smush['stats'] ) ? $smush['stats']['size_after'] : 0;
+
+		// Get the re-Smush IDs list.
+		if ( empty( $this->ng_admin->resmush_ids ) ) {
+			$this->ng_admin->resmush_ids = get_option( 'wp-smush-nextgen-resmush-list' );
 		}
 
-		$image_id = (int) $_POST['attachment_id'];
+		$this->ng_admin->resmush_ids = empty( $this->ng_admin->resmush_ids ) ? get_option( 'wp-smush-nextgen-resmush-list' ) : array();
+		$resmush_count               = ! empty( $this->ng_admin->resmush_ids ) ? count( $this->ng_admin->resmush_ids ) : 0;
+		$smushed_images              = $this->ng_stats->get_ngg_images( 'smushed' );
 
-		WP_Smush::get_instance()->core()->mod->smush->smush_single( $image_id );
+		// Remove re-Smush IDs from smushed images list.
+		if ( $resmush_count > 0 && is_array( $this->ng_admin->resmush_ids ) ) {
+			foreach ( $smushed_images as $image_k => $image ) {
+				if ( in_array( $image_k, $this->ng_admin->resmush_ids, true ) ) {
+					unset( $smushed_images[ $image_k ] );
+				}
+			}
+		}
+
+		// Get the image count and smushed images count.
+		$image_count   = ! empty( $smush ) && ! empty( $smush['sizes'] ) ? count( $smush['sizes'] ) : 0;
+		$smushed_count = is_array( $smushed_images ) ? count( $smushed_images ) : 0;
+
+		$stats['smushed'] = ! empty( $this->ng_admin->resmush_ids ) ? $smushed_count - $resmush_count : $smushed_count;
+		$stats['count']   = $image_count;
+
+		wp_send_json_success(
+			array(
+				'stats' => $stats,
+			)
+		);
 	}
 
 
-/** Function get_stats() called by wp_ajax hooks: {'get_stats'} **/
-/** No params detected :-/ **/
+/** Function image_list() called by wp_ajax hooks: {'image_list'} **/
+/** Parameters found in function image_list(): {"post": ["smush_path"]} **/
+function image_list() {
+		// Check For permission.
+		if ( ! current_user_can( 'manage_options' ) ) {
+			$this->send_error( __( 'Unauthorized', 'wp-smushit' ) );
+		}
+
+		// Verify nonce.
+		check_ajax_referer( 'smush_get_image_list', 'image_list_nonce' );
+
+		// Check if directory path is set or not.
+		if ( empty( $_POST['smush_path'] ) ) { // Input var ok.
+			$this->send_error( __( 'Empty Directory Path', 'wp-smushit' ) );
+		}
+
+		// FILTER_SANITIZE_URL is trimming the space if a folder contains space.
+		$smush_path = filter_input( INPUT_POST, 'smush_path', FILTER_SANITIZE_SPECIAL_CHARS, FILTER_REQUIRE_ARRAY );
+
+		try {
+			// This will add the images to the database and get the file list.
+			$files = $this->get_image_list( $smush_path );
+		} catch ( Exception $e ) {
+			$this->send_error( $e->getMessage() );
+		}
+
+		// If files array is empty, send a message.
+		if ( empty( $files ) ) {
+			$this->send_error( __( 'We could not find any images in the selected directory.', 'wp-smushit' ) );
+		}
+
+		// Clear cache.
+		wp_cache_delete( 'wp-smush-dir_total_stats', 'wp-smush' );
+
+		// Send response.
+		wp_send_json_success( count( $files ) );
+	}
+
+
+/** Function directory_smush_check_step() called by wp_ajax hooks: {'directory_smush_check_step'} **/
+/** Parameters found in function directory_smush_check_step(): {"post": ["step"]} **/
+function directory_smush_check_step() {
+		check_ajax_referer( 'wp-smush-ajax' );
+
+		// Check for permission.
+		$capability = is_multisite() ? 'manage_network' : 'manage_options';
+		if ( ! Helper::is_user_allowed( $capability ) ) {
+			wp_die( esc_html__( 'Unauthorized', 'wp-smushit' ), 403 );
+		}
+
+		$urls         = $this->get_scanned_images();
+		$current_step = isset( $_POST['step'] ) ? absint( $_POST['step'] ) : 0;
+
+		$this->scanner->update_current_step( $current_step );
+
+		if ( isset( $urls[ $current_step ] ) ) {
+			$this->optimise_image( (int) $urls[ $current_step ]['id'] );
+		}
+
+		wp_send_json_success();
+	}
 
 
 /** Function scan_images() called by wp_ajax hooks: {'scan_for_resmush'} **/
@@ -980,16 +1053,23 @@ function scan_images() {
 	}
 
 
-/** Function ignore_bulk_image() called by wp_ajax hooks: {'ignore_bulk_image'} **/
-/** Parameters found in function ignore_bulk_image(): {"post": ["id"]} **/
-function ignore_bulk_image() {
-		check_ajax_referer( 'wp-smush-ajax' );
+/** Function remove_icon() called by wp_ajax hooks: {'smush_remove_icon'} **/
+/** No params detected :-/ **/
 
-		// Check capability.
+
+/** Function dismiss_update_info() called by wp_ajax hooks: {'dismiss_update_info'} **/
+/** No params detected :-/ **/
+
+
+/** Function remove_from_skip_list() called by wp_ajax hooks: {'remove_from_skip_list'} **/
+/** Parameters found in function remove_from_skip_list(): {"post": ["id"]} **/
+function remove_from_skip_list() {
+		check_ajax_referer( 'wp-smush-remove-skipped' );
+
 		if ( ! Helper::is_user_allowed( 'upload_files' ) ) {
 			wp_send_json_error(
 				array(
-					'error_msg' => esc_html__( "You don't have permission to work with uploaded files.", 'wp-smushit' ),
+					'error_message' => esc_html__( "You don't have permission to work with uploaded files.", 'wp-smushit' ),
 				),
 				403
 			);
@@ -1001,167 +1081,87 @@ function ignore_bulk_image() {
 
 		$attachment_id = absint( $_POST['id'] );
 
-		// Ignore image.
-		update_post_meta( $attachment_id, 'wp-smush-ignore-bulk', true );
-
+		// Undo ignored file.
+		delete_post_meta( $attachment_id, 'wp-smush-ignore-bulk' );
 		wp_send_json_success(
 			array(
-				'links' => WP_Smush::get_instance()->library()->get_optimization_links( $attachment_id ),
+				'html' => WP_Smush::get_instance()->library()->generate_markup( $attachment_id ),
 			)
 		);
 	}
 
 
-/** Function webp_delete_all() called by wp_ajax hooks: {'smush_webp_delete_all'} **/
+/** Function get_dir_smush_stats() called by wp_ajax hooks: {'get_dir_smush_stats'} **/
 /** No params detected :-/ **/
 
 
-/** Function manual_nextgen() called by wp_ajax hooks: {'smush_manual_nextgen'} **/
-/** Parameters found in function manual_nextgen(): {"get": ["attachment_id", "_nonce"]} **/
-function manual_nextgen() {
-		$pid   = ! empty( $_GET['attachment_id'] ) ? absint( (int) $_GET['attachment_id'] ) : '';
-		$nonce = ! empty( $_GET['_nonce'] ) ? wp_unslash( $_GET['_nonce'] ) : '';
+/** Function smush_toggle_lazy_load() called by wp_ajax hooks: {'smush_toggle_lazy_load'} **/
+/** Parameters found in function smush_toggle_lazy_load(): {"post": ["param"]} **/
+function smush_toggle_lazy_load() {
+		check_ajax_referer( 'save_wp_smush_options' );
 
-		// Verify Nonce.
-		if ( ! wp_verify_nonce( $nonce, 'wp_smush_nextgen' ) ) {
+		if ( ! Helper::is_user_allowed( 'manage_options' ) ) {
 			wp_send_json_error(
 				array(
-					'error' => 'nonce_verification_failed',
-				)
+					'message' => __( 'User can not modify options', 'wp-smushit' ),
+				),
+				403
 			);
 		}
 
-		// Check for media upload permission.
-		if ( ! Helper::is_user_allowed( 'upload_files' ) ) {
-			wp_send_json_error(
-				array(
-					'error_msg' => __( "You don't have permission to work with uploaded files.", 'wp-smushit' ),
-				)
-			);
+		$param = isset( $_POST['param'] ) ? sanitize_text_field( wp_unslash( $_POST['param'] ) ) : false;
+
+		if ( 'true' === $param ) {
+			$settings = $this->settings->get_setting( 'wp-smush-lazy_load' );
+
+			// No settings, during init - set defaults.
+			if ( ! $settings ) {
+				$this->settings->init_lazy_load_defaults();
+			}
 		}
 
-		if ( empty( $pid ) ) {
-			wp_send_json_error(
-				array(
-					'error_msg' => __( 'No attachment ID was provided.', 'wp-smushit' ),
-				)
-			);
-		}
+		$this->settings->set( 'lazy_load', 'true' === $param );
 
-		$status = $this->smush_image( $pid );
-
-		// Send stats.
-		if ( is_wp_error( $status ) ) {
-			/**
-			 * Not used for bulk smush.
-			 *
-			 * @param WP_Error $smush
-			 */
-			wp_send_json_error( $status->get_error_message() );
-		}
-
-		wp_send_json_success( $status );
+		wp_send_json_success();
 	}
 
 
-/** Function directory_smush_cancel() called by wp_ajax hooks: {'directory_smush_cancel'} **/
-/** No params detected :-/ **/
+/** Function directory_smush_finish() called by wp_ajax hooks: {'directory_smush_finish'} **/
+/** Parameters found in function directory_smush_finish(): {"post": ["items", "failed", "skipped"]} **/
+function directory_smush_finish() {
+		check_ajax_referer( 'wp-smush-ajax' );
 
-
-/** Function dismiss_s3support_alert() called by wp_ajax hooks: {'dismiss_s3support_alert'} **/
-/** No params detected :-/ **/
-
-
-/** Function get_image_count() called by wp_ajax hooks: {'get_image_count'} **/
-/** No params detected :-/ **/
-
-
-/** Function skip_smush_setup() called by wp_ajax hooks: {'skip_smush_setup'} **/
-/** No params detected :-/ **/
-
-
-/** Function smush_manual() called by wp_ajax hooks: {'wp_smushit_manual'} **/
-/** Parameters found in function smush_manual(): {"get": ["attachment_id"]} **/
-function smush_manual() {
-		if ( ! check_ajax_referer( 'wp-smush-ajax', '_nonce', false ) ) {
-			wp_send_json_error(
-				array(
-					'error_msg' => esc_html__( 'Nonce verification failed', 'wp-smushit' ),
-				)
-			);
+		// Check for permission.
+		$capability = is_multisite() ? 'manage_network' : 'manage_options';
+		if ( ! Helper::is_user_allowed( $capability ) ) {
+			wp_die( esc_html__( 'Unauthorized', 'wp-smushit' ), 403 );
 		}
 
-		if ( ! Helper::is_user_allowed( 'upload_files' ) ) {
-			wp_send_json_error(
-				array(
-					'error_msg' => esc_html__( "You don't have permission to work with uploaded files.", 'wp-smushit' ),
-				)
-			);
+		$items   = isset( $_POST['items'] ) ? absint( $_POST['items'] ) : 0;
+		$failed  = isset( $_POST['failed'] ) ? absint( $_POST['failed'] ) : 0;
+		$skipped = isset( $_POST['skipped'] ) ? absint( $_POST['skipped'] ) : 0;
+
+		// If any images failed to smush, store count.
+		if ( $failed > 0 ) {
+			set_transient( 'wp-smush-dir-scan-failed-items', $failed, 60 * 5 ); // 5 minutes max.
 		}
 
-		if ( ! isset( $_GET['attachment_id'] ) ) {
-			wp_send_json_error(
-				array(
-					'error_msg' => esc_html__( 'No attachment ID was provided.', 'wp-smushit' ),
-				)
-			);
+		if ( $skipped > 0 ) {
+			set_transient( 'wp-smush-dir-scan-skipped-items', $skipped, 60 * 5 ); // 5 minutes max.
 		}
 
-		$attachment_id = (int) $_GET['attachment_id'];
-
-		// Pass on the attachment id to smush single function.
-		WP_Smush::get_instance()->core()->mod->smush->smush_single( $attachment_id );
+		// Store optimized items count.
+		set_transient( 'wp-smush-show-dir-scan-notice', $items, 60 * 5 ); // 5 minutes max.
+		$this->scanner->reset_scan();
+		wp_send_json_success();
 	}
 
 
-/** Function save_config() called by wp_ajax hooks: {'smush_save_config'} **/
+/** Function apply_config() called by wp_ajax hooks: {'smush_apply_config'} **/
 /** No params detected :-/ **/
 
 
-/** Function image_list() called by wp_ajax hooks: {'image_list'} **/
-/** Parameters found in function image_list(): {"post": ["smush_path"]} **/
-function image_list() {
-		// Check For permission.
-		if ( ! current_user_can( 'manage_options' ) ) {
-			$this->send_error( __( 'Unauthorized', 'wp-smushit' ) );
-		}
-
-		// Verify nonce.
-		check_ajax_referer( 'smush_get_image_list', 'image_list_nonce' );
-
-		// Check if directory path is set or not.
-		if ( empty( $_POST['smush_path'] ) ) { // Input var ok.
-			$this->send_error( __( 'Empty Directory Path', 'wp-smushit' ) );
-		}
-
-		// FILTER_SANITIZE_URL is trimming the space if a folder contains space.
-		$smush_path = filter_input( INPUT_POST, 'smush_path', FILTER_SANITIZE_SPECIAL_CHARS, FILTER_REQUIRE_ARRAY );
-
-		try {
-			// This will add the images to the database and get the file list.
-			$files = $this->get_image_list( $smush_path );
-		} catch ( Exception $e ) {
-			$this->send_error( $e->getMessage() );
-		}
-
-		// If files array is empty, send a message.
-		if ( empty( $files ) ) {
-			$this->send_error( __( 'We could not find any images in the selected directory.', 'wp-smushit' ) );
-		}
-
-		// Clear cache.
-		wp_cache_delete( 'wp-smush-dir_total_stats', 'wp-smush' );
-
-		// Send response.
-		wp_send_json_success( count( $files ) );
-	}
-
-
-/** Function wp_ajax_frash_dismiss() called by wp_ajax hooks: {'frash_dismiss'} **/
-/** No params detected :-/ **/
-
-
-/** Function webp_toggle_wizard() called by wp_ajax hooks: {'smush_toggle_webp_wizard'} **/
+/** Function show_warning_ajax() called by wp_ajax hooks: {'smush_show_warning'} **/
 /** No params detected :-/ **/
 
 

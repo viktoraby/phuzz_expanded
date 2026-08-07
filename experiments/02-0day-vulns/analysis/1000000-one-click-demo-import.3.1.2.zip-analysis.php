@@ -5,11 +5,154 @@
 *Found functions:6
 *Extracted functions:6
 *Total parameter names extracted: 3
-*Overview: {'after_all_import_data_ajax_callback': {'ocdi_after_import_data'}, 'import_demo_data_ajax_callback': {'ocdi_import_demo_data'}, 'install_plugin_callback': {'ocdi_install_plugin'}, 'upload_manual_import_files_callback': {'ocdi_upload_manual_import_files'}, 'import_created_content': {'ocdi_import_created_content'}, 'import_customizer_data_ajax_callback': {'ocdi_import_customizer_data'}}
+*Overview: {'install_plugin_callback': {'ocdi_install_plugin'}, 'import_created_content': {'ocdi_import_created_content'}, 'after_all_import_data_ajax_callback': {'ocdi_after_import_data'}, 'upload_manual_import_files_callback': {'ocdi_upload_manual_import_files'}, 'import_customizer_data_ajax_callback': {'ocdi_import_customizer_data'}, 'import_demo_data_ajax_callback': {'ocdi_import_demo_data'}}
 *
 ***/
 
+/** Function install_plugin_callback() called by wp_ajax hooks: {'ocdi_install_plugin'} **/
+/** Parameters found in function install_plugin_callback(): {"post": ["slug"]} **/
+function install_plugin_callback() {
+		check_ajax_referer( 'ocdi-ajax-verification', 'security' );
+
+		// Check if user has the WP capability to install plugins.
+		if ( ! current_user_can( 'install_plugins' ) ) {
+			wp_send_json_error( esc_html__( 'Could not install the plugin. You don\'t have permission to install plugins.', 'one-click-demo-import' ) );
+		}
+
+		$slug = ! empty( $_POST['slug'] ) ? sanitize_key( wp_unslash( $_POST['slug'] ) ) : '';
+
+		if ( empty( $slug ) ) {
+			wp_send_json_error( esc_html__( 'Could not install the plugin. Plugin slug is missing.', 'one-click-demo-import' ) );
+		}
+
+		// Check if the plugin is already installed and activated.
+		if ( $this->is_plugin_active( $slug ) ) {
+			wp_send_json_success( esc_html__( 'Plugin is already installed and activated!', 'one-click-demo-import' ) );
+		}
+
+		// Activate the plugin if the plugin is already installed.
+		if ( $this->is_plugin_installed( $slug ) ) {
+			$activated = $this->activate_plugin( $this->get_plugin_basename_from_slug( $slug ), $slug );
+
+			if ( ! is_wp_error( $activated ) ) {
+				wp_send_json_success( esc_html__( 'Plugin was already installed! We activated it for you.', 'one-click-demo-import' ) );
+			} else {
+				wp_send_json_error( $activated->get_error_message() );
+			}
+		}
+
+		// Check for file system permissions.
+		if ( ! $this->filesystem_permissions_allowed() ) {
+			wp_send_json_error( esc_html__( 'Could not install the plugin. Don\'t have file permission.', 'one-click-demo-import' ) );
+		}
+
+		// Do not allow WordPress to search/download translations, as this will break JS output.
+		remove_action( 'upgrader_process_complete', [ 'Language_Pack_Upgrader', 'async_upgrade' ], 20 );
+
+		// Prep variables for Plugin_Installer_Skin class.
+		$extra         = array();
+		$extra['slug'] = $slug; // Needed for potentially renaming of directory name.
+		$source        = $this->get_download_url( $slug );
+		$api           = empty( $this->get_plugin_data( $slug )['source'] ) ? $this->get_plugins_api( $slug ) : null;
+		$api           = ( false !== $api ) ? $api : null;
+
+		if ( ! empty( $api ) && is_wp_error( $api ) ) {
+			wp_send_json_error( $api->get_error_message() );
+		}
+
+		if ( ! class_exists( '\Plugin_Upgrader', false ) ) {
+			require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
+		}
+
+		$skin_args = array(
+			'type'   => 'web',
+			'plugin' => '',
+			'api'    => $api,
+			'extra'  => $extra,
+		);
+
+		$upgrader = new \Plugin_Upgrader( new PluginInstallerSkin( $skin_args ) );
+
+		$upgrader->install( $source );
+
+		// Flush the cache and return the newly installed plugin basename.
+		wp_cache_flush();
+
+		if ( $upgrader->plugin_info() ) {
+			$activated = $this->activate_plugin( $upgrader->plugin_info(), $slug );
+
+			if ( ! is_wp_error( $activated ) ) {
+				wp_send_json_success(
+					esc_html__( 'Plugin installed and activated succesfully.', 'one-click-demo-import' )
+				);
+			} else {
+				wp_send_json_success( $activated->get_error_message() );
+			}
+		}
+
+		wp_send_json_error( esc_html__( 'Could not install the plugin. WP Plugin installer could not retrieve plugin information.', 'one-click-demo-import' ) );
+	}
+
+
+/** Function import_created_content() called by wp_ajax hooks: {'ocdi_import_created_content'} **/
+/** Parameters found in function import_created_content(): {"post": ["slug"]} **/
+function import_created_content() {
+		check_ajax_referer( 'ocdi-ajax-verification', 'security' );
+
+		// Check if user has the WP capability to import content.
+		if ( ! current_user_can( 'import' ) ) {
+			wp_send_json_error( esc_html__( 'Could not import this page. You don\'t have permission to import content.', 'one-click-demo-import' ) );
+		}
+
+		$slug = ! empty( $_POST['slug'] ) ? sanitize_key( wp_unslash( $_POST['slug'] ) ) : '';
+
+		if ( empty( $slug ) ) {
+			wp_send_json_error( esc_html__( 'Could not import this page. Page slug is missing.', 'one-click-demo-import' ) );
+		}
+
+		// Install required plugins.
+		$content_item = $this->get_content_data( $slug );
+		$ocdi         = OneClickDemoImport::get_instance();
+		$refresh      = false;
+
+		if ( ! empty( $content_item['required_plugins'] ) ) {
+			foreach ( $content_item['required_plugins'] as $plugin_slug ) {
+				if ( ! $ocdi->plugin_installer->is_plugin_active( $plugin_slug ) ) {
+					$ocdi->plugin_installer->install_plugin( $plugin_slug );
+					$refresh = true;
+				}
+			}
+		}
+
+		if ( $refresh ) {
+			wp_send_json_success( [ 'refresh' => true ] );
+		}
+
+		// Import the pre-created page.
+		$error = $this->import_content( $slug );
+
+		if ( ! empty( $error ) ) {
+			wp_send_json_error(
+				sprintf( /* translators: %s - The actual error message. */
+					esc_html__( 'An error occured while importing this page: %s', 'one-click-demo-import' ),
+					esc_html( $error )
+				)
+			);
+		}
+
+		wp_send_json_success();
+	}
+
+
 /** Function after_all_import_data_ajax_callback() called by wp_ajax hooks: {'ocdi_after_import_data'} **/
+/** No params detected :-/ **/
+
+
+/** Function upload_manual_import_files_callback() called by wp_ajax hooks: {'ocdi_upload_manual_import_files'} **/
+/** No params detected :-/ **/
+
+
+/** Function import_customizer_data_ajax_callback() called by wp_ajax hooks: {'ocdi_import_customizer_data'} **/
 /** No params detected :-/ **/
 
 
@@ -129,148 +272,5 @@ function import_demo_data_ajax_callback() {
 		// Send a JSON response with final report.
 		$this->final_response();
 	}
-
-
-/** Function install_plugin_callback() called by wp_ajax hooks: {'ocdi_install_plugin'} **/
-/** Parameters found in function install_plugin_callback(): {"post": ["slug"]} **/
-function install_plugin_callback() {
-		check_ajax_referer( 'ocdi-ajax-verification', 'security' );
-
-		// Check if user has the WP capability to install plugins.
-		if ( ! current_user_can( 'install_plugins' ) ) {
-			wp_send_json_error( esc_html__( 'Could not install the plugin. You don\'t have permission to install plugins.', 'one-click-demo-import' ) );
-		}
-
-		$slug = ! empty( $_POST['slug'] ) ? sanitize_key( wp_unslash( $_POST['slug'] ) ) : '';
-
-		if ( empty( $slug ) ) {
-			wp_send_json_error( esc_html__( 'Could not install the plugin. Plugin slug is missing.', 'one-click-demo-import' ) );
-		}
-
-		// Check if the plugin is already installed and activated.
-		if ( $this->is_plugin_active( $slug ) ) {
-			wp_send_json_success( esc_html__( 'Plugin is already installed and activated!', 'one-click-demo-import' ) );
-		}
-
-		// Activate the plugin if the plugin is already installed.
-		if ( $this->is_plugin_installed( $slug ) ) {
-			$activated = $this->activate_plugin( $this->get_plugin_basename_from_slug( $slug ), $slug );
-
-			if ( ! is_wp_error( $activated ) ) {
-				wp_send_json_success( esc_html__( 'Plugin was already installed! We activated it for you.', 'one-click-demo-import' ) );
-			} else {
-				wp_send_json_error( $activated->get_error_message() );
-			}
-		}
-
-		// Check for file system permissions.
-		if ( ! $this->filesystem_permissions_allowed() ) {
-			wp_send_json_error( esc_html__( 'Could not install the plugin. Don\'t have file permission.', 'one-click-demo-import' ) );
-		}
-
-		// Do not allow WordPress to search/download translations, as this will break JS output.
-		remove_action( 'upgrader_process_complete', [ 'Language_Pack_Upgrader', 'async_upgrade' ], 20 );
-
-		// Prep variables for Plugin_Installer_Skin class.
-		$extra         = array();
-		$extra['slug'] = $slug; // Needed for potentially renaming of directory name.
-		$source        = $this->get_download_url( $slug );
-		$api           = empty( $this->get_plugin_data( $slug )['source'] ) ? $this->get_plugins_api( $slug ) : null;
-		$api           = ( false !== $api ) ? $api : null;
-
-		if ( ! empty( $api ) && is_wp_error( $api ) ) {
-			wp_send_json_error( $api->get_error_message() );
-		}
-
-		if ( ! class_exists( '\Plugin_Upgrader', false ) ) {
-			require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
-		}
-
-		$skin_args = array(
-			'type'   => 'web',
-			'plugin' => '',
-			'api'    => $api,
-			'extra'  => $extra,
-		);
-
-		$upgrader = new \Plugin_Upgrader( new PluginInstallerSkin( $skin_args ) );
-
-		$upgrader->install( $source );
-
-		// Flush the cache and return the newly installed plugin basename.
-		wp_cache_flush();
-
-		if ( $upgrader->plugin_info() ) {
-			$activated = $this->activate_plugin( $upgrader->plugin_info(), $slug );
-
-			if ( ! is_wp_error( $activated ) ) {
-				wp_send_json_success(
-					esc_html__( 'Plugin installed and activated succesfully.', 'one-click-demo-import' )
-				);
-			} else {
-				wp_send_json_success( $activated->get_error_message() );
-			}
-		}
-
-		wp_send_json_error( esc_html__( 'Could not install the plugin. WP Plugin installer could not retrieve plugin information.', 'one-click-demo-import' ) );
-	}
-
-
-/** Function upload_manual_import_files_callback() called by wp_ajax hooks: {'ocdi_upload_manual_import_files'} **/
-/** No params detected :-/ **/
-
-
-/** Function import_created_content() called by wp_ajax hooks: {'ocdi_import_created_content'} **/
-/** Parameters found in function import_created_content(): {"post": ["slug"]} **/
-function import_created_content() {
-		check_ajax_referer( 'ocdi-ajax-verification', 'security' );
-
-		// Check if user has the WP capability to import content.
-		if ( ! current_user_can( 'import' ) ) {
-			wp_send_json_error( esc_html__( 'Could not import this page. You don\'t have permission to import content.', 'one-click-demo-import' ) );
-		}
-
-		$slug = ! empty( $_POST['slug'] ) ? sanitize_key( wp_unslash( $_POST['slug'] ) ) : '';
-
-		if ( empty( $slug ) ) {
-			wp_send_json_error( esc_html__( 'Could not import this page. Page slug is missing.', 'one-click-demo-import' ) );
-		}
-
-		// Install required plugins.
-		$content_item = $this->get_content_data( $slug );
-		$ocdi         = OneClickDemoImport::get_instance();
-		$refresh      = false;
-
-		if ( ! empty( $content_item['required_plugins'] ) ) {
-			foreach ( $content_item['required_plugins'] as $plugin_slug ) {
-				if ( ! $ocdi->plugin_installer->is_plugin_active( $plugin_slug ) ) {
-					$ocdi->plugin_installer->install_plugin( $plugin_slug );
-					$refresh = true;
-				}
-			}
-		}
-
-		if ( $refresh ) {
-			wp_send_json_success( [ 'refresh' => true ] );
-		}
-
-		// Import the pre-created page.
-		$error = $this->import_content( $slug );
-
-		if ( ! empty( $error ) ) {
-			wp_send_json_error(
-				sprintf( /* translators: %s - The actual error message. */
-					esc_html__( 'An error occured while importing this page: %s', 'one-click-demo-import' ),
-					esc_html( $error )
-				)
-			);
-		}
-
-		wp_send_json_success();
-	}
-
-
-/** Function import_customizer_data_ajax_callback() called by wp_ajax hooks: {'ocdi_import_customizer_data'} **/
-/** No params detected :-/ **/
 
 

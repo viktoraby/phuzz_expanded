@@ -5,11 +5,11 @@
 *Found functions:6
 *Extracted functions:4
 *Total parameter names extracted: 5
-*Overview: {'ajaxGetGdprFiltersValues': {'pys_get_gdpr_filters_values', 'nopriv_pys_get_gdpr_filters_values'}, 'allCloseNotice': {'pys_fixed_notice_opt_dismiss'}, 'PixelYourSite\\adminNoticeDismissHandler': {'pys_notice_dismiss'}, 'catchOnCloseNotice': {'pys_fixed_notice_dismiss'}, 'catchAjaxEvent': {'nopriv_pys_api_event', 'pys_api_event'}, 'PixelYourSite\\adminNoticeCAPIDismissHandler': {'pys_notice_CAPI_dismiss'}}
+*Overview: {'ajaxGetGdprFiltersValues': {'nopriv_pys_get_gdpr_filters_values', 'pys_get_gdpr_filters_values'}, 'allCloseNotice': {'pys_fixed_notice_opt_dismiss'}, 'catchOnCloseNotice': {'pys_fixed_notice_dismiss'}, 'catchAjaxEvent': {'pys_api_event', 'nopriv_pys_api_event'}, 'PixelYourSite\\adminNoticeCAPIDismissHandler': {'pys_notice_CAPI_dismiss'}, 'PixelYourSite\\adminNoticeDismissHandler': {'pys_notice_dismiss'}}
 *
 ***/
 
-/** Function ajaxGetGdprFiltersValues() called by wp_ajax hooks: {'pys_get_gdpr_filters_values', 'nopriv_pys_get_gdpr_filters_values'} **/
+/** Function ajaxGetGdprFiltersValues() called by wp_ajax hooks: {'nopriv_pys_get_gdpr_filters_values', 'pys_get_gdpr_filters_values'} **/
 /** No params detected :-/ **/
 
 
@@ -42,10 +42,6 @@ function allCloseNotice(){
     }
 
 
-/** Function PixelYourSite\adminNoticeDismissHandler() called by wp_ajax hooks: {'pys_notice_dismiss'} **/
-/** No function found :-/ **/
-
-
 /** Function catchOnCloseNotice() called by wp_ajax hooks: {'pys_fixed_notice_dismiss'} **/
 /** Parameters found in function catchOnCloseNotice(): {"post": ["addon_slug", "meta_key"], "request": ["nonce"]} **/
 function  catchOnCloseNotice() {
@@ -74,7 +70,7 @@ function  catchOnCloseNotice() {
     }
 
 
-/** Function catchAjaxEvent() called by wp_ajax hooks: {'nopriv_pys_api_event', 'pys_api_event'} **/
+/** Function catchAjaxEvent() called by wp_ajax hooks: {'pys_api_event', 'nopriv_pys_api_event'} **/
 /** Parameters found in function catchAjaxEvent(): {"post": ["event", "data", "ids", "eventID", "woo_order", "edd_order"], "request": ["ajax_event"]} **/
 function catchAjaxEvent() {
         PYS()->getLog()->debug('catchAjaxEvent send fb server from ajax');
@@ -102,6 +98,10 @@ function catchAjaxEvent() {
 
 
 /** Function PixelYourSite\adminNoticeCAPIDismissHandler() called by wp_ajax hooks: {'pys_notice_CAPI_dismiss'} **/
+/** No function found :-/ **/
+
+
+/** Function PixelYourSite\adminNoticeDismissHandler() called by wp_ajax hooks: {'pys_notice_dismiss'} **/
 /** No function found :-/ **/
 
 

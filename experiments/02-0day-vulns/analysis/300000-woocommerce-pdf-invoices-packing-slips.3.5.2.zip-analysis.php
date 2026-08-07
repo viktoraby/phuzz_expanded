@@ -5,11 +5,53 @@
 *Found functions:8
 *Extracted functions:8
 *Total parameter names extracted: 7
-*Overview: {'generate_pdf_ajax': {'generate_wpo_wcpdf', 'nopriv_generate_wpo_wcpdf'}, 'document_printed_ajax': {'printed_wpo_wcpdf'}, 'set_number_store': {'wpo_wcpdf_set_next_number'}, 'ajax_debug_tools': {'wpo_wcpdf_debug_tools'}, 'preview_order_search': {'wpo_wcpdf_preview_order_search'}, 'ajax_preview': {'wpo_wcpdf_preview'}, 'get_media_upload_setting_html': {'wpo_wcpdf_get_media_upload_setting_html'}, 'ajax_crud_document': {'wpo_wcpdf_delete_document', 'wpo_wcpdf_regenerate_document', 'wpo_wcpdf_save_document'}}
+*Overview: {'get_media_upload_setting_html': {'wpo_wcpdf_get_media_upload_setting_html'}, 'set_number_store': {'wpo_wcpdf_set_next_number'}, 'generate_pdf_ajax': {'nopriv_generate_wpo_wcpdf', 'generate_wpo_wcpdf'}, 'ajax_preview': {'wpo_wcpdf_preview'}, 'ajax_debug_tools': {'wpo_wcpdf_debug_tools'}, 'document_printed_ajax': {'printed_wpo_wcpdf'}, 'preview_order_search': {'wpo_wcpdf_preview_order_search'}, 'ajax_crud_document': {'wpo_wcpdf_delete_document', 'wpo_wcpdf_save_document', 'wpo_wcpdf_regenerate_document'}}
 *
 ***/
 
-/** Function generate_pdf_ajax() called by wp_ajax hooks: {'generate_wpo_wcpdf', 'nopriv_generate_wpo_wcpdf'} **/
+/** Function get_media_upload_setting_html() called by wp_ajax hooks: {'wpo_wcpdf_get_media_upload_setting_html'} **/
+/** Parameters found in function get_media_upload_setting_html(): {"post": ["args", "attachment_id"]} **/
+function get_media_upload_setting_html() {
+		check_ajax_referer( 'wpo_wcpdf_get_media_upload_setting_html', 'security' );
+		// check permissions
+		if ( ! $this->user_can_manage_settings() ) {
+			wp_send_json_error(); 
+		}
+
+		// get previous (default) args and preset current
+		$args = $_POST['args'];
+		$args['current'] = absint( $_POST['attachment_id'] );
+
+		// get settings HTML
+		ob_start();
+		$this->callbacks->media_upload( $args );
+		$html = ob_get_clean();
+
+		return wp_send_json_success( $html );
+	}
+
+
+/** Function set_number_store() called by wp_ajax hooks: {'wpo_wcpdf_set_next_number'} **/
+/** Parameters found in function set_number_store(): {"post": ["store", "number"]} **/
+function set_number_store() {
+		check_ajax_referer( "wpo_wcpdf_next_{$_POST['store']}", 'security' );
+		// check permissions
+		if ( ! $this->user_can_manage_settings() ) {
+			die(); 
+		}
+
+		$number = ! empty( $_POST['number'] ) ? (int) $_POST['number'] : 0;
+		if ( $number > 0 ) {
+			$number_store_method = $this->get_sequential_number_store_method();
+			$number_store = new Sequential_Number_Store( $_POST['store'], $number_store_method );
+			$number_store->set_next( $number );
+			echo wp_kses_post( "next number ({$_POST['store']}) set to {$number}" );
+		}
+		die();
+	}
+
+
+/** Function generate_pdf_ajax() called by wp_ajax hooks: {'nopriv_generate_wpo_wcpdf', 'generate_wpo_wcpdf'} **/
 /** Parameters found in function generate_pdf_ajax(): {"request": ["access_key", "action", "document_type", "template_type", "order_ids", "debug", "bulk", "output"], "get": ["shortcode"]} **/
 function generate_pdf_ajax() {
 		$guest_access = WPO_WCPDF()->settings->is_guest_access_enabled();
@@ -190,129 +232,6 @@ function generate_pdf_ajax() {
 	}
 
 
-/** Function document_printed_ajax() called by wp_ajax hooks: {'printed_wpo_wcpdf'} **/
-/** No params detected :-/ **/
-
-
-/** Function set_number_store() called by wp_ajax hooks: {'wpo_wcpdf_set_next_number'} **/
-/** Parameters found in function set_number_store(): {"post": ["store", "number"]} **/
-function set_number_store() {
-		check_ajax_referer( "wpo_wcpdf_next_{$_POST['store']}", 'security' );
-		// check permissions
-		if ( ! $this->user_can_manage_settings() ) {
-			die(); 
-		}
-
-		$number = ! empty( $_POST['number'] ) ? (int) $_POST['number'] : 0;
-		if ( $number > 0 ) {
-			$number_store_method = $this->get_sequential_number_store_method();
-			$number_store = new Sequential_Number_Store( $_POST['store'], $number_store_method );
-			$number_store->set_next( $number );
-			echo wp_kses_post( "next number ({$_POST['store']}) set to {$number}" );
-		}
-		die();
-	}
-
-
-/** Function ajax_debug_tools() called by wp_ajax hooks: {'wpo_wcpdf_debug_tools'} **/
-/** No params detected :-/ **/
-
-
-/** Function preview_order_search() called by wp_ajax hooks: {'wpo_wcpdf_preview_order_search'} **/
-/** Parameters found in function preview_order_search(): {"post": ["search", "document_type"]} **/
-function preview_order_search() {
-		check_ajax_referer( 'wpo_wcpdf_preview', 'security' );
-
-		try {
-			// check permissions
-			if ( ! $this->user_can_manage_settings() ) {
-				throw new \Exception( esc_html__( 'You do not have sufficient permissions to access this page.', 'woocommerce-pdf-invoices-packing-slips' ), 403 );
-			}
-
-			if ( ! empty( $_POST['search'] ) && ! empty( $_POST['document_type'] ) ) {
-				$search        = sanitize_text_field( $_POST['search'] );
-				$document_type = sanitize_text_field( $_POST['document_type'] );
-				$results       = array();
-	
-				// we have an order ID
-				if ( is_numeric( $search ) && wc_get_order( $search ) ) {
-					$results = [ $search ];
-					
-				// no order ID, let's try with customer
-				} else {
-					$default_args = apply_filters( 'wpo_wcpdf_preview_order_search_args', array(
-						'type'     => 'shop_order',
-						'limit'    => 10,
-						'orderby'  => 'date',
-						'order'    => 'DESC',
-						'return'   => 'ids',
-					), $document_type );
-	
-					// search by email
-					if ( is_email( $search ) ) {
-						$args    = array( 'customer' => $search );
-						$args    = $args + $default_args;
-						$results = wc_get_orders( $args );
-	
-					// search by names
-					} else {
-						$names = array( 'billing_first_name', 'billing_last_name', 'billing_company' );
-						foreach ( $names as $name ) {
-							$args    = array( $name => $search );
-							$args    = $args + $default_args;
-							$results = wc_get_orders( $args );
-							if ( count( $results ) > 0 ) {
-								break;
-							}
-						}
-					}
-				}
-	
-				// filter results
-				$results = apply_filters( 'wpo_wcpdf_preview_order_search_results', $results, $search, $document_type );
-	
-				// if we got here we have results!
-				if ( ! empty( $results ) ) {
-					$data = array();
-					foreach ( $results as $value ) {
-						$order = wc_get_order( $value );
-						if ( empty( $order ) ) {
-							continue;
-						}
-						$order_id                              = is_callable( array( $order, 'get_id' ) ) ? $order->get_id() : 0;
-						$data[$order_id]['order_number']       = is_callable( array( $order, 'get_order_number' ) ) ? $order->get_order_number() : '';
-						$data[$order_id]['billing_first_name'] = is_callable( array( $order, 'get_billing_first_name' ) ) ? $order->get_billing_first_name() : '';
-						$data[$order_id]['billing_last_name']  = is_callable( array( $order, 'get_billing_last_name' ) ) ? $order->get_billing_last_name() : '';
-						$data[$order_id]['billing_company']    = is_callable( array( $order, 'get_billing_company' ) ) ? $order->get_billing_company() : '';
-						$data[$order_id]['date_created']       = is_callable( array( $order, 'get_date_created' ) ) ? '<strong>' . esc_attr__( 'Date', 'woocommerce-pdf-invoices-packing-slips' ) . ':</strong> ' . $order->get_date_created()->format( 'Y/m/d' ) : '';
-						$data[$order_id]['total']              = is_callable( array( $order, 'get_total' ) ) ? '<strong>' . esc_attr__( 'Total', 'woocommerce-pdf-invoices-packing-slips' ) . ':</strong> ' . wc_price( $order->get_total() ) : '';
-					}
-	
-					$data = apply_filters( 'wpo_wcpdf_preview_order_search_data', $data, $results );
-	
-					wp_send_json_success( $data );
-				} else {
-					wp_send_json_error( array( 'error' => esc_html__( 'No order(s) found!', 'woocommerce-pdf-invoices-packing-slips' ) ) );
-				}
-			} else {
-				wp_send_json_error( array( 'error' => esc_html__( 'An error occurred when trying to process your request!', 'woocommerce-pdf-invoices-packing-slips' ) ) );
-			}
-		} catch ( \Throwable $th ) {
-			wp_send_json_error(
-				array(
-					'error' => sprintf(
-						/* translators: error message */
-						esc_html__( 'Error trying to get orders: %s', 'woocommerce-pdf-invoices-packing-slips' ),
-						$th->getMessage()
-					)
-				)
-			);
-		}
-
-		wp_die();
-	}
-
-
 /** Function ajax_preview() called by wp_ajax hooks: {'wpo_wcpdf_preview'} **/
 /** Parameters found in function ajax_preview(): {"post": ["document_type", "order_id", "data"]} **/
 function ajax_preview() {
@@ -438,29 +357,110 @@ function ajax_preview() {
 	}
 
 
-/** Function get_media_upload_setting_html() called by wp_ajax hooks: {'wpo_wcpdf_get_media_upload_setting_html'} **/
-/** Parameters found in function get_media_upload_setting_html(): {"post": ["args", "attachment_id"]} **/
-function get_media_upload_setting_html() {
-		check_ajax_referer( 'wpo_wcpdf_get_media_upload_setting_html', 'security' );
-		// check permissions
-		if ( ! $this->user_can_manage_settings() ) {
-			wp_send_json_error(); 
+/** Function ajax_debug_tools() called by wp_ajax hooks: {'wpo_wcpdf_debug_tools'} **/
+/** No params detected :-/ **/
+
+
+/** Function document_printed_ajax() called by wp_ajax hooks: {'printed_wpo_wcpdf'} **/
+/** No params detected :-/ **/
+
+
+/** Function preview_order_search() called by wp_ajax hooks: {'wpo_wcpdf_preview_order_search'} **/
+/** Parameters found in function preview_order_search(): {"post": ["search", "document_type"]} **/
+function preview_order_search() {
+		check_ajax_referer( 'wpo_wcpdf_preview', 'security' );
+
+		try {
+			// check permissions
+			if ( ! $this->user_can_manage_settings() ) {
+				throw new \Exception( esc_html__( 'You do not have sufficient permissions to access this page.', 'woocommerce-pdf-invoices-packing-slips' ), 403 );
+			}
+
+			if ( ! empty( $_POST['search'] ) && ! empty( $_POST['document_type'] ) ) {
+				$search        = sanitize_text_field( $_POST['search'] );
+				$document_type = sanitize_text_field( $_POST['document_type'] );
+				$results       = array();
+	
+				// we have an order ID
+				if ( is_numeric( $search ) && wc_get_order( $search ) ) {
+					$results = [ $search ];
+					
+				// no order ID, let's try with customer
+				} else {
+					$default_args = apply_filters( 'wpo_wcpdf_preview_order_search_args', array(
+						'type'     => 'shop_order',
+						'limit'    => 10,
+						'orderby'  => 'date',
+						'order'    => 'DESC',
+						'return'   => 'ids',
+					), $document_type );
+	
+					// search by email
+					if ( is_email( $search ) ) {
+						$args    = array( 'customer' => $search );
+						$args    = $args + $default_args;
+						$results = wc_get_orders( $args );
+	
+					// search by names
+					} else {
+						$names = array( 'billing_first_name', 'billing_last_name', 'billing_company' );
+						foreach ( $names as $name ) {
+							$args    = array( $name => $search );
+							$args    = $args + $default_args;
+							$results = wc_get_orders( $args );
+							if ( count( $results ) > 0 ) {
+								break;
+							}
+						}
+					}
+				}
+	
+				// filter results
+				$results = apply_filters( 'wpo_wcpdf_preview_order_search_results', $results, $search, $document_type );
+	
+				// if we got here we have results!
+				if ( ! empty( $results ) ) {
+					$data = array();
+					foreach ( $results as $value ) {
+						$order = wc_get_order( $value );
+						if ( empty( $order ) ) {
+							continue;
+						}
+						$order_id                              = is_callable( array( $order, 'get_id' ) ) ? $order->get_id() : 0;
+						$data[$order_id]['order_number']       = is_callable( array( $order, 'get_order_number' ) ) ? $order->get_order_number() : '';
+						$data[$order_id]['billing_first_name'] = is_callable( array( $order, 'get_billing_first_name' ) ) ? $order->get_billing_first_name() : '';
+						$data[$order_id]['billing_last_name']  = is_callable( array( $order, 'get_billing_last_name' ) ) ? $order->get_billing_last_name() : '';
+						$data[$order_id]['billing_company']    = is_callable( array( $order, 'get_billing_company' ) ) ? $order->get_billing_company() : '';
+						$data[$order_id]['date_created']       = is_callable( array( $order, 'get_date_created' ) ) ? '<strong>' . esc_attr__( 'Date', 'woocommerce-pdf-invoices-packing-slips' ) . ':</strong> ' . $order->get_date_created()->format( 'Y/m/d' ) : '';
+						$data[$order_id]['total']              = is_callable( array( $order, 'get_total' ) ) ? '<strong>' . esc_attr__( 'Total', 'woocommerce-pdf-invoices-packing-slips' ) . ':</strong> ' . wc_price( $order->get_total() ) : '';
+					}
+	
+					$data = apply_filters( 'wpo_wcpdf_preview_order_search_data', $data, $results );
+	
+					wp_send_json_success( $data );
+				} else {
+					wp_send_json_error( array( 'error' => esc_html__( 'No order(s) found!', 'woocommerce-pdf-invoices-packing-slips' ) ) );
+				}
+			} else {
+				wp_send_json_error( array( 'error' => esc_html__( 'An error occurred when trying to process your request!', 'woocommerce-pdf-invoices-packing-slips' ) ) );
+			}
+		} catch ( \Throwable $th ) {
+			wp_send_json_error(
+				array(
+					'error' => sprintf(
+						/* translators: error message */
+						esc_html__( 'Error trying to get orders: %s', 'woocommerce-pdf-invoices-packing-slips' ),
+						$th->getMessage()
+					)
+				)
+			);
 		}
 
-		// get previous (default) args and preset current
-		$args = $_POST['args'];
-		$args['current'] = absint( $_POST['attachment_id'] );
-
-		// get settings HTML
-		ob_start();
-		$this->callbacks->media_upload( $args );
-		$html = ob_get_clean();
-
-		return wp_send_json_success( $html );
+		wp_die();
 	}
 
 
-/** Function ajax_crud_document() called by wp_ajax hooks: {'wpo_wcpdf_delete_document', 'wpo_wcpdf_regenerate_document', 'wpo_wcpdf_save_document'} **/
+/** Function ajax_crud_document() called by wp_ajax hooks: {'wpo_wcpdf_delete_document', 'wpo_wcpdf_save_document', 'wpo_wcpdf_regenerate_document'} **/
 /** Parameters found in function ajax_crud_document(): {"post": ["action", "order_id", "document_type", "action_type", "wpcdf_document_data_notice", "form_data"]} **/
 function ajax_crud_document() {
 		if ( check_ajax_referer( 'wpo_wcpdf_regenerate_document', 'security', false ) === false && check_ajax_referer( 'wpo_wcpdf_save_document', 'security', false ) === false && check_ajax_referer( 'wpo_wcpdf_delete_document', 'security', false ) === false ) {

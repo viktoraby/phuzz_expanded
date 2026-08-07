@@ -59,7 +59,7 @@ def main():
     N_FUZZERS=list(range(1,10+1)) #+1 to include the upper bound
     FUZZ_TIME=180
 
-    leaf_dirs = list(find_leaf_directories(DIRS["configs"]))
+    leaf_dirs = [d for d in find_leaf_directories(DIRS["configs"]) if "output" not in d.split(os.sep)]
 
     copied_plugins = set()
 

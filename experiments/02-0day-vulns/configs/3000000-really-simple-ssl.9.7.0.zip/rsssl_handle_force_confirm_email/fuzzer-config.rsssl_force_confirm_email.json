@@ -1,0 +1,32 @@
+{
+  "target": "http://web/wp-admin/admin-ajax.php",
+  "methods": [
+    "POST"
+  ],
+  "body_params": {
+    "weight": 1,
+    "fixed": [
+      "rsssl_force_email_action_nonce"
+    ],
+    "fuzz": [],
+    "data": [
+      {
+        "name": "rsssl_force_email_action_nonce",
+        "value": "fuzz"
+      }
+    ]
+  },
+  "query_params": {
+    "weight": 1,
+    "fixed": [
+      "action"
+    ],
+    "fuzz": [],
+    "data": [
+      {
+        "name": "action",
+        "value": "rsssl_force_confirm_email"
+      }
+    ]
+  }
+}

@@ -39,7 +39,7 @@ services:
       context: ./web
       dockerfile: Dockerfile
     environment:
-      APPLICATION_TYPE: xvwa
+      APPLICATION_TYPE: dvwa
       FUZZER_COVERAGE_PATH: /var/www/html/
       FUZZER_COMPRESS: 1
       REQUIRES_DB: 1
@@ -103,18 +103,18 @@ services:
     depends_on:
       - openldap
 
-  burpsuite:
-    build:
-      context: ./burpsuite
-      dockerfile: Dockerfile
-    environment:
-      FUZZER_CONFIG: bwapp/ldapi
-    volumes:
-      - ./fuzzer:/app
-      - ./burpsuite/data:/home/burp/data
-      - ./burpsuite/.java:/home/burp/.java
-    stdin_open: true # docker run -i
-    tty: true # docker run -t
+  #burpsuite:
+  #  build:
+  #    context: ./burpsuite
+  #    dockerfile: Dockerfile
+  #  environment:
+  #    FUZZER_CONFIG: bwapp/ldapi
+  #  volumes:
+  #    - ./fuzzer:/app
+  #    - ./burpsuite/data:/home/burp/data
+  #    - ./burpsuite/.java:/home/burp/.java
+  #  stdin_open: true # docker run -i
+  #  tty: true # docker run -t
 
   zap:
     build:
@@ -265,7 +265,7 @@ services:
     environment:
       PYTHONUNBUFFERED: 1
       FUZZER_NODE_ID: 8
-      FUZZER_CONFIG: xvwa/ssti
+      FUZZER_CONFIG: dvwa/sqli_low
       FUZZER_CLEANUP: 1
       FUZZER_COMPRESS: 1
     volumes:

@@ -5,62 +5,58 @@
 *Found functions:6
 *Extracted functions:5
 *Total parameter names extracted: 4
-*Overview: {'YITH_WCWL_Ajax_Handler': {'nopriv_reload_wishlist_and_adding_elem', 'remove_from_wishlist', 'save_title', 'nopriv_remove_from_wishlist', 'nopriv_add_to_wishlist', 'reload_wishlist_and_adding_elem', 'add_to_wishlist', 'nopriv_load_fragments', 'load_fragments', 'nopriv_load_mobile', 'load_mobile', 'nopriv_save_title', 'delete_item', 'nopriv_delete_item'}, 'create_log_file': {'yith_create_log_file'}, 'save_toggle_element_options': {'yith_plugin_fw_save_toggle_element'}, 'save_options': {'yith_bh_onboarding'}, 'do_shortcode': {'yith_plugin_fw_gutenberg_do_shortcode'}, 'save_toggle_element': {'yith_plugin_fw_save_toggle_element_metabox'}}
+*Overview: {'save_toggle_element_options': {'yith_plugin_fw_save_toggle_element'}, 'YITH_WCWL_Ajax_Handler': {'delete_item', 'nopriv_add_to_wishlist', 'load_mobile', 'nopriv_remove_from_wishlist', 'nopriv_load_fragments', 'add_to_wishlist', 'nopriv_save_title', 'save_title', 'load_fragments', 'nopriv_delete_item', 'remove_from_wishlist', 'nopriv_load_mobile', 'nopriv_reload_wishlist_and_adding_elem', 'reload_wishlist_and_adding_elem'}, 'save_toggle_element': {'yith_plugin_fw_save_toggle_element_metabox'}, 'save_options': {'yith_bh_onboarding'}, 'do_shortcode': {'yith_plugin_fw_gutenberg_do_shortcode'}, 'create_log_file': {'yith_create_log_file'}}
 *
 ***/
 
-/** Function YITH_WCWL_Ajax_Handler() called by wp_ajax hooks: {'nopriv_reload_wishlist_and_adding_elem', 'remove_from_wishlist', 'save_title', 'nopriv_remove_from_wishlist', 'nopriv_add_to_wishlist', 'reload_wishlist_and_adding_elem', 'add_to_wishlist', 'nopriv_load_fragments', 'load_fragments', 'nopriv_load_mobile', 'load_mobile', 'nopriv_save_title', 'delete_item', 'nopriv_delete_item'} **/
+/** Function save_toggle_element_options() called by wp_ajax hooks: {'yith_plugin_fw_save_toggle_element'} **/
+/** No params detected :-/ **/
+
+
+/** Function YITH_WCWL_Ajax_Handler() called by wp_ajax hooks: {'delete_item', 'nopriv_add_to_wishlist', 'load_mobile', 'nopriv_remove_from_wishlist', 'nopriv_load_fragments', 'add_to_wishlist', 'nopriv_save_title', 'save_title', 'load_fragments', 'nopriv_delete_item', 'remove_from_wishlist', 'nopriv_load_mobile', 'nopriv_reload_wishlist_and_adding_elem', 'reload_wishlist_and_adding_elem'} **/
 /** No function found :-/ **/
 
 
-/** Function create_log_file() called by wp_ajax hooks: {'yith_create_log_file'} **/
-/** Parameters found in function create_log_file(): {"post": ["nonce", "file"]} **/
-function create_log_file() {
-			if ( ! current_user_can( 'manage_options' ) || ! isset( $_POST['nonce'], $_POST['file'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'yith-export-log' ) ) {
-				wp_send_json( array( 'file' => false ) );
-				exit;
+/** Function save_toggle_element() called by wp_ajax hooks: {'yith_plugin_fw_save_toggle_element_metabox'} **/
+/** Parameters found in function save_toggle_element(): {"request": ["post_ID", "yit_metaboxes_nonce", "yit_metaboxes", "toggle_id", "metabox_tab"]} **/
+function save_toggle_element() {
+			if ( ! isset( $_REQUEST['post_ID'] ) ) {
+				return;
 			}
 
-			try {
+			if ( ! isset( $_REQUEST['yit_metaboxes_nonce'] ) || ! wp_verify_nonce( wp_unslash( $_REQUEST['yit_metaboxes_nonce'] ), 'metaboxes-fields-nonce' ) ) { // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+				return;
+			}
 
-				global $wp_filesystem;
+			$post_id = isset( $_REQUEST['post_ID'] ) ? absint( $_REQUEST['post_ID'] ) : false;
+			if ( ! $post_id ) {
+				return;
+			}
 
-				if ( empty( $wp_filesystem ) ) {
-					require_once ABSPATH . '/wp-admin/includes/file.php';
-					WP_Filesystem();
+			if ( isset( $_REQUEST['yit_metaboxes'], $_REQUEST['toggle_id'], $_REQUEST['metabox_tab'], $_REQUEST['yit_metaboxes'][ $_REQUEST['toggle_id'] ] ) ) {
+				$meta_box_data = isset( $_REQUEST['yit_metaboxes'] ) ? wp_unslash( $_REQUEST['yit_metaboxes'] ) : array(); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+				$metabox_tab   = sanitize_key( wp_unslash( $_REQUEST['metabox_tab'] ) );
+				$field_id      = sanitize_key( wp_unslash( $_REQUEST['toggle_id'] ) );
+				if ( strpos( $field_id, '_' ) === 0 ) {
+					$field_id = substr( $field_id, 1 );
 				}
 
-				$download_file  = false;
-				$file_content   = '';
-				$requested_file = sanitize_text_field( wp_unslash( $_POST['file'] ) );
+				if ( is_array( $meta_box_data ) ) {
+					$this->reorder_tabs();
+					$tabs = $this->tabs;
 
-				switch ( $requested_file ) {
-					case 'error_log':
-						$file_content = $wp_filesystem->get_contents( ABSPATH . 'error_log' );
-						break;
-					case 'debug.log':
-						$file_content = $wp_filesystem->get_contents( WP_CONTENT_DIR . '/debug.log' );
-						break;
+					if ( isset( $tabs[ $metabox_tab ], $tabs[ $metabox_tab ]['fields'] ) && isset( $tabs[ $metabox_tab ]['fields'][ $field_id ] ) ) {
+						$field = $tabs[ $metabox_tab ]['fields'][ $field_id ];
+						if ( $field ) {
+							$this->sanitize_and_save_field( $field, $post_id );
+						}
+					}
 				}
-
-				if ( '' !== $file_content ) {
-					$domain        = str_replace( array( 'http://', 'https://' ), '', network_site_url() );
-					$hash          = substr( wp_hash( $domain ), 0, 16 );
-					$file          = wp_upload_dir()['basedir'] . '/log-' . $hash . '.txt';
-					$download_file = wp_upload_dir()['baseurl'] . '/log-' . $hash . '.txt';
-
-					$r = $wp_filesystem->put_contents( $file, $file_content );
-				}
-
-				wp_send_json( array( 'file' => $download_file ) );
-			} catch ( Exception $e ) {
-				wp_send_json( array( 'file' => false ) );
+			} elseif ( isset( $_REQUEST['toggle_id'] ) ) {
+				$field_id = sanitize_key( wp_unslash( $_REQUEST['toggle_id'] ) );
+				delete_post_meta( $post_id, $field_id );
 			}
 		}
-
-
-/** Function save_toggle_element_options() called by wp_ajax hooks: {'yith_plugin_fw_save_toggle_element'} **/
-/** No params detected :-/ **/
 
 
 /** Function save_options() called by wp_ajax hooks: {'yith_bh_onboarding'} **/
@@ -129,44 +125,48 @@ function do_shortcode() {
 		}
 
 
-/** Function save_toggle_element() called by wp_ajax hooks: {'yith_plugin_fw_save_toggle_element_metabox'} **/
-/** Parameters found in function save_toggle_element(): {"request": ["post_ID", "yit_metaboxes_nonce", "yit_metaboxes", "toggle_id", "metabox_tab"]} **/
-function save_toggle_element() {
-			if ( ! isset( $_REQUEST['post_ID'] ) ) {
-				return;
+/** Function create_log_file() called by wp_ajax hooks: {'yith_create_log_file'} **/
+/** Parameters found in function create_log_file(): {"post": ["nonce", "file"]} **/
+function create_log_file() {
+			if ( ! current_user_can( 'manage_options' ) || ! isset( $_POST['nonce'], $_POST['file'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'yith-export-log' ) ) {
+				wp_send_json( array( 'file' => false ) );
+				exit;
 			}
 
-			if ( ! isset( $_REQUEST['yit_metaboxes_nonce'] ) || ! wp_verify_nonce( wp_unslash( $_REQUEST['yit_metaboxes_nonce'] ), 'metaboxes-fields-nonce' ) ) { // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-				return;
-			}
+			try {
 
-			$post_id = isset( $_REQUEST['post_ID'] ) ? absint( $_REQUEST['post_ID'] ) : false;
-			if ( ! $post_id ) {
-				return;
-			}
+				global $wp_filesystem;
 
-			if ( isset( $_REQUEST['yit_metaboxes'], $_REQUEST['toggle_id'], $_REQUEST['metabox_tab'], $_REQUEST['yit_metaboxes'][ $_REQUEST['toggle_id'] ] ) ) {
-				$meta_box_data = isset( $_REQUEST['yit_metaboxes'] ) ? wp_unslash( $_REQUEST['yit_metaboxes'] ) : array(); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-				$metabox_tab   = sanitize_key( wp_unslash( $_REQUEST['metabox_tab'] ) );
-				$field_id      = sanitize_key( wp_unslash( $_REQUEST['toggle_id'] ) );
-				if ( strpos( $field_id, '_' ) === 0 ) {
-					$field_id = substr( $field_id, 1 );
+				if ( empty( $wp_filesystem ) ) {
+					require_once ABSPATH . '/wp-admin/includes/file.php';
+					WP_Filesystem();
 				}
 
-				if ( is_array( $meta_box_data ) ) {
-					$this->reorder_tabs();
-					$tabs = $this->tabs;
+				$download_file  = false;
+				$file_content   = '';
+				$requested_file = sanitize_text_field( wp_unslash( $_POST['file'] ) );
 
-					if ( isset( $tabs[ $metabox_tab ], $tabs[ $metabox_tab ]['fields'] ) && isset( $tabs[ $metabox_tab ]['fields'][ $field_id ] ) ) {
-						$field = $tabs[ $metabox_tab ]['fields'][ $field_id ];
-						if ( $field ) {
-							$this->sanitize_and_save_field( $field, $post_id );
-						}
-					}
+				switch ( $requested_file ) {
+					case 'error_log':
+						$file_content = $wp_filesystem->get_contents( ABSPATH . 'error_log' );
+						break;
+					case 'debug.log':
+						$file_content = $wp_filesystem->get_contents( WP_CONTENT_DIR . '/debug.log' );
+						break;
 				}
-			} elseif ( isset( $_REQUEST['toggle_id'] ) ) {
-				$field_id = sanitize_key( wp_unslash( $_REQUEST['toggle_id'] ) );
-				delete_post_meta( $post_id, $field_id );
+
+				if ( '' !== $file_content ) {
+					$domain        = str_replace( array( 'http://', 'https://' ), '', network_site_url() );
+					$hash          = substr( wp_hash( $domain ), 0, 16 );
+					$file          = wp_upload_dir()['basedir'] . '/log-' . $hash . '.txt';
+					$download_file = wp_upload_dir()['baseurl'] . '/log-' . $hash . '.txt';
+
+					$r = $wp_filesystem->put_contents( $file, $file_content );
+				}
+
+				wp_send_json( array( 'file' => $download_file ) );
+			} catch ( Exception $e ) {
+				wp_send_json( array( 'file' => false ) );
 			}
 		}
 
