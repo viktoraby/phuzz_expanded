@@ -5,49 +5,9 @@
 *Found functions:4
 *Extracted functions:4
 *Total parameter names extracted: 4
-*Overview: {'createNewThumb': {'createNewThumb'}, 'ajax_set_post_thumbnail': {'ngg_set_post_thumbnail'}, 'ngg_ajax_operation': {'ngg_ajax_operation'}, 'ngg_rotateImage': {'rotateImage'}}
+*Overview: {'ajax_set_post_thumbnail': {'ngg_set_post_thumbnail'}, 'ngg_ajax_operation': {'ngg_ajax_operation'}, 'ngg_rotateImage': {'rotateImage'}, 'createNewThumb': {'createNewThumb'}}
 *
 ***/
-
-/** Function createNewThumb() called by wp_ajax hooks: {'createNewThumb'} **/
-/** Parameters found in function createNewThumb(): {"post": ["nonce", "id", "x", "rr", "y", "w", "h"]} **/
-function createNewThumb() {
-
-	// check for correct capability
-	if ( !is_user_logged_in() )
-		die('-1');
-
-	// check for correct NextGEN capability
-	if ( !current_user_can('NextGEN Manage gallery') )
-		die('-1');
-
-    if (!wp_verify_nonce($_POST['nonce'], 'ngg_update_thumbnail'))
-        die('-1');
-
-	$id = (int) $_POST['id'];
-
-	$x = round( $_POST['x'] * $_POST['rr'], 0);
-	$y = round( $_POST['y'] * $_POST['rr'], 0);
-	$w = round( $_POST['w'] * $_POST['rr'], 0);
-	$h = round( $_POST['h'] * $_POST['rr'], 0);
-	$crop_frame = array('x' => $x, 'y' => $y, 'width' => $w, 'height' => $h);
-
-	$storage = C_Gallery_Storage::get_instance();
-
-	// XXX NextGEN Legacy wasn't handling watermarks or reflections at this stage, so we're forcefully disabling them to maintain compatibility
-	$params = array('watermark' => false, 'reflection' => false, 'crop' => true, 'crop_frame' => $crop_frame);
-	$result = $storage->generate_thumbnail($id, $params);
-
-	if ($result) {
-		echo "OK";
-	} else {
-		header('HTTP/1.1 500 Internal Server Error');
-		echo "KO";
-	}
-
-	C_NextGEN_Bootstrap::shutdown();
-}
-
 
 /** Function ajax_set_post_thumbnail() called by wp_ajax hooks: {'ngg_set_post_thumbnail'} **/
 /** Parameters found in function ajax_set_post_thumbnail(): {"post": ["nonce", "post_id", "thumbnail_id"]} **/
@@ -219,6 +179,46 @@ function ngg_rotateImage() {
 
 	header('HTTP/1.1 500 Internal Server Error');
 	die( $result );
+}
+
+
+/** Function createNewThumb() called by wp_ajax hooks: {'createNewThumb'} **/
+/** Parameters found in function createNewThumb(): {"post": ["nonce", "id", "x", "rr", "y", "w", "h"]} **/
+function createNewThumb() {
+
+	// check for correct capability
+	if ( !is_user_logged_in() )
+		die('-1');
+
+	// check for correct NextGEN capability
+	if ( !current_user_can('NextGEN Manage gallery') )
+		die('-1');
+
+    if (!wp_verify_nonce($_POST['nonce'], 'ngg_update_thumbnail'))
+        die('-1');
+
+	$id = (int) $_POST['id'];
+
+	$x = round( $_POST['x'] * $_POST['rr'], 0);
+	$y = round( $_POST['y'] * $_POST['rr'], 0);
+	$w = round( $_POST['w'] * $_POST['rr'], 0);
+	$h = round( $_POST['h'] * $_POST['rr'], 0);
+	$crop_frame = array('x' => $x, 'y' => $y, 'width' => $w, 'height' => $h);
+
+	$storage = C_Gallery_Storage::get_instance();
+
+	// XXX NextGEN Legacy wasn't handling watermarks or reflections at this stage, so we're forcefully disabling them to maintain compatibility
+	$params = array('watermark' => false, 'reflection' => false, 'crop' => true, 'crop_frame' => $crop_frame);
+	$result = $storage->generate_thumbnail($id, $params);
+
+	if ($result) {
+		echo "OK";
+	} else {
+		header('HTTP/1.1 500 Internal Server Error');
+		echo "KO";
+	}
+
+	C_NextGEN_Bootstrap::shutdown();
 }
 
 

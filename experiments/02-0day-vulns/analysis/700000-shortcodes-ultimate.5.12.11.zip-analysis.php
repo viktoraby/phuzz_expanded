@@ -5,64 +5,56 @@
 *Found functions:10
 *Extracted functions:9
 *Total parameter names extracted: 7
-*Overview: {'preview': {'su_generator_preview'}, 'ajax_get_taxonomies': {'su_generator_get_taxonomies'}, 'ajax_get_preset': {'su_generator_get_preset'}, 'Freemius': {'fs_toggle_debug_mode'}, 'ajax_get_icons': {'su_generator_get_icons'}, 'settings': {'su_generator_settings'}, 'ajax_remove_preset': {'su_generator_remove_preset'}, 'dismiss_notice_ajax_callback': {'fs_dismiss_notice_action_{$ajax_action_suffix}'}, 'ajax_get_terms': {'su_generator_get_terms'}, 'ajax_add_preset': {'su_generator_add_preset'}}
+*Overview: {'ajax_get_icons': {'su_generator_get_icons'}, 'ajax_add_preset': {'su_generator_add_preset'}, 'settings': {'su_generator_settings'}, 'Freemius': {'fs_toggle_debug_mode'}, 'dismiss_notice_ajax_callback': {'fs_dismiss_notice_action_{$ajax_action_suffix}'}, 'ajax_get_terms': {'su_generator_get_terms'}, 'ajax_get_preset': {'su_generator_get_preset'}, 'preview': {'su_generator_preview'}, 'ajax_get_taxonomies': {'su_generator_get_taxonomies'}, 'ajax_remove_preset': {'su_generator_remove_preset'}}
 *
 ***/
 
-/** Function preview() called by wp_ajax hooks: {'su_generator_preview'} **/
-/** Parameters found in function preview(): {"post": ["shortcode"]} **/
-function preview() {
-		// Check authentication
-		self::access();
-		// Output results
-		do_action( 'su/generator/preview/before' );
-		echo '<h5>' . __( 'Preview', 'shortcodes-ultimate' ) . '</h5>';
-		echo do_shortcode( wp_kses_post( wp_unslash( $_POST['shortcode'] ) ) );
-		echo '<div style="clear:both"></div>';
-		do_action( 'su/generator/preview/after' );
-		die();
-	}
-
-
-/** Function ajax_get_taxonomies() called by wp_ajax hooks: {'su_generator_get_taxonomies'} **/
+/** Function ajax_get_icons() called by wp_ajax hooks: {'su_generator_get_icons'} **/
 /** No params detected :-/ **/
 
 
-/** Function ajax_get_preset() called by wp_ajax hooks: {'su_generator_get_preset'} **/
-/** Parameters found in function ajax_get_preset(): {"get": ["id", "shortcode", "nonce"]} **/
-function ajax_get_preset() {
+/** Function ajax_add_preset() called by wp_ajax hooks: {'su_generator_add_preset'} **/
+/** Parameters found in function ajax_add_preset(): {"post": ["id", "name", "settings", "shortcode", "nonce"]} **/
+function ajax_add_preset() {
 		self::access();
 		// Check incoming data
-		if ( empty( $_GET['id'] ) ) return;
-		if ( empty( $_GET['shortcode'] ) ) return;
+		if ( empty( $_POST['id'] ) ) return;
+		if ( empty( $_POST['name'] ) ) return;
+		if ( empty( $_POST['settings'] ) ) return;
+		if ( empty( $_POST['shortcode'] ) ) return;
 		// Check Nonce
 		if (
-			empty( $_GET['nonce'] ) ||
-			! is_string( $_GET['nonce'] ) ||
-			! wp_verify_nonce( $_GET['nonce'], 'su_generator_preset' )
+			empty( $_POST['nonce'] ) ||
+			! is_string( $_POST['nonce'] ) ||
+			! wp_verify_nonce( $_POST['nonce'], 'su_generator_preset' )
 		) {
 			return;
 		}
 		// Clean-up incoming data
-		$id = sanitize_key( $_GET['id'] );
-		$shortcode = sanitize_key( $_GET['shortcode'] );
-		// Default data
-		$data = array();
+		$id = sanitize_key( $_POST['id'] );
+		$name = sanitize_text_field( $_POST['name'] );
+		$shortcode = sanitize_key( $_POST['shortcode'] );
+		// Validate and sanitize settings
+		$settings = is_array( $_POST['settings'] ) ? stripslashes_deep( $_POST['settings'] ) : array();
+		$settings = array_map( 'wp_kses_post', $settings );
+		// Prepare option name
+		$option = 'su_presets_' . $shortcode;
 		// Get the existing presets
-		$presets = get_option( 'su_presets_' . $shortcode );
-		// Check that preset is exists
-		if ( is_array( $presets ) && isset( $presets[$id]['settings'] ) ) $data = $presets[$id]['settings'];
-		// Print results
-		die( json_encode( $data ) );
+		$current = get_option( $option );
+		// Create array with new preset
+		$new = array(
+			'id'       => $id,
+			'name'     => $name,
+			'settings' => $settings
+		);
+		// Add new array to the option value
+		if ( !is_array( $current ) ) $current = array();
+		$current[$id] = $new;
+		// Save updated option
+		update_option( $option, $current );
+		// Clear cache
+		delete_transient( 'su/generator/settings/' . $shortcode );
 	}
-
-
-/** Function Freemius() called by wp_ajax hooks: {'fs_toggle_debug_mode'} **/
-/** No function found :-/ **/
-
-
-/** Function ajax_get_icons() called by wp_ajax hooks: {'su_generator_get_icons'} **/
-/** No params detected :-/ **/
 
 
 /** Function settings() called by wp_ajax hooks: {'su_generator_settings'} **/
@@ -142,37 +134,8 @@ function settings() {
 	}
 
 
-/** Function ajax_remove_preset() called by wp_ajax hooks: {'su_generator_remove_preset'} **/
-/** Parameters found in function ajax_remove_preset(): {"post": ["id", "shortcode", "nonce"]} **/
-function ajax_remove_preset() {
-		self::access();
-		// Check incoming data
-		if ( empty( $_POST['id'] ) ) return;
-		if ( empty( $_POST['shortcode'] ) ) return;
-		// Check Nonce
-		if (
-			empty( $_POST['nonce'] ) ||
-			! is_string( $_POST['nonce'] ) ||
-			! wp_verify_nonce( $_POST['nonce'], 'su_generator_preset' )
-		) {
-			return;
-		}
-		// Clean-up incoming data
-		$id = sanitize_key( $_POST['id'] );
-		$shortcode = sanitize_key( $_POST['shortcode'] );
-		// Prepare option name
-		$option = 'su_presets_' . $shortcode;
-		// Get the existing presets
-		$current = get_option( $option );
-		// Check that preset is exists
-		if ( !is_array( $current ) || empty( $current[$id] ) ) return;
-		// Remove preset
-		unset( $current[$id] );
-		// Save updated option
-		update_option( $option, $current );
-		// Clear cache
-		delete_transient( 'su/generator/settings/' . $shortcode );
-	}
+/** Function Freemius() called by wp_ajax hooks: {'fs_toggle_debug_mode'} **/
+/** No function found :-/ **/
 
 
 /** Function dismiss_notice_ajax_callback() called by wp_ajax hooks: {'fs_dismiss_notice_action_{$ajax_action_suffix}'} **/
@@ -202,14 +165,60 @@ function ajax_get_terms() {
 	}
 
 
-/** Function ajax_add_preset() called by wp_ajax hooks: {'su_generator_add_preset'} **/
-/** Parameters found in function ajax_add_preset(): {"post": ["id", "name", "settings", "shortcode", "nonce"]} **/
-function ajax_add_preset() {
+/** Function ajax_get_preset() called by wp_ajax hooks: {'su_generator_get_preset'} **/
+/** Parameters found in function ajax_get_preset(): {"get": ["id", "shortcode", "nonce"]} **/
+function ajax_get_preset() {
+		self::access();
+		// Check incoming data
+		if ( empty( $_GET['id'] ) ) return;
+		if ( empty( $_GET['shortcode'] ) ) return;
+		// Check Nonce
+		if (
+			empty( $_GET['nonce'] ) ||
+			! is_string( $_GET['nonce'] ) ||
+			! wp_verify_nonce( $_GET['nonce'], 'su_generator_preset' )
+		) {
+			return;
+		}
+		// Clean-up incoming data
+		$id = sanitize_key( $_GET['id'] );
+		$shortcode = sanitize_key( $_GET['shortcode'] );
+		// Default data
+		$data = array();
+		// Get the existing presets
+		$presets = get_option( 'su_presets_' . $shortcode );
+		// Check that preset is exists
+		if ( is_array( $presets ) && isset( $presets[$id]['settings'] ) ) $data = $presets[$id]['settings'];
+		// Print results
+		die( json_encode( $data ) );
+	}
+
+
+/** Function preview() called by wp_ajax hooks: {'su_generator_preview'} **/
+/** Parameters found in function preview(): {"post": ["shortcode"]} **/
+function preview() {
+		// Check authentication
+		self::access();
+		// Output results
+		do_action( 'su/generator/preview/before' );
+		echo '<h5>' . __( 'Preview', 'shortcodes-ultimate' ) . '</h5>';
+		echo do_shortcode( wp_kses_post( wp_unslash( $_POST['shortcode'] ) ) );
+		echo '<div style="clear:both"></div>';
+		do_action( 'su/generator/preview/after' );
+		die();
+	}
+
+
+/** Function ajax_get_taxonomies() called by wp_ajax hooks: {'su_generator_get_taxonomies'} **/
+/** No params detected :-/ **/
+
+
+/** Function ajax_remove_preset() called by wp_ajax hooks: {'su_generator_remove_preset'} **/
+/** Parameters found in function ajax_remove_preset(): {"post": ["id", "shortcode", "nonce"]} **/
+function ajax_remove_preset() {
 		self::access();
 		// Check incoming data
 		if ( empty( $_POST['id'] ) ) return;
-		if ( empty( $_POST['name'] ) ) return;
-		if ( empty( $_POST['settings'] ) ) return;
 		if ( empty( $_POST['shortcode'] ) ) return;
 		// Check Nonce
 		if (
@@ -221,24 +230,15 @@ function ajax_add_preset() {
 		}
 		// Clean-up incoming data
 		$id = sanitize_key( $_POST['id'] );
-		$name = sanitize_text_field( $_POST['name'] );
 		$shortcode = sanitize_key( $_POST['shortcode'] );
-		// Validate and sanitize settings
-		$settings = is_array( $_POST['settings'] ) ? stripslashes_deep( $_POST['settings'] ) : array();
-		$settings = array_map( 'wp_kses_post', $settings );
 		// Prepare option name
 		$option = 'su_presets_' . $shortcode;
 		// Get the existing presets
 		$current = get_option( $option );
-		// Create array with new preset
-		$new = array(
-			'id'       => $id,
-			'name'     => $name,
-			'settings' => $settings
-		);
-		// Add new array to the option value
-		if ( !is_array( $current ) ) $current = array();
-		$current[$id] = $new;
+		// Check that preset is exists
+		if ( !is_array( $current ) || empty( $current[$id] ) ) return;
+		// Remove preset
+		unset( $current[$id] );
 		// Save updated option
 		update_option( $option, $current );
 		// Clear cache

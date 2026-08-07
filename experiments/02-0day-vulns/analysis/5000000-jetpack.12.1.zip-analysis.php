@@ -5,173 +5,9 @@
 *Found functions:55
 *Extracted functions:50
 *Total parameter names extracted: 26
-*Overview: {'ajax_tracks': {'jetpack_tracks'}, 'regenerate_post_by_email_address': {'jetpack_post_by_email_regenerate'}, 'options_page_tumblr': {'publicize_tumblr_options_page'}, 'jetpack_debugger_sync_progress_ajax': {'jetpack_sync_progress_check'}, 'wp_ajax_videopress_get_upload_jwt': {'videopress-get-upload-jwt'}, 'wp_ajax_upsell_nudge_jitm': {'upsell_nudge_jitm'}, 'ajax_new_service': {'sharing_new_service'}, 'grunion_ajax_shortcode': {'grunion_shortcode'}, 'options_page_facebook': {'publicize_facebook_options_page'}, 'options_save_twitter': {'publicize_twitter_options_save'}, 'ajax_update_widget_token_id': {'wpcom_instagram_widget_update_widget_token_id'}, 'grunion_ajax_shortcode_to_json': {'grunion_shortcode_to_json'}, 'grunion_recheck_queue': {'grunion_recheck_queue'}, 'ajax_dismiss_handler': {'jetpack-protect-dismiss-multisite-banner'}, 'wp_ajax_update_transcoding_status': {'videopress-update-transcoding-status'}, 'test_publicize_conns': {'test_publicize_conns'}, 'ajax_delete_service': {'sharing_delete_service'}, 'handle_optout_request': {'nopriv_privacy_optout', 'privacy_optout'}, '\\accept_tos': {'jetpack_accept_tos'}, 'ajax_get_payment_buttons': {'customize-jetpack-simple-payments-buttons-get'}, 'upload': {'jetpack_comic_upload'}, 'jetpack_debugger_full_sync_start': {'jetpack_debugger_full_sync_start'}, 'options_save_linkedin': {'publicize_linkedin_options_save'}, 'grunion_display_form_view': {'grunion_form_builder'}, 'delete_post_by_email_address': {'jetpack_post_by_email_disable'}, 'ajax_check_api_key': {'customize-contact-info-api-key'}, 'remote_request_handlers': {'nopriv_{$action}'}, 'download_feedback_as_csv': {'feedback_export'}, 'wp_ajax_jitm_dismiss': {'jitm_dismiss'}, 'jetpack_connection_banner_callback': {'jetpack_connection_banner'}, 'grunion_ajax_spam': {'grunion_ajax_spam'}, 'ajax_delete_payment_button': {'customize-jetpack-simple-payments-button-delete'}, 'export_to_gdrive': {'grunion_export_to_gdrive'}, 'options_page_linkedin': {'publicize_linkedin_options_page'}, 'ajax_save_services': {'sharing_save_services'}, 'options_save_tumblr': {'publicize_tumblr_options_save'}, 'options_save_facebook': {'publicize_facebook_options_save'}, 'plugin_edit_ajax': {'edit-theme-plugin-file'}, 'Jetpack_Recommendations_Banner': {'jetpack_recommendations_banner'}, 'theme_edit_ajax': {'edit-theme-plugin-file'}, 'ajax_save_payment_button': {'customize-jetpack-simple-payments-button-save'}, 'options_page_twitter': {'publicize_twitter_options_page'}, 'post_attachment_comment': {'nopriv_post_attachment_comment', 'post_attachment_comment'}, 'test_gdrive_connection': {'grunion_gdrive_connection'}, 'grunion_delete_spam_feedbacks': {'jetpack_delete_spam_feedbacks'}, 'wp_ajax_videopress_get_upload_token': {'videopress-get-upload-token'}, 'create_post_by_email_address': {'jetpack_post_by_email_enable'}, 'jetpack_debugger_ajax_local_testing_suite': {'health-check-jetpack-local_testing_suite'}, 'ajax_sidebar_state': {'sidebar_state'}, 'ajax_request': {'grunion-contact-form', 'nopriv_grunion-contact-form'}, 'ajax_save_options': {'sharing_save_options'}, 'handle_optout_markup': {'nopriv_privacy_optout_markup', 'privacy_optout_markup'}, 'ajax_recheck_ssl': {'jetpack-recheck-ssl'}, 'get_attachment_comments': {'get_attachment_comments', 'nopriv_get_attachment_comments'}, 'wp_ajax_videopress_get_playback_jwt': {'nopriv_videopress-get-playback-jwt', 'videopress-get-playback-jwt'}}
+*Overview: {'grunion_ajax_shortcode': {'grunion_shortcode'}, 'plugin_edit_ajax': {'edit-theme-plugin-file'}, 'ajax_save_payment_button': {'customize-jetpack-simple-payments-button-save'}, 'handle_optout_request': {'privacy_optout', 'nopriv_privacy_optout'}, 'grunion_ajax_spam': {'grunion_ajax_spam'}, 'ajax_request': {'grunion-contact-form', 'nopriv_grunion-contact-form'}, 'jetpack_debugger_full_sync_start': {'jetpack_debugger_full_sync_start'}, 'download_feedback_as_csv': {'feedback_export'}, 'theme_edit_ajax': {'edit-theme-plugin-file'}, 'wp_ajax_update_transcoding_status': {'videopress-update-transcoding-status'}, 'jetpack_connection_banner_callback': {'jetpack_connection_banner'}, 'options_save_linkedin': {'publicize_linkedin_options_save'}, 'handle_optout_markup': {'nopriv_privacy_optout_markup', 'privacy_optout_markup'}, 'Jetpack_Recommendations_Banner': {'jetpack_recommendations_banner'}, 'ajax_save_options': {'sharing_save_options'}, 'upload': {'jetpack_comic_upload'}, 'ajax_recheck_ssl': {'jetpack-recheck-ssl'}, 'wp_ajax_videopress_get_upload_token': {'videopress-get-upload-token'}, 'jetpack_debugger_sync_progress_ajax': {'jetpack_sync_progress_check'}, 'jetpack_debugger_ajax_local_testing_suite': {'health-check-jetpack-local_testing_suite'}, 'export_to_gdrive': {'grunion_export_to_gdrive'}, 'grunion_recheck_queue': {'grunion_recheck_queue'}, 'ajax_dismiss_handler': {'jetpack-protect-dismiss-multisite-banner'}, 'options_save_twitter': {'publicize_twitter_options_save'}, 'ajax_update_widget_token_id': {'wpcom_instagram_widget_update_widget_token_id'}, 'test_publicize_conns': {'test_publicize_conns'}, 'grunion_display_form_view': {'grunion_form_builder'}, 'wp_ajax_videopress_get_playback_jwt': {'videopress-get-playback-jwt', 'nopriv_videopress-get-playback-jwt'}, 'regenerate_post_by_email_address': {'jetpack_post_by_email_regenerate'}, 'delete_post_by_email_address': {'jetpack_post_by_email_disable'}, 'ajax_save_services': {'sharing_save_services'}, 'test_gdrive_connection': {'grunion_gdrive_connection'}, 'remote_request_handlers': {'nopriv_{$action}'}, 'options_page_linkedin': {'publicize_linkedin_options_page'}, 'post_attachment_comment': {'post_attachment_comment', 'nopriv_post_attachment_comment'}, 'ajax_delete_service': {'sharing_delete_service'}, 'ajax_tracks': {'jetpack_tracks'}, 'options_page_facebook': {'publicize_facebook_options_page'}, 'options_page_twitter': {'publicize_twitter_options_page'}, 'ajax_new_service': {'sharing_new_service'}, 'create_post_by_email_address': {'jetpack_post_by_email_enable'}, 'grunion_delete_spam_feedbacks': {'jetpack_delete_spam_feedbacks'}, 'ajax_sidebar_state': {'sidebar_state'}, 'wp_ajax_videopress_get_upload_jwt': {'videopress-get-upload-jwt'}, 'wp_ajax_upsell_nudge_jitm': {'upsell_nudge_jitm'}, 'get_attachment_comments': {'nopriv_get_attachment_comments', 'get_attachment_comments'}, 'options_save_tumblr': {'publicize_tumblr_options_save'}, 'ajax_check_api_key': {'customize-contact-info-api-key'}, 'ajax_get_payment_buttons': {'customize-jetpack-simple-payments-buttons-get'}, 'ajax_delete_payment_button': {'customize-jetpack-simple-payments-button-delete'}, 'options_save_facebook': {'publicize_facebook_options_save'}, 'wp_ajax_jitm_dismiss': {'jitm_dismiss'}, 'grunion_ajax_shortcode_to_json': {'grunion_shortcode_to_json'}, '\\accept_tos': {'jetpack_accept_tos'}, 'options_page_tumblr': {'publicize_tumblr_options_page'}}
 *
 ***/
-
-/** Function ajax_tracks() called by wp_ajax hooks: {'jetpack_tracks'} **/
-/** Parameters found in function ajax_tracks(): {"request": ["tracksNonce", "tracksEventName", "tracksEventType", "tracksEventProp"]} **/
-function ajax_tracks() {
-		// Check for nonce.
-		if (
-			empty( $_REQUEST['tracksNonce'] )
-			|| ! wp_verify_nonce( $_REQUEST['tracksNonce'], 'jp-tracks-ajax-nonce' ) // phpcs:ignore WordPress.Security.ValidatedSanitizedInput -- WP core doesn't pre-sanitize nonces either.
-		) {
-			wp_send_json_error(
-				__( 'You aren’t authorized to do that.', 'jetpack-connection' ),
-				403
-			);
-		}
-
-		if ( ! isset( $_REQUEST['tracksEventName'] ) || ! isset( $_REQUEST['tracksEventType'] ) ) {
-			wp_send_json_error(
-				__( 'No valid event name or type.', 'jetpack-connection' ),
-				403
-			);
-		}
-
-		$tracks_data = array();
-		if ( 'click' === $_REQUEST['tracksEventType'] && isset( $_REQUEST['tracksEventProp'] ) ) {
-			if ( is_array( $_REQUEST['tracksEventProp'] ) ) {
-				$tracks_data = array_map( 'filter_var', wp_unslash( $_REQUEST['tracksEventProp'] ) );
-			} else {
-				$tracks_data = array( 'clicked' => filter_var( wp_unslash( $_REQUEST['tracksEventProp'] ) ) );
-			}
-		}
-
-		$this->record_user_event( filter_var( wp_unslash( $_REQUEST['tracksEventName'] ) ), $tracks_data, null, false );
-
-		wp_send_json_success();
-	}
-
-
-/** Function regenerate_post_by_email_address() called by wp_ajax hooks: {'jetpack_post_by_email_regenerate'} **/
-/** No function found :-/ **/
-
-
-/** Function options_page_tumblr() called by wp_ajax hooks: {'publicize_tumblr_options_page'} **/
-/** Parameters found in function options_page_tumblr(): {"request": ["connection"]} **/
-function options_page_tumblr() {
-		$connection_name = isset( $_REQUEST['connection'] ) ? filter_var( wp_unslash( $_REQUEST['connection'] ) ) : null;
-
-		// Nonce check.
-		check_admin_referer( 'options_page_tumblr_' . $connection_name );
-
-		$connected_services = $this->get_all_connections();
-		$connection         = $connected_services['tumblr'][ $connection_name ];
-		$options_to_show    = $connection['connection_data']['meta']['options_responses'];
-		$request            = $options_to_show[0];
-
-		$blogs = $request['response']['user']['blogs'];
-
-		$blog_selected = false;
-
-		if ( ! empty( $connection['connection_data']['meta']['tumblr_base_hostname'] ) ) {
-			foreach ( $blogs as $blog ) {
-				if ( $connection['connection_data']['meta']['tumblr_base_hostname'] === $this->get_basehostname( $blog['url'] ) ) {
-					$blog_selected = $connection['connection_data']['meta']['tumblr_base_hostname'];
-					break;
-				}
-			}
-		}
-
-		// Use their Primary blog if they haven't selected one yet.
-		if ( ! $blog_selected ) {
-			foreach ( $blogs as $blog ) {
-				if ( $blog['primary'] ) {
-					$blog_selected = $this->get_basehostname( $blog['url'] );
-				}
-			}
-		}
-		?>
-
-		<div id="thickbox-content">
-
-			<?php
-			ob_start();
-			Publicize_UI::connected_notice( 'Tumblr' );
-			$update_notice = ob_get_clean();
-
-			if ( ! empty( $update_notice ) ) {
-				echo wp_kses_post( $update_notice );
-			}
-			?>
-
-			<p><?php echo wp_kses( __( 'Share to my <strong>Tumblr blog</strong>:', 'jetpack-publicize-pkg' ), array( 'strong' ) ); ?></p>
-
-			<ul id="option-tumblr-blog">
-
-				<?php
-				foreach ( $blogs as $blog ) {
-					$url = $this->get_basehostname( $blog['url'] );
-					?>
-					<li>
-						<input type="radio" name="option" data-type="blog" id="<?php echo esc_attr( $url ); ?>"
-							value="<?php echo esc_attr( $url ); ?>" <?php checked( $blog_selected === $url, true ); ?> />
-						<label for="<?php echo esc_attr( $url ); ?>"><span
-								class="name"><?php echo esc_html( $blog['title'] ); ?></span></label>
-					</li>
-				<?php } ?>
-
-			</ul>
-
-			<?php Publicize_UI::global_checkbox( 'tumblr', $connection_name ); ?>
-
-			<p style="text-align: center;">
-				<input type="submit" value="<?php esc_attr_e( 'OK', 'jetpack-publicize-pkg' ); ?>"
-					class="button tumblr-options save-options" name="save"
-					data-connection="<?php echo esc_attr( $connection_name ); ?>"
-					rel="<?php echo esc_attr( wp_create_nonce( 'save_tumblr_blog_' . $connection_name ) ); ?>"/>
-			</p> <br/>
-		</div>
-
-		<?php
-	}
-
-
-/** Function jetpack_debugger_sync_progress_ajax() called by wp_ajax hooks: {'jetpack_sync_progress_check'} **/
-/** No params detected :-/ **/
-
-
-/** Function wp_ajax_videopress_get_upload_jwt() called by wp_ajax hooks: {'videopress-get-upload-jwt'} **/
-/** No params detected :-/ **/
-
-
-/** Function wp_ajax_upsell_nudge_jitm() called by wp_ajax hooks: {'upsell_nudge_jitm'} **/
-/** No params detected :-/ **/
-
-
-/** Function ajax_new_service() called by wp_ajax hooks: {'sharing_new_service'} **/
-/** Parameters found in function ajax_new_service(): {"post": ["_wpnonce", "sharing_name", "sharing_url", "sharing_icon"]} **/
-function ajax_new_service() {
-		if (
-			isset( $_POST['_wpnonce'] )
-			&& isset( $_POST['sharing_name'] )
-			&& isset( $_POST['sharing_url'] )
-			&& isset( $_POST['sharing_icon'] )
-			&& wp_verify_nonce( sanitize_key( wp_unslash( $_POST['_wpnonce'] ) ), 'sharing-new_service' )
-		) {
-			$sharer  = new Sharing_Service();
-			$service = $sharer->new_service(
-				sanitize_text_field( wp_unslash( $_POST['sharing_name'] ) ),
-				esc_url_raw( wp_unslash( $_POST['sharing_url'] ) ),
-				esc_url_raw( wp_unslash( $_POST['sharing_icon'] ) )
-			);
-
-			if ( $service ) {
-				$this->output_service( $service->get_id(), $service );
-				echo '<!--->';
-				$service->button_style = 'icon-text';
-				$this->output_preview( $service );
-
-				die();
-			}
-		}
-
-		// Fail
-		die( '1' );
-	}
-
 
 /** Function grunion_ajax_shortcode() called by wp_ajax hooks: {'grunion_shortcode'} **/
 /** Parameters found in function grunion_ajax_shortcode(): {"post": ["fields"]} **/
@@ -219,352 +55,84 @@ function grunion_ajax_shortcode() {
 	}
 
 
-/** Function options_page_facebook() called by wp_ajax hooks: {'publicize_facebook_options_page'} **/
-/** Parameters found in function options_page_facebook(): {"request": ["connection"]} **/
-function options_page_facebook() {
-		$connection_name = isset( $_REQUEST['connection'] ) ? filter_var( wp_unslash( $_REQUEST['connection'] ) ) : null;
-
-		// Nonce check.
-		check_admin_referer( 'options_page_facebook_' . $connection_name );
-
-		$connected_services = $this->get_all_connections();
-		$connection         = $connected_services['facebook'][ $connection_name ];
-		$options_to_show    = ( ! empty( $connection['connection_data']['meta']['options_responses'] ) ? $connection['connection_data']['meta']['options_responses'] : false );
-
-		$pages = ( ! empty( $options_to_show[1]['data'] ) ? $options_to_show[1]['data'] : false );
-
-		$page_selected = false;
-		if ( ! empty( $connection['connection_data']['meta']['facebook_page'] ) ) {
-			$found = false;
-			if ( $pages && isset( $pages->data ) && is_array( $pages->data ) ) {
-				foreach ( $pages->data as $page ) {
-					if ( $page->id === (int) $connection['connection_data']['meta']['facebook_page'] ) {
-						$found = true;
-						break;
-					}
-				}
-			}
-
-			if ( $found ) {
-				$page_selected = $connection['connection_data']['meta']['facebook_page'];
-			}
-		}
-
-		?>
-
-		<div id="thickbox-content">
-			<?php
-			ob_start();
-			Publicize_UI::connected_notice( 'Facebook' );
-			$update_notice = ob_get_clean();
-
-			if ( ! empty( $update_notice ) ) {
-				echo wp_kses_post( $update_notice );
-			}
-			$page_info_message = sprintf(
-				wp_kses(
-					/* translators: %s is the link to the support page about using Facebook with Jetpack Social */
-					__( 'Facebook supports Jetpack Social connections to Facebook Pages, but not to Facebook Profiles. <a href="%s">Learn More about Jetpack Social for Facebook</a>', 'jetpack-publicize-pkg' ),
-					array( 'a' => array( 'href' ) )
-				),
-				esc_url( Redirect::get_url( 'jetpack-support-publicize-facebook' ) )
-			);
-
-			if ( $pages ) :
-				?>
-				<p>
-					<?php
-						echo wp_kses(
-							__( 'Share to my <strong>Facebook Page</strong>:', 'jetpack-publicize-pkg' ),
-							array( 'strong' )
-						);
-					?>
-				</p>
-				<table id="option-fb-fanpage">
-					<tbody>
-
-					<?php foreach ( $pages as $i => $page ) : ?>
-						<?php if ( ! ( $i % 2 ) ) : ?>
-							<tr>
-						<?php endif; ?>
-						<td class="radio">
-							<input
-								type="radio"
-								name="option"
-								data-type="page"
-								id="<?php echo esc_attr( $page['id'] ); ?>"
-								value="<?php echo esc_attr( $page['id'] ); ?>"
-								<?php checked( $page_selected && (int) $page_selected === (int) $page['id'], true ); ?> />
-						</td>
-						<td class="thumbnail"><label for="<?php echo esc_attr( $page['id'] ); ?>"><img
-									src="<?php echo esc_url( str_replace( '_s', '_q', $page['picture']['data']['url'] ) ); ?>"
-									width="50" height="50"/></label></td>
-						<td class="details">
-							<label for="<?php echo esc_attr( $page['id'] ); ?>">
-								<span class="name"><?php echo esc_html( $page['name'] ); ?></span><br/>
-								<span class="category"><?php echo esc_html( $page['category'] ); ?></span>
-							</label>
-						</td>
-						<?php if ( ( $i % 2 ) || ( count( $pages ) - 1 === $i ) ) : ?>
-							</tr>
-						<?php endif; ?>
-					<?php endforeach; ?>
-
-					</tbody>
-				</table>
-
-				<?php Publicize_UI::global_checkbox( 'facebook', $connection_name ); ?>
-				<p style="text-align: center;">
-					<input type="submit" value="<?php esc_attr_e( 'OK', 'jetpack-publicize-pkg' ); ?>"
-						class="button fb-options save-options" name="save"
-						data-connection="<?php echo esc_attr( $connection_name ); ?>"
-						rel="<?php echo esc_attr( wp_create_nonce( 'save_fb_token_' . $connection_name ) ); ?>"/>
-				</p><br/>
-				<?php // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-				<p><?php echo $page_info_message; ?></p>
-			<?php else : ?>
-				<div>
-					<?php // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-					<p><?php echo $page_info_message; ?></p>
-					<p>
-						<?php
-							echo wp_kses(
-								sprintf(
-									/* translators: %1$s is the link to Facebook documentation to create a page, %2$s is the target of the link */
-									__( '<a class="button" href="%1$s" target="%2$s">Create a Facebook page</a> to get started.', 'jetpack-publicize-pkg' ),
-									'https://www.facebook.com/pages/creation/',
-									'_blank noopener noreferrer'
-								),
-								array( 'a' => array( 'class', 'href', 'target' ) )
-							);
-						?>
-					</p>
-				</div>
-			<?php endif; ?>
-		</div>
-		<?php
-	}
-
-
-/** Function options_save_twitter() called by wp_ajax hooks: {'publicize_twitter_options_save'} **/
+/** Function plugin_edit_ajax() called by wp_ajax hooks: {'edit-theme-plugin-file'} **/
 /** No params detected :-/ **/
 
 
-/** Function ajax_update_widget_token_id() called by wp_ajax hooks: {'wpcom_instagram_widget_update_widget_token_id'} **/
-/** Parameters found in function ajax_update_widget_token_id(): {"post": ["keyring_id", "instagram_widget_id"]} **/
-function ajax_update_widget_token_id() {
-		if ( ! check_ajax_referer( 'instagram-widget-save-token', 'savetoken', false ) ) {
-			wp_send_json_error( array( 'message' => 'bad_nonce' ), 403 );
-		}
+/** Function ajax_save_payment_button() called by wp_ajax hooks: {'customize-jetpack-simple-payments-button-save'} **/
+/** Parameters found in function ajax_save_payment_button(): {"post": ["params"]} **/
+function ajax_save_payment_button() {
+			if ( ! check_ajax_referer( 'customize-jetpack-simple-payments', 'customize-jetpack-simple-payments-nonce', false ) ) {
+				wp_send_json_error( 'bad_nonce', 400 );
+			}
 
-		if ( ! current_user_can( 'customize' ) ) {
-			wp_send_json_error( array( 'message' => 'not_authorized' ), 403 );
-		}
+			if ( ! current_user_can( 'customize' ) ) {
+				wp_send_json_error( 'customize_not_allowed', 403 );
+			}
 
-		$token_id  = ! empty( $_POST['keyring_id'] ) ? (int) $_POST['keyring_id'] : null;
-		$widget_id = ! empty( $_POST['instagram_widget_id'] ) ? (int) $_POST['instagram_widget_id'] : null;
+			$post_type_object = get_post_type_object( Jetpack_Simple_Payments::$post_type_product );
+			if ( ! current_user_can( $post_type_object->cap->create_posts ) || ! current_user_can( $post_type_object->cap->publish_posts ) ) {
+				wp_send_json_error( 'insufficient_post_permissions', 403 );
+			}
 
-		// For Simple sites check if the token is valid.
-		// (For Atomic sites, this check is done via the api: wpcom/v2/instagram/<token_id>).
-		if ( defined( 'IS_WPCOM' ) && IS_WPCOM ) {
-			$token = Keyring::init()->get_token_store()->get_token(
+			if ( empty( $_POST['params'] ) || ! is_array( $_POST['params'] ) ) {
+				wp_send_json_error( 'missing_params', 400 );
+			}
+
+			$params = wp_unslash( $_POST['params'] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Manually validated by validate_ajax_params().
+			$errors = $this->validate_ajax_params( $params );
+			if ( ! empty( $errors->errors ) ) {
+				wp_send_json_error( $errors );
+			}
+
+			$product_post_id = isset( $params['product_post_id'] ) ? (int) $params['product_post_id'] : 0;
+
+			$product_post = array(
+				'ID'            => $product_post_id,
+				'post_type'     => Jetpack_Simple_Payments::$post_type_product,
+				'post_status'   => 'publish',
+				'post_title'    => $params['post_title'],
+				'post_content'  => $params['post_content'],
+				'_thumbnail_id' => ! empty( $params['image_id'] ) ? $params['image_id'] : -1,
+				'meta_input'    => array(
+					'spay_currency' => $params['currency'],
+					'spay_price'    => $params['price'],
+					'spay_multiple' => isset( $params['multiple'] ) ? (int) $params['multiple'] : 0,
+					'spay_email'    => is_email( $params['email'] ),
+				),
+			);
+
+			if ( empty( $product_post_id ) ) {
+				$product_post_id = wp_insert_post( $product_post );
+			} else {
+				$product_post_id = wp_update_post( $product_post );
+			}
+
+			if ( ! $product_post_id || is_wp_error( $product_post_id ) ) {
+				wp_send_json_error( $product_post_id );
+			}
+
+			$tracks_properties = array(
+				'id'       => $product_post_id,
+				'currency' => $params['currency'],
+				'price'    => $params['price'],
+			);
+			if ( 0 === $product_post['ID'] ) {
+				$this->record_event( 'created', 'create', $tracks_properties );
+			} else {
+				$this->record_event( 'updated', 'update', $tracks_properties );
+			}
+
+			wp_send_json_success(
 				array(
-					'type' => 'access',
-					'id'   => $token_id,
+					'product_post_id'    => $product_post_id,
+					'product_post_title' => $params['post_title'],
 				)
 			);
-			if ( get_current_user_id() !== (int) $token->meta['user_id'] ) {
-				return wp_send_json_error( array( 'message' => 'not_authorized' ), 403 );
-			}
 		}
 
-		$this->update_widget_token_id( $token_id, $widget_id );
-		$this->update_widget_token_legacy_status( false );
 
-		return wp_send_json_success( null, 200 );
-	}
-
-
-/** Function grunion_ajax_shortcode_to_json() called by wp_ajax hooks: {'grunion_shortcode_to_json'} **/
-/** Parameters found in function grunion_ajax_shortcode_to_json(): {"post": ["post_id", "content"]} **/
-function grunion_ajax_shortcode_to_json() {
-		global $post;
-
-		check_ajax_referer( 'grunion_shortcode_to_json' );
-
-		if ( ! empty( $_POST['post_id'] ) && ! current_user_can( 'edit_post', (int) $_POST['post_id'] ) ) {
-			die( '-1' );
-		} elseif ( ! current_user_can( 'edit_posts' ) ) {
-			die( '-1' );
-		}
-
-		if ( ! isset( $_POST['content'] ) || ! is_numeric( $_POST['post_id'] ) ) {
-			die( '-1' );
-		}
-
-		$content = sanitize_text_field( wp_unslash( $_POST['content'] ) );
-
-		// doesn't look like a post with a [contact-form] already.
-		if ( false === has_shortcode( $content, 'contact-form' ) ) {
-			die( '' );
-		}
-
-		$post = get_post( (int) $_POST['post_id'] ); // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
-
-		do_shortcode( $content );
-
-		$grunion = Contact_Form::$last;
-
-		$out = array(
-			'to'      => '',
-			'subject' => '',
-			'fields'  => array(),
-		);
-
-		foreach ( $grunion->fields as $field ) {
-			$out['fields'][ $field->get_attribute( 'id' ) ] = $field->attributes;
-		}
-
-		foreach ( array( 'to', 'subject' ) as $attribute ) {
-			$value = $grunion->get_attribute( $attribute );
-			if ( isset( $grunion->defaults[ $attribute ] ) && $value === $grunion->defaults[ $attribute ] ) {
-				$value = '';
-			}
-			$out[ $attribute ] = $value;
-		}
-
-		die( wp_json_encode( $out ) );
-	}
-
-
-/** Function grunion_recheck_queue() called by wp_ajax hooks: {'grunion_recheck_queue'} **/
-/** Parameters found in function grunion_recheck_queue(): {"post": ["limit", "offset"]} **/
-function grunion_recheck_queue() {
-		$blog_id = get_current_blog_id();
-
-		if (
-			empty( $_POST[ 'jetpack_check_feedback_spam_' . (string) $blog_id ] )
-			|| ! wp_verify_nonce( sanitize_key( $_POST[ 'jetpack_check_feedback_spam_' . (string) $blog_id ] ), 'grunion_recheck_queue' )
-		) {
-			wp_send_json_error(
-				__( 'You aren’t authorized to do that.', 'jetpack-forms' ),
-				403
-			);
-
-			return;
-		}
-
-		if ( ! current_user_can( 'delete_others_posts' ) ) {
-			wp_send_json_error(
-				__( 'You don’t have permission to do that.', 'jetpack-forms' ),
-				403
-			);
-
-			return;
-		}
-
-		$query = 'post_type=feedback&post_status=publish';
-
-		if ( isset( $_POST['limit'], $_POST['offset'] ) ) {
-			$query .= '&posts_per_page=' . (int) $_POST['limit'] . '&offset=' . (int) $_POST['offset'];
-		}
-
-		$approved_feedbacks = get_posts( $query );
-
-		foreach ( $approved_feedbacks as $feedback ) {
-			$meta = get_post_meta( $feedback->ID, '_feedback_akismet_values', true );
-
-			if ( ! $meta ) {
-				// _feedback_akismet_values is eventually deleted when it's no longer
-				// within a reasonable time period to check the feedback for spam, so
-				// if it's gone, don't attempt a spam recheck.
-				continue;
-			}
-
-			$meta['recheck_reason'] = 'recheck_queue';
-
-			/**
-			 * Filter whether the submitted feedback is considered as spam.
-			 *
-			 * @module contact-form
-			 *
-			 * @since 3.4.0
-			 *
-			 * @param bool false Is the submitted feedback spam? Default to false.
-			 * @param array $meta Feedack values returned by the Akismet plugin.
-			 */
-			$is_spam = apply_filters( 'jetpack_contact_form_is_spam', false, $meta );
-
-			if ( $is_spam ) {
-				wp_update_post(
-					array(
-						'ID'          => $feedback->ID,
-						'post_status' => 'spam',
-					)
-				);
-				/** This action is already documented in modules/contact-form/admin.php */
-				do_action( 'contact_form_akismet', 'spam', $meta );
-			}
-		}
-
-		wp_send_json(
-			array(
-				'processed' => count( $approved_feedbacks ),
-			)
-		);
-	}
-
-
-/** Function ajax_dismiss_handler() called by wp_ajax hooks: {'jetpack-protect-dismiss-multisite-banner'} **/
-/** No params detected :-/ **/
-
-
-/** Function wp_ajax_update_transcoding_status() called by wp_ajax hooks: {'videopress-update-transcoding-status'} **/
-/** Parameters found in function wp_ajax_update_transcoding_status(): {"post": ["post_id"]} **/
-function wp_ajax_update_transcoding_status() {
-		if ( ! isset( $_POST['post_id'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Informational AJAX response.
-			wp_send_json_error( array( 'message' => __( 'A valid post_id is required.', 'jetpack-videopress-pkg' ) ) );
-			return;
-		}
-
-		$post_id = (int) $_POST['post_id']; // phpcs:ignore WordPress.Security.NonceVerification.Missing
-
-		if ( ! videopress_update_meta_data( $post_id ) ) {
-			wp_send_json_error( array( 'message' => __( 'That post does not have a VideoPress video associated to it.', 'jetpack-videopress-pkg' ) ) );
-			return;
-		}
-
-		wp_send_json_success(
-			array(
-				'message' => __( 'Status updated', 'jetpack-videopress-pkg' ),
-				'status'  => videopress_get_transcoding_status( $post_id ),
-			)
-		);
-	}
-
-
-/** Function test_publicize_conns() called by wp_ajax hooks: {'test_publicize_conns'} **/
-/** No params detected :-/ **/
-
-
-/** Function ajax_delete_service() called by wp_ajax hooks: {'sharing_delete_service'} **/
-/** Parameters found in function ajax_delete_service(): {"post": ["_wpnonce", "service"]} **/
-function ajax_delete_service() {
-		if (
-			isset( $_POST['_wpnonce'] )
-			&& isset( $_POST['service'] )
-			&& wp_verify_nonce(
-				sanitize_key( wp_unslash( $_POST['_wpnonce'] ) ),
-				'sharing-options_' . sanitize_text_field( wp_unslash( $_POST['service'] ) )
-			)
-		) {
-			$sharer = new Sharing_Service();
-			$sharer->delete_service( sanitize_text_field( wp_unslash( $_POST['service'] ) ) );
-		}
-	}
-
-
-/** Function handle_optout_request() called by wp_ajax hooks: {'nopriv_privacy_optout', 'privacy_optout'} **/
+/** Function handle_optout_request() called by wp_ajax hooks: {'privacy_optout', 'nopriv_privacy_optout'} **/
 /** Parameters found in function handle_optout_request(): {"post": ["optout"]} **/
 function handle_optout_request() {
 		check_ajax_referer( 'ccpa_optout', 'security' );
@@ -573,88 +141,6 @@ function handle_optout_request() {
 		$optout ? self::set_optout_cookie() : self::set_optin_cookie();
 
 		wp_send_json_success( $optout );
-	}
-
-
-/** Function \accept_tos() called by wp_ajax hooks: {'jetpack_accept_tos'} **/
-/** No function found :-/ **/
-
-
-/** Function ajax_get_payment_buttons() called by wp_ajax hooks: {'customize-jetpack-simple-payments-buttons-get'} **/
-/** No params detected :-/ **/
-
-
-/** Function upload() called by wp_ajax hooks: {'jetpack_comic_upload'} **/
-/** No params detected :-/ **/
-
-
-/** Function jetpack_debugger_full_sync_start() called by wp_ajax hooks: {'jetpack_debugger_full_sync_start'} **/
-/** No params detected :-/ **/
-
-
-/** Function options_save_linkedin() called by wp_ajax hooks: {'publicize_linkedin_options_save'} **/
-/** No params detected :-/ **/
-
-
-/** Function grunion_display_form_view() called by wp_ajax hooks: {'grunion_form_builder'} **/
-/** No params detected :-/ **/
-
-
-/** Function delete_post_by_email_address() called by wp_ajax hooks: {'jetpack_post_by_email_disable'} **/
-/** No function found :-/ **/
-
-
-/** Function ajax_check_api_key() called by wp_ajax hooks: {'customize-contact-info-api-key'} **/
-/** Parameters found in function ajax_check_api_key(): {"post": ["apikey"]} **/
-function ajax_check_api_key() {
-			if ( isset( $_POST['apikey'] ) ) {
-				if ( check_ajax_referer( 'customize_contact_info_api_key' ) && current_user_can( 'customize' ) ) {
-					$apikey                     = wp_kses( wp_unslash( $_POST['apikey'] ), array() );
-					$default_instance           = $this->defaults();
-					$default_instance['apikey'] = $apikey;
-					wp_send_json( array( 'result' => esc_html( $this->has_good_map( $default_instance ) ) ) );
-				}
-			} else {
-				wp_die();
-			}
-		}
-
-
-/** Function remote_request_handlers() called by wp_ajax hooks: {'nopriv_{$action}'} **/
-/** No params detected :-/ **/
-
-
-/** Function download_feedback_as_csv() called by wp_ajax hooks: {'feedback_export'} **/
-/** No params detected :-/ **/
-
-
-/** Function wp_ajax_jitm_dismiss() called by wp_ajax hooks: {'jitm_dismiss'} **/
-/** Parameters found in function wp_ajax_jitm_dismiss(): {"request": ["id", "feature_class"]} **/
-function wp_ajax_jitm_dismiss() {
-		check_ajax_referer( 'jitm_dismiss' );
-		$jitm = \Automattic\Jetpack\JITMS\JITM::get_instance();
-		if ( isset( $_REQUEST['id'] ) && isset( $_REQUEST['feature_class'] ) ) {
-			$jitm->dismiss( sanitize_text_field( wp_unslash( $_REQUEST['id'] ) ), sanitize_text_field( wp_unslash( $_REQUEST['feature_class'] ) ) );
-		}
-		wp_die();
-	}
-
-
-/** Function jetpack_connection_banner_callback() called by wp_ajax hooks: {'jetpack_connection_banner'} **/
-/** Parameters found in function jetpack_connection_banner_callback(): {"request": ["dismissBanner"]} **/
-function jetpack_connection_banner_callback() {
-		check_ajax_referer( 'jp-connection-banner-nonce', 'nonce' );
-
-		// Disable the banner dismiss functionality if the pre-connection prompt helpers filter is set.
-		if (
-			isset( $_REQUEST['dismissBanner'] ) &&
-			! Jetpack_Connection_Banner::force_display()
-		) {
-			Jetpack_Options::update_option( 'dismissed_connection_banner', 1 );
-			wp_send_json_success();
-		}
-
-		wp_die();
 	}
 
 
@@ -835,50 +321,268 @@ function grunion_ajax_spam() {
 	}
 
 
-/** Function ajax_delete_payment_button() called by wp_ajax hooks: {'customize-jetpack-simple-payments-button-delete'} **/
-/** Parameters found in function ajax_delete_payment_button(): {"post": ["params"]} **/
-function ajax_delete_payment_button() {
-			if ( ! check_ajax_referer( 'customize-jetpack-simple-payments', 'customize-jetpack-simple-payments-nonce', false ) ) {
-				wp_send_json_error( 'bad_nonce', 400 );
-			}
+/** Function ajax_request() called by wp_ajax hooks: {'grunion-contact-form', 'nopriv_grunion-contact-form'} **/
+/** No params detected :-/ **/
 
-			if ( ! current_user_can( 'customize' ) ) {
-				wp_send_json_error( 'customize_not_allowed', 403 );
-			}
 
-			if ( empty( $_POST['params'] ) || ! is_array( $_POST['params'] ) ) {
-				wp_send_json_error( 'missing_params', 400 );
-			}
+/** Function jetpack_debugger_full_sync_start() called by wp_ajax hooks: {'jetpack_debugger_full_sync_start'} **/
+/** No params detected :-/ **/
 
-			$params         = wp_unslash( $_POST['params'] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Manually validated just below.
-			$illegal_params = array_diff( array_keys( $params ), array( 'product_post_id' ) );
-			if ( ! empty( $illegal_params ) ) {
-				wp_send_json_error( 'illegal_params', 400 );
-			}
 
-			$product_id   = (int) $params['product_post_id'];
-			$product_post = get_post( $product_id );
+/** Function download_feedback_as_csv() called by wp_ajax hooks: {'feedback_export'} **/
+/** No params detected :-/ **/
 
-			$return = array( 'status' => $product_post->post_status );
 
-			wp_delete_post( $product_id, true );
-			$status = get_post_status( $product_id );
-			if ( false === $status ) {
-				$return['status'] = 'deleted';
-			}
+/** Function theme_edit_ajax() called by wp_ajax hooks: {'edit-theme-plugin-file'} **/
+/** No params detected :-/ **/
 
-			$this->record_event( 'deleted', 'delete', array( 'id' => $product_id ) );
 
-			wp_send_json_success( $return );
+/** Function wp_ajax_update_transcoding_status() called by wp_ajax hooks: {'videopress-update-transcoding-status'} **/
+/** Parameters found in function wp_ajax_update_transcoding_status(): {"post": ["post_id"]} **/
+function wp_ajax_update_transcoding_status() {
+		if ( ! isset( $_POST['post_id'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Informational AJAX response.
+			wp_send_json_error( array( 'message' => __( 'A valid post_id is required.', 'jetpack-videopress-pkg' ) ) );
+			return;
 		}
+
+		$post_id = (int) $_POST['post_id']; // phpcs:ignore WordPress.Security.NonceVerification.Missing
+
+		if ( ! videopress_update_meta_data( $post_id ) ) {
+			wp_send_json_error( array( 'message' => __( 'That post does not have a VideoPress video associated to it.', 'jetpack-videopress-pkg' ) ) );
+			return;
+		}
+
+		wp_send_json_success(
+			array(
+				'message' => __( 'Status updated', 'jetpack-videopress-pkg' ),
+				'status'  => videopress_get_transcoding_status( $post_id ),
+			)
+		);
+	}
+
+
+/** Function jetpack_connection_banner_callback() called by wp_ajax hooks: {'jetpack_connection_banner'} **/
+/** Parameters found in function jetpack_connection_banner_callback(): {"request": ["dismissBanner"]} **/
+function jetpack_connection_banner_callback() {
+		check_ajax_referer( 'jp-connection-banner-nonce', 'nonce' );
+
+		// Disable the banner dismiss functionality if the pre-connection prompt helpers filter is set.
+		if (
+			isset( $_REQUEST['dismissBanner'] ) &&
+			! Jetpack_Connection_Banner::force_display()
+		) {
+			Jetpack_Options::update_option( 'dismissed_connection_banner', 1 );
+			wp_send_json_success();
+		}
+
+		wp_die();
+	}
+
+
+/** Function options_save_linkedin() called by wp_ajax hooks: {'publicize_linkedin_options_save'} **/
+/** No params detected :-/ **/
+
+
+/** Function handle_optout_markup() called by wp_ajax hooks: {'nopriv_privacy_optout_markup', 'privacy_optout_markup'} **/
+/** No params detected :-/ **/
+
+
+/** Function Jetpack_Recommendations_Banner() called by wp_ajax hooks: {'jetpack_recommendations_banner'} **/
+/** No function found :-/ **/
+
+
+/** Function ajax_save_options() called by wp_ajax hooks: {'sharing_save_options'} **/
+/** Parameters found in function ajax_save_options(): {"post": ["_wpnonce", "service"]} **/
+function ajax_save_options() {
+		if (
+			isset( $_POST['_wpnonce'] )
+			&& isset( $_POST['service'] )
+			&& wp_verify_nonce(
+				sanitize_key( wp_unslash( $_POST['_wpnonce'] ) ),
+				'sharing-options_' . sanitize_text_field( wp_unslash( $_POST['service'] ) )
+			)
+		) {
+			$sharer  = new Sharing_Service();
+			$service = $sharer->get_service( sanitize_text_field( wp_unslash( $_POST['service'] ) ) );
+
+			if ( $service && $service instanceof Sharing_Advanced_Source ) {
+				$service->update_options( $_POST );
+
+				$sharer->set_service( sanitize_text_field( wp_unslash( $_POST['service'] ) ), $service );
+			}
+
+			$this->output_service( $service->get_id(), $service, true );
+			echo '<!--->';
+			$service->button_style = 'icon-text';
+			$this->output_preview( $service );
+			die();
+		}
+	}
+
+
+/** Function upload() called by wp_ajax hooks: {'jetpack_comic_upload'} **/
+/** No params detected :-/ **/
+
+
+/** Function ajax_recheck_ssl() called by wp_ajax hooks: {'jetpack-recheck-ssl'} **/
+/** No params detected :-/ **/
+
+
+/** Function wp_ajax_videopress_get_upload_token() called by wp_ajax hooks: {'videopress-get-upload-token'} **/
+/** No params detected :-/ **/
+
+
+/** Function jetpack_debugger_sync_progress_ajax() called by wp_ajax hooks: {'jetpack_sync_progress_check'} **/
+/** No params detected :-/ **/
+
+
+/** Function jetpack_debugger_ajax_local_testing_suite() called by wp_ajax hooks: {'health-check-jetpack-local_testing_suite'} **/
+/** No params detected :-/ **/
 
 
 /** Function export_to_gdrive() called by wp_ajax hooks: {'grunion_export_to_gdrive'} **/
 /** No params detected :-/ **/
 
 
-/** Function options_page_linkedin() called by wp_ajax hooks: {'publicize_linkedin_options_page'} **/
+/** Function grunion_recheck_queue() called by wp_ajax hooks: {'grunion_recheck_queue'} **/
+/** Parameters found in function grunion_recheck_queue(): {"post": ["limit", "offset"]} **/
+function grunion_recheck_queue() {
+		$blog_id = get_current_blog_id();
+
+		if (
+			empty( $_POST[ 'jetpack_check_feedback_spam_' . (string) $blog_id ] )
+			|| ! wp_verify_nonce( sanitize_key( $_POST[ 'jetpack_check_feedback_spam_' . (string) $blog_id ] ), 'grunion_recheck_queue' )
+		) {
+			wp_send_json_error(
+				__( 'You aren’t authorized to do that.', 'jetpack-forms' ),
+				403
+			);
+
+			return;
+		}
+
+		if ( ! current_user_can( 'delete_others_posts' ) ) {
+			wp_send_json_error(
+				__( 'You don’t have permission to do that.', 'jetpack-forms' ),
+				403
+			);
+
+			return;
+		}
+
+		$query = 'post_type=feedback&post_status=publish';
+
+		if ( isset( $_POST['limit'], $_POST['offset'] ) ) {
+			$query .= '&posts_per_page=' . (int) $_POST['limit'] . '&offset=' . (int) $_POST['offset'];
+		}
+
+		$approved_feedbacks = get_posts( $query );
+
+		foreach ( $approved_feedbacks as $feedback ) {
+			$meta = get_post_meta( $feedback->ID, '_feedback_akismet_values', true );
+
+			if ( ! $meta ) {
+				// _feedback_akismet_values is eventually deleted when it's no longer
+				// within a reasonable time period to check the feedback for spam, so
+				// if it's gone, don't attempt a spam recheck.
+				continue;
+			}
+
+			$meta['recheck_reason'] = 'recheck_queue';
+
+			/**
+			 * Filter whether the submitted feedback is considered as spam.
+			 *
+			 * @module contact-form
+			 *
+			 * @since 3.4.0
+			 *
+			 * @param bool false Is the submitted feedback spam? Default to false.
+			 * @param array $meta Feedack values returned by the Akismet plugin.
+			 */
+			$is_spam = apply_filters( 'jetpack_contact_form_is_spam', false, $meta );
+
+			if ( $is_spam ) {
+				wp_update_post(
+					array(
+						'ID'          => $feedback->ID,
+						'post_status' => 'spam',
+					)
+				);
+				/** This action is already documented in modules/contact-form/admin.php */
+				do_action( 'contact_form_akismet', 'spam', $meta );
+			}
+		}
+
+		wp_send_json(
+			array(
+				'processed' => count( $approved_feedbacks ),
+			)
+		);
+	}
+
+
+/** Function ajax_dismiss_handler() called by wp_ajax hooks: {'jetpack-protect-dismiss-multisite-banner'} **/
 /** No params detected :-/ **/
+
+
+/** Function options_save_twitter() called by wp_ajax hooks: {'publicize_twitter_options_save'} **/
+/** No params detected :-/ **/
+
+
+/** Function ajax_update_widget_token_id() called by wp_ajax hooks: {'wpcom_instagram_widget_update_widget_token_id'} **/
+/** Parameters found in function ajax_update_widget_token_id(): {"post": ["keyring_id", "instagram_widget_id"]} **/
+function ajax_update_widget_token_id() {
+		if ( ! check_ajax_referer( 'instagram-widget-save-token', 'savetoken', false ) ) {
+			wp_send_json_error( array( 'message' => 'bad_nonce' ), 403 );
+		}
+
+		if ( ! current_user_can( 'customize' ) ) {
+			wp_send_json_error( array( 'message' => 'not_authorized' ), 403 );
+		}
+
+		$token_id  = ! empty( $_POST['keyring_id'] ) ? (int) $_POST['keyring_id'] : null;
+		$widget_id = ! empty( $_POST['instagram_widget_id'] ) ? (int) $_POST['instagram_widget_id'] : null;
+
+		// For Simple sites check if the token is valid.
+		// (For Atomic sites, this check is done via the api: wpcom/v2/instagram/<token_id>).
+		if ( defined( 'IS_WPCOM' ) && IS_WPCOM ) {
+			$token = Keyring::init()->get_token_store()->get_token(
+				array(
+					'type' => 'access',
+					'id'   => $token_id,
+				)
+			);
+			if ( get_current_user_id() !== (int) $token->meta['user_id'] ) {
+				return wp_send_json_error( array( 'message' => 'not_authorized' ), 403 );
+			}
+		}
+
+		$this->update_widget_token_id( $token_id, $widget_id );
+		$this->update_widget_token_legacy_status( false );
+
+		return wp_send_json_success( null, 200 );
+	}
+
+
+/** Function test_publicize_conns() called by wp_ajax hooks: {'test_publicize_conns'} **/
+/** No params detected :-/ **/
+
+
+/** Function grunion_display_form_view() called by wp_ajax hooks: {'grunion_form_builder'} **/
+/** No params detected :-/ **/
+
+
+/** Function wp_ajax_videopress_get_playback_jwt() called by wp_ajax hooks: {'videopress-get-playback-jwt', 'nopriv_videopress-get-playback-jwt'} **/
+/** No params detected :-/ **/
+
+
+/** Function regenerate_post_by_email_address() called by wp_ajax hooks: {'jetpack_post_by_email_regenerate'} **/
+/** No function found :-/ **/
+
+
+/** Function delete_post_by_email_address() called by wp_ajax hooks: {'jetpack_post_by_email_disable'} **/
+/** No function found :-/ **/
 
 
 /** Function ajax_save_services() called by wp_ajax hooks: {'sharing_save_services'} **/
@@ -901,137 +605,19 @@ function ajax_save_services() {
 	}
 
 
-/** Function options_save_tumblr() called by wp_ajax hooks: {'publicize_tumblr_options_save'} **/
-/** Parameters found in function options_save_tumblr(): {"post": ["connection", "selected_id"]} **/
-function options_save_tumblr() {
-		$connection_name = isset( $_POST['connection'] ) ? filter_var( wp_unslash( $_POST['connection'] ) ) : null;
-
-		// Nonce check.
-		check_admin_referer( 'save_tumblr_blog_' . $connection_name );
-		$options = array( 'tumblr_base_hostname' => isset( $_POST['selected_id'] ) ? sanitize_text_field( wp_unslash( $_POST['selected_id'] ) ) : null );
-
-		$this->set_remote_publicize_options( $connection_name, $options );
-	}
-
-
-/** Function options_save_facebook() called by wp_ajax hooks: {'publicize_facebook_options_save'} **/
-/** Parameters found in function options_save_facebook(): {"request": ["connection"], "post": ["type", "selected_id"]} **/
-function options_save_facebook() {
-		$connection_name = isset( $_REQUEST['connection'] ) ? filter_var( wp_unslash( $_REQUEST['connection'] ) ) : null;
-
-		// Nonce check.
-		check_admin_referer( 'save_fb_token_' . $connection_name );
-
-		if ( ! isset( $_POST['type'] ) || 'page' !== $_POST['type'] || ! isset( $_POST['selected_id'] ) ) {
-			return;
-		}
-
-		// Check for a numeric page ID.
-		$page_id = $_POST['selected_id']; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput -- Manually validated just below
-		if ( ! ctype_digit( $page_id ) ) {
-			die( 'Security check' );
-		}
-
-		// Publish to Page.
-		$options = array(
-			'facebook_page'    => $page_id,
-			'facebook_profile' => null,
-		);
-
-		$this->set_remote_publicize_options( $connection_name, $options );
-	}
-
-
-/** Function plugin_edit_ajax() called by wp_ajax hooks: {'edit-theme-plugin-file'} **/
+/** Function test_gdrive_connection() called by wp_ajax hooks: {'grunion_gdrive_connection'} **/
 /** No params detected :-/ **/
 
 
-/** Function Jetpack_Recommendations_Banner() called by wp_ajax hooks: {'jetpack_recommendations_banner'} **/
-/** No function found :-/ **/
-
-
-/** Function theme_edit_ajax() called by wp_ajax hooks: {'edit-theme-plugin-file'} **/
+/** Function remote_request_handlers() called by wp_ajax hooks: {'nopriv_{$action}'} **/
 /** No params detected :-/ **/
 
 
-/** Function ajax_save_payment_button() called by wp_ajax hooks: {'customize-jetpack-simple-payments-button-save'} **/
-/** Parameters found in function ajax_save_payment_button(): {"post": ["params"]} **/
-function ajax_save_payment_button() {
-			if ( ! check_ajax_referer( 'customize-jetpack-simple-payments', 'customize-jetpack-simple-payments-nonce', false ) ) {
-				wp_send_json_error( 'bad_nonce', 400 );
-			}
-
-			if ( ! current_user_can( 'customize' ) ) {
-				wp_send_json_error( 'customize_not_allowed', 403 );
-			}
-
-			$post_type_object = get_post_type_object( Jetpack_Simple_Payments::$post_type_product );
-			if ( ! current_user_can( $post_type_object->cap->create_posts ) || ! current_user_can( $post_type_object->cap->publish_posts ) ) {
-				wp_send_json_error( 'insufficient_post_permissions', 403 );
-			}
-
-			if ( empty( $_POST['params'] ) || ! is_array( $_POST['params'] ) ) {
-				wp_send_json_error( 'missing_params', 400 );
-			}
-
-			$params = wp_unslash( $_POST['params'] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Manually validated by validate_ajax_params().
-			$errors = $this->validate_ajax_params( $params );
-			if ( ! empty( $errors->errors ) ) {
-				wp_send_json_error( $errors );
-			}
-
-			$product_post_id = isset( $params['product_post_id'] ) ? (int) $params['product_post_id'] : 0;
-
-			$product_post = array(
-				'ID'            => $product_post_id,
-				'post_type'     => Jetpack_Simple_Payments::$post_type_product,
-				'post_status'   => 'publish',
-				'post_title'    => $params['post_title'],
-				'post_content'  => $params['post_content'],
-				'_thumbnail_id' => ! empty( $params['image_id'] ) ? $params['image_id'] : -1,
-				'meta_input'    => array(
-					'spay_currency' => $params['currency'],
-					'spay_price'    => $params['price'],
-					'spay_multiple' => isset( $params['multiple'] ) ? (int) $params['multiple'] : 0,
-					'spay_email'    => is_email( $params['email'] ),
-				),
-			);
-
-			if ( empty( $product_post_id ) ) {
-				$product_post_id = wp_insert_post( $product_post );
-			} else {
-				$product_post_id = wp_update_post( $product_post );
-			}
-
-			if ( ! $product_post_id || is_wp_error( $product_post_id ) ) {
-				wp_send_json_error( $product_post_id );
-			}
-
-			$tracks_properties = array(
-				'id'       => $product_post_id,
-				'currency' => $params['currency'],
-				'price'    => $params['price'],
-			);
-			if ( 0 === $product_post['ID'] ) {
-				$this->record_event( 'created', 'create', $tracks_properties );
-			} else {
-				$this->record_event( 'updated', 'update', $tracks_properties );
-			}
-
-			wp_send_json_success(
-				array(
-					'product_post_id'    => $product_post_id,
-					'product_post_title' => $params['post_title'],
-				)
-			);
-		}
-
-
-/** Function options_page_twitter() called by wp_ajax hooks: {'publicize_twitter_options_page'} **/
+/** Function options_page_linkedin() called by wp_ajax hooks: {'publicize_linkedin_options_page'} **/
 /** No params detected :-/ **/
 
 
-/** Function post_attachment_comment() called by wp_ajax hooks: {'nopriv_post_attachment_comment', 'post_attachment_comment'} **/
+/** Function post_attachment_comment() called by wp_ajax hooks: {'post_attachment_comment', 'nopriv_post_attachment_comment'} **/
 /** Parameters found in function post_attachment_comment(): {"post": ["nonce", "blog_id", "id", "comment", "author", "email", "url"]} **/
 function post_attachment_comment() {
 		if ( ! headers_sent() ) {
@@ -1162,8 +748,224 @@ function post_attachment_comment() {
 	}
 
 
-/** Function test_gdrive_connection() called by wp_ajax hooks: {'grunion_gdrive_connection'} **/
+/** Function ajax_delete_service() called by wp_ajax hooks: {'sharing_delete_service'} **/
+/** Parameters found in function ajax_delete_service(): {"post": ["_wpnonce", "service"]} **/
+function ajax_delete_service() {
+		if (
+			isset( $_POST['_wpnonce'] )
+			&& isset( $_POST['service'] )
+			&& wp_verify_nonce(
+				sanitize_key( wp_unslash( $_POST['_wpnonce'] ) ),
+				'sharing-options_' . sanitize_text_field( wp_unslash( $_POST['service'] ) )
+			)
+		) {
+			$sharer = new Sharing_Service();
+			$sharer->delete_service( sanitize_text_field( wp_unslash( $_POST['service'] ) ) );
+		}
+	}
+
+
+/** Function ajax_tracks() called by wp_ajax hooks: {'jetpack_tracks'} **/
+/** Parameters found in function ajax_tracks(): {"request": ["tracksNonce", "tracksEventName", "tracksEventType", "tracksEventProp"]} **/
+function ajax_tracks() {
+		// Check for nonce.
+		if (
+			empty( $_REQUEST['tracksNonce'] )
+			|| ! wp_verify_nonce( $_REQUEST['tracksNonce'], 'jp-tracks-ajax-nonce' ) // phpcs:ignore WordPress.Security.ValidatedSanitizedInput -- WP core doesn't pre-sanitize nonces either.
+		) {
+			wp_send_json_error(
+				__( 'You aren’t authorized to do that.', 'jetpack-connection' ),
+				403
+			);
+		}
+
+		if ( ! isset( $_REQUEST['tracksEventName'] ) || ! isset( $_REQUEST['tracksEventType'] ) ) {
+			wp_send_json_error(
+				__( 'No valid event name or type.', 'jetpack-connection' ),
+				403
+			);
+		}
+
+		$tracks_data = array();
+		if ( 'click' === $_REQUEST['tracksEventType'] && isset( $_REQUEST['tracksEventProp'] ) ) {
+			if ( is_array( $_REQUEST['tracksEventProp'] ) ) {
+				$tracks_data = array_map( 'filter_var', wp_unslash( $_REQUEST['tracksEventProp'] ) );
+			} else {
+				$tracks_data = array( 'clicked' => filter_var( wp_unslash( $_REQUEST['tracksEventProp'] ) ) );
+			}
+		}
+
+		$this->record_user_event( filter_var( wp_unslash( $_REQUEST['tracksEventName'] ) ), $tracks_data, null, false );
+
+		wp_send_json_success();
+	}
+
+
+/** Function options_page_facebook() called by wp_ajax hooks: {'publicize_facebook_options_page'} **/
+/** Parameters found in function options_page_facebook(): {"request": ["connection"]} **/
+function options_page_facebook() {
+		$connection_name = isset( $_REQUEST['connection'] ) ? filter_var( wp_unslash( $_REQUEST['connection'] ) ) : null;
+
+		// Nonce check.
+		check_admin_referer( 'options_page_facebook_' . $connection_name );
+
+		$connected_services = $this->get_all_connections();
+		$connection         = $connected_services['facebook'][ $connection_name ];
+		$options_to_show    = ( ! empty( $connection['connection_data']['meta']['options_responses'] ) ? $connection['connection_data']['meta']['options_responses'] : false );
+
+		$pages = ( ! empty( $options_to_show[1]['data'] ) ? $options_to_show[1]['data'] : false );
+
+		$page_selected = false;
+		if ( ! empty( $connection['connection_data']['meta']['facebook_page'] ) ) {
+			$found = false;
+			if ( $pages && isset( $pages->data ) && is_array( $pages->data ) ) {
+				foreach ( $pages->data as $page ) {
+					if ( $page->id === (int) $connection['connection_data']['meta']['facebook_page'] ) {
+						$found = true;
+						break;
+					}
+				}
+			}
+
+			if ( $found ) {
+				$page_selected = $connection['connection_data']['meta']['facebook_page'];
+			}
+		}
+
+		?>
+
+		<div id="thickbox-content">
+			<?php
+			ob_start();
+			Publicize_UI::connected_notice( 'Facebook' );
+			$update_notice = ob_get_clean();
+
+			if ( ! empty( $update_notice ) ) {
+				echo wp_kses_post( $update_notice );
+			}
+			$page_info_message = sprintf(
+				wp_kses(
+					/* translators: %s is the link to the support page about using Facebook with Jetpack Social */
+					__( 'Facebook supports Jetpack Social connections to Facebook Pages, but not to Facebook Profiles. <a href="%s">Learn More about Jetpack Social for Facebook</a>', 'jetpack-publicize-pkg' ),
+					array( 'a' => array( 'href' ) )
+				),
+				esc_url( Redirect::get_url( 'jetpack-support-publicize-facebook' ) )
+			);
+
+			if ( $pages ) :
+				?>
+				<p>
+					<?php
+						echo wp_kses(
+							__( 'Share to my <strong>Facebook Page</strong>:', 'jetpack-publicize-pkg' ),
+							array( 'strong' )
+						);
+					?>
+				</p>
+				<table id="option-fb-fanpage">
+					<tbody>
+
+					<?php foreach ( $pages as $i => $page ) : ?>
+						<?php if ( ! ( $i % 2 ) ) : ?>
+							<tr>
+						<?php endif; ?>
+						<td class="radio">
+							<input
+								type="radio"
+								name="option"
+								data-type="page"
+								id="<?php echo esc_attr( $page['id'] ); ?>"
+								value="<?php echo esc_attr( $page['id'] ); ?>"
+								<?php checked( $page_selected && (int) $page_selected === (int) $page['id'], true ); ?> />
+						</td>
+						<td class="thumbnail"><label for="<?php echo esc_attr( $page['id'] ); ?>"><img
+									src="<?php echo esc_url( str_replace( '_s', '_q', $page['picture']['data']['url'] ) ); ?>"
+									width="50" height="50"/></label></td>
+						<td class="details">
+							<label for="<?php echo esc_attr( $page['id'] ); ?>">
+								<span class="name"><?php echo esc_html( $page['name'] ); ?></span><br/>
+								<span class="category"><?php echo esc_html( $page['category'] ); ?></span>
+							</label>
+						</td>
+						<?php if ( ( $i % 2 ) || ( count( $pages ) - 1 === $i ) ) : ?>
+							</tr>
+						<?php endif; ?>
+					<?php endforeach; ?>
+
+					</tbody>
+				</table>
+
+				<?php Publicize_UI::global_checkbox( 'facebook', $connection_name ); ?>
+				<p style="text-align: center;">
+					<input type="submit" value="<?php esc_attr_e( 'OK', 'jetpack-publicize-pkg' ); ?>"
+						class="button fb-options save-options" name="save"
+						data-connection="<?php echo esc_attr( $connection_name ); ?>"
+						rel="<?php echo esc_attr( wp_create_nonce( 'save_fb_token_' . $connection_name ) ); ?>"/>
+				</p><br/>
+				<?php // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+				<p><?php echo $page_info_message; ?></p>
+			<?php else : ?>
+				<div>
+					<?php // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+					<p><?php echo $page_info_message; ?></p>
+					<p>
+						<?php
+							echo wp_kses(
+								sprintf(
+									/* translators: %1$s is the link to Facebook documentation to create a page, %2$s is the target of the link */
+									__( '<a class="button" href="%1$s" target="%2$s">Create a Facebook page</a> to get started.', 'jetpack-publicize-pkg' ),
+									'https://www.facebook.com/pages/creation/',
+									'_blank noopener noreferrer'
+								),
+								array( 'a' => array( 'class', 'href', 'target' ) )
+							);
+						?>
+					</p>
+				</div>
+			<?php endif; ?>
+		</div>
+		<?php
+	}
+
+
+/** Function options_page_twitter() called by wp_ajax hooks: {'publicize_twitter_options_page'} **/
 /** No params detected :-/ **/
+
+
+/** Function ajax_new_service() called by wp_ajax hooks: {'sharing_new_service'} **/
+/** Parameters found in function ajax_new_service(): {"post": ["_wpnonce", "sharing_name", "sharing_url", "sharing_icon"]} **/
+function ajax_new_service() {
+		if (
+			isset( $_POST['_wpnonce'] )
+			&& isset( $_POST['sharing_name'] )
+			&& isset( $_POST['sharing_url'] )
+			&& isset( $_POST['sharing_icon'] )
+			&& wp_verify_nonce( sanitize_key( wp_unslash( $_POST['_wpnonce'] ) ), 'sharing-new_service' )
+		) {
+			$sharer  = new Sharing_Service();
+			$service = $sharer->new_service(
+				sanitize_text_field( wp_unslash( $_POST['sharing_name'] ) ),
+				esc_url_raw( wp_unslash( $_POST['sharing_url'] ) ),
+				esc_url_raw( wp_unslash( $_POST['sharing_icon'] ) )
+			);
+
+			if ( $service ) {
+				$this->output_service( $service->get_id(), $service );
+				echo '<!--->';
+				$service->button_style = 'icon-text';
+				$this->output_preview( $service );
+
+				die();
+			}
+		}
+
+		// Fail
+		die( '1' );
+	}
+
+
+/** Function create_post_by_email_address() called by wp_ajax hooks: {'jetpack_post_by_email_enable'} **/
+/** No function found :-/ **/
 
 
 /** Function grunion_delete_spam_feedbacks() called by wp_ajax hooks: {'jetpack_delete_spam_feedbacks'} **/
@@ -1232,18 +1034,6 @@ function grunion_delete_spam_feedbacks() {
 	}
 
 
-/** Function wp_ajax_videopress_get_upload_token() called by wp_ajax hooks: {'videopress-get-upload-token'} **/
-/** No params detected :-/ **/
-
-
-/** Function create_post_by_email_address() called by wp_ajax hooks: {'jetpack_post_by_email_enable'} **/
-/** No function found :-/ **/
-
-
-/** Function jetpack_debugger_ajax_local_testing_suite() called by wp_ajax hooks: {'health-check-jetpack-local_testing_suite'} **/
-/** No params detected :-/ **/
-
-
 /** Function ajax_sidebar_state() called by wp_ajax hooks: {'sidebar_state'} **/
 /** Parameters found in function ajax_sidebar_state(): {"request": ["expanded"]} **/
 function ajax_sidebar_state() {
@@ -1262,48 +1052,15 @@ function ajax_sidebar_state() {
 	}
 
 
-/** Function ajax_request() called by wp_ajax hooks: {'grunion-contact-form', 'nopriv_grunion-contact-form'} **/
+/** Function wp_ajax_videopress_get_upload_jwt() called by wp_ajax hooks: {'videopress-get-upload-jwt'} **/
 /** No params detected :-/ **/
 
 
-/** Function ajax_save_options() called by wp_ajax hooks: {'sharing_save_options'} **/
-/** Parameters found in function ajax_save_options(): {"post": ["_wpnonce", "service"]} **/
-function ajax_save_options() {
-		if (
-			isset( $_POST['_wpnonce'] )
-			&& isset( $_POST['service'] )
-			&& wp_verify_nonce(
-				sanitize_key( wp_unslash( $_POST['_wpnonce'] ) ),
-				'sharing-options_' . sanitize_text_field( wp_unslash( $_POST['service'] ) )
-			)
-		) {
-			$sharer  = new Sharing_Service();
-			$service = $sharer->get_service( sanitize_text_field( wp_unslash( $_POST['service'] ) ) );
-
-			if ( $service && $service instanceof Sharing_Advanced_Source ) {
-				$service->update_options( $_POST );
-
-				$sharer->set_service( sanitize_text_field( wp_unslash( $_POST['service'] ) ), $service );
-			}
-
-			$this->output_service( $service->get_id(), $service, true );
-			echo '<!--->';
-			$service->button_style = 'icon-text';
-			$this->output_preview( $service );
-			die();
-		}
-	}
-
-
-/** Function handle_optout_markup() called by wp_ajax hooks: {'nopriv_privacy_optout_markup', 'privacy_optout_markup'} **/
+/** Function wp_ajax_upsell_nudge_jitm() called by wp_ajax hooks: {'upsell_nudge_jitm'} **/
 /** No params detected :-/ **/
 
 
-/** Function ajax_recheck_ssl() called by wp_ajax hooks: {'jetpack-recheck-ssl'} **/
-/** No params detected :-/ **/
-
-
-/** Function get_attachment_comments() called by wp_ajax hooks: {'get_attachment_comments', 'nopriv_get_attachment_comments'} **/
+/** Function get_attachment_comments() called by wp_ajax hooks: {'nopriv_get_attachment_comments', 'get_attachment_comments'} **/
 /** Parameters found in function get_attachment_comments(): {"request": ["id", "offset"]} **/
 function get_attachment_comments() {
 		if ( ! headers_sent() ) {
@@ -1428,7 +1185,250 @@ function get_attachment_comments() {
 	}
 
 
-/** Function wp_ajax_videopress_get_playback_jwt() called by wp_ajax hooks: {'nopriv_videopress-get-playback-jwt', 'videopress-get-playback-jwt'} **/
+/** Function options_save_tumblr() called by wp_ajax hooks: {'publicize_tumblr_options_save'} **/
+/** Parameters found in function options_save_tumblr(): {"post": ["connection", "selected_id"]} **/
+function options_save_tumblr() {
+		$connection_name = isset( $_POST['connection'] ) ? filter_var( wp_unslash( $_POST['connection'] ) ) : null;
+
+		// Nonce check.
+		check_admin_referer( 'save_tumblr_blog_' . $connection_name );
+		$options = array( 'tumblr_base_hostname' => isset( $_POST['selected_id'] ) ? sanitize_text_field( wp_unslash( $_POST['selected_id'] ) ) : null );
+
+		$this->set_remote_publicize_options( $connection_name, $options );
+	}
+
+
+/** Function ajax_check_api_key() called by wp_ajax hooks: {'customize-contact-info-api-key'} **/
+/** Parameters found in function ajax_check_api_key(): {"post": ["apikey"]} **/
+function ajax_check_api_key() {
+			if ( isset( $_POST['apikey'] ) ) {
+				if ( check_ajax_referer( 'customize_contact_info_api_key' ) && current_user_can( 'customize' ) ) {
+					$apikey                     = wp_kses( wp_unslash( $_POST['apikey'] ), array() );
+					$default_instance           = $this->defaults();
+					$default_instance['apikey'] = $apikey;
+					wp_send_json( array( 'result' => esc_html( $this->has_good_map( $default_instance ) ) ) );
+				}
+			} else {
+				wp_die();
+			}
+		}
+
+
+/** Function ajax_get_payment_buttons() called by wp_ajax hooks: {'customize-jetpack-simple-payments-buttons-get'} **/
 /** No params detected :-/ **/
+
+
+/** Function ajax_delete_payment_button() called by wp_ajax hooks: {'customize-jetpack-simple-payments-button-delete'} **/
+/** Parameters found in function ajax_delete_payment_button(): {"post": ["params"]} **/
+function ajax_delete_payment_button() {
+			if ( ! check_ajax_referer( 'customize-jetpack-simple-payments', 'customize-jetpack-simple-payments-nonce', false ) ) {
+				wp_send_json_error( 'bad_nonce', 400 );
+			}
+
+			if ( ! current_user_can( 'customize' ) ) {
+				wp_send_json_error( 'customize_not_allowed', 403 );
+			}
+
+			if ( empty( $_POST['params'] ) || ! is_array( $_POST['params'] ) ) {
+				wp_send_json_error( 'missing_params', 400 );
+			}
+
+			$params         = wp_unslash( $_POST['params'] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Manually validated just below.
+			$illegal_params = array_diff( array_keys( $params ), array( 'product_post_id' ) );
+			if ( ! empty( $illegal_params ) ) {
+				wp_send_json_error( 'illegal_params', 400 );
+			}
+
+			$product_id   = (int) $params['product_post_id'];
+			$product_post = get_post( $product_id );
+
+			$return = array( 'status' => $product_post->post_status );
+
+			wp_delete_post( $product_id, true );
+			$status = get_post_status( $product_id );
+			if ( false === $status ) {
+				$return['status'] = 'deleted';
+			}
+
+			$this->record_event( 'deleted', 'delete', array( 'id' => $product_id ) );
+
+			wp_send_json_success( $return );
+		}
+
+
+/** Function options_save_facebook() called by wp_ajax hooks: {'publicize_facebook_options_save'} **/
+/** Parameters found in function options_save_facebook(): {"request": ["connection"], "post": ["type", "selected_id"]} **/
+function options_save_facebook() {
+		$connection_name = isset( $_REQUEST['connection'] ) ? filter_var( wp_unslash( $_REQUEST['connection'] ) ) : null;
+
+		// Nonce check.
+		check_admin_referer( 'save_fb_token_' . $connection_name );
+
+		if ( ! isset( $_POST['type'] ) || 'page' !== $_POST['type'] || ! isset( $_POST['selected_id'] ) ) {
+			return;
+		}
+
+		// Check for a numeric page ID.
+		$page_id = $_POST['selected_id']; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput -- Manually validated just below
+		if ( ! ctype_digit( $page_id ) ) {
+			die( 'Security check' );
+		}
+
+		// Publish to Page.
+		$options = array(
+			'facebook_page'    => $page_id,
+			'facebook_profile' => null,
+		);
+
+		$this->set_remote_publicize_options( $connection_name, $options );
+	}
+
+
+/** Function wp_ajax_jitm_dismiss() called by wp_ajax hooks: {'jitm_dismiss'} **/
+/** Parameters found in function wp_ajax_jitm_dismiss(): {"request": ["id", "feature_class"]} **/
+function wp_ajax_jitm_dismiss() {
+		check_ajax_referer( 'jitm_dismiss' );
+		$jitm = \Automattic\Jetpack\JITMS\JITM::get_instance();
+		if ( isset( $_REQUEST['id'] ) && isset( $_REQUEST['feature_class'] ) ) {
+			$jitm->dismiss( sanitize_text_field( wp_unslash( $_REQUEST['id'] ) ), sanitize_text_field( wp_unslash( $_REQUEST['feature_class'] ) ) );
+		}
+		wp_die();
+	}
+
+
+/** Function grunion_ajax_shortcode_to_json() called by wp_ajax hooks: {'grunion_shortcode_to_json'} **/
+/** Parameters found in function grunion_ajax_shortcode_to_json(): {"post": ["post_id", "content"]} **/
+function grunion_ajax_shortcode_to_json() {
+		global $post;
+
+		check_ajax_referer( 'grunion_shortcode_to_json' );
+
+		if ( ! empty( $_POST['post_id'] ) && ! current_user_can( 'edit_post', (int) $_POST['post_id'] ) ) {
+			die( '-1' );
+		} elseif ( ! current_user_can( 'edit_posts' ) ) {
+			die( '-1' );
+		}
+
+		if ( ! isset( $_POST['content'] ) || ! is_numeric( $_POST['post_id'] ) ) {
+			die( '-1' );
+		}
+
+		$content = sanitize_text_field( wp_unslash( $_POST['content'] ) );
+
+		// doesn't look like a post with a [contact-form] already.
+		if ( false === has_shortcode( $content, 'contact-form' ) ) {
+			die( '' );
+		}
+
+		$post = get_post( (int) $_POST['post_id'] ); // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
+
+		do_shortcode( $content );
+
+		$grunion = Contact_Form::$last;
+
+		$out = array(
+			'to'      => '',
+			'subject' => '',
+			'fields'  => array(),
+		);
+
+		foreach ( $grunion->fields as $field ) {
+			$out['fields'][ $field->get_attribute( 'id' ) ] = $field->attributes;
+		}
+
+		foreach ( array( 'to', 'subject' ) as $attribute ) {
+			$value = $grunion->get_attribute( $attribute );
+			if ( isset( $grunion->defaults[ $attribute ] ) && $value === $grunion->defaults[ $attribute ] ) {
+				$value = '';
+			}
+			$out[ $attribute ] = $value;
+		}
+
+		die( wp_json_encode( $out ) );
+	}
+
+
+/** Function \accept_tos() called by wp_ajax hooks: {'jetpack_accept_tos'} **/
+/** No function found :-/ **/
+
+
+/** Function options_page_tumblr() called by wp_ajax hooks: {'publicize_tumblr_options_page'} **/
+/** Parameters found in function options_page_tumblr(): {"request": ["connection"]} **/
+function options_page_tumblr() {
+		$connection_name = isset( $_REQUEST['connection'] ) ? filter_var( wp_unslash( $_REQUEST['connection'] ) ) : null;
+
+		// Nonce check.
+		check_admin_referer( 'options_page_tumblr_' . $connection_name );
+
+		$connected_services = $this->get_all_connections();
+		$connection         = $connected_services['tumblr'][ $connection_name ];
+		$options_to_show    = $connection['connection_data']['meta']['options_responses'];
+		$request            = $options_to_show[0];
+
+		$blogs = $request['response']['user']['blogs'];
+
+		$blog_selected = false;
+
+		if ( ! empty( $connection['connection_data']['meta']['tumblr_base_hostname'] ) ) {
+			foreach ( $blogs as $blog ) {
+				if ( $connection['connection_data']['meta']['tumblr_base_hostname'] === $this->get_basehostname( $blog['url'] ) ) {
+					$blog_selected = $connection['connection_data']['meta']['tumblr_base_hostname'];
+					break;
+				}
+			}
+		}
+
+		// Use their Primary blog if they haven't selected one yet.
+		if ( ! $blog_selected ) {
+			foreach ( $blogs as $blog ) {
+				if ( $blog['primary'] ) {
+					$blog_selected = $this->get_basehostname( $blog['url'] );
+				}
+			}
+		}
+		?>
+
+		<div id="thickbox-content">
+
+			<?php
+			ob_start();
+			Publicize_UI::connected_notice( 'Tumblr' );
+			$update_notice = ob_get_clean();
+
+			if ( ! empty( $update_notice ) ) {
+				echo wp_kses_post( $update_notice );
+			}
+			?>
+
+			<p><?php echo wp_kses( __( 'Share to my <strong>Tumblr blog</strong>:', 'jetpack-publicize-pkg' ), array( 'strong' ) ); ?></p>
+
+			<ul id="option-tumblr-blog">
+
+				<?php
+				foreach ( $blogs as $blog ) {
+					$url = $this->get_basehostname( $blog['url'] );
+					?>
+					<li>
+						<input type="radio" name="option" data-type="blog" id="<?php echo esc_attr( $url ); ?>"
+							value="<?php echo esc_attr( $url ); ?>" <?php checked( $blog_selected === $url, true ); ?> />
+						<label for="<?php echo esc_attr( $url ); ?>"><span
+								class="name"><?php echo esc_html( $blog['title'] ); ?></span></label>
+					</li>
+				<?php } ?>
+
+			</ul>
+
+			<?php Publicize_UI::global_checkbox( 'tumblr', $connection_name ); ?>
+
+			<p style="text-align: center;">
+				<input type="submit" value="<?php esc_attr_e( 'OK', 'jetpack-publicize-pkg' ); ?>"
+					class="button tumblr-options save-options" name="save"
+					data-connection="<?php echo esc_attr( $connection_name ); ?>"
+					rel="<?php echo esc_attr( wp_create_nonce( 'save_tumblr_blog_' . $connection_name ) ); ?>"/>
+			</p> <br/>
+		</div>
+
+		<?php
+	}
 
 

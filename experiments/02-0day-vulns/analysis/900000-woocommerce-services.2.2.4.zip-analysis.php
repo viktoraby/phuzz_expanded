@@ -5,9 +5,26 @@
 *Found functions:3
 *Extracted functions:3
 *Total parameter names extracted: 2
-*Overview: {'ajax_get_jetpack_connect_url': {'woocommerce_services_get_jetpack_connect_url'}, 'ajax_dismiss_notice': {'wc_connect_dismiss_notice'}, 'ajax_activate_jetpack': {'woocommerce_services_activate_jetpack'}}
+*Overview: {'ajax_dismiss_notice': {'wc_connect_dismiss_notice'}, 'ajax_activate_jetpack': {'woocommerce_services_activate_jetpack'}, 'ajax_get_jetpack_connect_url': {'woocommerce_services_get_jetpack_connect_url'}}
 *
 ***/
+
+/** Function ajax_dismiss_notice() called by wp_ajax hooks: {'wc_connect_dismiss_notice'} **/
+/** Parameters found in function ajax_dismiss_notice(): {"post": ["dismissible_id"]} **/
+function ajax_dismiss_notice() {
+			if ( empty( $_POST['dismissible_id'] ) ) {
+				return;
+			}
+
+			check_ajax_referer( 'wc_connect_dismiss_notice', 'nonce' );
+			$this->dismiss_notice( sanitize_key( $_POST['dismissible_id'] ) );
+			wp_die();
+		}
+
+
+/** Function ajax_activate_jetpack() called by wp_ajax hooks: {'woocommerce_services_activate_jetpack'} **/
+/** No params detected :-/ **/
+
 
 /** Function ajax_get_jetpack_connect_url() called by wp_ajax hooks: {'woocommerce_services_get_jetpack_connect_url'} **/
 /** Parameters found in function ajax_get_jetpack_connect_url(): {"post": ["redirect_url"]} **/
@@ -28,22 +45,5 @@ function ajax_get_jetpack_connect_url() {
 			echo esc_url_raw( $connect_url );
 			wp_die();
 		}
-
-
-/** Function ajax_dismiss_notice() called by wp_ajax hooks: {'wc_connect_dismiss_notice'} **/
-/** Parameters found in function ajax_dismiss_notice(): {"post": ["dismissible_id"]} **/
-function ajax_dismiss_notice() {
-			if ( empty( $_POST['dismissible_id'] ) ) {
-				return;
-			}
-
-			check_ajax_referer( 'wc_connect_dismiss_notice', 'nonce' );
-			$this->dismiss_notice( sanitize_key( $_POST['dismissible_id'] ) );
-			wp_die();
-		}
-
-
-/** Function ajax_activate_jetpack() called by wp_ajax hooks: {'woocommerce_services_activate_jetpack'} **/
-/** No params detected :-/ **/
 
 

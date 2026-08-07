@@ -5,9 +5,30 @@
 *Found functions:3
 *Extracted functions:2
 *Total parameter names extracted: 2
-*Overview: {'NextendSocialLoginAdmin::ajax_save_form_data': {'nextend-social-login'}, 'nsl-dismissible-notice': {'nsl_dismiss_admin_notice'}, 'NextendSocialLoginAdmin::save_review_state': {'nsl_save_review_state'}}
+*Overview: {'NextendSocialLoginAdmin::save_review_state': {'nsl_save_review_state'}, 'nsl-dismissible-notice': {'nsl_dismiss_admin_notice'}, 'NextendSocialLoginAdmin::ajax_save_form_data': {'nextend-social-login'}}
 *
 ***/
+
+/** Function NextendSocialLoginAdmin::save_review_state() called by wp_ajax hooks: {'nsl_save_review_state'} **/
+/** Parameters found in function NextendSocialLoginAdmin::save_review_state(): {"post": ["review_state"]} **/
+function save_review_state() {
+        check_ajax_referer('nsl_save_review_state');
+        if (isset($_POST['review_state'])) {
+            $review_state = intval($_POST['review_state']);
+            if ($review_state > 0) {
+
+                NextendSocialLogin::$settings->update(array(
+                    'review_state' => $review_state
+                ));
+            }
+        }
+        wp_die();
+    }
+
+
+/** Function nsl-dismissible-notice() called by wp_ajax hooks: {'nsl_dismiss_admin_notice'} **/
+/** No function found :-/ **/
+
 
 /** Function NextendSocialLoginAdmin::ajax_save_form_data() called by wp_ajax hooks: {'nextend-social-login'} **/
 /** Parameters found in function NextendSocialLoginAdmin::ajax_save_form_data(): {"post": ["view", "ordering"]} **/
@@ -29,27 +50,6 @@ function ajax_save_form_data() {
                     break;
             }
         }
-    }
-
-
-/** Function nsl-dismissible-notice() called by wp_ajax hooks: {'nsl_dismiss_admin_notice'} **/
-/** No function found :-/ **/
-
-
-/** Function NextendSocialLoginAdmin::save_review_state() called by wp_ajax hooks: {'nsl_save_review_state'} **/
-/** Parameters found in function NextendSocialLoginAdmin::save_review_state(): {"post": ["review_state"]} **/
-function save_review_state() {
-        check_ajax_referer('nsl_save_review_state');
-        if (isset($_POST['review_state'])) {
-            $review_state = intval($_POST['review_state']);
-            if ($review_state > 0) {
-
-                NextendSocialLogin::$settings->update(array(
-                    'review_state' => $review_state
-                ));
-            }
-        }
-        wp_die();
     }
 
 

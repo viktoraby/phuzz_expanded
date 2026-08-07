@@ -155,7 +155,7 @@ def generate_fuzzer_config(wp_hook, params):
 def docker_compose_get_template(application_type, coverage_path, plugin_name) -> str:
     # 2024-04-07: This is an old version of the docker-compose.yml. It would require a change from `./php-instrumentation/` to `./web/` now.
     # We also ran these experiments without the compression of the coverage.
-    return f"""version: "3.7"
+    return f"""
 services:
   hargen:
     build:
@@ -205,6 +205,32 @@ services:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_ROOT_HOST: "%"
       MYSQL_USER_HOST: "%"
+
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: password
+      MONGO_INITDB_DATABASE: mymdb
+    ports:
+    - "27017:27017"
+
+  openldap:
+    image: osixia/openldap:latest
+    container_name: openldap
+    environment:
+      LDAP_BASE_DN: "dc=example,dc=org"
+      LDAP_ORGANISATION: "Example Organization"
+      LDAP_DOMAIN: "example.org"
+      LDAP_ADMIN_PASSWORD: "admin"
+      LDAP_TLS: "false"             
+    volumes:
+      - ./ldap/bootstrap.ldif:/container/service/slapd/assets/config/bootstrap/ldif/custom/50-bootstrap.ldif
+    ports:
+      - "389:389"                   
+    command: --copy-service
+    restart: unless-stopped
 __BURPSUITE__
 __FUZZERS__
 volumes:

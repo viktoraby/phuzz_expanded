@@ -5,13 +5,13 @@
 *Found functions:19
 *Extracted functions:19
 *Total parameter names extracted: 13
-*Overview: {'ajax_delete_widget': {'mm_delete_widget'}, 'ajax_save_grid_data': {'mm_save_grid_data'}, 'ajax_get_empty_grid_row': {'mm_get_empty_grid_row'}, 'output_spacer_block_html': {'mm_get_toggle_block_spacer'}, 'ajax_save_menu_item': {'mm_save_menu_item'}, 'ajax_update_widget_columns': {'mm_update_widget_columns'}, 'ajax_show_widget_form': {'mm_edit_widget'}, 'ajax_save_menu_item_settings': {'mm_save_menu_item_settings'}, 'save': {'mm_save_settings'}, 'ajax_add_widget': {'mm_add_widget'}, 'ajax_save_theme': {'megamenu_save_theme'}, 'output_menu_toggle_block_animated_html': {'mm_get_toggle_block_menu_toggle_animated'}, 'ajax_update_menu_item_columns': {'mm_update_menu_item_columns'}, 'ajax_get_lightbox_html': {'mm_get_lightbox_html'}, 'ajax_show_menu_item_form': {'mm_edit_menu_item'}, 'ajax_save_widget': {'mm_save_widget'}, 'output_menu_toggle_block_html': {'mm_get_toggle_block_menu_toggle'}, 'ajax_reorder_items': {'mm_reorder_items'}, 'ajax_get_empty_grid_column': {'mm_get_empty_grid_column'}}
+*Overview: {'ajax_reorder_items': {'mm_reorder_items'}, 'ajax_save_theme': {'megamenu_save_theme'}, 'ajax_add_widget': {'mm_add_widget'}, 'ajax_update_widget_columns': {'mm_update_widget_columns'}, 'ajax_save_menu_item': {'mm_save_menu_item'}, 'ajax_get_lightbox_html': {'mm_get_lightbox_html'}, 'ajax_get_empty_grid_column': {'mm_get_empty_grid_column'}, 'output_menu_toggle_block_html': {'mm_get_toggle_block_menu_toggle'}, 'ajax_delete_widget': {'mm_delete_widget'}, 'ajax_update_menu_item_columns': {'mm_update_menu_item_columns'}, 'save': {'mm_save_settings'}, 'ajax_show_widget_form': {'mm_edit_widget'}, 'ajax_save_grid_data': {'mm_save_grid_data'}, 'output_menu_toggle_block_animated_html': {'mm_get_toggle_block_menu_toggle_animated'}, 'ajax_save_menu_item_settings': {'mm_save_menu_item_settings'}, 'ajax_show_menu_item_form': {'mm_edit_menu_item'}, 'ajax_save_widget': {'mm_save_widget'}, 'ajax_get_empty_grid_row': {'mm_get_empty_grid_row'}, 'output_spacer_block_html': {'mm_get_toggle_block_spacer'}}
 *
 ***/
 
-/** Function ajax_delete_widget() called by wp_ajax hooks: {'mm_delete_widget'} **/
-/** Parameters found in function ajax_delete_widget(): {"post": ["widget_id"]} **/
-function ajax_delete_widget() {
+/** Function ajax_reorder_items() called by wp_ajax hooks: {'mm_reorder_items'} **/
+/** Parameters found in function ajax_reorder_items(): {"post": ["items"]} **/
+function ajax_reorder_items() {
 
 			check_ajax_referer( 'megamenu_edit' );
 
@@ -21,22 +21,30 @@ function ajax_delete_widget() {
 				return;
 			}
 
-			$widget_id = sanitize_text_field( $_POST['widget_id'] );
+			$items = isset( $_POST['items'] ) ? $_POST['items'] : false;
 
-			$deleted = $this->delete_widget( $widget_id );
+			$saved = false;
 
-			if ( $deleted ) {
-				$this->send_json_success( sprintf( __( 'Deleted %s', 'megamenu' ), $widget_id ) );
+			if ( $items ) {
+				$moved = $this->reorder_items( $items );
+			}
+
+			if ( $moved ) {
+				$this->send_json_success( sprintf( __( 'Moved (%s)', 'megamenu' ), json_encode( $items ) ) );
 			} else {
-				$this->send_json_error( sprintf( __( 'Failed to delete %s', 'megamenu' ), $widget_id ) );
+				$this->send_json_error( sprintf( __( "Didn't move items", 'megamenu' ), json_encode( $items ) ) );
 			}
 
 		}
 
 
-/** Function ajax_save_grid_data() called by wp_ajax hooks: {'mm_save_grid_data'} **/
-/** Parameters found in function ajax_save_grid_data(): {"post": ["grid", "parent_menu_item"]} **/
-function ajax_save_grid_data() {
+/** Function ajax_save_theme() called by wp_ajax hooks: {'megamenu_save_theme'} **/
+/** No params detected :-/ **/
+
+
+/** Function ajax_add_widget() called by wp_ajax hooks: {'mm_add_widget'} **/
+/** Parameters found in function ajax_add_widget(): {"post": ["id_base", "menu_item_id", "title", "is_grid_widget"]} **/
+function ajax_add_widget() {
 
 			check_ajax_referer( 'megamenu_edit' );
 
@@ -46,36 +54,46 @@ function ajax_save_grid_data() {
 				return;
 			}
 
-			$grid                = isset( $_POST['grid'] ) ? $_POST['grid'] : false;
-			$parent_menu_item_id = absint( $_POST['parent_menu_item'] );
+			$id_base        = sanitize_text_field( $_POST['id_base'] );
+			$menu_item_id   = absint( $_POST['menu_item_id'] );
+			$title          = sanitize_text_field( $_POST['title'] );
+			$is_grid_widget = isset( $_POST['is_grid_widget'] ) && $_POST['is_grid_widget'] == 'true';
 
-			$saved = true;
+			$added = $this->add_widget( $id_base, $menu_item_id, $title, $is_grid_widget );
 
-			$existing_settings = get_post_meta( $parent_menu_item_id, '_megamenu', true );
-
-			if ( is_array( $grid ) ) {
-
-				$submitted_settings = array_merge( $existing_settings, array( 'grid' => $grid ) );
-
-			}
-
-			update_post_meta( $parent_menu_item_id, '_megamenu', $submitted_settings );
-
-			if ( $saved ) {
-				$this->send_json_success( sprintf( __( 'Saved (%s)', 'megamenu' ), json_encode( $grid ) ) );
+			if ( $added ) {
+				$this->send_json_success( $added );
 			} else {
-				$this->send_json_error( sprintf( __( "Didn't save", 'megamenu' ), json_encode( $grid ) ) );
+				$this->send_json_error( sprintf( __( 'Failed to add %1$s to %2$d', 'megamenu' ), $id_base, $menu_item_id ) );
 			}
 
 		}
 
 
-/** Function ajax_get_empty_grid_row() called by wp_ajax hooks: {'mm_get_empty_grid_row'} **/
-/** No params detected :-/ **/
+/** Function ajax_update_widget_columns() called by wp_ajax hooks: {'mm_update_widget_columns'} **/
+/** Parameters found in function ajax_update_widget_columns(): {"post": ["id", "columns"]} **/
+function ajax_update_widget_columns() {
 
+			check_ajax_referer( 'megamenu_edit' );
 
-/** Function output_spacer_block_html() called by wp_ajax hooks: {'mm_get_toggle_block_spacer'} **/
-/** No params detected :-/ **/
+			$capability = apply_filters( 'megamenu_options_capability', 'edit_theme_options' );
+
+			if ( ! current_user_can( $capability ) ) {
+				return;
+			}
+
+			$widget_id = sanitize_text_field( $_POST['id'] );
+			$columns   = absint( $_POST['columns'] );
+
+			$updated = $this->update_widget_columns( $widget_id, $columns );
+
+			if ( $updated ) {
+				$this->send_json_success( sprintf( __( 'Updated %1$s (new columns: %2$d)', 'megamenu' ), $widget_id, $columns ) );
+			} else {
+				$this->send_json_error( sprintf( __( 'Failed to update %s', 'megamenu' ), $widget_id ) );
+			}
+
+		}
 
 
 /** Function ajax_save_menu_item() called by wp_ajax hooks: {'mm_save_menu_item'} **/
@@ -110,35 +128,86 @@ function ajax_save_menu_item() {
 		}
 
 
-/** Function ajax_update_widget_columns() called by wp_ajax hooks: {'mm_update_widget_columns'} **/
-/** Parameters found in function ajax_update_widget_columns(): {"post": ["id", "columns"]} **/
-function ajax_update_widget_columns() {
+/** Function ajax_get_lightbox_html() called by wp_ajax hooks: {'mm_get_lightbox_html'} **/
+/** No params detected :-/ **/
 
-			check_ajax_referer( 'megamenu_edit' );
 
-			$capability = apply_filters( 'megamenu_options_capability', 'edit_theme_options' );
+/** Function ajax_get_empty_grid_column() called by wp_ajax hooks: {'mm_get_empty_grid_column'} **/
+/** No params detected :-/ **/
 
-			if ( ! current_user_can( $capability ) ) {
-				return;
+
+/** Function output_menu_toggle_block_html() called by wp_ajax hooks: {'mm_get_toggle_block_menu_toggle'} **/
+/** Parameters found in function output_menu_toggle_block_html(): {"get": ["theme"]} **/
+function output_menu_toggle_block_html( $block_id, $settings = array() ) {
+
+			if ( empty( $settings ) ) {
+				$block_id = '0';
 			}
 
-			$widget_id = sanitize_text_field( $_POST['id'] );
-			$columns   = absint( $_POST['columns'] );
+			$theme_id = 'default';
 
-			$updated = $this->update_widget_columns( $widget_id, $columns );
+			if ( isset( $_GET['theme'] ) ) {
+				$theme_id = esc_attr( $_GET['theme'] );
 
-			if ( $updated ) {
-				$this->send_json_success( sprintf( __( 'Updated %1$s (new columns: %2$d)', 'megamenu' ), $widget_id, $columns ) );
-			} else {
-				$this->send_json_error( sprintf( __( 'Failed to update %s', 'megamenu' ), $widget_id ) );
 			}
 
+			$defaults = $this->get_default_menu_toggle_block( $theme_id );
+
+			$settings = array_merge( $defaults, $settings );
+
+			?>
+
+		<div class='block'>
+			<div class='block-title'><?php _e( 'TOGGLE', 'megamenu' ); ?> <span title='<?php _e( 'Menu Toggle', 'megamenu' ); ?>' class="dashicons dashicons-menu"></span></div>
+			<div class='block-settings'>
+				<h3><?php _e( 'Menu Toggle Settings', 'megamenu' ); ?></h3>
+				<input type='hidden' class='type' name='toggle_blocks[<?php echo $block_id; ?>][type]' value='menu_toggle' />
+				<input type='hidden' class='align' name='toggle_blocks[<?php echo $block_id; ?>][align]' value='<?php echo $settings['align']; ?>'>
+				<label>
+					<?php _e( 'Closed Text', 'megamenu' ); ?><input type='text' class='closed_text' name='toggle_blocks[<?php echo $block_id; ?>][closed_text]' value='<?php echo stripslashes( esc_attr( $settings['closed_text'] ) ); ?>' />
+				</label>
+				<label>
+					<?php _e( 'Open Text', 'megamenu' ); ?><input type='text' class='open_text' name='toggle_blocks[<?php echo $block_id; ?>][open_text]' value='<?php echo stripslashes( esc_attr( $settings['open_text'] ) ); ?>' />
+				</label>
+				<label>
+					<?php _e( 'Closed Icon', 'megamenu' ); ?>
+					<?php $this->print_icon_option( 'closed_icon', $block_id, $settings['closed_icon'], $this->toggle_icons() ); ?>
+				</label>
+				<label>
+					<?php _e( 'Open Icon', 'megamenu' ); ?>
+					<?php $this->print_icon_option( 'open_icon', $block_id, $settings['open_icon'], $this->toggle_icons() ); ?>
+				</label>
+				<label>
+					<?php _e( 'Text Color', 'megamenu' ); ?>
+					<?php $this->print_toggle_color_option( 'text_color', $block_id, $settings['text_color'] ); ?>
+				</label>
+				<label>
+					<?php _e( 'Text Size', 'megamenu' ); ?><input type='text' class='text_size' name='toggle_blocks[<?php echo $block_id; ?>][text_size]' value='<?php echo stripslashes( esc_attr( $settings['text_size'] ) ); ?>' />
+				</label>
+				<label>
+					<?php _e( 'Icon Color', 'megamenu' ); ?>
+					<?php $this->print_toggle_color_option( 'icon_color', $block_id, $settings['icon_color'] ); ?>
+				</label>
+				<label>
+					<?php _e( 'Icon Size', 'megamenu' ); ?><input type='text' class='icon_size' name='toggle_blocks[<?php echo $block_id; ?>][icon_size]' value='<?php echo stripslashes( esc_attr( $settings['icon_size'] ) ); ?>' />
+				</label>
+				<label>
+					<?php _e( 'Icon Position', 'megamenu' ); ?><select name='toggle_blocks[<?php echo $block_id; ?>][icon_position]'>
+						<option value='before' <?php selected( $settings['icon_position'], 'before' ); ?> ><?php _e( 'Before', 'megamenu' ); ?></option>
+						<option value='after' <?php selected( $settings['icon_position'], 'after' ); ?> ><?php _e( 'After', 'megamenu' ); ?></option>
+					</select>
+				</label>
+				<a class='mega-delete'><?php _e( 'Delete', 'megamenu' ); ?></a>
+			</div>
+		</div>
+
+			<?php
 		}
 
 
-/** Function ajax_show_widget_form() called by wp_ajax hooks: {'mm_edit_widget'} **/
-/** Parameters found in function ajax_show_widget_form(): {"post": ["widget_id"]} **/
-function ajax_show_widget_form() {
+/** Function ajax_delete_widget() called by wp_ajax hooks: {'mm_delete_widget'} **/
+/** Parameters found in function ajax_delete_widget(): {"post": ["widget_id"]} **/
+function ajax_delete_widget() {
 
 			check_ajax_referer( 'megamenu_edit' );
 
@@ -150,18 +219,20 @@ function ajax_show_widget_form() {
 
 			$widget_id = sanitize_text_field( $_POST['widget_id'] );
 
-			if ( ob_get_contents() ) {
-				ob_clean(); // remove any warnings or output from other plugins which may corrupt the response
-			}
+			$deleted = $this->delete_widget( $widget_id );
 
-			wp_die( trim( $this->show_widget_form( $widget_id ) ) );
+			if ( $deleted ) {
+				$this->send_json_success( sprintf( __( 'Deleted %s', 'megamenu' ), $widget_id ) );
+			} else {
+				$this->send_json_error( sprintf( __( 'Failed to delete %s', 'megamenu' ), $widget_id ) );
+			}
 
 		}
 
 
-/** Function ajax_save_menu_item_settings() called by wp_ajax hooks: {'mm_save_menu_item_settings'} **/
-/** Parameters found in function ajax_save_menu_item_settings(): {"post": ["settings", "menu_item_id", "tab", "clear_cache"]} **/
-function ajax_save_menu_item_settings() {
+/** Function ajax_update_menu_item_columns() called by wp_ajax hooks: {'mm_update_menu_item_columns'} **/
+/** Parameters found in function ajax_update_menu_item_columns(): {"post": ["id", "columns"]} **/
+function ajax_update_menu_item_columns() {
 
 			check_ajax_referer( 'megamenu_edit' );
 
@@ -171,51 +242,16 @@ function ajax_save_menu_item_settings() {
 				return;
 			}
 
-			$submitted_settings = isset( $_POST['settings'] ) ? $_POST['settings'] : array();
+			$id      = absint( $_POST['id'] );
+			$columns = absint( $_POST['columns'] );
 
-			$menu_item_id = absint( $_POST['menu_item_id'] );
+			$updated = $this->update_menu_item_columns( $id, $columns );
 
-			if ( $menu_item_id > 0 && is_array( $submitted_settings ) ) {
-
-				// only check the checkbox values if the general settings form was submitted
-				if ( isset( $_POST['tab'] ) && $_POST['tab'] == 'general_settings' ) {
-
-					$checkboxes = array( 'hide_text', 'disable_link', 'hide_arrow', 'hide_on_mobile', 'hide_on_desktop', 'close_after_click', 'hide_sub_menu_on_mobile', 'collapse_children' );
-
-					foreach ( $checkboxes as $checkbox ) {
-						if ( ! isset( $submitted_settings[ $checkbox ] ) ) {
-							$submitted_settings[ $checkbox ] = 'false';
-						}
-					}
-				}
-
-				$submitted_settings = apply_filters( 'megamenu_menu_item_submitted_settings', $submitted_settings, $menu_item_id );
-
-				$existing_settings = get_post_meta( $menu_item_id, '_megamenu', true );
-
-				if ( is_array( $existing_settings ) ) {
-
-					$submitted_settings = array_merge( $existing_settings, $submitted_settings );
-
-				}
-
-				update_post_meta( $menu_item_id, '_megamenu', $submitted_settings );
-
-				do_action( 'megamenu_save_menu_item_settings', $menu_item_id );
-
+			if ( $updated ) {
+				$this->send_json_success( sprintf( __( 'Updated %1$s (new columns: %2$d)', 'megamenu' ), $id, $columns ) );
+			} else {
+				$this->send_json_error( sprintf( __( 'Failed to update %s', 'megamenu' ), $id ) );
 			}
-
-			if ( isset( $_POST['clear_cache'] ) ) {
-
-				do_action( 'megamenu_delete_cache' );
-
-			}
-
-			if ( ob_get_contents() ) {
-				ob_clean(); // remove any warnings or output from other plugins which may corrupt the response
-			}
-
-			wp_send_json_success();
 
 		}
 
@@ -278,9 +314,9 @@ function save() {
 		}
 
 
-/** Function ajax_add_widget() called by wp_ajax hooks: {'mm_add_widget'} **/
-/** Parameters found in function ajax_add_widget(): {"post": ["id_base", "menu_item_id", "title", "is_grid_widget"]} **/
-function ajax_add_widget() {
+/** Function ajax_show_widget_form() called by wp_ajax hooks: {'mm_edit_widget'} **/
+/** Parameters found in function ajax_show_widget_form(): {"post": ["widget_id"]} **/
+function ajax_show_widget_form() {
 
 			check_ajax_referer( 'megamenu_edit' );
 
@@ -290,33 +326,60 @@ function ajax_add_widget() {
 				return;
 			}
 
-			$id_base        = sanitize_text_field( $_POST['id_base'] );
-			$menu_item_id   = absint( $_POST['menu_item_id'] );
-			$title          = sanitize_text_field( $_POST['title'] );
-			$is_grid_widget = isset( $_POST['is_grid_widget'] ) && $_POST['is_grid_widget'] == 'true';
+			$widget_id = sanitize_text_field( $_POST['widget_id'] );
 
-			$added = $this->add_widget( $id_base, $menu_item_id, $title, $is_grid_widget );
-
-			if ( $added ) {
-				$this->send_json_success( $added );
-			} else {
-				$this->send_json_error( sprintf( __( 'Failed to add %1$s to %2$d', 'megamenu' ), $id_base, $menu_item_id ) );
+			if ( ob_get_contents() ) {
+				ob_clean(); // remove any warnings or output from other plugins which may corrupt the response
 			}
+
+			wp_die( trim( $this->show_widget_form( $widget_id ) ) );
 
 		}
 
 
-/** Function ajax_save_theme() called by wp_ajax hooks: {'megamenu_save_theme'} **/
-/** No params detected :-/ **/
+/** Function ajax_save_grid_data() called by wp_ajax hooks: {'mm_save_grid_data'} **/
+/** Parameters found in function ajax_save_grid_data(): {"post": ["grid", "parent_menu_item"]} **/
+function ajax_save_grid_data() {
+
+			check_ajax_referer( 'megamenu_edit' );
+
+			$capability = apply_filters( 'megamenu_options_capability', 'edit_theme_options' );
+
+			if ( ! current_user_can( $capability ) ) {
+				return;
+			}
+
+			$grid                = isset( $_POST['grid'] ) ? $_POST['grid'] : false;
+			$parent_menu_item_id = absint( $_POST['parent_menu_item'] );
+
+			$saved = true;
+
+			$existing_settings = get_post_meta( $parent_menu_item_id, '_megamenu', true );
+
+			if ( is_array( $grid ) ) {
+
+				$submitted_settings = array_merge( $existing_settings, array( 'grid' => $grid ) );
+
+			}
+
+			update_post_meta( $parent_menu_item_id, '_megamenu', $submitted_settings );
+
+			if ( $saved ) {
+				$this->send_json_success( sprintf( __( 'Saved (%s)', 'megamenu' ), json_encode( $grid ) ) );
+			} else {
+				$this->send_json_error( sprintf( __( "Didn't save", 'megamenu' ), json_encode( $grid ) ) );
+			}
+
+		}
 
 
 /** Function output_menu_toggle_block_animated_html() called by wp_ajax hooks: {'mm_get_toggle_block_menu_toggle_animated'} **/
 /** No params detected :-/ **/
 
 
-/** Function ajax_update_menu_item_columns() called by wp_ajax hooks: {'mm_update_menu_item_columns'} **/
-/** Parameters found in function ajax_update_menu_item_columns(): {"post": ["id", "columns"]} **/
-function ajax_update_menu_item_columns() {
+/** Function ajax_save_menu_item_settings() called by wp_ajax hooks: {'mm_save_menu_item_settings'} **/
+/** Parameters found in function ajax_save_menu_item_settings(): {"post": ["settings", "menu_item_id", "tab", "clear_cache"]} **/
+function ajax_save_menu_item_settings() {
 
 			check_ajax_referer( 'megamenu_edit' );
 
@@ -326,22 +389,53 @@ function ajax_update_menu_item_columns() {
 				return;
 			}
 
-			$id      = absint( $_POST['id'] );
-			$columns = absint( $_POST['columns'] );
+			$submitted_settings = isset( $_POST['settings'] ) ? $_POST['settings'] : array();
 
-			$updated = $this->update_menu_item_columns( $id, $columns );
+			$menu_item_id = absint( $_POST['menu_item_id'] );
 
-			if ( $updated ) {
-				$this->send_json_success( sprintf( __( 'Updated %1$s (new columns: %2$d)', 'megamenu' ), $id, $columns ) );
-			} else {
-				$this->send_json_error( sprintf( __( 'Failed to update %s', 'megamenu' ), $id ) );
+			if ( $menu_item_id > 0 && is_array( $submitted_settings ) ) {
+
+				// only check the checkbox values if the general settings form was submitted
+				if ( isset( $_POST['tab'] ) && $_POST['tab'] == 'general_settings' ) {
+
+					$checkboxes = array( 'hide_text', 'disable_link', 'hide_arrow', 'hide_on_mobile', 'hide_on_desktop', 'close_after_click', 'hide_sub_menu_on_mobile', 'collapse_children' );
+
+					foreach ( $checkboxes as $checkbox ) {
+						if ( ! isset( $submitted_settings[ $checkbox ] ) ) {
+							$submitted_settings[ $checkbox ] = 'false';
+						}
+					}
+				}
+
+				$submitted_settings = apply_filters( 'megamenu_menu_item_submitted_settings', $submitted_settings, $menu_item_id );
+
+				$existing_settings = get_post_meta( $menu_item_id, '_megamenu', true );
+
+				if ( is_array( $existing_settings ) ) {
+
+					$submitted_settings = array_merge( $existing_settings, $submitted_settings );
+
+				}
+
+				update_post_meta( $menu_item_id, '_megamenu', $submitted_settings );
+
+				do_action( 'megamenu_save_menu_item_settings', $menu_item_id );
+
 			}
 
+			if ( isset( $_POST['clear_cache'] ) ) {
+
+				do_action( 'megamenu_delete_cache' );
+
+			}
+
+			if ( ob_get_contents() ) {
+				ob_clean(); // remove any warnings or output from other plugins which may corrupt the response
+			}
+
+			wp_send_json_success();
+
 		}
-
-
-/** Function ajax_get_lightbox_html() called by wp_ajax hooks: {'mm_get_lightbox_html'} **/
-/** No params detected :-/ **/
 
 
 /** Function ajax_show_menu_item_form() called by wp_ajax hooks: {'mm_edit_menu_item'} **/
@@ -444,105 +538,11 @@ function ajax_save_widget() {
 		}
 
 
-/** Function output_menu_toggle_block_html() called by wp_ajax hooks: {'mm_get_toggle_block_menu_toggle'} **/
-/** Parameters found in function output_menu_toggle_block_html(): {"get": ["theme"]} **/
-function output_menu_toggle_block_html( $block_id, $settings = array() ) {
-
-			if ( empty( $settings ) ) {
-				$block_id = '0';
-			}
-
-			$theme_id = 'default';
-
-			if ( isset( $_GET['theme'] ) ) {
-				$theme_id = esc_attr( $_GET['theme'] );
-
-			}
-
-			$defaults = $this->get_default_menu_toggle_block( $theme_id );
-
-			$settings = array_merge( $defaults, $settings );
-
-			?>
-
-		<div class='block'>
-			<div class='block-title'><?php _e( 'TOGGLE', 'megamenu' ); ?> <span title='<?php _e( 'Menu Toggle', 'megamenu' ); ?>' class="dashicons dashicons-menu"></span></div>
-			<div class='block-settings'>
-				<h3><?php _e( 'Menu Toggle Settings', 'megamenu' ); ?></h3>
-				<input type='hidden' class='type' name='toggle_blocks[<?php echo $block_id; ?>][type]' value='menu_toggle' />
-				<input type='hidden' class='align' name='toggle_blocks[<?php echo $block_id; ?>][align]' value='<?php echo $settings['align']; ?>'>
-				<label>
-					<?php _e( 'Closed Text', 'megamenu' ); ?><input type='text' class='closed_text' name='toggle_blocks[<?php echo $block_id; ?>][closed_text]' value='<?php echo stripslashes( esc_attr( $settings['closed_text'] ) ); ?>' />
-				</label>
-				<label>
-					<?php _e( 'Open Text', 'megamenu' ); ?><input type='text' class='open_text' name='toggle_blocks[<?php echo $block_id; ?>][open_text]' value='<?php echo stripslashes( esc_attr( $settings['open_text'] ) ); ?>' />
-				</label>
-				<label>
-					<?php _e( 'Closed Icon', 'megamenu' ); ?>
-					<?php $this->print_icon_option( 'closed_icon', $block_id, $settings['closed_icon'], $this->toggle_icons() ); ?>
-				</label>
-				<label>
-					<?php _e( 'Open Icon', 'megamenu' ); ?>
-					<?php $this->print_icon_option( 'open_icon', $block_id, $settings['open_icon'], $this->toggle_icons() ); ?>
-				</label>
-				<label>
-					<?php _e( 'Text Color', 'megamenu' ); ?>
-					<?php $this->print_toggle_color_option( 'text_color', $block_id, $settings['text_color'] ); ?>
-				</label>
-				<label>
-					<?php _e( 'Text Size', 'megamenu' ); ?><input type='text' class='text_size' name='toggle_blocks[<?php echo $block_id; ?>][text_size]' value='<?php echo stripslashes( esc_attr( $settings['text_size'] ) ); ?>' />
-				</label>
-				<label>
-					<?php _e( 'Icon Color', 'megamenu' ); ?>
-					<?php $this->print_toggle_color_option( 'icon_color', $block_id, $settings['icon_color'] ); ?>
-				</label>
-				<label>
-					<?php _e( 'Icon Size', 'megamenu' ); ?><input type='text' class='icon_size' name='toggle_blocks[<?php echo $block_id; ?>][icon_size]' value='<?php echo stripslashes( esc_attr( $settings['icon_size'] ) ); ?>' />
-				</label>
-				<label>
-					<?php _e( 'Icon Position', 'megamenu' ); ?><select name='toggle_blocks[<?php echo $block_id; ?>][icon_position]'>
-						<option value='before' <?php selected( $settings['icon_position'], 'before' ); ?> ><?php _e( 'Before', 'megamenu' ); ?></option>
-						<option value='after' <?php selected( $settings['icon_position'], 'after' ); ?> ><?php _e( 'After', 'megamenu' ); ?></option>
-					</select>
-				</label>
-				<a class='mega-delete'><?php _e( 'Delete', 'megamenu' ); ?></a>
-			</div>
-		</div>
-
-			<?php
-		}
+/** Function ajax_get_empty_grid_row() called by wp_ajax hooks: {'mm_get_empty_grid_row'} **/
+/** No params detected :-/ **/
 
 
-/** Function ajax_reorder_items() called by wp_ajax hooks: {'mm_reorder_items'} **/
-/** Parameters found in function ajax_reorder_items(): {"post": ["items"]} **/
-function ajax_reorder_items() {
-
-			check_ajax_referer( 'megamenu_edit' );
-
-			$capability = apply_filters( 'megamenu_options_capability', 'edit_theme_options' );
-
-			if ( ! current_user_can( $capability ) ) {
-				return;
-			}
-
-			$items = isset( $_POST['items'] ) ? $_POST['items'] : false;
-
-			$saved = false;
-
-			if ( $items ) {
-				$moved = $this->reorder_items( $items );
-			}
-
-			if ( $moved ) {
-				$this->send_json_success( sprintf( __( 'Moved (%s)', 'megamenu' ), json_encode( $items ) ) );
-			} else {
-				$this->send_json_error( sprintf( __( "Didn't move items", 'megamenu' ), json_encode( $items ) ) );
-			}
-
-		}
-
-
-/** Function ajax_get_empty_grid_column() called by wp_ajax hooks: {'mm_get_empty_grid_column'} **/
+/** Function output_spacer_block_html() called by wp_ajax hooks: {'mm_get_toggle_block_spacer'} **/
 /** No params detected :-/ **/
 
 

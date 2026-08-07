@@ -5,9 +5,13 @@
 *Found functions:2
 *Extracted functions:2
 *Total parameter names extracted: 1
-*Overview: {'get_list_details': {'mc4wp_get_list_details'}, 'refresh_mailchimp_lists': {'mc4wp_renew_mailchimp_lists'}}
+*Overview: {'refresh_mailchimp_lists': {'mc4wp_renew_mailchimp_lists'}, 'get_list_details': {'mc4wp_get_list_details'}}
 *
 ***/
+
+/** Function refresh_mailchimp_lists() called by wp_ajax hooks: {'mc4wp_renew_mailchimp_lists'} **/
+/** No params detected :-/ **/
+
 
 /** Function get_list_details() called by wp_ajax hooks: {'mc4wp_get_list_details'} **/
 /** Parameters found in function get_list_details(): {"get": ["ids", "format"]} **/
@@ -39,9 +43,5 @@ function get_list_details() {
 		}
 		exit;
 	}
-
-
-/** Function refresh_mailchimp_lists() called by wp_ajax hooks: {'mc4wp_renew_mailchimp_lists'} **/
-/** No params detected :-/ **/
 
 

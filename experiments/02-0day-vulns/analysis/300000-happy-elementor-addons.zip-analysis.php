@@ -5,102 +5,9 @@
 *Found functions:10
 *Extracted functions:10
 *Total parameter names extracted: 10
-*Overview: {'clear_cache': {'ha_clear_cache'}, 'process_request': {'ha_process_dynamic_select'}, 'process_autocomplete': {'ha_condition_autocomplete'}, 'mailchimp_prepare_ajax': {'nopriv_ha_mailchimp_ajax', 'ha_mailchimp_ajax'}, 'process_condition_update': {'ha_condition_update'}, 'ha_get_template_type': {'ha_cond_template_type'}, 'ha_get_current_condition': {'ha_cond_get_current'}, 'twitter_feed_ajax': {'ha_twitter_feed_action', 'nopriv_ha_twitter_feed_action'}, 'post_tab': {'nopriv_ha_post_tab_action', 'ha_post_tab_action'}, 'process_ignore_request': {'ignore_attention_seeker'}}
+*Overview: {'mailchimp_prepare_ajax': {'nopriv_ha_mailchimp_ajax', 'ha_mailchimp_ajax'}, 'twitter_feed_ajax': {'nopriv_ha_twitter_feed_action', 'ha_twitter_feed_action'}, 'process_ignore_request': {'ignore_attention_seeker'}, 'process_autocomplete': {'ha_condition_autocomplete'}, 'process_request': {'ha_process_dynamic_select'}, 'clear_cache': {'ha_clear_cache'}, 'ha_get_template_type': {'ha_cond_template_type'}, 'process_condition_update': {'ha_condition_update'}, 'post_tab': {'ha_post_tab_action', 'nopriv_ha_post_tab_action'}, 'ha_get_current_condition': {'ha_cond_get_current'}}
 *
 ***/
-
-/** Function clear_cache() called by wp_ajax hooks: {'ha_clear_cache'} **/
-/** Parameters found in function clear_cache(): {"post": ["type", "post_id"]} **/
-function clear_cache() {
-		if ( ! current_user_can( 'manage_options' ) ) {
-			return;
-		}
-
-		if ( ! check_ajax_referer( 'ha_clear_cache', 'nonce' ) ) {
-			wp_send_json_error();
-		}
-
-		$type = isset( $_POST['type'] ) ? $_POST['type'] : '';
-		$post_id = isset( $_POST['post_id'] ) ? $_POST['post_id'] : 0;
-		$assets_cache = new Assets_Cache( $post_id );
-		if ( $type === 'page' ) {
-			$assets_cache->delete();
-		} elseif ( $type === 'all' ) {
-			$assets_cache->delete_all();
-		}
-		wp_send_json_success();
-	}
-
-
-/** Function process_request() called by wp_ajax hooks: {'ha_process_dynamic_select'} **/
-/** Parameters found in function process_request(): {"request": ["object_type"]} **/
-function process_request() {
-		try {
-			self::validate_reqeust();
-
-			$object_type = ! empty( $_REQUEST['object_type'] ) ? trim( $_REQUEST['object_type'] ) : '';
-
-			if ( ! in_array( $object_type, [ 'post', 'term', 'user', 'mailchimp_list' ], true ) ) {
-				throw new Exception( 'Invalid object type' );
-			}
-
-			$response = [];
-
-			if ( $object_type === 'post' ) {
-				$response = self::process_post();
-			}
-
-			if ( $object_type === 'term' ) {
-				$response = self::process_term();
-			}
-
-			if ( $object_type === 'mailchimp_list' ) {
-				$response = self::process_mailchimp_list();
-			}
-
-			wp_send_json_success( $response );
-		} catch( Exception $e ) {
-			wp_send_json_error( $e->getMessage() );
-		}
-	}
-
-
-/** Function process_autocomplete() called by wp_ajax hooks: {'ha_condition_autocomplete'} **/
-/** Parameters found in function process_autocomplete(): {"request": ["object_type"]} **/
-function process_autocomplete() {
-        try {
-            $this->validate_reqeust();
-
-            $object_type = !empty($_REQUEST['object_type']) ? trim($_REQUEST['object_type']) : '';
-
-            if (!in_array($object_type, ['post', 'tax', 'author', 'archive', 'singular'], true)) {
-                throw new Exception('Invalid object type');
-            }
-
-            $response = [];
-
-            if ($object_type === 'post') {
-                $response = $this->process_post();
-            }
-
-            if ($object_type === 'tax') {
-                $response = $this->process_term();
-            }
-
-            if ($object_type === 'singular') {
-                $response = $this->singular_conditions();
-            }
-
-            if ($object_type === 'archive') {
-                $response = $this->archive_conditions();
-            }
-
-            wp_send_json_success($response);
-        } catch (Exception $e) {
-            wp_send_json_error($e->getMessage());
-        }
-    }
-
 
 /** Function mailchimp_prepare_ajax() called by wp_ajax hooks: {'nopriv_ha_mailchimp_ajax', 'ha_mailchimp_ajax'} **/
 /** Parameters found in function mailchimp_prepare_ajax(): {"post": ["subscriber_info"]} **/
@@ -126,99 +33,7 @@ function mailchimp_prepare_ajax() {
 	}
 
 
-/** Function process_condition_update() called by wp_ajax hooks: {'ha_condition_update'} **/
-/** Parameters found in function process_condition_update(): {"request": ["template_id", "conds"]} **/
-function process_condition_update() {
-        try {
-            $this->validate_reqeust();
-            $templateID = isset($_REQUEST['template_id']) ? $_REQUEST['template_id'] : null;
-            $requestConditions = isset($_REQUEST['conds']) ? $_REQUEST['conds'] : [];
-
-            $exitsConditions = get_post_meta($templateID, '_ha_display_cond', true);
-
-            $mergedConditions = !empty( $exitsConditions ) ? array_diff($requestConditions, $exitsConditions) : $requestConditions;
-
-            if ($templateID) {
-
-                $allExtitsCondition = $this->ha_get_all_conditions();
-                $templateType = get_post_meta($templateID, '_ha_library_type', true);
-
-                $duplicate = $this->ha_check_template_conditions($templateType, $requestConditions, $mergedConditions, $allExtitsCondition);
-
-                if (!$duplicate) {
-                    $cond = update_post_meta($templateID, '_ha_display_cond', array_unique($requestConditions));
-                    $updates = get_post_meta($templateID, '_ha_display_cond');
-
-                    if($cond != null) {
-                        $this->cache->regenerate();
-                        wp_send_json_success($updates);
-                    }else {
-                        wp_send_json_error();
-                    }
-                } else {
-                    wp_send_json_error(['msg' => esc_html__('Unable to save, conflicting include exclude condition detected. Please change the conditions accordingly.', 'happy-elementor-addons')]);
-                }
-
-            } else {
-
-                wp_send_json_error();
-            }
-
-            //_ha_display_cond;
-        } catch (Exception $e) {
-            wp_send_json_error($e->getMessage());
-        }
-    }
-
-
-/** Function ha_get_template_type() called by wp_ajax hooks: {'ha_cond_template_type'} **/
-/** Parameters found in function ha_get_template_type(): {"request": ["post_id"]} **/
-function ha_get_template_type() {
-        try {
-            //$this->validate_reqeust();
-
-            $id = isset($_REQUEST['post_id']) ? $_REQUEST['post_id'] : null;
-            if ($id) {
-                $tpl_type = get_post_meta($id, '_ha_library_type', true);
-                wp_send_json_success($tpl_type);
-            } else {
-                wp_send_json_error();
-            }
-            //_ha_display_cond;
-        } catch (Exception $e) {
-            wp_send_json_error($e->getMessage());
-        }
-    }
-
-
-/** Function ha_get_current_condition() called by wp_ajax hooks: {'ha_cond_get_current'} **/
-/** Parameters found in function ha_get_current_condition(): {"request": ["template_id"]} **/
-function ha_get_current_condition() {
-        try {
-            // $this->validate_reqeust();
-            $templateID = isset($_REQUEST['template_id']) ? $_REQUEST['template_id'] : null;
-            // wp_send_json_success($templateID);
-            if ($templateID) {
-                $cond = get_post_meta($templateID, '_ha_display_cond', true);
-                if ($cond) {
-                    ob_start();
-                    $this->cond_to_html($cond);
-                    $html = ob_get_contents();
-                    ob_end_clean();
-                    wp_send_json_success($html);
-                } else {
-                    wp_send_json_error();
-                }
-            } else {
-                wp_send_json_error();
-            }
-        } catch (Exception $e) {
-            wp_send_json_error($e->getMessage());
-        }
-    }
-
-
-/** Function twitter_feed_ajax() called by wp_ajax hooks: {'ha_twitter_feed_action', 'nopriv_ha_twitter_feed_action'} **/
+/** Function twitter_feed_ajax() called by wp_ajax hooks: {'nopriv_ha_twitter_feed_action', 'ha_twitter_feed_action'} **/
 /** Parameters found in function twitter_feed_ajax(): {"post": ["query_settings", "loaded_item"]} **/
 function twitter_feed_ajax() {
 
@@ -411,7 +226,182 @@ function twitter_feed_ajax() {
 	}
 
 
-/** Function post_tab() called by wp_ajax hooks: {'nopriv_ha_post_tab_action', 'ha_post_tab_action'} **/
+/** Function process_ignore_request() called by wp_ajax hooks: {'ignore_attention_seeker'} **/
+/** Parameters found in function process_ignore_request(): {"post": ["nonce", "id"]} **/
+function process_ignore_request() {
+        $nonce = isset( $_POST['nonce'] ) ? $_POST['nonce'] : '';
+        $id = isset( $_POST['id'] ) ? $_POST['id'] : '';
+
+        if ( wp_verify_nonce( $nonce, 'ignore_attention_seeker' ) && $id ) {
+            $seeker = wp_list_filter( self::get_attentions(), ['_id' => $id] );
+            $expire_date = $seeker[0]['end_date'] - time();
+            set_transient( self::generate_db_key( $id ), 'ignore', $expire_date );
+            wp_send_json_success();
+        }
+
+        exit;
+    }
+
+
+/** Function process_autocomplete() called by wp_ajax hooks: {'ha_condition_autocomplete'} **/
+/** Parameters found in function process_autocomplete(): {"request": ["object_type"]} **/
+function process_autocomplete() {
+        try {
+            $this->validate_reqeust();
+
+            $object_type = !empty($_REQUEST['object_type']) ? trim($_REQUEST['object_type']) : '';
+
+            if (!in_array($object_type, ['post', 'tax', 'author', 'archive', 'singular'], true)) {
+                throw new Exception('Invalid object type');
+            }
+
+            $response = [];
+
+            if ($object_type === 'post') {
+                $response = $this->process_post();
+            }
+
+            if ($object_type === 'tax') {
+                $response = $this->process_term();
+            }
+
+            if ($object_type === 'singular') {
+                $response = $this->singular_conditions();
+            }
+
+            if ($object_type === 'archive') {
+                $response = $this->archive_conditions();
+            }
+
+            wp_send_json_success($response);
+        } catch (Exception $e) {
+            wp_send_json_error($e->getMessage());
+        }
+    }
+
+
+/** Function process_request() called by wp_ajax hooks: {'ha_process_dynamic_select'} **/
+/** Parameters found in function process_request(): {"request": ["object_type"]} **/
+function process_request() {
+		try {
+			self::validate_reqeust();
+
+			$object_type = ! empty( $_REQUEST['object_type'] ) ? trim( $_REQUEST['object_type'] ) : '';
+
+			if ( ! in_array( $object_type, [ 'post', 'term', 'user', 'mailchimp_list' ], true ) ) {
+				throw new Exception( 'Invalid object type' );
+			}
+
+			$response = [];
+
+			if ( $object_type === 'post' ) {
+				$response = self::process_post();
+			}
+
+			if ( $object_type === 'term' ) {
+				$response = self::process_term();
+			}
+
+			if ( $object_type === 'mailchimp_list' ) {
+				$response = self::process_mailchimp_list();
+			}
+
+			wp_send_json_success( $response );
+		} catch( Exception $e ) {
+			wp_send_json_error( $e->getMessage() );
+		}
+	}
+
+
+/** Function clear_cache() called by wp_ajax hooks: {'ha_clear_cache'} **/
+/** Parameters found in function clear_cache(): {"post": ["type", "post_id"]} **/
+function clear_cache() {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+
+		if ( ! check_ajax_referer( 'ha_clear_cache', 'nonce' ) ) {
+			wp_send_json_error();
+		}
+
+		$type = isset( $_POST['type'] ) ? $_POST['type'] : '';
+		$post_id = isset( $_POST['post_id'] ) ? $_POST['post_id'] : 0;
+		$assets_cache = new Assets_Cache( $post_id );
+		if ( $type === 'page' ) {
+			$assets_cache->delete();
+		} elseif ( $type === 'all' ) {
+			$assets_cache->delete_all();
+		}
+		wp_send_json_success();
+	}
+
+
+/** Function ha_get_template_type() called by wp_ajax hooks: {'ha_cond_template_type'} **/
+/** Parameters found in function ha_get_template_type(): {"request": ["post_id"]} **/
+function ha_get_template_type() {
+        try {
+            //$this->validate_reqeust();
+
+            $id = isset($_REQUEST['post_id']) ? $_REQUEST['post_id'] : null;
+            if ($id) {
+                $tpl_type = get_post_meta($id, '_ha_library_type', true);
+                wp_send_json_success($tpl_type);
+            } else {
+                wp_send_json_error();
+            }
+            //_ha_display_cond;
+        } catch (Exception $e) {
+            wp_send_json_error($e->getMessage());
+        }
+    }
+
+
+/** Function process_condition_update() called by wp_ajax hooks: {'ha_condition_update'} **/
+/** Parameters found in function process_condition_update(): {"request": ["template_id", "conds"]} **/
+function process_condition_update() {
+        try {
+            $this->validate_reqeust();
+            $templateID = isset($_REQUEST['template_id']) ? $_REQUEST['template_id'] : null;
+            $requestConditions = isset($_REQUEST['conds']) ? $_REQUEST['conds'] : [];
+
+            $exitsConditions = get_post_meta($templateID, '_ha_display_cond', true);
+
+            $mergedConditions = !empty( $exitsConditions ) ? array_diff($requestConditions, $exitsConditions) : $requestConditions;
+
+            if ($templateID) {
+
+                $allExtitsCondition = $this->ha_get_all_conditions();
+                $templateType = get_post_meta($templateID, '_ha_library_type', true);
+
+                $duplicate = $this->ha_check_template_conditions($templateType, $requestConditions, $mergedConditions, $allExtitsCondition);
+
+                if (!$duplicate) {
+                    $cond = update_post_meta($templateID, '_ha_display_cond', array_unique($requestConditions));
+                    $updates = get_post_meta($templateID, '_ha_display_cond');
+
+                    if($cond != null) {
+                        $this->cache->regenerate();
+                        wp_send_json_success($updates);
+                    }else {
+                        wp_send_json_error();
+                    }
+                } else {
+                    wp_send_json_error(['msg' => esc_html__('Unable to save, conflicting include exclude condition detected. Please change the conditions accordingly.', 'happy-elementor-addons')]);
+                }
+
+            } else {
+
+                wp_send_json_error();
+            }
+
+            //_ha_display_cond;
+        } catch (Exception $e) {
+            wp_send_json_error($e->getMessage());
+        }
+    }
+
+
+/** Function post_tab() called by wp_ajax hooks: {'ha_post_tab_action', 'nopriv_ha_post_tab_action'} **/
 /** Parameters found in function post_tab(): {"post": ["post_tab_query", "term_id"]} **/
 function post_tab() {
 
@@ -503,20 +493,30 @@ function post_tab() {
 	}
 
 
-/** Function process_ignore_request() called by wp_ajax hooks: {'ignore_attention_seeker'} **/
-/** Parameters found in function process_ignore_request(): {"post": ["nonce", "id"]} **/
-function process_ignore_request() {
-        $nonce = isset( $_POST['nonce'] ) ? $_POST['nonce'] : '';
-        $id = isset( $_POST['id'] ) ? $_POST['id'] : '';
-
-        if ( wp_verify_nonce( $nonce, 'ignore_attention_seeker' ) && $id ) {
-            $seeker = wp_list_filter( self::get_attentions(), ['_id' => $id] );
-            $expire_date = $seeker[0]['end_date'] - time();
-            set_transient( self::generate_db_key( $id ), 'ignore', $expire_date );
-            wp_send_json_success();
+/** Function ha_get_current_condition() called by wp_ajax hooks: {'ha_cond_get_current'} **/
+/** Parameters found in function ha_get_current_condition(): {"request": ["template_id"]} **/
+function ha_get_current_condition() {
+        try {
+            // $this->validate_reqeust();
+            $templateID = isset($_REQUEST['template_id']) ? $_REQUEST['template_id'] : null;
+            // wp_send_json_success($templateID);
+            if ($templateID) {
+                $cond = get_post_meta($templateID, '_ha_display_cond', true);
+                if ($cond) {
+                    ob_start();
+                    $this->cond_to_html($cond);
+                    $html = ob_get_contents();
+                    ob_end_clean();
+                    wp_send_json_success($html);
+                } else {
+                    wp_send_json_error();
+                }
+            } else {
+                wp_send_json_error();
+            }
+        } catch (Exception $e) {
+            wp_send_json_error($e->getMessage());
         }
-
-        exit;
     }
 
 

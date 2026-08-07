@@ -5,7 +5,7 @@
 *Found functions:2
 *Extracted functions:2
 *Total parameter names extracted: 3
-*Overview: {'ai_ajax_backend': {'ai_ajax_backend'}, 'ai_ajax': {'ai_ajax', 'nopriv_ai_ajax'}}
+*Overview: {'ai_ajax_backend': {'ai_ajax_backend'}, 'ai_ajax': {'nopriv_ai_ajax', 'ai_ajax'}}
 *
 ***/
 
@@ -326,7 +326,7 @@ function ai_ajax_backend () {
 }
 
 
-/** Function ai_ajax() called by wp_ajax hooks: {'ai_ajax', 'nopriv_ai_ajax'} **/
+/** Function ai_ajax() called by wp_ajax hooks: {'nopriv_ai_ajax', 'ai_ajax'} **/
 /** Parameters found in function ai_ajax(): {"get": ["block", "cookie_check", "cookie_check_url", "virtual"]} **/
 function ai_ajax () {
   global $ai_wp_data;

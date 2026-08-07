@@ -1,0 +1,42 @@
+{
+  "target": "http://web/wp-admin/admin-ajax.php",
+  "methods": [
+    "POST"
+  ],
+  "body_params": {
+    "weight": 1,
+    "fixed": [],
+    "fuzz": [
+      "return_url",
+      "connection_id",
+      "connect_args"
+    ],
+    "data": [
+      {
+        "name": "return_url",
+        "value": "fuzz"
+      },
+      {
+        "name": "connection_id",
+        "value": "fuzz"
+      },
+      {
+        "name": "connect_args",
+        "value": "fuzz"
+      }
+    ]
+  },
+  "query_params": {
+    "weight": 1,
+    "fixed": [
+      "action"
+    ],
+    "fuzz": [],
+    "data": [
+      {
+        "name": "action",
+        "value": "wp_mail_smtp_sendlayer_connect"
+      }
+    ]
+  }
+}

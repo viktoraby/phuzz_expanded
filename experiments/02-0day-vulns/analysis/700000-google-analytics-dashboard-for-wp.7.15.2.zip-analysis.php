@@ -5,9 +5,1254 @@
 *Found functions:67
 *Extracted functions:67
 *Total parameter names extracted: 47
-*Overview: {'get_report_data': {'exactmetrics_vue_get_report_data'}, 'ajax_start_indexing': {'exactmetrics_sharedcount_start_indexing'}, 'dismiss_first_time_notice': {'exactmetrics_vue_dismiss_first_time_notice'}, 'exactmetrics_handle_get_plugin_info': {'nopriv_exactmetrics_get_plugin_info'}, 'exactmetrics_mark_floatbar_hidden': {'exactmetrics_hide_floatbar'}, 'dismiss': {'exactmetrics_notification_dismiss'}, 'test_check_tracking_code': {'health-check-exactmetrics-test_tracking_code'}, 'update_dual_tracking_id': {'exactmetrics_update_dual_tracking_id'}, 'delete_categories': {'exactmetrics_vue_delete_categories'}, 'get_addons': {'exactmetrics_vue_get_addons'}, 'exactmetrics_get_floatbar': {'exactmetrics_get_floatbar'}, 'rauthenticate': {'nopriv_exactmetrics_rauthenticate'}, 'check_popular_posts_report': {'exactmetrics_vue_grab_popular_posts_report'}, 'delete_notes': {'exactmetrics_vue_delete_notes'}, 'exactmetrics_get_sem_rush_cta_status': {'exactmetrics_get_sem_rush_cta_status'}, 'update_manual_v4': {'exactmetrics_update_manual_v4'}, 'test_check_connection': {'health-check-exactmetrics-test_connection'}, 'update_popular_posts_theme_setting': {'exactmetrics_vue_popular_posts_update_theme_setting'}, 'ajax_get_themes': {'exactmetrics_get_popular_posts_themes'}, 'maybe_authenticate': {'exactmetrics_maybe_authenticate'}, 'maybe_reauthenticate': {'exactmetrics_maybe_reauthenticate'}, 'update_settings_bulk': {'exactmetrics_vue_update_settings_bulk'}, 'handle_relay_mp_token_push': {'nopriv_exactmetrics_push_mp_token'}, 'exactmetrics_ajax_deactivate_addon': {'exactmetrics_deactivate_addon'}, 'save_widget_state': {'exactmetrics_save_widget_state'}, 'generate_connect_url': {'exactmetrics_connect_url'}, 'maybe_delete': {'exactmetrics_maybe_delete'}, 'update_settings': {'exactmetrics_vue_update_settings'}, 'get_license': {'exactmetrics_vue_get_license'}, 'update_measurement_protocol_secret': {'exactmetrics_update_measurement_protocol_secret'}, 'exactmetrics_ajax_dismiss_notice': {'exactmetrics_ajax_dismiss_notice'}, 'save_note': {'exactmetrics_vue_save_note'}, 'get_notice_status': {'exactmetrics_vue_notice_status'}, 'get_posts': {'exactmetrics_get_posts'}, 'get_settings': {'exactmetrics_vue_get_settings'}, 'get_note': {'exactmetrics_vue_get_note'}, 'save_category': {'exactmetrics_vue_save_category'}, 'exactmetrics_handle_ga_queue_response': {'nopriv_exactmetrics_handle_ga_queue_response'}, 'trash_notes': {'exactmetrics_vue_trash_notes'}, 'exactmetrics_mark_admin_menu_tooltip_hidden': {'exactmetrics_hide_admin_menu_tooltip'}, 'mark_notice_closed': {'exactmetrics_mark_notice_closed'}, 'exactmetrics_ajax_activate_addon': {'exactmetrics_activate_addon'}, 'exactmetrics_ajax_install_addon': {'exactmetrics_install_addon'}, 'exactmetrics_dismiss_tracking_notice': {'exactmetrics_dismiss_tracking_notice'}, 'install_and_activate_wpforms': {'exactmetrics_onboarding_wpforms_install'}, 'get_notes': {'exactmetrics_vue_get_notes'}, 'is_installed': {'nopriv_exactmetrics_is_installed'}, 'maybe_verify': {'exactmetrics_maybe_verify'}, 'ajax_get_notifications': {'exactmetrics_vue_get_notifications'}, 'maybe_add_notifications': {'exactmetrics_vue_get_notifications'}, 'ajax_get_index_progress': {'exactmetrics_sharedcount_get_index_progress'}, 'get_profile': {'exactmetrics_vue_get_profile'}, 'get_install_errors': {'exactmetrics_onboarding_get_errors'}, 'handle_settings_import': {'exactmetrics_handle_settings_import'}, 'get_result': {'exactmetrics_gutenberg_headline_analyzer_get_results'}, 'review_dismiss': {'exactmetrics_review_dismiss'}, 'get_post_types': {'exactmetrics_get_post_types'}, 'get_categories': {'exactmetrics_vue_get_categories'}, 'update_manual_ua': {'exactmetrics_update_manual_ua'}, 'get_taxonomy_terms': {'exactmetrics_get_terms'}, 'restore_notes': {'exactmetrics_vue_restore_notes'}, 'get_ajax_output': {'nopriv_exactmetrics_popular_posts_get_widget_output', 'exactmetrics_popular_posts_get_widget_output'}, 'install_plugin': {'exactmetrics_vue_install_plugin'}, 'dismiss_notice': {'exactmetrics_vue_notice_dismiss'}, 'process': {'nopriv_exactmetrics_connect_process'}, 'exactmetrics_ajax_dismiss_semrush_cta': {'exactmetrics_vue_dismiss_semrush_cta'}, 'empty_cache': {'exactmetrics_popular_posts_empty_cache'}}
+*Overview: {'save_note': {'exactmetrics_vue_save_note'}, 'dismiss_notice': {'exactmetrics_vue_notice_dismiss'}, 'update_dual_tracking_id': {'exactmetrics_update_dual_tracking_id'}, 'install_plugin': {'exactmetrics_vue_install_plugin'}, 'exactmetrics_get_sem_rush_cta_status': {'exactmetrics_get_sem_rush_cta_status'}, 'update_manual_v4': {'exactmetrics_update_manual_v4'}, 'exactmetrics_ajax_dismiss_notice': {'exactmetrics_ajax_dismiss_notice'}, 'get_note': {'exactmetrics_vue_get_note'}, 'get_ajax_output': {'exactmetrics_popular_posts_get_widget_output', 'nopriv_exactmetrics_popular_posts_get_widget_output'}, 'maybe_add_notifications': {'exactmetrics_vue_get_notifications'}, 'get_posts': {'exactmetrics_get_posts'}, 'save_widget_state': {'exactmetrics_save_widget_state'}, 'get_categories': {'exactmetrics_vue_get_categories'}, 'exactmetrics_ajax_install_addon': {'exactmetrics_install_addon'}, 'get_notes': {'exactmetrics_vue_get_notes'}, 'restore_notes': {'exactmetrics_vue_restore_notes'}, 'maybe_authenticate': {'exactmetrics_maybe_authenticate'}, 'get_license': {'exactmetrics_vue_get_license'}, 'exactmetrics_mark_admin_menu_tooltip_hidden': {'exactmetrics_hide_admin_menu_tooltip'}, 'install_and_activate_wpforms': {'exactmetrics_onboarding_wpforms_install'}, 'get_post_types': {'exactmetrics_get_post_types'}, 'ajax_get_themes': {'exactmetrics_get_popular_posts_themes'}, 'exactmetrics_ajax_deactivate_addon': {'exactmetrics_deactivate_addon'}, 'dismiss': {'exactmetrics_notification_dismiss'}, 'delete_notes': {'exactmetrics_vue_delete_notes'}, 'generate_connect_url': {'exactmetrics_connect_url'}, 'exactmetrics_mark_floatbar_hidden': {'exactmetrics_hide_floatbar'}, 'ajax_start_indexing': {'exactmetrics_sharedcount_start_indexing'}, 'handle_relay_mp_token_push': {'nopriv_exactmetrics_push_mp_token'}, 'get_taxonomy_terms': {'exactmetrics_get_terms'}, 'check_popular_posts_report': {'exactmetrics_vue_grab_popular_posts_report'}, 'maybe_reauthenticate': {'exactmetrics_maybe_reauthenticate'}, 'test_check_tracking_code': {'health-check-exactmetrics-test_tracking_code'}, 'mark_notice_closed': {'exactmetrics_mark_notice_closed'}, 'empty_cache': {'exactmetrics_popular_posts_empty_cache'}, 'ajax_get_notifications': {'exactmetrics_vue_get_notifications'}, 'get_notice_status': {'exactmetrics_vue_notice_status'}, 'exactmetrics_dismiss_tracking_notice': {'exactmetrics_dismiss_tracking_notice'}, 'review_dismiss': {'exactmetrics_review_dismiss'}, 'exactmetrics_handle_ga_queue_response': {'nopriv_exactmetrics_handle_ga_queue_response'}, 'exactmetrics_ajax_activate_addon': {'exactmetrics_activate_addon'}, 'is_installed': {'nopriv_exactmetrics_is_installed'}, 'get_report_data': {'exactmetrics_vue_get_report_data'}, 'get_install_errors': {'exactmetrics_onboarding_get_errors'}, 'ajax_get_index_progress': {'exactmetrics_sharedcount_get_index_progress'}, 'update_manual_ua': {'exactmetrics_update_manual_ua'}, 'dismiss_first_time_notice': {'exactmetrics_vue_dismiss_first_time_notice'}, 'get_profile': {'exactmetrics_vue_get_profile'}, 'update_settings_bulk': {'exactmetrics_vue_update_settings_bulk'}, 'handle_settings_import': {'exactmetrics_handle_settings_import'}, 'get_result': {'exactmetrics_gutenberg_headline_analyzer_get_results'}, 'get_addons': {'exactmetrics_vue_get_addons'}, 'rauthenticate': {'nopriv_exactmetrics_rauthenticate'}, 'maybe_verify': {'exactmetrics_maybe_verify'}, 'get_settings': {'exactmetrics_vue_get_settings'}, 'maybe_delete': {'exactmetrics_maybe_delete'}, 'delete_categories': {'exactmetrics_vue_delete_categories'}, 'update_popular_posts_theme_setting': {'exactmetrics_vue_popular_posts_update_theme_setting'}, 'exactmetrics_handle_get_plugin_info': {'nopriv_exactmetrics_get_plugin_info'}, 'exactmetrics_get_floatbar': {'exactmetrics_get_floatbar'}, 'update_measurement_protocol_secret': {'exactmetrics_update_measurement_protocol_secret'}, 'save_category': {'exactmetrics_vue_save_category'}, 'trash_notes': {'exactmetrics_vue_trash_notes'}, 'exactmetrics_ajax_dismiss_semrush_cta': {'exactmetrics_vue_dismiss_semrush_cta'}, 'update_settings': {'exactmetrics_vue_update_settings'}, 'process': {'nopriv_exactmetrics_connect_process'}, 'test_check_connection': {'health-check-exactmetrics-test_connection'}}
 *
 ***/
+
+/** Function save_note() called by wp_ajax hooks: {'exactmetrics_vue_save_note'} **/
+/** Parameters found in function save_note(): {"post": ["note"]} **/
+function save_note()
+	{
+		check_ajax_referer('mi-admin-nonce', 'nonce');
+
+		$note = !empty($_POST['note']) ? json_decode(html_entity_decode(stripslashes($_POST['note']))) : [];
+
+		$note_details = array(
+			'note' => sanitize_text_field($note->note_title),
+			'category' => intval(is_object($note->category) && isset($note->category->id) && intval($note->category->id) ? $note->category->id : 0),
+			'date' => $note->note_date_ymd,
+			'medias' => !empty($note->medias) ? array_values(array_keys((array) $note->medias)) : [],
+			'important' => isset($note->important) ? $note->important : false,
+		);
+
+		if ($note->id) {
+			// Update Site Note.
+			$note_details['id'] = $note->id;
+		}
+
+		$note_id = $this->db->create($note_details);
+
+		if (is_wp_error($note_id)) {
+			wp_send_json(
+				array(
+					'published' => false,
+					'message' => $note_id->get_error_message(),
+				)
+			);
+		}
+
+		wp_send_json(
+			array(
+				'published' => true,
+				'message' => '',
+				'id' => $note_id,
+			)
+		);
+	}
+
+
+/** Function dismiss_notice() called by wp_ajax hooks: {'exactmetrics_vue_notice_dismiss'} **/
+/** Parameters found in function dismiss_notice(): {"post": ["notice"]} **/
+function dismiss_notice() {
+
+		check_ajax_referer( 'mi-admin-nonce', 'nonce' );
+
+		$notice_id = empty( $_POST['notice'] ) ? false : sanitize_text_field( wp_unslash( $_POST['notice'] ) );
+		if ( ! $notice_id ) {
+			wp_send_json_error();
+		}
+		ExactMetrics()->notices->dismiss( $notice_id );
+
+		wp_send_json_success();
+	}
+
+
+/** Function update_dual_tracking_id() called by wp_ajax hooks: {'exactmetrics_update_dual_tracking_id'} **/
+/** Parameters found in function update_dual_tracking_id(): {"request": ["isnetwork", "value"]} **/
+function update_dual_tracking_id() {
+		check_ajax_referer( 'mi-admin-nonce', 'nonce' );
+
+		if ( ! current_user_can( 'exactmetrics_save_settings' ) ) {
+			return;
+		}
+
+		if ( ! empty( $_REQUEST['isnetwork'] ) && sanitize_text_field( wp_unslash( $_REQUEST['isnetwork'] ) ) ) {
+			define( 'WP_NETWORK_ADMIN', true );
+		}
+
+		$value              = empty( $_REQUEST['value'] ) ? '' : sanitize_text_field( wp_unslash( $_REQUEST['value'] ) );
+		$sanitized_ua_value = exactmetrics_is_valid_ua( $value );
+		$sanitized_v4_value = exactmetrics_is_valid_v4_id( $value );
+
+		if ( $sanitized_v4_value ) {
+			$value = $sanitized_v4_value;
+		} elseif ( $sanitized_ua_value ) {
+			$value = $sanitized_ua_value;
+		} elseif ( ! empty( $value ) ) {
+			$url = exactmetrics_get_url( 'notice', 'invalid-dual-code', 'https://www.exactmetrics.com/docs/how-to-set-up-dual-tracking/' );
+			// Translators: Link to help article.
+			wp_send_json_error( array(
+				'error' => sprintf( __( 'Oops! We detected an invalid tracking code. Please verify that both your %1$sUniversal Analytics Tracking ID%2$s and %3$sGoogle Analytics 4 Measurement ID%4$s are valid.', 'google-analytics-dashboard-for-wp' ), '<a target="_blank" href="' . $url . '">', '</a>', '<a target="_blank" href="' . $url . '">', '</a>' ),
+			) );
+		}
+
+		$auth = ExactMetrics()->auth;
+
+		if ( is_network_admin() ) {
+			$auth->set_network_dual_tracking_id( $value );
+		} else {
+			$auth->set_dual_tracking_id( $value );
+		}
+
+		wp_send_json_success();
+	}
+
+
+/** Function install_plugin() called by wp_ajax hooks: {'exactmetrics_vue_install_plugin'} **/
+/** Parameters found in function install_plugin(): {"post": ["slug"]} **/
+function install_plugin() {
+		check_ajax_referer( 'mi-admin-nonce', 'nonce' );
+
+		if ( ! exactmetrics_can_install_plugins() ) {
+			wp_send_json( array(
+				'error' => esc_html__( 'Oops! You are not allowed to install plugins. Please contact your website administrator for further assistance.', 'google-analytics-dashboard-for-wp' ),
+			) );
+		}
+
+		$slug = isset( $_POST['slug'] ) ? sanitize_text_field( wp_unslash( $_POST['slug'] ) ) : false;
+
+		if ( ! $slug ) {
+			wp_send_json( array(
+				'message' => esc_html__( 'Missing plugin name.', 'google-analytics-dashboard-for-wp' ),
+			) );
+		}
+
+		include_once ABSPATH . 'wp-admin/includes/plugin-install.php';
+
+		$api = plugins_api( 'plugin_information', array(
+			'slug'   => $slug,
+			'fields' => array(
+				'short_description' => false,
+				'sections'          => false,
+				'requires'          => false,
+				'rating'            => false,
+				'ratings'           => false,
+				'downloaded'        => false,
+				'last_updated'      => false,
+				'added'             => false,
+				'tags'              => false,
+				'compatibility'     => false,
+				'homepage'          => false,
+				'donate_link'       => false,
+			),
+		) );
+
+		if ( is_wp_error( $api ) ) {
+			return $api->get_error_message();
+		}
+
+		$download_url = $api->download_link;
+
+		$method = '';
+		$url    = add_query_arg(
+			array(
+				'page' => 'exactmetrics-settings',
+			),
+			admin_url( 'admin.php' )
+		);
+		$url    = esc_url( $url );
+
+		ob_start();
+		if ( false === ( $creds = request_filesystem_credentials( $url, $method, false, false, null ) ) ) {
+			$form = ob_get_clean();
+
+			wp_send_json( array( 'form' => $form ) );
+		}
+
+		// If we are not authenticated, make it happen now.
+		if ( ! WP_Filesystem( $creds ) ) {
+			ob_start();
+			request_filesystem_credentials( $url, $method, true, false, null );
+			$form = ob_get_clean();
+
+			wp_send_json( array( 'form' => $form ) );
+
+		}
+
+		// We do not need any extra credentials if we have gotten this far, so let's install the plugin.
+		exactmetrics_require_upgrader();
+
+		// Prevent language upgrade in ajax calls.
+		remove_action( 'upgrader_process_complete', array( 'Language_Pack_Upgrader', 'async_upgrade' ), 20 );
+		// Create the plugin upgrader with our custom skin.
+		$installer = new ExactMetrics_Plugin_Upgrader( new ExactMetrics_Skin() );
+		$installer->install( $download_url );
+
+		// Flush the cache and return the newly installed plugin basename.
+		wp_cache_flush();
+		wp_send_json_success();
+
+		wp_die();
+	}
+
+
+/** Function exactmetrics_get_sem_rush_cta_status() called by wp_ajax hooks: {'exactmetrics_get_sem_rush_cta_status'} **/
+/** No params detected :-/ **/
+
+
+/** Function update_manual_v4() called by wp_ajax hooks: {'exactmetrics_update_manual_v4'} **/
+/** Parameters found in function update_manual_v4(): {"post": ["manual_v4_code"], "request": ["isnetwork"]} **/
+function update_manual_v4() {
+
+		check_ajax_referer( 'mi-admin-nonce', 'nonce' );
+
+		if ( ! current_user_can( 'exactmetrics_save_settings' ) ) {
+			return;
+		}
+
+		$manual_v4_code = isset( $_POST['manual_v4_code'] ) ? sanitize_text_field( wp_unslash( $_POST['manual_v4_code'] ) ) : '';
+		$manual_v4_code = exactmetrics_is_valid_v4_id( $manual_v4_code ); // Also sanitizes the string.
+
+		if ( ! empty( $_REQUEST['isnetwork'] ) && sanitize_text_field( wp_unslash( $_REQUEST['isnetwork'] ) ) ) {
+			define( 'WP_NETWORK_ADMIN', true );
+		}
+		$manual_v4_code_old = is_network_admin() ? ExactMetrics()->auth->get_network_manual_v4_id() : ExactMetrics()->auth->get_manual_v4_id();
+
+		if ( $manual_v4_code && $manual_v4_code_old && $manual_v4_code_old === $manual_v4_code ) {
+			// Same code we had before
+			// Do nothing.
+			wp_send_json_success();
+		} else if ( $manual_v4_code && $manual_v4_code_old && $manual_v4_code_old !== $manual_v4_code ) {
+			// Different UA code.
+			if ( is_network_admin() ) {
+				ExactMetrics()->auth->set_network_manual_v4_id( $manual_v4_code );
+			} else {
+				ExactMetrics()->auth->set_manual_v4_id( $manual_v4_code );
+			}
+		} else if ( $manual_v4_code && empty( $manual_v4_code_old ) ) {
+			// Move to manual.
+			if ( is_network_admin() ) {
+				ExactMetrics()->auth->set_network_manual_v4_id( $manual_v4_code );
+			} else {
+				ExactMetrics()->auth->set_manual_v4_id( $manual_v4_code );
+			}
+		} else if ( empty( $manual_v4_code ) && $manual_v4_code_old ) {
+			// Deleted manual.
+			if ( is_network_admin() ) {
+				ExactMetrics()->auth->delete_network_manual_v4_id();
+			} else {
+				ExactMetrics()->auth->delete_manual_v4_id();
+			}
+		} else if ( isset( $_POST['manual_v4_code'] ) && empty( $manual_v4_code ) ) {
+			wp_send_json_error( array(
+				'v4_error' => 1,
+				// Translators: link tag starts with url, link tag ends.
+				'error'    => sprintf(
+					__( 'Oops! Please enter a valid Google Analytics 4 Measurement ID. %1$sLearn how to find your Measurement ID%2$s.', 'google-analytics-dashboard-for-wp' ),
+					'<a target="_blank" href="' . exactmetrics_get_url( 'notice', 'invalid-manual-gav4-code', 'https://www.exactmetrics.com/docs/how-to-set-up-dual-tracking/' ) . '">',
+					'</a>'
+				),
+			) );
+		}
+
+		wp_send_json_success();
+	}
+
+
+/** Function exactmetrics_ajax_dismiss_notice() called by wp_ajax hooks: {'exactmetrics_ajax_dismiss_notice'} **/
+/** Parameters found in function exactmetrics_ajax_dismiss_notice(): {"post": ["notice"]} **/
+function exactmetrics_ajax_dismiss_notice() {
+
+	// Run a security check first.
+	check_ajax_referer( 'exactmetrics-dismiss-notice', 'nonce' );
+
+	// Deactivate the notice
+	if ( isset( $_POST['notice'] ) ) {
+		// Init the notice class and mark notice as deactivated
+		ExactMetrics()->notices->dismiss( $_POST['notice'] );
+
+		// Return true
+		echo json_encode( true );
+		wp_die();
+	}
+
+	// If here, an error occurred
+	echo json_encode( false );
+	wp_die();
+
+}
+
+
+/** Function get_note() called by wp_ajax hooks: {'exactmetrics_vue_get_note'} **/
+/** Parameters found in function get_note(): {"post": ["id"]} **/
+function get_note()
+	{
+		check_ajax_referer('mi-admin-nonce', 'nonce');
+
+		$id = !empty($_POST['id']) ? intval($_POST['id']) : null;
+		$item = $this->db->get($id);
+
+		if (is_wp_error($item)) {
+			wp_send_json(
+				array(
+					'success' => false,
+					'message' => $item->get_error_message(),
+				)
+			);
+		}
+
+		wp_send_json($item);
+	}
+
+
+/** Function get_ajax_output() called by wp_ajax hooks: {'exactmetrics_popular_posts_get_widget_output', 'nopriv_exactmetrics_popular_posts_get_widget_output'} **/
+/** Parameters found in function get_ajax_output(): {"post": ["data"]} **/
+function get_ajax_output() {
+
+		if ( empty( $_POST['data'] ) || ! is_array( $_POST['data'] ) ) {
+			return;
+		}
+
+		$html         = array();
+		$widgets_args = $_POST['data']; // phpcs:ignore
+
+		foreach ( $widgets_args as $args ) {
+			$args = json_decode( sanitize_text_field( wp_unslash( $args ) ), true );
+			if ( ! empty( $args['type'] ) ) {
+				$type            = ucfirst( $args['type'] );
+				$widget_function = function_exists( 'ExactMetrics_Popular_Posts_' . $type ) ? call_user_func( 'ExactMetrics_Popular_Posts_' . $type ) : false;
+				if ( $widget_function ) {
+					$html[] = $widget_function->get_rendered_html( $args );
+				}
+			}
+		}
+
+		wp_send_json( $html );
+	}
+
+
+/** Function maybe_add_notifications() called by wp_ajax hooks: {'exactmetrics_vue_get_notifications'} **/
+/** No params detected :-/ **/
+
+
+/** Function get_posts() called by wp_ajax hooks: {'exactmetrics_get_posts'} **/
+/** Parameters found in function get_posts(): {"post": ["post_type", "keyword", "numberposts"]} **/
+function get_posts() {
+
+		// Run a security check first.
+		check_ajax_referer( 'mi-admin-nonce', 'nonce' );
+
+		$post_type = isset( $_POST['post_type'] ) ? sanitize_text_field( wp_unslash( $_POST['post_type'] ) ) : 'any';
+
+		$args = array(
+			's'              => isset( $_POST['keyword'] ) ? sanitize_text_field( wp_unslash( $_POST['keyword'] ) ) : '',
+			'post_type'      => $post_type,
+			'posts_per_page' => isset( $_POST['numberposts'] ) ? sanitize_text_field( wp_unslash( $_POST['numberposts'] ) ) : 10,
+			'orderby'        => 'relevance',
+		);
+
+		$array = array();
+		$posts = get_posts( $args );
+
+		if ( in_array( $post_type, array( 'page', 'any' ), true ) ) {
+			$homepage = get_option( 'page_on_front' );
+			if ( ! $homepage ) {
+				$array[] = array(
+					'id'    => - 1,
+					'title' => __( 'Homepage', 'google-analytics-dashboard-for-wp' ),
+				);
+			}
+		}
+
+		if ( $posts ) {
+			foreach ( $posts as $post ) {
+				$array[] = array(
+					'id'    => $post->ID,
+					'title' => $post->post_title,
+				);
+			}
+		}
+
+		wp_send_json_success( $array );
+	}
+
+
+/** Function save_widget_state() called by wp_ajax hooks: {'exactmetrics_save_widget_state'} **/
+/** Parameters found in function save_widget_state(): {"post": ["reports", "width", "interval", "compact"]} **/
+function save_widget_state() {
+
+		check_ajax_referer( 'mi-admin-nonce', 'nonce' );
+
+		$default         = self::$default_options;
+		$current_options = $this->get_options();
+
+		$reports = $default['reports'];
+		if ( isset( $_POST['reports'] ) ) {
+			$reports = json_decode( sanitize_text_field( wp_unslash( $_POST['reports'] ) ), true );
+		}
+
+		$options = array(
+			'width'       => ! empty( $_POST['width'] ) ? sanitize_text_field( wp_unslash( $_POST['width'] ) ) : $default['width'],
+			'interval'    => ! empty( $_POST['interval'] ) ? absint( wp_unslash( $_POST['interval'] ) ) : $default['interval'],
+			'compact'     => ! empty( $_POST['compact'] ) ? 'true' === sanitize_text_field( wp_unslash( $_POST['compact'] ) ) : $default['compact'],
+			'reports'     => $reports,
+			'notice30day' => $current_options['notice30day'],
+		);
+
+		array_walk( $options, 'sanitize_text_field' );
+		update_user_meta( get_current_user_id(), 'exactmetrics_user_preferences', $options );
+
+		wp_send_json_success();
+
+	}
+
+
+/** Function get_categories() called by wp_ajax hooks: {'exactmetrics_vue_get_categories'} **/
+/** Parameters found in function get_categories(): {"post": ["params"]} **/
+function get_categories()
+	{
+		check_ajax_referer('mi-admin-nonce', 'nonce');
+
+		$params = !empty($_POST['params']) ? json_decode(html_entity_decode(stripslashes($_POST['params'])), true) : [];
+
+		$args = wp_parse_args($params, array(
+			'per_page' => -1,
+			'page' => 1,
+			'orderby' => 'name',
+			'order' => 'asc',
+		));
+
+		$total = intval($this->db->get_categories($args, true));
+
+		if ($total) {
+			$items = $this->db->get_categories($args);
+		} else {
+			$items = array();
+		}
+
+		wp_send_json(
+			array(
+				'items' => $items,
+				'pagination' => array(
+					'total' => $total,
+					'pages' => ceil($total / $args['per_page']),
+					'page'  => $args['page'],
+					'per_page' => $args['per_page'],
+				),
+			)
+		);
+	}
+
+
+/** Function exactmetrics_ajax_install_addon() called by wp_ajax hooks: {'exactmetrics_install_addon'} **/
+/** Parameters found in function exactmetrics_ajax_install_addon(): {"post": ["plugin"]} **/
+function exactmetrics_ajax_install_addon() {
+
+	// Run a security check first.
+	check_ajax_referer( 'exactmetrics-install', 'nonce' );
+
+	if ( ! exactmetrics_can_install_plugins() ) {
+		wp_send_json( array(
+			'error' => esc_html__( 'You are not allowed to install plugins', 'google-analytics-dashboard-for-wp' ),
+		) );
+	}
+
+	// Install the addon.
+	if ( isset( $_POST['plugin'] ) ) {
+		$download_url = $_POST['plugin'];
+		global $hook_suffix;
+
+		// Set the current screen to avoid undefined notices.
+		set_current_screen();
+
+		// Prepare variables.
+		$method = '';
+		$url    = add_query_arg(
+			array(
+				'page' => 'exactmetrics-settings'
+			),
+			admin_url( 'admin.php' )
+		);
+		$url    = esc_url( $url );
+
+		// Start output bufferring to catch the filesystem form if credentials are needed.
+		ob_start();
+		if ( false === ( $creds = request_filesystem_credentials( $url, $method, false, false, null ) ) ) {
+			$form = ob_get_clean();
+			echo json_encode( array( 'form' => $form ) );
+			wp_die();
+		}
+
+		// If we are not authenticated, make it happen now.
+		if ( ! WP_Filesystem( $creds ) ) {
+			ob_start();
+			request_filesystem_credentials( $url, $method, true, false, null );
+			$form = ob_get_clean();
+			echo json_encode( array( 'form' => $form ) );
+			wp_die();
+		}
+
+		// We do not need any extra credentials if we have gotten this far, so let's install the plugin.
+		exactmetrics_require_upgrader( false );
+
+		// Create the plugin upgrader with our custom skin.
+		$installer = new Plugin_Upgrader( $skin = new ExactMetrics_Skin() );
+		$installer->install( $download_url );
+
+		// Flush the cache and return the newly installed plugin basename.
+		wp_cache_flush();
+		if ( $installer->plugin_info() ) {
+			$plugin_basename = $installer->plugin_info();
+			echo json_encode( array( 'plugin' => $plugin_basename ) );
+			wp_die();
+		}
+	}
+
+	// Send back a response.
+	echo json_encode( true );
+	wp_die();
+
+}
+
+
+/** Function get_notes() called by wp_ajax hooks: {'exactmetrics_vue_get_notes'} **/
+/** Parameters found in function get_notes(): {"post": ["params"]} **/
+function get_notes()
+	{
+		check_ajax_referer('mi-admin-nonce', 'nonce');
+
+		$params = !empty($_POST['params']) ? json_decode(html_entity_decode(stripslashes($_POST['params'])), true) : [];
+
+		$output = $this->prepare_notes($params);
+
+		$num_posts = wp_count_posts('exactmetrics_note', 'readable');
+
+		if ($num_posts) {
+			$output['status_filters'] = array(
+				array(
+					'status' => 'all',
+					'count'  => array_sum((array) $num_posts) - $num_posts->trash,
+				),
+			);
+
+			foreach ($num_posts as $status => $count) {
+				if (0 >= $count) {
+					continue;
+				}
+
+				$output['status_filters'][] = array(
+					'status' => $status,
+					'count'  => $count,
+				);
+			}
+		}
+
+		wp_send_json($output);
+	}
+
+
+/** Function restore_notes() called by wp_ajax hooks: {'exactmetrics_vue_restore_notes'} **/
+/** Parameters found in function restore_notes(): {"post": ["ids"]} **/
+function restore_notes()
+	{
+		check_ajax_referer('mi-admin-nonce', 'nonce');
+
+		$ids = !empty($_POST['ids']) ? json_decode(html_entity_decode(stripslashes($_POST['ids']))) : [];
+
+		if (empty($ids)) {
+			wp_send_json(
+				array(
+					'success' => false,
+					'message' => __('Please choose a site note(s) to restore!', 'google-analytics-dashboard-for-wp'),
+				)
+			);
+		}
+
+		foreach ($ids as $id) {
+			$this->db->restore_note($id);
+		}
+
+		wp_send_json(
+			array(
+				'success' => true,
+				'message' => '',
+			)
+		);
+	}
+
+
+/** Function maybe_authenticate() called by wp_ajax hooks: {'exactmetrics_maybe_authenticate'} **/
+/** Parameters found in function maybe_authenticate(): {"request": ["isnetwork"]} **/
+function maybe_authenticate() {
+
+		// Check nonce
+		check_ajax_referer( 'mi-admin-nonce', 'nonce' );
+
+		// current user can authenticate
+		if ( ! current_user_can( 'exactmetrics_save_settings' ) ) {
+			// Translators: link tag starts with url, link tag ends.
+			$message = sprintf(
+				__( 'You don\'t have the correct WordPress user permissions to authenticate into ExactMetrics. Please check with your site administrator that your role is included in the ExactMetrics permissions settings. %1$sClick here for more information%2$s.', 'google-analytics-dashboard-for-wp' ),
+				'<a target="_blank" href="' . exactmetrics_get_url( 'notice', 'cannot-save-settings', 'https://www.exactmetrics.com/docs/how-to-allow-user-roles-to-access-the-exactmetrics-reports-and-settings/' ) . '">',
+				'</a>'
+			);
+			wp_send_json_error( array( 'message' => $message ) );
+		}
+
+		if ( ! empty( $_REQUEST['isnetwork'] ) && $_REQUEST['isnetwork'] ) { // phpcs:ignore
+			define( 'WP_NETWORK_ADMIN', true );
+		}
+
+		// Only for Pro users, require a license key to be entered first so we can link to things.
+		if ( exactmetrics_is_pro_version() ) {
+			$valid = is_network_admin() ? ExactMetrics()->license->is_network_licensed() : ExactMetrics()->license->is_site_licensed();
+			if ( ! $valid ) {
+				wp_send_json_error( array( 'message' => __( "Cannot authenticate. Please enter a valid, active license key for ExactMetrics Pro into the settings page.", 'google-analytics-dashboard-for-wp' ) ) );
+			}
+		}
+
+		// we do not have a current auth
+		if ( ! $this->is_network_admin() && ExactMetrics()->auth->is_authed() ) {
+			// Translators: Support link tag starts with url, Support link tag ends.
+			$message = sprintf(
+				__( 'Oops! There has been an error authenticating. Please try again in a few minutes. If the problem persists, please %1$scontact our support%2$s team.', 'google-analytics-dashboard-for-wp' ),
+				'<a target="_blank" href="' . exactmetrics_get_url( 'notice', 'error-authenticating', 'https://www.exactmetrics.com/my-account/support/' ) . '">',
+				'</a>'
+			);
+			wp_send_json_error( array( 'message' => $message ) );
+		} else if ( $this->is_network_admin() && ExactMetrics()->auth->is_network_authed() ) {
+			// Translators: Support link tag starts with url, Support link tag ends.
+			$message = sprintf(
+				__( 'Oops! There has been an error authenticating. Please try again in a few minutes. If the problem persists, please %1$scontact our support%2$s team.', 'google-analytics-dashboard-for-wp' ),
+				'<a target="_blank href="' . exactmetrics_get_url( 'notice', 'error-authenticating', 'https://www.exactmetrics.com/my-account/support/' ) . '">',
+				'</a>'
+			);
+			wp_send_json_error( array( 'message' => $message ) );
+		}
+
+		$sitei = $this->get_sitei();
+
+		$siteurl = add_query_arg( array(
+			'tt'        => $this->get_tt(),
+			'sitei'     => $sitei,
+			'miversion' => EXACTMETRICS_VERSION,
+			'ajaxurl'   => admin_url( 'admin-ajax.php' ),
+			'network'   => is_network_admin() ? 'network' : 'site',
+			'siteurl'   => is_network_admin() ? network_admin_url() : site_url(),
+			'return'    => is_network_admin() ? network_admin_url( 'admin.php?page=exactmetrics_network' ) : admin_url( 'admin.php?page=exactmetrics_settings' ),
+			'testurl'   => 'https://' . exactmetrics_get_api_url() . 'test/',
+		), $this->get_route( 'https://' . exactmetrics_get_api_url() . 'auth/new/{type}' ) );
+
+		if ( exactmetrics_is_pro_version() ) {
+			$key     = is_network_admin() ? ExactMetrics()->license->get_network_license_key() : ExactMetrics()->license->get_site_license_key();
+			$siteurl = add_query_arg( 'license', $key, $siteurl );
+		}
+
+		$siteurl = apply_filters( 'exactmetrics_maybe_authenticate_siteurl', $siteurl );
+		wp_send_json_success( array( 'redirect' => $siteurl ) );
+	}
+
+
+/** Function get_license() called by wp_ajax hooks: {'exactmetrics_vue_get_license'} **/
+/** No params detected :-/ **/
+
+
+/** Function exactmetrics_mark_admin_menu_tooltip_hidden() called by wp_ajax hooks: {'exactmetrics_hide_admin_menu_tooltip'} **/
+/** No params detected :-/ **/
+
+
+/** Function install_and_activate_wpforms() called by wp_ajax hooks: {'exactmetrics_onboarding_wpforms_install'} **/
+/** No params detected :-/ **/
+
+
+/** Function get_post_types() called by wp_ajax hooks: {'exactmetrics_get_post_types'} **/
+/** No params detected :-/ **/
+
+
+/** Function ajax_get_themes() called by wp_ajax hooks: {'exactmetrics_get_popular_posts_themes'} **/
+/** Parameters found in function ajax_get_themes(): {"post": ["type"]} **/
+function ajax_get_themes() {
+
+		check_ajax_referer( 'mi-admin-nonce', 'nonce' );
+
+		$type = isset( $_POST['type'] ) ? sanitize_text_field( wp_unslash( $_POST['type'] ) ) : 'inline';
+
+		wp_send_json_success( $this->get_themes_by_type( $type, false ) );
+
+	}
+
+
+/** Function exactmetrics_ajax_deactivate_addon() called by wp_ajax hooks: {'exactmetrics_deactivate_addon'} **/
+/** Parameters found in function exactmetrics_ajax_deactivate_addon(): {"post": ["plugin", "isnetwork"]} **/
+function exactmetrics_ajax_deactivate_addon() {
+
+	// Run a security check first.
+	check_ajax_referer( 'exactmetrics-deactivate', 'nonce' );
+
+	if ( ! current_user_can( 'deactivate_plugins' ) ) {
+		wp_send_json( array(
+			'error' => esc_html__( 'You are not allowed to deactivate plugins', 'google-analytics-dashboard-for-wp' ),
+		) );
+	}
+
+	// Deactivate the addon.
+	if ( isset( $_POST['plugin'] ) ) {
+		if ( isset( $_POST['isnetwork'] ) && $_POST['isnetwork'] ) {
+			$deactivate = deactivate_plugins( $_POST['plugin'], false, true );
+		} else {
+			$deactivate = deactivate_plugins( $_POST['plugin'] );
+		}
+	}
+
+	echo json_encode( true );
+	wp_die();
+}
+
+
+/** Function dismiss() called by wp_ajax hooks: {'exactmetrics_notification_dismiss'} **/
+/** No params detected :-/ **/
+
+
+/** Function delete_notes() called by wp_ajax hooks: {'exactmetrics_vue_delete_notes'} **/
+/** Parameters found in function delete_notes(): {"post": ["ids"]} **/
+function delete_notes()
+	{
+		check_ajax_referer('mi-admin-nonce', 'nonce');
+
+		$ids = !empty($_POST['ids']) ? json_decode(html_entity_decode(stripslashes($_POST['ids']))) : [];
+
+		if (empty($ids)) {
+			wp_send_json(
+				array(
+					'success' => false,
+					'message' => __('Please choose a site note(s) to delete!', 'google-analytics-dashboard-for-wp'),
+				)
+			);
+		}
+
+		foreach ($ids as $id) {
+			$this->db->delete_note($id);
+		}
+
+		wp_send_json(
+			array(
+				'success' => true,
+				'message' => '',
+			)
+		);
+	}
+
+
+/** Function generate_connect_url() called by wp_ajax hooks: {'exactmetrics_connect_url'} **/
+/** Parameters found in function generate_connect_url(): {"post": ["key", "network"]} **/
+function generate_connect_url() {
+
+		check_ajax_referer( 'mi-admin-nonce', 'nonce' );
+
+		// Check for permissions.
+		if ( ! exactmetrics_can_install_plugins() ) {
+			wp_send_json_error( array( 'message' => esc_html__( 'Oops! You are not allowed to install plugins. Please contact your site administrator.', 'google-analytics-dashboard-for-wp' ) ) );
+		}
+
+		if ( exactmetrics_is_dev_url( home_url() ) ) {
+			wp_send_json_success( array(
+				'url' => 'https://www.exactmetrics.com/docs/go-lite-pro/#manual-upgrade',
+			) );
+		}
+
+		$key = ! empty( $_POST['key'] ) ? sanitize_text_field( wp_unslash( $_POST['key'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification
+
+		if ( empty( $key ) ) {
+			wp_send_json_error(
+				array(
+					'message' => esc_html__( 'Please enter your license key to connect.', 'google-analytics-dashboard-for-wp' ),
+				)
+			);
+		}
+
+		// Verify pro version is not installed.
+		$active = activate_plugin( 'exactmetrics-premium/exactmetrics-premium.php', false, false, true );
+		if ( ! is_wp_error( $active ) ) {
+			// Deactivate plugin.
+			deactivate_plugins( plugin_basename( EXACTMETRICS_PLUGIN_FILE ), false, false );
+			wp_send_json_error( array(
+				'message' => esc_html__( 'You already have ExactMetrics Pro installed.', 'google-analytics-dashboard-for-wp' ),
+				'reload'  => true,
+			) );
+		}
+
+		// Network?
+		$network = ! empty( $_POST['network'] ) && $_POST['network']; // phpcs:ignore
+
+		// Redirect.
+		$oth = hash( 'sha512', wp_rand() );
+		update_option( 'exactmetrics_connect', array(
+			'key'     => $key,
+			'time'    => time(),
+			'network' => $network,
+		) );
+		update_option( 'exactmetrics_connect_token', $oth );
+		$version  = ExactMetrics()->version;
+		$siteurl  = admin_url();
+		$endpoint = admin_url( 'admin-ajax.php' );
+		$redirect = $network ? network_admin_url( 'admin.php?page=exactmetrics_network' ) : admin_url( 'admin.php?page=exactmetrics_settings' );
+
+		$url = add_query_arg( array(
+			'key'      => $key,
+			'oth'      => $oth,
+			'endpoint' => $endpoint,
+			'version'  => $version,
+			'siteurl'  => $siteurl,
+			'homeurl'  => home_url(),
+			'redirect' => rawurldecode( base64_encode( $redirect ) ),
+			'v'        => 2,
+		), 'https://upgrade.exactmetrics.com' );
+
+		wp_send_json_success( array(
+			'url' => $url,
+		) );
+	}
+
+
+/** Function exactmetrics_mark_floatbar_hidden() called by wp_ajax hooks: {'exactmetrics_hide_floatbar'} **/
+/** No params detected :-/ **/
+
+
+/** Function ajax_start_indexing() called by wp_ajax hooks: {'exactmetrics_sharedcount_start_indexing'} **/
+/** No params detected :-/ **/
+
+
+/** Function handle_relay_mp_token_push() called by wp_ajax hooks: {'nopriv_exactmetrics_push_mp_token'} **/
+/** Parameters found in function handle_relay_mp_token_push(): {"post": ["mp_token", "timestamp", "signature"]} **/
+function handle_relay_mp_token_push() {
+		$mp_token  = sanitize_text_field( $_POST['mp_token'] ); // phpcs:ignore
+		$timestamp = (int) sanitize_text_field( $_POST['timestamp'] ); // phpcs:ignore
+		$signature = sanitize_text_field( $_POST['signature'] ); // phpcs:ignore
+
+		// check if expired
+		if ( time() > $timestamp + 1000 ) {
+			wp_send_json_error( new WP_Error( 'exactmetrics_mp_token_timestamp_expired' ) );
+		}
+
+		// Check hashed signature
+		$auth = ExactMetrics()->auth;
+
+		$is_network = is_multisite();
+		$public_key = $is_network
+			? $auth->get_network_key()
+			: $auth->get_key();
+
+		$hashed_data = array(
+			'mp_token'  => sanitize_text_field($_POST['mp_token']),
+			'timestamp' => $timestamp,
+		);
+
+		// These `hash_` functions are polyfilled by WP in wp-includes/compat.php
+		$expected_signature = hash_hmac( 'md5', http_build_query( $hashed_data ), $public_key );
+		if ( ! hash_equals( $signature, $expected_signature ) ) {
+			wp_send_json_error( new WP_Error( 'exactmetrics_mp_token_invalid_signature' ) );
+		}
+
+		// Save measurement protocol token
+		if ( $is_network ) {
+			$auth->set_network_measurement_protocol_secret( $mp_token );
+		} else {
+			$auth->set_measurement_protocol_secret( $mp_token );
+		}
+		wp_send_json_success();
+	}
+
+
+/** Function get_taxonomy_terms() called by wp_ajax hooks: {'exactmetrics_get_terms'} **/
+/** Parameters found in function get_taxonomy_terms(): {"post": ["keyword", "taxonomy"]} **/
+function get_taxonomy_terms() {
+
+		// Run a security check first.
+		check_ajax_referer( 'mi-admin-nonce', 'nonce' );
+
+		$keyword  = isset( $_POST['keyword'] ) ? sanitize_text_field( wp_unslash( $_POST['keyword'] ) ) : '';
+		$taxonomy = isset( $_POST['taxonomy'] ) ? sanitize_text_field( wp_unslash( $_POST['taxonomy'] ) ) : 'category';
+
+		$args = array(
+			'taxonomy'   => array( $taxonomy ),
+			'hide_empty' => false,
+			'name__like' => $keyword,
+		);
+
+		$terms = get_terms( $args );
+		$array = array();
+
+		if ( ! empty( $terms ) ) {
+			foreach ( $terms as $term ) {
+				$array[] = array(
+					'id'   => esc_attr( $term->term_id ),
+					'text' => esc_attr( $term->name ),
+				);
+			}
+		}
+
+		wp_send_json_success( $array );
+	}
+
+
+/** Function check_popular_posts_report() called by wp_ajax hooks: {'exactmetrics_vue_grab_popular_posts_report'} **/
+/** Parameters found in function check_popular_posts_report(): {"request": ["isnetwork"], "post": ["start", "end"]} **/
+function check_popular_posts_report() {
+
+		check_ajax_referer( 'mi-admin-nonce', 'nonce' );
+
+		if ( ! current_user_can( 'exactmetrics_view_dashboard' ) ) {
+			// Translators: Link tag starts with url and link tag ends.
+			$message = sprintf(
+				esc_html__( 'Oops! You don not have permissions to view or access Popular Posts. Please check with your site administrator that your role is included in the ExactMetrics permissions settings. %1$sClick here for more information%2$s.', 'google-analytics-dashboard-for-wp' ),
+				'<a target="_blank" href="' . exactmetrics_get_url( 'notice', 'cannot-view-dashboard', 'https://www.exactmetrics.com/docs/how-to-allow-user-roles-to-access-the-exactmetrics-reports-and-settings/' ) . '">',
+				'</a>'
+			);
+			wp_send_json_error( array( 'message' => $message ) );
+		}
+
+		if ( ! empty( $_REQUEST['isnetwork'] ) && $_REQUEST['isnetwork'] ) {
+			define( 'WP_NETWORK_ADMIN', true );
+		}
+		$settings_page = admin_url( 'admin.php?page=exactmetrics_settings' );
+
+		// Only for Pro users, require a license key to be entered first so we can link to things.
+		if ( exactmetrics_is_pro_version() ) {
+			if ( ! ExactMetrics()->license->is_site_licensed() && ! ExactMetrics()->license->is_network_licensed() ) {
+				$url = admin_url( 'admin.php?page=exactmetrics_settings#/' );
+
+				// Check for MS dashboard
+				if ( is_network_admin() ) {
+					$url = network_admin_url( 'admin.php?page=exactmetrics_settings#/' );
+				}
+				// Translators: Setting page link tag starts with url and Setting page link tag ends.
+				$message = sprintf(
+					esc_html__( 'Oops! We could not find a valid license key for ExactMetrics. Please %1$senter a valid license key%2$s to view this report.', 'google-analytics-dashboard-for-wp' ),
+					'<a href="' . esc_url( $url ) . '">',
+					'</a>'
+				);
+				wp_send_json_error( array(
+					'message' => $message,
+					'footer'  => '<a href="' . $settings_page . '">' . __( 'Add your license', 'google-analytics-dashboard-for-wp' ) . '</a>',
+				) );
+			} else if ( ExactMetrics()->license->is_site_licensed() && ! ExactMetrics()->license->site_license_has_error() ) {
+				// Good to go: site licensed.
+			} else if ( ExactMetrics()->license->is_network_licensed() && ! ExactMetrics()->license->network_license_has_error() ) {
+				// Good to go: network licensed.
+			} else {
+				// Translators: Account page link tag starts with url and Account page link tag ends.
+				$message = sprintf(
+					esc_html__( 'Oops! We could not find a valid license key. Please enter a valid license key to view this report. You can find your license by logging into your %1$sExactMetrics account%2$s.', 'google-analytics-dashboard-for-wp' ),
+					'<a target="_blank" href="' . exactmetrics_get_url( 'notice', 'license-errors', 'https://www.exactmetrics.com/my-account/licenses/' ) . '">',
+					'</a>'
+				);
+				wp_send_json_error( array( 'message' => $message ) );
+			}
+		}
+
+		// We do not have a current auth.
+		$site_auth = ExactMetrics()->auth->get_viewname();
+		$ms_auth   = is_multisite() && ExactMetrics()->auth->get_network_viewname();
+		if ( ! $site_auth && ! $ms_auth ) {
+			$url = admin_url( 'admin.php?page=exactmetrics_settings#/' );
+
+			// Check for MS dashboard
+			if ( is_network_admin() ) {
+				$url = network_admin_url( 'admin.php?page=exactmetrics_settings#/' );
+			}
+			// Translators: Wizard page link tag starts with url and Wizard page link tag ends.
+			$message = sprintf(
+				esc_html__( 'You need to authenticate into ExactMetrics before viewing reports. Please complete the setup by going through our %1$ssetup wizard%2$s.', 'google-analytics-dashboard-for-wp' ),
+				'<a href="' . esc_url( $url ) . '">',
+				'</a>'
+			);
+			wp_send_json_error( array( 'message' => $message ) );
+		}
+
+		$report_name = 'popularposts';
+
+		if ( empty( $report_name ) ) {
+			// Translators: Support link tag starts with url and Support link tag ends.
+			$message = sprintf(
+				esc_html__( 'Oops! We encountered an error while generating your reports. Please wait a few minutes and try again. If the issue persists, please %1$scontact our support%2$s team.', 'google-analytics-dashboard-for-wp' ),
+				'<a target="_blank" href="' . exactmetrics_get_url( 'notice', 'cannot-generate-reports', 'https://www.exactmetrics.com/my-account/support/' ) . '">',
+				'</a>'
+			);
+			wp_send_json_error( array( 'message' => $message ) );
+		}
+
+		$report = ExactMetrics()->reporting->get_report( $report_name );
+
+		$isnetwork = ! empty( $_REQUEST['isnetwork'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['isnetwork'] ) ) : '';
+		$start     = ! empty( $_POST['start'] ) ? sanitize_text_field( wp_unslash( $_POST['start'] ) ) : $report->default_start_date();
+		$end       = ! empty( $_POST['end'] ) ? sanitize_text_field( wp_unslash( $_POST['end'] ) ) : $report->default_end_date();
+
+		$args = array(
+			'start' => $start,
+			'end'   => $end,
+		);
+
+		if ( $isnetwork ) {
+			$args['network'] = true;
+		}
+
+		if ( exactmetrics_is_pro_version() && ! ExactMetrics()->license->license_can( $report->level ) ) {
+			$data = array(
+				'success' => false,
+				'error'   => 'license_level',
+			);
+		} else {
+			$data = apply_filters( 'exactmetrics_vue_reports_data', $report->get_data( $args ), $report_name, $report );
+		}
+
+		if ( ! empty( $data['success'] ) && ! empty( $data['data'] ) ) {
+			wp_send_json_success( $data['data'] );
+		} else if ( isset( $data['success'] ) && false === $data['success'] && ! empty( $data['error'] ) ) {
+			// Use a custom handler for invalid_grant errors.
+			if ( strpos( $data['error'], 'invalid_grant' ) > 0 ) {
+				wp_send_json_error(
+					array(
+						'message' => 'invalid_grant',
+						'footer'  => '',
+					)
+				);
+			}
+
+			wp_send_json_error(
+				array(
+					'message' => $data['error'],
+					'footer'  => isset( $data['data']['footer'] ) ? $data['data']['footer'] : '',
+				)
+			);
+		}
+
+		// Translators: Support link tag starts with url and Support link tag ends.
+		$message = sprintf(
+			__( 'Oops! We encountered an error while generating your reports. Please wait a few minutes and try again. If the issue persists, please %1$scontact our support%2$s team.', 'google-analytics-dashboard-for-wp' ),
+			'<a target="_blank" href="' . exactmetrics_get_url( 'notice', 'cannot-generate-reports', 'https://www.exactmetrics.com/my-account/support/' ) . '">',
+			'</a>'
+		);
+		wp_send_json_error( array( 'message' => $message ) );
+	}
+
+
+/** Function maybe_reauthenticate() called by wp_ajax hooks: {'exactmetrics_maybe_reauthenticate'} **/
+/** Parameters found in function maybe_reauthenticate(): {"request": ["isnetwork"]} **/
+function maybe_reauthenticate() {
+
+		// Check nonce
+		check_ajax_referer( 'mi-admin-nonce', 'nonce' );
+
+		$url = admin_url( 'admin.php?page=exactmetrics-onboarding' );
+
+		// current user can authenticate
+		if ( ! current_user_can( 'exactmetrics_save_settings' ) ) {
+			// Translators: Link tag starts with url and link tag ends.
+			$message = sprintf(
+				__( 'You don\'t have the correct WordPress user permissions to re-authenticate into ExactMetrics. Please check with your site administrator that your role is included in the ExactMetrics permissions settings. %1$sClick here for more information%2$s.', 'google-analytics-dashboard-for-wp' ),
+				'<a target="_blank" href="' . exactmetrics_get_url( 'notice', 'cannot-save-settings', 'https://www.exactmetrics.com/docs/how-to-allow-user-roles-to-access-the-exactmetrics-reports-and-settings/' ) . '">',
+				'</a>'
+			);
+			wp_send_json_error( array( 'message' => $message ) );
+		}
+
+		if ( ! empty( $_REQUEST['isnetwork'] ) && filter_var($_REQUEST['isnetwork'], FILTER_VALIDATE_BOOLEAN) ) {
+			define( 'WP_NETWORK_ADMIN', true );
+		}
+
+		// Only for Pro users, require a license key to be entered first so we can link to things.
+		if ( exactmetrics_is_pro_version() ) {
+			$valid = is_network_admin() ? ExactMetrics()->license->is_network_licensed() : ExactMetrics()->license->is_site_licensed();
+			if ( exactmetrics_is_pro_version() && ! $valid ) {
+				wp_send_json_error( array( 'message' => __( "Your license key for ExactMetrics is invalid. The key no longer exists or the user associated with the key has been deleted. Please use a different key.", 'google-analytics-dashboard-for-wp' ) ) );
+			}
+		}
+
+		// we do have a current auth
+		if ( ! $this->is_network_admin() && ! ExactMetrics()->auth->is_authed() ) {
+			// Translators: Wizard Link tag starts with url, Wizard link tag ends, Support link tag starts, Support link tag ends.
+			$message = sprintf(
+				__( 'Oops! There was a problem while re-authenticating. Please try to complete the ExactMetrics %1$ssetup wizard%2$s again. If the problem persists, please %3$scontact our support%4$s team.', 'google-analytics-dashboard-for-wp' ),
+				'<a href="' . esc_url( $url ) . '">',
+				'</a>',
+				'<a target="_blank" href="' . exactmetrics_get_url( 'notice', 'cannot-re-authenticate', 'https://www.exactmetrics.com/my-account/support/' ) . '">',
+				'</a>'
+			);
+			wp_send_json_error( array( 'message' => $message ) );
+		} else if ( $this->is_network_admin() && ! ExactMetrics()->auth->is_network_authed() ) {
+			// Translators: Wizard Link tag starts with url, Wizard link tag ends, Support link tag starts, Support link tag ends.
+			$message = sprintf(
+				__( 'Oops! There was a problem while re-authenticating. Please try to complete the ExactMetrics %1$ssetup wizard%2$s again. If the problem persists, please %3$scontact our support%4$s team.', 'google-analytics-dashboard-for-wp' ),
+				'<a href="' . esc_url( $url ) . '">',
+				'</a>',
+				'<a target="_blank" href="' . exactmetrics_get_url( 'notice', 'cannot-re-authenticate', 'https://www.exactmetrics.com/my-account/support/' ) . '">',
+				'</a>'
+			);
+			wp_send_json_error( array( 'message' => $message ) );
+		}
+
+		$siteurl = add_query_arg( array(
+			'tt'        => $this->get_tt(),
+			'sitei'     => $this->get_sitei(),
+			'miversion' => EXACTMETRICS_VERSION,
+			'ajaxurl'   => admin_url( 'admin-ajax.php' ),
+			'network'   => is_network_admin() ? 'network' : 'site',
+			'siteurl'   => is_network_admin() ? network_admin_url() : site_url(),
+			'key'       => is_network_admin() ? ExactMetrics()->auth->get_network_key() : ExactMetrics()->auth->get_key(),
+			'token'     => is_network_admin() ? ExactMetrics()->auth->get_network_token() : ExactMetrics()->auth->get_token(),
+			'return'    => is_network_admin() ? network_admin_url( 'admin.php?page=exactmetrics_network' ) : admin_url( 'admin.php?page=exactmetrics_settings' ),
+			'testurl'   => 'https://' . exactmetrics_get_api_url() . 'test/',
+		), $this->get_route( 'https://' . exactmetrics_get_api_url() . 'auth/reauth/{type}' ) );
+
+		if ( exactmetrics_is_pro_version() ) {
+			$key     = is_network_admin() ? ExactMetrics()->license->get_network_license_key() : ExactMetrics()->license->get_site_license_key();
+			$siteurl = add_query_arg( 'license', $key, $siteurl );
+		}
+
+		$siteurl = apply_filters( 'exactmetrics_maybe_authenticate_siteurl', $siteurl );
+
+		wp_send_json_success( array( 'redirect' => $siteurl ) );
+	}
+
+
+/** Function test_check_tracking_code() called by wp_ajax hooks: {'health-check-exactmetrics-test_tracking_code'} **/
+/** No params detected :-/ **/
+
+
+/** Function mark_notice_closed() called by wp_ajax hooks: {'exactmetrics_mark_notice_closed'} **/
+/** No params detected :-/ **/
+
+
+/** Function empty_cache() called by wp_ajax hooks: {'exactmetrics_popular_posts_empty_cache'} **/
+/** No params detected :-/ **/
+
+
+/** Function ajax_get_notifications() called by wp_ajax hooks: {'exactmetrics_vue_get_notifications'} **/
+/** No params detected :-/ **/
+
+
+/** Function get_notice_status() called by wp_ajax hooks: {'exactmetrics_vue_notice_status'} **/
+/** Parameters found in function get_notice_status(): {"post": ["notice"]} **/
+function get_notice_status() {
+
+		check_ajax_referer( 'mi-admin-nonce', 'nonce' );
+
+		$notice_id = empty( $_POST['notice'] ) ? false : sanitize_text_field( wp_unslash( $_POST['notice'] ) );
+		if ( ! $notice_id ) {
+			wp_send_json_error();
+		}
+		$is_dismissed = ExactMetrics()->notices->is_dismissed( $notice_id );
+
+		wp_send_json_success( array(
+			'dismissed' => $is_dismissed,
+		) );
+	}
+
+
+/** Function exactmetrics_dismiss_tracking_notice() called by wp_ajax hooks: {'exactmetrics_dismiss_tracking_notice'} **/
+/** No params detected :-/ **/
+
+
+/** Function review_dismiss() called by wp_ajax hooks: {'exactmetrics_review_dismiss'} **/
+/** No params detected :-/ **/
+
+
+/** Function exactmetrics_handle_ga_queue_response() called by wp_ajax hooks: {'nopriv_exactmetrics_handle_ga_queue_response'} **/
+/** Parameters found in function exactmetrics_handle_ga_queue_response(): {"request": ["key", "profile", "mp_secret"]} **/
+function exactmetrics_handle_ga_queue_response() {
+
+    $auth = ExactMetrics()->auth;
+
+    //  Authenticate with public key
+    $key = sanitize_text_field($_REQUEST['key']);
+
+    $site_key = is_network_admin() ? $auth->get_network_key() : $auth->get_key();
+
+    if ( !hash_equals( $site_key, $key ) ) {
+        wp_send_json_error([
+            'error'     => __( 'Invalid site key.', 'google-analytics-dashboard-for-wp' )
+        ], 401);
+    }
+
+    //  Check if credentials have already been saved - prevent override
+    $local_queue_status = exactmetrics_get_option( 'ga4_upgrade_queue_status' );
+
+    if ( $local_queue_status === 'fulfilled' ) {
+        wp_send_json_error([
+            'error'     => __( 'Site has already been processed.', 'google-analytics-dashboard-for-wp' )
+        ], 400);
+    }
+
+    if ( empty($_REQUEST['profile']) || empty($_REQUEST['mp_secret']) ) {
+        wp_send_json_error([
+            'error'     => __( 'Profile or secret key missing.', 'google-analytics-dashboard-for-wp' )
+        ], 400);
+    }
+
+    $v4_id = sanitize_text_field($_REQUEST['profile']);
+    $mp_secret = sanitize_text_field($_REQUEST['mp_secret']);
+
+    //  Update dual tracking
+    if ( is_network_admin() ) {
+        $auth->set_network_dual_tracking_id( $v4_id );
+        $auth->set_network_measurement_protocol_secret( $mp_secret );
+    } else {
+        $auth->set_dual_tracking_id( $v4_id );
+        $auth->set_measurement_protocol_secret( $mp_secret );
+    }
+
+    //  Create automatic swap cron
+    if ( false === wp_next_scheduled( 'exactmetrics_v4_property_swap' ) ) {
+        wp_schedule_single_event( strtotime( "+31 days" ), 'exactmetrics_v4_property_swap' );
+    }
+
+    //  Update queue status option
+    exactmetrics_update_option( 'ga4_upgrade_queue_status', 'fulfilled' );
+    exactmetrics_delete_option( 'ga4_upgrade_queue_job_id' );
+
+    wp_send_json_success();
+}
+
+
+/** Function exactmetrics_ajax_activate_addon() called by wp_ajax hooks: {'exactmetrics_activate_addon'} **/
+/** Parameters found in function exactmetrics_ajax_activate_addon(): {"post": ["plugin", "isnetwork"]} **/
+function exactmetrics_ajax_activate_addon() {
+
+	// Run a security check first.
+	check_ajax_referer( 'exactmetrics-activate', 'nonce' );
+
+	if ( ! current_user_can( 'activate_plugins' ) ) {
+		wp_send_json( array(
+			'error' => esc_html__( 'You are not allowed to activate plugins', 'google-analytics-dashboard-for-wp' ),
+		) );
+	}
+
+	// Activate the addon.
+	if ( isset( $_POST['plugin'] ) ) {
+		if ( isset( $_POST['isnetwork'] ) && $_POST['isnetwork'] ) {
+			$activate = activate_plugin( $_POST['plugin'], null, true );
+		} else {
+			$activate = activate_plugin( $_POST['plugin'] );
+		}
+		/* Restrict thirt-party redirections on activation */
+		delete_transient( '_userfeedback_activation_redirect' );
+		if ( is_wp_error( $activate ) ) {
+			echo json_encode( array( 'error' => $activate->get_error_message() ) );
+			wp_die();
+		}
+
+		do_action( 'exactmetrics_after_ajax_activate_addon', sanitize_text_field( $_POST['plugin'] ) );
+	}
+
+	echo json_encode( true );
+	wp_die();
+
+}
+
+
+/** Function is_installed() called by wp_ajax hooks: {'nopriv_exactmetrics_is_installed'} **/
+/** No params detected :-/ **/
+
 
 /** Function get_report_data() called by wp_ajax hooks: {'exactmetrics_vue_get_report_data'} **/
 /** Parameters found in function get_report_data(): {"request": ["isnetwork"], "post": ["report", "start", "end"]} **/
@@ -151,126 +1396,205 @@ function get_report_data() {
 	}
 
 
-/** Function ajax_start_indexing() called by wp_ajax hooks: {'exactmetrics_sharedcount_start_indexing'} **/
+/** Function get_install_errors() called by wp_ajax hooks: {'exactmetrics_onboarding_get_errors'} **/
 /** No params detected :-/ **/
 
 
-/** Function dismiss_first_time_notice() called by wp_ajax hooks: {'exactmetrics_vue_dismiss_first_time_notice'} **/
+/** Function ajax_get_index_progress() called by wp_ajax hooks: {'exactmetrics_sharedcount_get_index_progress'} **/
 /** No params detected :-/ **/
 
 
-/** Function exactmetrics_handle_get_plugin_info() called by wp_ajax hooks: {'nopriv_exactmetrics_get_plugin_info'} **/
-/** Parameters found in function exactmetrics_handle_get_plugin_info(): {"request": ["key"]} **/
-function exactmetrics_handle_get_plugin_info() {
+/** Function update_manual_ua() called by wp_ajax hooks: {'exactmetrics_update_manual_ua'} **/
+/** Parameters found in function update_manual_ua(): {"post": ["manual_ua_code"], "request": ["isnetwork"]} **/
+function update_manual_ua() {
 
-    $auth = ExactMetrics()->auth;
-
-    //  Authenticate with public key
-    $key = sanitize_text_field($_REQUEST['key']);
-
-    $site_key = is_network_admin() ? $auth->get_network_key() : $auth->get_key();
-
-    if ( !hash_equals( $site_key, $key ) ) {
-        wp_send_json_error([
-            'error'     => __( 'Invalid site key.', 'google-analytics-dashboard-for-wp' )
-        ], 401);
-    }
-
-    $ua = is_network_admin() ? $auth->get_network_ua() : $auth->get_ua();
-    $v4 = is_network_admin() ? $auth->get_network_v4_id() :  $auth->get_v4_id();
-    $has_secret = is_network_admin() ?
-        !empty( $auth->get_network_measurement_protocol_secret() ) :
-        !empty( $auth->get_measurement_protocol_secret() );
-
-    wp_send_json([
-        'ua'                => $ua,
-        'v4'                => $v4,
-        'has_mp_secret'     => $has_secret,
-        'plugin_version'    => ExactMetrics()->version
-    ]);
-}
-
-
-/** Function exactmetrics_mark_floatbar_hidden() called by wp_ajax hooks: {'exactmetrics_hide_floatbar'} **/
-/** No params detected :-/ **/
-
-
-/** Function dismiss() called by wp_ajax hooks: {'exactmetrics_notification_dismiss'} **/
-/** No params detected :-/ **/
-
-
-/** Function test_check_tracking_code() called by wp_ajax hooks: {'health-check-exactmetrics-test_tracking_code'} **/
-/** No params detected :-/ **/
-
-
-/** Function update_dual_tracking_id() called by wp_ajax hooks: {'exactmetrics_update_dual_tracking_id'} **/
-/** Parameters found in function update_dual_tracking_id(): {"request": ["isnetwork", "value"]} **/
-function update_dual_tracking_id() {
 		check_ajax_referer( 'mi-admin-nonce', 'nonce' );
 
 		if ( ! current_user_can( 'exactmetrics_save_settings' ) ) {
 			return;
 		}
 
+		$manual_ua_code = isset( $_POST['manual_ua_code'] ) ? sanitize_text_field( wp_unslash( $_POST['manual_ua_code'] ) ) : '';
+		$manual_ua_code = exactmetrics_is_valid_ua( $manual_ua_code ); // Also sanitizes the string.
 		if ( ! empty( $_REQUEST['isnetwork'] ) && sanitize_text_field( wp_unslash( $_REQUEST['isnetwork'] ) ) ) {
 			define( 'WP_NETWORK_ADMIN', true );
 		}
+		$manual_ua_code_old = is_network_admin() ? ExactMetrics()->auth->get_network_manual_ua() : ExactMetrics()->auth->get_manual_ua();
 
-		$value              = empty( $_REQUEST['value'] ) ? '' : sanitize_text_field( wp_unslash( $_REQUEST['value'] ) );
-		$sanitized_ua_value = exactmetrics_is_valid_ua( $value );
-		$sanitized_v4_value = exactmetrics_is_valid_v4_id( $value );
-
-		if ( $sanitized_v4_value ) {
-			$value = $sanitized_v4_value;
-		} elseif ( $sanitized_ua_value ) {
-			$value = $sanitized_ua_value;
-		} elseif ( ! empty( $value ) ) {
-			$url = exactmetrics_get_url( 'notice', 'invalid-dual-code', 'https://www.exactmetrics.com/docs/how-to-set-up-dual-tracking/' );
-			// Translators: Link to help article.
+		if ( $manual_ua_code && $manual_ua_code_old && $manual_ua_code_old === $manual_ua_code ) {
+			// Same code we had before
+			// Do nothing.
+			wp_send_json_success();
+		} else if ( $manual_ua_code && $manual_ua_code_old && $manual_ua_code_old !== $manual_ua_code ) {
+			// Different UA code.
+			if ( is_network_admin() ) {
+				ExactMetrics()->auth->set_network_manual_ua( $manual_ua_code );
+			} else {
+				ExactMetrics()->auth->set_manual_ua( $manual_ua_code );
+			}
+		} else if ( $manual_ua_code && empty( $manual_ua_code_old ) ) {
+			// Move to manual.
+			if ( is_network_admin() ) {
+				ExactMetrics()->auth->set_network_manual_ua( $manual_ua_code );
+			} else {
+				ExactMetrics()->auth->set_manual_ua( $manual_ua_code );
+			}
+		} else if ( empty( $manual_ua_code ) && $manual_ua_code_old ) {
+			// Deleted manual.
+			if ( is_network_admin() ) {
+				ExactMetrics()->auth->delete_network_manual_ua();
+			} else {
+				ExactMetrics()->auth->delete_manual_ua();
+			}
+		} else if ( isset( $_POST['manual_ua_code'] ) && empty( $manual_ua_code ) ) {
 			wp_send_json_error( array(
-				'error' => sprintf( __( 'Oops! We detected an invalid tracking code. Please verify that both your %1$sUniversal Analytics Tracking ID%2$s and %3$sGoogle Analytics 4 Measurement ID%4$s are valid.', 'google-analytics-dashboard-for-wp' ), '<a target="_blank" href="' . $url . '">', '</a>', '<a target="_blank" href="' . $url . '">', '</a>' ),
+				'ua_error' => 1,
+				'error'    => __( 'Invalid UA code', 'google-analytics-dashboard-for-wp' ),
 			) );
-		}
-
-		$auth = ExactMetrics()->auth;
-
-		if ( is_network_admin() ) {
-			$auth->set_network_dual_tracking_id( $value );
-		} else {
-			$auth->set_dual_tracking_id( $value );
 		}
 
 		wp_send_json_success();
 	}
 
 
-/** Function delete_categories() called by wp_ajax hooks: {'exactmetrics_vue_delete_categories'} **/
-/** Parameters found in function delete_categories(): {"post": ["ids"]} **/
-function delete_categories()
-	{
-		check_ajax_referer('mi-admin-nonce', 'nonce');
+/** Function dismiss_first_time_notice() called by wp_ajax hooks: {'exactmetrics_vue_dismiss_first_time_notice'} **/
+/** No params detected :-/ **/
 
-		$ids = !empty($_POST['ids']) ? json_decode(html_entity_decode(stripslashes($_POST['ids']))) : [];
 
-		if (empty($ids)) {
-			wp_send_json(
+/** Function get_profile() called by wp_ajax hooks: {'exactmetrics_vue_get_profile'} **/
+/** No params detected :-/ **/
+
+
+/** Function update_settings_bulk() called by wp_ajax hooks: {'exactmetrics_vue_update_settings_bulk'} **/
+/** Parameters found in function update_settings_bulk(): {"post": ["settings"]} **/
+function update_settings_bulk() {
+
+		check_ajax_referer( 'mi-admin-nonce', 'nonce' );
+
+		if ( ! current_user_can( 'exactmetrics_save_settings' ) ) {
+			return;
+		}
+
+		if ( isset( $_POST['settings'] ) ) {
+			$settings = json_decode( sanitize_text_field( wp_unslash( $_POST['settings'] ) ), true );
+			foreach ( $settings as $setting => $value ) {
+				$value = $this->handle_sanitization( $setting, $value );
+				exactmetrics_update_option( $setting, $value );
+				do_action( 'exactmetrics_after_update_settings', $setting, $value );
+			}
+		}
+
+		wp_send_json_success();
+
+	}
+
+
+/** Function handle_settings_import() called by wp_ajax hooks: {'exactmetrics_handle_settings_import'} **/
+/** Parameters found in function handle_settings_import(): {"files": ["import_file"]} **/
+function handle_settings_import() {
+
+		check_ajax_referer( 'mi-admin-nonce', 'nonce' );
+
+		if ( ! current_user_can( 'exactmetrics_save_settings' ) ) {
+			return;
+		}
+
+		if ( ! isset( $_FILES['import_file'] ) ) {
+			return;
+		}
+
+		$extension = explode( '.', sanitize_text_field( wp_unslash( $_FILES['import_file']['name'] ) ) ); // phpcs:ignore
+		$extension = end( $extension );
+
+		if ( 'json' !== $extension ) {
+			wp_send_json_error( array(
+				'message' => esc_html__( 'Please upload a valid .json file', 'google-analytics-dashboard-for-wp' ),
+			) );
+		}
+
+		$import_file = sanitize_text_field( wp_unslash( $_FILES['import_file']['tmp_name'] ) ); // phpcs:ignore
+
+		$file = file_get_contents( $import_file );
+		if ( empty( $file ) ) {
+			wp_send_json_error( array(
+				'message' => esc_html__( 'Please select a valid file to upload.', 'google-analytics-dashboard-for-wp' ),
+			) );
+		}
+
+		// Retrieve the settings from the file and convert the json object to an array.
+		$new_settings = json_decode( wp_json_encode( json_decode( $file ) ), true );
+		$settings     = exactmetrics_get_options();
+		$exclude      = array(
+			'analytics_profile',
+			'analytics_profile_code',
+			'analytics_profile_name',
+			'oauth_version',
+			'cron_last_run',
+			'exactmetrics_oauth_status',
+		);
+
+		foreach ( $exclude as $e ) {
+			if ( ! empty( $new_settings[ $e ] ) ) {
+				unset( $new_settings[ $e ] );
+			}
+		}
+
+		foreach ( $exclude as $e ) {
+			if ( ! empty( $settings[ $e ] ) ) {
+				$new_settings = $settings[ $e ];
+			}
+		}
+
+		global $exactmetrics_settings;
+		$exactmetrics_settings = $new_settings;
+
+		update_option( exactmetrics_get_option_name(), $new_settings );
+
+		wp_send_json_success( $new_settings );
+
+	}
+
+
+/** Function get_result() called by wp_ajax hooks: {'exactmetrics_gutenberg_headline_analyzer_get_results'} **/
+/** Parameters found in function get_result(): {"request": ["q"]} **/
+function get_result() {
+
+		// csrf check
+		if ( check_ajax_referer( 'exactmetrics_gutenberg_headline_nonce', false, false ) === false ) {
+			$content = self::output_template( 'results-error.php' );
+			wp_send_json_error(
 				array(
-					'success' => false,
-					'message' => __('Please choose a category to delete!', 'google-analytics-dashboard-for-wp'),
+					'html' => $content
 				)
 			);
 		}
 
-		foreach ($ids as $id) {
-			$this->db->delete_category($id);
-		}
+		// get whether or not the website is up
+		$result = $this->get_headline_scores();
 
-		wp_send_json(
-			array(
-				'success' => true,
-				'message' => '',
-			)
-		);
+		if ( ! empty( $result->err ) ) {
+			$content = self::output_template( 'results-error.php', $result );
+			wp_send_json_error(
+				array( 'html' => $content, 'analysed' => false )
+			);
+		} else {
+			if(!isset($_REQUEST['q'])){
+				wp_send_json_error(
+					array( 'html' => '', 'analysed' => false )
+				);
+			}
+			$q = (isset($_REQUEST['q'])) ? sanitize_text_field($_REQUEST['q']) : '';
+			// send the response
+			wp_send_json_success(
+				array(
+					'result'   => $result,
+					'analysed' => ! $result->err,
+					'sentence' => ucwords( wp_unslash( $q ) ),
+					'score'    => ( isset( $result->score ) && ! empty( $result->score ) ) ? $result->score : 0
+				)
+			);
+
+		}
 	}
 
 
@@ -590,10 +1914,6 @@ function get_addons() {
 	}
 
 
-/** Function exactmetrics_get_floatbar() called by wp_ajax hooks: {'exactmetrics_get_floatbar'} **/
-/** No params detected :-/ **/
-
-
 /** Function rauthenticate() called by wp_ajax hooks: {'nopriv_exactmetrics_rauthenticate'} **/
 /** Parameters found in function rauthenticate(): {"request": ["ua", "v4", "network", "tt"]} **/
 function rauthenticate() {
@@ -630,641 +1950,77 @@ function rauthenticate() {
 	}
 
 
-/** Function check_popular_posts_report() called by wp_ajax hooks: {'exactmetrics_vue_grab_popular_posts_report'} **/
-/** Parameters found in function check_popular_posts_report(): {"request": ["isnetwork"], "post": ["start", "end"]} **/
-function check_popular_posts_report() {
+/** Function maybe_verify() called by wp_ajax hooks: {'exactmetrics_maybe_verify'} **/
+/** Parameters found in function maybe_verify(): {"request": ["isnetwork"]} **/
+function maybe_verify() {
 
+		// Check nonce
 		check_ajax_referer( 'mi-admin-nonce', 'nonce' );
 
-		if ( ! current_user_can( 'exactmetrics_view_dashboard' ) ) {
+		// current user can verify
+		if ( ! current_user_can( 'exactmetrics_save_settings' ) ) {
 			// Translators: Link tag starts with url and link tag ends.
 			$message = sprintf(
-				esc_html__( 'Oops! You don not have permissions to view or access Popular Posts. Please check with your site administrator that your role is included in the ExactMetrics permissions settings. %1$sClick here for more information%2$s.', 'google-analytics-dashboard-for-wp' ),
-				'<a target="_blank" href="' . exactmetrics_get_url( 'notice', 'cannot-view-dashboard', 'https://www.exactmetrics.com/docs/how-to-allow-user-roles-to-access-the-exactmetrics-reports-and-settings/' ) . '">',
+				__( 'You don\'t have the correct user permissions to verify the ExactMetrics license you are trying to use. Please check with your site administrator that your role is included in the ExactMetrics permissions settings. %1$sClick here for more information%2$s.', 'google-analytics-dashboard-for-wp' ),
+				'<a target="_blank" rel="noopener" href="' . exactmetrics_get_url( 'notice', 'cannot-save-settings', 'https://www.exactmetrics.com/docs/how-to-allow-user-roles-to-access-the-exactmetrics-reports-and-settings/' ) . '">',
 				'</a>'
 			);
 			wp_send_json_error( array( 'message' => $message ) );
 		}
 
-		if ( ! empty( $_REQUEST['isnetwork'] ) && $_REQUEST['isnetwork'] ) {
+		if ( ! empty( $_REQUEST['isnetwork'] ) && filter_var($_REQUEST['isnetwork'], FILTER_VALIDATE_BOOL) ) {
 			define( 'WP_NETWORK_ADMIN', true );
 		}
-		$settings_page = admin_url( 'admin.php?page=exactmetrics_settings' );
 
-		// Only for Pro users, require a license key to be entered first so we can link to things.
+		// we have an auth to verify
+		if ( $this->is_network_admin() && ! ExactMetrics()->auth->is_network_authed() ) {
+			// Translators: Support Link tag starts with url and Support link tag ends.
+			$message = sprintf(
+				__( 'Please enter a valid license within the ExactMetrics settings panel. You can check your license by logging into your ExactMetrics account by %1$sclicking here%2$s.', 'google-analytics-dashboard-for-wp' ),
+				'<a target="_blank" rel="noopener" href="' . exactmetrics_get_url( 'notice', 'cannot-verify-license', 'https://www.exactmetrics.com/my-account/' ) . '">',
+				'</a>'
+			);
+			wp_send_json_error( array( 'message' => $message ) );
+		} else if ( ! $this->is_network_admin() && ! ExactMetrics()->auth->is_authed() ) {
+			// Translators: Support Link tag starts with url and Support link tag ends.
+			$message = sprintf(
+				__( 'Please enter a valid license within the ExactMetrics settings panel. You can check your license by logging into your ExactMetrics account by %1$sclicking here%2$s.', 'google-analytics-dashboard-for-wp' ),
+				'<a target="_blank" rel="noopener" href="' . exactmetrics_get_url( 'notice', 'cannot-verify-license', 'https://www.exactmetrics.com/my-account/' ) . '">',
+				'</a>'
+			);
+			wp_send_json_error( array( 'message' => $message ) );
+		}
+
 		if ( exactmetrics_is_pro_version() ) {
-			if ( ! ExactMetrics()->license->is_site_licensed() && ! ExactMetrics()->license->is_network_licensed() ) {
-				$url = admin_url( 'admin.php?page=exactmetrics_settings#/' );
-
-				// Check for MS dashboard
-				if ( is_network_admin() ) {
-					$url = network_admin_url( 'admin.php?page=exactmetrics_settings#/' );
-				}
-				// Translators: Setting page link tag starts with url and Setting page link tag ends.
+			$valid = is_network_admin() ? ExactMetrics()->license->is_network_licensed() : ExactMetrics()->license->is_site_licensed();
+			if ( ! $valid ) {
+				// Translators: Support Link tag starts with url and Support link tag ends.
 				$message = sprintf(
-					esc_html__( 'Oops! We could not find a valid license key for ExactMetrics. Please %1$senter a valid license key%2$s to view this report.', 'google-analytics-dashboard-for-wp' ),
-					'<a href="' . esc_url( $url ) . '">',
-					'</a>'
-				);
-				wp_send_json_error( array(
-					'message' => $message,
-					'footer'  => '<a href="' . $settings_page . '">' . __( 'Add your license', 'google-analytics-dashboard-for-wp' ) . '</a>',
-				) );
-			} else if ( ExactMetrics()->license->is_site_licensed() && ! ExactMetrics()->license->site_license_has_error() ) {
-				// Good to go: site licensed.
-			} else if ( ExactMetrics()->license->is_network_licensed() && ! ExactMetrics()->license->network_license_has_error() ) {
-				// Good to go: network licensed.
-			} else {
-				// Translators: Account page link tag starts with url and Account page link tag ends.
-				$message = sprintf(
-					esc_html__( 'Oops! We could not find a valid license key. Please enter a valid license key to view this report. You can find your license by logging into your %1$sExactMetrics account%2$s.', 'google-analytics-dashboard-for-wp' ),
-					'<a target="_blank" href="' . exactmetrics_get_url( 'notice', 'license-errors', 'https://www.exactmetrics.com/my-account/licenses/' ) . '">',
+					__( 'Please enter a valid license within the ExactMetrics settings panel. You can check your license by logging into your ExactMetrics account by %1$sclicking here%2$s.', 'google-analytics-dashboard-for-wp' ),
+					'<a target="_blank" rel="noopener" href="' . exactmetrics_get_url( 'notice', 'cannot-verify-license', 'https://www.exactmetrics.com/my-account/' ) . '">',
 					'</a>'
 				);
 				wp_send_json_error( array( 'message' => $message ) );
 			}
 		}
 
-		// We do not have a current auth.
-		$site_auth = ExactMetrics()->auth->get_viewname();
-		$ms_auth   = is_multisite() && ExactMetrics()->auth->get_network_viewname();
-		if ( ! $site_auth && ! $ms_auth ) {
-			$url = admin_url( 'admin.php?page=exactmetrics_settings#/' );
-
-			// Check for MS dashboard
-			if ( is_network_admin() ) {
-				$url = network_admin_url( 'admin.php?page=exactmetrics_settings#/' );
-			}
-			// Translators: Wizard page link tag starts with url and Wizard page link tag ends.
-			$message = sprintf(
-				esc_html__( 'You need to authenticate into ExactMetrics before viewing reports. Please complete the setup by going through our %1$ssetup wizard%2$s.', 'google-analytics-dashboard-for-wp' ),
-				'<a href="' . esc_url( $url ) . '">',
-				'</a>'
-			);
-			wp_send_json_error( array( 'message' => $message ) );
-		}
-
-		$report_name = 'popularposts';
-
-		if ( empty( $report_name ) ) {
-			// Translators: Support link tag starts with url and Support link tag ends.
-			$message = sprintf(
-				esc_html__( 'Oops! We encountered an error while generating your reports. Please wait a few minutes and try again. If the issue persists, please %1$scontact our support%2$s team.', 'google-analytics-dashboard-for-wp' ),
-				'<a target="_blank" href="' . exactmetrics_get_url( 'notice', 'cannot-generate-reports', 'https://www.exactmetrics.com/my-account/support/' ) . '">',
-				'</a>'
-			);
-			wp_send_json_error( array( 'message' => $message ) );
-		}
-
-		$report = ExactMetrics()->reporting->get_report( $report_name );
-
-		$isnetwork = ! empty( $_REQUEST['isnetwork'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['isnetwork'] ) ) : '';
-		$start     = ! empty( $_POST['start'] ) ? sanitize_text_field( wp_unslash( $_POST['start'] ) ) : $report->default_start_date();
-		$end       = ! empty( $_POST['end'] ) ? sanitize_text_field( wp_unslash( $_POST['end'] ) ) : $report->default_end_date();
-
-		$args = array(
-			'start' => $start,
-			'end'   => $end,
-		);
-
-		if ( $isnetwork ) {
-			$args['network'] = true;
-		}
-
-		if ( exactmetrics_is_pro_version() && ! ExactMetrics()->license->license_can( $report->level ) ) {
-			$data = array(
-				'success' => false,
-				'error'   => 'license_level',
-			);
+		$worked = $this->verify_auth();
+		if ( $worked && ! is_wp_error( $worked ) ) {
+			wp_send_json_success( array( 'message' => __( "Successfully verified.", 'google-analytics-dashboard-for-wp' ) ) );
 		} else {
-			$data = apply_filters( 'exactmetrics_vue_reports_data', $report->get_data( $args ), $report_name, $report );
-		}
-
-		if ( ! empty( $data['success'] ) && ! empty( $data['data'] ) ) {
-			wp_send_json_success( $data['data'] );
-		} else if ( isset( $data['success'] ) && false === $data['success'] && ! empty( $data['error'] ) ) {
-			// Use a custom handler for invalid_grant errors.
-			if ( strpos( $data['error'], 'invalid_grant' ) > 0 ) {
-				wp_send_json_error(
-					array(
-						'message' => 'invalid_grant',
-						'footer'  => '',
-					)
-				);
-			}
-
-			wp_send_json_error(
-				array(
-					'message' => $data['error'],
-					'footer'  => isset( $data['data']['footer'] ) ? $data['data']['footer'] : '',
-				)
+			// Translators: Support Link tag starts with url and Support link tag ends.
+			$message = sprintf(
+				__( 'Oops! There has been an error while trying to verify your license. Please try again or contact our support team by %1$sclicking here%2$s.', 'google-analytics-dashboard-for-wp' ),
+				'<a target="_blank" href="' . exactmetrics_get_url( 'notice', 'cannot-verify-license', 'https://www.exactmetrics.com/my-account/support/' ) . '">',
+				'</a>'
 			);
+			wp_send_json_error( array( 'message' => $message ) );
 		}
-
-		// Translators: Support link tag starts with url and Support link tag ends.
-		$message = sprintf(
-			__( 'Oops! We encountered an error while generating your reports. Please wait a few minutes and try again. If the issue persists, please %1$scontact our support%2$s team.', 'google-analytics-dashboard-for-wp' ),
-			'<a target="_blank" href="' . exactmetrics_get_url( 'notice', 'cannot-generate-reports', 'https://www.exactmetrics.com/my-account/support/' ) . '">',
-			'</a>'
-		);
-		wp_send_json_error( array( 'message' => $message ) );
 	}
 
 
-/** Function delete_notes() called by wp_ajax hooks: {'exactmetrics_vue_delete_notes'} **/
-/** Parameters found in function delete_notes(): {"post": ["ids"]} **/
-function delete_notes()
-	{
-		check_ajax_referer('mi-admin-nonce', 'nonce');
-
-		$ids = !empty($_POST['ids']) ? json_decode(html_entity_decode(stripslashes($_POST['ids']))) : [];
-
-		if (empty($ids)) {
-			wp_send_json(
-				array(
-					'success' => false,
-					'message' => __('Please choose a site note(s) to delete!', 'google-analytics-dashboard-for-wp'),
-				)
-			);
-		}
-
-		foreach ($ids as $id) {
-			$this->db->delete_note($id);
-		}
-
-		wp_send_json(
-			array(
-				'success' => true,
-				'message' => '',
-			)
-		);
-	}
-
-
-/** Function exactmetrics_get_sem_rush_cta_status() called by wp_ajax hooks: {'exactmetrics_get_sem_rush_cta_status'} **/
+/** Function get_settings() called by wp_ajax hooks: {'exactmetrics_vue_get_settings'} **/
 /** No params detected :-/ **/
-
-
-/** Function update_manual_v4() called by wp_ajax hooks: {'exactmetrics_update_manual_v4'} **/
-/** Parameters found in function update_manual_v4(): {"post": ["manual_v4_code"], "request": ["isnetwork"]} **/
-function update_manual_v4() {
-
-		check_ajax_referer( 'mi-admin-nonce', 'nonce' );
-
-		if ( ! current_user_can( 'exactmetrics_save_settings' ) ) {
-			return;
-		}
-
-		$manual_v4_code = isset( $_POST['manual_v4_code'] ) ? sanitize_text_field( wp_unslash( $_POST['manual_v4_code'] ) ) : '';
-		$manual_v4_code = exactmetrics_is_valid_v4_id( $manual_v4_code ); // Also sanitizes the string.
-
-		if ( ! empty( $_REQUEST['isnetwork'] ) && sanitize_text_field( wp_unslash( $_REQUEST['isnetwork'] ) ) ) {
-			define( 'WP_NETWORK_ADMIN', true );
-		}
-		$manual_v4_code_old = is_network_admin() ? ExactMetrics()->auth->get_network_manual_v4_id() : ExactMetrics()->auth->get_manual_v4_id();
-
-		if ( $manual_v4_code && $manual_v4_code_old && $manual_v4_code_old === $manual_v4_code ) {
-			// Same code we had before
-			// Do nothing.
-			wp_send_json_success();
-		} else if ( $manual_v4_code && $manual_v4_code_old && $manual_v4_code_old !== $manual_v4_code ) {
-			// Different UA code.
-			if ( is_network_admin() ) {
-				ExactMetrics()->auth->set_network_manual_v4_id( $manual_v4_code );
-			} else {
-				ExactMetrics()->auth->set_manual_v4_id( $manual_v4_code );
-			}
-		} else if ( $manual_v4_code && empty( $manual_v4_code_old ) ) {
-			// Move to manual.
-			if ( is_network_admin() ) {
-				ExactMetrics()->auth->set_network_manual_v4_id( $manual_v4_code );
-			} else {
-				ExactMetrics()->auth->set_manual_v4_id( $manual_v4_code );
-			}
-		} else if ( empty( $manual_v4_code ) && $manual_v4_code_old ) {
-			// Deleted manual.
-			if ( is_network_admin() ) {
-				ExactMetrics()->auth->delete_network_manual_v4_id();
-			} else {
-				ExactMetrics()->auth->delete_manual_v4_id();
-			}
-		} else if ( isset( $_POST['manual_v4_code'] ) && empty( $manual_v4_code ) ) {
-			wp_send_json_error( array(
-				'v4_error' => 1,
-				// Translators: link tag starts with url, link tag ends.
-				'error'    => sprintf(
-					__( 'Oops! Please enter a valid Google Analytics 4 Measurement ID. %1$sLearn how to find your Measurement ID%2$s.', 'google-analytics-dashboard-for-wp' ),
-					'<a target="_blank" href="' . exactmetrics_get_url( 'notice', 'invalid-manual-gav4-code', 'https://www.exactmetrics.com/docs/how-to-set-up-dual-tracking/' ) . '">',
-					'</a>'
-				),
-			) );
-		}
-
-		wp_send_json_success();
-	}
-
-
-/** Function test_check_connection() called by wp_ajax hooks: {'health-check-exactmetrics-test_connection'} **/
-/** No params detected :-/ **/
-
-
-/** Function update_popular_posts_theme_setting() called by wp_ajax hooks: {'exactmetrics_vue_popular_posts_update_theme_setting'} **/
-/** Parameters found in function update_popular_posts_theme_setting(): {"post": ["type", "theme", "object", "key", "value"]} **/
-function update_popular_posts_theme_setting() {
-
-		check_ajax_referer( 'mi-admin-nonce', 'nonce' );
-
-		if ( ! current_user_can( 'exactmetrics_save_settings' ) ) {
-			return;
-		}
-
-		if ( ! empty( $_POST['type'] ) && ! empty( $_POST['theme'] ) && ! empty( $_POST['object'] ) && ! empty( $_POST['key'] ) && ! empty( $_POST['value'] ) ) {
-			$settings_key = 'exactmetrics_popular_posts_theme_settings';
-			$type         = sanitize_text_field( wp_unslash( $_POST['type'] ) ); // Type of Popular Posts instance: inline/widget/products.
-			$theme        = sanitize_text_field( wp_unslash( $_POST['theme'] ) );
-			$object       = sanitize_text_field( wp_unslash( $_POST['object'] ) ); // Style object like title, label, background, etc.
-			$key          = sanitize_text_field( wp_unslash( $_POST['key'] ) ); // Style key for the object like color, font size, etc.
-			$value        = sanitize_text_field( wp_unslash( $_POST['value'] ) ); // Value of custom style like 12px or #fff.
-			$settings     = get_option( $settings_key, array() );
-
-			if ( ! isset( $settings[ $type ] ) ) {
-				$settings[ $type ] = array();
-			}
-			if ( ! isset( $settings[ $type ][ $theme ] ) ) {
-				$settings[ $type ][ $theme ] = array();
-			}
-
-			if ( ! isset( $settings[ $type ][ $theme ][ $object ] ) ) {
-				$settings[ $type ][ $theme ][ $object ] = array();
-			}
-
-			$settings[ $type ][ $theme ][ $object ][ $key ] = $value;
-
-			update_option( $settings_key, $settings );
-
-			wp_send_json_success();
-		}
-
-		wp_send_json_error();
-
-	}
-
-
-/** Function ajax_get_themes() called by wp_ajax hooks: {'exactmetrics_get_popular_posts_themes'} **/
-/** Parameters found in function ajax_get_themes(): {"post": ["type"]} **/
-function ajax_get_themes() {
-
-		check_ajax_referer( 'mi-admin-nonce', 'nonce' );
-
-		$type = isset( $_POST['type'] ) ? sanitize_text_field( wp_unslash( $_POST['type'] ) ) : 'inline';
-
-		wp_send_json_success( $this->get_themes_by_type( $type, false ) );
-
-	}
-
-
-/** Function maybe_authenticate() called by wp_ajax hooks: {'exactmetrics_maybe_authenticate'} **/
-/** Parameters found in function maybe_authenticate(): {"request": ["isnetwork"]} **/
-function maybe_authenticate() {
-
-		// Check nonce
-		check_ajax_referer( 'mi-admin-nonce', 'nonce' );
-
-		// current user can authenticate
-		if ( ! current_user_can( 'exactmetrics_save_settings' ) ) {
-			// Translators: link tag starts with url, link tag ends.
-			$message = sprintf(
-				__( 'You don\'t have the correct WordPress user permissions to authenticate into ExactMetrics. Please check with your site administrator that your role is included in the ExactMetrics permissions settings. %1$sClick here for more information%2$s.', 'google-analytics-dashboard-for-wp' ),
-				'<a target="_blank" href="' . exactmetrics_get_url( 'notice', 'cannot-save-settings', 'https://www.exactmetrics.com/docs/how-to-allow-user-roles-to-access-the-exactmetrics-reports-and-settings/' ) . '">',
-				'</a>'
-			);
-			wp_send_json_error( array( 'message' => $message ) );
-		}
-
-		if ( ! empty( $_REQUEST['isnetwork'] ) && $_REQUEST['isnetwork'] ) { // phpcs:ignore
-			define( 'WP_NETWORK_ADMIN', true );
-		}
-
-		// Only for Pro users, require a license key to be entered first so we can link to things.
-		if ( exactmetrics_is_pro_version() ) {
-			$valid = is_network_admin() ? ExactMetrics()->license->is_network_licensed() : ExactMetrics()->license->is_site_licensed();
-			if ( ! $valid ) {
-				wp_send_json_error( array( 'message' => __( "Cannot authenticate. Please enter a valid, active license key for ExactMetrics Pro into the settings page.", 'google-analytics-dashboard-for-wp' ) ) );
-			}
-		}
-
-		// we do not have a current auth
-		if ( ! $this->is_network_admin() && ExactMetrics()->auth->is_authed() ) {
-			// Translators: Support link tag starts with url, Support link tag ends.
-			$message = sprintf(
-				__( 'Oops! There has been an error authenticating. Please try again in a few minutes. If the problem persists, please %1$scontact our support%2$s team.', 'google-analytics-dashboard-for-wp' ),
-				'<a target="_blank" href="' . exactmetrics_get_url( 'notice', 'error-authenticating', 'https://www.exactmetrics.com/my-account/support/' ) . '">',
-				'</a>'
-			);
-			wp_send_json_error( array( 'message' => $message ) );
-		} else if ( $this->is_network_admin() && ExactMetrics()->auth->is_network_authed() ) {
-			// Translators: Support link tag starts with url, Support link tag ends.
-			$message = sprintf(
-				__( 'Oops! There has been an error authenticating. Please try again in a few minutes. If the problem persists, please %1$scontact our support%2$s team.', 'google-analytics-dashboard-for-wp' ),
-				'<a target="_blank href="' . exactmetrics_get_url( 'notice', 'error-authenticating', 'https://www.exactmetrics.com/my-account/support/' ) . '">',
-				'</a>'
-			);
-			wp_send_json_error( array( 'message' => $message ) );
-		}
-
-		$sitei = $this->get_sitei();
-
-		$siteurl = add_query_arg( array(
-			'tt'        => $this->get_tt(),
-			'sitei'     => $sitei,
-			'miversion' => EXACTMETRICS_VERSION,
-			'ajaxurl'   => admin_url( 'admin-ajax.php' ),
-			'network'   => is_network_admin() ? 'network' : 'site',
-			'siteurl'   => is_network_admin() ? network_admin_url() : site_url(),
-			'return'    => is_network_admin() ? network_admin_url( 'admin.php?page=exactmetrics_network' ) : admin_url( 'admin.php?page=exactmetrics_settings' ),
-			'testurl'   => 'https://' . exactmetrics_get_api_url() . 'test/',
-		), $this->get_route( 'https://' . exactmetrics_get_api_url() . 'auth/new/{type}' ) );
-
-		if ( exactmetrics_is_pro_version() ) {
-			$key     = is_network_admin() ? ExactMetrics()->license->get_network_license_key() : ExactMetrics()->license->get_site_license_key();
-			$siteurl = add_query_arg( 'license', $key, $siteurl );
-		}
-
-		$siteurl = apply_filters( 'exactmetrics_maybe_authenticate_siteurl', $siteurl );
-		wp_send_json_success( array( 'redirect' => $siteurl ) );
-	}
-
-
-/** Function maybe_reauthenticate() called by wp_ajax hooks: {'exactmetrics_maybe_reauthenticate'} **/
-/** Parameters found in function maybe_reauthenticate(): {"request": ["isnetwork"]} **/
-function maybe_reauthenticate() {
-
-		// Check nonce
-		check_ajax_referer( 'mi-admin-nonce', 'nonce' );
-
-		$url = admin_url( 'admin.php?page=exactmetrics-onboarding' );
-
-		// current user can authenticate
-		if ( ! current_user_can( 'exactmetrics_save_settings' ) ) {
-			// Translators: Link tag starts with url and link tag ends.
-			$message = sprintf(
-				__( 'You don\'t have the correct WordPress user permissions to re-authenticate into ExactMetrics. Please check with your site administrator that your role is included in the ExactMetrics permissions settings. %1$sClick here for more information%2$s.', 'google-analytics-dashboard-for-wp' ),
-				'<a target="_blank" href="' . exactmetrics_get_url( 'notice', 'cannot-save-settings', 'https://www.exactmetrics.com/docs/how-to-allow-user-roles-to-access-the-exactmetrics-reports-and-settings/' ) . '">',
-				'</a>'
-			);
-			wp_send_json_error( array( 'message' => $message ) );
-		}
-
-		if ( ! empty( $_REQUEST['isnetwork'] ) && filter_var($_REQUEST['isnetwork'], FILTER_VALIDATE_BOOLEAN) ) {
-			define( 'WP_NETWORK_ADMIN', true );
-		}
-
-		// Only for Pro users, require a license key to be entered first so we can link to things.
-		if ( exactmetrics_is_pro_version() ) {
-			$valid = is_network_admin() ? ExactMetrics()->license->is_network_licensed() : ExactMetrics()->license->is_site_licensed();
-			if ( exactmetrics_is_pro_version() && ! $valid ) {
-				wp_send_json_error( array( 'message' => __( "Your license key for ExactMetrics is invalid. The key no longer exists or the user associated with the key has been deleted. Please use a different key.", 'google-analytics-dashboard-for-wp' ) ) );
-			}
-		}
-
-		// we do have a current auth
-		if ( ! $this->is_network_admin() && ! ExactMetrics()->auth->is_authed() ) {
-			// Translators: Wizard Link tag starts with url, Wizard link tag ends, Support link tag starts, Support link tag ends.
-			$message = sprintf(
-				__( 'Oops! There was a problem while re-authenticating. Please try to complete the ExactMetrics %1$ssetup wizard%2$s again. If the problem persists, please %3$scontact our support%4$s team.', 'google-analytics-dashboard-for-wp' ),
-				'<a href="' . esc_url( $url ) . '">',
-				'</a>',
-				'<a target="_blank" href="' . exactmetrics_get_url( 'notice', 'cannot-re-authenticate', 'https://www.exactmetrics.com/my-account/support/' ) . '">',
-				'</a>'
-			);
-			wp_send_json_error( array( 'message' => $message ) );
-		} else if ( $this->is_network_admin() && ! ExactMetrics()->auth->is_network_authed() ) {
-			// Translators: Wizard Link tag starts with url, Wizard link tag ends, Support link tag starts, Support link tag ends.
-			$message = sprintf(
-				__( 'Oops! There was a problem while re-authenticating. Please try to complete the ExactMetrics %1$ssetup wizard%2$s again. If the problem persists, please %3$scontact our support%4$s team.', 'google-analytics-dashboard-for-wp' ),
-				'<a href="' . esc_url( $url ) . '">',
-				'</a>',
-				'<a target="_blank" href="' . exactmetrics_get_url( 'notice', 'cannot-re-authenticate', 'https://www.exactmetrics.com/my-account/support/' ) . '">',
-				'</a>'
-			);
-			wp_send_json_error( array( 'message' => $message ) );
-		}
-
-		$siteurl = add_query_arg( array(
-			'tt'        => $this->get_tt(),
-			'sitei'     => $this->get_sitei(),
-			'miversion' => EXACTMETRICS_VERSION,
-			'ajaxurl'   => admin_url( 'admin-ajax.php' ),
-			'network'   => is_network_admin() ? 'network' : 'site',
-			'siteurl'   => is_network_admin() ? network_admin_url() : site_url(),
-			'key'       => is_network_admin() ? ExactMetrics()->auth->get_network_key() : ExactMetrics()->auth->get_key(),
-			'token'     => is_network_admin() ? ExactMetrics()->auth->get_network_token() : ExactMetrics()->auth->get_token(),
-			'return'    => is_network_admin() ? network_admin_url( 'admin.php?page=exactmetrics_network' ) : admin_url( 'admin.php?page=exactmetrics_settings' ),
-			'testurl'   => 'https://' . exactmetrics_get_api_url() . 'test/',
-		), $this->get_route( 'https://' . exactmetrics_get_api_url() . 'auth/reauth/{type}' ) );
-
-		if ( exactmetrics_is_pro_version() ) {
-			$key     = is_network_admin() ? ExactMetrics()->license->get_network_license_key() : ExactMetrics()->license->get_site_license_key();
-			$siteurl = add_query_arg( 'license', $key, $siteurl );
-		}
-
-		$siteurl = apply_filters( 'exactmetrics_maybe_authenticate_siteurl', $siteurl );
-
-		wp_send_json_success( array( 'redirect' => $siteurl ) );
-	}
-
-
-/** Function update_settings_bulk() called by wp_ajax hooks: {'exactmetrics_vue_update_settings_bulk'} **/
-/** Parameters found in function update_settings_bulk(): {"post": ["settings"]} **/
-function update_settings_bulk() {
-
-		check_ajax_referer( 'mi-admin-nonce', 'nonce' );
-
-		if ( ! current_user_can( 'exactmetrics_save_settings' ) ) {
-			return;
-		}
-
-		if ( isset( $_POST['settings'] ) ) {
-			$settings = json_decode( sanitize_text_field( wp_unslash( $_POST['settings'] ) ), true );
-			foreach ( $settings as $setting => $value ) {
-				$value = $this->handle_sanitization( $setting, $value );
-				exactmetrics_update_option( $setting, $value );
-				do_action( 'exactmetrics_after_update_settings', $setting, $value );
-			}
-		}
-
-		wp_send_json_success();
-
-	}
-
-
-/** Function handle_relay_mp_token_push() called by wp_ajax hooks: {'nopriv_exactmetrics_push_mp_token'} **/
-/** Parameters found in function handle_relay_mp_token_push(): {"post": ["mp_token", "timestamp", "signature"]} **/
-function handle_relay_mp_token_push() {
-		$mp_token  = sanitize_text_field( $_POST['mp_token'] ); // phpcs:ignore
-		$timestamp = (int) sanitize_text_field( $_POST['timestamp'] ); // phpcs:ignore
-		$signature = sanitize_text_field( $_POST['signature'] ); // phpcs:ignore
-
-		// check if expired
-		if ( time() > $timestamp + 1000 ) {
-			wp_send_json_error( new WP_Error( 'exactmetrics_mp_token_timestamp_expired' ) );
-		}
-
-		// Check hashed signature
-		$auth = ExactMetrics()->auth;
-
-		$is_network = is_multisite();
-		$public_key = $is_network
-			? $auth->get_network_key()
-			: $auth->get_key();
-
-		$hashed_data = array(
-			'mp_token'  => sanitize_text_field($_POST['mp_token']),
-			'timestamp' => $timestamp,
-		);
-
-		// These `hash_` functions are polyfilled by WP in wp-includes/compat.php
-		$expected_signature = hash_hmac( 'md5', http_build_query( $hashed_data ), $public_key );
-		if ( ! hash_equals( $signature, $expected_signature ) ) {
-			wp_send_json_error( new WP_Error( 'exactmetrics_mp_token_invalid_signature' ) );
-		}
-
-		// Save measurement protocol token
-		if ( $is_network ) {
-			$auth->set_network_measurement_protocol_secret( $mp_token );
-		} else {
-			$auth->set_measurement_protocol_secret( $mp_token );
-		}
-		wp_send_json_success();
-	}
-
-
-/** Function exactmetrics_ajax_deactivate_addon() called by wp_ajax hooks: {'exactmetrics_deactivate_addon'} **/
-/** Parameters found in function exactmetrics_ajax_deactivate_addon(): {"post": ["plugin", "isnetwork"]} **/
-function exactmetrics_ajax_deactivate_addon() {
-
-	// Run a security check first.
-	check_ajax_referer( 'exactmetrics-deactivate', 'nonce' );
-
-	if ( ! current_user_can( 'deactivate_plugins' ) ) {
-		wp_send_json( array(
-			'error' => esc_html__( 'You are not allowed to deactivate plugins', 'google-analytics-dashboard-for-wp' ),
-		) );
-	}
-
-	// Deactivate the addon.
-	if ( isset( $_POST['plugin'] ) ) {
-		if ( isset( $_POST['isnetwork'] ) && $_POST['isnetwork'] ) {
-			$deactivate = deactivate_plugins( $_POST['plugin'], false, true );
-		} else {
-			$deactivate = deactivate_plugins( $_POST['plugin'] );
-		}
-	}
-
-	echo json_encode( true );
-	wp_die();
-}
-
-
-/** Function save_widget_state() called by wp_ajax hooks: {'exactmetrics_save_widget_state'} **/
-/** Parameters found in function save_widget_state(): {"post": ["reports", "width", "interval", "compact"]} **/
-function save_widget_state() {
-
-		check_ajax_referer( 'mi-admin-nonce', 'nonce' );
-
-		$default         = self::$default_options;
-		$current_options = $this->get_options();
-
-		$reports = $default['reports'];
-		if ( isset( $_POST['reports'] ) ) {
-			$reports = json_decode( sanitize_text_field( wp_unslash( $_POST['reports'] ) ), true );
-		}
-
-		$options = array(
-			'width'       => ! empty( $_POST['width'] ) ? sanitize_text_field( wp_unslash( $_POST['width'] ) ) : $default['width'],
-			'interval'    => ! empty( $_POST['interval'] ) ? absint( wp_unslash( $_POST['interval'] ) ) : $default['interval'],
-			'compact'     => ! empty( $_POST['compact'] ) ? 'true' === sanitize_text_field( wp_unslash( $_POST['compact'] ) ) : $default['compact'],
-			'reports'     => $reports,
-			'notice30day' => $current_options['notice30day'],
-		);
-
-		array_walk( $options, 'sanitize_text_field' );
-		update_user_meta( get_current_user_id(), 'exactmetrics_user_preferences', $options );
-
-		wp_send_json_success();
-
-	}
-
-
-/** Function generate_connect_url() called by wp_ajax hooks: {'exactmetrics_connect_url'} **/
-/** Parameters found in function generate_connect_url(): {"post": ["key", "network"]} **/
-function generate_connect_url() {
-
-		check_ajax_referer( 'mi-admin-nonce', 'nonce' );
-
-		// Check for permissions.
-		if ( ! exactmetrics_can_install_plugins() ) {
-			wp_send_json_error( array( 'message' => esc_html__( 'Oops! You are not allowed to install plugins. Please contact your site administrator.', 'google-analytics-dashboard-for-wp' ) ) );
-		}
-
-		if ( exactmetrics_is_dev_url( home_url() ) ) {
-			wp_send_json_success( array(
-				'url' => 'https://www.exactmetrics.com/docs/go-lite-pro/#manual-upgrade',
-			) );
-		}
-
-		$key = ! empty( $_POST['key'] ) ? sanitize_text_field( wp_unslash( $_POST['key'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification
-
-		if ( empty( $key ) ) {
-			wp_send_json_error(
-				array(
-					'message' => esc_html__( 'Please enter your license key to connect.', 'google-analytics-dashboard-for-wp' ),
-				)
-			);
-		}
-
-		// Verify pro version is not installed.
-		$active = activate_plugin( 'exactmetrics-premium/exactmetrics-premium.php', false, false, true );
-		if ( ! is_wp_error( $active ) ) {
-			// Deactivate plugin.
-			deactivate_plugins( plugin_basename( EXACTMETRICS_PLUGIN_FILE ), false, false );
-			wp_send_json_error( array(
-				'message' => esc_html__( 'You already have ExactMetrics Pro installed.', 'google-analytics-dashboard-for-wp' ),
-				'reload'  => true,
-			) );
-		}
-
-		// Network?
-		$network = ! empty( $_POST['network'] ) && $_POST['network']; // phpcs:ignore
-
-		// Redirect.
-		$oth = hash( 'sha512', wp_rand() );
-		update_option( 'exactmetrics_connect', array(
-			'key'     => $key,
-			'time'    => time(),
-			'network' => $network,
-		) );
-		update_option( 'exactmetrics_connect_token', $oth );
-		$version  = ExactMetrics()->version;
-		$siteurl  = admin_url();
-		$endpoint = admin_url( 'admin-ajax.php' );
-		$redirect = $network ? network_admin_url( 'admin.php?page=exactmetrics_network' ) : admin_url( 'admin.php?page=exactmetrics_settings' );
-
-		$url = add_query_arg( array(
-			'key'      => $key,
-			'oth'      => $oth,
-			'endpoint' => $endpoint,
-			'version'  => $version,
-			'siteurl'  => $siteurl,
-			'homeurl'  => home_url(),
-			'redirect' => rawurldecode( base64_encode( $redirect ) ),
-			'v'        => 2,
-		), 'https://upgrade.exactmetrics.com' );
-
-		wp_send_json_success( array(
-			'url' => $url,
-		) );
-	}
 
 
 /** Function maybe_delete() called by wp_ajax hooks: {'exactmetrics_maybe_delete'} **/
@@ -1350,9 +2106,39 @@ function maybe_delete() {
 	}
 
 
-/** Function update_settings() called by wp_ajax hooks: {'exactmetrics_vue_update_settings'} **/
-/** Parameters found in function update_settings(): {"post": ["setting", "value"]} **/
-function update_settings() {
+/** Function delete_categories() called by wp_ajax hooks: {'exactmetrics_vue_delete_categories'} **/
+/** Parameters found in function delete_categories(): {"post": ["ids"]} **/
+function delete_categories()
+	{
+		check_ajax_referer('mi-admin-nonce', 'nonce');
+
+		$ids = !empty($_POST['ids']) ? json_decode(html_entity_decode(stripslashes($_POST['ids']))) : [];
+
+		if (empty($ids)) {
+			wp_send_json(
+				array(
+					'success' => false,
+					'message' => __('Please choose a category to delete!', 'google-analytics-dashboard-for-wp'),
+				)
+			);
+		}
+
+		foreach ($ids as $id) {
+			$this->db->delete_category($id);
+		}
+
+		wp_send_json(
+			array(
+				'success' => true,
+				'message' => '',
+			)
+		);
+	}
+
+
+/** Function update_popular_posts_theme_setting() called by wp_ajax hooks: {'exactmetrics_vue_popular_posts_update_theme_setting'} **/
+/** Parameters found in function update_popular_posts_theme_setting(): {"post": ["type", "theme", "object", "key", "value"]} **/
+function update_popular_posts_theme_setting() {
 
 		check_ajax_referer( 'mi-admin-nonce', 'nonce' );
 
@@ -1360,24 +2146,71 @@ function update_settings() {
 			return;
 		}
 
-		if ( isset( $_POST['setting'] ) ) {
-			$setting = sanitize_text_field( wp_unslash( $_POST['setting'] ) );
-			if ( isset( $_POST['value'] ) ) {
-				$value = $this->handle_sanitization( $setting, $_POST['value'] ); // phpcs:ignore
-				exactmetrics_update_option( $setting, $value );
-				do_action( 'exactmetrics_after_update_settings', $setting, $value );
-			} else {
-				exactmetrics_update_option( $setting, false );
-				do_action( 'exactmetrics_after_update_settings', $setting, false );
+		if ( ! empty( $_POST['type'] ) && ! empty( $_POST['theme'] ) && ! empty( $_POST['object'] ) && ! empty( $_POST['key'] ) && ! empty( $_POST['value'] ) ) {
+			$settings_key = 'exactmetrics_popular_posts_theme_settings';
+			$type         = sanitize_text_field( wp_unslash( $_POST['type'] ) ); // Type of Popular Posts instance: inline/widget/products.
+			$theme        = sanitize_text_field( wp_unslash( $_POST['theme'] ) );
+			$object       = sanitize_text_field( wp_unslash( $_POST['object'] ) ); // Style object like title, label, background, etc.
+			$key          = sanitize_text_field( wp_unslash( $_POST['key'] ) ); // Style key for the object like color, font size, etc.
+			$value        = sanitize_text_field( wp_unslash( $_POST['value'] ) ); // Value of custom style like 12px or #fff.
+			$settings     = get_option( $settings_key, array() );
+
+			if ( ! isset( $settings[ $type ] ) ) {
+				$settings[ $type ] = array();
 			}
+			if ( ! isset( $settings[ $type ][ $theme ] ) ) {
+				$settings[ $type ][ $theme ] = array();
+			}
+
+			if ( ! isset( $settings[ $type ][ $theme ][ $object ] ) ) {
+				$settings[ $type ][ $theme ][ $object ] = array();
+			}
+
+			$settings[ $type ][ $theme ][ $object ][ $key ] = $value;
+
+			update_option( $settings_key, $settings );
+
+			wp_send_json_success();
 		}
 
-		wp_send_json_success();
+		wp_send_json_error();
 
 	}
 
 
-/** Function get_license() called by wp_ajax hooks: {'exactmetrics_vue_get_license'} **/
+/** Function exactmetrics_handle_get_plugin_info() called by wp_ajax hooks: {'nopriv_exactmetrics_get_plugin_info'} **/
+/** Parameters found in function exactmetrics_handle_get_plugin_info(): {"request": ["key"]} **/
+function exactmetrics_handle_get_plugin_info() {
+
+    $auth = ExactMetrics()->auth;
+
+    //  Authenticate with public key
+    $key = sanitize_text_field($_REQUEST['key']);
+
+    $site_key = is_network_admin() ? $auth->get_network_key() : $auth->get_key();
+
+    if ( !hash_equals( $site_key, $key ) ) {
+        wp_send_json_error([
+            'error'     => __( 'Invalid site key.', 'google-analytics-dashboard-for-wp' )
+        ], 401);
+    }
+
+    $ua = is_network_admin() ? $auth->get_network_ua() : $auth->get_ua();
+    $v4 = is_network_admin() ? $auth->get_network_v4_id() :  $auth->get_v4_id();
+    $has_secret = is_network_admin() ?
+        !empty( $auth->get_network_measurement_protocol_secret() ) :
+        !empty( $auth->get_measurement_protocol_secret() );
+
+    wp_send_json([
+        'ua'                => $ua,
+        'v4'                => $v4,
+        'has_mp_secret'     => $has_secret,
+        'plugin_version'    => ExactMetrics()->version
+    ]);
+}
+
+
+/** Function exactmetrics_get_floatbar() called by wp_ajax hooks: {'exactmetrics_get_floatbar'} **/
 /** No params detected :-/ **/
 
 
@@ -1424,158 +2257,6 @@ function update_measurement_protocol_secret() {
 		}
 
 		wp_send_json_success( $data );
-	}
-
-
-/** Function exactmetrics_ajax_dismiss_notice() called by wp_ajax hooks: {'exactmetrics_ajax_dismiss_notice'} **/
-/** Parameters found in function exactmetrics_ajax_dismiss_notice(): {"post": ["notice"]} **/
-function exactmetrics_ajax_dismiss_notice() {
-
-	// Run a security check first.
-	check_ajax_referer( 'exactmetrics-dismiss-notice', 'nonce' );
-
-	// Deactivate the notice
-	if ( isset( $_POST['notice'] ) ) {
-		// Init the notice class and mark notice as deactivated
-		ExactMetrics()->notices->dismiss( $_POST['notice'] );
-
-		// Return true
-		echo json_encode( true );
-		wp_die();
-	}
-
-	// If here, an error occurred
-	echo json_encode( false );
-	wp_die();
-
-}
-
-
-/** Function save_note() called by wp_ajax hooks: {'exactmetrics_vue_save_note'} **/
-/** Parameters found in function save_note(): {"post": ["note"]} **/
-function save_note()
-	{
-		check_ajax_referer('mi-admin-nonce', 'nonce');
-
-		$note = !empty($_POST['note']) ? json_decode(html_entity_decode(stripslashes($_POST['note']))) : [];
-
-		$note_details = array(
-			'note' => sanitize_text_field($note->note_title),
-			'category' => intval(is_object($note->category) && isset($note->category->id) && intval($note->category->id) ? $note->category->id : 0),
-			'date' => $note->note_date_ymd,
-			'medias' => !empty($note->medias) ? array_values(array_keys((array) $note->medias)) : [],
-			'important' => isset($note->important) ? $note->important : false,
-		);
-
-		if ($note->id) {
-			// Update Site Note.
-			$note_details['id'] = $note->id;
-		}
-
-		$note_id = $this->db->create($note_details);
-
-		if (is_wp_error($note_id)) {
-			wp_send_json(
-				array(
-					'published' => false,
-					'message' => $note_id->get_error_message(),
-				)
-			);
-		}
-
-		wp_send_json(
-			array(
-				'published' => true,
-				'message' => '',
-				'id' => $note_id,
-			)
-		);
-	}
-
-
-/** Function get_notice_status() called by wp_ajax hooks: {'exactmetrics_vue_notice_status'} **/
-/** Parameters found in function get_notice_status(): {"post": ["notice"]} **/
-function get_notice_status() {
-
-		check_ajax_referer( 'mi-admin-nonce', 'nonce' );
-
-		$notice_id = empty( $_POST['notice'] ) ? false : sanitize_text_field( wp_unslash( $_POST['notice'] ) );
-		if ( ! $notice_id ) {
-			wp_send_json_error();
-		}
-		$is_dismissed = ExactMetrics()->notices->is_dismissed( $notice_id );
-
-		wp_send_json_success( array(
-			'dismissed' => $is_dismissed,
-		) );
-	}
-
-
-/** Function get_posts() called by wp_ajax hooks: {'exactmetrics_get_posts'} **/
-/** Parameters found in function get_posts(): {"post": ["post_type", "keyword", "numberposts"]} **/
-function get_posts() {
-
-		// Run a security check first.
-		check_ajax_referer( 'mi-admin-nonce', 'nonce' );
-
-		$post_type = isset( $_POST['post_type'] ) ? sanitize_text_field( wp_unslash( $_POST['post_type'] ) ) : 'any';
-
-		$args = array(
-			's'              => isset( $_POST['keyword'] ) ? sanitize_text_field( wp_unslash( $_POST['keyword'] ) ) : '',
-			'post_type'      => $post_type,
-			'posts_per_page' => isset( $_POST['numberposts'] ) ? sanitize_text_field( wp_unslash( $_POST['numberposts'] ) ) : 10,
-			'orderby'        => 'relevance',
-		);
-
-		$array = array();
-		$posts = get_posts( $args );
-
-		if ( in_array( $post_type, array( 'page', 'any' ), true ) ) {
-			$homepage = get_option( 'page_on_front' );
-			if ( ! $homepage ) {
-				$array[] = array(
-					'id'    => - 1,
-					'title' => __( 'Homepage', 'google-analytics-dashboard-for-wp' ),
-				);
-			}
-		}
-
-		if ( $posts ) {
-			foreach ( $posts as $post ) {
-				$array[] = array(
-					'id'    => $post->ID,
-					'title' => $post->post_title,
-				);
-			}
-		}
-
-		wp_send_json_success( $array );
-	}
-
-
-/** Function get_settings() called by wp_ajax hooks: {'exactmetrics_vue_get_settings'} **/
-/** No params detected :-/ **/
-
-
-/** Function get_note() called by wp_ajax hooks: {'exactmetrics_vue_get_note'} **/
-/** Parameters found in function get_note(): {"post": ["id"]} **/
-function get_note()
-	{
-		check_ajax_referer('mi-admin-nonce', 'nonce');
-
-		$id = !empty($_POST['id']) ? intval($_POST['id']) : null;
-		$item = $this->db->get($id);
-
-		if (is_wp_error($item)) {
-			wp_send_json(
-				array(
-					'success' => false,
-					'message' => $item->get_error_message(),
-				)
-			);
-		}
-
-		wp_send_json($item);
 	}
 
 
@@ -1630,63 +2311,6 @@ function save_category()
 	}
 
 
-/** Function exactmetrics_handle_ga_queue_response() called by wp_ajax hooks: {'nopriv_exactmetrics_handle_ga_queue_response'} **/
-/** Parameters found in function exactmetrics_handle_ga_queue_response(): {"request": ["key", "profile", "mp_secret"]} **/
-function exactmetrics_handle_ga_queue_response() {
-
-    $auth = ExactMetrics()->auth;
-
-    //  Authenticate with public key
-    $key = sanitize_text_field($_REQUEST['key']);
-
-    $site_key = is_network_admin() ? $auth->get_network_key() : $auth->get_key();
-
-    if ( !hash_equals( $site_key, $key ) ) {
-        wp_send_json_error([
-            'error'     => __( 'Invalid site key.', 'google-analytics-dashboard-for-wp' )
-        ], 401);
-    }
-
-    //  Check if credentials have already been saved - prevent override
-    $local_queue_status = exactmetrics_get_option( 'ga4_upgrade_queue_status' );
-
-    if ( $local_queue_status === 'fulfilled' ) {
-        wp_send_json_error([
-            'error'     => __( 'Site has already been processed.', 'google-analytics-dashboard-for-wp' )
-        ], 400);
-    }
-
-    if ( empty($_REQUEST['profile']) || empty($_REQUEST['mp_secret']) ) {
-        wp_send_json_error([
-            'error'     => __( 'Profile or secret key missing.', 'google-analytics-dashboard-for-wp' )
-        ], 400);
-    }
-
-    $v4_id = sanitize_text_field($_REQUEST['profile']);
-    $mp_secret = sanitize_text_field($_REQUEST['mp_secret']);
-
-    //  Update dual tracking
-    if ( is_network_admin() ) {
-        $auth->set_network_dual_tracking_id( $v4_id );
-        $auth->set_network_measurement_protocol_secret( $mp_secret );
-    } else {
-        $auth->set_dual_tracking_id( $v4_id );
-        $auth->set_measurement_protocol_secret( $mp_secret );
-    }
-
-    //  Create automatic swap cron
-    if ( false === wp_next_scheduled( 'exactmetrics_v4_property_swap' ) ) {
-        wp_schedule_single_event( strtotime( "+31 days" ), 'exactmetrics_v4_property_swap' );
-    }
-
-    //  Update queue status option
-    exactmetrics_update_option( 'ga4_upgrade_queue_status', 'fulfilled' );
-    exactmetrics_delete_option( 'ga4_upgrade_queue_job_id' );
-
-    wp_send_json_success();
-}
-
-
 /** Function trash_notes() called by wp_ajax hooks: {'exactmetrics_vue_trash_notes'} **/
 /** Parameters found in function trash_notes(): {"post": ["ids"]} **/
 function trash_notes()
@@ -1717,261 +2341,13 @@ function trash_notes()
 	}
 
 
-/** Function exactmetrics_mark_admin_menu_tooltip_hidden() called by wp_ajax hooks: {'exactmetrics_hide_admin_menu_tooltip'} **/
+/** Function exactmetrics_ajax_dismiss_semrush_cta() called by wp_ajax hooks: {'exactmetrics_vue_dismiss_semrush_cta'} **/
 /** No params detected :-/ **/
 
 
-/** Function mark_notice_closed() called by wp_ajax hooks: {'exactmetrics_mark_notice_closed'} **/
-/** No params detected :-/ **/
-
-
-/** Function exactmetrics_ajax_activate_addon() called by wp_ajax hooks: {'exactmetrics_activate_addon'} **/
-/** Parameters found in function exactmetrics_ajax_activate_addon(): {"post": ["plugin", "isnetwork"]} **/
-function exactmetrics_ajax_activate_addon() {
-
-	// Run a security check first.
-	check_ajax_referer( 'exactmetrics-activate', 'nonce' );
-
-	if ( ! current_user_can( 'activate_plugins' ) ) {
-		wp_send_json( array(
-			'error' => esc_html__( 'You are not allowed to activate plugins', 'google-analytics-dashboard-for-wp' ),
-		) );
-	}
-
-	// Activate the addon.
-	if ( isset( $_POST['plugin'] ) ) {
-		if ( isset( $_POST['isnetwork'] ) && $_POST['isnetwork'] ) {
-			$activate = activate_plugin( $_POST['plugin'], null, true );
-		} else {
-			$activate = activate_plugin( $_POST['plugin'] );
-		}
-		/* Restrict thirt-party redirections on activation */
-		delete_transient( '_userfeedback_activation_redirect' );
-		if ( is_wp_error( $activate ) ) {
-			echo json_encode( array( 'error' => $activate->get_error_message() ) );
-			wp_die();
-		}
-
-		do_action( 'exactmetrics_after_ajax_activate_addon', sanitize_text_field( $_POST['plugin'] ) );
-	}
-
-	echo json_encode( true );
-	wp_die();
-
-}
-
-
-/** Function exactmetrics_ajax_install_addon() called by wp_ajax hooks: {'exactmetrics_install_addon'} **/
-/** Parameters found in function exactmetrics_ajax_install_addon(): {"post": ["plugin"]} **/
-function exactmetrics_ajax_install_addon() {
-
-	// Run a security check first.
-	check_ajax_referer( 'exactmetrics-install', 'nonce' );
-
-	if ( ! exactmetrics_can_install_plugins() ) {
-		wp_send_json( array(
-			'error' => esc_html__( 'You are not allowed to install plugins', 'google-analytics-dashboard-for-wp' ),
-		) );
-	}
-
-	// Install the addon.
-	if ( isset( $_POST['plugin'] ) ) {
-		$download_url = $_POST['plugin'];
-		global $hook_suffix;
-
-		// Set the current screen to avoid undefined notices.
-		set_current_screen();
-
-		// Prepare variables.
-		$method = '';
-		$url    = add_query_arg(
-			array(
-				'page' => 'exactmetrics-settings'
-			),
-			admin_url( 'admin.php' )
-		);
-		$url    = esc_url( $url );
-
-		// Start output bufferring to catch the filesystem form if credentials are needed.
-		ob_start();
-		if ( false === ( $creds = request_filesystem_credentials( $url, $method, false, false, null ) ) ) {
-			$form = ob_get_clean();
-			echo json_encode( array( 'form' => $form ) );
-			wp_die();
-		}
-
-		// If we are not authenticated, make it happen now.
-		if ( ! WP_Filesystem( $creds ) ) {
-			ob_start();
-			request_filesystem_credentials( $url, $method, true, false, null );
-			$form = ob_get_clean();
-			echo json_encode( array( 'form' => $form ) );
-			wp_die();
-		}
-
-		// We do not need any extra credentials if we have gotten this far, so let's install the plugin.
-		exactmetrics_require_upgrader( false );
-
-		// Create the plugin upgrader with our custom skin.
-		$installer = new Plugin_Upgrader( $skin = new ExactMetrics_Skin() );
-		$installer->install( $download_url );
-
-		// Flush the cache and return the newly installed plugin basename.
-		wp_cache_flush();
-		if ( $installer->plugin_info() ) {
-			$plugin_basename = $installer->plugin_info();
-			echo json_encode( array( 'plugin' => $plugin_basename ) );
-			wp_die();
-		}
-	}
-
-	// Send back a response.
-	echo json_encode( true );
-	wp_die();
-
-}
-
-
-/** Function exactmetrics_dismiss_tracking_notice() called by wp_ajax hooks: {'exactmetrics_dismiss_tracking_notice'} **/
-/** No params detected :-/ **/
-
-
-/** Function install_and_activate_wpforms() called by wp_ajax hooks: {'exactmetrics_onboarding_wpforms_install'} **/
-/** No params detected :-/ **/
-
-
-/** Function get_notes() called by wp_ajax hooks: {'exactmetrics_vue_get_notes'} **/
-/** Parameters found in function get_notes(): {"post": ["params"]} **/
-function get_notes()
-	{
-		check_ajax_referer('mi-admin-nonce', 'nonce');
-
-		$params = !empty($_POST['params']) ? json_decode(html_entity_decode(stripslashes($_POST['params'])), true) : [];
-
-		$output = $this->prepare_notes($params);
-
-		$num_posts = wp_count_posts('exactmetrics_note', 'readable');
-
-		if ($num_posts) {
-			$output['status_filters'] = array(
-				array(
-					'status' => 'all',
-					'count'  => array_sum((array) $num_posts) - $num_posts->trash,
-				),
-			);
-
-			foreach ($num_posts as $status => $count) {
-				if (0 >= $count) {
-					continue;
-				}
-
-				$output['status_filters'][] = array(
-					'status' => $status,
-					'count'  => $count,
-				);
-			}
-		}
-
-		wp_send_json($output);
-	}
-
-
-/** Function is_installed() called by wp_ajax hooks: {'nopriv_exactmetrics_is_installed'} **/
-/** No params detected :-/ **/
-
-
-/** Function maybe_verify() called by wp_ajax hooks: {'exactmetrics_maybe_verify'} **/
-/** Parameters found in function maybe_verify(): {"request": ["isnetwork"]} **/
-function maybe_verify() {
-
-		// Check nonce
-		check_ajax_referer( 'mi-admin-nonce', 'nonce' );
-
-		// current user can verify
-		if ( ! current_user_can( 'exactmetrics_save_settings' ) ) {
-			// Translators: Link tag starts with url and link tag ends.
-			$message = sprintf(
-				__( 'You don\'t have the correct user permissions to verify the ExactMetrics license you are trying to use. Please check with your site administrator that your role is included in the ExactMetrics permissions settings. %1$sClick here for more information%2$s.', 'google-analytics-dashboard-for-wp' ),
-				'<a target="_blank" rel="noopener" href="' . exactmetrics_get_url( 'notice', 'cannot-save-settings', 'https://www.exactmetrics.com/docs/how-to-allow-user-roles-to-access-the-exactmetrics-reports-and-settings/' ) . '">',
-				'</a>'
-			);
-			wp_send_json_error( array( 'message' => $message ) );
-		}
-
-		if ( ! empty( $_REQUEST['isnetwork'] ) && filter_var($_REQUEST['isnetwork'], FILTER_VALIDATE_BOOL) ) {
-			define( 'WP_NETWORK_ADMIN', true );
-		}
-
-		// we have an auth to verify
-		if ( $this->is_network_admin() && ! ExactMetrics()->auth->is_network_authed() ) {
-			// Translators: Support Link tag starts with url and Support link tag ends.
-			$message = sprintf(
-				__( 'Please enter a valid license within the ExactMetrics settings panel. You can check your license by logging into your ExactMetrics account by %1$sclicking here%2$s.', 'google-analytics-dashboard-for-wp' ),
-				'<a target="_blank" rel="noopener" href="' . exactmetrics_get_url( 'notice', 'cannot-verify-license', 'https://www.exactmetrics.com/my-account/' ) . '">',
-				'</a>'
-			);
-			wp_send_json_error( array( 'message' => $message ) );
-		} else if ( ! $this->is_network_admin() && ! ExactMetrics()->auth->is_authed() ) {
-			// Translators: Support Link tag starts with url and Support link tag ends.
-			$message = sprintf(
-				__( 'Please enter a valid license within the ExactMetrics settings panel. You can check your license by logging into your ExactMetrics account by %1$sclicking here%2$s.', 'google-analytics-dashboard-for-wp' ),
-				'<a target="_blank" rel="noopener" href="' . exactmetrics_get_url( 'notice', 'cannot-verify-license', 'https://www.exactmetrics.com/my-account/' ) . '">',
-				'</a>'
-			);
-			wp_send_json_error( array( 'message' => $message ) );
-		}
-
-		if ( exactmetrics_is_pro_version() ) {
-			$valid = is_network_admin() ? ExactMetrics()->license->is_network_licensed() : ExactMetrics()->license->is_site_licensed();
-			if ( ! $valid ) {
-				// Translators: Support Link tag starts with url and Support link tag ends.
-				$message = sprintf(
-					__( 'Please enter a valid license within the ExactMetrics settings panel. You can check your license by logging into your ExactMetrics account by %1$sclicking here%2$s.', 'google-analytics-dashboard-for-wp' ),
-					'<a target="_blank" rel="noopener" href="' . exactmetrics_get_url( 'notice', 'cannot-verify-license', 'https://www.exactmetrics.com/my-account/' ) . '">',
-					'</a>'
-				);
-				wp_send_json_error( array( 'message' => $message ) );
-			}
-		}
-
-		$worked = $this->verify_auth();
-		if ( $worked && ! is_wp_error( $worked ) ) {
-			wp_send_json_success( array( 'message' => __( "Successfully verified.", 'google-analytics-dashboard-for-wp' ) ) );
-		} else {
-			// Translators: Support Link tag starts with url and Support link tag ends.
-			$message = sprintf(
-				__( 'Oops! There has been an error while trying to verify your license. Please try again or contact our support team by %1$sclicking here%2$s.', 'google-analytics-dashboard-for-wp' ),
-				'<a target="_blank" href="' . exactmetrics_get_url( 'notice', 'cannot-verify-license', 'https://www.exactmetrics.com/my-account/support/' ) . '">',
-				'</a>'
-			);
-			wp_send_json_error( array( 'message' => $message ) );
-		}
-	}
-
-
-/** Function ajax_get_notifications() called by wp_ajax hooks: {'exactmetrics_vue_get_notifications'} **/
-/** No params detected :-/ **/
-
-
-/** Function maybe_add_notifications() called by wp_ajax hooks: {'exactmetrics_vue_get_notifications'} **/
-/** No params detected :-/ **/
-
-
-/** Function ajax_get_index_progress() called by wp_ajax hooks: {'exactmetrics_sharedcount_get_index_progress'} **/
-/** No params detected :-/ **/
-
-
-/** Function get_profile() called by wp_ajax hooks: {'exactmetrics_vue_get_profile'} **/
-/** No params detected :-/ **/
-
-
-/** Function get_install_errors() called by wp_ajax hooks: {'exactmetrics_onboarding_get_errors'} **/
-/** No params detected :-/ **/
-
-
-/** Function handle_settings_import() called by wp_ajax hooks: {'exactmetrics_handle_settings_import'} **/
-/** Parameters found in function handle_settings_import(): {"files": ["import_file"]} **/
-function handle_settings_import() {
+/** Function update_settings() called by wp_ajax hooks: {'exactmetrics_vue_update_settings'} **/
+/** Parameters found in function update_settings(): {"post": ["setting", "value"]} **/
+function update_settings() {
 
 		check_ajax_referer( 'mi-admin-nonce', 'nonce' );
 
@@ -1979,392 +2355,20 @@ function handle_settings_import() {
 			return;
 		}
 
-		if ( ! isset( $_FILES['import_file'] ) ) {
-			return;
-		}
-
-		$extension = explode( '.', sanitize_text_field( wp_unslash( $_FILES['import_file']['name'] ) ) ); // phpcs:ignore
-		$extension = end( $extension );
-
-		if ( 'json' !== $extension ) {
-			wp_send_json_error( array(
-				'message' => esc_html__( 'Please upload a valid .json file', 'google-analytics-dashboard-for-wp' ),
-			) );
-		}
-
-		$import_file = sanitize_text_field( wp_unslash( $_FILES['import_file']['tmp_name'] ) ); // phpcs:ignore
-
-		$file = file_get_contents( $import_file );
-		if ( empty( $file ) ) {
-			wp_send_json_error( array(
-				'message' => esc_html__( 'Please select a valid file to upload.', 'google-analytics-dashboard-for-wp' ),
-			) );
-		}
-
-		// Retrieve the settings from the file and convert the json object to an array.
-		$new_settings = json_decode( wp_json_encode( json_decode( $file ) ), true );
-		$settings     = exactmetrics_get_options();
-		$exclude      = array(
-			'analytics_profile',
-			'analytics_profile_code',
-			'analytics_profile_name',
-			'oauth_version',
-			'cron_last_run',
-			'exactmetrics_oauth_status',
-		);
-
-		foreach ( $exclude as $e ) {
-			if ( ! empty( $new_settings[ $e ] ) ) {
-				unset( $new_settings[ $e ] );
-			}
-		}
-
-		foreach ( $exclude as $e ) {
-			if ( ! empty( $settings[ $e ] ) ) {
-				$new_settings = $settings[ $e ];
-			}
-		}
-
-		global $exactmetrics_settings;
-		$exactmetrics_settings = $new_settings;
-
-		update_option( exactmetrics_get_option_name(), $new_settings );
-
-		wp_send_json_success( $new_settings );
-
-	}
-
-
-/** Function get_result() called by wp_ajax hooks: {'exactmetrics_gutenberg_headline_analyzer_get_results'} **/
-/** Parameters found in function get_result(): {"request": ["q"]} **/
-function get_result() {
-
-		// csrf check
-		if ( check_ajax_referer( 'exactmetrics_gutenberg_headline_nonce', false, false ) === false ) {
-			$content = self::output_template( 'results-error.php' );
-			wp_send_json_error(
-				array(
-					'html' => $content
-				)
-			);
-		}
-
-		// get whether or not the website is up
-		$result = $this->get_headline_scores();
-
-		if ( ! empty( $result->err ) ) {
-			$content = self::output_template( 'results-error.php', $result );
-			wp_send_json_error(
-				array( 'html' => $content, 'analysed' => false )
-			);
-		} else {
-			if(!isset($_REQUEST['q'])){
-				wp_send_json_error(
-					array( 'html' => '', 'analysed' => false )
-				);
-			}
-			$q = (isset($_REQUEST['q'])) ? sanitize_text_field($_REQUEST['q']) : '';
-			// send the response
-			wp_send_json_success(
-				array(
-					'result'   => $result,
-					'analysed' => ! $result->err,
-					'sentence' => ucwords( wp_unslash( $q ) ),
-					'score'    => ( isset( $result->score ) && ! empty( $result->score ) ) ? $result->score : 0
-				)
-			);
-
-		}
-	}
-
-
-/** Function review_dismiss() called by wp_ajax hooks: {'exactmetrics_review_dismiss'} **/
-/** No params detected :-/ **/
-
-
-/** Function get_post_types() called by wp_ajax hooks: {'exactmetrics_get_post_types'} **/
-/** No params detected :-/ **/
-
-
-/** Function get_categories() called by wp_ajax hooks: {'exactmetrics_vue_get_categories'} **/
-/** Parameters found in function get_categories(): {"post": ["params"]} **/
-function get_categories()
-	{
-		check_ajax_referer('mi-admin-nonce', 'nonce');
-
-		$params = !empty($_POST['params']) ? json_decode(html_entity_decode(stripslashes($_POST['params'])), true) : [];
-
-		$args = wp_parse_args($params, array(
-			'per_page' => -1,
-			'page' => 1,
-			'orderby' => 'name',
-			'order' => 'asc',
-		));
-
-		$total = intval($this->db->get_categories($args, true));
-
-		if ($total) {
-			$items = $this->db->get_categories($args);
-		} else {
-			$items = array();
-		}
-
-		wp_send_json(
-			array(
-				'items' => $items,
-				'pagination' => array(
-					'total' => $total,
-					'pages' => ceil($total / $args['per_page']),
-					'page'  => $args['page'],
-					'per_page' => $args['per_page'],
-				),
-			)
-		);
-	}
-
-
-/** Function update_manual_ua() called by wp_ajax hooks: {'exactmetrics_update_manual_ua'} **/
-/** Parameters found in function update_manual_ua(): {"post": ["manual_ua_code"], "request": ["isnetwork"]} **/
-function update_manual_ua() {
-
-		check_ajax_referer( 'mi-admin-nonce', 'nonce' );
-
-		if ( ! current_user_can( 'exactmetrics_save_settings' ) ) {
-			return;
-		}
-
-		$manual_ua_code = isset( $_POST['manual_ua_code'] ) ? sanitize_text_field( wp_unslash( $_POST['manual_ua_code'] ) ) : '';
-		$manual_ua_code = exactmetrics_is_valid_ua( $manual_ua_code ); // Also sanitizes the string.
-		if ( ! empty( $_REQUEST['isnetwork'] ) && sanitize_text_field( wp_unslash( $_REQUEST['isnetwork'] ) ) ) {
-			define( 'WP_NETWORK_ADMIN', true );
-		}
-		$manual_ua_code_old = is_network_admin() ? ExactMetrics()->auth->get_network_manual_ua() : ExactMetrics()->auth->get_manual_ua();
-
-		if ( $manual_ua_code && $manual_ua_code_old && $manual_ua_code_old === $manual_ua_code ) {
-			// Same code we had before
-			// Do nothing.
-			wp_send_json_success();
-		} else if ( $manual_ua_code && $manual_ua_code_old && $manual_ua_code_old !== $manual_ua_code ) {
-			// Different UA code.
-			if ( is_network_admin() ) {
-				ExactMetrics()->auth->set_network_manual_ua( $manual_ua_code );
+		if ( isset( $_POST['setting'] ) ) {
+			$setting = sanitize_text_field( wp_unslash( $_POST['setting'] ) );
+			if ( isset( $_POST['value'] ) ) {
+				$value = $this->handle_sanitization( $setting, $_POST['value'] ); // phpcs:ignore
+				exactmetrics_update_option( $setting, $value );
+				do_action( 'exactmetrics_after_update_settings', $setting, $value );
 			} else {
-				ExactMetrics()->auth->set_manual_ua( $manual_ua_code );
+				exactmetrics_update_option( $setting, false );
+				do_action( 'exactmetrics_after_update_settings', $setting, false );
 			}
-		} else if ( $manual_ua_code && empty( $manual_ua_code_old ) ) {
-			// Move to manual.
-			if ( is_network_admin() ) {
-				ExactMetrics()->auth->set_network_manual_ua( $manual_ua_code );
-			} else {
-				ExactMetrics()->auth->set_manual_ua( $manual_ua_code );
-			}
-		} else if ( empty( $manual_ua_code ) && $manual_ua_code_old ) {
-			// Deleted manual.
-			if ( is_network_admin() ) {
-				ExactMetrics()->auth->delete_network_manual_ua();
-			} else {
-				ExactMetrics()->auth->delete_manual_ua();
-			}
-		} else if ( isset( $_POST['manual_ua_code'] ) && empty( $manual_ua_code ) ) {
-			wp_send_json_error( array(
-				'ua_error' => 1,
-				'error'    => __( 'Invalid UA code', 'google-analytics-dashboard-for-wp' ),
-			) );
 		}
 
 		wp_send_json_success();
-	}
 
-
-/** Function get_taxonomy_terms() called by wp_ajax hooks: {'exactmetrics_get_terms'} **/
-/** Parameters found in function get_taxonomy_terms(): {"post": ["keyword", "taxonomy"]} **/
-function get_taxonomy_terms() {
-
-		// Run a security check first.
-		check_ajax_referer( 'mi-admin-nonce', 'nonce' );
-
-		$keyword  = isset( $_POST['keyword'] ) ? sanitize_text_field( wp_unslash( $_POST['keyword'] ) ) : '';
-		$taxonomy = isset( $_POST['taxonomy'] ) ? sanitize_text_field( wp_unslash( $_POST['taxonomy'] ) ) : 'category';
-
-		$args = array(
-			'taxonomy'   => array( $taxonomy ),
-			'hide_empty' => false,
-			'name__like' => $keyword,
-		);
-
-		$terms = get_terms( $args );
-		$array = array();
-
-		if ( ! empty( $terms ) ) {
-			foreach ( $terms as $term ) {
-				$array[] = array(
-					'id'   => esc_attr( $term->term_id ),
-					'text' => esc_attr( $term->name ),
-				);
-			}
-		}
-
-		wp_send_json_success( $array );
-	}
-
-
-/** Function restore_notes() called by wp_ajax hooks: {'exactmetrics_vue_restore_notes'} **/
-/** Parameters found in function restore_notes(): {"post": ["ids"]} **/
-function restore_notes()
-	{
-		check_ajax_referer('mi-admin-nonce', 'nonce');
-
-		$ids = !empty($_POST['ids']) ? json_decode(html_entity_decode(stripslashes($_POST['ids']))) : [];
-
-		if (empty($ids)) {
-			wp_send_json(
-				array(
-					'success' => false,
-					'message' => __('Please choose a site note(s) to restore!', 'google-analytics-dashboard-for-wp'),
-				)
-			);
-		}
-
-		foreach ($ids as $id) {
-			$this->db->restore_note($id);
-		}
-
-		wp_send_json(
-			array(
-				'success' => true,
-				'message' => '',
-			)
-		);
-	}
-
-
-/** Function get_ajax_output() called by wp_ajax hooks: {'nopriv_exactmetrics_popular_posts_get_widget_output', 'exactmetrics_popular_posts_get_widget_output'} **/
-/** Parameters found in function get_ajax_output(): {"post": ["data"]} **/
-function get_ajax_output() {
-
-		if ( empty( $_POST['data'] ) || ! is_array( $_POST['data'] ) ) {
-			return;
-		}
-
-		$html         = array();
-		$widgets_args = $_POST['data']; // phpcs:ignore
-
-		foreach ( $widgets_args as $args ) {
-			$args = json_decode( sanitize_text_field( wp_unslash( $args ) ), true );
-			if ( ! empty( $args['type'] ) ) {
-				$type            = ucfirst( $args['type'] );
-				$widget_function = function_exists( 'ExactMetrics_Popular_Posts_' . $type ) ? call_user_func( 'ExactMetrics_Popular_Posts_' . $type ) : false;
-				if ( $widget_function ) {
-					$html[] = $widget_function->get_rendered_html( $args );
-				}
-			}
-		}
-
-		wp_send_json( $html );
-	}
-
-
-/** Function install_plugin() called by wp_ajax hooks: {'exactmetrics_vue_install_plugin'} **/
-/** Parameters found in function install_plugin(): {"post": ["slug"]} **/
-function install_plugin() {
-		check_ajax_referer( 'mi-admin-nonce', 'nonce' );
-
-		if ( ! exactmetrics_can_install_plugins() ) {
-			wp_send_json( array(
-				'error' => esc_html__( 'Oops! You are not allowed to install plugins. Please contact your website administrator for further assistance.', 'google-analytics-dashboard-for-wp' ),
-			) );
-		}
-
-		$slug = isset( $_POST['slug'] ) ? sanitize_text_field( wp_unslash( $_POST['slug'] ) ) : false;
-
-		if ( ! $slug ) {
-			wp_send_json( array(
-				'message' => esc_html__( 'Missing plugin name.', 'google-analytics-dashboard-for-wp' ),
-			) );
-		}
-
-		include_once ABSPATH . 'wp-admin/includes/plugin-install.php';
-
-		$api = plugins_api( 'plugin_information', array(
-			'slug'   => $slug,
-			'fields' => array(
-				'short_description' => false,
-				'sections'          => false,
-				'requires'          => false,
-				'rating'            => false,
-				'ratings'           => false,
-				'downloaded'        => false,
-				'last_updated'      => false,
-				'added'             => false,
-				'tags'              => false,
-				'compatibility'     => false,
-				'homepage'          => false,
-				'donate_link'       => false,
-			),
-		) );
-
-		if ( is_wp_error( $api ) ) {
-			return $api->get_error_message();
-		}
-
-		$download_url = $api->download_link;
-
-		$method = '';
-		$url    = add_query_arg(
-			array(
-				'page' => 'exactmetrics-settings',
-			),
-			admin_url( 'admin.php' )
-		);
-		$url    = esc_url( $url );
-
-		ob_start();
-		if ( false === ( $creds = request_filesystem_credentials( $url, $method, false, false, null ) ) ) {
-			$form = ob_get_clean();
-
-			wp_send_json( array( 'form' => $form ) );
-		}
-
-		// If we are not authenticated, make it happen now.
-		if ( ! WP_Filesystem( $creds ) ) {
-			ob_start();
-			request_filesystem_credentials( $url, $method, true, false, null );
-			$form = ob_get_clean();
-
-			wp_send_json( array( 'form' => $form ) );
-
-		}
-
-		// We do not need any extra credentials if we have gotten this far, so let's install the plugin.
-		exactmetrics_require_upgrader();
-
-		// Prevent language upgrade in ajax calls.
-		remove_action( 'upgrader_process_complete', array( 'Language_Pack_Upgrader', 'async_upgrade' ), 20 );
-		// Create the plugin upgrader with our custom skin.
-		$installer = new ExactMetrics_Plugin_Upgrader( new ExactMetrics_Skin() );
-		$installer->install( $download_url );
-
-		// Flush the cache and return the newly installed plugin basename.
-		wp_cache_flush();
-		wp_send_json_success();
-
-		wp_die();
-	}
-
-
-/** Function dismiss_notice() called by wp_ajax hooks: {'exactmetrics_vue_notice_dismiss'} **/
-/** Parameters found in function dismiss_notice(): {"post": ["notice"]} **/
-function dismiss_notice() {
-
-		check_ajax_referer( 'mi-admin-nonce', 'nonce' );
-
-		$notice_id = empty( $_POST['notice'] ) ? false : sanitize_text_field( wp_unslash( $_POST['notice'] ) );
-		if ( ! $notice_id ) {
-			wp_send_json_error();
-		}
-		ExactMetrics()->notices->dismiss( $notice_id );
-
-		wp_send_json_success();
 	}
 
 
@@ -2479,11 +2483,7 @@ function process() {
 	}
 
 
-/** Function exactmetrics_ajax_dismiss_semrush_cta() called by wp_ajax hooks: {'exactmetrics_vue_dismiss_semrush_cta'} **/
-/** No params detected :-/ **/
-
-
-/** Function empty_cache() called by wp_ajax hooks: {'exactmetrics_popular_posts_empty_cache'} **/
+/** Function test_check_connection() called by wp_ajax hooks: {'health-check-exactmetrics-test_connection'} **/
 /** No params detected :-/ **/
 
 

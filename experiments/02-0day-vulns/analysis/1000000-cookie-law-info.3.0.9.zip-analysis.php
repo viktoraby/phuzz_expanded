@@ -5,7 +5,7 @@
 *Found functions:5
 *Extracted functions:5
 *Total parameter names extracted: 5
-*Overview: {'cli_change_script_category': {'cli_change_script_category'}, 'ajax_main_controller': {'cookieyes_ajax_main_controller'}, 'ajax_policy_generator': {'cli_policy_generator'}, 'change_plugin_status': {'wt_cli_change_plugin_status'}, 'ajax_cookie_scaner': {'cli_cookie_scaner'}}
+*Overview: {'cli_change_script_category': {'cli_change_script_category'}, 'ajax_main_controller': {'cookieyes_ajax_main_controller'}, 'ajax_policy_generator': {'cli_policy_generator'}, 'ajax_cookie_scaner': {'cli_cookie_scaner'}, 'change_plugin_status': {'wt_cli_change_plugin_status'}}
 *
 ***/
 
@@ -98,25 +98,6 @@ function ajax_policy_generator() {
 	}
 
 
-/** Function change_plugin_status() called by wp_ajax hooks: {'wt_cli_change_plugin_status'} **/
-/** Parameters found in function change_plugin_status(): {"post": ["script_id", "status"]} **/
-function change_plugin_status() {
-
-			if ( ! current_user_can( 'manage_options' ) ) {
-				wp_die( esc_html__( 'You do not have sufficient permission to perform this operation', 'cookie-law-info' ) );
-			}
-			check_ajax_referer( $this->module_id );
-			$script_id = (int) ( isset( $_POST['script_id'] ) ? absint( $_POST['script_id'] ) : -1 );
-			$status    = wp_validate_boolean( ( isset( $_POST['status'] ) && true === wp_validate_boolean( sanitize_text_field( wp_unslash( $_POST['status'] ) ) ) ? true : false ) );
-			if ( $script_id !== -1 ) {
-				$this->update_script_status( $script_id, $status );
-				wp_send_json_success();
-			}
-			wp_send_json_error();
-
-		}
-
-
 /** Function ajax_cookie_scaner() called by wp_ajax hooks: {'cli_cookie_scaner'} **/
 /** Parameters found in function ajax_cookie_scaner(): {"post": ["cli_scaner_action"]} **/
 function ajax_cookie_scaner() {
@@ -150,5 +131,24 @@ function ajax_cookie_scaner() {
 		echo wp_json_encode( $out );
 		exit();
 	}
+
+
+/** Function change_plugin_status() called by wp_ajax hooks: {'wt_cli_change_plugin_status'} **/
+/** Parameters found in function change_plugin_status(): {"post": ["script_id", "status"]} **/
+function change_plugin_status() {
+
+			if ( ! current_user_can( 'manage_options' ) ) {
+				wp_die( esc_html__( 'You do not have sufficient permission to perform this operation', 'cookie-law-info' ) );
+			}
+			check_ajax_referer( $this->module_id );
+			$script_id = (int) ( isset( $_POST['script_id'] ) ? absint( $_POST['script_id'] ) : -1 );
+			$status    = wp_validate_boolean( ( isset( $_POST['status'] ) && true === wp_validate_boolean( sanitize_text_field( wp_unslash( $_POST['status'] ) ) ) ? true : false ) );
+			if ( $script_id !== -1 ) {
+				$this->update_script_status( $script_id, $status );
+				wp_send_json_success();
+			}
+			wp_send_json_error();
+
+		}
 
 

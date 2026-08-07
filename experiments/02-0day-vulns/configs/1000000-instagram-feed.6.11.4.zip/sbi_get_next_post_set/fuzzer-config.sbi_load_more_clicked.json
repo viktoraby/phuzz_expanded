@@ -1,0 +1,59 @@
+{
+  "target": "http://web/wp-admin/admin-ajax.php",
+  "methods": [
+    "POST"
+  ],
+  "body_params": {
+    "weight": 1,
+    "fixed": [
+      "locator_nonce"
+    ],
+    "fuzz": [
+      "feed_id",
+      "post_id",
+      "atts",
+      "location",
+      "offset",
+      "page"
+    ],
+    "data": [
+      {
+        "name": "feed_id",
+        "value": "fuzz"
+      },
+      {
+        "name": "post_id",
+        "value": "fuzz"
+      },
+      {
+        "name": "atts",
+        "value": "fuzz"
+      },
+      {
+        "name": "locator_nonce",
+        "value": "fuzz"
+      },
+      {
+        "name": "offset",
+        "value": "fuzz"
+      },
+      {
+        "name": "page",
+        "value": "fuzz"
+      }
+    ]
+  },
+  "query_params": {
+    "weight": 1,
+    "fixed": [
+      "action"
+    ],
+    "fuzz": [],
+    "data": [
+      {
+        "name": "action",
+        "value": "sbi_load_more_clicked"
+      }
+    ]
+  }
+}

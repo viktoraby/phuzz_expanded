@@ -5,75 +5,9 @@
 *Found functions:5
 *Extracted functions:5
 *Total parameter names extracted: 4
-*Overview: {'dismiss_notice': {'astra-notice-dismiss'}, 'update_subscription': {'hfe-update-subscription'}, 'hfe_activate_addon': {'hfe_activate_addon'}, 'hfe_get_posts_by_query': {'hfe_get_posts_by_query'}, 'hfe_admin_modal': {'hfe_admin_modal'}}
+*Overview: {'hfe_activate_addon': {'hfe_activate_addon'}, 'hfe_admin_modal': {'hfe_admin_modal'}, 'update_subscription': {'hfe-update-subscription'}, 'dismiss_notice': {'astra-notice-dismiss'}, 'hfe_get_posts_by_query': {'hfe_get_posts_by_query'}}
 *
 ***/
-
-/** Function dismiss_notice() called by wp_ajax hooks: {'astra-notice-dismiss'} **/
-/** Parameters found in function dismiss_notice(): {"post": ["notice_id", "repeat_notice_after", "nonce"]} **/
-function dismiss_notice() {
-			$notice_id           = ( isset( $_POST['notice_id'] ) ) ? sanitize_key( $_POST['notice_id'] ) : '';
-			$repeat_notice_after = ( isset( $_POST['repeat_notice_after'] ) ) ? absint( $_POST['repeat_notice_after'] ) : '';
-			$nonce               = ( isset( $_POST['nonce'] ) ) ? sanitize_key( $_POST['nonce'] ) : '';
-			$notice              = $this->get_notice_by_id( $notice_id );
-			$capability          = isset( $notice['capability'] ) ? $notice['capability'] : 'manage_options';
-
-			if ( ! apply_filters( 'astra_notices_user_cap_check', current_user_can( $capability ) ) ) {
-				return;
-			}
-
-			if ( false === wp_verify_nonce( $nonce, 'astra-notices' ) ) {
-				wp_send_json_error( esc_html_e( 'WordPress Nonce not validated.', 'header-footer-elementor' ) );
-			}
-
-			// Valid inputs?
-			if ( ! empty( $notice_id ) ) {
-
-				if ( ! empty( $repeat_notice_after ) ) {
-					set_transient( $notice_id, true, $repeat_notice_after );
-				} else {
-					update_user_meta( get_current_user_id(), $notice_id, 'notice-dismissed' );
-				}
-
-				wp_send_json_success();
-			}
-
-			wp_send_json_error();
-		}
-
-
-/** Function update_subscription() called by wp_ajax hooks: {'hfe-update-subscription'} **/
-/** Parameters found in function update_subscription(): {"post": ["data"]} **/
-function update_subscription() {
-
-			check_ajax_referer( 'hfe-admin-nonce', 'nonce' );
-
-			if ( ! current_user_can( 'manage_options' ) ) {
-				wp_send_json_error( 'You can\'t perform this action.' );
-			}
-
-			$api_domain = trailingslashit( $this->get_api_domain() );
-
-			$arguments = isset( $_POST['data'] ) ? array_map( 'sanitize_text_field', json_decode( stripslashes( $_POST['data'] ), true ) ) : [];
-
-			$url = add_query_arg( $arguments, $api_domain . 'wp-json/starter-templates/v1/subscribe/' ); // add URL of your site or mail API.
-
-			$response = wp_remote_post( $url, [ 'timeout' => 60 ] );
-
-			if ( ! is_wp_error( $response ) || wp_remote_retrieve_response_code( $response ) === 200 ) {
-				$response = json_decode( wp_remote_retrieve_body( $response ), true );
-
-				// Successfully subscribed.
-				if ( isset( $response['success'] ) && $response['success'] ) {
-					update_user_meta( get_current_user_ID(), 'hfe-subscribed', 'yes' );
-					wp_send_json_success( $response );
-				}
-			} else {
-				wp_send_json_error( $response );
-			}
-
-		}
-
 
 /** Function hfe_activate_addon() called by wp_ajax hooks: {'hfe_activate_addon'} **/
 /** Parameters found in function hfe_activate_addon(): {"post": ["plugin", "type", "slug"]} **/
@@ -133,6 +67,76 @@ function hfe_activate_addon() {
 			} elseif ( 'theme' === $type ) {
 				wp_send_json_error( esc_html__( 'Could not activate theme. Please activate from the Themes page.', 'header-footer-elementor' ) );
 			}
+		}
+
+
+/** Function hfe_admin_modal() called by wp_ajax hooks: {'hfe_admin_modal'} **/
+/** No params detected :-/ **/
+
+
+/** Function update_subscription() called by wp_ajax hooks: {'hfe-update-subscription'} **/
+/** Parameters found in function update_subscription(): {"post": ["data"]} **/
+function update_subscription() {
+
+			check_ajax_referer( 'hfe-admin-nonce', 'nonce' );
+
+			if ( ! current_user_can( 'manage_options' ) ) {
+				wp_send_json_error( 'You can\'t perform this action.' );
+			}
+
+			$api_domain = trailingslashit( $this->get_api_domain() );
+
+			$arguments = isset( $_POST['data'] ) ? array_map( 'sanitize_text_field', json_decode( stripslashes( $_POST['data'] ), true ) ) : [];
+
+			$url = add_query_arg( $arguments, $api_domain . 'wp-json/starter-templates/v1/subscribe/' ); // add URL of your site or mail API.
+
+			$response = wp_remote_post( $url, [ 'timeout' => 60 ] );
+
+			if ( ! is_wp_error( $response ) || wp_remote_retrieve_response_code( $response ) === 200 ) {
+				$response = json_decode( wp_remote_retrieve_body( $response ), true );
+
+				// Successfully subscribed.
+				if ( isset( $response['success'] ) && $response['success'] ) {
+					update_user_meta( get_current_user_ID(), 'hfe-subscribed', 'yes' );
+					wp_send_json_success( $response );
+				}
+			} else {
+				wp_send_json_error( $response );
+			}
+
+		}
+
+
+/** Function dismiss_notice() called by wp_ajax hooks: {'astra-notice-dismiss'} **/
+/** Parameters found in function dismiss_notice(): {"post": ["notice_id", "repeat_notice_after", "nonce"]} **/
+function dismiss_notice() {
+			$notice_id           = ( isset( $_POST['notice_id'] ) ) ? sanitize_key( $_POST['notice_id'] ) : '';
+			$repeat_notice_after = ( isset( $_POST['repeat_notice_after'] ) ) ? absint( $_POST['repeat_notice_after'] ) : '';
+			$nonce               = ( isset( $_POST['nonce'] ) ) ? sanitize_key( $_POST['nonce'] ) : '';
+			$notice              = $this->get_notice_by_id( $notice_id );
+			$capability          = isset( $notice['capability'] ) ? $notice['capability'] : 'manage_options';
+
+			if ( ! apply_filters( 'astra_notices_user_cap_check', current_user_can( $capability ) ) ) {
+				return;
+			}
+
+			if ( false === wp_verify_nonce( $nonce, 'astra-notices' ) ) {
+				wp_send_json_error( esc_html_e( 'WordPress Nonce not validated.', 'header-footer-elementor' ) );
+			}
+
+			// Valid inputs?
+			if ( ! empty( $notice_id ) ) {
+
+				if ( ! empty( $repeat_notice_after ) ) {
+					set_transient( $notice_id, true, $repeat_notice_after );
+				} else {
+					update_user_meta( get_current_user_id(), $notice_id, 'notice-dismissed' );
+				}
+
+				wp_send_json_success();
+			}
+
+			wp_send_json_error();
 		}
 
 
@@ -247,9 +251,5 @@ function hfe_get_posts_by_query() {
 		// return the result in json.
 		wp_send_json( $result );
 	}
-
-
-/** Function hfe_admin_modal() called by wp_ajax hooks: {'hfe_admin_modal'} **/
-/** No params detected :-/ **/
 
 

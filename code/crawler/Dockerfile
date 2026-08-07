@@ -2,6 +2,8 @@ FROM mcr.microsoft.com/playwright:v1.38.0-jammy@sha256:9f1ebfec94143da0084f4b811
 
 WORKDIR /app
 
+RUN rm -f /etc/apt/sources.list.d/nodesource.list
+
 RUN apt-get update && apt-get install -y python3-pip && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt ./

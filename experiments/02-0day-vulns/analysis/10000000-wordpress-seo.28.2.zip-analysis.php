@@ -1,0 +1,387 @@
+<?php
+/***
+*
+*Found actions: 18
+*Found functions:18
+*Extracted functions:17
+*Total parameter names extracted: 9
+*Overview: {'ajax_get_term_keyword_usage': {'get_term_keyword_usage'}, 'wpseo_save_description': {'wpseo_save_metadesc'}, 'ajax_get_keyword_usage_and_post_types': {'get_focus_keyword_usage_and_post_types'}, 'wpseo_save_all_descriptions': {'wpseo_save_all_descriptions'}, 'dismiss_first_time_configuration_notice': {'dismiss_first_time_configuration_notice'}, 'Yoast_Notification_Center': {'yoast_dismiss_notification'}, 'dismiss_premium_deactivated_notice': {'dismiss_premium_deactivated_notice'}, 'wpseo_set_ignore': {'wpseo_set_ignore'}, 'save_postdata': {'wpseo_elementor_save'}, 'ajax_get_notifications': {'yoast_get_notifications'}, 'ajax_restore_notification': {'yoast_restore_notification'}, 'do_filter': {'wpseo_filter_shortcodes'}, 'wpseo_save_title': {'wpseo_save_title'}, 'wpseo_save_all_titles': {'wpseo_save_all_titles'}, 'wpseo_set_option': {'wpseo_set_option'}, 'dismiss_notice': {'wpseo_dismiss_plugin_conflict'}, 'ajax_dismiss_notification': {'yoast_dismiss_notification'}, 'resolve_alert': {'wpseo_resolve_alert'}}
+*
+***/
+
+/** Function ajax_get_term_keyword_usage() called by wp_ajax hooks: {'get_term_keyword_usage'} **/
+/** Parameters found in function ajax_get_term_keyword_usage(): {"post": ["post_id", "keyword", "taxonomy"]} **/
+function ajax_get_term_keyword_usage() {
+	check_ajax_referer( 'wpseo-keyword-usage', 'nonce' );
+
+	if ( ! isset( $_POST['post_id'], $_POST['keyword'], $_POST['taxonomy'] ) || ! is_string( $_POST['keyword'] ) || ! is_string( $_POST['taxonomy'] ) ) {
+		wp_die( -1 );
+	}
+
+	// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Reason: We are casting the unsafe input to an integer.
+	$post_id = (int) wp_unslash( $_POST['post_id'] );
+
+	if ( $post_id === 0 ) {
+		wp_die( -1 );
+	}
+
+	$keyword       = sanitize_text_field( wp_unslash( $_POST['keyword'] ) );
+	$taxonomy_name = sanitize_text_field( wp_unslash( $_POST['taxonomy'] ) );
+
+	$taxonomy = get_taxonomy( $taxonomy_name );
+
+	if ( ! $taxonomy ) {
+		wp_die( 0 );
+	}
+
+	if ( ! current_user_can( $taxonomy->cap->edit_terms ) ) {
+		wp_die( -1 );
+	}
+
+	$usage = WPSEO_Taxonomy_Meta::get_keyword_usage( $keyword, $post_id, $taxonomy_name );
+
+	// Normalize the result so it is the same as the post keyword usage AJAX request.
+	$usage = $usage[ $keyword ];
+
+	wp_die(
+		// phpcs:ignore WordPress.Security.EscapeOutput -- Reason: WPSEO_Utils::format_json_encode is safe.
+		WPSEO_Utils::format_json_encode( $usage ),
+	);
+}
+
+
+/** Function wpseo_save_description() called by wp_ajax hooks: {'wpseo_save_metadesc'} **/
+/** No params detected :-/ **/
+
+
+/** Function ajax_get_keyword_usage_and_post_types() called by wp_ajax hooks: {'get_focus_keyword_usage_and_post_types'} **/
+/** Parameters found in function ajax_get_keyword_usage_and_post_types(): {"post": ["post_id", "keyword"]} **/
+function ajax_get_keyword_usage_and_post_types() {
+	check_ajax_referer( 'wpseo-keyword-usage-and-post-types', 'nonce' );
+
+	if ( ! isset( $_POST['post_id'], $_POST['keyword'] ) || ! is_string( $_POST['keyword'] ) ) {
+		exit( '-1' );
+	}
+
+	// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- We are casting to an integer.
+	$post_id = (int) wp_unslash( $_POST['post_id'] );
+
+	if ( $post_id === 0 || ! current_user_can( 'edit_post', $post_id ) ) {
+		exit( '-1' );
+	}
+
+	$keyword = sanitize_text_field( wp_unslash( $_POST['keyword'] ) );
+
+	$post_ids = WPSEO_Meta::keyword_usage( $keyword, $post_id );
+
+	$return_object = [
+		'keyword_usage' => $post_ids,
+		'post_types'    => WPSEO_Meta::post_types_for_ids( $post_ids ),
+	];
+
+	wp_die(
+		// phpcs:ignore WordPress.Security.EscapeOutput -- Reason: WPSEO_Utils::format_json_encode is safe.
+		WPSEO_Utils::format_json_encode( $return_object ),
+	);
+}
+
+
+/** Function wpseo_save_all_descriptions() called by wp_ajax hooks: {'wpseo_save_all_descriptions'} **/
+/** No params detected :-/ **/
+
+
+/** Function dismiss_first_time_configuration_notice() called by wp_ajax hooks: {'dismiss_first_time_configuration_notice'} **/
+/** No params detected :-/ **/
+
+
+/** Function Yoast_Notification_Center() called by wp_ajax hooks: {'yoast_dismiss_notification'} **/
+/** No function found :-/ **/
+
+
+/** Function dismiss_premium_deactivated_notice() called by wp_ajax hooks: {'dismiss_premium_deactivated_notice'} **/
+/** No params detected :-/ **/
+
+
+/** Function wpseo_set_ignore() called by wp_ajax hooks: {'wpseo_set_ignore'} **/
+/** Parameters found in function wpseo_set_ignore(): {"post": ["option"]} **/
+function wpseo_set_ignore() {
+	if ( ! current_user_can( 'manage_options' ) ) {
+		exit( '-1' );
+	}
+
+	check_ajax_referer( 'wpseo-ignore' );
+
+	if ( ! isset( $_POST['option'] ) || ! is_string( $_POST['option'] ) ) {
+		exit( '-1' );
+	}
+
+	$ignore_key = sanitize_text_field( wp_unslash( $_POST['option'] ) );
+	WPSEO_Options::set( 'ignore_' . $ignore_key, true );
+
+	exit( '1' );
+}
+
+
+/** Function save_postdata() called by wp_ajax hooks: {'wpseo_elementor_save'} **/
+/** Parameters found in function save_postdata(): {"post": ["yoast_free_metabox_nonce", "ID"]} **/
+function save_postdata( $post_id ) {
+		// Bail if this is a multisite installation and the site has been switched.
+		if ( is_multisite() && ms_is_switched() ) {
+			return false;
+		}
+
+		if ( $post_id === null ) {
+			return false;
+		}
+
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Sanitized in wp_verify_none.
+		if ( ! isset( $_POST['yoast_free_metabox_nonce'] ) || ! wp_verify_nonce( wp_unslash( $_POST['yoast_free_metabox_nonce'] ), 'yoast_free_metabox' ) ) {
+			return false;
+		}
+
+		if ( wp_is_post_revision( $post_id ) ) {
+			$post_id = wp_is_post_revision( $post_id );
+		}
+
+		/**
+		 * Determine we're not accidentally updating a different post.
+		 * We can't use filter_input here as the ID isn't available at this point, other than in the $_POST data.
+		 */
+		if ( ! isset( $_POST['ID'] ) || $post_id !== (int) $_POST['ID'] ) {
+			return false;
+		}
+
+		clean_post_cache( $post_id );
+		$post = get_post( $post_id );
+
+		if ( ! is_object( $post ) ) {
+			// Non-existent post.
+			return false;
+		}
+
+		do_action( 'wpseo_save_compare_data', $post );
+
+		$social_fields = [];
+		if ( $this->social_is_enabled ) {
+			$social_fields = WPSEO_Meta::get_meta_field_defs( 'social' );
+		}
+
+		$meta_boxes = apply_filters( 'wpseo_save_metaboxes', [] );
+		$meta_boxes = array_merge(
+			$meta_boxes,
+			WPSEO_Meta::get_meta_field_defs( 'general', $post->post_type ),
+			WPSEO_Meta::get_meta_field_defs( 'advanced' ),
+			$social_fields,
+			WPSEO_Meta::get_meta_field_defs( 'schema', $post->post_type ),
+		);
+
+		// We can't detect in save_postdata whether the request is coming from the block editor, so we gate the content_planner fields on post type only.
+		if ( $post->post_type === 'post' ) {
+			$meta_boxes = array_merge( $meta_boxes, WPSEO_Meta::get_meta_field_defs( 'content_planner' ) );
+		}
+
+		foreach ( $meta_boxes as $key => $meta_box ) {
+
+			// If analysis is disabled remove that analysis score value from the DB.
+			if ( $this->is_meta_value_disabled( $key ) ) {
+				WPSEO_Meta::delete( $key, $post_id );
+				continue;
+			}
+
+			$data       = null;
+			$field_name = WPSEO_Meta::$form_prefix . $key;
+
+			if ( $meta_box['type'] === 'checkbox' ) {
+				$data = isset( $_POST[ $field_name ] ) ? 'on' : 'off';
+			}
+			else {
+				if ( isset( $_POST[ $field_name ] ) ) {
+					// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- We're preparing to do just that.
+					$data = wp_unslash( $_POST[ $field_name ] );
+
+					// For multi-select.
+					if ( is_array( $data ) ) {
+						$data = array_map( [ 'WPSEO_Utils', 'sanitize_text_field' ], $data );
+					}
+
+					if ( is_string( $data ) ) {
+						$data = ( $key !== 'canonical' ) ? WPSEO_Utils::sanitize_text_field( $data ) : WPSEO_Utils::sanitize_url( $data );
+					}
+				}
+
+				// Reset options when no entry is present with multiselect - only applies to `meta-robots-adv` currently.
+				if ( ! isset( $_POST[ $field_name ] ) && ( $meta_box['type'] === 'multiselect' ) ) {
+					$data = [];
+				}
+			}
+
+			if ( $data !== null ) {
+				WPSEO_Meta::set_value( $key, $data, $post_id );
+			}
+		}
+
+		do_action( 'wpseo_saved_postdata' );
+	}
+
+
+/** Function ajax_get_notifications() called by wp_ajax hooks: {'yoast_get_notifications'} **/
+/** Parameters found in function ajax_get_notifications(): {"post": ["version"]} **/
+function ajax_get_notifications() {
+		$echo = false;
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing,WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Reason: We are not processing form data.
+		if ( isset( $_POST['version'] ) && is_string( $_POST['version'] ) ) {
+			// phpcs:ignore WordPress.Security.NonceVerification.Missing,WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Reason: We are only comparing the variable in a condition.
+			$echo = wp_unslash( $_POST['version'] ) === '2';
+		}
+
+		// Display the notices.
+		$this->display_notifications( $echo );
+
+		// AJAX die.
+		exit();
+	}
+
+
+/** Function ajax_restore_notification() called by wp_ajax hooks: {'yoast_restore_notification'} **/
+/** No params detected :-/ **/
+
+
+/** Function do_filter() called by wp_ajax hooks: {'wpseo_filter_shortcodes'} **/
+/** Parameters found in function do_filter(): {"post": ["data"]} **/
+function do_filter() {
+		check_ajax_referer( 'wpseo-filter-shortcodes', 'nonce' );
+
+		if ( ! isset( $_POST['data'] ) || ! is_array( $_POST['data'] ) ) {
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Reason: WPSEO_Utils::format_json_encode is considered safe.
+			wp_die( WPSEO_Utils::format_json_encode( [] ) );
+		}
+
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Reason: $shortcodes is getting sanitized later, before it's used.
+		$shortcodes        = wp_unslash( $_POST['data'] );
+		$parsed_shortcodes = [];
+
+		foreach ( $shortcodes as $shortcode ) {
+			if ( $shortcode !== sanitize_text_field( $shortcode ) ) {
+				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Reason: WPSEO_Utils::format_json_encode is considered safe.
+				wp_die( WPSEO_Utils::format_json_encode( [] ) );
+			}
+
+			$parsed_shortcodes[] = [
+				'shortcode' => $shortcode,
+				'output'    => do_shortcode( $shortcode ),
+			];
+		}
+
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Reason: WPSEO_Utils::format_json_encode is considered safe.
+		wp_die( WPSEO_Utils::format_json_encode( $parsed_shortcodes ) );
+	}
+
+
+/** Function wpseo_save_title() called by wp_ajax hooks: {'wpseo_save_title'} **/
+/** No params detected :-/ **/
+
+
+/** Function wpseo_save_all_titles() called by wp_ajax hooks: {'wpseo_save_all_titles'} **/
+/** No params detected :-/ **/
+
+
+/** Function wpseo_set_option() called by wp_ajax hooks: {'wpseo_set_option'} **/
+/** Parameters found in function wpseo_set_option(): {"post": ["option"]} **/
+function wpseo_set_option() {
+	if ( ! current_user_can( 'manage_options' ) ) {
+		exit( '-1' );
+	}
+
+	check_ajax_referer( 'wpseo-setoption' );
+
+	if ( ! isset( $_POST['option'] ) || ! is_string( $_POST['option'] ) ) {
+		exit( '-1' );
+	}
+
+	$option = sanitize_text_field( wp_unslash( $_POST['option'] ) );
+	if ( $option !== 'page_comments' ) {
+		exit( '-1' );
+	}
+
+	update_option( $option, 0 );
+	exit( '1' );
+}
+
+
+/** Function dismiss_notice() called by wp_ajax hooks: {'wpseo_dismiss_plugin_conflict'} **/
+/** No params detected :-/ **/
+
+
+/** Function ajax_dismiss_notification() called by wp_ajax hooks: {'yoast_dismiss_notification'} **/
+/** Parameters found in function ajax_dismiss_notification(): {"post": ["notification", "nonce"]} **/
+function ajax_dismiss_notification() {
+		$notification_center = self::get();
+
+		if ( ! isset( $_POST['notification'] ) || ! is_string( $_POST['notification'] ) ) {
+			exit( '-1' );
+		}
+
+		$notification_id = sanitize_text_field( wp_unslash( $_POST['notification'] ) );
+
+		if ( empty( $notification_id ) ) {
+			exit( '-1' );
+		}
+
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Reason: We are using the variable as a nonce.
+		if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( wp_unslash( $_POST['nonce'] ), $notification_id ) ) {
+			exit( '-1' );
+		}
+
+		$notification = $notification_center->get_notification_by_id( $notification_id );
+		if ( ( $notification instanceof Yoast_Notification ) === false ) {
+
+			// Permit legacy.
+			$options      = [
+				'id'            => $notification_id,
+				'dismissal_key' => $notification_id,
+			];
+			$notification = new Yoast_Notification( '', $options );
+		}
+
+		if ( self::maybe_dismiss_notification( $notification ) ) {
+			exit( '1' );
+		}
+
+		exit( '-1' );
+	}
+
+
+/** Function resolve_alert() called by wp_ajax hooks: {'wpseo_resolve_alert'} **/
+/** Parameters found in function resolve_alert(): {"post": ["alertId"]} **/
+function resolve_alert() {
+		if ( ! \check_ajax_referer( 'wpseo-resolve-alert-nonce', 'nonce', false ) || ! $this->capability_helper->current_user_can( 'wpseo_manage_options' ) ) {
+			\wp_send_json_error(
+				[
+					'message' => 'Security check failed.',
+				],
+			);
+			return;
+		}
+
+		if ( ! isset( $_POST['alertId'] ) ) {
+			\wp_send_json_error(
+				[
+					'message' => 'Alert ID is missing.',
+				],
+			);
+			return;
+		}
+
+		$alert_id = \sanitize_text_field( \wp_unslash( $_POST['alertId'] ) );
+		$user_id  = \get_current_user_id();
+
+		$this->user_helper->update_meta( $user_id, $alert_id . '_resolved', true );
+
+		\wp_send_json_success(
+			[
+				'message' => 'Alert resolved successfully.',
+			],
+		);
+	}
+
+

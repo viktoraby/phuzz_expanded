@@ -5,16 +5,16 @@
 *Found functions:26
 *Extracted functions:25
 *Total parameter names extracted: 24
-*Overview: {'oe_plugin_activation': {'oe_plugin_activation'}, 'customizer_export': {'oceanwp_cp_customizer_export'}, 'save_panel_settings': {'oceanwp_cp_save_panel_settings'}, 'ajax_handler': {'oceanwp_cp_system_status'}, 'block': {'ocean_notification_block'}, 'ajax_demo_data': {'owp_ajax_get_demo_data', 'owp_wizard_ajax_get_demo_data'}, 'save_customizer_settings': {'oceanwp_cp_save_customizer_settings'}, 'ajax_required_plugins_activate': {'owp_ajax_required_plugins_activate'}, 'ajax_import_widgets': {'owp_ajax_import_widgets'}, 'oe_plugin_installer': {'oe_plugin_installer'}, 'child_theme_install': {'oceanwp_cp_child_theme_install'}, 'ajax_get_import_data': {'owp_ajax_get_import_data'}, 'ajax_import_theme_settings': {'owp_ajax_import_theme_settings'}, 'save_single_option': {'oceanwp_cp_save_single_option'}, 'oceanwp_mailchimp_request_callback': {'nopriv_oceanwp_mailchimp_request', 'oceanwp_mailchimp_request'}, 'ajax_import_xml': {'owp_ajax_import_xml'}, 'update_oceanwp_woo_free_shipping_left_shortcode': {'update_oceanwp_woo_free_shipping_left_shortcode', 'nopriv_update_oceanwp_woo_free_shipping_left_shortcode'}, 'customizer_import': {'oceanwp_cp_customizer_import'}, 'dismiss_notice_ajax_callback': {'fs_dismiss_notice_action_{$ajax_action_suffix}'}, '_ajax_oe_menu_icons_update_settings': {'oe_menu_icons_update_settings'}, 'ajax_after_import': {'owp_after_import'}, 'customizer_reset': {'oceanwp_cp_customizer_reset'}, 'oe_premium_plugin_activation': {'oe_premium_plugin_activation'}, 'Freemius': {'fs_toggle_debug_mode'}, 'save_integrations_settings': {'oceanwp_cp_save_integrations_settings'}, 'ajax_import_forms': {'owp_ajax_import_forms'}}
+*Overview: {'oe_plugin_installer': {'oe_plugin_installer'}, 'Freemius': {'fs_toggle_debug_mode'}, 'ajax_demo_data': {'owp_wizard_ajax_get_demo_data', 'owp_ajax_get_demo_data'}, 'customizer_reset': {'oceanwp_cp_customizer_reset'}, 'save_customizer_settings': {'oceanwp_cp_save_customizer_settings'}, 'customizer_import': {'oceanwp_cp_customizer_import'}, 'ajax_import_xml': {'owp_ajax_import_xml'}, 'ajax_handler': {'oceanwp_cp_system_status'}, 'oe_premium_plugin_activation': {'oe_premium_plugin_activation'}, 'child_theme_install': {'oceanwp_cp_child_theme_install'}, 'save_panel_settings': {'oceanwp_cp_save_panel_settings'}, 'dismiss_notice_ajax_callback': {'fs_dismiss_notice_action_{$ajax_action_suffix}'}, 'ajax_import_forms': {'owp_ajax_import_forms'}, 'customizer_export': {'oceanwp_cp_customizer_export'}, 'ajax_required_plugins_activate': {'owp_ajax_required_plugins_activate'}, 'ajax_import_theme_settings': {'owp_ajax_import_theme_settings'}, 'ajax_get_import_data': {'owp_ajax_get_import_data'}, 'block': {'ocean_notification_block'}, 'update_oceanwp_woo_free_shipping_left_shortcode': {'update_oceanwp_woo_free_shipping_left_shortcode', 'nopriv_update_oceanwp_woo_free_shipping_left_shortcode'}, 'ajax_after_import': {'owp_after_import'}, '_ajax_oe_menu_icons_update_settings': {'oe_menu_icons_update_settings'}, 'save_integrations_settings': {'oceanwp_cp_save_integrations_settings'}, 'ajax_import_widgets': {'owp_ajax_import_widgets'}, 'oceanwp_mailchimp_request_callback': {'oceanwp_mailchimp_request', 'nopriv_oceanwp_mailchimp_request'}, 'save_single_option': {'oceanwp_cp_save_single_option'}, 'oe_plugin_activation': {'oe_plugin_activation'}}
 *
 ***/
 
-/** Function oe_plugin_activation() called by wp_ajax hooks: {'oe_plugin_activation'} **/
-/** Parameters found in function oe_plugin_activation(): {"post": ["nonce", "plugin"]} **/
-function oe_plugin_activation() {
+/** Function oe_plugin_installer() called by wp_ajax hooks: {'oe_plugin_installer'} **/
+/** Parameters found in function oe_plugin_installer(): {"post": ["nonce", "plugin"]} **/
+function oe_plugin_installer() {
 
-		if ( ! current_user_can( 'install_plugins' ) ) {
-			wp_die( __( 'Sorry, you are not allowed to activate plugins on this site.', 'ocean-extra' ) );
+		if ( ! current_user_can('install_plugins') ) {
+			wp_die( __( 'Sorry, you are not allowed to install plugins on this site.', 'ocean-extra' ) );
 		}
 
 		$nonce 	= $_POST["nonce"];
@@ -22,15 +22,14 @@ function oe_plugin_activation() {
 
 		// Check our nonce, if they don't match then bounce!
 		if ( ! wp_verify_nonce( $nonce, 'oe_installer_nonce' ) ) {
-			die( __( 'Error - unable to verify nonce, please try again.', 'ocean-extra' ) );
+			wp_die( __( 'Error - unable to verify nonce, please try again.', 'ocean-extra') );
 		}
 
-
-		// Include required libs for activation
+		// Include required libs for installation
 		require_once( ABSPATH . 'wp-admin/includes/plugin-install.php' );
 		require_once( ABSPATH . 'wp-admin/includes/class-wp-upgrader.php' );
+		require_once( ABSPATH . 'wp-admin/includes/class-wp-ajax-upgrader-skin.php' );
 		require_once( ABSPATH . 'wp-admin/includes/class-plugin-upgrader.php' );
-
 
 		// Get Plugin Info
 		$api = plugins_api( 'plugin_information',
@@ -53,16 +52,16 @@ function oe_plugin_activation() {
 			)
 		);
 
+		$skin     = new WP_Ajax_Upgrader_Skin();
+		$upgrader = new Plugin_Upgrader( $skin );
+		$upgrader->install( $api->download_link );
+
 		if ( $api->name ) {
-			$main_plugin_file = Ocean_Extra_Plugin_Installer::get_plugin_file( $plugin );
 			$status = 'success';
-			if ( $main_plugin_file ) {
-				activate_plugin( $main_plugin_file );
-				$msg = $api->name .' successfully activated.';
-			}
+			$msg 	= $api->name .' successfully installed.';
 		} else {
 			$status = 'failed';
-			$msg 	= 'There was an error activating '. $api->name .'.';
+			$msg 	= 'There was an error installing '. $api->name .'.';
 		}
 
 		$json = array(
@@ -75,128 +74,11 @@ function oe_plugin_activation() {
 	}
 
 
-/** Function customizer_export() called by wp_ajax hooks: {'oceanwp_cp_customizer_export'} **/
-/** Parameters found in function customizer_export(): {"post": ["_nonce"]} **/
-function customizer_export() {
-
-		OceanWP_Theme_Panel::check_ajax_access( $_POST['_nonce'], 'customizer_export', 'echo' );
-
-		$mods = get_theme_mods();
-		$data = array(
-			'mods'    => $mods ? $mods : array(),
-			'options' => array(),
-		);
-
-		foreach ( $mods as $key => $value ) {
-
-			// Don't save widget data.
-			if ( 'widget_' === substr( strtolower( $key ), 0, 7 ) ) {
-				continue;
-			}
-
-			// Don't save sidebar data.
-			if ( 'sidebars_' === substr( strtolower( $key ), 0, 9 ) ) {
-				continue;
-			}
-
-			$data['options'][ $key ] = $value;
-		}
-
-		if ( function_exists( 'wp_get_custom_css_post' ) ) {
-			$data['wp_css'] = wp_get_custom_css();
-		}
-
-		echo serialize( $data );
-		die;
-	}
+/** Function Freemius() called by wp_ajax hooks: {'fs_toggle_debug_mode'} **/
+/** No function found :-/ **/
 
 
-/** Function save_panel_settings() called by wp_ajax hooks: {'oceanwp_cp_save_panel_settings'} **/
-/** Parameters found in function save_panel_settings(): {"post": ["form_fields", "nonce"]} **/
-function save_panel_settings() {
-		$params = array();
-		parse_str( $_POST['form_fields'], $params );
-
-		OceanWP_Theme_Panel::check_ajax_access( $_POST['nonce'], 'oceanwp_theme_panel' );
-
-		if ( empty( $params['option_name'] ) ) {
-			wp_send_json_error(
-				array(
-					'message' => esc_html__( 'Something went wrong', 'ocean-extra' ),
-				)
-			);
-		}
-
-		$option = trim( $params['option_name'] );
-		$value  = array();
-		if ( isset( $params[ $option ] ) ) {
-			$value = $params[ $option ];
-			$value = isset( $value ) ? (array) $value : array();
-			$value = array_map( 'sanitize_text_field', $value );
-		}
-		update_option( $option, $value );
-
-		wp_send_json_success(
-			array(
-				'option'  => $option,
-				'message' => esc_html__( 'Settings saved successfully.', 'ocean-extra' ),
-			)
-		);
-	}
-
-
-/** Function ajax_handler() called by wp_ajax hooks: {'oceanwp_cp_system_status'} **/
-/** Parameters found in function ajax_handler(): {"request": ["nonce"], "post": ["type"]} **/
-function ajax_handler()
-		{
-			OceanWP_Theme_Panel::check_ajax_access( $_REQUEST['nonce'], 'oceanwp_theme_panel' );
-
-			$type = $_POST['type'];
-
-			if (!$type) {
-				wp_send_json_error(esc_html__('Type param is missing.', 'ocean-extra'));
-			}
-
-			$this->$type();
-
-			wp_send_json_error(
-				sprintf(esc_html__('Type param (%s) is not valid.', 'ocean-extra'), $type)
-			);
-		}
-
-
-/** Function block() called by wp_ajax hooks: {'ocean_notification_block'} **/
-/** Parameters found in function block(): {"post": ["id"]} **/
-function block() {
-		check_ajax_referer( 'ocean-notifications-admin', 'nonce' );
-
-		if ( empty( $_POST['id'] ) ) {
-			wp_send_json_error();
-		}
-
-		$id     = sanitize_text_field( wp_unslash( $_POST['id'] ) );
-		$option = $this->get_option();
-		$type   = 'notifications';
-
-		$option['blocked'][] = $id;
-		$option['blocked']   = array_unique( $option['blocked'] );
-
-		if ( is_array( $option[ $type ] ) && ! empty( $option[ $type ] ) ) {
-			foreach ( $option[ $type ] as $key => $notification ) {
-				if ( (string) $notification['id'] === (string) $id ) {
-					unset( $option[ $type ][ $key ] );
-					break;
-				}
-			}
-		}
-
-		update_option( 'ocean_notifications', $option );
-
-		wp_send_json_success();
-	}
-
-
-/** Function ajax_demo_data() called by wp_ajax hooks: {'owp_ajax_get_demo_data', 'owp_wizard_ajax_get_demo_data'} **/
+/** Function ajax_demo_data() called by wp_ajax hooks: {'owp_wizard_ajax_get_demo_data', 'owp_ajax_get_demo_data'} **/
 /** Parameters found in function ajax_demo_data(): {"get": ["demo_data_nonce", "demo_name", "demo_type"]} **/
 function ajax_demo_data() {
 
@@ -321,6 +203,27 @@ function ajax_demo_data() {
 		}
 
 
+/** Function customizer_reset() called by wp_ajax hooks: {'oceanwp_cp_customizer_reset'} **/
+/** Parameters found in function customizer_reset(): {"post": ["_nonce"]} **/
+function customizer_reset() {
+
+		OceanWP_Theme_Panel::check_ajax_access( $_POST['_nonce'], 'customizer_reset' );
+
+		$theme               = wp_get_theme();
+		$themename           = strtolower( $theme->name );
+		$customizer_settings = get_option( "theme_mods_{$themename}" );
+		if ( $customizer_settings ) {
+			delete_option( "theme_mods_{$themename}" );
+		}
+
+		wp_send_json_success(
+			array(
+				'message' => esc_html__( 'Settings successfully reset.', 'ocean-extra' ),
+			)
+		);
+	}
+
+
 /** Function save_customizer_settings() called by wp_ajax hooks: {'oceanwp_cp_save_customizer_settings'} **/
 /** Parameters found in function save_customizer_settings(): {"post": ["form_fields"]} **/
 function save_customizer_settings() {
@@ -359,50 +262,53 @@ function save_customizer_settings() {
 	}
 
 
-/** Function ajax_required_plugins_activate() called by wp_ajax hooks: {'owp_ajax_required_plugins_activate'} **/
-/** Parameters found in function ajax_required_plugins_activate(): {"post": ["init"]} **/
-function ajax_required_plugins_activate() {
+/** Function customizer_import() called by wp_ajax hooks: {'oceanwp_cp_customizer_import'} **/
+/** Parameters found in function customizer_import(): {"post": ["_nonce"], "files": ["file"]} **/
+function customizer_import() {
 
-			if ( ! current_user_can( 'install_plugins' ) || ! isset( $_POST['init'] ) || ! $_POST['init'] ) {
-				wp_send_json_error(
-					array(
-						'success' => false,
-						'message' => __( 'No plugin specified', 'ocean-extra' ),
-					)
-				);
-			}
+		OceanWP_Theme_Panel::check_ajax_access( $_POST['_nonce'], 'customizer_import', true );
 
-			$plugin_init = ( isset( $_POST['init'] ) ) ? esc_attr( $_POST['init'] ) : '';
-			$activate    = activate_plugin( $plugin_init, '', false, true );
-
-			if ( is_wp_error( $activate ) ) {
-				wp_send_json_error(
-					array(
-						'success' => false,
-						'message' => $activate->get_error_message(),
-					)
-				);
-			}
-
-			wp_send_json_success(
-				array(
-					'success' => true,
-					'message' => __( 'Plugin Successfully Activated', 'ocean-extra' ),
-				)
-			);
-
+		if ( empty( $_FILES['file'] ) ) {
+			wp_send_json_error( array( 'message' => esc_html__( 'Something went wrong', 'ocean-extra' ) ) );
 		}
 
+		$template  = get_template();
+		$overrides = array(
+			'test_form' => false,
+			'test_type' => false,
+			'mimes'     => array( 'dat' => 'text/plain' ),
+		);
+		$file      = wp_handle_upload( $_FILES['file'], $overrides );
 
-/** Function ajax_import_widgets() called by wp_ajax hooks: {'owp_ajax_import_widgets'} **/
-/** Parameters found in function ajax_import_widgets(): {"post": ["owp_import_demo_data_nonce", "owp_import_demo"]} **/
-function ajax_import_widgets() {
-			if (!current_user_can('manage_options') || ! wp_verify_nonce( $_POST['owp_import_demo_data_nonce'], 'owp_import_demo_data_nonce' ) ) {
+		if ( isset( $file['error'] ) ) {
+			wp_die(
+				$file['error'],
+				'',
+				array( 'back_link' => true )
+			);
+		}
+
+		// Process import file
+		$res = self::process_import_file( $file['file'] );
+
+		if ( $res['status'] === 'updated' ) {
+			wp_send_json_success(
+				array(
+					'message' => 'Success',
+				)
+			);
+		} else {
+			wp_send_json_error( array( 'message' => $res['msg'] ) );
+		}
+	}
+
+
+/** Function ajax_import_xml() called by wp_ajax hooks: {'owp_ajax_import_xml'} **/
+/** Parameters found in function ajax_import_xml(): {"post": ["owp_import_demo_data_nonce", "owp_import_demo"]} **/
+function ajax_import_xml() {
+			if ( !current_user_can('manage_options')||! wp_verify_nonce( $_POST['owp_import_demo_data_nonce'], 'owp_import_demo_data_nonce' ) ) {
 				die( 'This action was stopped for security purposes.' );
 			}
-
-			// Include widget importer
-			include OE_PATH . 'includes/panel/classes/importers/class-widget-importer.php';
 
 			// Get the selected demo
 			$demo_type = $_POST['owp_import_demo'];
@@ -415,12 +321,24 @@ function ajax_import_widgets() {
 			}
 			$demo = $demo_data[ $demo_type ];
 
-			// Widgets file
-			$widgets_file = isset( $demo['widgets_file'] ) ? $demo['widgets_file'] : '';
+			// Content
+			$xml_file = isset( $demo['xml_file'] ) ? $demo['xml_file'] : '';
 
-			// Import settings.
-			$widgets_importer = new OWP_Widget_Importer();
-			$result = $widgets_importer->process_import_file( $widgets_file );
+			// Delete the default post and page
+			$sample_page      = get_page_by_path( 'sample-page', OBJECT, 'page' );
+			$hello_world_post = get_page_by_path( 'hello-world', OBJECT, 'post' );
+
+			if ( ! is_null( $sample_page ) ) {
+				wp_delete_post( $sample_page->ID, true );
+			}
+
+			if ( ! is_null( $hello_world_post ) ) {
+				wp_delete_post( $hello_world_post->ID, true );
+			}
+
+			// Import Posts, Pages, Images, Menus.
+			$instance = new OceanWP_Demos();
+			$result = $instance->process_xml( $xml_file );
 
 			if ( is_wp_error( $result ) ) {
 				echo json_encode( $result->errors );
@@ -432,12 +350,32 @@ function ajax_import_widgets() {
 		}
 
 
-/** Function oe_plugin_installer() called by wp_ajax hooks: {'oe_plugin_installer'} **/
-/** Parameters found in function oe_plugin_installer(): {"post": ["nonce", "plugin"]} **/
-function oe_plugin_installer() {
+/** Function ajax_handler() called by wp_ajax hooks: {'oceanwp_cp_system_status'} **/
+/** Parameters found in function ajax_handler(): {"request": ["nonce"], "post": ["type"]} **/
+function ajax_handler()
+		{
+			OceanWP_Theme_Panel::check_ajax_access( $_REQUEST['nonce'], 'oceanwp_theme_panel' );
 
-		if ( ! current_user_can('install_plugins') ) {
-			wp_die( __( 'Sorry, you are not allowed to install plugins on this site.', 'ocean-extra' ) );
+			$type = $_POST['type'];
+
+			if (!$type) {
+				wp_send_json_error(esc_html__('Type param is missing.', 'ocean-extra'));
+			}
+
+			$this->$type();
+
+			wp_send_json_error(
+				sprintf(esc_html__('Type param (%s) is not valid.', 'ocean-extra'), $type)
+			);
+		}
+
+
+/** Function oe_premium_plugin_activation() called by wp_ajax hooks: {'oe_premium_plugin_activation'} **/
+/** Parameters found in function oe_premium_plugin_activation(): {"post": ["nonce", "plugin"]} **/
+function oe_premium_plugin_activation() {
+
+		if ( ! current_user_can( 'install_plugins' ) ) {
+			wp_die( __( 'Sorry, you are not allowed to activate plugins on this site.', 'ocean-extra' ) );
 		}
 
 		$nonce 	= $_POST["nonce"];
@@ -445,46 +383,31 @@ function oe_plugin_installer() {
 
 		// Check our nonce, if they don't match then bounce!
 		if ( ! wp_verify_nonce( $nonce, 'oe_installer_nonce' ) ) {
-			wp_die( __( 'Error - unable to verify nonce, please try again.', 'ocean-extra') );
+			die( __( 'Error - unable to verify nonce, please try again.', 'ocean-extra' ) );
 		}
 
-		// Include required libs for installation
-		require_once( ABSPATH . 'wp-admin/includes/plugin-install.php' );
+
+		// Include required libs for activation
 		require_once( ABSPATH . 'wp-admin/includes/class-wp-upgrader.php' );
-		require_once( ABSPATH . 'wp-admin/includes/class-wp-ajax-upgrader-skin.php' );
 		require_once( ABSPATH . 'wp-admin/includes/class-plugin-upgrader.php' );
 
+
 		// Get Plugin Info
-		$api = plugins_api( 'plugin_information',
-			array(
-				'slug' 		=> $plugin,
-				'fields' 	=> array(
-					'short_description' 	=> false,
-					'sections' 				=> false,
-					'requires' 				=> false,
-					'rating' 				=> false,
-					'ratings' 				=> false,
-					'downloaded' 			=> false,
-					'last_updated' 			=> false,
-					'added' 				=> false,
-					'tags' 					=> false,
-					'compatibility' 		=> false,
-					'homepage' 				=> false,
-					'donate_link' 			=> false,
-				),
-			)
+		$api = array(
+			'slug' 	=> $plugin,
+			'name' 	=> $plugin['name'],
 		);
 
-		$skin     = new WP_Ajax_Upgrader_Skin();
-		$upgrader = new Plugin_Upgrader( $skin );
-		$upgrader->install( $api->download_link );
-
-		if ( $api->name ) {
+		if ( $api['name'] ) {
+			$main_plugin_file = Ocean_Extra_Plugin_Installer::get_plugin_file( $plugin );
 			$status = 'success';
-			$msg 	= $api->name .' successfully installed.';
+			if ( $main_plugin_file ) {
+				activate_plugin( $main_plugin_file );
+				$msg = $api['name'] .' successfully activated.';
+			}
 		} else {
 			$status = 'failed';
-			$msg 	= 'There was an error installing '. $api->name .'.';
+			$msg 	= 'There was an error activating '. $api['name'] .'.';
 		}
 
 		$json = array(
@@ -535,8 +458,160 @@ function child_theme_install() {
 	}
 
 
-/** Function ajax_get_import_data() called by wp_ajax hooks: {'owp_ajax_get_import_data'} **/
-/** No params detected :-/ **/
+/** Function save_panel_settings() called by wp_ajax hooks: {'oceanwp_cp_save_panel_settings'} **/
+/** Parameters found in function save_panel_settings(): {"post": ["form_fields", "nonce"]} **/
+function save_panel_settings() {
+		$params = array();
+		parse_str( $_POST['form_fields'], $params );
+
+		OceanWP_Theme_Panel::check_ajax_access( $_POST['nonce'], 'oceanwp_theme_panel' );
+
+		if ( empty( $params['option_name'] ) ) {
+			wp_send_json_error(
+				array(
+					'message' => esc_html__( 'Something went wrong', 'ocean-extra' ),
+				)
+			);
+		}
+
+		$option = trim( $params['option_name'] );
+		$value  = array();
+		if ( isset( $params[ $option ] ) ) {
+			$value = $params[ $option ];
+			$value = isset( $value ) ? (array) $value : array();
+			$value = array_map( 'sanitize_text_field', $value );
+		}
+		update_option( $option, $value );
+
+		wp_send_json_success(
+			array(
+				'option'  => $option,
+				'message' => esc_html__( 'Settings saved successfully.', 'ocean-extra' ),
+			)
+		);
+	}
+
+
+/** Function dismiss_notice_ajax_callback() called by wp_ajax hooks: {'fs_dismiss_notice_action_{$ajax_action_suffix}'} **/
+/** Parameters found in function dismiss_notice_ajax_callback(): {"post": ["message_id"]} **/
+function dismiss_notice_ajax_callback() {
+            check_admin_referer( 'fs_dismiss_notice_action' );
+
+            if ( ! is_numeric( $_POST['message_id'] ) ) {
+                $this->_sticky_storage->remove( $_POST['message_id'] );
+            }
+
+            wp_die();
+        }
+
+
+/** Function ajax_import_forms() called by wp_ajax hooks: {'owp_ajax_import_forms'} **/
+/** Parameters found in function ajax_import_forms(): {"post": ["owp_import_demo_data_nonce", "owp_import_demo"]} **/
+function ajax_import_forms() {
+			if ( !current_user_can('manage_options') ||! wp_verify_nonce( $_POST['owp_import_demo_data_nonce'], 'owp_import_demo_data_nonce' ) ) {
+				die( 'This action was stopped for security purposes.' );
+			}
+
+			// Include form importer
+			include OE_PATH . 'includes/panel/classes/importers/class-wpforms-importer.php';
+
+			// Get the selected demo
+			$demo_type = $_POST['owp_import_demo'];
+
+			// Get demos data
+			$demos = self::get_demos_data();
+			$demo_data = $demos['elementor'];
+			if ( ! empty( $demos['gutenberg'] ) ) {
+				$demo_data = array_merge( $demo_data, $demos['gutenberg'] );
+			}
+			$demo = $demo_data[ $demo_type ];
+
+			// Widgets file
+			$form_file = isset( $demo['form_file'] ) ? $demo['form_file'] : '';
+
+			// Import settings.
+			$forms_importer = new OWP_WPForms_Importer();
+			$result = $forms_importer->process_import_file( $form_file );
+
+			if ( is_wp_error( $result ) ) {
+				echo json_encode( $result->errors );
+			} else {
+				echo 'successful import';
+			}
+
+			die();
+		}
+
+
+/** Function customizer_export() called by wp_ajax hooks: {'oceanwp_cp_customizer_export'} **/
+/** Parameters found in function customizer_export(): {"post": ["_nonce"]} **/
+function customizer_export() {
+
+		OceanWP_Theme_Panel::check_ajax_access( $_POST['_nonce'], 'customizer_export', 'echo' );
+
+		$mods = get_theme_mods();
+		$data = array(
+			'mods'    => $mods ? $mods : array(),
+			'options' => array(),
+		);
+
+		foreach ( $mods as $key => $value ) {
+
+			// Don't save widget data.
+			if ( 'widget_' === substr( strtolower( $key ), 0, 7 ) ) {
+				continue;
+			}
+
+			// Don't save sidebar data.
+			if ( 'sidebars_' === substr( strtolower( $key ), 0, 9 ) ) {
+				continue;
+			}
+
+			$data['options'][ $key ] = $value;
+		}
+
+		if ( function_exists( 'wp_get_custom_css_post' ) ) {
+			$data['wp_css'] = wp_get_custom_css();
+		}
+
+		echo serialize( $data );
+		die;
+	}
+
+
+/** Function ajax_required_plugins_activate() called by wp_ajax hooks: {'owp_ajax_required_plugins_activate'} **/
+/** Parameters found in function ajax_required_plugins_activate(): {"post": ["init"]} **/
+function ajax_required_plugins_activate() {
+
+			if ( ! current_user_can( 'install_plugins' ) || ! isset( $_POST['init'] ) || ! $_POST['init'] ) {
+				wp_send_json_error(
+					array(
+						'success' => false,
+						'message' => __( 'No plugin specified', 'ocean-extra' ),
+					)
+				);
+			}
+
+			$plugin_init = ( isset( $_POST['init'] ) ) ? esc_attr( $_POST['init'] ) : '';
+			$activate    = activate_plugin( $plugin_init, '', false, true );
+
+			if ( is_wp_error( $activate ) ) {
+				wp_send_json_error(
+					array(
+						'success' => false,
+						'message' => $activate->get_error_message(),
+					)
+				);
+			}
+
+			wp_send_json_success(
+				array(
+					'success' => true,
+					'message' => __( 'Plugin Successfully Activated', 'ocean-extra' ),
+				)
+			);
+
+		}
 
 
 /** Function ajax_import_theme_settings() called by wp_ajax hooks: {'owp_ajax_import_theme_settings'} **/
@@ -577,111 +652,39 @@ function ajax_import_theme_settings() {
 		}
 
 
-/** Function save_single_option() called by wp_ajax hooks: {'oceanwp_cp_save_single_option'} **/
+/** Function ajax_get_import_data() called by wp_ajax hooks: {'owp_ajax_get_import_data'} **/
 /** No params detected :-/ **/
 
 
-/** Function oceanwp_mailchimp_request_callback() called by wp_ajax hooks: {'nopriv_oceanwp_mailchimp_request', 'oceanwp_mailchimp_request'} **/
-/** Parameters found in function oceanwp_mailchimp_request_callback(): {"post": ["email"]} **/
-function oceanwp_mailchimp_request_callback() {
+/** Function block() called by wp_ajax hooks: {'ocean_notification_block'} **/
+/** Parameters found in function block(): {"post": ["id"]} **/
+function block() {
+		check_ajax_referer( 'ocean-notifications-admin', 'nonce' );
 
-			$apikey  = get_option( 'owp_mailchimp_api_key' );
-			$list_id = get_option( 'owp_mailchimp_list_id' );
-			$email   = ( isset( $_POST['email'] ) ) ? $_POST['email'] : '';
-			$status  = false;
-
-			if ( $email && $apikey && $list_id ) {
-
-				$root = 'https://api.mailchimp.com/3.0';
-
-				if ( strstr( $apikey, '-' ) ) {
-					list( $key, $dc ) = explode( '-', $apikey, 2 );
-				}
-
-				$root = str_replace( 'https://api', 'https://' . $dc . '.api', $root );
-				$root = rtrim( $root, '/' ) . '/';
-
-				$params = array(
-					'apikey'            => $apikey,
-					'id'                => $list_id,
-					'email_address'     => $email,
-					'status'            => 'subscribed',
-					'double_optin'      => false,
-					'send_welcome'      => false,
-					'replace_interests' => false,
-					'update_existing'   => true,
-				);
-
-				$ch     = curl_init();
-				$params = json_encode( $params );
-
-				curl_setopt( $ch, CURLOPT_URL, $root . '/lists/' . $list_id . '/members/' . $email );
-				curl_setopt( $ch, CURLOPT_USERPWD, 'user:' . $apikey );
-				curl_setopt( $ch, CURLOPT_HTTPHEADER, array( 'Content-Type: application/json' ) );
-				curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
-				curl_setopt( $ch, CURLOPT_CUSTOMREQUEST, 'PUT' );
-				curl_setopt( $ch, CURLOPT_SSL_VERIFYPEER, false );
-				curl_setopt( $ch, CURLOPT_POSTFIELDS, $params );
-
-				$response_body = curl_exec( $ch );
-				$httpCode      = curl_getinfo( $ch, CURLINFO_HTTP_CODE );
-
-				curl_close( $ch );
-
-				if ( $httpCode == 200 ) {
-					$status = true;
-				}
-			}
-
-			wp_send_json( array( 'status' => $status ) );
+		if ( empty( $_POST['id'] ) ) {
+			wp_send_json_error();
 		}
 
+		$id     = sanitize_text_field( wp_unslash( $_POST['id'] ) );
+		$option = $this->get_option();
+		$type   = 'notifications';
 
-/** Function ajax_import_xml() called by wp_ajax hooks: {'owp_ajax_import_xml'} **/
-/** Parameters found in function ajax_import_xml(): {"post": ["owp_import_demo_data_nonce", "owp_import_demo"]} **/
-function ajax_import_xml() {
-			if ( !current_user_can('manage_options')||! wp_verify_nonce( $_POST['owp_import_demo_data_nonce'], 'owp_import_demo_data_nonce' ) ) {
-				die( 'This action was stopped for security purposes.' );
+		$option['blocked'][] = $id;
+		$option['blocked']   = array_unique( $option['blocked'] );
+
+		if ( is_array( $option[ $type ] ) && ! empty( $option[ $type ] ) ) {
+			foreach ( $option[ $type ] as $key => $notification ) {
+				if ( (string) $notification['id'] === (string) $id ) {
+					unset( $option[ $type ][ $key ] );
+					break;
+				}
 			}
-
-			// Get the selected demo
-			$demo_type = $_POST['owp_import_demo'];
-
-			// Get demos data
-			$demos = self::get_demos_data();
-			$demo_data = $demos['elementor'];
-			if ( ! empty( $demos['gutenberg'] ) ) {
-				$demo_data = array_merge( $demo_data, $demos['gutenberg'] );
-			}
-			$demo = $demo_data[ $demo_type ];
-
-			// Content
-			$xml_file = isset( $demo['xml_file'] ) ? $demo['xml_file'] : '';
-
-			// Delete the default post and page
-			$sample_page      = get_page_by_path( 'sample-page', OBJECT, 'page' );
-			$hello_world_post = get_page_by_path( 'hello-world', OBJECT, 'post' );
-
-			if ( ! is_null( $sample_page ) ) {
-				wp_delete_post( $sample_page->ID, true );
-			}
-
-			if ( ! is_null( $hello_world_post ) ) {
-				wp_delete_post( $hello_world_post->ID, true );
-			}
-
-			// Import Posts, Pages, Images, Menus.
-			$instance = new OceanWP_Demos();
-			$result = $instance->process_xml( $xml_file );
-
-			if ( is_wp_error( $result ) ) {
-				echo json_encode( $result->errors );
-			} else {
-				echo 'successful import';
-			}
-
-			die();
 		}
+
+		update_option( 'ocean_notifications', $option );
+
+		wp_send_json_success();
+	}
 
 
 /** Function update_oceanwp_woo_free_shipping_left_shortcode() called by wp_ajax hooks: {'update_oceanwp_woo_free_shipping_left_shortcode', 'nopriv_update_oceanwp_woo_free_shipping_left_shortcode'} **/
@@ -707,64 +710,6 @@ function update_oceanwp_woo_free_shipping_left_shortcode() {
 
 		}
 	}
-
-
-/** Function customizer_import() called by wp_ajax hooks: {'oceanwp_cp_customizer_import'} **/
-/** Parameters found in function customizer_import(): {"post": ["_nonce"], "files": ["file"]} **/
-function customizer_import() {
-
-		OceanWP_Theme_Panel::check_ajax_access( $_POST['_nonce'], 'customizer_import', true );
-
-		if ( empty( $_FILES['file'] ) ) {
-			wp_send_json_error( array( 'message' => esc_html__( 'Something went wrong', 'ocean-extra' ) ) );
-		}
-
-		$template  = get_template();
-		$overrides = array(
-			'test_form' => false,
-			'test_type' => false,
-			'mimes'     => array( 'dat' => 'text/plain' ),
-		);
-		$file      = wp_handle_upload( $_FILES['file'], $overrides );
-
-		if ( isset( $file['error'] ) ) {
-			wp_die(
-				$file['error'],
-				'',
-				array( 'back_link' => true )
-			);
-		}
-
-		// Process import file
-		$res = self::process_import_file( $file['file'] );
-
-		if ( $res['status'] === 'updated' ) {
-			wp_send_json_success(
-				array(
-					'message' => 'Success',
-				)
-			);
-		} else {
-			wp_send_json_error( array( 'message' => $res['msg'] ) );
-		}
-	}
-
-
-/** Function dismiss_notice_ajax_callback() called by wp_ajax hooks: {'fs_dismiss_notice_action_{$ajax_action_suffix}'} **/
-/** Parameters found in function dismiss_notice_ajax_callback(): {"post": ["message_id"]} **/
-function dismiss_notice_ajax_callback() {
-            check_admin_referer( 'fs_dismiss_notice_action' );
-
-            if ( ! is_numeric( $_POST['message_id'] ) ) {
-                $this->_sticky_storage->remove( $_POST['message_id'] );
-            }
-
-            wp_die();
-        }
-
-
-/** Function _ajax_oe_menu_icons_update_settings() called by wp_ajax hooks: {'oe_menu_icons_update_settings'} **/
-/** No params detected :-/ **/
 
 
 /** Function ajax_after_import() called by wp_ajax hooks: {'owp_after_import'} **/
@@ -913,79 +858,8 @@ function ajax_after_import() {
 		}
 
 
-/** Function customizer_reset() called by wp_ajax hooks: {'oceanwp_cp_customizer_reset'} **/
-/** Parameters found in function customizer_reset(): {"post": ["_nonce"]} **/
-function customizer_reset() {
-
-		OceanWP_Theme_Panel::check_ajax_access( $_POST['_nonce'], 'customizer_reset' );
-
-		$theme               = wp_get_theme();
-		$themename           = strtolower( $theme->name );
-		$customizer_settings = get_option( "theme_mods_{$themename}" );
-		if ( $customizer_settings ) {
-			delete_option( "theme_mods_{$themename}" );
-		}
-
-		wp_send_json_success(
-			array(
-				'message' => esc_html__( 'Settings successfully reset.', 'ocean-extra' ),
-			)
-		);
-	}
-
-
-/** Function oe_premium_plugin_activation() called by wp_ajax hooks: {'oe_premium_plugin_activation'} **/
-/** Parameters found in function oe_premium_plugin_activation(): {"post": ["nonce", "plugin"]} **/
-function oe_premium_plugin_activation() {
-
-		if ( ! current_user_can( 'install_plugins' ) ) {
-			wp_die( __( 'Sorry, you are not allowed to activate plugins on this site.', 'ocean-extra' ) );
-		}
-
-		$nonce 	= $_POST["nonce"];
-		$plugin = $_POST["plugin"];
-
-		// Check our nonce, if they don't match then bounce!
-		if ( ! wp_verify_nonce( $nonce, 'oe_installer_nonce' ) ) {
-			die( __( 'Error - unable to verify nonce, please try again.', 'ocean-extra' ) );
-		}
-
-
-		// Include required libs for activation
-		require_once( ABSPATH . 'wp-admin/includes/class-wp-upgrader.php' );
-		require_once( ABSPATH . 'wp-admin/includes/class-plugin-upgrader.php' );
-
-
-		// Get Plugin Info
-		$api = array(
-			'slug' 	=> $plugin,
-			'name' 	=> $plugin['name'],
-		);
-
-		if ( $api['name'] ) {
-			$main_plugin_file = Ocean_Extra_Plugin_Installer::get_plugin_file( $plugin );
-			$status = 'success';
-			if ( $main_plugin_file ) {
-				activate_plugin( $main_plugin_file );
-				$msg = $api['name'] .' successfully activated.';
-			}
-		} else {
-			$status = 'failed';
-			$msg 	= 'There was an error activating '. $api['name'] .'.';
-		}
-
-		$json = array(
-			'status' 	=> $status,
-			'msg' 		=> $msg,
-		);
-
-		wp_send_json( $json );
-
-	}
-
-
-/** Function Freemius() called by wp_ajax hooks: {'fs_toggle_debug_mode'} **/
-/** No function found :-/ **/
+/** Function _ajax_oe_menu_icons_update_settings() called by wp_ajax hooks: {'oe_menu_icons_update_settings'} **/
+/** No params detected :-/ **/
 
 
 /** Function save_integrations_settings() called by wp_ajax hooks: {'oceanwp_cp_save_integrations_settings'} **/
@@ -1052,15 +926,15 @@ function save_integrations_settings() {
 	}
 
 
-/** Function ajax_import_forms() called by wp_ajax hooks: {'owp_ajax_import_forms'} **/
-/** Parameters found in function ajax_import_forms(): {"post": ["owp_import_demo_data_nonce", "owp_import_demo"]} **/
-function ajax_import_forms() {
-			if ( !current_user_can('manage_options') ||! wp_verify_nonce( $_POST['owp_import_demo_data_nonce'], 'owp_import_demo_data_nonce' ) ) {
+/** Function ajax_import_widgets() called by wp_ajax hooks: {'owp_ajax_import_widgets'} **/
+/** Parameters found in function ajax_import_widgets(): {"post": ["owp_import_demo_data_nonce", "owp_import_demo"]} **/
+function ajax_import_widgets() {
+			if (!current_user_can('manage_options') || ! wp_verify_nonce( $_POST['owp_import_demo_data_nonce'], 'owp_import_demo_data_nonce' ) ) {
 				die( 'This action was stopped for security purposes.' );
 			}
 
-			// Include form importer
-			include OE_PATH . 'includes/panel/classes/importers/class-wpforms-importer.php';
+			// Include widget importer
+			include OE_PATH . 'includes/panel/classes/importers/class-widget-importer.php';
 
 			// Get the selected demo
 			$demo_type = $_POST['owp_import_demo'];
@@ -1074,11 +948,11 @@ function ajax_import_forms() {
 			$demo = $demo_data[ $demo_type ];
 
 			// Widgets file
-			$form_file = isset( $demo['form_file'] ) ? $demo['form_file'] : '';
+			$widgets_file = isset( $demo['widgets_file'] ) ? $demo['widgets_file'] : '';
 
 			// Import settings.
-			$forms_importer = new OWP_WPForms_Importer();
-			$result = $forms_importer->process_import_file( $form_file );
+			$widgets_importer = new OWP_Widget_Importer();
+			$result = $widgets_importer->process_import_file( $widgets_file );
 
 			if ( is_wp_error( $result ) ) {
 				echo json_encode( $result->errors );
@@ -1088,5 +962,131 @@ function ajax_import_forms() {
 
 			die();
 		}
+
+
+/** Function oceanwp_mailchimp_request_callback() called by wp_ajax hooks: {'oceanwp_mailchimp_request', 'nopriv_oceanwp_mailchimp_request'} **/
+/** Parameters found in function oceanwp_mailchimp_request_callback(): {"post": ["email"]} **/
+function oceanwp_mailchimp_request_callback() {
+
+			$apikey  = get_option( 'owp_mailchimp_api_key' );
+			$list_id = get_option( 'owp_mailchimp_list_id' );
+			$email   = ( isset( $_POST['email'] ) ) ? $_POST['email'] : '';
+			$status  = false;
+
+			if ( $email && $apikey && $list_id ) {
+
+				$root = 'https://api.mailchimp.com/3.0';
+
+				if ( strstr( $apikey, '-' ) ) {
+					list( $key, $dc ) = explode( '-', $apikey, 2 );
+				}
+
+				$root = str_replace( 'https://api', 'https://' . $dc . '.api', $root );
+				$root = rtrim( $root, '/' ) . '/';
+
+				$params = array(
+					'apikey'            => $apikey,
+					'id'                => $list_id,
+					'email_address'     => $email,
+					'status'            => 'subscribed',
+					'double_optin'      => false,
+					'send_welcome'      => false,
+					'replace_interests' => false,
+					'update_existing'   => true,
+				);
+
+				$ch     = curl_init();
+				$params = json_encode( $params );
+
+				curl_setopt( $ch, CURLOPT_URL, $root . '/lists/' . $list_id . '/members/' . $email );
+				curl_setopt( $ch, CURLOPT_USERPWD, 'user:' . $apikey );
+				curl_setopt( $ch, CURLOPT_HTTPHEADER, array( 'Content-Type: application/json' ) );
+				curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
+				curl_setopt( $ch, CURLOPT_CUSTOMREQUEST, 'PUT' );
+				curl_setopt( $ch, CURLOPT_SSL_VERIFYPEER, false );
+				curl_setopt( $ch, CURLOPT_POSTFIELDS, $params );
+
+				$response_body = curl_exec( $ch );
+				$httpCode      = curl_getinfo( $ch, CURLINFO_HTTP_CODE );
+
+				curl_close( $ch );
+
+				if ( $httpCode == 200 ) {
+					$status = true;
+				}
+			}
+
+			wp_send_json( array( 'status' => $status ) );
+		}
+
+
+/** Function save_single_option() called by wp_ajax hooks: {'oceanwp_cp_save_single_option'} **/
+/** No params detected :-/ **/
+
+
+/** Function oe_plugin_activation() called by wp_ajax hooks: {'oe_plugin_activation'} **/
+/** Parameters found in function oe_plugin_activation(): {"post": ["nonce", "plugin"]} **/
+function oe_plugin_activation() {
+
+		if ( ! current_user_can( 'install_plugins' ) ) {
+			wp_die( __( 'Sorry, you are not allowed to activate plugins on this site.', 'ocean-extra' ) );
+		}
+
+		$nonce 	= $_POST["nonce"];
+		$plugin = $_POST["plugin"];
+
+		// Check our nonce, if they don't match then bounce!
+		if ( ! wp_verify_nonce( $nonce, 'oe_installer_nonce' ) ) {
+			die( __( 'Error - unable to verify nonce, please try again.', 'ocean-extra' ) );
+		}
+
+
+		// Include required libs for activation
+		require_once( ABSPATH . 'wp-admin/includes/plugin-install.php' );
+		require_once( ABSPATH . 'wp-admin/includes/class-wp-upgrader.php' );
+		require_once( ABSPATH . 'wp-admin/includes/class-plugin-upgrader.php' );
+
+
+		// Get Plugin Info
+		$api = plugins_api( 'plugin_information',
+			array(
+				'slug' 		=> $plugin,
+				'fields' 	=> array(
+					'short_description' 	=> false,
+					'sections' 				=> false,
+					'requires' 				=> false,
+					'rating' 				=> false,
+					'ratings' 				=> false,
+					'downloaded' 			=> false,
+					'last_updated' 			=> false,
+					'added' 				=> false,
+					'tags' 					=> false,
+					'compatibility' 		=> false,
+					'homepage' 				=> false,
+					'donate_link' 			=> false,
+				),
+			)
+		);
+
+		if ( $api->name ) {
+			$main_plugin_file = Ocean_Extra_Plugin_Installer::get_plugin_file( $plugin );
+			$status = 'success';
+			if ( $main_plugin_file ) {
+				activate_plugin( $main_plugin_file );
+				$msg = $api->name .' successfully activated.';
+			}
+		} else {
+			$status = 'failed';
+			$msg 	= 'There was an error activating '. $api->name .'.';
+		}
+
+		$json = array(
+			'status' 	=> $status,
+			'msg' 		=> $msg,
+		);
+
+		wp_send_json( $json );
+
+	}
 
 

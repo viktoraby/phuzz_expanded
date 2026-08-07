@@ -1,0 +1,57 @@
+{
+  "target": "http://web/wp-admin/admin-ajax.php",
+  "methods": [
+    "POST"
+  ],
+  "body_params": {
+    "weight": 1,
+    "fixed": [],
+    "fuzz": [
+      "user_id",
+      "ajax_action",
+      "account_type",
+      "connect_type",
+      "media_fields",
+      "post_limit"
+    ],
+    "data": [
+      {
+        "name": "user_id",
+        "value": "fuzz"
+      },
+      {
+        "name": "ajax_action",
+        "value": "fuzz"
+      },
+      {
+        "name": "account_type",
+        "value": "fuzz"
+      },
+      {
+        "name": "connect_type",
+        "value": "fuzz"
+      },
+      {
+        "name": "media_fields",
+        "value": "fuzz"
+      },
+      {
+        "name": "post_limit",
+        "value": "fuzz"
+      }
+    ]
+  },
+  "query_params": {
+    "weight": 1,
+    "fixed": [
+      "action"
+    ],
+    "fuzz": [],
+    "data": [
+      {
+        "name": "action",
+        "value": "sbi_get_api_calls_handler"
+      }
+    ]
+  }
+}

@@ -5,23 +5,23 @@
 *Found functions:41
 *Extracted functions:40
 *Total parameter names extracted: 3
-*Overview: {'FrmFieldsController::import_options': {'frm_import_options'}, 'FrmFieldsController::destroy': {'frm_delete_field'}, 'ajax_check_plugin_status': {'frm_smtp_page_check_plugin_status'}, 'FrmXMLController::export_xml': {'frm_export_xml'}, 'FrmAppController::uninstall': {'frm_uninstall'}, 'FrmXMLController::csv': {'nopriv_frm_entries_csv', 'frm_entries_csv'}, 'FrmAddonsController::ajax_activate_addon': {'frm_activate_addon'}, 'FrmAddonsController::connect_pro': {'frm_connect'}, 'FrmAppController::ajax_install': {'frm_install'}, 'FrmFieldsController::duplicate': {'frm_duplicate_field'}, 'FrmAddon::activate': {'frm_addon_activate'}, 'FrmFormActionsController::fill_action': {'frm_form_action_fill'}, 'FrmInboxController::dismiss_message': {'frm_inbox_dismiss'}, 'FrmFormActionsController::add_form_action': {'frm_add_form_action'}, 'FrmStylesController::reset_styling': {'frm_settings_reset'}, 'FrmAppController::dismiss_review': {'frm_dismiss_review'}, 'FrmAppController::deauthorize': {'frm_deauthorize'}, 'FrmStylesController::load_css': {'frmpro_load_css', 'nopriv_frmpro_load_css'}, 'FrmFieldsController::create': {'frm_insert_field'}, 'FrmFormsController::get_email_html': {'frm_get_default_html'}, 'FrmFormsController::preview': {'frm_forms_preview', 'nopriv_frm_forms_preview'}, 'FrmFormsController::route': {'frm_save_form'}, 'FrmFormsController::get_page_dropdown': {'get_page_dropdown'}, 'FrmSettingsController::load_settings_tab': {'frm_settings_tab'}, 'FrmApplicationsController::get_applications_data': {'frm_get_applications_data'}, 'FrmAddon::deactivate': {'frm_addon_deactivate'}, 'FrmFieldsController::load_field': {'frm_load_field'}, 'FrmFormsController::create_page_with_shortcode': {'frm_create_page_with_shortcode'}, 'FrmSettingsController::page_search': {'frm_page_search'}, 'FrmFormsController::get_shortcode_opts': {'frm_get_shortcode_opts'}, 'FrmFormsController::build_new_form': {'frm_install_form'}, 'FrmSettingsController::settings_cta_dismiss': {'frm_lite_settings_upgrade'}, 'FrmXMLController::install_template': {'frm_install_template'}, 'FrmFormsController::ajax_trash': {'frm_forms_trash'}, 'FrmFormMigratorsHelper::dismiss_migrator': {'frm_dismiss_migrator'}, 'FrmStylesController::rename_style': {'frm_rename_style'}, 'FrmFormTemplateApi::signup': {'template_api_signup'}, 'FrmStylesController::change_styling': {'frm_change_styling'}, 'FrmStylesController::load_saved_css': {'nopriv_frmpro_css', 'frmpro_css'}, 'FrmAddonsController::ajax_install_addon': {'frm_install_addon'}, 'FrmFormsController::build_template': {'frm_build_template'}}
+*Overview: {'FrmAddon::activate': {'frm_addon_activate'}, 'FrmAddonsController::ajax_install_addon': {'frm_install_addon'}, 'FrmSettingsController::settings_cta_dismiss': {'frm_lite_settings_upgrade'}, 'FrmStylesController::rename_style': {'frm_rename_style'}, 'FrmAppController::uninstall': {'frm_uninstall'}, 'FrmAddonsController::connect_pro': {'frm_connect'}, 'FrmAppController::ajax_install': {'frm_install'}, 'FrmFormsController::build_new_form': {'frm_install_form'}, 'FrmFormsController::preview': {'nopriv_frm_forms_preview', 'frm_forms_preview'}, 'FrmFieldsController::create': {'frm_insert_field'}, 'FrmSettingsController::page_search': {'frm_page_search'}, 'FrmStylesController::load_css': {'nopriv_frmpro_load_css', 'frmpro_load_css'}, 'FrmFormsController::get_email_html': {'frm_get_default_html'}, 'FrmFormsController::get_shortcode_opts': {'frm_get_shortcode_opts'}, 'FrmAppController::deauthorize': {'frm_deauthorize'}, 'FrmInboxController::dismiss_message': {'frm_inbox_dismiss'}, 'FrmFormsController::route': {'frm_save_form'}, 'FrmFormActionsController::add_form_action': {'frm_add_form_action'}, 'FrmFieldsController::import_options': {'frm_import_options'}, 'FrmAddon::deactivate': {'frm_addon_deactivate'}, 'FrmFieldsController::load_field': {'frm_load_field'}, 'FrmApplicationsController::get_applications_data': {'frm_get_applications_data'}, 'FrmFieldsController::duplicate': {'frm_duplicate_field'}, 'FrmFieldsController::destroy': {'frm_delete_field'}, 'FrmFormsController::create_page_with_shortcode': {'frm_create_page_with_shortcode'}, 'FrmFormMigratorsHelper::dismiss_migrator': {'frm_dismiss_migrator'}, 'FrmSettingsController::load_settings_tab': {'frm_settings_tab'}, 'ajax_check_plugin_status': {'frm_smtp_page_check_plugin_status'}, 'FrmFormsController::ajax_trash': {'frm_forms_trash'}, 'FrmStylesController::load_saved_css': {'frmpro_css', 'nopriv_frmpro_css'}, 'FrmXMLController::csv': {'frm_entries_csv', 'nopriv_frm_entries_csv'}, 'FrmFormActionsController::fill_action': {'frm_form_action_fill'}, 'FrmFormsController::get_page_dropdown': {'get_page_dropdown'}, 'FrmAddonsController::ajax_activate_addon': {'frm_activate_addon'}, 'FrmXMLController::install_template': {'frm_install_template'}, 'FrmXMLController::export_xml': {'frm_export_xml'}, 'FrmAppController::dismiss_review': {'frm_dismiss_review'}, 'FrmFormTemplateApi::signup': {'template_api_signup'}, 'FrmStylesController::change_styling': {'frm_change_styling'}, 'FrmFormsController::build_template': {'frm_build_template'}, 'FrmStylesController::reset_styling': {'frm_settings_reset'}}
 *
 ***/
 
-/** Function FrmFieldsController::import_options() called by wp_ajax hooks: {'frm_import_options'} **/
+/** Function FrmAddon::activate() called by wp_ajax hooks: {'frm_addon_activate'} **/
 /** No params detected :-/ **/
 
 
-/** Function FrmFieldsController::destroy() called by wp_ajax hooks: {'frm_delete_field'} **/
+/** Function FrmAddonsController::ajax_install_addon() called by wp_ajax hooks: {'frm_install_addon'} **/
 /** No params detected :-/ **/
 
 
-/** Function ajax_check_plugin_status() called by wp_ajax hooks: {'frm_smtp_page_check_plugin_status'} **/
-/** No function found :-/ **/
+/** Function FrmSettingsController::settings_cta_dismiss() called by wp_ajax hooks: {'frm_lite_settings_upgrade'} **/
+/** No params detected :-/ **/
 
 
-/** Function FrmXMLController::export_xml() called by wp_ajax hooks: {'frm_export_xml'} **/
+/** Function FrmStylesController::rename_style() called by wp_ajax hooks: {'frm_rename_style'} **/
 /** No params detected :-/ **/
 
 
@@ -29,7 +29,151 @@
 /** No params detected :-/ **/
 
 
-/** Function FrmXMLController::csv() called by wp_ajax hooks: {'nopriv_frm_entries_csv', 'frm_entries_csv'} **/
+/** Function FrmAddonsController::connect_pro() called by wp_ajax hooks: {'frm_connect'} **/
+/** No params detected :-/ **/
+
+
+/** Function FrmAppController::ajax_install() called by wp_ajax hooks: {'frm_install'} **/
+/** No params detected :-/ **/
+
+
+/** Function FrmFormsController::build_new_form() called by wp_ajax hooks: {'frm_install_form'} **/
+/** No params detected :-/ **/
+
+
+/** Function FrmFormsController::preview() called by wp_ajax hooks: {'nopriv_frm_forms_preview', 'frm_forms_preview'} **/
+/** No params detected :-/ **/
+
+
+/** Function FrmFieldsController::create() called by wp_ajax hooks: {'frm_insert_field'} **/
+/** No params detected :-/ **/
+
+
+/** Function FrmSettingsController::page_search() called by wp_ajax hooks: {'frm_page_search'} **/
+/** No params detected :-/ **/
+
+
+/** Function FrmStylesController::load_css() called by wp_ajax hooks: {'nopriv_frmpro_load_css', 'frmpro_load_css'} **/
+/** No params detected :-/ **/
+
+
+/** Function FrmFormsController::get_email_html() called by wp_ajax hooks: {'frm_get_default_html'} **/
+/** No params detected :-/ **/
+
+
+/** Function FrmFormsController::get_shortcode_opts() called by wp_ajax hooks: {'frm_get_shortcode_opts'} **/
+/** No params detected :-/ **/
+
+
+/** Function FrmAppController::deauthorize() called by wp_ajax hooks: {'frm_deauthorize'} **/
+/** No params detected :-/ **/
+
+
+/** Function FrmInboxController::dismiss_message() called by wp_ajax hooks: {'frm_inbox_dismiss'} **/
+/** No params detected :-/ **/
+
+
+/** Function FrmFormsController::route() called by wp_ajax hooks: {'frm_save_form'} **/
+/** No params detected :-/ **/
+
+
+/** Function FrmFormActionsController::add_form_action() called by wp_ajax hooks: {'frm_add_form_action'} **/
+/** No params detected :-/ **/
+
+
+/** Function FrmFieldsController::import_options() called by wp_ajax hooks: {'frm_import_options'} **/
+/** No params detected :-/ **/
+
+
+/** Function FrmAddon::deactivate() called by wp_ajax hooks: {'frm_addon_deactivate'} **/
+/** No params detected :-/ **/
+
+
+/** Function FrmFieldsController::load_field() called by wp_ajax hooks: {'frm_load_field'} **/
+/** Parameters found in function FrmFieldsController::load_field(): {"post": ["field"], "get": ["page"]} **/
+function load_field() {
+		FrmAppHelper::permission_check( 'frm_edit_forms' );
+		check_ajax_referer( 'frm_ajax', 'nonce' );
+
+		// Javascript may be included in some field settings.
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		$fields = isset( $_POST['field'] ) ? wp_unslash( $_POST['field'] ) : array();
+		if ( empty( $fields ) ) {
+			wp_die();
+		}
+
+		$_GET['page'] = 'formidable';
+
+		$values     = array(
+			'id'         => FrmAppHelper::get_post_param( 'form_id', '', 'absint' ),
+			'doing_ajax' => true,
+		);
+		$field_html = array();
+
+		foreach ( $fields as $field ) {
+			$field = htmlspecialchars_decode( nl2br( $field ) );
+			$field = json_decode( $field );
+			if ( ! isset( $field->id ) || ! is_numeric( $field->id ) ) {
+				// this field may have already been loaded
+				continue;
+			}
+
+			if ( ! isset( $field->value ) ) {
+				$field->value = '';
+			}
+			$field->field_options = json_decode( json_encode( $field->field_options ), true );
+			$field->options       = json_decode( json_encode( $field->options ), true );
+			$field->default_value = json_decode( json_encode( $field->default_value ), true );
+
+			ob_start();
+			self::load_single_field( $field, $values );
+			$field_html[ absint( $field->id ) ] = ob_get_contents();
+			ob_end_clean();
+		}
+
+		echo json_encode( $field_html );
+
+		wp_die();
+	}
+
+
+/** Function FrmApplicationsController::get_applications_data() called by wp_ajax hooks: {'frm_get_applications_data'} **/
+/** No params detected :-/ **/
+
+
+/** Function FrmFieldsController::duplicate() called by wp_ajax hooks: {'frm_duplicate_field'} **/
+/** No params detected :-/ **/
+
+
+/** Function FrmFieldsController::destroy() called by wp_ajax hooks: {'frm_delete_field'} **/
+/** No params detected :-/ **/
+
+
+/** Function FrmFormsController::create_page_with_shortcode() called by wp_ajax hooks: {'frm_create_page_with_shortcode'} **/
+/** No params detected :-/ **/
+
+
+/** Function FrmFormMigratorsHelper::dismiss_migrator() called by wp_ajax hooks: {'frm_dismiss_migrator'} **/
+/** No params detected :-/ **/
+
+
+/** Function FrmSettingsController::load_settings_tab() called by wp_ajax hooks: {'frm_settings_tab'} **/
+/** No params detected :-/ **/
+
+
+/** Function ajax_check_plugin_status() called by wp_ajax hooks: {'frm_smtp_page_check_plugin_status'} **/
+/** No function found :-/ **/
+
+
+/** Function FrmFormsController::ajax_trash() called by wp_ajax hooks: {'frm_forms_trash'} **/
+/** No params detected :-/ **/
+
+
+/** Function FrmStylesController::load_saved_css() called by wp_ajax hooks: {'frmpro_css', 'nopriv_frmpro_css'} **/
+/** No params detected :-/ **/
+
+
+/** Function FrmXMLController::csv() called by wp_ajax hooks: {'frm_entries_csv', 'nopriv_frm_entries_csv'} **/
 /** Parameters found in function FrmXMLController::csv(): {"request": ["s"]} **/
 function csv( $form_id = false, $search = '', $fid = '' ) {
 		FrmAppHelper::permission_check( 'frm_view_entries' );
@@ -92,67 +236,7 @@ function csv( $form_id = false, $search = '', $fid = '' ) {
 	}
 
 
-/** Function FrmAddonsController::ajax_activate_addon() called by wp_ajax hooks: {'frm_activate_addon'} **/
-/** No params detected :-/ **/
-
-
-/** Function FrmAddonsController::connect_pro() called by wp_ajax hooks: {'frm_connect'} **/
-/** No params detected :-/ **/
-
-
-/** Function FrmAppController::ajax_install() called by wp_ajax hooks: {'frm_install'} **/
-/** No params detected :-/ **/
-
-
-/** Function FrmFieldsController::duplicate() called by wp_ajax hooks: {'frm_duplicate_field'} **/
-/** No params detected :-/ **/
-
-
-/** Function FrmAddon::activate() called by wp_ajax hooks: {'frm_addon_activate'} **/
-/** No params detected :-/ **/
-
-
 /** Function FrmFormActionsController::fill_action() called by wp_ajax hooks: {'frm_form_action_fill'} **/
-/** No params detected :-/ **/
-
-
-/** Function FrmInboxController::dismiss_message() called by wp_ajax hooks: {'frm_inbox_dismiss'} **/
-/** No params detected :-/ **/
-
-
-/** Function FrmFormActionsController::add_form_action() called by wp_ajax hooks: {'frm_add_form_action'} **/
-/** No params detected :-/ **/
-
-
-/** Function FrmStylesController::reset_styling() called by wp_ajax hooks: {'frm_settings_reset'} **/
-/** No params detected :-/ **/
-
-
-/** Function FrmAppController::dismiss_review() called by wp_ajax hooks: {'frm_dismiss_review'} **/
-/** No params detected :-/ **/
-
-
-/** Function FrmAppController::deauthorize() called by wp_ajax hooks: {'frm_deauthorize'} **/
-/** No params detected :-/ **/
-
-
-/** Function FrmStylesController::load_css() called by wp_ajax hooks: {'frmpro_load_css', 'nopriv_frmpro_load_css'} **/
-/** No params detected :-/ **/
-
-
-/** Function FrmFieldsController::create() called by wp_ajax hooks: {'frm_insert_field'} **/
-/** No params detected :-/ **/
-
-
-/** Function FrmFormsController::get_email_html() called by wp_ajax hooks: {'frm_get_default_html'} **/
-/** No params detected :-/ **/
-
-
-/** Function FrmFormsController::preview() called by wp_ajax hooks: {'frm_forms_preview', 'nopriv_frm_forms_preview'} **/
-/** No params detected :-/ **/
-
-
-/** Function FrmFormsController::route() called by wp_ajax hooks: {'frm_save_form'} **/
 /** No params detected :-/ **/
 
 
@@ -160,83 +244,7 @@ function csv( $form_id = false, $search = '', $fid = '' ) {
 /** No params detected :-/ **/
 
 
-/** Function FrmSettingsController::load_settings_tab() called by wp_ajax hooks: {'frm_settings_tab'} **/
-/** No params detected :-/ **/
-
-
-/** Function FrmApplicationsController::get_applications_data() called by wp_ajax hooks: {'frm_get_applications_data'} **/
-/** No params detected :-/ **/
-
-
-/** Function FrmAddon::deactivate() called by wp_ajax hooks: {'frm_addon_deactivate'} **/
-/** No params detected :-/ **/
-
-
-/** Function FrmFieldsController::load_field() called by wp_ajax hooks: {'frm_load_field'} **/
-/** Parameters found in function FrmFieldsController::load_field(): {"post": ["field"], "get": ["page"]} **/
-function load_field() {
-		FrmAppHelper::permission_check( 'frm_edit_forms' );
-		check_ajax_referer( 'frm_ajax', 'nonce' );
-
-		// Javascript may be included in some field settings.
-		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-		$fields = isset( $_POST['field'] ) ? wp_unslash( $_POST['field'] ) : array();
-		if ( empty( $fields ) ) {
-			wp_die();
-		}
-
-		$_GET['page'] = 'formidable';
-
-		$values     = array(
-			'id'         => FrmAppHelper::get_post_param( 'form_id', '', 'absint' ),
-			'doing_ajax' => true,
-		);
-		$field_html = array();
-
-		foreach ( $fields as $field ) {
-			$field = htmlspecialchars_decode( nl2br( $field ) );
-			$field = json_decode( $field );
-			if ( ! isset( $field->id ) || ! is_numeric( $field->id ) ) {
-				// this field may have already been loaded
-				continue;
-			}
-
-			if ( ! isset( $field->value ) ) {
-				$field->value = '';
-			}
-			$field->field_options = json_decode( json_encode( $field->field_options ), true );
-			$field->options       = json_decode( json_encode( $field->options ), true );
-			$field->default_value = json_decode( json_encode( $field->default_value ), true );
-
-			ob_start();
-			self::load_single_field( $field, $values );
-			$field_html[ absint( $field->id ) ] = ob_get_contents();
-			ob_end_clean();
-		}
-
-		echo json_encode( $field_html );
-
-		wp_die();
-	}
-
-
-/** Function FrmFormsController::create_page_with_shortcode() called by wp_ajax hooks: {'frm_create_page_with_shortcode'} **/
-/** No params detected :-/ **/
-
-
-/** Function FrmSettingsController::page_search() called by wp_ajax hooks: {'frm_page_search'} **/
-/** No params detected :-/ **/
-
-
-/** Function FrmFormsController::get_shortcode_opts() called by wp_ajax hooks: {'frm_get_shortcode_opts'} **/
-/** No params detected :-/ **/
-
-
-/** Function FrmFormsController::build_new_form() called by wp_ajax hooks: {'frm_install_form'} **/
-/** No params detected :-/ **/
-
-
-/** Function FrmSettingsController::settings_cta_dismiss() called by wp_ajax hooks: {'frm_lite_settings_upgrade'} **/
+/** Function FrmAddonsController::ajax_activate_addon() called by wp_ajax hooks: {'frm_activate_addon'} **/
 /** No params detected :-/ **/
 
 
@@ -244,15 +252,11 @@ function load_field() {
 /** No params detected :-/ **/
 
 
-/** Function FrmFormsController::ajax_trash() called by wp_ajax hooks: {'frm_forms_trash'} **/
+/** Function FrmXMLController::export_xml() called by wp_ajax hooks: {'frm_export_xml'} **/
 /** No params detected :-/ **/
 
 
-/** Function FrmFormMigratorsHelper::dismiss_migrator() called by wp_ajax hooks: {'frm_dismiss_migrator'} **/
-/** No params detected :-/ **/
-
-
-/** Function FrmStylesController::rename_style() called by wp_ajax hooks: {'frm_rename_style'} **/
+/** Function FrmAppController::dismiss_review() called by wp_ajax hooks: {'frm_dismiss_review'} **/
 /** No params detected :-/ **/
 
 
@@ -264,15 +268,11 @@ function load_field() {
 /** No params detected :-/ **/
 
 
-/** Function FrmStylesController::load_saved_css() called by wp_ajax hooks: {'nopriv_frmpro_css', 'frmpro_css'} **/
-/** No params detected :-/ **/
-
-
-/** Function FrmAddonsController::ajax_install_addon() called by wp_ajax hooks: {'frm_install_addon'} **/
-/** No params detected :-/ **/
-
-
 /** Function FrmFormsController::build_template() called by wp_ajax hooks: {'frm_build_template'} **/
+/** No params detected :-/ **/
+
+
+/** Function FrmStylesController::reset_styling() called by wp_ajax hooks: {'frm_settings_reset'} **/
 /** No params detected :-/ **/
 
 

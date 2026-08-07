@@ -5,17 +5,9 @@
 *Found functions:3
 *Extracted functions:1
 *Total parameter names extracted: 1
-*Overview: {'obfx_update_module_options': {'obfx_update_module_options'}, 'obfx_update_module_active_status': {'obfx_update_module_active_status'}, 'dismiss': {'themeisle_sdk_dismiss_notice'}}
+*Overview: {'dismiss': {'themeisle_sdk_dismiss_notice'}, 'obfx_update_module_active_status': {'obfx_update_module_active_status'}, 'obfx_update_module_options': {'obfx_update_module_options'}}
 *
 ***/
-
-/** Function obfx_update_module_options() called by wp_ajax hooks: {'obfx_update_module_options'} **/
-/** No function found :-/ **/
-
-
-/** Function obfx_update_module_active_status() called by wp_ajax hooks: {'obfx_update_module_active_status'} **/
-/** No function found :-/ **/
-
 
 /** Function dismiss() called by wp_ajax hooks: {'themeisle_sdk_dismiss_notice'} **/
 /** Parameters found in function dismiss(): {"post": ["id", "confirm"]} **/
@@ -37,5 +29,13 @@ function dismiss() {
 		do_action( $id . '_process_confirm', $confirm );
 		wp_send_json( [] );
 	}
+
+
+/** Function obfx_update_module_active_status() called by wp_ajax hooks: {'obfx_update_module_active_status'} **/
+/** No function found :-/ **/
+
+
+/** Function obfx_update_module_options() called by wp_ajax hooks: {'obfx_update_module_options'} **/
+/** No function found :-/ **/
 
 

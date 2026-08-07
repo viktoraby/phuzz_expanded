@@ -5,704 +5,36 @@
 *Found functions:26
 *Extracted functions:26
 *Total parameter names extracted: 26
-*Overview: {'eael_checkout_cart_qty_update': {'eael_checkout_cart_qty_update', 'nopriv_eael_checkout_cart_qty_update'}, 'eael_admin_promotion': {'eael_admin_promotion'}, 'woo_checkout_update_order_review': {'woo_checkout_update_order_review', 'nopriv_woo_checkout_update_order_review'}, 'select2_ajax_get_posts_value_titles': {'nopriv_eael_select2_get_title', 'eael_select2_get_title'}, 'select2_ajax_posts_filter_autocomplete': {'nopriv_eael_select2_search_post', 'eael_select2_search_post'}, 'eael_product_quickview_popup': {'eael_product_quickview_popup', 'nopriv_eael_product_quickview_popup'}, 'ajax_install_plugin': {'wpdeveloper_install_plugin'}, 'save_settings': {'save_settings_with_ajax'}, 'eael_black_friday_optin_dismiss': {'eael_black_friday_optin_dismiss'}, 'save_eael_elements_data': {'save_eael_elements_data'}, 'eael_woo_pagination_ajax': {'nopriv_woo_product_pagination', 'woo_product_pagination'}, 'eael_get_token': {'nopriv_eael_get_token', 'eael_get_token'}, 'get_compare_table': {'nopriv_eael_product_grid', 'eael_product_grid'}, 'ajax_eael_product_gallery': {'eael_product_gallery', 'nopriv_eael_product_gallery'}, 'ajax_load_more': {'nopriv_load_more', 'load_more'}, 'eael_product_add_to_cart': {'nopriv_eael_product_add_to_cart', 'eael_product_add_to_cart'}, 'eael_clear_widget_cache_data': {'eael_clear_widget_cache_data'}, 'eael_eb_optin_notice_dismiss': {'eael_eb_optin_notice_dismiss'}, 'facebook_feed_render_items': {'facebook_feed_load_more', 'nopriv_facebook_feed_load_more'}, 'eael_woo_pagination_product_ajax': {'nopriv_woo_product_pagination_product', 'woo_product_pagination_product'}, 'save_setup_wizard_data': {'save_setup_wizard_data'}, 'templately_promo_status': {'templately_promo_status'}, 'clear_cache_files': {'clear_cache_files_with_ajax'}, 'ajax_upgrade_plugin': {'wpdeveloper_upgrade_plugin'}, 'ajax_activate_plugin': {'wpdeveloper_activate_plugin'}, 'eael_gb_eb_popup_dismiss': {'eael_gb_eb_popup_dismiss'}}
+*Overview: {'eael_eb_optin_notice_dismiss': {'eael_eb_optin_notice_dismiss'}, 'ajax_upgrade_plugin': {'wpdeveloper_upgrade_plugin'}, 'ajax_load_more': {'load_more', 'nopriv_load_more'}, 'select2_ajax_get_posts_value_titles': {'nopriv_eael_select2_get_title', 'eael_select2_get_title'}, 'get_compare_table': {'eael_product_grid', 'nopriv_eael_product_grid'}, 'ajax_eael_product_gallery': {'nopriv_eael_product_gallery', 'eael_product_gallery'}, 'eael_product_quickview_popup': {'nopriv_eael_product_quickview_popup', 'eael_product_quickview_popup'}, 'select2_ajax_posts_filter_autocomplete': {'eael_select2_search_post', 'nopriv_eael_select2_search_post'}, 'save_setup_wizard_data': {'save_setup_wizard_data'}, 'save_eael_elements_data': {'save_eael_elements_data'}, 'eael_get_token': {'nopriv_eael_get_token', 'eael_get_token'}, 'eael_woo_pagination_product_ajax': {'nopriv_woo_product_pagination_product', 'woo_product_pagination_product'}, 'ajax_install_plugin': {'wpdeveloper_install_plugin'}, 'eael_admin_promotion': {'eael_admin_promotion'}, 'eael_black_friday_optin_dismiss': {'eael_black_friday_optin_dismiss'}, 'templately_promo_status': {'templately_promo_status'}, 'eael_clear_widget_cache_data': {'eael_clear_widget_cache_data'}, 'eael_gb_eb_popup_dismiss': {'eael_gb_eb_popup_dismiss'}, 'eael_woo_pagination_ajax': {'nopriv_woo_product_pagination', 'woo_product_pagination'}, 'eael_product_add_to_cart': {'nopriv_eael_product_add_to_cart', 'eael_product_add_to_cart'}, 'clear_cache_files': {'clear_cache_files_with_ajax'}, 'woo_checkout_update_order_review': {'nopriv_woo_checkout_update_order_review', 'woo_checkout_update_order_review'}, 'ajax_activate_plugin': {'wpdeveloper_activate_plugin'}, 'save_settings': {'save_settings_with_ajax'}, 'facebook_feed_render_items': {'facebook_feed_load_more', 'nopriv_facebook_feed_load_more'}, 'eael_checkout_cart_qty_update': {'nopriv_eael_checkout_cart_qty_update', 'eael_checkout_cart_qty_update'}}
 *
 ***/
 
-/** Function eael_checkout_cart_qty_update() called by wp_ajax hooks: {'eael_checkout_cart_qty_update', 'nopriv_eael_checkout_cart_qty_update'} **/
-/** Parameters found in function eael_checkout_cart_qty_update(): {"post": ["nonce", "cart_item_key", "quantity"]} **/
-function eael_checkout_cart_qty_update() {
-        if ( ! wp_verify_nonce( $_POST['nonce'], 'essential-addons-elementor' ) ) {
-            die( __('Permission Denied!') );
-        }
-
-        $cart_item_key = $_POST['cart_item_key'];
-		$cart_item = WC()->cart->get_cart_item( $cart_item_key );
-		$cart_item_quantity = apply_filters( 'woocommerce_stock_amount_cart_item', apply_filters( 'woocommerce_stock_amount', preg_replace( "/[^0-9\.]/", '', filter_var($_POST['quantity'], FILTER_SANITIZE_NUMBER_INT)) ), $cart_item_key );
-
-		$passed_validation  = apply_filters( 'woocommerce_update_cart_validation', true, $cart_item_key, $cart_item, $cart_item_quantity );
-		if ( $passed_validation ) {
-			WC()->cart->set_quantity( $cart_item_key, $cart_item_quantity, true );
-			wp_send_json_success(
-                array(
-                    'message' => __( 'Quantity updated successfully.', 'essential-addons-for-elementor-lite' ),
-                    // 'cart_item_key' => $cart_item_key,
-                    'cart_item_quantity' => $cart_item_quantity,
-                    'cart_item_subtotal' => WC()->cart->get_product_subtotal( $cart_item['data'], $cart_item_quantity ),
-                    'cart_subtotal' => WC()->cart->get_cart_subtotal(),
-                    'cart_total' => WC()->cart->get_cart_total()
-                )
-            );
-		} else {
-    		wp_send_json_error(
-                array(
-                    'message' => __( 'Quantity update failed.', 'essential-addons-for-elementor-lite' ),
-                )
-            );
-        }
-
-		die();
-	}
-
-
-/** Function eael_admin_promotion() called by wp_ajax hooks: {'eael_admin_promotion'} **/
+/** Function eael_eb_optin_notice_dismiss() called by wp_ajax hooks: {'eael_eb_optin_notice_dismiss'} **/
 /** No params detected :-/ **/
 
 
-/** Function woo_checkout_update_order_review() called by wp_ajax hooks: {'woo_checkout_update_order_review', 'nopriv_woo_checkout_update_order_review'} **/
-/** Parameters found in function woo_checkout_update_order_review(): {"post": ["orderReviewData"]} **/
-function woo_checkout_update_order_review() {
-		$setting = $_POST['orderReviewData'];
-		ob_start();
-		Woo_Checkout_Helper::checkout_order_review_default( $setting );
-		$woo_checkout_update_order_review = ob_get_clean();
-
-		wp_send_json(
-			array(
-				'order_review' => $woo_checkout_update_order_review,
-			)
-		);
-	}
-
-
-/** Function select2_ajax_get_posts_value_titles() called by wp_ajax hooks: {'nopriv_eael_select2_get_title', 'eael_select2_get_title'} **/
-/** Parameters found in function select2_ajax_get_posts_value_titles(): {"post": ["id", "source_name", "post_type"]} **/
-function select2_ajax_get_posts_value_titles() {
-
-		if ( empty( $_POST['id'] ) ) {
-			wp_send_json_error( [] );
-		}
-
-		if ( empty( array_filter( $_POST['id'] ) ) ) {
-			wp_send_json_error( [] );
-		}
-		$ids         = array_map( 'intval', $_POST['id'] );
-		$source_name = ! empty( $_POST['source_name'] ) ? sanitize_text_field( $_POST['source_name'] ) : '';
-
-		switch ( $source_name ) {
-			case 'taxonomy':
-				$args = [
-					'hide_empty' => false,
-					'orderby'    => 'name',
-					'order'      => 'ASC',
-					'include'    => implode( ',', $ids ),
-				];
-
-				if ( $_POST['post_type'] !== 'all' ) {
-					$args['taxonomy'] = sanitize_text_field( $_POST['post_type'] );
-				}
-
-				$response = wp_list_pluck( get_terms( $args ), 'name', 'term_id' );
-				break;
-			case 'user':
-				$users = [];
-
-				foreach ( get_users( [ 'include' => $ids ] ) as $user ) {
-					$user_id           = $user->ID;
-					$user_name         = $user->display_name;
-					$users[ $user_id ] = $user_name;
-				}
-
-				$response = $users;
-				break;
-			default:
-				$post_info = get_posts( [
-					'post_type' => sanitize_text_field( $_POST['post_type'] ),
-					'include'   => implode( ',', $ids )
-				] );
-				$response  = wp_list_pluck( $post_info, 'post_title', 'ID' );
-		}
-
-		if ( ! empty( $response ) ) {
-			wp_send_json_success( [ 'results' => $response ] );
-		} else {
-			wp_send_json_error( [] );
-		}
-	}
-
-
-/** Function select2_ajax_posts_filter_autocomplete() called by wp_ajax hooks: {'nopriv_eael_select2_search_post', 'eael_select2_search_post'} **/
-/** Parameters found in function select2_ajax_posts_filter_autocomplete(): {"get": ["post_type", "source_name", "term"]} **/
-function select2_ajax_posts_filter_autocomplete() {
-		$post_type   = 'post';
-		$source_name = 'post_type';
-
-		if ( ! empty( $_GET['post_type'] ) ) {
-			$post_type = sanitize_text_field( $_GET['post_type'] );
-		}
-
-		if ( ! empty( $_GET['source_name'] ) ) {
-			$source_name = sanitize_text_field( $_GET['source_name'] );
-		}
-
-		$search  = ! empty( $_GET['term'] ) ? sanitize_text_field( $_GET['term'] ) : '';
-		$results = $post_list = [];
-		switch ( $source_name ) {
-			case 'taxonomy':
-				$args = [
-					'hide_empty' => false,
-					'orderby'    => 'name',
-					'order'      => 'ASC',
-					'search'     => $search,
-					'number'     => '5',
-				];
-
-				if ( $post_type !== 'all' ) {
-					$args['taxonomy'] = $post_type;
-				}
-
-				$post_list = wp_list_pluck( get_terms( $args ), 'name', 'term_id' );
-				break;
-			case 'user':
-				$users = [];
-
-				foreach ( get_users( [ 'search' => "*{$search}*" ] ) as $user ) {
-					$user_id           = $user->ID;
-					$user_name         = $user->display_name;
-					$users[ $user_id ] = $user_name;
-				}
-
-				$post_list = $users;
-				break;
-			default:
-				$post_list = HelperClass::get_query_post_list( $post_type, 10, $search );
-		}
-
-		if ( ! empty( $post_list ) ) {
-			foreach ( $post_list as $key => $item ) {
-				$results[] = [ 'text' => $item, 'id' => $key ];
-			}
-		}
-		wp_send_json( [ 'results' => $results ] );
-	}
-
-
-/** Function eael_product_quickview_popup() called by wp_ajax hooks: {'eael_product_quickview_popup', 'nopriv_eael_product_quickview_popup'} **/
-/** Parameters found in function eael_product_quickview_popup(): {"post": ["widget_id", "product_id", "page_id"]} **/
-function eael_product_quickview_popup() {
-		//check nonce
-		check_ajax_referer( 'essential-addons-elementor', 'security' );
-		$widget_id  = sanitize_key( $_POST['widget_id'] );
-		$product_id = absint( $_POST['product_id'] );
-		$page_id    = absint( $_POST['page_id'] );
-
-		if ( $widget_id == '' && $product_id == '' && $page_id == '' ) {
-			wp_send_json_error();
-		}
-
-		global $post, $product;
-		$product = wc_get_product( $product_id );
-		$post    = get_post( $product_id );
-		setup_postdata( $post );
-
-		$settings = $this->eael_get_widget_settings( $page_id, $widget_id );
-		ob_start();
-		HelperClass::eael_product_quick_view( $product, $settings, $widget_id );
-		$data = ob_get_clean();
-		wp_reset_postdata();
-
-		wp_send_json_success( $data );
-	}
-
-
-/** Function ajax_install_plugin() called by wp_ajax hooks: {'wpdeveloper_install_plugin'} **/
-/** Parameters found in function ajax_install_plugin(): {"post": ["slug"]} **/
-function ajax_install_plugin()
+/** Function ajax_upgrade_plugin() called by wp_ajax hooks: {'wpdeveloper_upgrade_plugin'} **/
+/** Parameters found in function ajax_upgrade_plugin(): {"post": ["basename"]} **/
+function ajax_upgrade_plugin()
     {
         check_ajax_referer('essential-addons-elementor', 'security');
-
-        if(!current_user_can( 'install_plugins' )) {
+        //check user capabilities
+        if(!current_user_can( 'update_plugins' )) {
             wp_send_json_error(__('you are not allowed to do this action', 'essential-addons-for-elementor-lite'));
         }
 
-	    $slug   = isset( $_POST['slug'] ) ? sanitize_text_field( $_POST['slug'] ) : '';
-	    $result = $this->install_plugin( $slug );
+	    $basename = isset( $_POST['basename'] ) ? sanitize_text_field( $_POST['basename'] ) : '';
+	    $result   = $this->upgrade_plugin( $basename );
 
-	    if ( is_wp_error( $result ) ) {
-		    wp_send_json_error( $result->get_error_message() );
-	    }
+        if (is_wp_error($result)) {
+            wp_send_json_error($result->get_error_message());
+        }
 
-        wp_send_json_success(__('Plugin is installed successfully!', 'essential-addons-for-elementor-lite'));
+        wp_send_json_success(__('Plugin is updated successfully!', 'essential-addons-for-elementor-lite'));
     }
 
 
-/** Function save_settings() called by wp_ajax hooks: {'save_settings_with_ajax'} **/
-/** Parameters found in function save_settings(): {"post": ["fields", "is_login_register"]} **/
-function save_settings() {
-		check_ajax_referer( 'essential-addons-elementor', 'security' );
-
-		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_send_json_error( __( 'you are not allowed to do this action', 'essential-addons-for-elementor-lite' ) );
-		}
-
-		if ( ! isset( $_POST['fields'] ) ) {
-			return;
-		}
-
-		wp_parse_str( $_POST['fields'], $settings );
-
-		if ( ! empty( $_POST['is_login_register'] ) ) {
-			// Saving Login | Register Related Data
-			if ( isset( $settings['recaptchaSiteKey'] ) ) {
-				update_option( 'eael_recaptcha_sitekey', sanitize_text_field( $settings['recaptchaSiteKey'] ) );
-			}
-			if ( isset( $settings['recaptchaSiteSecret'] ) ) {
-				update_option( 'eael_recaptcha_secret', sanitize_text_field( $settings['recaptchaSiteSecret'] ) );
-			}
-			if ( isset( $settings['recaptchaLanguage'] ) ) {
-				update_option( 'eael_recaptcha_language', sanitize_text_field( $settings['recaptchaLanguage'] ) );
-			}
-
-			//reCAPTCHA V3
-			if ( isset( $settings['recaptchaSiteKeyV3'] ) ) {
-				update_option( 'eael_recaptcha_sitekey_v3', sanitize_text_field( $settings['recaptchaSiteKeyV3'] ) );
-			}
-			if ( isset( $settings['recaptchaSiteSecretV3'] ) ) {
-				update_option( 'eael_recaptcha_secret_v3', sanitize_text_field( $settings['recaptchaSiteSecretV3'] ) );
-			}
-			if ( isset( $settings['recaptchaLanguageV3'] ) ) {
-				update_option( 'eael_recaptcha_language_v3', sanitize_text_field( $settings['recaptchaLanguageV3'] ) );
-			}
-
-			//pro settings
-			if ( isset( $settings['gClientId'] ) ) {
-				update_option( 'eael_g_client_id', sanitize_text_field( $settings['gClientId'] ) );
-			}
-			if ( isset( $settings['fbAppId'] ) ) {
-				update_option( 'eael_fb_app_id', sanitize_text_field( $settings['fbAppId'] ) );
-			}
-			if ( isset( $settings['fbAppSecret'] ) ) {
-				update_option( 'eael_fb_app_secret', sanitize_text_field( $settings['fbAppSecret'] ) );
-			}
-
-			wp_send_json_success( [ 'message' => __( 'Login | Register Settings updated', 'essential-addons-for-elementor-lite' ) ] );
-		}
-
-		//Login-register data
-		if ( isset( $settings['lr_recaptcha_sitekey'] ) ) {
-			update_option( 'eael_recaptcha_sitekey', sanitize_text_field( $settings['lr_recaptcha_sitekey'] ) );
-		}
-		if ( isset( $settings['lr_recaptcha_secret'] ) ) {
-			update_option( 'eael_recaptcha_secret', sanitize_text_field( $settings['lr_recaptcha_secret'] ) );
-		}
-		if ( isset( $settings['lr_recaptcha_language'] ) ) {
-			update_option( 'eael_recaptcha_language', sanitize_text_field( $settings['lr_recaptcha_language'] ) );
-		}
-		//reCAPTCHA v3
-		if ( isset( $settings['lr_recaptcha_sitekey_v3'] ) ) {
-			update_option( 'eael_recaptcha_sitekey_v3', sanitize_text_field( $settings['lr_recaptcha_sitekey_v3'] ) );
-		}
-		if ( isset( $settings['lr_recaptcha_secret_v3'] ) ) {
-			update_option( 'eael_recaptcha_secret_v3', sanitize_text_field( $settings['lr_recaptcha_secret_v3'] ) );
-		}
-		if ( isset( $settings['lr_recaptcha_language_v3'] ) ) {
-			update_option( 'eael_recaptcha_language_v3', sanitize_text_field( $settings['lr_recaptcha_language_v3'] ) );
-		}
-
-		if ( isset( $settings['lr_custom_profile_fields'] ) ) {
-			update_option( 'eael_custom_profile_fields', sanitize_text_field( $settings['lr_custom_profile_fields'] ) );
-		} else {
-			update_option( 'eael_custom_profile_fields', '' );
-		}
-
-		//pro settings
-		if ( isset( $settings['lr_g_client_id'] ) ) {
-			update_option( 'eael_g_client_id', sanitize_text_field( $settings['lr_g_client_id'] ) );
-		}
-		if ( isset( $settings['lr_fb_app_id'] ) ) {
-			update_option( 'eael_fb_app_id', sanitize_text_field( $settings['lr_fb_app_id'] ) );
-		}
-		if ( isset( $settings['lr_fb_app_secret'] ) ) {
-			update_option( 'eael_fb_app_secret', sanitize_text_field( $settings['lr_fb_app_secret'] ) );
-		}
-
-		// Business Reviews : Saving Google Place Api Key
-		if ( isset( $settings['br_google_place_api_key'] ) ) {
-			update_option( 'eael_br_google_place_api_key', sanitize_text_field( $settings['br_google_place_api_key'] ) );
-		}
-
-		// Saving Google Map Api Key
-		if ( isset( $settings['google-map-api'] ) ) {
-			update_option( 'eael_save_google_map_api', sanitize_text_field( $settings['google-map-api'] ) );
-		}
-
-		// Saving Mailchimp Api Key
-		if ( isset( $settings['mailchimp-api'] ) ) {
-			update_option( 'eael_save_mailchimp_api', sanitize_text_field( $settings['mailchimp-api'] ) );
-		}
-		
-		// Saving Mailchimp Api Key for EA Login | Register Form
-		if ( isset( $settings['lr_mailchimp_api_key'] ) ) {
-			update_option( 'eael_lr_mailchimp_api_key', sanitize_text_field( $settings['lr_mailchimp_api_key'] ) );
-		}
-
-		// Saving TYpeForm token
-		if ( isset( $settings['typeform-personal-token'] ) ) {
-			update_option( 'eael_save_typeform_personal_token', sanitize_text_field( $settings['typeform-personal-token'] ) );
-		}
-
-		// Saving Duplicator Settings
-		if ( isset( $settings['post-duplicator-post-type'] ) ) {
-			update_option( 'eael_save_post_duplicator_post_type', sanitize_text_field( $settings['post-duplicator-post-type'] ) );
-		}
-
-		// save js print method
-		if ( isset( $settings['eael-js-print-method'] ) ) {
-			update_option( 'eael_js_print_method', sanitize_text_field( $settings['eael-js-print-method'] ) );
-		}
-
-		$settings = array_map( 'sanitize_text_field', $settings );
-		$defaults = array_fill_keys( array_keys( array_merge( $this->registered_elements, $this->registered_extensions ) ), false );
-		$elements = array_merge( $defaults, array_fill_keys( array_keys( array_intersect_key( $settings, $defaults ) ), true ) );
-
-		// update new settings
-		$updated = update_option( 'eael_save_settings', $elements );
-
-		// clear assets files
-		$this->empty_dir( EAEL_ASSET_PATH );
-
-		wp_send_json( $updated );
-	}
-
-
-/** Function eael_black_friday_optin_dismiss() called by wp_ajax hooks: {'eael_black_friday_optin_dismiss'} **/
-/** No params detected :-/ **/
-
-
-/** Function save_eael_elements_data() called by wp_ajax hooks: {'save_eael_elements_data'} **/
-/** Parameters found in function save_eael_elements_data(): {"post": ["fields"]} **/
-function save_eael_elements_data() {
-		check_ajax_referer( 'essential-addons-elementor', 'security' );
-
-		if ( !current_user_can( 'manage_options' ) ) {
-			wp_send_json_error( __( 'you are not allowed to do this action', 'essential-addons-for-elementor-lite' ) );
-		}
-
-		if ( !isset( $_POST[ 'fields' ] ) ) {
-			return;
-		}
-
-		wp_parse_str( $_POST[ 'fields' ], $fields );
-
-		if ( $this->save_element_list( $fields ) ) {
-			wp_send_json_success();
-		}
-		wp_send_json_error();
-	}
-
-
-/** Function eael_woo_pagination_ajax() called by wp_ajax hooks: {'nopriv_woo_product_pagination', 'woo_product_pagination'} **/
-/** Parameters found in function eael_woo_pagination_ajax(): {"post": ["page_id", "widget_id", "number", "limit"], "request": ["args", "template_name"]} **/
-function eael_woo_pagination_ajax() {
-
-		check_ajax_referer( 'essential-addons-elementor', 'security' );
-
-		if ( ! empty( $_POST['page_id'] ) ) {
-			$page_id = intval( $_POST['page_id'], 10 );
-		} else {
-			$err_msg = __( 'Page ID is missing', 'essential-addons-for-elementor-lite' );
-			wp_send_json_error( $err_msg );
-		}
-
-		if ( ! empty( $_POST['widget_id'] ) ) {
-			$widget_id = sanitize_text_field( $_POST['widget_id'] );
-		} else {
-			$err_msg = __( 'Widget ID is missing', 'essential-addons-for-elementor-lite' );
-			wp_send_json_error( $err_msg );
-		}
-
-		$settings = HelperClass::eael_get_widget_settings( $page_id, $widget_id );
-
-		if ( empty( $settings ) ) {
-			wp_send_json_error( [ 'message' => __( 'Widget settings are not found. Did you save the widget before using load more??', 'essential-addons-for-elementor-lite' ) ] );
-		}
-
-		$settings['eael_page_id'] = $page_id;
-		wp_parse_str( $_REQUEST['args'], $args );
-
-		if ( isset( $args['date_query']['relation'] ) ) {
-			$args['date_query']['relation'] = HelperClass::eael_sanitize_relation( $args['date_query']['relation'] );
-		}
-		
-		$paginationNumber          = absint( $_POST['number'] );
-		$paginationLimit           = absint( $_POST['limit'] );
-		$pagination_Count          = intval( $args['total_post'] );
-		$pagination_Paginationlist = ceil( $pagination_Count / $paginationLimit );
-		$last                      = ceil( $pagination_Paginationlist );
-		$paginationprev            = $paginationNumber - 1;
-		$paginationnext            = $paginationNumber + 1;
-
-		if ( $paginationNumber > 1 ) {
-			$paginationprev;
-		}
-		if ( $paginationNumber < $last ) {
-			$paginationnext;
-		}
-
-		$adjacents                    = "2";
-		$next_label                   = sanitize_text_field( $settings['pagination_next_label'] );
-		$prev_label                   = sanitize_text_field( $settings['pagination_prev_label'] );
-		$settings['eael_widget_name'] = realpath( sanitize_file_name( $_REQUEST['template_name'] ) );
-		$setPagination                = "";
-
-		if ( $pagination_Paginationlist > 0 ) {
-
-			$setPagination .= "<ul class='page-numbers'>";
-
-			if ( 1 < $paginationNumber ) {
-				$setPagination .= "<li class='pagitext'><a href='javascript:void(0);' class='page-numbers'   data-pnumber='$paginationprev' >$prev_label</a></li>";
-			}
-
-			if ( $pagination_Paginationlist < 7 + ( $adjacents * 2 ) ) {
-
-				for ( $pagination = 1; $pagination <= $pagination_Paginationlist; $pagination ++ ) {
-					$active        = ( $paginationNumber == $pagination ) ? 'current' : '';
-					$setPagination .= sprintf( "<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>", $active, $pagination );
-				}
-
-			} else if ( $pagination_Paginationlist > 5 + ( $adjacents * 2 ) ) {
-
-				if ( $paginationNumber < 1 + ( $adjacents * 2 ) ) {
-					for ( $pagination = 1; $pagination <= 4 + ( $adjacents * 2 ); $pagination ++ ) {
-
-						$active        = ( $paginationNumber == $pagination ) ? 'current' : '';
-						$setPagination .= sprintf( "<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>", $active, $pagination );
-					}
-					$setPagination .= "<li class='pagitext dots'>...</li>";
-					$setPagination .= sprintf( "<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>", $active, $pagination );
-
-				} elseif ( $pagination_Paginationlist - ( $adjacents * 2 ) > $paginationNumber && $paginationNumber > ( $adjacents * 2 ) ) {
-					$active        = '';
-					$setPagination .= sprintf( "<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>", $active, 1 );
-					$setPagination .= "<li class='pagitext dots'>...</li>";
-					for ( $pagination = $paginationNumber - $adjacents; $pagination <= $paginationNumber + $adjacents; $pagination ++ ) {
-						$active        = ( $paginationNumber == $pagination ) ? 'current' : '';
-						$setPagination .= sprintf( "<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>", $active, $pagination );
-					}
-
-					$setPagination .= "<li class='pagitext dots'>...</li>";
-					$setPagination .= sprintf( "<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>", $active, $last );
-
-				} else {
-					$active        = '';
-					$setPagination .= sprintf( "<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>", $active, 1 );
-					$setPagination .= "<li class='pagitext dots'>...</li>";
-					for ( $pagination = $last - ( 2 + ( $adjacents * 2 ) ); $pagination <= $last; $pagination ++ ) {
-						$active        = ( $paginationNumber == $pagination ) ? 'current' : '';
-						$setPagination .= sprintf( "<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>", $active, $pagination );
-					}
-				}
-
-			} else {
-				for ( $pagination = 1; $pagination <= $pagination_Paginationlist; $pagination ++ ) {
-					$active        = ( $paginationNumber == $pagination ) ? 'current' : '';
-					$setPagination .= sprintf( "<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>", $active, $pagination );
-				}
-
-			}
-
-			if ( $paginationNumber < $pagination_Paginationlist ) {
-				$setPagination .= "<li class='pagitext'><a href='javascript:void(0);' class='page-numbers' data-pnumber='$paginationnext' >$next_label</a></li>";
-			}
-
-			$setPagination .= "</ul>";
-		}
-
-		printf( '%1$s', $setPagination );
-		wp_die();
-	}
-
-
-/** Function eael_get_token() called by wp_ajax hooks: {'nopriv_eael_get_token', 'eael_get_token'} **/
-/** No params detected :-/ **/
-
-
-/** Function get_compare_table() called by wp_ajax hooks: {'nopriv_eael_product_grid', 'eael_product_grid'} **/
-/** Parameters found in function get_compare_table(): {"post": ["page_id", "widget_id", "product_id", "product_ids", "remove_product", "nonce"]} **/
-function get_compare_table() {
-		$ajax      = wp_doing_ajax();
-		$page_id   = 0;
-		$widget_id = 0;
-
-		if ( ! empty( $_POST['page_id'] ) ) {
-			$page_id = intval( $_POST['page_id'], 10 );
-		} else {
-			$err_msg = __( 'Page ID is missing', 'essential-addons-for-elementor-lite' );
-		}
-		if ( ! empty( $_POST['widget_id'] ) ) {
-			$widget_id = sanitize_text_field( $_POST['widget_id'] );
-		} else {
-			$err_msg = __( 'Widget ID is missing', 'essential-addons-for-elementor-lite' );
-		}
-		if ( ! empty( $_POST['product_id'] ) ) {
-			$product_id = sanitize_text_field( $_POST['product_id'] );
-		} else {
-			$err_msg = __( 'Product ID is missing', 'essential-addons-for-elementor-lite' );
-		}
-
-        if (!empty($_POST['product_ids'])) {
-            $product_ids = wp_unslash(json_decode($_POST['product_ids']));
-		}
-
-        if (empty($product_ids)) {
-            $product_ids = [];
-        }
-
-		if ( ! empty( $product_id ) ) {
-			$p_exist = ! empty( $product_ids ) && is_array( $product_ids );
-			if ( ! empty( $_POST['remove_product'] ) && $p_exist ) {
-			    $product_ids = array_filter($product_ids, function ($id) use ($product_id){
-                    return $id != intval( $product_id );
-			    });
-			} else {
-			    $product_ids[] = intval( $product_id );
-			}
-		}
-
-
-		if ( ! empty( $err_msg ) ) {
-			if ( $ajax ) {
-				wp_send_json_error( $err_msg );
-			}
-
-			return false;
-		}
-		if ( empty( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'eael_product_grid' ) ) {
-			if ( $ajax ) {
-				wp_send_json_error( __( 'Security token did not match', 'essential-addons-for-elementor-lite' ) );
-			}
-
-			return false;
-		}
-		$product_ids = array_values(array_unique($product_ids));
-
-		$ds          = $this->eael_get_widget_settings( $page_id, $widget_id );
-		$products    = self::static_get_products_list( $product_ids, $ds );
-		$fields      = self::static_fields( $product_ids, $ds );
-		ob_start();
-		self::render_compare_table( compact( 'products', 'fields', 'ds' ) );
-		$table = ob_get_clean();
-		wp_send_json_success( [ 'compare_table' => $table, 'product_ids' => $product_ids ] );
-
-		return null;
-	}
-
-
-/** Function ajax_eael_product_gallery() called by wp_ajax hooks: {'eael_product_gallery', 'nopriv_eael_product_gallery'} **/
-/** Parameters found in function ajax_eael_product_gallery(): {"post": ["args", "nonce", "page_id", "widget_id"], "request": ["page", "taxonomy", "template_info"]} **/
-function ajax_eael_product_gallery() {
-
-		$ajax = wp_doing_ajax();
-
-		wp_parse_str( $_POST['args'], $args );
-
-		if ( isset( $args['date_query']['relation'] ) ) {
-			$args['date_query']['relation'] = HelperClass::eael_sanitize_relation( $args['date_query']['relation'] );
-		}
-
-		if ( empty( $_POST['nonce'] ) ) {
-			$err_msg = __( 'Insecure form submitted without security token', 'essential-addons-for-elementor-lite' );
-			if ( $ajax ) {
-				wp_send_json_error( $err_msg );
-			}
-
-			return false;
-		}
-
-		if ( ! wp_verify_nonce( $_POST['nonce'], 'eael_product_gallery' ) ) {
-			$err_msg = __( 'Security token did not match', 'essential-addons-for-elementor-lite' );
-			if ( $ajax ) {
-				wp_send_json_error( $err_msg );
-			}
-
-			return false;
-		}
-
-		if ( ! empty( $_POST['page_id'] ) ) {
-			$page_id = intval( $_POST['page_id'], 10 );
-		} else {
-			$err_msg = __( 'Page ID is missing', 'essential-addons-for-elementor-lite' );
-			if ( $ajax ) {
-				wp_send_json_error( $err_msg );
-			}
-
-			return false;
-		}
-
-		if ( ! empty( $_POST['widget_id'] ) ) {
-			$widget_id = sanitize_text_field( $_POST['widget_id'] );
-		} else {
-			$err_msg = __( 'Widget ID is missing', 'essential-addons-for-elementor-lite' );
-			if ( $ajax ) {
-				wp_send_json_error( $err_msg );
-			}
-
-			return false;
-		}
-
-		$settings = HelperClass::eael_get_widget_settings( $page_id, $widget_id );
-		if ( empty( $settings ) ) {
-			wp_send_json_error( [ 'message' => __( 'Widget settings are not found. Did you save the widget before using load more??', 'essential-addons-for-elementor-lite' ) ] );
-		}
-
-		if ( $widget_id == '' && $page_id == '' ) {
-			wp_send_json_error();
-		}
-
-		$settings['eael_widget_id'] = $widget_id;
-		$settings['eael_page_id']   = $page_id;
-		$args['offset']             = (int) $args['offset'] + ( ( (int) $_REQUEST['page'] - 1 ) * (int) $args['posts_per_page'] );
-
-		if ( isset( $_REQUEST['taxonomy'] ) && isset( $_REQUEST['taxonomy']['taxonomy'] ) && $_REQUEST['taxonomy']['taxonomy'] != 'all' ) {
-			$args['tax_query'] = [
-				$this->sanitize_taxonomy_data( $_REQUEST['taxonomy'] ),
-			];
-		}
-
-		$template_info = $this->eael_sanitize_template_param( $_REQUEST['template_info'] );
-
-		if ( $template_info ) {
-
-			if ( $template_info['dir'] === 'theme' ) {
-				$dir_path = $this->retrive_theme_path();
-			} else if ( $template_info['dir'] === 'pro' ) {
-				$dir_path = sprintf( "%sincludes", EAEL_PRO_PLUGIN_PATH );
-			} else {
-				$dir_path = sprintf( "%sincludes", EAEL_PLUGIN_PATH );
-			}
-
-			$file_path = realpath( sprintf(
-				'%s/Template/%s/%s',
-				$dir_path,
-				$template_info['name'],
-				$template_info['file_name']
-			) );
-
-			if ( ! $file_path || 0 !== strpos( $file_path, realpath( $dir_path ) ) ) {
-				wp_send_json_error( 'Invalid template', 'invalid_template', 400 );
-			}
-
-			$html = '';
-			if ( $file_path ) {
-				$query = new \WP_Query( $args );
-
-				if ( $query->have_posts() ) {
-
-					while ( $query->have_posts() ) {
-						$query->the_post();
-						$html .= HelperClass::include_with_variable( $file_path, [ 'settings' => $settings ] );
-					}
-					$html .= '<div class="eael-max-page" style="display:none;">'. ceil($query->found_posts / absint( $args['posts_per_page'] ) ) . '</div>';
-					printf( '%1$s', $html );
-					wp_reset_postdata();
-				}
-			}
-		}
-		wp_die();
-	}
-
-
-/** Function ajax_load_more() called by wp_ajax hooks: {'nopriv_load_more', 'load_more'} **/
+/** Function ajax_load_more() called by wp_ajax hooks: {'load_more', 'nopriv_load_more'} **/
 /** Parameters found in function ajax_load_more(): {"post": ["args", "nonce", "page_id", "widget_id", "exclude_ids", "active_term_id", "active_taxonomy"], "request": ["class", "page", "taxonomy", "post__not_in", "template_info"]} **/
 function ajax_load_more() {
 		$ajax = wp_doing_ajax();
@@ -903,6 +235,635 @@ function ajax_load_more() {
 	}
 
 
+/** Function select2_ajax_get_posts_value_titles() called by wp_ajax hooks: {'nopriv_eael_select2_get_title', 'eael_select2_get_title'} **/
+/** Parameters found in function select2_ajax_get_posts_value_titles(): {"post": ["id", "source_name", "post_type"]} **/
+function select2_ajax_get_posts_value_titles() {
+
+		if ( empty( $_POST['id'] ) ) {
+			wp_send_json_error( [] );
+		}
+
+		if ( empty( array_filter( $_POST['id'] ) ) ) {
+			wp_send_json_error( [] );
+		}
+		$ids         = array_map( 'intval', $_POST['id'] );
+		$source_name = ! empty( $_POST['source_name'] ) ? sanitize_text_field( $_POST['source_name'] ) : '';
+
+		switch ( $source_name ) {
+			case 'taxonomy':
+				$args = [
+					'hide_empty' => false,
+					'orderby'    => 'name',
+					'order'      => 'ASC',
+					'include'    => implode( ',', $ids ),
+				];
+
+				if ( $_POST['post_type'] !== 'all' ) {
+					$args['taxonomy'] = sanitize_text_field( $_POST['post_type'] );
+				}
+
+				$response = wp_list_pluck( get_terms( $args ), 'name', 'term_id' );
+				break;
+			case 'user':
+				$users = [];
+
+				foreach ( get_users( [ 'include' => $ids ] ) as $user ) {
+					$user_id           = $user->ID;
+					$user_name         = $user->display_name;
+					$users[ $user_id ] = $user_name;
+				}
+
+				$response = $users;
+				break;
+			default:
+				$post_info = get_posts( [
+					'post_type' => sanitize_text_field( $_POST['post_type'] ),
+					'include'   => implode( ',', $ids )
+				] );
+				$response  = wp_list_pluck( $post_info, 'post_title', 'ID' );
+		}
+
+		if ( ! empty( $response ) ) {
+			wp_send_json_success( [ 'results' => $response ] );
+		} else {
+			wp_send_json_error( [] );
+		}
+	}
+
+
+/** Function get_compare_table() called by wp_ajax hooks: {'eael_product_grid', 'nopriv_eael_product_grid'} **/
+/** Parameters found in function get_compare_table(): {"post": ["page_id", "widget_id", "product_id", "product_ids", "remove_product", "nonce"]} **/
+function get_compare_table() {
+		$ajax      = wp_doing_ajax();
+		$page_id   = 0;
+		$widget_id = 0;
+
+		if ( ! empty( $_POST['page_id'] ) ) {
+			$page_id = intval( $_POST['page_id'], 10 );
+		} else {
+			$err_msg = __( 'Page ID is missing', 'essential-addons-for-elementor-lite' );
+		}
+		if ( ! empty( $_POST['widget_id'] ) ) {
+			$widget_id = sanitize_text_field( $_POST['widget_id'] );
+		} else {
+			$err_msg = __( 'Widget ID is missing', 'essential-addons-for-elementor-lite' );
+		}
+		if ( ! empty( $_POST['product_id'] ) ) {
+			$product_id = sanitize_text_field( $_POST['product_id'] );
+		} else {
+			$err_msg = __( 'Product ID is missing', 'essential-addons-for-elementor-lite' );
+		}
+
+        if (!empty($_POST['product_ids'])) {
+            $product_ids = wp_unslash(json_decode($_POST['product_ids']));
+		}
+
+        if (empty($product_ids)) {
+            $product_ids = [];
+        }
+
+		if ( ! empty( $product_id ) ) {
+			$p_exist = ! empty( $product_ids ) && is_array( $product_ids );
+			if ( ! empty( $_POST['remove_product'] ) && $p_exist ) {
+			    $product_ids = array_filter($product_ids, function ($id) use ($product_id){
+                    return $id != intval( $product_id );
+			    });
+			} else {
+			    $product_ids[] = intval( $product_id );
+			}
+		}
+
+
+		if ( ! empty( $err_msg ) ) {
+			if ( $ajax ) {
+				wp_send_json_error( $err_msg );
+			}
+
+			return false;
+		}
+		if ( empty( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'eael_product_grid' ) ) {
+			if ( $ajax ) {
+				wp_send_json_error( __( 'Security token did not match', 'essential-addons-for-elementor-lite' ) );
+			}
+
+			return false;
+		}
+		$product_ids = array_values(array_unique($product_ids));
+
+		$ds          = $this->eael_get_widget_settings( $page_id, $widget_id );
+		$products    = self::static_get_products_list( $product_ids, $ds );
+		$fields      = self::static_fields( $product_ids, $ds );
+		ob_start();
+		self::render_compare_table( compact( 'products', 'fields', 'ds' ) );
+		$table = ob_get_clean();
+		wp_send_json_success( [ 'compare_table' => $table, 'product_ids' => $product_ids ] );
+
+		return null;
+	}
+
+
+/** Function ajax_eael_product_gallery() called by wp_ajax hooks: {'nopriv_eael_product_gallery', 'eael_product_gallery'} **/
+/** Parameters found in function ajax_eael_product_gallery(): {"post": ["args", "nonce", "page_id", "widget_id"], "request": ["page", "taxonomy", "template_info"]} **/
+function ajax_eael_product_gallery() {
+
+		$ajax = wp_doing_ajax();
+
+		wp_parse_str( $_POST['args'], $args );
+
+		if ( isset( $args['date_query']['relation'] ) ) {
+			$args['date_query']['relation'] = HelperClass::eael_sanitize_relation( $args['date_query']['relation'] );
+		}
+
+		if ( empty( $_POST['nonce'] ) ) {
+			$err_msg = __( 'Insecure form submitted without security token', 'essential-addons-for-elementor-lite' );
+			if ( $ajax ) {
+				wp_send_json_error( $err_msg );
+			}
+
+			return false;
+		}
+
+		if ( ! wp_verify_nonce( $_POST['nonce'], 'eael_product_gallery' ) ) {
+			$err_msg = __( 'Security token did not match', 'essential-addons-for-elementor-lite' );
+			if ( $ajax ) {
+				wp_send_json_error( $err_msg );
+			}
+
+			return false;
+		}
+
+		if ( ! empty( $_POST['page_id'] ) ) {
+			$page_id = intval( $_POST['page_id'], 10 );
+		} else {
+			$err_msg = __( 'Page ID is missing', 'essential-addons-for-elementor-lite' );
+			if ( $ajax ) {
+				wp_send_json_error( $err_msg );
+			}
+
+			return false;
+		}
+
+		if ( ! empty( $_POST['widget_id'] ) ) {
+			$widget_id = sanitize_text_field( $_POST['widget_id'] );
+		} else {
+			$err_msg = __( 'Widget ID is missing', 'essential-addons-for-elementor-lite' );
+			if ( $ajax ) {
+				wp_send_json_error( $err_msg );
+			}
+
+			return false;
+		}
+
+		$settings = HelperClass::eael_get_widget_settings( $page_id, $widget_id );
+		if ( empty( $settings ) ) {
+			wp_send_json_error( [ 'message' => __( 'Widget settings are not found. Did you save the widget before using load more??', 'essential-addons-for-elementor-lite' ) ] );
+		}
+
+		if ( $widget_id == '' && $page_id == '' ) {
+			wp_send_json_error();
+		}
+
+		$settings['eael_widget_id'] = $widget_id;
+		$settings['eael_page_id']   = $page_id;
+		$args['offset']             = (int) $args['offset'] + ( ( (int) $_REQUEST['page'] - 1 ) * (int) $args['posts_per_page'] );
+
+		if ( isset( $_REQUEST['taxonomy'] ) && isset( $_REQUEST['taxonomy']['taxonomy'] ) && $_REQUEST['taxonomy']['taxonomy'] != 'all' ) {
+			$args['tax_query'] = [
+				$this->sanitize_taxonomy_data( $_REQUEST['taxonomy'] ),
+			];
+		}
+
+		$template_info = $this->eael_sanitize_template_param( $_REQUEST['template_info'] );
+
+		if ( $template_info ) {
+
+			if ( $template_info['dir'] === 'theme' ) {
+				$dir_path = $this->retrive_theme_path();
+			} else if ( $template_info['dir'] === 'pro' ) {
+				$dir_path = sprintf( "%sincludes", EAEL_PRO_PLUGIN_PATH );
+			} else {
+				$dir_path = sprintf( "%sincludes", EAEL_PLUGIN_PATH );
+			}
+
+			$file_path = realpath( sprintf(
+				'%s/Template/%s/%s',
+				$dir_path,
+				$template_info['name'],
+				$template_info['file_name']
+			) );
+
+			if ( ! $file_path || 0 !== strpos( $file_path, realpath( $dir_path ) ) ) {
+				wp_send_json_error( 'Invalid template', 'invalid_template', 400 );
+			}
+
+			$html = '';
+			if ( $file_path ) {
+				$query = new \WP_Query( $args );
+
+				if ( $query->have_posts() ) {
+
+					while ( $query->have_posts() ) {
+						$query->the_post();
+						$html .= HelperClass::include_with_variable( $file_path, [ 'settings' => $settings ] );
+					}
+					$html .= '<div class="eael-max-page" style="display:none;">'. ceil($query->found_posts / absint( $args['posts_per_page'] ) ) . '</div>';
+					printf( '%1$s', $html );
+					wp_reset_postdata();
+				}
+			}
+		}
+		wp_die();
+	}
+
+
+/** Function eael_product_quickview_popup() called by wp_ajax hooks: {'nopriv_eael_product_quickview_popup', 'eael_product_quickview_popup'} **/
+/** Parameters found in function eael_product_quickview_popup(): {"post": ["widget_id", "product_id", "page_id"]} **/
+function eael_product_quickview_popup() {
+		//check nonce
+		check_ajax_referer( 'essential-addons-elementor', 'security' );
+		$widget_id  = sanitize_key( $_POST['widget_id'] );
+		$product_id = absint( $_POST['product_id'] );
+		$page_id    = absint( $_POST['page_id'] );
+
+		if ( $widget_id == '' && $product_id == '' && $page_id == '' ) {
+			wp_send_json_error();
+		}
+
+		global $post, $product;
+		$product = wc_get_product( $product_id );
+		$post    = get_post( $product_id );
+		setup_postdata( $post );
+
+		$settings = $this->eael_get_widget_settings( $page_id, $widget_id );
+		ob_start();
+		HelperClass::eael_product_quick_view( $product, $settings, $widget_id );
+		$data = ob_get_clean();
+		wp_reset_postdata();
+
+		wp_send_json_success( $data );
+	}
+
+
+/** Function select2_ajax_posts_filter_autocomplete() called by wp_ajax hooks: {'eael_select2_search_post', 'nopriv_eael_select2_search_post'} **/
+/** Parameters found in function select2_ajax_posts_filter_autocomplete(): {"get": ["post_type", "source_name", "term"]} **/
+function select2_ajax_posts_filter_autocomplete() {
+		$post_type   = 'post';
+		$source_name = 'post_type';
+
+		if ( ! empty( $_GET['post_type'] ) ) {
+			$post_type = sanitize_text_field( $_GET['post_type'] );
+		}
+
+		if ( ! empty( $_GET['source_name'] ) ) {
+			$source_name = sanitize_text_field( $_GET['source_name'] );
+		}
+
+		$search  = ! empty( $_GET['term'] ) ? sanitize_text_field( $_GET['term'] ) : '';
+		$results = $post_list = [];
+		switch ( $source_name ) {
+			case 'taxonomy':
+				$args = [
+					'hide_empty' => false,
+					'orderby'    => 'name',
+					'order'      => 'ASC',
+					'search'     => $search,
+					'number'     => '5',
+				];
+
+				if ( $post_type !== 'all' ) {
+					$args['taxonomy'] = $post_type;
+				}
+
+				$post_list = wp_list_pluck( get_terms( $args ), 'name', 'term_id' );
+				break;
+			case 'user':
+				$users = [];
+
+				foreach ( get_users( [ 'search' => "*{$search}*" ] ) as $user ) {
+					$user_id           = $user->ID;
+					$user_name         = $user->display_name;
+					$users[ $user_id ] = $user_name;
+				}
+
+				$post_list = $users;
+				break;
+			default:
+				$post_list = HelperClass::get_query_post_list( $post_type, 10, $search );
+		}
+
+		if ( ! empty( $post_list ) ) {
+			foreach ( $post_list as $key => $item ) {
+				$results[] = [ 'text' => $item, 'id' => $key ];
+			}
+		}
+		wp_send_json( [ 'results' => $results ] );
+	}
+
+
+/** Function save_setup_wizard_data() called by wp_ajax hooks: {'save_setup_wizard_data'} **/
+/** Parameters found in function save_setup_wizard_data(): {"post": ["fields"]} **/
+function save_setup_wizard_data() {
+
+		check_ajax_referer( 'essential-addons-elementor', 'security' );
+
+		if ( !current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( __( 'you are not allowed to do this action', 'essential-addons-for-elementor-lite' ) );
+		}
+
+		if ( !isset( $_POST[ 'fields' ] ) ) {
+			return;
+		}
+
+		wp_parse_str( $_POST[ 'fields' ], $fields );
+
+		if ( isset( $fields[ 'eael_user_email_address' ] ) && intval( $fields[ 'eael_user_email_address' ] ) == 1 ) {
+			$this->wpins_process();
+		}
+		update_option( 'eael_setup_wizard', 'complete' );
+		if ( $this->save_element_list( $fields ) ) {
+			wp_send_json_success( [ 'redirect_url' => esc_url( admin_url( 'admin.php?page=eael-settings' ) ) ] );
+		}
+		wp_send_json_error();
+	}
+
+
+/** Function save_eael_elements_data() called by wp_ajax hooks: {'save_eael_elements_data'} **/
+/** Parameters found in function save_eael_elements_data(): {"post": ["fields"]} **/
+function save_eael_elements_data() {
+		check_ajax_referer( 'essential-addons-elementor', 'security' );
+
+		if ( !current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( __( 'you are not allowed to do this action', 'essential-addons-for-elementor-lite' ) );
+		}
+
+		if ( !isset( $_POST[ 'fields' ] ) ) {
+			return;
+		}
+
+		wp_parse_str( $_POST[ 'fields' ], $fields );
+
+		if ( $this->save_element_list( $fields ) ) {
+			wp_send_json_success();
+		}
+		wp_send_json_error();
+	}
+
+
+/** Function eael_get_token() called by wp_ajax hooks: {'nopriv_eael_get_token', 'eael_get_token'} **/
+/** No params detected :-/ **/
+
+
+/** Function eael_woo_pagination_product_ajax() called by wp_ajax hooks: {'nopriv_woo_product_pagination_product', 'woo_product_pagination_product'} **/
+/** Parameters found in function eael_woo_pagination_product_ajax(): {"post": ["page_id", "widget_id", "number", "limit"], "request": ["args", "templateInfo"]} **/
+function eael_woo_pagination_product_ajax() {
+
+		check_ajax_referer( 'essential-addons-elementor', 'security' );
+
+		if ( ! empty( $_POST['page_id'] ) ) {
+			$page_id = intval( $_POST['page_id'], 10 );
+		} else {
+			$err_msg = __( 'Page ID is missing', 'essential-addons-for-elementor-lite' );
+			wp_send_json_error( $err_msg );
+		}
+
+		if ( ! empty( $_POST['widget_id'] ) ) {
+			$widget_id = sanitize_text_field( $_POST['widget_id'] );
+		} else {
+			$err_msg = __( 'Widget ID is missing', 'essential-addons-for-elementor-lite' );
+			wp_send_json_error( $err_msg );
+		}
+
+		$settings = HelperClass::eael_get_widget_settings( $page_id, $widget_id );
+		if ( empty( $settings ) ) {
+			wp_send_json_error( [ 'message' => __( 'Widget settings are not found. Did you save the widget before using load more??', 'essential-addons-for-elementor-lite' ) ] );
+		}
+		$settings['eael_page_id']   = $page_id;
+		$settings['eael_widget_id'] = $widget_id;
+		wp_parse_str( $_REQUEST['args'], $args );
+
+		if ( isset( $args['date_query']['relation'] ) ) {
+			$args['date_query']['relation'] = HelperClass::eael_sanitize_relation( $args['date_query']['relation'] );
+		}
+
+		$paginationNumber = absint( $_POST['number'] );
+		$paginationLimit  = absint( $_POST['limit'] );
+
+		$args['posts_per_page'] = $paginationLimit;
+
+		if ( $paginationNumber == "1" ) {
+			$paginationOffsetValue = "0";
+		} else {
+			$paginationOffsetValue = ( $paginationNumber - 1 ) * $paginationLimit;
+			$args['offset']        = $paginationOffsetValue;
+		}
+
+
+		$template_info = $this->eael_sanitize_template_param( $_REQUEST['templateInfo'] );
+
+		$this->set_widget_name( $template_info['name'] );
+		$template = realpath( $this->get_template( $template_info['file_name'] ) );
+
+		ob_start();
+		$query = new \WP_Query( $args );
+		if ( $query->have_posts() ) {
+			while ( $query->have_posts() ) {
+				$query->the_post();
+				include( $template );
+			}
+			wp_reset_postdata();
+		}
+		echo ob_get_clean();
+		wp_die();
+	}
+
+
+/** Function ajax_install_plugin() called by wp_ajax hooks: {'wpdeveloper_install_plugin'} **/
+/** Parameters found in function ajax_install_plugin(): {"post": ["slug"]} **/
+function ajax_install_plugin()
+    {
+        check_ajax_referer('essential-addons-elementor', 'security');
+
+        if(!current_user_can( 'install_plugins' )) {
+            wp_send_json_error(__('you are not allowed to do this action', 'essential-addons-for-elementor-lite'));
+        }
+
+	    $slug   = isset( $_POST['slug'] ) ? sanitize_text_field( $_POST['slug'] ) : '';
+	    $result = $this->install_plugin( $slug );
+
+	    if ( is_wp_error( $result ) ) {
+		    wp_send_json_error( $result->get_error_message() );
+	    }
+
+        wp_send_json_success(__('Plugin is installed successfully!', 'essential-addons-for-elementor-lite'));
+    }
+
+
+/** Function eael_admin_promotion() called by wp_ajax hooks: {'eael_admin_promotion'} **/
+/** No params detected :-/ **/
+
+
+/** Function eael_black_friday_optin_dismiss() called by wp_ajax hooks: {'eael_black_friday_optin_dismiss'} **/
+/** No params detected :-/ **/
+
+
+/** Function templately_promo_status() called by wp_ajax hooks: {'templately_promo_status'} **/
+/** No params detected :-/ **/
+
+
+/** Function eael_clear_widget_cache_data() called by wp_ajax hooks: {'eael_clear_widget_cache_data'} **/
+/** Parameters found in function eael_clear_widget_cache_data(): {"post": ["ac_name", "hastag", "c_key", "c_secret"]} **/
+function eael_clear_widget_cache_data() {
+		global $wpdb;
+
+		check_ajax_referer( 'essential-addons-elementor', 'security' );
+
+		$ac_name     = sanitize_text_field( $_POST['ac_name'] );
+		$hastag      = sanitize_text_field( $_POST['hastag'] );
+		$c_key       = sanitize_text_field( $_POST['c_key'] );
+		$c_secret    = sanitize_text_field( $_POST['c_secret'] );
+		$key_pattern = '_transient_' . $ac_name . '%' . md5( $hastag . $c_key . $c_secret ) . '_tf_cache';
+
+		$sql     = "SELECT `option_name` AS `name`
+            FROM  $wpdb->options
+            WHERE `option_name` LIKE '$key_pattern'
+            ORDER BY `option_name`";
+		$results = $wpdb->get_results( $sql );
+
+		foreach ( $results as $transient ) {
+			$cache_key = substr( $transient->name, 11 );
+			delete_transient( $cache_key );
+		}
+
+		wp_send_json_success();
+	}
+
+
+/** Function eael_gb_eb_popup_dismiss() called by wp_ajax hooks: {'eael_gb_eb_popup_dismiss'} **/
+/** No params detected :-/ **/
+
+
+/** Function eael_woo_pagination_ajax() called by wp_ajax hooks: {'nopriv_woo_product_pagination', 'woo_product_pagination'} **/
+/** Parameters found in function eael_woo_pagination_ajax(): {"post": ["page_id", "widget_id", "number", "limit"], "request": ["args", "template_name"]} **/
+function eael_woo_pagination_ajax() {
+
+		check_ajax_referer( 'essential-addons-elementor', 'security' );
+
+		if ( ! empty( $_POST['page_id'] ) ) {
+			$page_id = intval( $_POST['page_id'], 10 );
+		} else {
+			$err_msg = __( 'Page ID is missing', 'essential-addons-for-elementor-lite' );
+			wp_send_json_error( $err_msg );
+		}
+
+		if ( ! empty( $_POST['widget_id'] ) ) {
+			$widget_id = sanitize_text_field( $_POST['widget_id'] );
+		} else {
+			$err_msg = __( 'Widget ID is missing', 'essential-addons-for-elementor-lite' );
+			wp_send_json_error( $err_msg );
+		}
+
+		$settings = HelperClass::eael_get_widget_settings( $page_id, $widget_id );
+
+		if ( empty( $settings ) ) {
+			wp_send_json_error( [ 'message' => __( 'Widget settings are not found. Did you save the widget before using load more??', 'essential-addons-for-elementor-lite' ) ] );
+		}
+
+		$settings['eael_page_id'] = $page_id;
+		wp_parse_str( $_REQUEST['args'], $args );
+
+		if ( isset( $args['date_query']['relation'] ) ) {
+			$args['date_query']['relation'] = HelperClass::eael_sanitize_relation( $args['date_query']['relation'] );
+		}
+		
+		$paginationNumber          = absint( $_POST['number'] );
+		$paginationLimit           = absint( $_POST['limit'] );
+		$pagination_Count          = intval( $args['total_post'] );
+		$pagination_Paginationlist = ceil( $pagination_Count / $paginationLimit );
+		$last                      = ceil( $pagination_Paginationlist );
+		$paginationprev            = $paginationNumber - 1;
+		$paginationnext            = $paginationNumber + 1;
+
+		if ( $paginationNumber > 1 ) {
+			$paginationprev;
+		}
+		if ( $paginationNumber < $last ) {
+			$paginationnext;
+		}
+
+		$adjacents                    = "2";
+		$next_label                   = sanitize_text_field( $settings['pagination_next_label'] );
+		$prev_label                   = sanitize_text_field( $settings['pagination_prev_label'] );
+		$settings['eael_widget_name'] = realpath( sanitize_file_name( $_REQUEST['template_name'] ) );
+		$setPagination                = "";
+
+		if ( $pagination_Paginationlist > 0 ) {
+
+			$setPagination .= "<ul class='page-numbers'>";
+
+			if ( 1 < $paginationNumber ) {
+				$setPagination .= "<li class='pagitext'><a href='javascript:void(0);' class='page-numbers'   data-pnumber='$paginationprev' >$prev_label</a></li>";
+			}
+
+			if ( $pagination_Paginationlist < 7 + ( $adjacents * 2 ) ) {
+
+				for ( $pagination = 1; $pagination <= $pagination_Paginationlist; $pagination ++ ) {
+					$active        = ( $paginationNumber == $pagination ) ? 'current' : '';
+					$setPagination .= sprintf( "<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>", $active, $pagination );
+				}
+
+			} else if ( $pagination_Paginationlist > 5 + ( $adjacents * 2 ) ) {
+
+				if ( $paginationNumber < 1 + ( $adjacents * 2 ) ) {
+					for ( $pagination = 1; $pagination <= 4 + ( $adjacents * 2 ); $pagination ++ ) {
+
+						$active        = ( $paginationNumber == $pagination ) ? 'current' : '';
+						$setPagination .= sprintf( "<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>", $active, $pagination );
+					}
+					$setPagination .= "<li class='pagitext dots'>...</li>";
+					$setPagination .= sprintf( "<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>", $active, $pagination );
+
+				} elseif ( $pagination_Paginationlist - ( $adjacents * 2 ) > $paginationNumber && $paginationNumber > ( $adjacents * 2 ) ) {
+					$active        = '';
+					$setPagination .= sprintf( "<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>", $active, 1 );
+					$setPagination .= "<li class='pagitext dots'>...</li>";
+					for ( $pagination = $paginationNumber - $adjacents; $pagination <= $paginationNumber + $adjacents; $pagination ++ ) {
+						$active        = ( $paginationNumber == $pagination ) ? 'current' : '';
+						$setPagination .= sprintf( "<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>", $active, $pagination );
+					}
+
+					$setPagination .= "<li class='pagitext dots'>...</li>";
+					$setPagination .= sprintf( "<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>", $active, $last );
+
+				} else {
+					$active        = '';
+					$setPagination .= sprintf( "<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>", $active, 1 );
+					$setPagination .= "<li class='pagitext dots'>...</li>";
+					for ( $pagination = $last - ( 2 + ( $adjacents * 2 ) ); $pagination <= $last; $pagination ++ ) {
+						$active        = ( $paginationNumber == $pagination ) ? 'current' : '';
+						$setPagination .= sprintf( "<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>", $active, $pagination );
+					}
+				}
+
+			} else {
+				for ( $pagination = 1; $pagination <= $pagination_Paginationlist; $pagination ++ ) {
+					$active        = ( $paginationNumber == $pagination ) ? 'current' : '';
+					$setPagination .= sprintf( "<li><a href='javascript:void(0);' id='post' class='page-numbers %s' data-pnumber='%2\$d'>%2\$d</a></li>", $active, $pagination );
+				}
+
+			}
+
+			if ( $paginationNumber < $pagination_Paginationlist ) {
+				$setPagination .= "<li class='pagitext'><a href='javascript:void(0);' class='page-numbers' data-pnumber='$paginationnext' >$next_label</a></li>";
+			}
+
+			$setPagination .= "</ul>";
+		}
+
+		printf( '%1$s', $setPagination );
+		wp_die();
+	}
+
+
 /** Function eael_product_add_to_cart() called by wp_ajax hooks: {'nopriv_eael_product_add_to_cart', 'eael_product_add_to_cart'} **/
 /** Parameters found in function eael_product_add_to_cart(): {"post": ["cart_item_data", "product_data"]} **/
 function eael_product_add_to_cart() {
@@ -935,36 +896,217 @@ function eael_product_add_to_cart() {
 	}
 
 
-/** Function eael_clear_widget_cache_data() called by wp_ajax hooks: {'eael_clear_widget_cache_data'} **/
-/** Parameters found in function eael_clear_widget_cache_data(): {"post": ["ac_name", "hastag", "c_key", "c_secret"]} **/
-function eael_clear_widget_cache_data() {
-		global $wpdb;
-
+/** Function clear_cache_files() called by wp_ajax hooks: {'clear_cache_files_with_ajax'} **/
+/** Parameters found in function clear_cache_files(): {"request": ["posts"], "post": ["posts"]} **/
+function clear_cache_files() {
 		check_ajax_referer( 'essential-addons-elementor', 'security' );
 
-		$ac_name     = sanitize_text_field( $_POST['ac_name'] );
-		$hastag      = sanitize_text_field( $_POST['hastag'] );
-		$c_key       = sanitize_text_field( $_POST['c_key'] );
-		$c_secret    = sanitize_text_field( $_POST['c_secret'] );
-		$key_pattern = '_transient_' . $ac_name . '%' . md5( $hastag . $c_key . $c_secret ) . '_tf_cache';
-
-		$sql     = "SELECT `option_name` AS `name`
-            FROM  $wpdb->options
-            WHERE `option_name` LIKE '$key_pattern'
-            ORDER BY `option_name`";
-		$results = $wpdb->get_results( $sql );
-
-		foreach ( $results as $transient ) {
-			$cache_key = substr( $transient->name, 11 );
-			delete_transient( $cache_key );
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( __( 'you are not allowed to do this action', 'essential-addons-for-elementor-lite' ) );
 		}
 
-		wp_send_json_success();
+		if ( isset( $_REQUEST['posts'] ) ) {
+			if ( ! empty( $_POST['posts'] ) ) {
+				foreach ( json_decode( $_POST['posts'] ) as $post ) {
+					$this->remove_files( 'post-' . $post );
+				}
+			}
+		} else {
+			// clear cache files
+			$this->empty_dir( EAEL_ASSET_PATH );
+			if ( $this->is_activate_elementor() ) {
+				\Elementor\Plugin::$instance->files_manager->clear_cache();
+			}
+		}
+
+		// Purge All LS Cache
+		do_action( 'litespeed_purge_all', '3rd Essential Addons for Elementor' );
+
+		// After clear the cache hook
+		do_action( 'eael_after_clear_cache_files' );
+
+		wp_send_json( true );
 	}
 
 
-/** Function eael_eb_optin_notice_dismiss() called by wp_ajax hooks: {'eael_eb_optin_notice_dismiss'} **/
-/** No params detected :-/ **/
+/** Function woo_checkout_update_order_review() called by wp_ajax hooks: {'nopriv_woo_checkout_update_order_review', 'woo_checkout_update_order_review'} **/
+/** Parameters found in function woo_checkout_update_order_review(): {"post": ["orderReviewData"]} **/
+function woo_checkout_update_order_review() {
+		$setting = $_POST['orderReviewData'];
+		ob_start();
+		Woo_Checkout_Helper::checkout_order_review_default( $setting );
+		$woo_checkout_update_order_review = ob_get_clean();
+
+		wp_send_json(
+			array(
+				'order_review' => $woo_checkout_update_order_review,
+			)
+		);
+	}
+
+
+/** Function ajax_activate_plugin() called by wp_ajax hooks: {'wpdeveloper_activate_plugin'} **/
+/** Parameters found in function ajax_activate_plugin(): {"post": ["basename"]} **/
+function ajax_activate_plugin()
+    {
+        check_ajax_referer('essential-addons-elementor', 'security');
+
+        //check user capabilities
+        if(!current_user_can( 'activate_plugins' )) {
+            wp_send_json_error(__('you are not allowed to do this action', 'essential-addons-for-elementor-lite'));
+        }
+
+	    $basename = isset( $_POST['basename'] ) ? sanitize_text_field( $_POST['basename'] ) : '';
+	    $result   = activate_plugin( $basename, '', false, true );
+
+	    if ( is_wp_error( $result ) ) {
+		    wp_send_json_error( $result->get_error_message() );
+	    }
+
+        if ($result === false) {
+            wp_send_json_error(__('Plugin couldn\'t be activated.', 'essential-addons-for-elementor-lite'));
+        }
+        wp_send_json_success(__('Plugin is activated successfully!', 'essential-addons-for-elementor-lite'));
+    }
+
+
+/** Function save_settings() called by wp_ajax hooks: {'save_settings_with_ajax'} **/
+/** Parameters found in function save_settings(): {"post": ["fields", "is_login_register"]} **/
+function save_settings() {
+		check_ajax_referer( 'essential-addons-elementor', 'security' );
+
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( __( 'you are not allowed to do this action', 'essential-addons-for-elementor-lite' ) );
+		}
+
+		if ( ! isset( $_POST['fields'] ) ) {
+			return;
+		}
+
+		wp_parse_str( $_POST['fields'], $settings );
+
+		if ( ! empty( $_POST['is_login_register'] ) ) {
+			// Saving Login | Register Related Data
+			if ( isset( $settings['recaptchaSiteKey'] ) ) {
+				update_option( 'eael_recaptcha_sitekey', sanitize_text_field( $settings['recaptchaSiteKey'] ) );
+			}
+			if ( isset( $settings['recaptchaSiteSecret'] ) ) {
+				update_option( 'eael_recaptcha_secret', sanitize_text_field( $settings['recaptchaSiteSecret'] ) );
+			}
+			if ( isset( $settings['recaptchaLanguage'] ) ) {
+				update_option( 'eael_recaptcha_language', sanitize_text_field( $settings['recaptchaLanguage'] ) );
+			}
+
+			//reCAPTCHA V3
+			if ( isset( $settings['recaptchaSiteKeyV3'] ) ) {
+				update_option( 'eael_recaptcha_sitekey_v3', sanitize_text_field( $settings['recaptchaSiteKeyV3'] ) );
+			}
+			if ( isset( $settings['recaptchaSiteSecretV3'] ) ) {
+				update_option( 'eael_recaptcha_secret_v3', sanitize_text_field( $settings['recaptchaSiteSecretV3'] ) );
+			}
+			if ( isset( $settings['recaptchaLanguageV3'] ) ) {
+				update_option( 'eael_recaptcha_language_v3', sanitize_text_field( $settings['recaptchaLanguageV3'] ) );
+			}
+
+			//pro settings
+			if ( isset( $settings['gClientId'] ) ) {
+				update_option( 'eael_g_client_id', sanitize_text_field( $settings['gClientId'] ) );
+			}
+			if ( isset( $settings['fbAppId'] ) ) {
+				update_option( 'eael_fb_app_id', sanitize_text_field( $settings['fbAppId'] ) );
+			}
+			if ( isset( $settings['fbAppSecret'] ) ) {
+				update_option( 'eael_fb_app_secret', sanitize_text_field( $settings['fbAppSecret'] ) );
+			}
+
+			wp_send_json_success( [ 'message' => __( 'Login | Register Settings updated', 'essential-addons-for-elementor-lite' ) ] );
+		}
+
+		//Login-register data
+		if ( isset( $settings['lr_recaptcha_sitekey'] ) ) {
+			update_option( 'eael_recaptcha_sitekey', sanitize_text_field( $settings['lr_recaptcha_sitekey'] ) );
+		}
+		if ( isset( $settings['lr_recaptcha_secret'] ) ) {
+			update_option( 'eael_recaptcha_secret', sanitize_text_field( $settings['lr_recaptcha_secret'] ) );
+		}
+		if ( isset( $settings['lr_recaptcha_language'] ) ) {
+			update_option( 'eael_recaptcha_language', sanitize_text_field( $settings['lr_recaptcha_language'] ) );
+		}
+		//reCAPTCHA v3
+		if ( isset( $settings['lr_recaptcha_sitekey_v3'] ) ) {
+			update_option( 'eael_recaptcha_sitekey_v3', sanitize_text_field( $settings['lr_recaptcha_sitekey_v3'] ) );
+		}
+		if ( isset( $settings['lr_recaptcha_secret_v3'] ) ) {
+			update_option( 'eael_recaptcha_secret_v3', sanitize_text_field( $settings['lr_recaptcha_secret_v3'] ) );
+		}
+		if ( isset( $settings['lr_recaptcha_language_v3'] ) ) {
+			update_option( 'eael_recaptcha_language_v3', sanitize_text_field( $settings['lr_recaptcha_language_v3'] ) );
+		}
+
+		if ( isset( $settings['lr_custom_profile_fields'] ) ) {
+			update_option( 'eael_custom_profile_fields', sanitize_text_field( $settings['lr_custom_profile_fields'] ) );
+		} else {
+			update_option( 'eael_custom_profile_fields', '' );
+		}
+
+		//pro settings
+		if ( isset( $settings['lr_g_client_id'] ) ) {
+			update_option( 'eael_g_client_id', sanitize_text_field( $settings['lr_g_client_id'] ) );
+		}
+		if ( isset( $settings['lr_fb_app_id'] ) ) {
+			update_option( 'eael_fb_app_id', sanitize_text_field( $settings['lr_fb_app_id'] ) );
+		}
+		if ( isset( $settings['lr_fb_app_secret'] ) ) {
+			update_option( 'eael_fb_app_secret', sanitize_text_field( $settings['lr_fb_app_secret'] ) );
+		}
+
+		// Business Reviews : Saving Google Place Api Key
+		if ( isset( $settings['br_google_place_api_key'] ) ) {
+			update_option( 'eael_br_google_place_api_key', sanitize_text_field( $settings['br_google_place_api_key'] ) );
+		}
+
+		// Saving Google Map Api Key
+		if ( isset( $settings['google-map-api'] ) ) {
+			update_option( 'eael_save_google_map_api', sanitize_text_field( $settings['google-map-api'] ) );
+		}
+
+		// Saving Mailchimp Api Key
+		if ( isset( $settings['mailchimp-api'] ) ) {
+			update_option( 'eael_save_mailchimp_api', sanitize_text_field( $settings['mailchimp-api'] ) );
+		}
+		
+		// Saving Mailchimp Api Key for EA Login | Register Form
+		if ( isset( $settings['lr_mailchimp_api_key'] ) ) {
+			update_option( 'eael_lr_mailchimp_api_key', sanitize_text_field( $settings['lr_mailchimp_api_key'] ) );
+		}
+
+		// Saving TYpeForm token
+		if ( isset( $settings['typeform-personal-token'] ) ) {
+			update_option( 'eael_save_typeform_personal_token', sanitize_text_field( $settings['typeform-personal-token'] ) );
+		}
+
+		// Saving Duplicator Settings
+		if ( isset( $settings['post-duplicator-post-type'] ) ) {
+			update_option( 'eael_save_post_duplicator_post_type', sanitize_text_field( $settings['post-duplicator-post-type'] ) );
+		}
+
+		// save js print method
+		if ( isset( $settings['eael-js-print-method'] ) ) {
+			update_option( 'eael_js_print_method', sanitize_text_field( $settings['eael-js-print-method'] ) );
+		}
+
+		$settings = array_map( 'sanitize_text_field', $settings );
+		$defaults = array_fill_keys( array_keys( array_merge( $this->registered_elements, $this->registered_extensions ) ), false );
+		$elements = array_merge( $defaults, array_fill_keys( array_keys( array_intersect_key( $settings, $defaults ) ), true ) );
+
+		// update new settings
+		$updated = update_option( 'eael_save_settings', $elements );
+
+		// clear assets files
+		$this->empty_dir( EAEL_ASSET_PATH );
+
+		wp_send_json( $updated );
+	}
 
 
 /** Function facebook_feed_render_items() called by wp_ajax hooks: {'facebook_feed_load_more', 'nopriv_facebook_feed_load_more'} **/
@@ -1199,181 +1341,39 @@ function facebook_feed_render_items( $settings = [] ) {
 	}
 
 
-/** Function eael_woo_pagination_product_ajax() called by wp_ajax hooks: {'nopriv_woo_product_pagination_product', 'woo_product_pagination_product'} **/
-/** Parameters found in function eael_woo_pagination_product_ajax(): {"post": ["page_id", "widget_id", "number", "limit"], "request": ["args", "templateInfo"]} **/
-function eael_woo_pagination_product_ajax() {
+/** Function eael_checkout_cart_qty_update() called by wp_ajax hooks: {'nopriv_eael_checkout_cart_qty_update', 'eael_checkout_cart_qty_update'} **/
+/** Parameters found in function eael_checkout_cart_qty_update(): {"post": ["nonce", "cart_item_key", "quantity"]} **/
+function eael_checkout_cart_qty_update() {
+        if ( ! wp_verify_nonce( $_POST['nonce'], 'essential-addons-elementor' ) ) {
+            die( __('Permission Denied!') );
+        }
 
-		check_ajax_referer( 'essential-addons-elementor', 'security' );
+        $cart_item_key = $_POST['cart_item_key'];
+		$cart_item = WC()->cart->get_cart_item( $cart_item_key );
+		$cart_item_quantity = apply_filters( 'woocommerce_stock_amount_cart_item', apply_filters( 'woocommerce_stock_amount', preg_replace( "/[^0-9\.]/", '', filter_var($_POST['quantity'], FILTER_SANITIZE_NUMBER_INT)) ), $cart_item_key );
 
-		if ( ! empty( $_POST['page_id'] ) ) {
-			$page_id = intval( $_POST['page_id'], 10 );
+		$passed_validation  = apply_filters( 'woocommerce_update_cart_validation', true, $cart_item_key, $cart_item, $cart_item_quantity );
+		if ( $passed_validation ) {
+			WC()->cart->set_quantity( $cart_item_key, $cart_item_quantity, true );
+			wp_send_json_success(
+                array(
+                    'message' => __( 'Quantity updated successfully.', 'essential-addons-for-elementor-lite' ),
+                    // 'cart_item_key' => $cart_item_key,
+                    'cart_item_quantity' => $cart_item_quantity,
+                    'cart_item_subtotal' => WC()->cart->get_product_subtotal( $cart_item['data'], $cart_item_quantity ),
+                    'cart_subtotal' => WC()->cart->get_cart_subtotal(),
+                    'cart_total' => WC()->cart->get_cart_total()
+                )
+            );
 		} else {
-			$err_msg = __( 'Page ID is missing', 'essential-addons-for-elementor-lite' );
-			wp_send_json_error( $err_msg );
-		}
+    		wp_send_json_error(
+                array(
+                    'message' => __( 'Quantity update failed.', 'essential-addons-for-elementor-lite' ),
+                )
+            );
+        }
 
-		if ( ! empty( $_POST['widget_id'] ) ) {
-			$widget_id = sanitize_text_field( $_POST['widget_id'] );
-		} else {
-			$err_msg = __( 'Widget ID is missing', 'essential-addons-for-elementor-lite' );
-			wp_send_json_error( $err_msg );
-		}
-
-		$settings = HelperClass::eael_get_widget_settings( $page_id, $widget_id );
-		if ( empty( $settings ) ) {
-			wp_send_json_error( [ 'message' => __( 'Widget settings are not found. Did you save the widget before using load more??', 'essential-addons-for-elementor-lite' ) ] );
-		}
-		$settings['eael_page_id']   = $page_id;
-		$settings['eael_widget_id'] = $widget_id;
-		wp_parse_str( $_REQUEST['args'], $args );
-
-		if ( isset( $args['date_query']['relation'] ) ) {
-			$args['date_query']['relation'] = HelperClass::eael_sanitize_relation( $args['date_query']['relation'] );
-		}
-
-		$paginationNumber = absint( $_POST['number'] );
-		$paginationLimit  = absint( $_POST['limit'] );
-
-		$args['posts_per_page'] = $paginationLimit;
-
-		if ( $paginationNumber == "1" ) {
-			$paginationOffsetValue = "0";
-		} else {
-			$paginationOffsetValue = ( $paginationNumber - 1 ) * $paginationLimit;
-			$args['offset']        = $paginationOffsetValue;
-		}
-
-
-		$template_info = $this->eael_sanitize_template_param( $_REQUEST['templateInfo'] );
-
-		$this->set_widget_name( $template_info['name'] );
-		$template = realpath( $this->get_template( $template_info['file_name'] ) );
-
-		ob_start();
-		$query = new \WP_Query( $args );
-		if ( $query->have_posts() ) {
-			while ( $query->have_posts() ) {
-				$query->the_post();
-				include( $template );
-			}
-			wp_reset_postdata();
-		}
-		echo ob_get_clean();
-		wp_die();
+		die();
 	}
-
-
-/** Function save_setup_wizard_data() called by wp_ajax hooks: {'save_setup_wizard_data'} **/
-/** Parameters found in function save_setup_wizard_data(): {"post": ["fields"]} **/
-function save_setup_wizard_data() {
-
-		check_ajax_referer( 'essential-addons-elementor', 'security' );
-
-		if ( !current_user_can( 'manage_options' ) ) {
-			wp_send_json_error( __( 'you are not allowed to do this action', 'essential-addons-for-elementor-lite' ) );
-		}
-
-		if ( !isset( $_POST[ 'fields' ] ) ) {
-			return;
-		}
-
-		wp_parse_str( $_POST[ 'fields' ], $fields );
-
-		if ( isset( $fields[ 'eael_user_email_address' ] ) && intval( $fields[ 'eael_user_email_address' ] ) == 1 ) {
-			$this->wpins_process();
-		}
-		update_option( 'eael_setup_wizard', 'complete' );
-		if ( $this->save_element_list( $fields ) ) {
-			wp_send_json_success( [ 'redirect_url' => esc_url( admin_url( 'admin.php?page=eael-settings' ) ) ] );
-		}
-		wp_send_json_error();
-	}
-
-
-/** Function templately_promo_status() called by wp_ajax hooks: {'templately_promo_status'} **/
-/** No params detected :-/ **/
-
-
-/** Function clear_cache_files() called by wp_ajax hooks: {'clear_cache_files_with_ajax'} **/
-/** Parameters found in function clear_cache_files(): {"request": ["posts"], "post": ["posts"]} **/
-function clear_cache_files() {
-		check_ajax_referer( 'essential-addons-elementor', 'security' );
-
-		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_send_json_error( __( 'you are not allowed to do this action', 'essential-addons-for-elementor-lite' ) );
-		}
-
-		if ( isset( $_REQUEST['posts'] ) ) {
-			if ( ! empty( $_POST['posts'] ) ) {
-				foreach ( json_decode( $_POST['posts'] ) as $post ) {
-					$this->remove_files( 'post-' . $post );
-				}
-			}
-		} else {
-			// clear cache files
-			$this->empty_dir( EAEL_ASSET_PATH );
-			if ( $this->is_activate_elementor() ) {
-				\Elementor\Plugin::$instance->files_manager->clear_cache();
-			}
-		}
-
-		// Purge All LS Cache
-		do_action( 'litespeed_purge_all', '3rd Essential Addons for Elementor' );
-
-		// After clear the cache hook
-		do_action( 'eael_after_clear_cache_files' );
-
-		wp_send_json( true );
-	}
-
-
-/** Function ajax_upgrade_plugin() called by wp_ajax hooks: {'wpdeveloper_upgrade_plugin'} **/
-/** Parameters found in function ajax_upgrade_plugin(): {"post": ["basename"]} **/
-function ajax_upgrade_plugin()
-    {
-        check_ajax_referer('essential-addons-elementor', 'security');
-        //check user capabilities
-        if(!current_user_can( 'update_plugins' )) {
-            wp_send_json_error(__('you are not allowed to do this action', 'essential-addons-for-elementor-lite'));
-        }
-
-	    $basename = isset( $_POST['basename'] ) ? sanitize_text_field( $_POST['basename'] ) : '';
-	    $result   = $this->upgrade_plugin( $basename );
-
-        if (is_wp_error($result)) {
-            wp_send_json_error($result->get_error_message());
-        }
-
-        wp_send_json_success(__('Plugin is updated successfully!', 'essential-addons-for-elementor-lite'));
-    }
-
-
-/** Function ajax_activate_plugin() called by wp_ajax hooks: {'wpdeveloper_activate_plugin'} **/
-/** Parameters found in function ajax_activate_plugin(): {"post": ["basename"]} **/
-function ajax_activate_plugin()
-    {
-        check_ajax_referer('essential-addons-elementor', 'security');
-
-        //check user capabilities
-        if(!current_user_can( 'activate_plugins' )) {
-            wp_send_json_error(__('you are not allowed to do this action', 'essential-addons-for-elementor-lite'));
-        }
-
-	    $basename = isset( $_POST['basename'] ) ? sanitize_text_field( $_POST['basename'] ) : '';
-	    $result   = activate_plugin( $basename, '', false, true );
-
-	    if ( is_wp_error( $result ) ) {
-		    wp_send_json_error( $result->get_error_message() );
-	    }
-
-        if ($result === false) {
-            wp_send_json_error(__('Plugin couldn\'t be activated.', 'essential-addons-for-elementor-lite'));
-        }
-        wp_send_json_success(__('Plugin is activated successfully!', 'essential-addons-for-elementor-lite'));
-    }
-
-
-/** Function eael_gb_eb_popup_dismiss() called by wp_ajax hooks: {'eael_gb_eb_popup_dismiss'} **/
-/** No params detected :-/ **/
 
 

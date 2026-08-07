@@ -5,138 +5,127 @@
 *Found functions:6
 *Extracted functions:6
 *Total parameter names extracted: 5
-*Overview: {'do_ajax_product_export': {'woocommerce_do_ajax_product_export'}, 'handle_edit_review': {'edit-comment'}, 'post_add_dismissed_suggestion_handler': {'woocommerce_add_dismissed_marketplace_suggestion'}, 'handle_reply_to_review': {'replyto-comment'}, 'do_ajax_product_import': {'woocommerce_do_ajax_product_import'}, 'delete_zone_count_transient': {'woocommerce_shipping_zones_save_changes', 'woocommerce_shipping_zone_methods_save_changes'}}
+*Overview: {'do_ajax_product_import': {'woocommerce_do_ajax_product_import'}, 'post_add_dismissed_suggestion_handler': {'woocommerce_add_dismissed_marketplace_suggestion'}, 'delete_zone_count_transient': {'woocommerce_shipping_zones_save_changes', 'woocommerce_shipping_zone_methods_save_changes'}, 'handle_reply_to_review': {'replyto-comment'}, 'do_ajax_product_export': {'woocommerce_do_ajax_product_export'}, 'handle_edit_review': {'edit-comment'}}
 *
 ***/
 
-/** Function do_ajax_product_export() called by wp_ajax hooks: {'woocommerce_do_ajax_product_export'} **/
-/** Parameters found in function do_ajax_product_export(): {"post": ["step", "columns", "selected_columns", "export_meta", "export_types", "export_category", "filename"]} **/
-function do_ajax_product_export() {
-		check_ajax_referer( 'wc-product-export', 'security' );
+/** Function do_ajax_product_import() called by wp_ajax hooks: {'woocommerce_do_ajax_product_import'} **/
+/** Parameters found in function do_ajax_product_import(): {"post": ["file", "delimiter", "position", "mapping", "update_existing", "character_encoding"]} **/
+function do_ajax_product_import() {
+		global $wpdb;
 
-		if ( ! $this->export_allowed() ) {
-			wp_send_json_error( array( 'message' => __( 'Insufficient privileges to export products.', 'woocommerce' ) ) );
+		check_ajax_referer( 'wc-product-import', 'security' );
+
+		if ( ! $this->import_allowed() || ! isset( $_POST['file'] ) ) { // PHPCS: input var ok.
+			wp_send_json_error( array( 'message' => __( 'Insufficient privileges to import products.', 'woocommerce' ) ) );
 		}
 
-		include_once WC_ABSPATH . 'includes/export/class-wc-product-csv-exporter.php';
+		include_once WC_ABSPATH . 'includes/admin/importers/class-wc-product-csv-importer-controller.php';
+		include_once WC_ABSPATH . 'includes/import/class-wc-product-csv-importer.php';
 
-		$step     = isset( $_POST['step'] ) ? absint( $_POST['step'] ) : 1; // WPCS: input var ok, sanitization ok.
-		$exporter = new WC_Product_CSV_Exporter();
+		$file   = wc_clean( wp_unslash( $_POST['file'] ) ); // PHPCS: input var ok.
+		$params = array(
+			'delimiter'          => ! empty( $_POST['delimiter'] ) ? wc_clean( wp_unslash( $_POST['delimiter'] ) ) : ',', // PHPCS: input var ok.
+			'start_pos'          => isset( $_POST['position'] ) ? absint( $_POST['position'] ) : 0, // PHPCS: input var ok.
+			'mapping'            => isset( $_POST['mapping'] ) ? (array) wc_clean( wp_unslash( $_POST['mapping'] ) ) : array(), // PHPCS: input var ok.
+			'update_existing'    => isset( $_POST['update_existing'] ) ? (bool) $_POST['update_existing'] : false, // PHPCS: input var ok.
+			'character_encoding' => isset( $_POST['character_encoding'] ) ? wc_clean( wp_unslash( $_POST['character_encoding'] ) ) : '',
 
-		if ( ! empty( $_POST['columns'] ) ) { // WPCS: input var ok.
-			$exporter->set_column_names( wp_unslash( $_POST['columns'] ) ); // WPCS: input var ok, sanitization ok.
-		}
-
-		if ( ! empty( $_POST['selected_columns'] ) ) { // WPCS: input var ok.
-			$exporter->set_columns_to_export( wp_unslash( $_POST['selected_columns'] ) ); // WPCS: input var ok, sanitization ok.
-		}
-
-		if ( ! empty( $_POST['export_meta'] ) ) { // WPCS: input var ok.
-			$exporter->enable_meta_export( true );
-		}
-
-		if ( ! empty( $_POST['export_types'] ) ) { // WPCS: input var ok.
-			$exporter->set_product_types_to_export( wp_unslash( $_POST['export_types'] ) ); // WPCS: input var ok, sanitization ok.
-		}
-
-		if ( ! empty( $_POST['export_category'] ) && is_array( $_POST['export_category'] ) ) {// WPCS: input var ok.
-			$exporter->set_product_category_to_export( wp_unslash( array_values( $_POST['export_category'] ) ) ); // WPCS: input var ok, sanitization ok.
-		}
-
-		if ( ! empty( $_POST['filename'] ) ) { // WPCS: input var ok.
-			$exporter->set_filename( wp_unslash( $_POST['filename'] ) ); // WPCS: input var ok, sanitization ok.
-		}
-
-		$exporter->set_page( $step );
-		$exporter->generate_file();
-
-		$query_args = apply_filters(
-			'woocommerce_export_get_ajax_query_args',
-			array(
-				'nonce'    => wp_create_nonce( 'product-csv' ),
-				'action'   => 'download_product_csv',
-				'filename' => $exporter->get_filename(),
-			)
+			/**
+			 * Batch size for the product import process.
+			 *
+			 * @param int $size Batch size.
+			 *
+			 * @since
+			 */
+			'lines'              => apply_filters( 'woocommerce_product_import_batch_size', 30 ),
+			'parse'              => true,
 		);
 
-		if ( 100 === $exporter->get_percent_complete() ) {
+		// Log failures.
+		if ( 0 !== $params['start_pos'] ) {
+			$error_log = array_filter( (array) get_user_option( 'product_import_error_log' ) );
+		} else {
+			$error_log = array();
+		}
+
+		$importer         = WC_Product_CSV_Importer_Controller::get_importer( $file, $params );
+		$results          = $importer->import();
+		$percent_complete = $importer->get_percent_complete();
+		$error_log        = array_merge( $error_log, $results['failed'], $results['skipped'] );
+
+		update_user_option( get_current_user_id(), 'product_import_error_log', $error_log );
+
+		if ( 100 === $percent_complete ) {
+			// @codingStandardsIgnoreStart.
+			$wpdb->delete( $wpdb->postmeta, array( 'meta_key' => '_original_id' ) );
+			$wpdb->delete( $wpdb->posts, array(
+				'post_type'   => 'product',
+				'post_status' => 'importing',
+			) );
+			$wpdb->delete( $wpdb->posts, array(
+				'post_type'   => 'product_variation',
+				'post_status' => 'importing',
+			) );
+			// @codingStandardsIgnoreEnd.
+
+			// Clean up orphaned data.
+			$wpdb->query(
+				"
+				DELETE {$wpdb->posts}.* FROM {$wpdb->posts}
+				LEFT JOIN {$wpdb->posts} wp ON wp.ID = {$wpdb->posts}.post_parent
+				WHERE wp.ID IS NULL AND {$wpdb->posts}.post_type = 'product_variation'
+			"
+			);
+			$wpdb->query(
+				"
+				DELETE {$wpdb->postmeta}.* FROM {$wpdb->postmeta}
+				LEFT JOIN {$wpdb->posts} wp ON wp.ID = {$wpdb->postmeta}.post_id
+				WHERE wp.ID IS NULL
+			"
+			);
+			// @codingStandardsIgnoreStart.
+			$wpdb->query( "
+				DELETE tr.* FROM {$wpdb->term_relationships} tr
+				LEFT JOIN {$wpdb->posts} wp ON wp.ID = tr.object_id
+				LEFT JOIN {$wpdb->term_taxonomy} tt ON tr.term_taxonomy_id = tt.term_taxonomy_id
+				WHERE wp.ID IS NULL
+				AND tt.taxonomy IN ( '" . implode( "','", array_map( 'esc_sql', get_object_taxonomies( 'product' ) ) ) . "' )
+			" );
+			// @codingStandardsIgnoreEnd.
+
+			// Send success.
 			wp_send_json_success(
 				array(
-					'step'       => 'done',
+					'position'   => 'done',
 					'percentage' => 100,
-					'url'        => add_query_arg( $query_args, admin_url( 'edit.php?post_type=product&page=product_exporter' ) ),
+					'url'        => add_query_arg( array( '_wpnonce' => wp_create_nonce( 'woocommerce-csv-importer' ) ), admin_url( 'edit.php?post_type=product&page=product_importer&step=done' ) ),
+					'imported'   => count( $results['imported'] ),
+					'failed'     => count( $results['failed'] ),
+					'updated'    => count( $results['updated'] ),
+					'skipped'    => count( $results['skipped'] ),
 				)
 			);
 		} else {
 			wp_send_json_success(
 				array(
-					'step'       => ++$step,
-					'percentage' => $exporter->get_percent_complete(),
-					'columns'    => $exporter->get_column_names(),
+					'position'   => $importer->get_file_position(),
+					'percentage' => $percent_complete,
+					'imported'   => count( $results['imported'] ),
+					'failed'     => count( $results['failed'] ),
+					'updated'    => count( $results['updated'] ),
+					'skipped'    => count( $results['skipped'] ),
 				)
 			);
 		}
 	}
 
 
-/** Function handle_edit_review() called by wp_ajax hooks: {'edit-comment'} **/
-/** Parameters found in function handle_edit_review(): {"post": ["comment_ID", "content", "status", "comment_status", "position"]} **/
-function handle_edit_review(): void {
-		check_ajax_referer( 'replyto-comment', '_ajax_nonce-replyto-comment' );
-
-		$comment_id = isset( $_POST['comment_ID'] ) ? (int) sanitize_text_field( wp_unslash( $_POST['comment_ID'] ) ) : 0;
-
-		if ( empty( $comment_id ) || ! current_user_can( 'edit_comment', $comment_id ) ) {
-			wp_die( -1 );
-		}
-
-		$review = get_comment( $comment_id );
-
-		// Bail silently if this is not a review, or a reply to a review. That allows `wp_ajax_edit_comment()` to handle any further actions.
-		if ( ! $this->is_review_or_reply( $review ) ) {
-			return;
-		}
-
-		if ( empty( $review->comment_ID ) ) {
-			wp_die( -1 );
-		}
-
-		if ( empty( $_POST['content'] ) ) {
-			wp_die( esc_html__( 'Error: Please type your review text.', 'woocommerce' ) );
-		}
-
-		if ( isset( $_POST['status'] ) ) {
-			$_POST['comment_status'] = sanitize_text_field( wp_unslash( $_POST['status'] ) );
-		}
-
-		$updated = edit_comment();
-		if ( is_wp_error( $updated ) ) {
-			wp_die( esc_html( $updated->get_error_message() ) );
-		}
-
-		$position      = isset( $_POST['position'] ) ? (int) sanitize_text_field( wp_unslash( $_POST['position'] ) ) : -1;
-		$wp_list_table = $this->make_reviews_list_table();
-
-		ob_start();
-		$wp_list_table->single_row( $review );
-		$review_list_item = ob_get_clean();
-
-		$x = new WP_Ajax_Response();
-
-		$x->add(
-			array(
-				'what'     => 'edit_comment',
-				'id'       => $review->comment_ID,
-				'data'     => $review_list_item,
-				'position' => $position,
-			)
-		);
-
-		$x->send();
-	}
-
-
 /** Function post_add_dismissed_suggestion_handler() called by wp_ajax hooks: {'woocommerce_add_dismissed_marketplace_suggestion'} **/
+/** No params detected :-/ **/
+
+
+/** Function delete_zone_count_transient() called by wp_ajax hooks: {'woocommerce_shipping_zones_save_changes', 'woocommerce_shipping_zone_methods_save_changes'} **/
 /** No params detected :-/ **/
 
 
@@ -279,119 +268,130 @@ function handle_reply_to_review() : void {
 	}
 
 
-/** Function do_ajax_product_import() called by wp_ajax hooks: {'woocommerce_do_ajax_product_import'} **/
-/** Parameters found in function do_ajax_product_import(): {"post": ["file", "delimiter", "position", "mapping", "update_existing", "character_encoding"]} **/
-function do_ajax_product_import() {
-		global $wpdb;
+/** Function do_ajax_product_export() called by wp_ajax hooks: {'woocommerce_do_ajax_product_export'} **/
+/** Parameters found in function do_ajax_product_export(): {"post": ["step", "columns", "selected_columns", "export_meta", "export_types", "export_category", "filename"]} **/
+function do_ajax_product_export() {
+		check_ajax_referer( 'wc-product-export', 'security' );
 
-		check_ajax_referer( 'wc-product-import', 'security' );
-
-		if ( ! $this->import_allowed() || ! isset( $_POST['file'] ) ) { // PHPCS: input var ok.
-			wp_send_json_error( array( 'message' => __( 'Insufficient privileges to import products.', 'woocommerce' ) ) );
+		if ( ! $this->export_allowed() ) {
+			wp_send_json_error( array( 'message' => __( 'Insufficient privileges to export products.', 'woocommerce' ) ) );
 		}
 
-		include_once WC_ABSPATH . 'includes/admin/importers/class-wc-product-csv-importer-controller.php';
-		include_once WC_ABSPATH . 'includes/import/class-wc-product-csv-importer.php';
+		include_once WC_ABSPATH . 'includes/export/class-wc-product-csv-exporter.php';
 
-		$file   = wc_clean( wp_unslash( $_POST['file'] ) ); // PHPCS: input var ok.
-		$params = array(
-			'delimiter'          => ! empty( $_POST['delimiter'] ) ? wc_clean( wp_unslash( $_POST['delimiter'] ) ) : ',', // PHPCS: input var ok.
-			'start_pos'          => isset( $_POST['position'] ) ? absint( $_POST['position'] ) : 0, // PHPCS: input var ok.
-			'mapping'            => isset( $_POST['mapping'] ) ? (array) wc_clean( wp_unslash( $_POST['mapping'] ) ) : array(), // PHPCS: input var ok.
-			'update_existing'    => isset( $_POST['update_existing'] ) ? (bool) $_POST['update_existing'] : false, // PHPCS: input var ok.
-			'character_encoding' => isset( $_POST['character_encoding'] ) ? wc_clean( wp_unslash( $_POST['character_encoding'] ) ) : '',
+		$step     = isset( $_POST['step'] ) ? absint( $_POST['step'] ) : 1; // WPCS: input var ok, sanitization ok.
+		$exporter = new WC_Product_CSV_Exporter();
 
-			/**
-			 * Batch size for the product import process.
-			 *
-			 * @param int $size Batch size.
-			 *
-			 * @since
-			 */
-			'lines'              => apply_filters( 'woocommerce_product_import_batch_size', 30 ),
-			'parse'              => true,
+		if ( ! empty( $_POST['columns'] ) ) { // WPCS: input var ok.
+			$exporter->set_column_names( wp_unslash( $_POST['columns'] ) ); // WPCS: input var ok, sanitization ok.
+		}
+
+		if ( ! empty( $_POST['selected_columns'] ) ) { // WPCS: input var ok.
+			$exporter->set_columns_to_export( wp_unslash( $_POST['selected_columns'] ) ); // WPCS: input var ok, sanitization ok.
+		}
+
+		if ( ! empty( $_POST['export_meta'] ) ) { // WPCS: input var ok.
+			$exporter->enable_meta_export( true );
+		}
+
+		if ( ! empty( $_POST['export_types'] ) ) { // WPCS: input var ok.
+			$exporter->set_product_types_to_export( wp_unslash( $_POST['export_types'] ) ); // WPCS: input var ok, sanitization ok.
+		}
+
+		if ( ! empty( $_POST['export_category'] ) && is_array( $_POST['export_category'] ) ) {// WPCS: input var ok.
+			$exporter->set_product_category_to_export( wp_unslash( array_values( $_POST['export_category'] ) ) ); // WPCS: input var ok, sanitization ok.
+		}
+
+		if ( ! empty( $_POST['filename'] ) ) { // WPCS: input var ok.
+			$exporter->set_filename( wp_unslash( $_POST['filename'] ) ); // WPCS: input var ok, sanitization ok.
+		}
+
+		$exporter->set_page( $step );
+		$exporter->generate_file();
+
+		$query_args = apply_filters(
+			'woocommerce_export_get_ajax_query_args',
+			array(
+				'nonce'    => wp_create_nonce( 'product-csv' ),
+				'action'   => 'download_product_csv',
+				'filename' => $exporter->get_filename(),
+			)
 		);
 
-		// Log failures.
-		if ( 0 !== $params['start_pos'] ) {
-			$error_log = array_filter( (array) get_user_option( 'product_import_error_log' ) );
-		} else {
-			$error_log = array();
-		}
-
-		$importer         = WC_Product_CSV_Importer_Controller::get_importer( $file, $params );
-		$results          = $importer->import();
-		$percent_complete = $importer->get_percent_complete();
-		$error_log        = array_merge( $error_log, $results['failed'], $results['skipped'] );
-
-		update_user_option( get_current_user_id(), 'product_import_error_log', $error_log );
-
-		if ( 100 === $percent_complete ) {
-			// @codingStandardsIgnoreStart.
-			$wpdb->delete( $wpdb->postmeta, array( 'meta_key' => '_original_id' ) );
-			$wpdb->delete( $wpdb->posts, array(
-				'post_type'   => 'product',
-				'post_status' => 'importing',
-			) );
-			$wpdb->delete( $wpdb->posts, array(
-				'post_type'   => 'product_variation',
-				'post_status' => 'importing',
-			) );
-			// @codingStandardsIgnoreEnd.
-
-			// Clean up orphaned data.
-			$wpdb->query(
-				"
-				DELETE {$wpdb->posts}.* FROM {$wpdb->posts}
-				LEFT JOIN {$wpdb->posts} wp ON wp.ID = {$wpdb->posts}.post_parent
-				WHERE wp.ID IS NULL AND {$wpdb->posts}.post_type = 'product_variation'
-			"
-			);
-			$wpdb->query(
-				"
-				DELETE {$wpdb->postmeta}.* FROM {$wpdb->postmeta}
-				LEFT JOIN {$wpdb->posts} wp ON wp.ID = {$wpdb->postmeta}.post_id
-				WHERE wp.ID IS NULL
-			"
-			);
-			// @codingStandardsIgnoreStart.
-			$wpdb->query( "
-				DELETE tr.* FROM {$wpdb->term_relationships} tr
-				LEFT JOIN {$wpdb->posts} wp ON wp.ID = tr.object_id
-				LEFT JOIN {$wpdb->term_taxonomy} tt ON tr.term_taxonomy_id = tt.term_taxonomy_id
-				WHERE wp.ID IS NULL
-				AND tt.taxonomy IN ( '" . implode( "','", array_map( 'esc_sql', get_object_taxonomies( 'product' ) ) ) . "' )
-			" );
-			// @codingStandardsIgnoreEnd.
-
-			// Send success.
+		if ( 100 === $exporter->get_percent_complete() ) {
 			wp_send_json_success(
 				array(
-					'position'   => 'done',
+					'step'       => 'done',
 					'percentage' => 100,
-					'url'        => add_query_arg( array( '_wpnonce' => wp_create_nonce( 'woocommerce-csv-importer' ) ), admin_url( 'edit.php?post_type=product&page=product_importer&step=done' ) ),
-					'imported'   => count( $results['imported'] ),
-					'failed'     => count( $results['failed'] ),
-					'updated'    => count( $results['updated'] ),
-					'skipped'    => count( $results['skipped'] ),
+					'url'        => add_query_arg( $query_args, admin_url( 'edit.php?post_type=product&page=product_exporter' ) ),
 				)
 			);
 		} else {
 			wp_send_json_success(
 				array(
-					'position'   => $importer->get_file_position(),
-					'percentage' => $percent_complete,
-					'imported'   => count( $results['imported'] ),
-					'failed'     => count( $results['failed'] ),
-					'updated'    => count( $results['updated'] ),
-					'skipped'    => count( $results['skipped'] ),
+					'step'       => ++$step,
+					'percentage' => $exporter->get_percent_complete(),
+					'columns'    => $exporter->get_column_names(),
 				)
 			);
 		}
 	}
 
 
-/** Function delete_zone_count_transient() called by wp_ajax hooks: {'woocommerce_shipping_zones_save_changes', 'woocommerce_shipping_zone_methods_save_changes'} **/
-/** No params detected :-/ **/
+/** Function handle_edit_review() called by wp_ajax hooks: {'edit-comment'} **/
+/** Parameters found in function handle_edit_review(): {"post": ["comment_ID", "content", "status", "comment_status", "position"]} **/
+function handle_edit_review(): void {
+		check_ajax_referer( 'replyto-comment', '_ajax_nonce-replyto-comment' );
+
+		$comment_id = isset( $_POST['comment_ID'] ) ? (int) sanitize_text_field( wp_unslash( $_POST['comment_ID'] ) ) : 0;
+
+		if ( empty( $comment_id ) || ! current_user_can( 'edit_comment', $comment_id ) ) {
+			wp_die( -1 );
+		}
+
+		$review = get_comment( $comment_id );
+
+		// Bail silently if this is not a review, or a reply to a review. That allows `wp_ajax_edit_comment()` to handle any further actions.
+		if ( ! $this->is_review_or_reply( $review ) ) {
+			return;
+		}
+
+		if ( empty( $review->comment_ID ) ) {
+			wp_die( -1 );
+		}
+
+		if ( empty( $_POST['content'] ) ) {
+			wp_die( esc_html__( 'Error: Please type your review text.', 'woocommerce' ) );
+		}
+
+		if ( isset( $_POST['status'] ) ) {
+			$_POST['comment_status'] = sanitize_text_field( wp_unslash( $_POST['status'] ) );
+		}
+
+		$updated = edit_comment();
+		if ( is_wp_error( $updated ) ) {
+			wp_die( esc_html( $updated->get_error_message() ) );
+		}
+
+		$position      = isset( $_POST['position'] ) ? (int) sanitize_text_field( wp_unslash( $_POST['position'] ) ) : -1;
+		$wp_list_table = $this->make_reviews_list_table();
+
+		ob_start();
+		$wp_list_table->single_row( $review );
+		$review_list_item = ob_get_clean();
+
+		$x = new WP_Ajax_Response();
+
+		$x->add(
+			array(
+				'what'     => 'edit_comment',
+				'id'       => $review->comment_ID,
+				'data'     => $review_list_item,
+				'position' => $position,
+			)
+		);
+
+		$x->send();
+	}
 
 

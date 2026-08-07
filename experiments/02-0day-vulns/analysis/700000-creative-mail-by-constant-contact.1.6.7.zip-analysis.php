@@ -5,7 +5,7 @@
 *Found functions:8
 *Extracted functions:8
 *Total parameter names extracted: 2
-*Overview: {'get_creative_email_activated': {'ce4wp_creative_email_activated'}, 'mark_as_rated': {'woocommerce_ce4wp_rated'}, 'deactivate_survey_post': {'ce4wp_deactivate_survey'}, 'no_consent_checkout': {'nopriv_ce4wp_abandoned_checkouts_no_consent_checkout', 'ce4wp_abandoned_checkouts_no_consent_checkout'}, 'request_single_sign_on_url': {'ce4wp_request_sso'}, 'get_all_custom_lists': {'ce4wp_get_all_custom_lists'}, 'submit_contact': {'nopriv_ce4wp_form_submission', 'ce4wp_form_submission'}, 'maybe_capture_guest_checkout': {'nopriv_ce4wp_abandoned_checkouts_capture_guest_checkout', 'ce4wp_abandoned_checkouts_capture_guest_checkout'}}
+*Overview: {'get_creative_email_activated': {'ce4wp_creative_email_activated'}, 'submit_contact': {'ce4wp_form_submission', 'nopriv_ce4wp_form_submission'}, 'maybe_capture_guest_checkout': {'ce4wp_abandoned_checkouts_capture_guest_checkout', 'nopriv_ce4wp_abandoned_checkouts_capture_guest_checkout'}, 'get_all_custom_lists': {'ce4wp_get_all_custom_lists'}, 'request_single_sign_on_url': {'ce4wp_request_sso'}, 'no_consent_checkout': {'nopriv_ce4wp_abandoned_checkouts_no_consent_checkout', 'ce4wp_abandoned_checkouts_no_consent_checkout'}, 'deactivate_survey_post': {'ce4wp_deactivate_survey'}, 'mark_as_rated': {'woocommerce_ce4wp_rated'}}
 *
 ***/
 
@@ -13,7 +13,34 @@
 /** No params detected :-/ **/
 
 
-/** Function mark_as_rated() called by wp_ajax hooks: {'woocommerce_ce4wp_rated'} **/
+/** Function submit_contact() called by wp_ajax hooks: {'ce4wp_form_submission', 'nopriv_ce4wp_form_submission'} **/
+/** No params detected :-/ **/
+
+
+/** Function maybe_capture_guest_checkout() called by wp_ajax hooks: {'ce4wp_abandoned_checkouts_capture_guest_checkout', 'nopriv_ce4wp_abandoned_checkouts_capture_guest_checkout'} **/
+/** No params detected :-/ **/
+
+
+/** Function get_all_custom_lists() called by wp_ajax hooks: {'ce4wp_get_all_custom_lists'} **/
+/** No params detected :-/ **/
+
+
+/** Function request_single_sign_on_url() called by wp_ajax hooks: {'ce4wp_request_sso'} **/
+/** Parameters found in function request_single_sign_on_url(): {"post": ["link_reference", "link_parameters"]} **/
+function request_single_sign_on_url() {
+		// Check for nonce security.
+		$this->check_nonce();
+
+		$linkReference  = array_key_exists('link_reference', $_POST) ? sanitize_text_field( wp_unslash( $_POST['link_reference'] ) ) : null;
+		$linkParameters = array_key_exists('link_parameters', $_POST) ? array_map( 'sanitize_text_field', wp_unslash( $_POST['link_parameters'] ) ) : null;
+		$response       = new Response();
+		$response->url  = $this->request_single_sign_on_url_internal($linkReference, $linkParameters);
+
+		wp_send_json_success($response);
+	}
+
+
+/** Function no_consent_checkout() called by wp_ajax hooks: {'nopriv_ce4wp_abandoned_checkouts_no_consent_checkout', 'ce4wp_abandoned_checkouts_no_consent_checkout'} **/
 /** No params detected :-/ **/
 
 
@@ -59,34 +86,7 @@ function deactivate_survey_post(): void {
 	}
 
 
-/** Function no_consent_checkout() called by wp_ajax hooks: {'nopriv_ce4wp_abandoned_checkouts_no_consent_checkout', 'ce4wp_abandoned_checkouts_no_consent_checkout'} **/
-/** No params detected :-/ **/
-
-
-/** Function request_single_sign_on_url() called by wp_ajax hooks: {'ce4wp_request_sso'} **/
-/** Parameters found in function request_single_sign_on_url(): {"post": ["link_reference", "link_parameters"]} **/
-function request_single_sign_on_url() {
-		// Check for nonce security.
-		$this->check_nonce();
-
-		$linkReference  = array_key_exists('link_reference', $_POST) ? sanitize_text_field( wp_unslash( $_POST['link_reference'] ) ) : null;
-		$linkParameters = array_key_exists('link_parameters', $_POST) ? array_map( 'sanitize_text_field', wp_unslash( $_POST['link_parameters'] ) ) : null;
-		$response       = new Response();
-		$response->url  = $this->request_single_sign_on_url_internal($linkReference, $linkParameters);
-
-		wp_send_json_success($response);
-	}
-
-
-/** Function get_all_custom_lists() called by wp_ajax hooks: {'ce4wp_get_all_custom_lists'} **/
-/** No params detected :-/ **/
-
-
-/** Function submit_contact() called by wp_ajax hooks: {'nopriv_ce4wp_form_submission', 'ce4wp_form_submission'} **/
-/** No params detected :-/ **/
-
-
-/** Function maybe_capture_guest_checkout() called by wp_ajax hooks: {'nopriv_ce4wp_abandoned_checkouts_capture_guest_checkout', 'ce4wp_abandoned_checkouts_capture_guest_checkout'} **/
+/** Function mark_as_rated() called by wp_ajax hooks: {'woocommerce_ce4wp_rated'} **/
 /** No params detected :-/ **/
 
 

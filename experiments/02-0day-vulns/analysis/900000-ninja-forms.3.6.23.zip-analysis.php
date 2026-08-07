@@ -5,38 +5,318 @@
 *Found functions:28
 *Extracted functions:24
 *Total parameter names extracted: 18
-*Overview: {'ninja_forms_ajax_migrate_database': {'ninja_forms_ajax_migrate_database'}, 'ninja_forms_services': {'nf_services'}, 'save': {'nf_save_form'}, 'maybe_delete_field': {'nf_maybe_delete_field'}, 'submit': {'nf_ajax_submit', 'nopriv_nf_ajax_submit'}, 'disconnect': {'nf_oauth_disconnect'}, 'maybe_opt_in': {'nf_optin'}, 'remove_maintenance_mode': {'nf_remove_maintenance_mode'}, 'form_telemetry': {'nf_form_telemetry'}, 'ninja_forms_dashboard_nonce': {'nf_update_cache_mode'}, 'ninja_forms_ajax_import_form': {'ninja_forms_ajax_import_form'}, 'create': {'nf_create_saved_field'}, 'ninja_forms_ajax_import_fields': {'ninja_forms_ajax_import_fields'}, 'get_new_nonce': {'nopriv_nf_ajax_get_new_nonce', 'nf_ajax_get_new_nonce'}, 'duplicate': {'nf_duplicate'}, 'delete': {'nf_delete_form', 'nf_delete', 'nf_delete_saved_field'}, 'update': {'nf_update_saved_field', 'nf_preview_update'}, '<pre>': {'nf_services_install'}, 'ninja_forms_admin_all_forms_capabilities': {'nf_oauth'}, 'hide_columns': {'nf_hide_columns'}, 'connect': {'nf_oauth_connect'}, 'resume': {'nf_ajax_resume', 'nopriv_nf_ajax_resume'}, 'wp_ajax_ninja_forms_sendwp_remote_install_handler': {'ninja_forms_sendwp_remote_install'}, 'get_forms': {'nf_get_forms'}, 'get_new_form_templates': {'nf_get_new_form_templates'}, 'delete_all_data': {'nf_delete_all_data'}, 'undo_click': {'nf_undo_click'}, 'log_error': {'nopriv_nf_log_js_error', 'nf_log_js_error'}}
+*Overview: {'<pre>': {'nf_services_install'}, 'ninja_forms_services': {'nf_services'}, 'create': {'nf_create_saved_field'}, 'update': {'nf_update_saved_field', 'nf_preview_update'}, 'wp_ajax_ninja_forms_sendwp_remote_install_handler': {'ninja_forms_sendwp_remote_install'}, 'ninja_forms_dashboard_nonce': {'nf_update_cache_mode'}, 'remove_maintenance_mode': {'nf_remove_maintenance_mode'}, 'undo_click': {'nf_undo_click'}, 'log_error': {'nf_log_js_error', 'nopriv_nf_log_js_error'}, 'maybe_opt_in': {'nf_optin'}, 'disconnect': {'nf_oauth_disconnect'}, 'ninja_forms_admin_all_forms_capabilities': {'nf_oauth'}, 'duplicate': {'nf_duplicate'}, 'maybe_delete_field': {'nf_maybe_delete_field'}, 'save': {'nf_save_form'}, 'get_new_form_templates': {'nf_get_new_form_templates'}, 'form_telemetry': {'nf_form_telemetry'}, 'connect': {'nf_oauth_connect'}, 'ninja_forms_ajax_migrate_database': {'ninja_forms_ajax_migrate_database'}, 'get_forms': {'nf_get_forms'}, 'ninja_forms_ajax_import_form': {'ninja_forms_ajax_import_form'}, 'submit': {'nf_ajax_submit', 'nopriv_nf_ajax_submit'}, 'delete': {'nf_delete', 'nf_delete_saved_field', 'nf_delete_form'}, 'hide_columns': {'nf_hide_columns'}, 'resume': {'nf_ajax_resume', 'nopriv_nf_ajax_resume'}, 'get_new_nonce': {'nf_ajax_get_new_nonce', 'nopriv_nf_ajax_get_new_nonce'}, 'delete_all_data': {'nf_delete_all_data'}, 'ninja_forms_ajax_import_fields': {'ninja_forms_ajax_import_fields'}}
 *
 ***/
 
-/** Function ninja_forms_ajax_migrate_database() called by wp_ajax hooks: {'ninja_forms_ajax_migrate_database'} **/
-/** Parameters found in function ninja_forms_ajax_migrate_database(): {"post": ["security"]} **/
-function ninja_forms_ajax_migrate_database(){
-    if( ! current_user_can( apply_filters( 'ninja_forms_admin_upgrade_migrate_database_capabilities', 'manage_options' ) ) ) return;
-    if ( ! isset( $_POST[ 'security' ] ) ) return;
-    if ( ! wp_verify_nonce( $_POST[ 'security' ], 'ninja_forms_upgrade_nonce' ) ) return;
-    $migrations = new NF_Database_Migrations();
-    
-    $sure = true;
-    $really_sure = true;
-    $nuke_multisite = false;
-    $migrations->nuke( $sure, $really_sure, $nuke_multisite );
-    $migrations->migrate();
-    // Reset our required updates.
-    delete_option( 'ninja_forms_required_updates' );
-    // Prevent recent 2.9x conversions from running required updates within a week.
-    set_transient( 'ninja_forms_prevent_updates', 'true', WEEK_IN_SECONDS );
-    echo json_encode( array( 'migrate' => 'true' ) );
-    wp_die();
-}
+/** Function <pre>() called by wp_ajax hooks: {'nf_services_install'} **/
+/** No function found :-/ **/
 
 
 /** Function ninja_forms_services() called by wp_ajax hooks: {'nf_services'} **/
 /** No function found :-/ **/
 
 
-/** Function save() called by wp_ajax hooks: {'nf_save_form'} **/
+/** Function create() called by wp_ajax hooks: {'nf_create_saved_field'} **/
 /** No params detected :-/ **/
+
+
+/** Function update() called by wp_ajax hooks: {'nf_update_saved_field', 'nf_preview_update'} **/
+/** Parameters found in function update(): {"post": ["form"]} **/
+function update()
+    {
+        // Does the current user have admin privileges
+        if (!current_user_can(apply_filters('ninja_forms_admin_all_forms_capabilities', 'manage_options'))) {
+            $this->_data['errors'] = esc_html__('Access denied. You must have admin privileges to perform this action.', 'ninja-forms');
+            $this->_respond();
+        }
+
+        check_ajax_referer( 'ninja_forms_builder_nonce', 'security' );
+
+        $form = json_decode( stripslashes( $_POST['form'] ), ARRAY_A );
+
+        $form_id = $form[ 'id' ];
+
+        $form_data = $this->get_form_data( $form_id );
+
+        /*
+         * Form Settings
+         */
+
+        if( isset( $form[ 'settings' ] ) && is_array( $form[ 'settings' ] ) ) {
+
+            $old_settings = $form_data[ 'settings' ];
+
+            $form_data[ 'settings' ] = array_merge( $old_settings, $form[ 'settings' ] );
+        }
+
+        /*
+         * Fields and Field Settings
+         */
+
+        if( isset( $form[ 'fields' ] ) && is_array( $form[ 'fields' ] ) ) {
+
+            foreach( $form[ 'fields' ] as $field ){
+
+                $id = $field[ 'id' ];
+
+                $old_settings = ( isset( $form_data[ 'fields' ][ $id ][ 'settings' ] ) ) ? $form_data[ 'fields' ][ $id ][ 'settings' ] : array();
+
+                $new_settings = array_merge( $old_settings, $field[ 'settings' ] );
+
+                $form_data[ 'fields' ][ $id ][ 'settings' ] = $new_settings;
+            }
+        }
+
+        if( isset( $form[ 'deleted_fields' ] ) ) {
+
+            foreach( $form[ 'deleted_fields' ] as $deleted_field ){
+
+                unset( $form_data[ 'fields' ][ $deleted_field ] );
+            }
+        }
+
+        /*
+         * Actions and Action Settings
+         */
+
+        if( isset( $form[ 'actions' ] ) && is_array( $form[ 'actions' ] ) ) {
+
+            foreach( $form[ 'actions' ] as $action ){
+
+                $id = $action[ 'id' ];
+
+                if( isset( $form[ 'deleted_actions' ][ $id ] ) ) {
+
+                    unset( $form_data[ 'actions' ][ $id ] );
+                    continue;
+                }
+
+                $old_settings = ( isset ( $form_data[ 'actions' ][ $id ][ 'settings' ] ) ) ? $form_data[ 'actions' ][ $id ][ 'settings' ]: array();
+
+                $new_settings = array_merge( $old_settings, $action[ 'settings' ] );
+
+                $form_data[ 'actions' ][ $id ][ 'settings' ] = $new_settings;
+            }
+        }
+
+        if( isset( $form[ 'deleted_actions' ] ) ) {
+
+            foreach( $form[ 'deleted_actions' ] as $deleted_action ){
+
+                unset( $form_data[ 'actions' ][ $deleted_action ] );
+            }
+        }
+
+
+
+        $this->update_form_data( $form_data );
+
+        $this->_data['form'] = $form_data;
+
+        do_action( 'ninja_forms_save_form_preview', $form_id );
+
+        $this->_respond();
+    }
+
+
+/** Function wp_ajax_ninja_forms_sendwp_remote_install_handler() called by wp_ajax hooks: {'ninja_forms_sendwp_remote_install'} **/
+/** Parameters found in function wp_ajax_ninja_forms_sendwp_remote_install_handler(): {"request": ["nonce"]} **/
+function wp_ajax_ninja_forms_sendwp_remote_install_handler () {
+    if (!current_user_can('manage_options') || ! isset($_REQUEST['nonce']) || ! wp_verify_nonce( $_REQUEST['nonce'] , 'ninja_forms_sendwp_remote_install') ) {
+        ob_end_clean();
+        echo json_encode( array( 'error' => esc_html__( 'Something went wrong. SendWP was not installed correctly.', 'ninja-forms') ) );
+        exit;
+    }
+
+    $all_plugins = get_plugins();
+    $is_sendwp_installed = false;
+    foreach(get_plugins() as $path => $details ) {
+        if(false === strpos($path, '/sendwp.php')) continue;
+        $is_sendwp_installed = true;
+        activate_plugin( $path );
+        break;
+    }
+
+    if( ! $is_sendwp_installed ) {
+
+        $plugin_slug = 'sendwp';
+
+        include_once ABSPATH . 'wp-admin/includes/plugin-install.php';
+        include_once ABSPATH . 'wp-admin/includes/file.php';
+        include_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
+        
+        /*
+        * Use the WordPress Plugins API to get the plugin download link.
+        */
+        $api = plugins_api( 'plugin_information', array(
+            'slug' => $plugin_slug,
+        ) );
+        if ( is_wp_error( $api ) ) {
+            ob_end_clean();
+            echo json_encode( array( 'error' => $api->get_error_message(), 'debug' => $api ) );
+            exit;
+        }
+        
+        /*
+        * Use the AJAX Upgrader skin to quietly install the plugin.
+        */
+        $upgrader = new Plugin_Upgrader( new WP_Ajax_Upgrader_Skin() );
+        $install = $upgrader->install( $api->download_link );
+        if ( is_wp_error( $install ) ) {
+            ob_end_clean();
+            echo json_encode( array( 'error' => $install->get_error_message(), 'debug' => $api ) );
+            exit;
+        }
+        
+        /*
+        * Activate the plugin based on the results of the upgrader.
+        * @NOTE Assume this works, if the download works - otherwise there is a false positive if the plugin is already installed.
+        */
+        $activated = activate_plugin( $upgrader->plugin_info() );
+
+    }
+
+    /*
+     * Final check to see if SendWP is available.
+     */
+    if( ! function_exists('sendwp_get_server_url') ) {
+        ob_end_clean();
+        echo json_encode( array(
+            'error' => esc_html__( 'Something went wrong. SendWP was not installed correctly.' ),
+            'install' => $install,
+            ) );
+        exit;
+    }
+    
+    echo json_encode( array(
+        'partner_id' => 16,
+        'register_url' => esc_url(sendwp_get_server_url() . '_/signup'),
+        'client_name' => esc_attr( sendwp_get_client_name() ),
+        'client_secret' => esc_attr( sendwp_get_client_secret() ),
+        'client_redirect' => esc_url(sendwp_get_client_redirect()),
+        'client_url' => esc_url( sendwp_get_client_url() ),
+    ) );
+    exit;
+}
+
+
+/** Function ninja_forms_dashboard_nonce() called by wp_ajax hooks: {'nf_update_cache_mode'} **/
+/** No function found :-/ **/
+
+
+/** Function remove_maintenance_mode() called by wp_ajax hooks: {'nf_remove_maintenance_mode'} **/
+/** No params detected :-/ **/
+
+
+/** Function undo_click() called by wp_ajax hooks: {'nf_undo_click'} **/
+/** No params detected :-/ **/
+
+
+/** Function log_error() called by wp_ajax hooks: {'nf_log_js_error', 'nopriv_nf_log_js_error'} **/
+/** Parameters found in function log_error(): {"request": ["message", "url", "lineNumber"]} **/
+function log_error()
+    {
+        check_ajax_referer( 'ninja_forms_display_nonce', 'security' );
+        $message = esc_html( stripslashes( $_REQUEST[ 'message' ] ) );
+        $url = esc_html( stripslashes( $_REQUEST[ 'url' ] ) );
+        $lineNumber = esc_html( stripslashes( $_REQUEST[ 'lineNumber' ] ) );
+
+        Ninja_Forms()->logger()->emergency( $message . ' in ' . $url . ' on line ' . $lineNumber );
+ 
+        die( 1 );
+    }
+
+
+/** Function maybe_opt_in() called by wp_ajax hooks: {'nf_optin'} **/
+/** No params detected :-/ **/
+
+
+/** Function disconnect() called by wp_ajax hooks: {'nf_oauth_disconnect'} **/
+/** Parameters found in function disconnect(): {"request": ["nonce"]} **/
+function disconnect() {
+
+    // Does the current user have admin privileges
+    if (!current_user_can('manage_options')) {
+      return;
+    }
+
+    if( ! wp_verify_nonce( $_REQUEST['nonce'], 'nf-oauth-disconnect' ) ) return;
+
+    do_action( 'ninja_forms_oauth_disconnect' );
+
+    $url = trailingslashit( $this->base_url ) . 'disconnect';
+    $args = [
+      'blocking' => false,
+      'method' => 'DELETE',
+      'body' => [
+        'client_id' => get_option( 'ninja_forms_oauth_client_id' ),
+        'client_secret' => get_option( 'ninja_forms_oauth_client_secret' )
+      ]
+    ];
+    $response = wp_remote_request( $url, $args );
+
+    delete_option( 'ninja_forms_oauth_client_id' );
+    delete_option( 'ninja_forms_oauth_client_secret' );
+    wp_die( 1 );
+  }
+
+
+/** Function ninja_forms_admin_all_forms_capabilities() called by wp_ajax hooks: {'nf_oauth'} **/
+/** No function found :-/ **/
+
+
+/** Function duplicate() called by wp_ajax hooks: {'nf_duplicate'} **/
+/** Parameters found in function duplicate(): {"request": ["form_id"]} **/
+function duplicate()
+    {
+        $form_id = absint($_REQUEST[ 'form_id' ]);
+
+        //Copied and pasted from NF_Database_models_Form::duplicate line 136
+        $form = Ninja_Forms()->form( $form_id )->get();
+
+        $settings = $form->get_settings();
+
+        $new_form = Ninja_Forms()->form()->get();
+        $new_form->update_settings( $settings );
+
+        $form_title = $form->get_setting( 'title' );
+
+        $new_form_title = $form_title . " - " . esc_html__( 'copy', 'ninja-forms' );
+
+        $new_form->update_setting( 'title', $new_form_title );
+
+        $new_form->update_setting( 'lock', 0 );
+
+        $new_form->save();
+
+        $new_form_id = $new_form->get_id();
+
+        $fields = Ninja_Forms()->form( $form_id )->get_fields();
+
+        foreach( $fields as $field ){
+
+            $field_settings = $field->get_settings();
+
+            $field_settings[ 'parent_id' ] = $new_form_id;
+
+            $new_field = Ninja_Forms()->form( $new_form_id )->field()->get();
+            $new_field->update_settings( $field_settings )->save();
+        }
+
+        $actions = Ninja_Forms()->form( $form_id )->get_actions();
+
+        foreach( $actions as $action ){
+
+            $action_settings = $action->get_settings();
+
+            $new_action = Ninja_Forms()->form( $new_form_id )->action()->get();
+            $new_action->update_settings( $action_settings )->save();
+        }
+
+        return $new_form_id;
+
+    }
 
 
 /** Function maybe_delete_field() called by wp_ajax hooks: {'nf_maybe_delete_field'} **/
@@ -79,6 +359,97 @@ function maybe_delete_field() {
 
 		$this->_respond();
 	}
+
+
+/** Function save() called by wp_ajax hooks: {'nf_save_form'} **/
+/** No params detected :-/ **/
+
+
+/** Function get_new_form_templates() called by wp_ajax hooks: {'nf_get_new_form_templates'} **/
+/** No params detected :-/ **/
+
+
+/** Function form_telemetry() called by wp_ajax hooks: {'nf_form_telemetry'} **/
+/** No params detected :-/ **/
+
+
+/** Function connect() called by wp_ajax hooks: {'nf_oauth_connect'} **/
+/** Parameters found in function connect(): {"request": ["nonce"], "get": ["client_id", "redirect"]} **/
+function connect() {
+    // Does the current user have admin privileges
+    if (!current_user_can('manage_options')) {
+      return;
+    }
+
+    if( ! wp_verify_nonce( $_REQUEST['nonce'], 'nf-oauth-connect' ) ) return;
+
+    if( ! isset( $_GET[ 'client_id' ] ) ) return;
+
+    $client_id = sanitize_text_field( $_GET[ 'client_id' ] );
+    update_option( 'ninja_forms_oauth_client_id', $client_id );
+
+    if( isset( $_GET[ 'redirect' ] ) ){
+      $redirect = sanitize_text_field( $_GET[ 'redirect' ] );
+      $redirect = add_query_arg( 'client_id', $client_id, $redirect );
+      wp_redirect( $redirect );
+      exit;
+    }
+
+    wp_safe_redirect( admin_url( 'admin.php?page=ninja-forms#services' ) );
+    exit;
+  }
+
+
+/** Function ninja_forms_ajax_migrate_database() called by wp_ajax hooks: {'ninja_forms_ajax_migrate_database'} **/
+/** Parameters found in function ninja_forms_ajax_migrate_database(): {"post": ["security"]} **/
+function ninja_forms_ajax_migrate_database(){
+    if( ! current_user_can( apply_filters( 'ninja_forms_admin_upgrade_migrate_database_capabilities', 'manage_options' ) ) ) return;
+    if ( ! isset( $_POST[ 'security' ] ) ) return;
+    if ( ! wp_verify_nonce( $_POST[ 'security' ], 'ninja_forms_upgrade_nonce' ) ) return;
+    $migrations = new NF_Database_Migrations();
+    
+    $sure = true;
+    $really_sure = true;
+    $nuke_multisite = false;
+    $migrations->nuke( $sure, $really_sure, $nuke_multisite );
+    $migrations->migrate();
+    // Reset our required updates.
+    delete_option( 'ninja_forms_required_updates' );
+    // Prevent recent 2.9x conversions from running required updates within a week.
+    set_transient( 'ninja_forms_prevent_updates', 'true', WEEK_IN_SECONDS );
+    echo json_encode( array( 'migrate' => 'true' ) );
+    wp_die();
+}
+
+
+/** Function get_forms() called by wp_ajax hooks: {'nf_get_forms'} **/
+/** No params detected :-/ **/
+
+
+/** Function ninja_forms_ajax_import_form() called by wp_ajax hooks: {'ninja_forms_ajax_import_form'} **/
+/** Parameters found in function ninja_forms_ajax_import_form(): {"post": ["security", "import", "formID", "flagged"]} **/
+function ninja_forms_ajax_import_form(){
+    if( ! current_user_can( apply_filters( 'ninja_forms_admin_upgrade_import_form_capabilities', 'manage_options' ) ) ) return;
+    if ( ! isset( $_POST[ 'security' ] ) ) return;
+    if ( ! wp_verify_nonce( $_POST[ 'security' ], 'ninja_forms_upgrade_nonce' ) ) return;
+
+    $import = stripslashes( $_POST[ 'import' ] );
+
+    $form_id = ( isset( $_POST[ 'formID' ] ) ) ? absint( $_POST[ 'formID' ] ) : '';
+
+    WPN_Helper::delete_nf_cache( $form_id ); // Bust the cache.
+
+    Ninja_Forms()->form()->import_form( $import, TRUE, $form_id, TRUE );
+
+    if( isset( $_POST[ 'flagged' ] ) && $_POST[ 'flagged' ] ){
+        $form = Ninja_Forms()->form( $form_id )->get();
+        $form->update_setting( 'lock', TRUE );
+        $form->save();
+    }
+
+    echo json_encode( array( 'export' => WPN_Helper::esc_html($_POST['import']), 'import' => $import ) );
+    wp_die();
+}
 
 
 /** Function submit() called by wp_ajax hooks: {'nf_ajax_submit', 'nopriv_nf_ajax_submit'} **/
@@ -183,266 +554,8 @@ function submit()
     }
 
 
-/** Function disconnect() called by wp_ajax hooks: {'nf_oauth_disconnect'} **/
-/** Parameters found in function disconnect(): {"request": ["nonce"]} **/
-function disconnect() {
-
-    // Does the current user have admin privileges
-    if (!current_user_can('manage_options')) {
-      return;
-    }
-
-    if( ! wp_verify_nonce( $_REQUEST['nonce'], 'nf-oauth-disconnect' ) ) return;
-
-    do_action( 'ninja_forms_oauth_disconnect' );
-
-    $url = trailingslashit( $this->base_url ) . 'disconnect';
-    $args = [
-      'blocking' => false,
-      'method' => 'DELETE',
-      'body' => [
-        'client_id' => get_option( 'ninja_forms_oauth_client_id' ),
-        'client_secret' => get_option( 'ninja_forms_oauth_client_secret' )
-      ]
-    ];
-    $response = wp_remote_request( $url, $args );
-
-    delete_option( 'ninja_forms_oauth_client_id' );
-    delete_option( 'ninja_forms_oauth_client_secret' );
-    wp_die( 1 );
-  }
-
-
-/** Function maybe_opt_in() called by wp_ajax hooks: {'nf_optin'} **/
+/** Function delete() called by wp_ajax hooks: {'nf_delete', 'nf_delete_saved_field', 'nf_delete_form'} **/
 /** No params detected :-/ **/
-
-
-/** Function remove_maintenance_mode() called by wp_ajax hooks: {'nf_remove_maintenance_mode'} **/
-/** No params detected :-/ **/
-
-
-/** Function form_telemetry() called by wp_ajax hooks: {'nf_form_telemetry'} **/
-/** No params detected :-/ **/
-
-
-/** Function ninja_forms_dashboard_nonce() called by wp_ajax hooks: {'nf_update_cache_mode'} **/
-/** No function found :-/ **/
-
-
-/** Function ninja_forms_ajax_import_form() called by wp_ajax hooks: {'ninja_forms_ajax_import_form'} **/
-/** Parameters found in function ninja_forms_ajax_import_form(): {"post": ["security", "import", "formID", "flagged"]} **/
-function ninja_forms_ajax_import_form(){
-    if( ! current_user_can( apply_filters( 'ninja_forms_admin_upgrade_import_form_capabilities', 'manage_options' ) ) ) return;
-    if ( ! isset( $_POST[ 'security' ] ) ) return;
-    if ( ! wp_verify_nonce( $_POST[ 'security' ], 'ninja_forms_upgrade_nonce' ) ) return;
-
-    $import = stripslashes( $_POST[ 'import' ] );
-
-    $form_id = ( isset( $_POST[ 'formID' ] ) ) ? absint( $_POST[ 'formID' ] ) : '';
-
-    WPN_Helper::delete_nf_cache( $form_id ); // Bust the cache.
-
-    Ninja_Forms()->form()->import_form( $import, TRUE, $form_id, TRUE );
-
-    if( isset( $_POST[ 'flagged' ] ) && $_POST[ 'flagged' ] ){
-        $form = Ninja_Forms()->form( $form_id )->get();
-        $form->update_setting( 'lock', TRUE );
-        $form->save();
-    }
-
-    echo json_encode( array( 'export' => WPN_Helper::esc_html($_POST['import']), 'import' => $import ) );
-    wp_die();
-}
-
-
-/** Function create() called by wp_ajax hooks: {'nf_create_saved_field'} **/
-/** No params detected :-/ **/
-
-
-/** Function ninja_forms_ajax_import_fields() called by wp_ajax hooks: {'ninja_forms_ajax_import_fields'} **/
-/** Parameters found in function ninja_forms_ajax_import_fields(): {"post": ["security", "fields"]} **/
-function ninja_forms_ajax_import_fields(){
-    if( ! current_user_can( apply_filters( 'ninja_forms_admin_upgrade_import_fields_capabilities', 'manage_options' ) ) ) return;
-    if ( ! isset( $_POST[ 'security' ] ) ) return;
-    if ( ! wp_verify_nonce( $_POST[ 'security' ], 'ninja_forms_upgrade_nonce' ) ) return;
-    $fields = stripslashes( WPN_Helper::esc_html($_POST[ 'fields' ]) ); // TODO: How to sanitize serialized string?
-    $fields = maybe_unserialize( $fields );
-
-    foreach( $fields as $field ) {
-        Ninja_Forms()->form()->import_field( $field, $field[ 'id' ], TRUE );
-    }
-
-    echo json_encode( array( 'export' => WPN_Helper::esc_html($_POST['fields']), 'import' => $fields ) );
-    wp_die();
-}
-
-
-/** Function get_new_nonce() called by wp_ajax hooks: {'nopriv_nf_ajax_get_new_nonce', 'nf_ajax_get_new_nonce'} **/
-/** No params detected :-/ **/
-
-
-/** Function duplicate() called by wp_ajax hooks: {'nf_duplicate'} **/
-/** Parameters found in function duplicate(): {"request": ["form_id"]} **/
-function duplicate()
-    {
-        $form_id = absint($_REQUEST[ 'form_id' ]);
-
-        //Copied and pasted from NF_Database_models_Form::duplicate line 136
-        $form = Ninja_Forms()->form( $form_id )->get();
-
-        $settings = $form->get_settings();
-
-        $new_form = Ninja_Forms()->form()->get();
-        $new_form->update_settings( $settings );
-
-        $form_title = $form->get_setting( 'title' );
-
-        $new_form_title = $form_title . " - " . esc_html__( 'copy', 'ninja-forms' );
-
-        $new_form->update_setting( 'title', $new_form_title );
-
-        $new_form->update_setting( 'lock', 0 );
-
-        $new_form->save();
-
-        $new_form_id = $new_form->get_id();
-
-        $fields = Ninja_Forms()->form( $form_id )->get_fields();
-
-        foreach( $fields as $field ){
-
-            $field_settings = $field->get_settings();
-
-            $field_settings[ 'parent_id' ] = $new_form_id;
-
-            $new_field = Ninja_Forms()->form( $new_form_id )->field()->get();
-            $new_field->update_settings( $field_settings )->save();
-        }
-
-        $actions = Ninja_Forms()->form( $form_id )->get_actions();
-
-        foreach( $actions as $action ){
-
-            $action_settings = $action->get_settings();
-
-            $new_action = Ninja_Forms()->form( $new_form_id )->action()->get();
-            $new_action->update_settings( $action_settings )->save();
-        }
-
-        return $new_form_id;
-
-    }
-
-
-/** Function delete() called by wp_ajax hooks: {'nf_delete_form', 'nf_delete', 'nf_delete_saved_field'} **/
-/** No params detected :-/ **/
-
-
-/** Function update() called by wp_ajax hooks: {'nf_update_saved_field', 'nf_preview_update'} **/
-/** Parameters found in function update(): {"post": ["form"]} **/
-function update()
-    {
-        // Does the current user have admin privileges
-        if (!current_user_can(apply_filters('ninja_forms_admin_all_forms_capabilities', 'manage_options'))) {
-            $this->_data['errors'] = esc_html__('Access denied. You must have admin privileges to perform this action.', 'ninja-forms');
-            $this->_respond();
-        }
-
-        check_ajax_referer( 'ninja_forms_builder_nonce', 'security' );
-
-        $form = json_decode( stripslashes( $_POST['form'] ), ARRAY_A );
-
-        $form_id = $form[ 'id' ];
-
-        $form_data = $this->get_form_data( $form_id );
-
-        /*
-         * Form Settings
-         */
-
-        if( isset( $form[ 'settings' ] ) && is_array( $form[ 'settings' ] ) ) {
-
-            $old_settings = $form_data[ 'settings' ];
-
-            $form_data[ 'settings' ] = array_merge( $old_settings, $form[ 'settings' ] );
-        }
-
-        /*
-         * Fields and Field Settings
-         */
-
-        if( isset( $form[ 'fields' ] ) && is_array( $form[ 'fields' ] ) ) {
-
-            foreach( $form[ 'fields' ] as $field ){
-
-                $id = $field[ 'id' ];
-
-                $old_settings = ( isset( $form_data[ 'fields' ][ $id ][ 'settings' ] ) ) ? $form_data[ 'fields' ][ $id ][ 'settings' ] : array();
-
-                $new_settings = array_merge( $old_settings, $field[ 'settings' ] );
-
-                $form_data[ 'fields' ][ $id ][ 'settings' ] = $new_settings;
-            }
-        }
-
-        if( isset( $form[ 'deleted_fields' ] ) ) {
-
-            foreach( $form[ 'deleted_fields' ] as $deleted_field ){
-
-                unset( $form_data[ 'fields' ][ $deleted_field ] );
-            }
-        }
-
-        /*
-         * Actions and Action Settings
-         */
-
-        if( isset( $form[ 'actions' ] ) && is_array( $form[ 'actions' ] ) ) {
-
-            foreach( $form[ 'actions' ] as $action ){
-
-                $id = $action[ 'id' ];
-
-                if( isset( $form[ 'deleted_actions' ][ $id ] ) ) {
-
-                    unset( $form_data[ 'actions' ][ $id ] );
-                    continue;
-                }
-
-                $old_settings = ( isset ( $form_data[ 'actions' ][ $id ][ 'settings' ] ) ) ? $form_data[ 'actions' ][ $id ][ 'settings' ]: array();
-
-                $new_settings = array_merge( $old_settings, $action[ 'settings' ] );
-
-                $form_data[ 'actions' ][ $id ][ 'settings' ] = $new_settings;
-            }
-        }
-
-        if( isset( $form[ 'deleted_actions' ] ) ) {
-
-            foreach( $form[ 'deleted_actions' ] as $deleted_action ){
-
-                unset( $form_data[ 'actions' ][ $deleted_action ] );
-            }
-        }
-
-
-
-        $this->update_form_data( $form_data );
-
-        $this->_data['form'] = $form_data;
-
-        do_action( 'ninja_forms_save_form_preview', $form_id );
-
-        $this->_respond();
-    }
-
-
-/** Function <pre>() called by wp_ajax hooks: {'nf_services_install'} **/
-/** No function found :-/ **/
-
-
-/** Function ninja_forms_admin_all_forms_capabilities() called by wp_ajax hooks: {'nf_oauth'} **/
-/** No function found :-/ **/
 
 
 /** Function hide_columns() called by wp_ajax hooks: {'nf_hide_columns'} **/
@@ -465,33 +578,6 @@ function hide_columns() {
     }
 
 
-/** Function connect() called by wp_ajax hooks: {'nf_oauth_connect'} **/
-/** Parameters found in function connect(): {"request": ["nonce"], "get": ["client_id", "redirect"]} **/
-function connect() {
-    // Does the current user have admin privileges
-    if (!current_user_can('manage_options')) {
-      return;
-    }
-
-    if( ! wp_verify_nonce( $_REQUEST['nonce'], 'nf-oauth-connect' ) ) return;
-
-    if( ! isset( $_GET[ 'client_id' ] ) ) return;
-
-    $client_id = sanitize_text_field( $_GET[ 'client_id' ] );
-    update_option( 'ninja_forms_oauth_client_id', $client_id );
-
-    if( isset( $_GET[ 'redirect' ] ) ){
-      $redirect = sanitize_text_field( $_GET[ 'redirect' ] );
-      $redirect = add_query_arg( 'client_id', $client_id, $redirect );
-      wp_redirect( $redirect );
-      exit;
-    }
-
-    wp_safe_redirect( admin_url( 'admin.php?page=ninja-forms#services' ) );
-    exit;
-  }
-
-
 /** Function resume() called by wp_ajax hooks: {'nf_ajax_resume', 'nopriv_nf_ajax_resume'} **/
 /** Parameters found in function resume(): {"post": ["nf_resume"]} **/
 function resume()
@@ -510,92 +596,7 @@ function resume()
     }
 
 
-/** Function wp_ajax_ninja_forms_sendwp_remote_install_handler() called by wp_ajax hooks: {'ninja_forms_sendwp_remote_install'} **/
-/** Parameters found in function wp_ajax_ninja_forms_sendwp_remote_install_handler(): {"request": ["nonce"]} **/
-function wp_ajax_ninja_forms_sendwp_remote_install_handler () {
-    if (!current_user_can('manage_options') || ! isset($_REQUEST['nonce']) || ! wp_verify_nonce( $_REQUEST['nonce'] , 'ninja_forms_sendwp_remote_install') ) {
-        ob_end_clean();
-        echo json_encode( array( 'error' => esc_html__( 'Something went wrong. SendWP was not installed correctly.', 'ninja-forms') ) );
-        exit;
-    }
-
-    $all_plugins = get_plugins();
-    $is_sendwp_installed = false;
-    foreach(get_plugins() as $path => $details ) {
-        if(false === strpos($path, '/sendwp.php')) continue;
-        $is_sendwp_installed = true;
-        activate_plugin( $path );
-        break;
-    }
-
-    if( ! $is_sendwp_installed ) {
-
-        $plugin_slug = 'sendwp';
-
-        include_once ABSPATH . 'wp-admin/includes/plugin-install.php';
-        include_once ABSPATH . 'wp-admin/includes/file.php';
-        include_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
-        
-        /*
-        * Use the WordPress Plugins API to get the plugin download link.
-        */
-        $api = plugins_api( 'plugin_information', array(
-            'slug' => $plugin_slug,
-        ) );
-        if ( is_wp_error( $api ) ) {
-            ob_end_clean();
-            echo json_encode( array( 'error' => $api->get_error_message(), 'debug' => $api ) );
-            exit;
-        }
-        
-        /*
-        * Use the AJAX Upgrader skin to quietly install the plugin.
-        */
-        $upgrader = new Plugin_Upgrader( new WP_Ajax_Upgrader_Skin() );
-        $install = $upgrader->install( $api->download_link );
-        if ( is_wp_error( $install ) ) {
-            ob_end_clean();
-            echo json_encode( array( 'error' => $install->get_error_message(), 'debug' => $api ) );
-            exit;
-        }
-        
-        /*
-        * Activate the plugin based on the results of the upgrader.
-        * @NOTE Assume this works, if the download works - otherwise there is a false positive if the plugin is already installed.
-        */
-        $activated = activate_plugin( $upgrader->plugin_info() );
-
-    }
-
-    /*
-     * Final check to see if SendWP is available.
-     */
-    if( ! function_exists('sendwp_get_server_url') ) {
-        ob_end_clean();
-        echo json_encode( array(
-            'error' => esc_html__( 'Something went wrong. SendWP was not installed correctly.' ),
-            'install' => $install,
-            ) );
-        exit;
-    }
-    
-    echo json_encode( array(
-        'partner_id' => 16,
-        'register_url' => esc_url(sendwp_get_server_url() . '_/signup'),
-        'client_name' => esc_attr( sendwp_get_client_name() ),
-        'client_secret' => esc_attr( sendwp_get_client_secret() ),
-        'client_redirect' => esc_url(sendwp_get_client_redirect()),
-        'client_url' => esc_url( sendwp_get_client_url() ),
-    ) );
-    exit;
-}
-
-
-/** Function get_forms() called by wp_ajax hooks: {'nf_get_forms'} **/
-/** No params detected :-/ **/
-
-
-/** Function get_new_form_templates() called by wp_ajax hooks: {'nf_get_new_form_templates'} **/
+/** Function get_new_nonce() called by wp_ajax hooks: {'nf_ajax_get_new_nonce', 'nopriv_nf_ajax_get_new_nonce'} **/
 /** No params detected :-/ **/
 
 
@@ -671,22 +672,21 @@ function delete_all_data()
 	}
 
 
-/** Function undo_click() called by wp_ajax hooks: {'nf_undo_click'} **/
-/** No params detected :-/ **/
+/** Function ninja_forms_ajax_import_fields() called by wp_ajax hooks: {'ninja_forms_ajax_import_fields'} **/
+/** Parameters found in function ninja_forms_ajax_import_fields(): {"post": ["security", "fields"]} **/
+function ninja_forms_ajax_import_fields(){
+    if( ! current_user_can( apply_filters( 'ninja_forms_admin_upgrade_import_fields_capabilities', 'manage_options' ) ) ) return;
+    if ( ! isset( $_POST[ 'security' ] ) ) return;
+    if ( ! wp_verify_nonce( $_POST[ 'security' ], 'ninja_forms_upgrade_nonce' ) ) return;
+    $fields = stripslashes( WPN_Helper::esc_html($_POST[ 'fields' ]) ); // TODO: How to sanitize serialized string?
+    $fields = maybe_unserialize( $fields );
 
-
-/** Function log_error() called by wp_ajax hooks: {'nopriv_nf_log_js_error', 'nf_log_js_error'} **/
-/** Parameters found in function log_error(): {"request": ["message", "url", "lineNumber"]} **/
-function log_error()
-    {
-        check_ajax_referer( 'ninja_forms_display_nonce', 'security' );
-        $message = esc_html( stripslashes( $_REQUEST[ 'message' ] ) );
-        $url = esc_html( stripslashes( $_REQUEST[ 'url' ] ) );
-        $lineNumber = esc_html( stripslashes( $_REQUEST[ 'lineNumber' ] ) );
-
-        Ninja_Forms()->logger()->emergency( $message . ' in ' . $url . ' on line ' . $lineNumber );
- 
-        die( 1 );
+    foreach( $fields as $field ) {
+        Ninja_Forms()->form()->import_field( $field, $field[ 'id' ], TRUE );
     }
+
+    echo json_encode( array( 'export' => WPN_Helper::esc_html($_POST['fields']), 'import' => $fields ) );
+    wp_die();
+}
 
 

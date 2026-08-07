@@ -5,35 +5,15 @@
 *Found functions:13
 *Extracted functions:4
 *Total parameter names extracted: 4
-*Overview: {'WPGMZA\\\\store_nominatim_cache': {'wpgmza_store_nominatim_cache', 'nopriv_wpgmza_store_nominatim_cache'}, 'WPGMZA\\\\query_nominatim_cache': {'nopriv_wpgmza_query_nominatim_cache', 'wpgmza_query_nominatim_cache'}, 'onReportRestAPIBlocked': {'nopriv_wpgmza_report_rest_api_blocked', 'wpgmza_report_rest_api_blocked'}, 'WPGMZA\\\\SettingsPage': {'wpgmza_maps_settings_danger_zone_delete_data'}, 'WPGMZA\\\\MapEditorTour': {'wpgmza_tour_progress_update'}, 'WPGMZA\\\\InstallerPage': {'wpgmza_installer_page_save_options', 'wpgmza_installer_page_skip'}, 'WPGMZA\\\\clear_nominatim_cache': {'wpgmza_clear_nominatim_cache'}, 'onAJAXRequest': {'wpgmza_rest_api_request', 'nopriv_wpgmza_rest_api_request'}, 'WPGMZA\\\\Page': {'wpgmza_hide_chat'}, 'dismissFromPostAjax': {'wpgmza_dismiss_persistent_notice'}, 'processBackgroundAction': {'wpgmza_persisten_notice_quick_action'}, 'wpgmaps_action_callback_pro': {'delete_poly', 'delete_rectangle', 'approve_marker', 'delete_polyline', 'add_marker', 'delete_circle', 'edit_marker', 'delete_marker', 'delete_dataset'}, 'WPGMZA\\\\MapsEngineDialog': {'wpgmza_maps_engine_dialog_set_engine'}}
+*Overview: {'WPGMZA\\\\SettingsPage': {'wpgmza_maps_settings_danger_zone_delete_data'}, 'WPGMZA\\\\Page': {'wpgmza_hide_chat'}, 'onAJAXRequest': {'wpgmza_rest_api_request', 'nopriv_wpgmza_rest_api_request'}, 'onReportRestAPIBlocked': {'wpgmza_report_rest_api_blocked', 'nopriv_wpgmza_report_rest_api_blocked'}, 'WPGMZA\\\\store_nominatim_cache': {'nopriv_wpgmza_store_nominatim_cache', 'wpgmza_store_nominatim_cache'}, 'WPGMZA\\\\query_nominatim_cache': {'wpgmza_query_nominatim_cache', 'nopriv_wpgmza_query_nominatim_cache'}, 'WPGMZA\\\\MapsEngineDialog': {'wpgmza_maps_engine_dialog_set_engine'}, 'WPGMZA\\\\MapEditorTour': {'wpgmza_tour_progress_update'}, 'wpgmaps_action_callback_pro': {'delete_rectangle', 'delete_poly', 'delete_marker', 'edit_marker', 'delete_circle', 'delete_dataset', 'approve_marker', 'delete_polyline', 'add_marker'}, 'WPGMZA\\\\InstallerPage': {'wpgmza_installer_page_save_options', 'wpgmza_installer_page_skip'}, 'WPGMZA\\\\clear_nominatim_cache': {'wpgmza_clear_nominatim_cache'}, 'dismissFromPostAjax': {'wpgmza_dismiss_persistent_notice'}, 'processBackgroundAction': {'wpgmza_persisten_notice_quick_action'}}
 *
 ***/
-
-/** Function WPGMZA\\store_nominatim_cache() called by wp_ajax hooks: {'wpgmza_store_nominatim_cache', 'nopriv_wpgmza_store_nominatim_cache'} **/
-/** No function found :-/ **/
-
-
-/** Function WPGMZA\\query_nominatim_cache() called by wp_ajax hooks: {'nopriv_wpgmza_query_nominatim_cache', 'wpgmza_query_nominatim_cache'} **/
-/** No function found :-/ **/
-
-
-/** Function onReportRestAPIBlocked() called by wp_ajax hooks: {'nopriv_wpgmza_report_rest_api_blocked', 'wpgmza_report_rest_api_blocked'} **/
-/** No params detected :-/ **/
-
 
 /** Function WPGMZA\\SettingsPage() called by wp_ajax hooks: {'wpgmza_maps_settings_danger_zone_delete_data'} **/
 /** No function found :-/ **/
 
 
-/** Function WPGMZA\\MapEditorTour() called by wp_ajax hooks: {'wpgmza_tour_progress_update'} **/
-/** No function found :-/ **/
-
-
-/** Function WPGMZA\\InstallerPage() called by wp_ajax hooks: {'wpgmza_installer_page_save_options', 'wpgmza_installer_page_skip'} **/
-/** No function found :-/ **/
-
-
-/** Function WPGMZA\\clear_nominatim_cache() called by wp_ajax hooks: {'wpgmza_clear_nominatim_cache'} **/
+/** Function WPGMZA\\Page() called by wp_ajax hooks: {'wpgmza_hide_chat'} **/
 /** No function found :-/ **/
 
 
@@ -112,7 +92,35 @@ function onAJAXRequest()
 	}
 
 
-/** Function WPGMZA\\Page() called by wp_ajax hooks: {'wpgmza_hide_chat'} **/
+/** Function onReportRestAPIBlocked() called by wp_ajax hooks: {'wpgmza_report_rest_api_blocked', 'nopriv_wpgmza_report_rest_api_blocked'} **/
+/** No params detected :-/ **/
+
+
+/** Function WPGMZA\\store_nominatim_cache() called by wp_ajax hooks: {'nopriv_wpgmza_store_nominatim_cache', 'wpgmza_store_nominatim_cache'} **/
+/** No function found :-/ **/
+
+
+/** Function WPGMZA\\query_nominatim_cache() called by wp_ajax hooks: {'wpgmza_query_nominatim_cache', 'nopriv_wpgmza_query_nominatim_cache'} **/
+/** No function found :-/ **/
+
+
+/** Function WPGMZA\\MapsEngineDialog() called by wp_ajax hooks: {'wpgmza_maps_engine_dialog_set_engine'} **/
+/** No function found :-/ **/
+
+
+/** Function WPGMZA\\MapEditorTour() called by wp_ajax hooks: {'wpgmza_tour_progress_update'} **/
+/** No function found :-/ **/
+
+
+/** Function wpgmaps_action_callback_pro() called by wp_ajax hooks: {'delete_rectangle', 'delete_poly', 'delete_marker', 'edit_marker', 'delete_circle', 'delete_dataset', 'approve_marker', 'delete_polyline', 'add_marker'} **/
+/** No function found :-/ **/
+
+
+/** Function WPGMZA\\InstallerPage() called by wp_ajax hooks: {'wpgmza_installer_page_save_options', 'wpgmza_installer_page_skip'} **/
+/** No function found :-/ **/
+
+
+/** Function WPGMZA\\clear_nominatim_cache() called by wp_ajax hooks: {'wpgmza_clear_nominatim_cache'} **/
 /** No function found :-/ **/
 
 
@@ -162,13 +170,5 @@ function processBackgroundAction(){
 
 		wp_send_json_success('Complete');
 	}
-
-
-/** Function wpgmaps_action_callback_pro() called by wp_ajax hooks: {'delete_poly', 'delete_rectangle', 'approve_marker', 'delete_polyline', 'add_marker', 'delete_circle', 'edit_marker', 'delete_marker', 'delete_dataset'} **/
-/** No function found :-/ **/
-
-
-/** Function WPGMZA\\MapsEngineDialog() called by wp_ajax hooks: {'wpgmza_maps_engine_dialog_set_engine'} **/
-/** No function found :-/ **/
 
 
