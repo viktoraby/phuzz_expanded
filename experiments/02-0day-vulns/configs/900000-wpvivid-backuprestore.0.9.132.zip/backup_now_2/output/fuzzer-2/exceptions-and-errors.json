@@ -1,0 +1,252 @@
+[
+  {
+    "coverage_id": "1787298485-4d30f6e6-469f-41c4-873b-6c7db78026c3",
+    "priority": 0,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "wpvivid_backup_now_2"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "task_id": "7B%Q\u0002B2\u0007p%28\u0006ap%p%<script>alert(0xdeadbef)</sc7i%pt>\\5%7'%7D\u0000\u0000\u0000"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Cookie_Jar::offsetExists($key) should either be compatible with ArrayAccess::offsetExists(mixed $offset): bool, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Cookie/Jar.php",
+        "errline": 63
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Cookie_Jar::offsetGet($key) should either be compatible with ArrayAccess::offsetGet(mixed $offset): mixed, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Cookie/Jar.php",
+        "errline": 73
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Cookie_Jar::offsetSet($key, $value) should either be compatible with ArrayAccess::offsetSet(mixed $offset, mixed $value): void, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Cookie/Jar.php",
+        "errline": 89
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Cookie_Jar::offsetUnset($key) should either be compatible with ArrayAccess::offsetUnset(mixed $offset): void, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Cookie/Jar.php",
+        "errline": 102
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Cookie_Jar::getIterator() should either be compatible with IteratorAggregate::getIterator(): Traversable, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Cookie/Jar.php",
+        "errline": 111
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Utility_CaseInsensitiveDictionary::offsetExists($key) should either be compatible with ArrayAccess::offsetExists(mixed $offset): bool, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Utility/CaseInsensitiveDictionary.php",
+        "errline": 40
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Utility_CaseInsensitiveDictionary::offsetGet($key) should either be compatible with ArrayAccess::offsetGet(mixed $offset): mixed, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Utility/CaseInsensitiveDictionary.php",
+        "errline": 51
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Utility_CaseInsensitiveDictionary::offsetSet($key, $value) should either be compatible with ArrayAccess::offsetSet(mixed $offset, mixed $value): void, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Utility/CaseInsensitiveDictionary.php",
+        "errline": 68
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Utility_CaseInsensitiveDictionary::offsetUnset($key) should either be compatible with ArrayAccess::offsetUnset(mixed $offset): void, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Utility/CaseInsensitiveDictionary.php",
+        "errline": 82
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Utility_CaseInsensitiveDictionary::getIterator() should either be compatible with IteratorAggregate::getIterator(): Traversable, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Utility/CaseInsensitiveDictionary.php",
+        "errline": 91
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"result\":\"success\",\"task_id\":\"7bqb2p28appscriptalert0xdeadbefsc7ipt577d000\"",
+    "response.body.length": 77,
+    "response.headers": {
+      "Date": "Fri, 21 Aug 2026 07:48:05 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "77",
+      "Connection": "close",
+      "Content-Encoding": "none",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 295.867,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787298465-6dd5892a-b5e0-4c3c-b06e-411af5024b19",
+    "paths": {},
+    "new_paths": [],
+    "vulns": [],
+    "score": 0,
+    "is_interesting": false,
+    "fuzzer_id": "2",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "task_id"
+  },
+  {
+    "coverage_id": "1787298515-e8d3e6b1-23d1-4409-93a3-4a18e9f2b40e",
+    "priority": 0,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "wpvivid_backup_now_2"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "task_id": "e/F?u#l\u00013$.\u0000"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Cookie_Jar::offsetExists($key) should either be compatible with ArrayAccess::offsetExists(mixed $offset): bool, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Cookie/Jar.php",
+        "errline": 63
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Cookie_Jar::offsetGet($key) should either be compatible with ArrayAccess::offsetGet(mixed $offset): mixed, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Cookie/Jar.php",
+        "errline": 73
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Cookie_Jar::offsetSet($key, $value) should either be compatible with ArrayAccess::offsetSet(mixed $offset, mixed $value): void, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Cookie/Jar.php",
+        "errline": 89
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Cookie_Jar::offsetUnset($key) should either be compatible with ArrayAccess::offsetUnset(mixed $offset): void, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Cookie/Jar.php",
+        "errline": 102
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Cookie_Jar::getIterator() should either be compatible with IteratorAggregate::getIterator(): Traversable, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Cookie/Jar.php",
+        "errline": 111
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Utility_CaseInsensitiveDictionary::offsetExists($key) should either be compatible with ArrayAccess::offsetExists(mixed $offset): bool, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Utility/CaseInsensitiveDictionary.php",
+        "errline": 40
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Utility_CaseInsensitiveDictionary::offsetGet($key) should either be compatible with ArrayAccess::offsetGet(mixed $offset): mixed, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Utility/CaseInsensitiveDictionary.php",
+        "errline": 51
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Utility_CaseInsensitiveDictionary::offsetSet($key, $value) should either be compatible with ArrayAccess::offsetSet(mixed $offset, mixed $value): void, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Utility/CaseInsensitiveDictionary.php",
+        "errline": 68
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Utility_CaseInsensitiveDictionary::offsetUnset($key) should either be compatible with ArrayAccess::offsetUnset(mixed $offset): void, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Utility/CaseInsensitiveDictionary.php",
+        "errline": 82
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Utility_CaseInsensitiveDictionary::getIterator() should either be compatible with IteratorAggregate::getIterator(): Traversable, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Utility/CaseInsensitiveDictionary.php",
+        "errline": 91
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"result\":\"success\",\"task_id\":\"eful30\"",
+    "response.body.length": 39,
+    "response.headers": {
+      "Date": "Fri, 21 Aug 2026 07:48:35 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "39",
+      "Connection": "close",
+      "Content-Encoding": "none",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 986.656,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787298493-e7e7f6d7-d71e-4a2a-ab39-ff536af0ccf9",
+    "paths": {},
+    "new_paths": [],
+    "vulns": [],
+    "score": 0,
+    "is_interesting": false,
+    "fuzzer_id": "2",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "task_id"
+  }
+]

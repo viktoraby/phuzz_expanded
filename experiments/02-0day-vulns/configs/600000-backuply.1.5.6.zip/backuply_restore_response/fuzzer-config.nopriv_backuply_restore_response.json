@@ -1,0 +1,35 @@
+{
+  "target": "http://web/wp-admin/admin-ajax.php",
+  "methods": [
+    "GET"
+  ],
+  "query_params": {
+    "weight": 1,
+    "fixed": [
+      "action"
+    ],
+    "fuzz": [
+      "not_writable",
+      "restore_db",
+      "is_migrating"
+    ],
+    "data": [
+      {
+        "name": "action",
+        "value": "backuply_restore_response"
+      },
+      {
+        "name": "not_writable",
+        "value": "fuzz"
+      },
+      {
+        "name": "restore_db",
+        "value": "fuzz"
+      },
+      {
+        "name": "is_migrating",
+        "value": "fuzz"
+      }
+    ]
+  }
+}

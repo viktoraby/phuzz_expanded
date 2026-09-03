@@ -1,0 +1,102 @@
+[
+  {
+    "coverage_id": "1786825509-bca60c7c-db1b-4a12-bb95-6fffb4d05f6a",
+    "priority": 30,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "wpsc_activate_boost"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "source": "#{99901*99991}"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"success\":false,\"data\":\"Plugin file does not exist.\"}",
+    "response.body.length": 55,
+    "response.headers": {
+      "Date": "Sat, 15 Aug 2026 20:25:11 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "55",
+      "Content-Type": "application/json; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 706.256,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786825509-f0b81c01-5dba-4487-b803-77a213add2ab",
+    "paths": [
+      "/var/www/html/wp-content/plugins/wp-super-cache/plugins/awaitingmoderation.php::::14_53_64_65",
+      "/var/www/html/wp-content/plugins/wp-super-cache/plugins/dynamic-cache-test.php::::152_154_188_77_78",
+      "/var/www/html/wp-content/plugins/wp-super-cache/plugins/multisite.php::::3_69",
+      "/var/www/html/wp-content/plugins/wp-super-cache/rest/class.wp-super-cache-rest-test-cache.php::::98",
+      "/var/www/html/wp-content/plugins/wp-super-cache/ossdl-cdn.php::::389_5_9",
+      "/var/www/html/wp-content/plugins/wp-super-cache/rest/class.wp-super-cache-rest-delete-cache.php::::36",
+      "/var/www/html/wp-content/plugins/wp-super-cache/rest/class.wp-super-cache-rest-update-plugins.php::::23",
+      "/var/www/html/wp-content/plugins/wp-super-cache/src/device-detection/class-user-agent-info.php::::20_2294",
+      "/var/www/html/wp-content/plugins/wp-super-cache/rest/class.wp-super-cache-settings-map.php::::264",
+      "/var/www/html/wp-content/plugins/wp-super-cache/src/device-detection/class-device-detection.php::::13_14_81",
+      "/var/www/html/wp-content/plugins/wp-super-cache/inc/preload-notification.php::::30_31",
+      "/var/www/html/wp-content/plugins/wp-super-cache/plugins/badbehaviour.php::::12_87_98_99",
+      "/var/www/html/wp-content/plugins/wp-super-cache/wp-cache-phase2.php::::1618_1620_1624_1625_1627_1628_3624_418_424_426_427_614_615_71_72_790_792_796_797_798",
+      "/var/www/html/wp-content/plugins/wp-super-cache/rest/class.wp-super-cache-rest-update-settings.php::::3_653",
+      "/var/www/html/wp-content/plugins/wp-super-cache/rest/class.wp-super-cache-rest-get-cache.php::::46",
+      "/var/www/html/wp-content/plugins/wp-super-cache/rest/class.wp-super-cache-rest-preload.php::::32",
+      "/var/www/html/wp-content/plugins/wp-super-cache/plugins/jetpack.php::::3_4_5_58_80_93_94",
+      "/var/www/html/wp-content/plugins/wp-super-cache/plugins/wptouch.php::::127_142_143_41_60_86",
+      "/var/www/html/wp-content/plugins/wp-super-cache/rest/class.wp-super-cache-rest-get-settings.php::::209_3",
+      "/var/www/html/wp-content/plugins/wp-super-cache/src/device-detection/functions.php::::15_40",
+      "/var/www/html/wp-content/plugins/wp-super-cache/inc/delete-cache-button.php::::141_183_2_41_76_77",
+      "/var/www/html/wp-content/plugins/wp-super-cache/wp-cache.php::::1002_101_103_106_108_139_140_142_147_148_149_1513_154_156_157_158_181_189_202_207_2098_2129_2140_2152_261_262_285_2977_3014_3023_3036_3082_309_31_321_327_33_3367_34_35_356_361_37_3748_3749_3788_3791_3792_3795_3796_394_400_402_406_407_408_409_41_416_4324_4367_4384_4403_4417_4440_4441_4452_4453_4512_51_52_58_59_65_66_72_76_770_79_87_91_98_99",
+      "/var/www/html/wp-content/plugins/wp-super-cache/plugins/domain-mapping.php::::102_124_137_138_59",
+      "/var/www/html/wp-content/plugins/wp-super-cache/rest/class.wp-super-cache-rest-get-plugins.php::::17",
+      "/var/www/html/wp-content/plugins/wp-super-cache/rest/class.wp-super-cache-rest-get-stats.php::::19",
+      "/var/www/html/wp-content/plugins/wp-super-cache/wp-cache-base.php::::17_18_22_5_52_6_8",
+      "/var/www/html/wp-content/plugins/wp-super-cache/wp-cache-phase1.php::::10_101_103_106_114_115_116_118_13_18_22_27_29_3_4_40_43_46_49_50_53_58_65_66_67_68_69_75_85_86_9_99",
+      "/var/www/html/wp-content/plugins/wp-super-cache/rest/load.php::::10_11_12_166_167_3_4_5_6_7_8_9",
+      "/var/www/html/wp-content/plugins/wp-super-cache/inc/boost.php::::10_103_104_105_139_235_76_82_83_9_93_99",
+      "/var/www/html/wp-content/plugins/wp-super-cache/rest/class.wp-super-cache-rest-get-status.php::::115"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 30,
+    "is_interesting": false,
+    "fuzzer_id": "3",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "source"
+  }
+]

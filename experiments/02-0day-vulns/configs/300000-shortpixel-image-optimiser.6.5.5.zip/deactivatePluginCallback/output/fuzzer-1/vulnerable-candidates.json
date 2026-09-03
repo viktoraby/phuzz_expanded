@@ -1,0 +1,418 @@
+{
+  "PathTraversal": [
+    {
+      "coverage_id": "1787249678-143a39be-d6e3-459c-a8bd-ebd90391c62a",
+      "priority": 72,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "shortpixel_deactivate_plugin"
+        },
+        "body_params": {
+          "reason": "fuzz6"
+        }
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "anonymous": "fun",
+          "details": "fuzz"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": [
+        {
+          "errno": 8192,
+          "errstr": "Return type of Requests_Cookie_Jar::offsetExists($key) should either be compatible with ArrayAccess::offsetExists(mixed $offset): bool, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+          "errfile": "/var/www/html/wp-includes/Requests/Cookie/Jar.php",
+          "errline": 63
+        },
+        {
+          "errno": 8192,
+          "errstr": "Return type of Requests_Cookie_Jar::offsetGet($key) should either be compatible with ArrayAccess::offsetGet(mixed $offset): mixed, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+          "errfile": "/var/www/html/wp-includes/Requests/Cookie/Jar.php",
+          "errline": 73
+        },
+        {
+          "errno": 8192,
+          "errstr": "Return type of Requests_Cookie_Jar::offsetSet($key, $value) should either be compatible with ArrayAccess::offsetSet(mixed $offset, mixed $value): void, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+          "errfile": "/var/www/html/wp-includes/Requests/Cookie/Jar.php",
+          "errline": 89
+        },
+        {
+          "errno": 8192,
+          "errstr": "Return type of Requests_Cookie_Jar::offsetUnset($key) should either be compatible with ArrayAccess::offsetUnset(mixed $offset): void, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+          "errfile": "/var/www/html/wp-includes/Requests/Cookie/Jar.php",
+          "errline": 102
+        },
+        {
+          "errno": 8192,
+          "errstr": "Return type of Requests_Cookie_Jar::getIterator() should either be compatible with IteratorAggregate::getIterator(): Traversable, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+          "errfile": "/var/www/html/wp-includes/Requests/Cookie/Jar.php",
+          "errline": 111
+        },
+        {
+          "errno": 8192,
+          "errstr": "http_build_query(): Passing null to parameter #2 ($numeric_prefix) of type string is deprecated",
+          "errfile": "/var/www/html/wp-includes/Requests/Transport/cURL.php",
+          "errline": 345
+        },
+        {
+          "errno": 8192,
+          "errstr": "Return type of Requests_Utility_CaseInsensitiveDictionary::offsetExists($key) should either be compatible with ArrayAccess::offsetExists(mixed $offset): bool, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+          "errfile": "/var/www/html/wp-includes/Requests/Utility/CaseInsensitiveDictionary.php",
+          "errline": 40
+        },
+        {
+          "errno": 8192,
+          "errstr": "Return type of Requests_Utility_CaseInsensitiveDictionary::offsetGet($key) should either be compatible with ArrayAccess::offsetGet(mixed $offset): mixed, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+          "errfile": "/var/www/html/wp-includes/Requests/Utility/CaseInsensitiveDictionary.php",
+          "errline": 51
+        },
+        {
+          "errno": 8192,
+          "errstr": "Return type of Requests_Utility_CaseInsensitiveDictionary::offsetSet($key, $value) should either be compatible with ArrayAccess::offsetSet(mixed $offset, mixed $value): void, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+          "errfile": "/var/www/html/wp-includes/Requests/Utility/CaseInsensitiveDictionary.php",
+          "errline": 68
+        },
+        {
+          "errno": 8192,
+          "errstr": "Return type of Requests_Utility_CaseInsensitiveDictionary::offsetUnset($key) should either be compatible with ArrayAccess::offsetUnset(mixed $offset): void, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+          "errfile": "/var/www/html/wp-includes/Requests/Utility/CaseInsensitiveDictionary.php",
+          "errline": 82
+        },
+        {
+          "errno": 8192,
+          "errstr": "Return type of Requests_Utility_CaseInsensitiveDictionary::getIterator() should either be compatible with IteratorAggregate::getIterator(): Traversable, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+          "errfile": "/var/www/html/wp-includes/Requests/Utility/CaseInsensitiveDictionary.php",
+          "errline": 91
+        }
+      ],
+      "exceptions": null,
+      "response_body": "\n{\"status\":\"ok\"}",
+      "response.body.length": 16,
+      "response.headers": {
+        "Date": "Thu, 20 Aug 2026 18:14:38 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "16",
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 629.593,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787249538-df54675f-f9ad-44b6-baa2-7d19a7cbb1cc",
+      "paths": [
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/external/cache.php::::179_180_23_24_25_29_30_32_37_38_4_43_46_49_53_57_61_68",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/Model/AdminNoticeModel.php::::153_290_4_99",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/external/nextgen/nextGenViewController.php::::4_83",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/Controller/AjaxController.php::::1899_47_48_5_50",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/Controller/ImageEditorController.php::::159_28_37_38_4_40",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/Controller/Optimizer/OptimizerBase.php::::274_4_46_47_53_55_57_60_70_71_72_73_74_76",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/Controller/Api/AiController.php::::12_334_39_40",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/Controller/CronController.php::::102_104_105_109_110_111_23_25_27_28_287_4_43_47_48_50_73_85_92_94_97_99",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/Model/AdminNotices/NextgenNotice.php::::4_62",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/Model/AdminNotices/AvifNotice.php::::142_4",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/external/offload/InfiniteUploads.php::::38_7",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/external/themes/total-theme.php::::16_17_4_47_48",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/external/visualcomposer.php::::13_14_19_22_27_28_3",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/Model/AdminNotices/SpaiCDN.php::::4_86",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/external/spai.php::::14_16_20_33_4_44_45",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/external/offload/Offloader.php::::106_107_20_21_24_29_30_31_35_36_39_43_47_50_54_69_7",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/external/cloudflare.php::::217_218_25_26_27_4",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/wp-shortpixel.php::::101_105_108_109_110_112_115_116_117_118_15_20_30_31_36_37_39_41_42_44_45_48_49_52_54_55_57_59_62_64_66_67_68_69_70_79_81_85_87_88_98",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/build/shortpixel/notices/src/NoticeController.php::::146_147_23_24_25_27_29_31_35_37_387_40_67_68_69_74_75_77_91_92_94_95",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/external/wp-cli/wp-cli-base.php::::5_615",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/external/wpml.php::::15_17_4_52",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/Controller/AdminNoticesController.php::::205_207_208_210_214_215_216_217_218_219_222_4_53_54_56_59_64_652_66_67_71_72_74",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/view/shortpixel-plugin-request.php::::111_112_117_118_119_121_207_208_209_210_211_213_214_218_222_226_46_48_49_5_50_51_52_53_54_57_58_59_67_70_71_72_73_75_78_81",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/Model/AdminNotices/ApiNotice.php::::4_91",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/external/offload/virtual-filesystem.php::::6_68",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/external/MediaFileRenamer.php::::18_19_79_8_80",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/Controller/Backup/BackupController.php::::12_185_38_42_44_48_55_56_61",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/external/image-galleries.php::::15_16_17_27_4_40_67_68",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/build/shortpixel/PackageLoader.php::::12_16_17_21_22_24_29_30_33_34_36_39_40_42_45_46_47_48_51_55_56_65_67_68_69_71_73_75_76_81_82_84_85_86_87_91_93_95",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/external/uncode.php::::14_15_19_20_21_4_73_74",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/build/shortpixel/log/src/DebugItem.php::::154",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/Model/EnvironmentModel.php::::115_116_119_136_141_143_146_149_154_156_162_211_212_213_214_216_218_220_221_223_228_229_231_233_234_235_237_239_240_244_249_250_254_323_324_325_330_331_342_4_445_450_451_452_458_60_61_62_63_64_68_69_74",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/Model/AdminNotices/UnlistedNotice.php::::4_63",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/external/wp-cli/wp-cli-bulk.php::::325_5",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/external/pantheon.php::::4_62_65",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/Controller/QuotaController.php::::100_101_102_103_108_109_110_111_115_22_23_25_366_4_51_54_55_57_69_72_82_83_86_87_88_90_91_93_94_95_96_97",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/Controller/CacheController.php::::21_4_48_51_52_53_55_75",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/ViewController.php::::358_4_76_77_79_80_82_92_93_96",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/Model/SettingsModel.php::::116_117_119_120_124_126_128_133_135_141_145_147_157_159_161_163_165_166_168_175_184_203_210_211_399_4",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/Controller/AdminController.php::::4_42_43_45_539_540_711_712_717_723_728_730_733_864",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/Controller/Backup/LocalBackupController.php::::164_9",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/build/shortpixel/log/src/ShortPixelLogger.php::::139_140_142_155_156_281_282_398_399_400_401_458_459_462_50_51_53_54_57_71_81",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/Controller/ApiKeyController.php::::20_21_22_30_31_33_39_4_40_60_80",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/Model/AdminNotices/QuotaNoticeMonth.php::::129_4",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/Controller/Api/RequestManager.php::::10_394_83_84_86_89",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/external/Woocommerce.php::::107_108_18_19_23_33_4",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/Controller/Optimizer/OptimizeAiController.php::::27_28_29_30_4_628_630_632_633_638_643_644_649_651_653_830",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/Model/CacheModel.php::::135_136_138_139_140_142_154_156_158_175_4_62_63_64_82_87",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/build/shortpixel/autoload.php::::2_3_4_5",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/Model/AdminNotices/NewExclusionFormat.php::::4_63",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/Controller.php::::30_31_4_42_43_62",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/external/formidable.php::::127_128_15_17_20_25_26_27_28_4",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/Model/AdminNotices/QuotaNoticeReached.php::::138_4",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/external/query-monitor.php::::14_20_27_30_4_51_52",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/view/shortpixel-feedback.php::::23_24_26_27_30_322_325_327_328_329_330_331_332_333_334_336_337_338_339_35_352_357_36_37_38_40_6",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/Model/AdminNotices/ApiNoticeRepeat.php::::4_81",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/Model/AdminNotices/ApiNoticeRepeatLong.php::::4_88",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/external/nextgen/nextGenController.php::::30_32_33_34_39_4_41_441_442_47_71_76_77_79_84_87_92_97",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/Model/AdminNotices/CompatNotice.php::::270_4",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/build/shortpixel/notices/src/NoticeModel.php::::167_168_169_170_171_172_173_174_175_176_178_179_181_182_380",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/Controller/FrontController.php::::35_37_39_43_5_58",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/Model/AdminNotices/ListviewNotice.php::::126_26_27_28_4",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/Model.php::::100_101_102_122_199_210_222_224_244_246_306_5_86_92_95_96_97_98_99",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/external/wp-cli/wp-cli-single.php::::150_4",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/shortpixel-plugin.php::::103_107_108_109_110_113_114_115_119_125_128_129_130_131_138_146_161_162_164_173_174_175_176_177_181_182_183_184_185_189_190_192_193_196_199_200_204_207_209_212_214_216_218_220_221_224_228_229_240_242_245_246_250_252_255_256_260_262_264_265_268_273_278_284_285_288_289_291_4_50_52_57_58_61_68_70_75_76_77_775_776_780_792_793_795_80_800_806_82_86_87_88_89_93_95_97_99",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/Model/AdminNotices/LegacyNotice.php::::4_53",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/Model/AccessModel.php::::111_112_183_197_198_205_4_46_47_60_72_74_76_85_87_90",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/Model/ApiKeyModel.php::::127_128_130_142_144_162_163_164_167_179_181_193_194_195_196_200_201_233_234_237_238_243_249_274_276_277_278_279_285_306_4_473_474_489_493",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/Model/AdminNotices/LitespeedCache.php::::108_4",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/Controller/QueueController.php::::40_44_45_6_860",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/Controller/View/OtherMediaViewController.php::::171_175_176_178_182_4_45_49_51_53_55_57_59_61_642",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/external/offload/wp-offload-media.php::::7_723"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 72,
+      "is_interesting": false,
+      "fuzzer_id": "1",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "anonymous"
+    },
+    {
+      "coverage_id": "1787249678-143a39be-d6e3-459c-a8bd-ebd90391c62a",
+      "priority": 72,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "shortpixel_deactivate_plugin"
+        },
+        "body_params": {
+          "reason": "fuzz6"
+        }
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "anonymous": "fun",
+          "details": "fuzz"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": [
+        {
+          "errno": 8192,
+          "errstr": "Return type of Requests_Cookie_Jar::offsetExists($key) should either be compatible with ArrayAccess::offsetExists(mixed $offset): bool, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+          "errfile": "/var/www/html/wp-includes/Requests/Cookie/Jar.php",
+          "errline": 63
+        },
+        {
+          "errno": 8192,
+          "errstr": "Return type of Requests_Cookie_Jar::offsetGet($key) should either be compatible with ArrayAccess::offsetGet(mixed $offset): mixed, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+          "errfile": "/var/www/html/wp-includes/Requests/Cookie/Jar.php",
+          "errline": 73
+        },
+        {
+          "errno": 8192,
+          "errstr": "Return type of Requests_Cookie_Jar::offsetSet($key, $value) should either be compatible with ArrayAccess::offsetSet(mixed $offset, mixed $value): void, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+          "errfile": "/var/www/html/wp-includes/Requests/Cookie/Jar.php",
+          "errline": 89
+        },
+        {
+          "errno": 8192,
+          "errstr": "Return type of Requests_Cookie_Jar::offsetUnset($key) should either be compatible with ArrayAccess::offsetUnset(mixed $offset): void, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+          "errfile": "/var/www/html/wp-includes/Requests/Cookie/Jar.php",
+          "errline": 102
+        },
+        {
+          "errno": 8192,
+          "errstr": "Return type of Requests_Cookie_Jar::getIterator() should either be compatible with IteratorAggregate::getIterator(): Traversable, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+          "errfile": "/var/www/html/wp-includes/Requests/Cookie/Jar.php",
+          "errline": 111
+        },
+        {
+          "errno": 8192,
+          "errstr": "http_build_query(): Passing null to parameter #2 ($numeric_prefix) of type string is deprecated",
+          "errfile": "/var/www/html/wp-includes/Requests/Transport/cURL.php",
+          "errline": 345
+        },
+        {
+          "errno": 8192,
+          "errstr": "Return type of Requests_Utility_CaseInsensitiveDictionary::offsetExists($key) should either be compatible with ArrayAccess::offsetExists(mixed $offset): bool, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+          "errfile": "/var/www/html/wp-includes/Requests/Utility/CaseInsensitiveDictionary.php",
+          "errline": 40
+        },
+        {
+          "errno": 8192,
+          "errstr": "Return type of Requests_Utility_CaseInsensitiveDictionary::offsetGet($key) should either be compatible with ArrayAccess::offsetGet(mixed $offset): mixed, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+          "errfile": "/var/www/html/wp-includes/Requests/Utility/CaseInsensitiveDictionary.php",
+          "errline": 51
+        },
+        {
+          "errno": 8192,
+          "errstr": "Return type of Requests_Utility_CaseInsensitiveDictionary::offsetSet($key, $value) should either be compatible with ArrayAccess::offsetSet(mixed $offset, mixed $value): void, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+          "errfile": "/var/www/html/wp-includes/Requests/Utility/CaseInsensitiveDictionary.php",
+          "errline": 68
+        },
+        {
+          "errno": 8192,
+          "errstr": "Return type of Requests_Utility_CaseInsensitiveDictionary::offsetUnset($key) should either be compatible with ArrayAccess::offsetUnset(mixed $offset): void, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+          "errfile": "/var/www/html/wp-includes/Requests/Utility/CaseInsensitiveDictionary.php",
+          "errline": 82
+        },
+        {
+          "errno": 8192,
+          "errstr": "Return type of Requests_Utility_CaseInsensitiveDictionary::getIterator() should either be compatible with IteratorAggregate::getIterator(): Traversable, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+          "errfile": "/var/www/html/wp-includes/Requests/Utility/CaseInsensitiveDictionary.php",
+          "errline": 91
+        }
+      ],
+      "exceptions": null,
+      "response_body": "\n{\"status\":\"ok\"}",
+      "response.body.length": 16,
+      "response.headers": {
+        "Date": "Thu, 20 Aug 2026 18:14:38 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "16",
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 629.593,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787249538-df54675f-f9ad-44b6-baa2-7d19a7cbb1cc",
+      "paths": [
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/external/cache.php::::179_180_23_24_25_29_30_32_37_38_4_43_46_49_53_57_61_68",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/Model/AdminNoticeModel.php::::153_290_4_99",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/external/nextgen/nextGenViewController.php::::4_83",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/Controller/AjaxController.php::::1899_47_48_5_50",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/Controller/ImageEditorController.php::::159_28_37_38_4_40",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/Controller/Optimizer/OptimizerBase.php::::274_4_46_47_53_55_57_60_70_71_72_73_74_76",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/Controller/Api/AiController.php::::12_334_39_40",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/Controller/CronController.php::::102_104_105_109_110_111_23_25_27_28_287_4_43_47_48_50_73_85_92_94_97_99",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/Model/AdminNotices/NextgenNotice.php::::4_62",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/Model/AdminNotices/AvifNotice.php::::142_4",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/external/offload/InfiniteUploads.php::::38_7",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/external/themes/total-theme.php::::16_17_4_47_48",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/external/visualcomposer.php::::13_14_19_22_27_28_3",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/Model/AdminNotices/SpaiCDN.php::::4_86",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/external/spai.php::::14_16_20_33_4_44_45",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/external/offload/Offloader.php::::106_107_20_21_24_29_30_31_35_36_39_43_47_50_54_69_7",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/external/cloudflare.php::::217_218_25_26_27_4",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/wp-shortpixel.php::::101_105_108_109_110_112_115_116_117_118_15_20_30_31_36_37_39_41_42_44_45_48_49_52_54_55_57_59_62_64_66_67_68_69_70_79_81_85_87_88_98",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/build/shortpixel/notices/src/NoticeController.php::::146_147_23_24_25_27_29_31_35_37_387_40_67_68_69_74_75_77_91_92_94_95",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/external/wp-cli/wp-cli-base.php::::5_615",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/external/wpml.php::::15_17_4_52",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/Controller/AdminNoticesController.php::::205_207_208_210_214_215_216_217_218_219_222_4_53_54_56_59_64_652_66_67_71_72_74",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/view/shortpixel-plugin-request.php::::111_112_117_118_119_121_207_208_209_210_211_213_214_218_222_226_46_48_49_5_50_51_52_53_54_57_58_59_67_70_71_72_73_75_78_81",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/Model/AdminNotices/ApiNotice.php::::4_91",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/external/offload/virtual-filesystem.php::::6_68",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/external/MediaFileRenamer.php::::18_19_79_8_80",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/Controller/Backup/BackupController.php::::12_185_38_42_44_48_55_56_61",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/external/image-galleries.php::::15_16_17_27_4_40_67_68",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/build/shortpixel/PackageLoader.php::::12_16_17_21_22_24_29_30_33_34_36_39_40_42_45_46_47_48_51_55_56_65_67_68_69_71_73_75_76_81_82_84_85_86_87_91_93_95",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/external/uncode.php::::14_15_19_20_21_4_73_74",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/build/shortpixel/log/src/DebugItem.php::::154",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/Model/EnvironmentModel.php::::115_116_119_136_141_143_146_149_154_156_162_211_212_213_214_216_218_220_221_223_228_229_231_233_234_235_237_239_240_244_249_250_254_323_324_325_330_331_342_4_445_450_451_452_458_60_61_62_63_64_68_69_74",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/Model/AdminNotices/UnlistedNotice.php::::4_63",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/external/wp-cli/wp-cli-bulk.php::::325_5",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/external/pantheon.php::::4_62_65",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/Controller/QuotaController.php::::100_101_102_103_108_109_110_111_115_22_23_25_366_4_51_54_55_57_69_72_82_83_86_87_88_90_91_93_94_95_96_97",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/Controller/CacheController.php::::21_4_48_51_52_53_55_75",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/ViewController.php::::358_4_76_77_79_80_82_92_93_96",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/Model/SettingsModel.php::::116_117_119_120_124_126_128_133_135_141_145_147_157_159_161_163_165_166_168_175_184_203_210_211_399_4",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/Controller/AdminController.php::::4_42_43_45_539_540_711_712_717_723_728_730_733_864",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/Controller/Backup/LocalBackupController.php::::164_9",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/build/shortpixel/log/src/ShortPixelLogger.php::::139_140_142_155_156_281_282_398_399_400_401_458_459_462_50_51_53_54_57_71_81",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/Controller/ApiKeyController.php::::20_21_22_30_31_33_39_4_40_60_80",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/Model/AdminNotices/QuotaNoticeMonth.php::::129_4",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/Controller/Api/RequestManager.php::::10_394_83_84_86_89",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/external/Woocommerce.php::::107_108_18_19_23_33_4",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/Controller/Optimizer/OptimizeAiController.php::::27_28_29_30_4_628_630_632_633_638_643_644_649_651_653_830",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/Model/CacheModel.php::::135_136_138_139_140_142_154_156_158_175_4_62_63_64_82_87",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/build/shortpixel/autoload.php::::2_3_4_5",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/Model/AdminNotices/NewExclusionFormat.php::::4_63",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/Controller.php::::30_31_4_42_43_62",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/external/formidable.php::::127_128_15_17_20_25_26_27_28_4",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/Model/AdminNotices/QuotaNoticeReached.php::::138_4",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/external/query-monitor.php::::14_20_27_30_4_51_52",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/view/shortpixel-feedback.php::::23_24_26_27_30_322_325_327_328_329_330_331_332_333_334_336_337_338_339_35_352_357_36_37_38_40_6",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/Model/AdminNotices/ApiNoticeRepeat.php::::4_81",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/Model/AdminNotices/ApiNoticeRepeatLong.php::::4_88",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/external/nextgen/nextGenController.php::::30_32_33_34_39_4_41_441_442_47_71_76_77_79_84_87_92_97",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/Model/AdminNotices/CompatNotice.php::::270_4",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/build/shortpixel/notices/src/NoticeModel.php::::167_168_169_170_171_172_173_174_175_176_178_179_181_182_380",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/Controller/FrontController.php::::35_37_39_43_5_58",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/Model/AdminNotices/ListviewNotice.php::::126_26_27_28_4",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/Model.php::::100_101_102_122_199_210_222_224_244_246_306_5_86_92_95_96_97_98_99",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/external/wp-cli/wp-cli-single.php::::150_4",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/shortpixel-plugin.php::::103_107_108_109_110_113_114_115_119_125_128_129_130_131_138_146_161_162_164_173_174_175_176_177_181_182_183_184_185_189_190_192_193_196_199_200_204_207_209_212_214_216_218_220_221_224_228_229_240_242_245_246_250_252_255_256_260_262_264_265_268_273_278_284_285_288_289_291_4_50_52_57_58_61_68_70_75_76_77_775_776_780_792_793_795_80_800_806_82_86_87_88_89_93_95_97_99",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/Model/AdminNotices/LegacyNotice.php::::4_53",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/Model/AccessModel.php::::111_112_183_197_198_205_4_46_47_60_72_74_76_85_87_90",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/Model/ApiKeyModel.php::::127_128_130_142_144_162_163_164_167_179_181_193_194_195_196_200_201_233_234_237_238_243_249_274_276_277_278_279_285_306_4_473_474_489_493",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/Model/AdminNotices/LitespeedCache.php::::108_4",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/Controller/QueueController.php::::40_44_45_6_860",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/Controller/View/OtherMediaViewController.php::::171_175_176_178_182_4_45_49_51_53_55_57_59_61_642",
+        "/var/www/html/wp-content/plugins/shortpixel-image-optimiser/class/external/offload/wp-offload-media.php::::7_723"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 72,
+      "is_interesting": false,
+      "fuzzer_id": "1",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "anonymous"
+    }
+  ]
+}

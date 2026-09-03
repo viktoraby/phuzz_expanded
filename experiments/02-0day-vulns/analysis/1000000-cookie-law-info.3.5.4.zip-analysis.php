@@ -5,32 +5,9 @@
 *Found functions:8
 *Extracted functions:8
 *Total parameter names extracted: 5
-*Overview: {'install_plugin': {'wbte_accessibility_install_plugin'}, 'cli_change_script_category': {'cli_change_script_category'}, 'ajax_cookie_scaner': {'cli_cookie_scaner'}, 'ajax_main_controller': {'cookieyes_ajax_main_controller'}, 'change_plugin_status': {'wt_cli_change_plugin_status'}, 'handle_dismiss_banner': {'wbte_accessibility_dismiss_banner'}, 'handle_remind_later': {'wbte_accessibility_remind_later'}, 'ajax_policy_generator': {'cli_policy_generator'}}
+*Overview: {'ajax_cookie_scaner': {'cli_cookie_scaner'}, 'change_plugin_status': {'wt_cli_change_plugin_status'}, 'install_plugin': {'wbte_accessibility_install_plugin'}, 'handle_remind_later': {'wbte_accessibility_remind_later'}, 'ajax_policy_generator': {'cli_policy_generator'}, 'cli_change_script_category': {'cli_change_script_category'}, 'handle_dismiss_banner': {'wbte_accessibility_dismiss_banner'}, 'ajax_main_controller': {'cookieyes_ajax_main_controller'}}
 *
 ***/
-
-/** Function install_plugin() called by wp_ajax hooks: {'wbte_accessibility_install_plugin'} **/
-/** No params detected :-/ **/
-
-
-/** Function cli_change_script_category() called by wp_ajax hooks: {'cli_change_script_category'} **/
-/** Parameters found in function cli_change_script_category(): {"post": ["script_id", "category"]} **/
-function cli_change_script_category() {
-
-			if ( current_user_can( 'manage_options' ) && check_ajax_referer( $this->module_id ) ) {
-
-				$script_id = (int) ( isset( $_POST['script_id'] ) ? sanitize_text_field( wp_unslash( $_POST['script_id'] ) ) : -1 );
-				$category  = isset( $_POST['category'] ) ? sanitize_text_field( wp_unslash( $_POST['category'] ) ) : '';
-
-				if ( $script_id !== -1 ) {
-					self::cli_script_update_category( $script_id, $category );
-					wp_send_json_success();
-				}
-				wp_send_json_error( __( 'Invalid script id', 'cookie-law-info' ) );
-			}
-			wp_send_json_error( __( 'You do not have sufficient permission to perform this operation', 'cookie-law-info' ) );
-		}
-
 
 /** Function ajax_cookie_scaner() called by wp_ajax hooks: {'cli_cookie_scaner'} **/
 /** Parameters found in function ajax_cookie_scaner(): {"post": ["cli_scaner_action"]} **/
@@ -65,6 +42,85 @@ function ajax_cookie_scaner() {
 		echo wp_json_encode( $out );
 		exit();
 	}
+
+
+/** Function change_plugin_status() called by wp_ajax hooks: {'wt_cli_change_plugin_status'} **/
+/** Parameters found in function change_plugin_status(): {"post": ["script_id", "status"]} **/
+function change_plugin_status() {
+
+			check_ajax_referer( $this->module_id );
+			if ( ! current_user_can( 'manage_options' ) ) {
+				wp_die( esc_html__( 'You do not have sufficient permission to perform this operation', 'cookie-law-info' ) );
+			}
+			$script_id = (int) ( isset( $_POST['script_id'] ) ? absint( $_POST['script_id'] ) : -1 );
+			$status    = wp_validate_boolean( ( isset( $_POST['status'] ) && true === wp_validate_boolean( sanitize_text_field( wp_unslash( $_POST['status'] ) ) ) ? true : false ) );
+			if ( $script_id !== -1 ) {
+				$this->update_script_status( $script_id, $status );
+				wp_send_json_success();
+			}
+			wp_send_json_error();
+
+		}
+
+
+/** Function install_plugin() called by wp_ajax hooks: {'wbte_accessibility_install_plugin'} **/
+/** No params detected :-/ **/
+
+
+/** Function handle_remind_later() called by wp_ajax hooks: {'wbte_accessibility_remind_later'} **/
+/** No params detected :-/ **/
+
+
+/** Function ajax_policy_generator() called by wp_ajax hooks: {'cli_policy_generator'} **/
+/** Parameters found in function ajax_policy_generator(): {"post": ["cli_policy_generator_action"]} **/
+function ajax_policy_generator() {
+		check_ajax_referer( 'cli_policy_generator', 'security' );
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_die( esc_html__( 'You do not have sufficient permission to perform this operation', 'cookie-law-info' ) );
+		}
+		$out               = array(
+			'response' => false,
+			'message'  => __( 'Unable to handle your request.', 'cookie-law-info' ),
+		);
+		$non_json_response = array();
+		if ( isset( $_POST['cli_policy_generator_action'] ) ) {
+			$allowed_actions             = array( 'autosave_content_data', 'save_contentdata', 'get_policy_pageid' );
+			$action                      = isset( $_POST['cli_policy_generator_action'] ) ? sanitize_text_field( wp_unslash( $_POST['cli_policy_generator_action'] ) ) : '';
+			$cli_policy_generator_action = in_array( $action, $allowed_actions ) ? $action : '';
+			if ( in_array( $cli_policy_generator_action, $allowed_actions ) && method_exists( $this, $cli_policy_generator_action ) ) {
+				$out = $this->{$cli_policy_generator_action}();
+			}
+		}
+		if ( in_array( $cli_policy_generator_action, $non_json_response ) ) {
+			echo esc_html( is_array( $out ) ? $out['message'] : $out );
+		} else {
+			echo wp_json_encode( $out );
+		}
+		exit();
+	}
+
+
+/** Function cli_change_script_category() called by wp_ajax hooks: {'cli_change_script_category'} **/
+/** Parameters found in function cli_change_script_category(): {"post": ["script_id", "category"]} **/
+function cli_change_script_category() {
+
+			if ( current_user_can( 'manage_options' ) && check_ajax_referer( $this->module_id ) ) {
+
+				$script_id = (int) ( isset( $_POST['script_id'] ) ? sanitize_text_field( wp_unslash( $_POST['script_id'] ) ) : -1 );
+				$category  = isset( $_POST['category'] ) ? sanitize_text_field( wp_unslash( $_POST['category'] ) ) : '';
+
+				if ( $script_id !== -1 ) {
+					self::cli_script_update_category( $script_id, $category );
+					wp_send_json_success();
+				}
+				wp_send_json_error( __( 'Invalid script id', 'cookie-law-info' ) );
+			}
+			wp_send_json_error( __( 'You do not have sufficient permission to perform this operation', 'cookie-law-info' ) );
+		}
+
+
+/** Function handle_dismiss_banner() called by wp_ajax hooks: {'wbte_accessibility_dismiss_banner'} **/
+/** No params detected :-/ **/
 
 
 /** Function ajax_main_controller() called by wp_ajax hooks: {'cookieyes_ajax_main_controller'} **/
@@ -106,61 +162,5 @@ function ajax_main_controller() {
 			wp_send_json_error( $data );
 			exit();
 		}
-
-
-/** Function change_plugin_status() called by wp_ajax hooks: {'wt_cli_change_plugin_status'} **/
-/** Parameters found in function change_plugin_status(): {"post": ["script_id", "status"]} **/
-function change_plugin_status() {
-
-			check_ajax_referer( $this->module_id );
-			if ( ! current_user_can( 'manage_options' ) ) {
-				wp_die( esc_html__( 'You do not have sufficient permission to perform this operation', 'cookie-law-info' ) );
-			}
-			$script_id = (int) ( isset( $_POST['script_id'] ) ? absint( $_POST['script_id'] ) : -1 );
-			$status    = wp_validate_boolean( ( isset( $_POST['status'] ) && true === wp_validate_boolean( sanitize_text_field( wp_unslash( $_POST['status'] ) ) ) ? true : false ) );
-			if ( $script_id !== -1 ) {
-				$this->update_script_status( $script_id, $status );
-				wp_send_json_success();
-			}
-			wp_send_json_error();
-
-		}
-
-
-/** Function handle_dismiss_banner() called by wp_ajax hooks: {'wbte_accessibility_dismiss_banner'} **/
-/** No params detected :-/ **/
-
-
-/** Function handle_remind_later() called by wp_ajax hooks: {'wbte_accessibility_remind_later'} **/
-/** No params detected :-/ **/
-
-
-/** Function ajax_policy_generator() called by wp_ajax hooks: {'cli_policy_generator'} **/
-/** Parameters found in function ajax_policy_generator(): {"post": ["cli_policy_generator_action"]} **/
-function ajax_policy_generator() {
-		check_ajax_referer( 'cli_policy_generator', 'security' );
-		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_die( esc_html__( 'You do not have sufficient permission to perform this operation', 'cookie-law-info' ) );
-		}
-		$out               = array(
-			'response' => false,
-			'message'  => __( 'Unable to handle your request.', 'cookie-law-info' ),
-		);
-		$non_json_response = array();
-		if ( isset( $_POST['cli_policy_generator_action'] ) ) {
-			$allowed_actions             = array( 'autosave_content_data', 'save_contentdata', 'get_policy_pageid' );
-			$action                      = isset( $_POST['cli_policy_generator_action'] ) ? sanitize_text_field( wp_unslash( $_POST['cli_policy_generator_action'] ) ) : '';
-			$cli_policy_generator_action = in_array( $action, $allowed_actions ) ? $action : '';
-			if ( in_array( $cli_policy_generator_action, $allowed_actions ) && method_exists( $this, $cli_policy_generator_action ) ) {
-				$out = $this->{$cli_policy_generator_action}();
-			}
-		}
-		if ( in_array( $cli_policy_generator_action, $non_json_response ) ) {
-			echo esc_html( is_array( $out ) ? $out['message'] : $out );
-		} else {
-			echo wp_json_encode( $out );
-		}
-		exit();
-	}
 
 

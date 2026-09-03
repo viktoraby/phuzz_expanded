@@ -5,11 +5,210 @@
 *Found functions:101
 *Extracted functions:97
 *Total parameter names extracted: 12
-*Overview: {'save_permissions': {'forminator_save_permissions'}, 'save_report': {'forminator_save_report'}, 'paypal_disconnect': {'forminator_disconnect_paypal'}, 'ajax_group_interests': {'forminator_mailchimp_get_group_interests'}, 'forminator_share_feedback': {'forminator_share_feedback'}, 'filter_report_data': {'forminator_filter_report_data'}, 'dismiss_notice': {'forminator_dismiss_notification'}, 'load_email_form': {'forminator_load_email_settings_popup'}, 'save_import_form_cf7': {'forminator_save_import_form_cf7_popup'}, 'get_module_addons': {'forminator_addon_get_module_addons'}, 'get_preset_templates': {'forminator_preset_templates'}, 'set_encryption_key': {'forminator_set_encryption_key'}, 'load_pagination_listings': {'forminator_load_pagination_listings_popup'}, 'check_stripe_checkout_session_status': {'forminator_check_stripe_checkout_session_status', 'nopriv_forminator_check_stripe_checkout_session_status'}, 'toggle_usage_tracking': {'forminator_usage_tracking'}, 'module_search': {'forminator_module_search'}, 'load_pagination_entries': {'forminator_load_pagination_entries_popup'}, 'save_privacy_settings': {'forminator_save_privacy_settings_popup'}, 'delete_poll_submissions': {'forminator_delete_poll_submissions'}, 'multiple_file_upload': {'forminator_multiple_file_upload', 'nopriv_forminator_multiple_file_upload'}, 'load_export': {'forminator_load_export_form_popup', 'forminator_load_export_poll_popup', 'forminator_load_export_quiz_popup'}, 'save_builder': {'forminator_save_builder'}, 'get_nonce': {'forminator_get_nonce', 'nopriv_forminator_get_nonce'}, 'load_import_form_cf7': {'forminator_load_import_form_cf7_popup'}, 'load_exports': {'forminator_load_exports_popup'}, 'fetch_report': {'forminator_fetch_report'}, 'search_emails': {'forminator_builder_search_emails'}, 'rename_template': {'forminator_rename_template'}, 'revert_builder': {'forminator_revert_builder'}, 'update_report_status': {'forminator_report_update_status'}, 'duplicate_template': {'forminator_duplicate_template'}, 'paypal_settings_modal': {'forminator_paypal_settings_modal'}, 'resend_draft_email': {'forminator_resend_draft_email'}, 'resend_notification_email': {'forminator_resend_notification_email'}, 'addons_page_actions': {'$action'}, 'settings': {'forminator_addon_settings'}, 'deactivate': {'forminator_addon_deactivate'}, 'fallback_email': {'nopriv_forminator_2fa_fallback_email', 'forminator_2fa_fallback_email'}, 'save_import_form_ninja': {'forminator_save_import_form_ninja_popup'}, 'stripe_oauth_init': {'forminator_stripe_oauth_init'}, 'apply_appearance_preset': {'forminator_apply_appearance_preset'}, 'stripe_oauth_disconnect': {'forminator_stripe_oauth_disconnect'}, 'load_privacy_settings': {'forminator_load_privacy_settings_popup'}, 'load_captcha': {'forminator_load_captcha_popup'}, 'Forminator_QForm_Front': {'forminator_load_quiz', 'nopriv_forminator_load_quiz', 'forminator_reload_quiz', 'nopriv_forminator_reload_quiz'}, 'save_pdf': {'forminator_save_pdf'}, 'Forminator_Poll_Front': {'nopriv_forminator_load_poll', 'forminator_load_poll'}, 'dismiss_admin_notice': {'forminator_dismiss_notice'}, 'load_uninstall_form': {'forminator_load_uninstall_settings_popup'}, 'update_payment_amount': {'nopriv_forminator_update_payment_amount', 'forminator_update_payment_amount'}, 'save_appearance_preset': {'forminator_save_appearance_preset'}, 'delete_template': {'forminator_delete_template'}, 'get_avatar': {'forminator_get_avatar'}, 'save_currency': {'forminator_save_currency_popup'}, 'module_settings': {'forminator_addon_module_settings'}, 'Forminator_CForm_Front': {'nopriv_forminator_load_form', 'forminator_load_form', 'forminator_update_live_preview'}, 'save_pagination_listings': {'forminator_save_pagination_listings_popup'}, 'search_users': {'forminator_search_users'}, 'submit_deactivation_survey': {'forminator_deactivation_survey'}, 'promote_remind_later': {'forminator_promote_remind_later'}, 'load_import': {'forminator_load_import_poll_popup', 'forminator_load_import_quiz_popup', 'forminator_load_import_form_popup'}, 'load_currency': {'forminator_load_currency_popup'}, 'approve_user': {'forminator_approve_user_popup'}, 'save_import_form_gravity': {'forminator_save_import_form_gravity_popup'}, 'submit_email_draft_link': {'forminator_email_draft_link', 'nopriv_forminator_email_draft_link'}, 'get_cloud_templates': {'forminator_get_cloud_templates'}, 'save_dashboard_settings': {'forminator_save_dashboard_settings_popup'}, 'save_accessibility_settings': {'forminator_save_accessibility_settings_popup'}, 'create_module_from_template': {'forminator_create_module_from_template'}, 'later_notice': {'forminator_later_notification'}, 'disconnect_hub': {'forminator_disconnect_hub'}, 'load_turnstile_preview': {'forminator_load_turnstile_preview'}, 'reset_tracking_data': {'forminator_reset_tracking_data'}, 'paypal_update_page': {'forminator_paypal_update_page'}, 'save_uninstall_form': {'forminator_save_uninstall_settings_popup'}, 'save_quiz': {'forminator_save_quiz_knowledge', 'forminator_save_quiz_nowrong'}, 'delete_unconfirmed_user': {'forminator_delete_unconfirmed_user_popup'}, 'load_import_form_gravity': {'forminator_load_import_form_gravity_popup'}, 'load_recaptcha_preview': {'forminator_load_recaptcha_preview'}, 'save_poll_form': {'forminator_save_poll'}, 'dismiss_welcome': {'nopriv_forminator_dismiss_welcome', 'forminator_dismiss_welcome'}, 'save_payments': {'forminator_save_payments_settings_popup'}, 'fetch_pdfs': {'forminator_fetch_pdfs'}, 'load_hcaptcha_preview': {'forminator_load_hcaptcha_preview'}, 'create_appearance_preset': {'forminator_create_appearance_preset'}, 'refresh_email_lists': {'forminator_refresh_email_lists'}, 'load_import_form_ninja': {'forminator_load_import_form_ninja_popup'}, 'load_google_fonts': {'forminator_load_google_fonts'}, 'preview_module': {'forminator_load_preview_polls_popup', 'forminator_load_preview_cforms_popup', 'forminator_load_preview_quizzes_popup'}, 'resend_activation_link': {'forminator_resend_activation_link'}, 'get_addons': {'forminator_addon_get_addons'}, 'delete_pdf': {'forminator_delete_pdf'}, 'save_template': {'forminator_save_template'}, 'save_captcha': {'forminator_save_captcha_popup'}, 'create_paypal_order': {'nopriv_forminator_pp_create_order', 'forminator_pp_create_order'}, 'save_pagination_entries': {'forminator_save_pagination_entries_popup'}, 'deactivate_for_module': {'forminator_addon_deactivate_for_module'}, 'delete_appearance_preset': {'forminator_delete_appearance_preset'}, 'hubspot_support_request': {'forminator_hubspot_support_request'}, 'save_import': {'forminator_save_import_poll_popup', 'forminator_save_import_form_popup', 'forminator_save_import_quiz_popup'}, 'clear_exports': {'forminator_clear_exports_popup'}}
+*Overview: {'save_uninstall_form': {'forminator_save_uninstall_settings_popup'}, 'stripe_oauth_disconnect': {'forminator_stripe_oauth_disconnect'}, 'resend_notification_email': {'forminator_resend_notification_email'}, 'save_pdf': {'forminator_save_pdf'}, 'get_cloud_templates': {'forminator_get_cloud_templates'}, 'load_captcha': {'forminator_load_captcha_popup'}, 'fetch_pdfs': {'forminator_fetch_pdfs'}, 'save_pagination_listings': {'forminator_save_pagination_listings_popup'}, 'deactivate_for_module': {'forminator_addon_deactivate_for_module'}, 'submit_deactivation_survey': {'forminator_deactivation_survey'}, 'approve_user': {'forminator_approve_user_popup'}, 'load_currency': {'forminator_load_currency_popup'}, 'delete_poll_submissions': {'forminator_delete_poll_submissions'}, 'load_pagination_entries': {'forminator_load_pagination_entries_popup'}, 'set_encryption_key': {'forminator_set_encryption_key'}, 'paypal_settings_modal': {'forminator_paypal_settings_modal'}, 'load_pagination_listings': {'forminator_load_pagination_listings_popup'}, 'load_email_form': {'forminator_load_email_settings_popup'}, 'save_accessibility_settings': {'forminator_save_accessibility_settings_popup'}, 'save_captcha': {'forminator_save_captcha_popup'}, 'get_addons': {'forminator_addon_get_addons'}, 'fallback_email': {'nopriv_forminator_2fa_fallback_email', 'forminator_2fa_fallback_email'}, 'save_payments': {'forminator_save_payments_settings_popup'}, 'toggle_usage_tracking': {'forminator_usage_tracking'}, 'duplicate_template': {'forminator_duplicate_template'}, 'save_import_form_cf7': {'forminator_save_import_form_cf7_popup'}, 'save_import': {'forminator_save_import_quiz_popup', 'forminator_save_import_form_popup', 'forminator_save_import_poll_popup'}, 'save_currency': {'forminator_save_currency_popup'}, 'save_template': {'forminator_save_template'}, 'save_report': {'forminator_save_report'}, 'Forminator_QForm_Front': {'forminator_load_quiz', 'nopriv_forminator_reload_quiz', 'nopriv_forminator_load_quiz', 'forminator_reload_quiz'}, 'delete_pdf': {'forminator_delete_pdf'}, 'load_privacy_settings': {'forminator_load_privacy_settings_popup'}, 'get_module_addons': {'forminator_addon_get_module_addons'}, 'later_notice': {'forminator_later_notification'}, 'module_search': {'forminator_module_search'}, 'update_payment_amount': {'forminator_update_payment_amount', 'nopriv_forminator_update_payment_amount'}, 'load_import_form_cf7': {'forminator_load_import_form_cf7_popup'}, 'apply_appearance_preset': {'forminator_apply_appearance_preset'}, 'stripe_oauth_init': {'forminator_stripe_oauth_init'}, 'resend_draft_email': {'forminator_resend_draft_email'}, 'module_settings': {'forminator_addon_module_settings'}, 'promote_remind_later': {'forminator_promote_remind_later'}, 'search_emails': {'forminator_builder_search_emails'}, 'addons_page_actions': {'$action'}, 'load_uninstall_form': {'forminator_load_uninstall_settings_popup'}, 'submit_email_draft_link': {'nopriv_forminator_email_draft_link', 'forminator_email_draft_link'}, 'search_users': {'forminator_search_users'}, 'save_builder': {'forminator_save_builder'}, 'delete_template': {'forminator_delete_template'}, 'paypal_disconnect': {'forminator_disconnect_paypal'}, 'save_import_form_gravity': {'forminator_save_import_form_gravity_popup'}, 'revert_builder': {'forminator_revert_builder'}, 'check_stripe_checkout_session_status': {'forminator_check_stripe_checkout_session_status', 'nopriv_forminator_check_stripe_checkout_session_status'}, 'save_quiz': {'forminator_save_quiz_nowrong', 'forminator_save_quiz_knowledge'}, 'load_import_form_gravity': {'forminator_load_import_form_gravity_popup'}, 'get_preset_templates': {'forminator_preset_templates'}, 'save_appearance_preset': {'forminator_save_appearance_preset'}, 'deactivate': {'forminator_addon_deactivate'}, 'update_report_status': {'forminator_report_update_status'}, 'save_pagination_entries': {'forminator_save_pagination_entries_popup'}, 'disconnect_hub': {'forminator_disconnect_hub'}, 'create_appearance_preset': {'forminator_create_appearance_preset'}, 'load_exports': {'forminator_load_exports_popup'}, 'delete_unconfirmed_user': {'forminator_delete_unconfirmed_user_popup'}, 'filter_report_data': {'forminator_filter_report_data'}, 'multiple_file_upload': {'forminator_multiple_file_upload', 'nopriv_forminator_multiple_file_upload'}, 'hubspot_support_request': {'forminator_hubspot_support_request'}, 'load_recaptcha_preview': {'forminator_load_recaptcha_preview'}, 'settings': {'forminator_addon_settings'}, 'get_avatar': {'forminator_get_avatar'}, 'load_turnstile_preview': {'forminator_load_turnstile_preview'}, 'preview_module': {'forminator_load_preview_quizzes_popup', 'forminator_load_preview_cforms_popup', 'forminator_load_preview_polls_popup'}, 'save_dashboard_settings': {'forminator_save_dashboard_settings_popup'}, 'save_privacy_settings': {'forminator_save_privacy_settings_popup'}, 'load_import': {'forminator_load_import_quiz_popup', 'forminator_load_import_form_popup', 'forminator_load_import_poll_popup'}, 'clear_exports': {'forminator_clear_exports_popup'}, 'dismiss_welcome': {'nopriv_forminator_dismiss_welcome', 'forminator_dismiss_welcome'}, 'load_hcaptcha_preview': {'forminator_load_hcaptcha_preview'}, 'refresh_email_lists': {'forminator_refresh_email_lists'}, 'rename_template': {'forminator_rename_template'}, 'forminator_share_feedback': {'forminator_share_feedback'}, 'reset_tracking_data': {'forminator_reset_tracking_data'}, 'load_import_form_ninja': {'forminator_load_import_form_ninja_popup'}, 'create_paypal_order': {'forminator_pp_create_order', 'nopriv_forminator_pp_create_order'}, 'dismiss_notice': {'forminator_dismiss_notification'}, 'save_permissions': {'forminator_save_permissions'}, 'fetch_report': {'forminator_fetch_report'}, 'create_module_from_template': {'forminator_create_module_from_template'}, 'resend_activation_link': {'forminator_resend_activation_link'}, 'load_google_fonts': {'forminator_load_google_fonts'}, 'Forminator_CForm_Front': {'nopriv_forminator_load_form', 'forminator_load_form', 'forminator_update_live_preview'}, 'get_nonce': {'forminator_get_nonce', 'nopriv_forminator_get_nonce'}, 'save_poll_form': {'forminator_save_poll'}, 'save_import_form_ninja': {'forminator_save_import_form_ninja_popup'}, 'load_export': {'forminator_load_export_quiz_popup', 'forminator_load_export_poll_popup', 'forminator_load_export_form_popup'}, 'Forminator_Poll_Front': {'forminator_load_poll', 'nopriv_forminator_load_poll'}, 'dismiss_admin_notice': {'forminator_dismiss_notice'}, 'paypal_update_page': {'forminator_paypal_update_page'}, 'ajax_group_interests': {'forminator_mailchimp_get_group_interests'}, 'delete_appearance_preset': {'forminator_delete_appearance_preset'}}
 *
 ***/
 
-/** Function save_permissions() called by wp_ajax hooks: {'forminator_save_permissions'} **/
+/** Function save_uninstall_form() called by wp_ajax hooks: {'forminator_save_uninstall_settings_popup'} **/
+/** No params detected :-/ **/
+
+
+/** Function stripe_oauth_disconnect() called by wp_ajax hooks: {'forminator_stripe_oauth_disconnect'} **/
+/** Parameters found in function stripe_oauth_disconnect(): {"post": ["mode"]} **/
+function stripe_oauth_disconnect() {
+		// Validate nonce + capabilities.
+		forminator_validate_ajax( 'forminator_stripe_oauth', false, 'forminator-settings' );
+
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Verified in forminator_validate_ajax above.
+		$mode = isset( $_POST['mode'] ) ? sanitize_text_field( wp_unslash( $_POST['mode'] ) ) : '';
+		if ( ! in_array( $mode, array( 'live', 'test' ), true ) ) {
+			wp_send_json_error(
+				array(
+					'message' => esc_html__( 'Invalid Stripe connection mode.', 'forminator' ),
+				)
+			);
+		}
+
+		if ( ! Forminator_Gateway_Stripe::is_mode_configured( $mode ) ) {
+			wp_send_json_error(
+				array(
+					'message' => esc_html__( 'This Stripe mode is not connected.', 'forminator' ),
+				)
+			);
+		}
+
+		Forminator_Stripe_Connect::get_instance()->disconnect( $mode );
+
+		$success_text = 'live' === $mode
+			? esc_html__( 'Live Stripe account disconnected successfully.', 'forminator' )
+			: esc_html__( 'Test Stripe account disconnected successfully.', 'forminator' );
+
+		$data = array(
+			'notifications' => array(
+				array(
+					'type'     => 'success',
+					'text'     => $success_text,
+					'duration' => 4000,
+				),
+			),
+		);
+
+		ob_start();
+		/* @noinspection PhpIncludeInspection */
+		include forminator_plugin_dir() . 'admin/views/settings/payments/section-stripe.php';
+		$data['html'] = ob_get_clean();
+
+		wp_send_json_success( $data );
+	}
+
+
+/** Function resend_notification_email() called by wp_ajax hooks: {'forminator_resend_notification_email'} **/
+/** No params detected :-/ **/
+
+
+/** Function save_pdf() called by wp_ajax hooks: {'forminator_save_pdf'} **/
+/** No params detected :-/ **/
+
+
+/** Function get_cloud_templates() called by wp_ajax hooks: {'forminator_get_cloud_templates'} **/
+/** No params detected :-/ **/
+
+
+/** Function load_captcha() called by wp_ajax hooks: {'forminator_load_captcha_popup'} **/
+/** No params detected :-/ **/
+
+
+/** Function fetch_pdfs() called by wp_ajax hooks: {'forminator_fetch_pdfs'} **/
+/** No params detected :-/ **/
+
+
+/** Function save_pagination_listings() called by wp_ajax hooks: {'forminator_save_pagination_listings_popup'} **/
+/** No params detected :-/ **/
+
+
+/** Function deactivate_for_module() called by wp_ajax hooks: {'forminator_addon_deactivate_for_module'} **/
+/** No params detected :-/ **/
+
+
+/** Function submit_deactivation_survey() called by wp_ajax hooks: {'forminator_deactivation_survey'} **/
+/** No params detected :-/ **/
+
+
+/** Function approve_user() called by wp_ajax hooks: {'forminator_approve_user_popup'} **/
+/** No params detected :-/ **/
+
+
+/** Function load_currency() called by wp_ajax hooks: {'forminator_load_currency_popup'} **/
+/** No params detected :-/ **/
+
+
+/** Function delete_poll_submissions() called by wp_ajax hooks: {'forminator_delete_poll_submissions'} **/
+/** No params detected :-/ **/
+
+
+/** Function load_pagination_entries() called by wp_ajax hooks: {'forminator_load_pagination_entries_popup'} **/
+/** No params detected :-/ **/
+
+
+/** Function set_encryption_key() called by wp_ajax hooks: {'forminator_set_encryption_key'} **/
+/** No params detected :-/ **/
+
+
+/** Function paypal_settings_modal() called by wp_ajax hooks: {'forminator_paypal_settings_modal'} **/
+/** No params detected :-/ **/
+
+
+/** Function load_pagination_listings() called by wp_ajax hooks: {'forminator_load_pagination_listings_popup'} **/
+/** No params detected :-/ **/
+
+
+/** Function load_email_form() called by wp_ajax hooks: {'forminator_load_email_settings_popup'} **/
+/** No params detected :-/ **/
+
+
+/** Function save_accessibility_settings() called by wp_ajax hooks: {'forminator_save_accessibility_settings_popup'} **/
+/** No params detected :-/ **/
+
+
+/** Function save_captcha() called by wp_ajax hooks: {'forminator_save_captcha_popup'} **/
+/** No params detected :-/ **/
+
+
+/** Function get_addons() called by wp_ajax hooks: {'forminator_addon_get_addons'} **/
+/** No params detected :-/ **/
+
+
+/** Function fallback_email() called by wp_ajax hooks: {'nopriv_forminator_2fa_fallback_email', 'forminator_2fa_fallback_email'} **/
+/** No params detected :-/ **/
+
+
+/** Function save_payments() called by wp_ajax hooks: {'forminator_save_payments_settings_popup'} **/
+/** No params detected :-/ **/
+
+
+/** Function toggle_usage_tracking() called by wp_ajax hooks: {'forminator_usage_tracking'} **/
+/** No params detected :-/ **/
+
+
+/** Function duplicate_template() called by wp_ajax hooks: {'forminator_duplicate_template'} **/
+/** No params detected :-/ **/
+
+
+/** Function save_import_form_cf7() called by wp_ajax hooks: {'forminator_save_import_form_cf7_popup'} **/
+/** No params detected :-/ **/
+
+
+/** Function save_import() called by wp_ajax hooks: {'forminator_save_import_quiz_popup', 'forminator_save_import_form_popup', 'forminator_save_import_poll_popup'} **/
+/** Parameters found in function save_import(): {"post": ["importable"]} **/
+function save_import() {
+		if ( ! Forminator::is_import_export_feature_enabled() ) {
+			wp_send_json_error( esc_html__( 'Import Export Feature disabled.', 'forminator' ) );
+		}
+		if ( empty( $_POST['importable'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing
+			wp_send_json_error( esc_html__( 'Import text can not be empty.', 'forminator' ) );
+		}
+		$current_action = current_action();
+		$slug           = str_replace( array( 'wp_ajax_forminator_save_import_', '_popup' ), '', $current_action );
+		// Validate nonce.
+		forminator_validate_ajax( 'forminator_save_import_' . $slug, false, 'forminator-settings' );
+
+		// Modify recipients if replace all recipients checkbox has been checked.
+		$change_recipients = 'checked' === Forminator_Core::sanitize_text_field( 'change_recipients' );
+
+		$save_to_cloud = 'checked' === Forminator_Core::sanitize_text_field( 'save_to_cloud' );
+
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput
+		$json  = wp_unslash( $_POST['importable'] );
+		$model = $this->import_json( $json, $slug, $change_recipients );
+
+		$return_url = admin_url( 'admin.php?page=forminator-' . forminator_get_prefix( $slug, 'c' ) );
+
+		if ( $save_to_cloud && ! forminator_cloud_templates_disabled() && forminator_is_site_connected_to_hub() ) {
+			Forminator_Template_API::create_template( $model->name, wp_json_encode( $model->to_exportable_data() ) );
+		}
+		/**
+		 * Fires after form import
+		 *
+		 * @since 1.27.0
+		 *
+		 * @param string $slug Module type.
+		 */
+		do_action( 'forminator_after_form_import', $slug );
+
+		wp_send_json_success(
+			array(
+				'id'  => $model->id,
+				'url' => $return_url,
+			)
+		);
+	}
+
+
+/** Function save_currency() called by wp_ajax hooks: {'forminator_save_currency_popup'} **/
+/** No params detected :-/ **/
+
+
+/** Function save_template() called by wp_ajax hooks: {'forminator_save_template'} **/
 /** No params detected :-/ **/
 
 
@@ -58,47 +257,15 @@ function save_report() {
 	}
 
 
-/** Function paypal_disconnect() called by wp_ajax hooks: {'forminator_disconnect_paypal'} **/
+/** Function Forminator_QForm_Front() called by wp_ajax hooks: {'forminator_load_quiz', 'nopriv_forminator_reload_quiz', 'nopriv_forminator_load_quiz', 'forminator_reload_quiz'} **/
+/** No function found :-/ **/
+
+
+/** Function delete_pdf() called by wp_ajax hooks: {'forminator_delete_pdf'} **/
 /** No params detected :-/ **/
 
 
-/** Function ajax_group_interests() called by wp_ajax hooks: {'forminator_mailchimp_get_group_interests'} **/
-/** Parameters found in function ajax_group_interests(): {"post": ["data"]} **/
-function ajax_group_interests() {
-		forminator_validate_ajax( 'forminator_mailchimp_interests', false, 'forminator-integrations' );
-		$html = '';
-		// phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput -- The nonce is verified before and sanitized in Forminator_Core::sanitize_array.
-		$post_data = isset( $_POST['data'] ) ? Forminator_Core::sanitize_array( $_POST['data'], 'data' ) : array();
-		$data      = array();
-		wp_parse_str( $post_data, $data );
-		$module_id   = $data['module_id'] ?? '';
-		$module_type = $data['module_type'] ?? '';
-		if ( $module_id ) {
-			$module_settings_instance = $this->get_addon_settings( $module_id, $module_type );
-			$html                     = $module_settings_instance->get_group_interests( $data );
-		}
-
-		wp_send_json_success( $html );
-	}
-
-
-/** Function forminator_share_feedback() called by wp_ajax hooks: {'forminator_share_feedback'} **/
-/** No params detected :-/ **/
-
-
-/** Function filter_report_data() called by wp_ajax hooks: {'forminator_filter_report_data'} **/
-/** No params detected :-/ **/
-
-
-/** Function dismiss_notice() called by wp_ajax hooks: {'forminator_dismiss_notification'} **/
-/** No params detected :-/ **/
-
-
-/** Function load_email_form() called by wp_ajax hooks: {'forminator_load_email_settings_popup'} **/
-/** No params detected :-/ **/
-
-
-/** Function save_import_form_cf7() called by wp_ajax hooks: {'forminator_save_import_form_cf7_popup'} **/
+/** Function load_privacy_settings() called by wp_ajax hooks: {'forminator_load_privacy_settings_popup'} **/
 /** No params detected :-/ **/
 
 
@@ -106,23 +273,7 @@ function ajax_group_interests() {
 /** No params detected :-/ **/
 
 
-/** Function get_preset_templates() called by wp_ajax hooks: {'forminator_preset_templates'} **/
-/** No params detected :-/ **/
-
-
-/** Function set_encryption_key() called by wp_ajax hooks: {'forminator_set_encryption_key'} **/
-/** No params detected :-/ **/
-
-
-/** Function load_pagination_listings() called by wp_ajax hooks: {'forminator_load_pagination_listings_popup'} **/
-/** No params detected :-/ **/
-
-
-/** Function check_stripe_checkout_session_status() called by wp_ajax hooks: {'forminator_check_stripe_checkout_session_status', 'nopriv_forminator_check_stripe_checkout_session_status'} **/
-/** No params detected :-/ **/
-
-
-/** Function toggle_usage_tracking() called by wp_ajax hooks: {'forminator_usage_tracking'} **/
+/** Function later_notice() called by wp_ajax hooks: {'forminator_later_notification'} **/
 /** No params detected :-/ **/
 
 
@@ -130,23 +281,127 @@ function ajax_group_interests() {
 /** No params detected :-/ **/
 
 
-/** Function load_pagination_entries() called by wp_ajax hooks: {'forminator_load_pagination_entries_popup'} **/
+/** Function update_payment_amount() called by wp_ajax hooks: {'forminator_update_payment_amount', 'nopriv_forminator_update_payment_amount'} **/
 /** No params detected :-/ **/
 
 
-/** Function save_privacy_settings() called by wp_ajax hooks: {'forminator_save_privacy_settings_popup'} **/
+/** Function load_import_form_cf7() called by wp_ajax hooks: {'forminator_load_import_form_cf7_popup'} **/
 /** No params detected :-/ **/
 
 
-/** Function delete_poll_submissions() called by wp_ajax hooks: {'forminator_delete_poll_submissions'} **/
+/** Function apply_appearance_preset() called by wp_ajax hooks: {'forminator_apply_appearance_preset'} **/
+/** Parameters found in function apply_appearance_preset(): {"post": ["settings"]} **/
+function apply_appearance_preset() {
+		forminator_validate_ajax( 'forminator_apply_preset', false, 'forminator-cform' );
+
+		$preset_id = Forminator_Core::sanitize_text_field( 'preset_id' );
+		$ids       = filter_input( INPUT_POST, 'ids', FILTER_VALIDATE_INT, FILTER_REQUIRE_ARRAY );
+		$edit_form = filter_input( INPUT_POST, 'edit_form', FILTER_VALIDATE_BOOLEAN );
+		$count     = 0;
+
+		$new_settings = Forminator_Settings_Page::get_preset( $preset_id );
+		if ( $ids ) {
+			foreach ( $ids as $form_id ) {
+				$form_model = Forminator_Base_Form_Model::get_model( $form_id );
+				if ( ! $form_model ) {
+					continue;
+				}
+
+				$form_model->settings = self::merge_appearance_settings( $form_model->settings, $new_settings );
+
+				if ( $edit_form ) {
+					// phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput -- Sanitized in Forminator_Core::sanitize_array.
+					$settings     = isset( $_POST['settings'] ) ? Forminator_Core::sanitize_array( $_POST['settings'] ) : array();
+					$old_settings = json_decode( wp_unslash( $settings ), true );
+					if ( $old_settings ) {
+						$form_model->settings = self::merge_appearance_settings( $old_settings, $new_settings );
+					}
+					wp_send_json_success( $form_model->settings );
+				}
+
+				// Save data.
+				$result = $form_model->save();
+				if ( ! is_wp_error( $result ) ) {
+					// Regenerare module css file.
+					Forminator_Render_Form::regenerate_css_file( $form_id );
+
+					++$count;
+				}
+			}
+		}
+
+		if ( $edit_form ) {
+			wp_send_json_error( esc_html__( 'Something went wrong.', 'forminator' ) );
+		}
+		/* translators: %s: Form count */
+		$success = sprintf( esc_html__( 'Preset successfully applied to %d form(s).', 'forminator' ), $count );
+		wp_send_json_success( $success );
+	}
+
+
+/** Function stripe_oauth_init() called by wp_ajax hooks: {'forminator_stripe_oauth_init'} **/
+/** Parameters found in function stripe_oauth_init(): {"post": ["mode"]} **/
+function stripe_oauth_init() {
+		// Validate nonce + capabilities.
+		forminator_validate_ajax( 'forminator_stripe_oauth', false, 'forminator-settings' );
+
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Verified in forminator_validate_ajax above.
+		$mode = isset( $_POST['mode'] ) ? sanitize_text_field( wp_unslash( $_POST['mode'] ) ) : '';
+		if ( ! in_array( $mode, array( 'live', 'test' ), true ) ) {
+			wp_send_json_error(
+				array(
+					'message' => esc_html__( 'Invalid Stripe connection mode.', 'forminator' ),
+				)
+			);
+		}
+
+		$url = Forminator_Stripe_Connect::get_instance()->get_oauth_url( $mode );
+
+		if ( is_wp_error( $url ) ) {
+			wp_send_json_error(
+				array(
+					'message' => $url->get_error_message(),
+				)
+			);
+		}
+
+		wp_send_json_success(
+			array(
+				'url' => esc_url_raw( $url ),
+			)
+		);
+	}
+
+
+/** Function resend_draft_email() called by wp_ajax hooks: {'forminator_resend_draft_email'} **/
 /** No params detected :-/ **/
 
 
-/** Function multiple_file_upload() called by wp_ajax hooks: {'forminator_multiple_file_upload', 'nopriv_forminator_multiple_file_upload'} **/
+/** Function module_settings() called by wp_ajax hooks: {'forminator_addon_module_settings'} **/
 /** No params detected :-/ **/
 
 
-/** Function load_export() called by wp_ajax hooks: {'forminator_load_export_form_popup', 'forminator_load_export_poll_popup', 'forminator_load_export_quiz_popup'} **/
+/** Function promote_remind_later() called by wp_ajax hooks: {'forminator_promote_remind_later'} **/
+/** No params detected :-/ **/
+
+
+/** Function search_emails() called by wp_ajax hooks: {'forminator_builder_search_emails'} **/
+/** No params detected :-/ **/
+
+
+/** Function addons_page_actions() called by wp_ajax hooks: {'$action'} **/
+/** No params detected :-/ **/
+
+
+/** Function load_uninstall_form() called by wp_ajax hooks: {'forminator_load_uninstall_settings_popup'} **/
+/** No params detected :-/ **/
+
+
+/** Function submit_email_draft_link() called by wp_ajax hooks: {'nopriv_forminator_email_draft_link', 'forminator_email_draft_link'} **/
+/** No params detected :-/ **/
+
+
+/** Function search_users() called by wp_ajax hooks: {'forminator_search_users'} **/
 /** No params detected :-/ **/
 
 
@@ -250,307 +505,11 @@ function save_builder() {
 	}
 
 
-/** Function get_nonce() called by wp_ajax hooks: {'forminator_get_nonce', 'nopriv_forminator_get_nonce'} **/
-/** No params detected :-/ **/
-
-
-/** Function load_import_form_cf7() called by wp_ajax hooks: {'forminator_load_import_form_cf7_popup'} **/
-/** No params detected :-/ **/
-
-
-/** Function load_exports() called by wp_ajax hooks: {'forminator_load_exports_popup'} **/
-/** No params detected :-/ **/
-
-
-/** Function fetch_report() called by wp_ajax hooks: {'forminator_fetch_report'} **/
-/** No params detected :-/ **/
-
-
-/** Function search_emails() called by wp_ajax hooks: {'forminator_builder_search_emails'} **/
-/** No params detected :-/ **/
-
-
-/** Function rename_template() called by wp_ajax hooks: {'forminator_rename_template'} **/
-/** No params detected :-/ **/
-
-
-/** Function revert_builder() called by wp_ajax hooks: {'forminator_revert_builder'} **/
-/** No params detected :-/ **/
-
-
-/** Function update_report_status() called by wp_ajax hooks: {'forminator_report_update_status'} **/
-/** No params detected :-/ **/
-
-
-/** Function duplicate_template() called by wp_ajax hooks: {'forminator_duplicate_template'} **/
-/** No params detected :-/ **/
-
-
-/** Function paypal_settings_modal() called by wp_ajax hooks: {'forminator_paypal_settings_modal'} **/
-/** No params detected :-/ **/
-
-
-/** Function resend_draft_email() called by wp_ajax hooks: {'forminator_resend_draft_email'} **/
-/** No params detected :-/ **/
-
-
-/** Function resend_notification_email() called by wp_ajax hooks: {'forminator_resend_notification_email'} **/
-/** No params detected :-/ **/
-
-
-/** Function addons_page_actions() called by wp_ajax hooks: {'$action'} **/
-/** No params detected :-/ **/
-
-
-/** Function settings() called by wp_ajax hooks: {'forminator_addon_settings'} **/
-/** No params detected :-/ **/
-
-
-/** Function deactivate() called by wp_ajax hooks: {'forminator_addon_deactivate'} **/
-/** No params detected :-/ **/
-
-
-/** Function fallback_email() called by wp_ajax hooks: {'nopriv_forminator_2fa_fallback_email', 'forminator_2fa_fallback_email'} **/
-/** No params detected :-/ **/
-
-
-/** Function save_import_form_ninja() called by wp_ajax hooks: {'forminator_save_import_form_ninja_popup'} **/
-/** No params detected :-/ **/
-
-
-/** Function stripe_oauth_init() called by wp_ajax hooks: {'forminator_stripe_oauth_init'} **/
-/** Parameters found in function stripe_oauth_init(): {"post": ["mode"]} **/
-function stripe_oauth_init() {
-		// Validate nonce + capabilities.
-		forminator_validate_ajax( 'forminator_stripe_oauth', false, 'forminator-settings' );
-
-		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Verified in forminator_validate_ajax above.
-		$mode = isset( $_POST['mode'] ) ? sanitize_text_field( wp_unslash( $_POST['mode'] ) ) : '';
-		if ( ! in_array( $mode, array( 'live', 'test' ), true ) ) {
-			wp_send_json_error(
-				array(
-					'message' => esc_html__( 'Invalid Stripe connection mode.', 'forminator' ),
-				)
-			);
-		}
-
-		$url = Forminator_Stripe_Connect::get_instance()->get_oauth_url( $mode );
-
-		if ( is_wp_error( $url ) ) {
-			wp_send_json_error(
-				array(
-					'message' => $url->get_error_message(),
-				)
-			);
-		}
-
-		wp_send_json_success(
-			array(
-				'url' => esc_url_raw( $url ),
-			)
-		);
-	}
-
-
-/** Function apply_appearance_preset() called by wp_ajax hooks: {'forminator_apply_appearance_preset'} **/
-/** Parameters found in function apply_appearance_preset(): {"post": ["settings"]} **/
-function apply_appearance_preset() {
-		forminator_validate_ajax( 'forminator_apply_preset', false, 'forminator-cform' );
-
-		$preset_id = Forminator_Core::sanitize_text_field( 'preset_id' );
-		$ids       = filter_input( INPUT_POST, 'ids', FILTER_VALIDATE_INT, FILTER_REQUIRE_ARRAY );
-		$edit_form = filter_input( INPUT_POST, 'edit_form', FILTER_VALIDATE_BOOLEAN );
-		$count     = 0;
-
-		$new_settings = Forminator_Settings_Page::get_preset( $preset_id );
-		if ( $ids ) {
-			foreach ( $ids as $form_id ) {
-				$form_model = Forminator_Base_Form_Model::get_model( $form_id );
-				if ( ! $form_model ) {
-					continue;
-				}
-
-				$form_model->settings = self::merge_appearance_settings( $form_model->settings, $new_settings );
-
-				if ( $edit_form ) {
-					// phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput -- Sanitized in Forminator_Core::sanitize_array.
-					$settings     = isset( $_POST['settings'] ) ? Forminator_Core::sanitize_array( $_POST['settings'] ) : array();
-					$old_settings = json_decode( wp_unslash( $settings ), true );
-					if ( $old_settings ) {
-						$form_model->settings = self::merge_appearance_settings( $old_settings, $new_settings );
-					}
-					wp_send_json_success( $form_model->settings );
-				}
-
-				// Save data.
-				$result = $form_model->save();
-				if ( ! is_wp_error( $result ) ) {
-					// Regenerare module css file.
-					Forminator_Render_Form::regenerate_css_file( $form_id );
-
-					++$count;
-				}
-			}
-		}
-
-		if ( $edit_form ) {
-			wp_send_json_error( esc_html__( 'Something went wrong.', 'forminator' ) );
-		}
-		/* translators: %s: Form count */
-		$success = sprintf( esc_html__( 'Preset successfully applied to %d form(s).', 'forminator' ), $count );
-		wp_send_json_success( $success );
-	}
-
-
-/** Function stripe_oauth_disconnect() called by wp_ajax hooks: {'forminator_stripe_oauth_disconnect'} **/
-/** Parameters found in function stripe_oauth_disconnect(): {"post": ["mode"]} **/
-function stripe_oauth_disconnect() {
-		// Validate nonce + capabilities.
-		forminator_validate_ajax( 'forminator_stripe_oauth', false, 'forminator-settings' );
-
-		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Verified in forminator_validate_ajax above.
-		$mode = isset( $_POST['mode'] ) ? sanitize_text_field( wp_unslash( $_POST['mode'] ) ) : '';
-		if ( ! in_array( $mode, array( 'live', 'test' ), true ) ) {
-			wp_send_json_error(
-				array(
-					'message' => esc_html__( 'Invalid Stripe connection mode.', 'forminator' ),
-				)
-			);
-		}
-
-		if ( ! Forminator_Gateway_Stripe::is_mode_configured( $mode ) ) {
-			wp_send_json_error(
-				array(
-					'message' => esc_html__( 'This Stripe mode is not connected.', 'forminator' ),
-				)
-			);
-		}
-
-		Forminator_Stripe_Connect::get_instance()->disconnect( $mode );
-
-		$success_text = 'live' === $mode
-			? esc_html__( 'Live Stripe account disconnected successfully.', 'forminator' )
-			: esc_html__( 'Test Stripe account disconnected successfully.', 'forminator' );
-
-		$data = array(
-			'notifications' => array(
-				array(
-					'type'     => 'success',
-					'text'     => $success_text,
-					'duration' => 4000,
-				),
-			),
-		);
-
-		ob_start();
-		/* @noinspection PhpIncludeInspection */
-		include forminator_plugin_dir() . 'admin/views/settings/payments/section-stripe.php';
-		$data['html'] = ob_get_clean();
-
-		wp_send_json_success( $data );
-	}
-
-
-/** Function load_privacy_settings() called by wp_ajax hooks: {'forminator_load_privacy_settings_popup'} **/
-/** No params detected :-/ **/
-
-
-/** Function load_captcha() called by wp_ajax hooks: {'forminator_load_captcha_popup'} **/
-/** No params detected :-/ **/
-
-
-/** Function Forminator_QForm_Front() called by wp_ajax hooks: {'forminator_load_quiz', 'nopriv_forminator_load_quiz', 'forminator_reload_quiz', 'nopriv_forminator_reload_quiz'} **/
-/** No function found :-/ **/
-
-
-/** Function save_pdf() called by wp_ajax hooks: {'forminator_save_pdf'} **/
-/** No params detected :-/ **/
-
-
-/** Function Forminator_Poll_Front() called by wp_ajax hooks: {'nopriv_forminator_load_poll', 'forminator_load_poll'} **/
-/** No function found :-/ **/
-
-
-/** Function dismiss_admin_notice() called by wp_ajax hooks: {'forminator_dismiss_notice'} **/
-/** No params detected :-/ **/
-
-
-/** Function load_uninstall_form() called by wp_ajax hooks: {'forminator_load_uninstall_settings_popup'} **/
-/** No params detected :-/ **/
-
-
-/** Function update_payment_amount() called by wp_ajax hooks: {'nopriv_forminator_update_payment_amount', 'forminator_update_payment_amount'} **/
-/** No params detected :-/ **/
-
-
-/** Function save_appearance_preset() called by wp_ajax hooks: {'forminator_save_appearance_preset'} **/
-/** Parameters found in function save_appearance_preset(): {"post": ["settings"]} **/
-function save_appearance_preset() {
-		forminator_validate_ajax( 'forminator_appearance_preset', false, 'forminator-settings' );
-
-		$id = Forminator_Core::sanitize_text_field( 'presetId' );
-		if ( ! $id ) {
-			wp_send_json_error( esc_html__( 'Appearance preset id doesn\'t exist', 'forminator' ) );
-		}
-
-		$settings = array();
-		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Verified in forminator_validate_ajax.
-		if ( ! empty( $_POST['settings'] ) ) {
-			// phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput -- Sanitized in Forminator_Core::sanitize_array.
-			$settings = Forminator_Core::sanitize_array( json_decode( wp_unslash( $_POST['settings'] ), true ) );
-		}
-
-		self::save_preset( $id, $settings );
-
-		wp_send_json_success( esc_html__( 'The preset has been successfully updated.', 'forminator' ) );
-	}
-
-
 /** Function delete_template() called by wp_ajax hooks: {'forminator_delete_template'} **/
 /** No params detected :-/ **/
 
 
-/** Function get_avatar() called by wp_ajax hooks: {'forminator_get_avatar'} **/
-/** No params detected :-/ **/
-
-
-/** Function save_currency() called by wp_ajax hooks: {'forminator_save_currency_popup'} **/
-/** No params detected :-/ **/
-
-
-/** Function module_settings() called by wp_ajax hooks: {'forminator_addon_module_settings'} **/
-/** No params detected :-/ **/
-
-
-/** Function Forminator_CForm_Front() called by wp_ajax hooks: {'nopriv_forminator_load_form', 'forminator_load_form', 'forminator_update_live_preview'} **/
-/** No function found :-/ **/
-
-
-/** Function save_pagination_listings() called by wp_ajax hooks: {'forminator_save_pagination_listings_popup'} **/
-/** No params detected :-/ **/
-
-
-/** Function search_users() called by wp_ajax hooks: {'forminator_search_users'} **/
-/** No params detected :-/ **/
-
-
-/** Function submit_deactivation_survey() called by wp_ajax hooks: {'forminator_deactivation_survey'} **/
-/** No params detected :-/ **/
-
-
-/** Function promote_remind_later() called by wp_ajax hooks: {'forminator_promote_remind_later'} **/
-/** No params detected :-/ **/
-
-
-/** Function load_import() called by wp_ajax hooks: {'forminator_load_import_poll_popup', 'forminator_load_import_quiz_popup', 'forminator_load_import_form_popup'} **/
-/** No params detected :-/ **/
-
-
-/** Function load_currency() called by wp_ajax hooks: {'forminator_load_currency_popup'} **/
-/** No params detected :-/ **/
-
-
-/** Function approve_user() called by wp_ajax hooks: {'forminator_approve_user_popup'} **/
+/** Function paypal_disconnect() called by wp_ajax hooks: {'forminator_disconnect_paypal'} **/
 /** No params detected :-/ **/
 
 
@@ -558,51 +517,15 @@ function save_appearance_preset() {
 /** No params detected :-/ **/
 
 
-/** Function submit_email_draft_link() called by wp_ajax hooks: {'forminator_email_draft_link', 'nopriv_forminator_email_draft_link'} **/
+/** Function revert_builder() called by wp_ajax hooks: {'forminator_revert_builder'} **/
 /** No params detected :-/ **/
 
 
-/** Function get_cloud_templates() called by wp_ajax hooks: {'forminator_get_cloud_templates'} **/
+/** Function check_stripe_checkout_session_status() called by wp_ajax hooks: {'forminator_check_stripe_checkout_session_status', 'nopriv_forminator_check_stripe_checkout_session_status'} **/
 /** No params detected :-/ **/
 
 
-/** Function save_dashboard_settings() called by wp_ajax hooks: {'forminator_save_dashboard_settings_popup'} **/
-/** No params detected :-/ **/
-
-
-/** Function save_accessibility_settings() called by wp_ajax hooks: {'forminator_save_accessibility_settings_popup'} **/
-/** No params detected :-/ **/
-
-
-/** Function create_module_from_template() called by wp_ajax hooks: {'forminator_create_module_from_template'} **/
-/** No params detected :-/ **/
-
-
-/** Function later_notice() called by wp_ajax hooks: {'forminator_later_notification'} **/
-/** No params detected :-/ **/
-
-
-/** Function disconnect_hub() called by wp_ajax hooks: {'forminator_disconnect_hub'} **/
-/** No params detected :-/ **/
-
-
-/** Function load_turnstile_preview() called by wp_ajax hooks: {'forminator_load_turnstile_preview'} **/
-/** No params detected :-/ **/
-
-
-/** Function reset_tracking_data() called by wp_ajax hooks: {'forminator_reset_tracking_data'} **/
-/** No params detected :-/ **/
-
-
-/** Function paypal_update_page() called by wp_ajax hooks: {'forminator_paypal_update_page'} **/
-/** No params detected :-/ **/
-
-
-/** Function save_uninstall_form() called by wp_ajax hooks: {'forminator_save_uninstall_settings_popup'} **/
-/** No params detected :-/ **/
-
-
-/** Function save_quiz() called by wp_ajax hooks: {'forminator_save_quiz_knowledge', 'forminator_save_quiz_nowrong'} **/
+/** Function save_quiz() called by wp_ajax hooks: {'forminator_save_quiz_nowrong', 'forminator_save_quiz_knowledge'} **/
 /** Parameters found in function save_quiz(): {"post": ["data"]} **/
 function save_quiz() {
 		if ( ! forminator_is_user_allowed( 'forminator-quiz' ) ) {
@@ -693,15 +616,218 @@ function save_quiz() {
 	}
 
 
-/** Function delete_unconfirmed_user() called by wp_ajax hooks: {'forminator_delete_unconfirmed_user_popup'} **/
-/** No params detected :-/ **/
-
-
 /** Function load_import_form_gravity() called by wp_ajax hooks: {'forminator_load_import_form_gravity_popup'} **/
 /** No params detected :-/ **/
 
 
+/** Function get_preset_templates() called by wp_ajax hooks: {'forminator_preset_templates'} **/
+/** No params detected :-/ **/
+
+
+/** Function save_appearance_preset() called by wp_ajax hooks: {'forminator_save_appearance_preset'} **/
+/** Parameters found in function save_appearance_preset(): {"post": ["settings"]} **/
+function save_appearance_preset() {
+		forminator_validate_ajax( 'forminator_appearance_preset', false, 'forminator-settings' );
+
+		$id = Forminator_Core::sanitize_text_field( 'presetId' );
+		if ( ! $id ) {
+			wp_send_json_error( esc_html__( 'Appearance preset id doesn\'t exist', 'forminator' ) );
+		}
+
+		$settings = array();
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Verified in forminator_validate_ajax.
+		if ( ! empty( $_POST['settings'] ) ) {
+			// phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput -- Sanitized in Forminator_Core::sanitize_array.
+			$settings = Forminator_Core::sanitize_array( json_decode( wp_unslash( $_POST['settings'] ), true ) );
+		}
+
+		self::save_preset( $id, $settings );
+
+		wp_send_json_success( esc_html__( 'The preset has been successfully updated.', 'forminator' ) );
+	}
+
+
+/** Function deactivate() called by wp_ajax hooks: {'forminator_addon_deactivate'} **/
+/** No params detected :-/ **/
+
+
+/** Function update_report_status() called by wp_ajax hooks: {'forminator_report_update_status'} **/
+/** No params detected :-/ **/
+
+
+/** Function save_pagination_entries() called by wp_ajax hooks: {'forminator_save_pagination_entries_popup'} **/
+/** No function found :-/ **/
+
+
+/** Function disconnect_hub() called by wp_ajax hooks: {'forminator_disconnect_hub'} **/
+/** No params detected :-/ **/
+
+
+/** Function create_appearance_preset() called by wp_ajax hooks: {'forminator_create_appearance_preset'} **/
+/** No params detected :-/ **/
+
+
+/** Function load_exports() called by wp_ajax hooks: {'forminator_load_exports_popup'} **/
+/** No params detected :-/ **/
+
+
+/** Function delete_unconfirmed_user() called by wp_ajax hooks: {'forminator_delete_unconfirmed_user_popup'} **/
+/** No params detected :-/ **/
+
+
+/** Function filter_report_data() called by wp_ajax hooks: {'forminator_filter_report_data'} **/
+/** No params detected :-/ **/
+
+
+/** Function multiple_file_upload() called by wp_ajax hooks: {'forminator_multiple_file_upload', 'nopriv_forminator_multiple_file_upload'} **/
+/** No params detected :-/ **/
+
+
+/** Function hubspot_support_request() called by wp_ajax hooks: {'forminator_hubspot_support_request'} **/
+/** No params detected :-/ **/
+
+
 /** Function load_recaptcha_preview() called by wp_ajax hooks: {'forminator_load_recaptcha_preview'} **/
+/** No params detected :-/ **/
+
+
+/** Function settings() called by wp_ajax hooks: {'forminator_addon_settings'} **/
+/** No params detected :-/ **/
+
+
+/** Function get_avatar() called by wp_ajax hooks: {'forminator_get_avatar'} **/
+/** No params detected :-/ **/
+
+
+/** Function load_turnstile_preview() called by wp_ajax hooks: {'forminator_load_turnstile_preview'} **/
+/** No params detected :-/ **/
+
+
+/** Function preview_module() called by wp_ajax hooks: {'forminator_load_preview_quizzes_popup', 'forminator_load_preview_cforms_popup', 'forminator_load_preview_polls_popup'} **/
+/** Parameters found in function preview_module(): {"post": ["data"]} **/
+function preview_module() {
+		$current_action = current_action();
+		$slug           = str_replace( array( 'wp_ajax_forminator_load_preview_', '_popup' ), '', $current_action );
+		if ( 'cforms' === $slug ) {
+			$slug = 'form';
+		} elseif ( 'polls' === $slug ) {
+			$slug = 'poll';
+		} elseif ( 'quizzes' === $slug ) {
+			$slug = 'quiz';
+		}
+
+		// Validate nonce.
+		forminator_validate_ajax( 'forminator_popup_preview_' . $slug, false, 'forminator' );
+
+		$preview_data = false;
+		// force -1 for preview.
+		$form_id = filter_input( INPUT_POST, 'id', FILTER_VALIDATE_INT );
+		$form_id = $form_id ? $form_id : - 1;
+
+		// Check if preview data set.
+		if ( ! empty( $_POST['data'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Verified in forminator_validate_ajax.
+			// phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput -- Sanitized in Forminator_Core::sanitize_array.
+			$data = Forminator_Core::sanitize_array( $_POST['data'], 'data' );
+
+			if ( ! is_array( $data ) ) {
+				$data = json_decode( $data, true );
+			}
+			$function     = 'forminator_data_to_model_' . $slug;
+			$preview_data = $function( $data );
+		}
+
+		$html = forminator_preview( $form_id, $slug, true, $preview_data );
+
+		wp_send_json_success( $html );
+	}
+
+
+/** Function save_dashboard_settings() called by wp_ajax hooks: {'forminator_save_dashboard_settings_popup'} **/
+/** No params detected :-/ **/
+
+
+/** Function save_privacy_settings() called by wp_ajax hooks: {'forminator_save_privacy_settings_popup'} **/
+/** No params detected :-/ **/
+
+
+/** Function load_import() called by wp_ajax hooks: {'forminator_load_import_quiz_popup', 'forminator_load_import_form_popup', 'forminator_load_import_poll_popup'} **/
+/** No params detected :-/ **/
+
+
+/** Function clear_exports() called by wp_ajax hooks: {'forminator_clear_exports_popup'} **/
+/** No params detected :-/ **/
+
+
+/** Function dismiss_welcome() called by wp_ajax hooks: {'nopriv_forminator_dismiss_welcome', 'forminator_dismiss_welcome'} **/
+/** No params detected :-/ **/
+
+
+/** Function load_hcaptcha_preview() called by wp_ajax hooks: {'forminator_load_hcaptcha_preview'} **/
+/** No params detected :-/ **/
+
+
+/** Function refresh_email_lists() called by wp_ajax hooks: {'forminator_refresh_email_lists'} **/
+/** No params detected :-/ **/
+
+
+/** Function rename_template() called by wp_ajax hooks: {'forminator_rename_template'} **/
+/** No params detected :-/ **/
+
+
+/** Function forminator_share_feedback() called by wp_ajax hooks: {'forminator_share_feedback'} **/
+/** No params detected :-/ **/
+
+
+/** Function reset_tracking_data() called by wp_ajax hooks: {'forminator_reset_tracking_data'} **/
+/** No params detected :-/ **/
+
+
+/** Function load_import_form_ninja() called by wp_ajax hooks: {'forminator_load_import_form_ninja_popup'} **/
+/** No params detected :-/ **/
+
+
+/** Function create_paypal_order() called by wp_ajax hooks: {'forminator_pp_create_order', 'nopriv_forminator_pp_create_order'} **/
+/** No params detected :-/ **/
+
+
+/** Function dismiss_notice() called by wp_ajax hooks: {'forminator_dismiss_notification'} **/
+/** No params detected :-/ **/
+
+
+/** Function save_permissions() called by wp_ajax hooks: {'forminator_save_permissions'} **/
+/** No params detected :-/ **/
+
+
+/** Function fetch_report() called by wp_ajax hooks: {'forminator_fetch_report'} **/
+/** No params detected :-/ **/
+
+
+/** Function create_module_from_template() called by wp_ajax hooks: {'forminator_create_module_from_template'} **/
+/** No params detected :-/ **/
+
+
+/** Function resend_activation_link() called by wp_ajax hooks: {'forminator_resend_activation_link'} **/
+/** No params detected :-/ **/
+
+
+/** Function load_google_fonts() called by wp_ajax hooks: {'forminator_load_google_fonts'} **/
+/** Parameters found in function load_google_fonts(): {"post": ["data"]} **/
+function load_google_fonts() {
+		forminator_validate_ajax( 'forminator_load_google_fonts', false, 'forminator' );
+
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Verified in forminator_validate_ajax.
+		$is_object = isset( $_POST['data']['isObject'] ) ? sanitize_text_field( wp_unslash( $_POST['data']['isObject'] ) ) : false;
+
+		$fonts = forminator_get_font_families( $is_object );
+		wp_send_json_success( $fonts );
+	}
+
+
+/** Function Forminator_CForm_Front() called by wp_ajax hooks: {'nopriv_forminator_load_form', 'forminator_load_form', 'forminator_update_live_preview'} **/
+/** No function found :-/ **/
+
+
+/** Function get_nonce() called by wp_ajax hooks: {'forminator_get_nonce', 'nopriv_forminator_get_nonce'} **/
 /** No params detected :-/ **/
 
 
@@ -762,173 +888,47 @@ function save_poll_form() {
 	}
 
 
-/** Function dismiss_welcome() called by wp_ajax hooks: {'nopriv_forminator_dismiss_welcome', 'forminator_dismiss_welcome'} **/
+/** Function save_import_form_ninja() called by wp_ajax hooks: {'forminator_save_import_form_ninja_popup'} **/
 /** No params detected :-/ **/
 
 
-/** Function save_payments() called by wp_ajax hooks: {'forminator_save_payments_settings_popup'} **/
+/** Function load_export() called by wp_ajax hooks: {'forminator_load_export_quiz_popup', 'forminator_load_export_poll_popup', 'forminator_load_export_form_popup'} **/
 /** No params detected :-/ **/
 
 
-/** Function fetch_pdfs() called by wp_ajax hooks: {'forminator_fetch_pdfs'} **/
+/** Function Forminator_Poll_Front() called by wp_ajax hooks: {'forminator_load_poll', 'nopriv_forminator_load_poll'} **/
+/** No function found :-/ **/
+
+
+/** Function dismiss_admin_notice() called by wp_ajax hooks: {'forminator_dismiss_notice'} **/
 /** No params detected :-/ **/
 
 
-/** Function load_hcaptcha_preview() called by wp_ajax hooks: {'forminator_load_hcaptcha_preview'} **/
+/** Function paypal_update_page() called by wp_ajax hooks: {'forminator_paypal_update_page'} **/
 /** No params detected :-/ **/
 
 
-/** Function create_appearance_preset() called by wp_ajax hooks: {'forminator_create_appearance_preset'} **/
-/** No params detected :-/ **/
-
-
-/** Function refresh_email_lists() called by wp_ajax hooks: {'forminator_refresh_email_lists'} **/
-/** No params detected :-/ **/
-
-
-/** Function load_import_form_ninja() called by wp_ajax hooks: {'forminator_load_import_form_ninja_popup'} **/
-/** No params detected :-/ **/
-
-
-/** Function load_google_fonts() called by wp_ajax hooks: {'forminator_load_google_fonts'} **/
-/** Parameters found in function load_google_fonts(): {"post": ["data"]} **/
-function load_google_fonts() {
-		forminator_validate_ajax( 'forminator_load_google_fonts', false, 'forminator' );
-
-		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Verified in forminator_validate_ajax.
-		$is_object = isset( $_POST['data']['isObject'] ) ? sanitize_text_field( wp_unslash( $_POST['data']['isObject'] ) ) : false;
-
-		$fonts = forminator_get_font_families( $is_object );
-		wp_send_json_success( $fonts );
-	}
-
-
-/** Function preview_module() called by wp_ajax hooks: {'forminator_load_preview_polls_popup', 'forminator_load_preview_cforms_popup', 'forminator_load_preview_quizzes_popup'} **/
-/** Parameters found in function preview_module(): {"post": ["data"]} **/
-function preview_module() {
-		$current_action = current_action();
-		$slug           = str_replace( array( 'wp_ajax_forminator_load_preview_', '_popup' ), '', $current_action );
-		if ( 'cforms' === $slug ) {
-			$slug = 'form';
-		} elseif ( 'polls' === $slug ) {
-			$slug = 'poll';
-		} elseif ( 'quizzes' === $slug ) {
-			$slug = 'quiz';
+/** Function ajax_group_interests() called by wp_ajax hooks: {'forminator_mailchimp_get_group_interests'} **/
+/** Parameters found in function ajax_group_interests(): {"post": ["data"]} **/
+function ajax_group_interests() {
+		forminator_validate_ajax( 'forminator_mailchimp_interests', false, 'forminator-integrations' );
+		$html = '';
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput -- The nonce is verified before and sanitized in Forminator_Core::sanitize_array.
+		$post_data = isset( $_POST['data'] ) ? Forminator_Core::sanitize_array( $_POST['data'], 'data' ) : array();
+		$data      = array();
+		wp_parse_str( $post_data, $data );
+		$module_id   = $data['module_id'] ?? '';
+		$module_type = $data['module_type'] ?? '';
+		if ( $module_id ) {
+			$module_settings_instance = $this->get_addon_settings( $module_id, $module_type );
+			$html                     = $module_settings_instance->get_group_interests( $data );
 		}
-
-		// Validate nonce.
-		forminator_validate_ajax( 'forminator_popup_preview_' . $slug, false, 'forminator' );
-
-		$preview_data = false;
-		// force -1 for preview.
-		$form_id = filter_input( INPUT_POST, 'id', FILTER_VALIDATE_INT );
-		$form_id = $form_id ? $form_id : - 1;
-
-		// Check if preview data set.
-		if ( ! empty( $_POST['data'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Verified in forminator_validate_ajax.
-			// phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput -- Sanitized in Forminator_Core::sanitize_array.
-			$data = Forminator_Core::sanitize_array( $_POST['data'], 'data' );
-
-			if ( ! is_array( $data ) ) {
-				$data = json_decode( $data, true );
-			}
-			$function     = 'forminator_data_to_model_' . $slug;
-			$preview_data = $function( $data );
-		}
-
-		$html = forminator_preview( $form_id, $slug, true, $preview_data );
 
 		wp_send_json_success( $html );
 	}
 
 
-/** Function resend_activation_link() called by wp_ajax hooks: {'forminator_resend_activation_link'} **/
-/** No params detected :-/ **/
-
-
-/** Function get_addons() called by wp_ajax hooks: {'forminator_addon_get_addons'} **/
-/** No params detected :-/ **/
-
-
-/** Function delete_pdf() called by wp_ajax hooks: {'forminator_delete_pdf'} **/
-/** No params detected :-/ **/
-
-
-/** Function save_template() called by wp_ajax hooks: {'forminator_save_template'} **/
-/** No params detected :-/ **/
-
-
-/** Function save_captcha() called by wp_ajax hooks: {'forminator_save_captcha_popup'} **/
-/** No params detected :-/ **/
-
-
-/** Function create_paypal_order() called by wp_ajax hooks: {'nopriv_forminator_pp_create_order', 'forminator_pp_create_order'} **/
-/** No params detected :-/ **/
-
-
-/** Function save_pagination_entries() called by wp_ajax hooks: {'forminator_save_pagination_entries_popup'} **/
-/** No function found :-/ **/
-
-
-/** Function deactivate_for_module() called by wp_ajax hooks: {'forminator_addon_deactivate_for_module'} **/
-/** No params detected :-/ **/
-
-
 /** Function delete_appearance_preset() called by wp_ajax hooks: {'forminator_delete_appearance_preset'} **/
-/** No params detected :-/ **/
-
-
-/** Function hubspot_support_request() called by wp_ajax hooks: {'forminator_hubspot_support_request'} **/
-/** No params detected :-/ **/
-
-
-/** Function save_import() called by wp_ajax hooks: {'forminator_save_import_poll_popup', 'forminator_save_import_form_popup', 'forminator_save_import_quiz_popup'} **/
-/** Parameters found in function save_import(): {"post": ["importable"]} **/
-function save_import() {
-		if ( ! Forminator::is_import_export_feature_enabled() ) {
-			wp_send_json_error( esc_html__( 'Import Export Feature disabled.', 'forminator' ) );
-		}
-		if ( empty( $_POST['importable'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing
-			wp_send_json_error( esc_html__( 'Import text can not be empty.', 'forminator' ) );
-		}
-		$current_action = current_action();
-		$slug           = str_replace( array( 'wp_ajax_forminator_save_import_', '_popup' ), '', $current_action );
-		// Validate nonce.
-		forminator_validate_ajax( 'forminator_save_import_' . $slug, false, 'forminator-settings' );
-
-		// Modify recipients if replace all recipients checkbox has been checked.
-		$change_recipients = 'checked' === Forminator_Core::sanitize_text_field( 'change_recipients' );
-
-		$save_to_cloud = 'checked' === Forminator_Core::sanitize_text_field( 'save_to_cloud' );
-
-		// phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput
-		$json  = wp_unslash( $_POST['importable'] );
-		$model = $this->import_json( $json, $slug, $change_recipients );
-
-		$return_url = admin_url( 'admin.php?page=forminator-' . forminator_get_prefix( $slug, 'c' ) );
-
-		if ( $save_to_cloud && ! forminator_cloud_templates_disabled() && forminator_is_site_connected_to_hub() ) {
-			Forminator_Template_API::create_template( $model->name, wp_json_encode( $model->to_exportable_data() ) );
-		}
-		/**
-		 * Fires after form import
-		 *
-		 * @since 1.27.0
-		 *
-		 * @param string $slug Module type.
-		 */
-		do_action( 'forminator_after_form_import', $slug );
-
-		wp_send_json_success(
-			array(
-				'id'  => $model->id,
-				'url' => $return_url,
-			)
-		);
-	}
-
-
-/** Function clear_exports() called by wp_ajax hooks: {'forminator_clear_exports_popup'} **/
 /** No params detected :-/ **/
 
 

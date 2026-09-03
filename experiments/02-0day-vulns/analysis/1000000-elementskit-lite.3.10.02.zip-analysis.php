@@ -5,9 +5,79 @@
 *Found functions:8
 *Extracted functions:8
 *Total parameter names extracted: 7
-*Overview: {'elementskit_admin_action': {'ekit_admin_action'}, 'elementskit_onboard_plugins': {'ekit_onboard_plugins'}, 'handle_feedback': {'elementskit_deactivation_feedback'}, 'ekit_widgetarea_content': {'nopriv_ekit_widgetarea_content', 'ekit_widgetarea_content'}, 'generate_navigation_markup': {'generate_navigation_markup'}, 'ask_me_later_message': {'wpmet_rating_ask_me_later_message'}, 'never_show_message': {'wpmet_rating_never_show_message'}, 'dismiss_ajax_call': {'wpmet-notices'}}
+*Overview: {'elementskit_onboard_plugins': {'ekit_onboard_plugins'}, 'ekit_widgetarea_content': {'ekit_widgetarea_content', 'nopriv_ekit_widgetarea_content'}, 'generate_navigation_markup': {'generate_navigation_markup'}, 'ask_me_later_message': {'wpmet_rating_ask_me_later_message'}, 'elementskit_admin_action': {'ekit_admin_action'}, 'never_show_message': {'wpmet_rating_never_show_message'}, 'handle_feedback': {'elementskit_deactivation_feedback'}, 'dismiss_ajax_call': {'wpmet-notices'}}
 *
 ***/
+
+/** Function elementskit_onboard_plugins() called by wp_ajax hooks: {'ekit_onboard_plugins'} **/
+/** Parameters found in function elementskit_onboard_plugins(): {"post": ["nonce", "plugin_slug"]} **/
+function elementskit_onboard_plugins() {
+		// Check for nonce security
+		if (!isset($_POST['nonce']) || ! wp_verify_nonce( sanitize_key(wp_unslash($_POST['nonce'])), 'ajax-nonce' ) ) {
+			return;
+		}
+
+		$plugin_slug = isset( $_POST['plugin_slug'] ) ? sanitize_text_field( wp_unslash( $_POST['plugin_slug'] ) ) : '';
+		if ( isset( $plugin_slug ) && current_user_can('install_plugins') ) {
+			$status = \ElementsKit_Lite\Libs\Framework\Classes\Plugin_Installer::single_install_and_activate( $plugin_slug );
+			if ( is_wp_error( $status ) ) {
+				wp_send_json_error( array( 'status' => false ) );
+			} else {
+				wp_send_json_success(
+					array(
+						'message' => self::plugin_activate_message( $plugin_slug )
+					)
+				);
+			}
+		}
+	}
+
+
+/** Function ekit_widgetarea_content() called by wp_ajax hooks: {'ekit_widgetarea_content', 'nopriv_ekit_widgetarea_content'} **/
+/** Parameters found in function ekit_widgetarea_content(): {"post": ["nonce", "post_id"]} **/
+function ekit_widgetarea_content() {
+
+		if ( !isset($_POST['nonce']) || !wp_verify_nonce( sanitize_key( wp_unslash( $_POST['nonce'] ) ), 'ekit_pro' ) ) {
+			wp_die();
+		}
+
+		$post_id = isset($_POST['post_id']) ? intval( $_POST['post_id'] ) : 0;
+
+		if ( 'publish' !== get_post_status( $post_id ) ) {
+			wp_die();
+		}
+
+		if ( isset( $post_id ) ) {
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped --  Displaying with Elementor content rendering
+			echo str_replace( '#elementor', '', \ElementsKit_Lite\Utils::render_tab_content( \ElementsKit_Lite\Utils::render_elementor_content( $post_id ), $post_id ) );
+		} else {
+            echo esc_html__( 'Click on the Edit Content button to edit/add the content.', 'elementskit-lite' );
+		}
+
+		wp_die();
+	}
+
+
+/** Function generate_navigation_markup() called by wp_ajax hooks: {'generate_navigation_markup'} **/
+/** No params detected :-/ **/
+
+
+/** Function ask_me_later_message() called by wp_ajax hooks: {'wpmet_rating_ask_me_later_message'} **/
+/** Parameters found in function ask_me_later_message(): {"post": ["nonce", "plugin_name"]} **/
+function ask_me_later_message() {
+			
+			if( empty( $_POST['nonce'] ) || !wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'wpmet_rating' ) ){
+				return false;
+			}
+
+			$plugin_name = isset($_POST['plugin_name']) ? sanitize_key( $_POST['plugin_name'] ) : '';
+			if ( get_option( $plugin_name . '_ask_me_later' ) == false ) {
+				add_option( $plugin_name . '_ask_me_later', 'yes' );
+			} else {
+				add_option( $plugin_name . '_never_show', 'yes' );
+			}
+		}
+
 
 /** Function elementskit_admin_action() called by wp_ajax hooks: {'ekit_admin_action'} **/
 /** Parameters found in function elementskit_admin_action(): {"post": ["nonce", "widget_list", "module_list", "user_data", "settings", "our_plugins"]} **/
@@ -91,28 +161,17 @@ function elementskit_admin_action() {
 	}
 
 
-/** Function elementskit_onboard_plugins() called by wp_ajax hooks: {'ekit_onboard_plugins'} **/
-/** Parameters found in function elementskit_onboard_plugins(): {"post": ["nonce", "plugin_slug"]} **/
-function elementskit_onboard_plugins() {
-		// Check for nonce security
-		if (!isset($_POST['nonce']) || ! wp_verify_nonce( sanitize_key(wp_unslash($_POST['nonce'])), 'ajax-nonce' ) ) {
-			return;
-		}
-
-		$plugin_slug = isset( $_POST['plugin_slug'] ) ? sanitize_text_field( wp_unslash( $_POST['plugin_slug'] ) ) : '';
-		if ( isset( $plugin_slug ) && current_user_can('install_plugins') ) {
-			$status = \ElementsKit_Lite\Libs\Framework\Classes\Plugin_Installer::single_install_and_activate( $plugin_slug );
-			if ( is_wp_error( $status ) ) {
-				wp_send_json_error( array( 'status' => false ) );
-			} else {
-				wp_send_json_success(
-					array(
-						'message' => self::plugin_activate_message( $plugin_slug )
-					)
-				);
+/** Function never_show_message() called by wp_ajax hooks: {'wpmet_rating_never_show_message'} **/
+/** Parameters found in function never_show_message(): {"post": ["nonce", "plugin_name"]} **/
+function never_show_message() {
+			
+			if( empty( $_POST['nonce'] ) || !wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'wpmet_rating' ) ){
+				return false;
 			}
+
+			$plugin_name = isset($_POST['plugin_name']) ? sanitize_key( $_POST['plugin_name'] ) : '';
+			add_option( $plugin_name . '_never_show', 'yes' );
 		}
-	}
 
 
 /** Function handle_feedback() called by wp_ajax hooks: {'elementskit_deactivation_feedback'} **/
@@ -171,65 +230,6 @@ function handle_feedback() {
 			array( 'message' => esc_html__( 'Thank you for your feedback!', 'elementskit-lite' ) )
 		);
 	}
-
-
-/** Function ekit_widgetarea_content() called by wp_ajax hooks: {'nopriv_ekit_widgetarea_content', 'ekit_widgetarea_content'} **/
-/** Parameters found in function ekit_widgetarea_content(): {"post": ["nonce", "post_id"]} **/
-function ekit_widgetarea_content() {
-
-		if ( !isset($_POST['nonce']) || !wp_verify_nonce( sanitize_key( wp_unslash( $_POST['nonce'] ) ), 'ekit_pro' ) ) {
-			wp_die();
-		}
-
-		$post_id = isset($_POST['post_id']) ? intval( $_POST['post_id'] ) : 0;
-
-		if ( 'publish' !== get_post_status( $post_id ) ) {
-			wp_die();
-		}
-
-		if ( isset( $post_id ) ) {
-			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped --  Displaying with Elementor content rendering
-			echo str_replace( '#elementor', '', \ElementsKit_Lite\Utils::render_tab_content( \ElementsKit_Lite\Utils::render_elementor_content( $post_id ), $post_id ) );
-		} else {
-            echo esc_html__( 'Click on the Edit Content button to edit/add the content.', 'elementskit-lite' );
-		}
-
-		wp_die();
-	}
-
-
-/** Function generate_navigation_markup() called by wp_ajax hooks: {'generate_navigation_markup'} **/
-/** No params detected :-/ **/
-
-
-/** Function ask_me_later_message() called by wp_ajax hooks: {'wpmet_rating_ask_me_later_message'} **/
-/** Parameters found in function ask_me_later_message(): {"post": ["nonce", "plugin_name"]} **/
-function ask_me_later_message() {
-			
-			if( empty( $_POST['nonce'] ) || !wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'wpmet_rating' ) ){
-				return false;
-			}
-
-			$plugin_name = isset($_POST['plugin_name']) ? sanitize_key( $_POST['plugin_name'] ) : '';
-			if ( get_option( $plugin_name . '_ask_me_later' ) == false ) {
-				add_option( $plugin_name . '_ask_me_later', 'yes' );
-			} else {
-				add_option( $plugin_name . '_never_show', 'yes' );
-			}
-		}
-
-
-/** Function never_show_message() called by wp_ajax hooks: {'wpmet_rating_never_show_message'} **/
-/** Parameters found in function never_show_message(): {"post": ["nonce", "plugin_name"]} **/
-function never_show_message() {
-			
-			if( empty( $_POST['nonce'] ) || !wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'wpmet_rating' ) ){
-				return false;
-			}
-
-			$plugin_name = isset($_POST['plugin_name']) ? sanitize_key( $_POST['plugin_name'] ) : '';
-			add_option( $plugin_name . '_never_show', 'yes' );
-		}
 
 
 /** Function dismiss_ajax_call() called by wp_ajax hooks: {'wpmet-notices'} **/

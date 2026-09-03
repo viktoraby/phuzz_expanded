@@ -5,32 +5,19 @@
 *Found functions:8
 *Extracted functions:7
 *Total parameter names extracted: 2
-*Overview: {'ajax_dismiss_plugin': {'yaymail_banner_dismiss'}, 'ajax_first_folder_notice': {'fbv_first_folder_notice'}, 'syncWPML': {'fbv_sync_wpml'}, 'ajax_dismiss_column': {'yaymail_wc_settings_dismiss_column'}, 'savePostTypeSettings': {'fbv_save_post_type_settings'}, 'filebird-themify': {'tb_load_editor'}, 'fbv_save_review': {'fbv_save_review'}, 'ajax_install_activate_yaymail': {'yaymail_banner_install_activate', 'yaymail_wc_settings_install_activate'}}
+*Overview: {'ajax_first_folder_notice': {'fbv_first_folder_notice'}, 'filebird-themify': {'tb_load_editor'}, 'syncWPML': {'fbv_sync_wpml'}, 'savePostTypeSettings': {'fbv_save_post_type_settings'}, 'ajax_dismiss_plugin': {'yaymail_banner_dismiss'}, 'ajax_dismiss_column': {'yaymail_wc_settings_dismiss_column'}, 'ajax_install_activate_yaymail': {'yaymail_wc_settings_install_activate', 'yaymail_banner_install_activate'}, 'fbv_save_review': {'fbv_save_review'}}
 *
 ***/
-
-/** Function ajax_dismiss_plugin() called by wp_ajax hooks: {'yaymail_banner_dismiss'} **/
-/** Parameters found in function ajax_dismiss_plugin(): {"post": ["days"]} **/
-function ajax_dismiss_plugin() {
-			check_ajax_referer( 'yaymail_banner_install-plugin_yaymail', 'nonce', true );
-
-			$days = isset( $_POST['days'] ) ? (int) sanitize_text_field( $_POST['days'] ) : 30;
-			$time = time() + ( $days * 60 * 60 * 24 );
-
-			update_option( 'yaymail_wc_settings_banner_notification', $time );
-			wp_send_json_success();
-		}
-
 
 /** Function ajax_first_folder_notice() called by wp_ajax hooks: {'fbv_first_folder_notice'} **/
 /** No params detected :-/ **/
 
 
+/** Function filebird-themify() called by wp_ajax hooks: {'tb_load_editor'} **/
+/** No function found :-/ **/
+
+
 /** Function syncWPML() called by wp_ajax hooks: {'fbv_sync_wpml'} **/
-/** No params detected :-/ **/
-
-
-/** Function ajax_dismiss_column() called by wp_ajax hooks: {'yaymail_wc_settings_dismiss_column'} **/
 /** No params detected :-/ **/
 
 
@@ -62,15 +49,28 @@ function savePostTypeSettings() {
 	}
 
 
-/** Function filebird-themify() called by wp_ajax hooks: {'tb_load_editor'} **/
-/** No function found :-/ **/
+/** Function ajax_dismiss_plugin() called by wp_ajax hooks: {'yaymail_banner_dismiss'} **/
+/** Parameters found in function ajax_dismiss_plugin(): {"post": ["days"]} **/
+function ajax_dismiss_plugin() {
+			check_ajax_referer( 'yaymail_banner_install-plugin_yaymail', 'nonce', true );
+
+			$days = isset( $_POST['days'] ) ? (int) sanitize_text_field( $_POST['days'] ) : 30;
+			$time = time() + ( $days * 60 * 60 * 24 );
+
+			update_option( 'yaymail_wc_settings_banner_notification', $time );
+			wp_send_json_success();
+		}
 
 
-/** Function fbv_save_review() called by wp_ajax hooks: {'fbv_save_review'} **/
+/** Function ajax_dismiss_column() called by wp_ajax hooks: {'yaymail_wc_settings_dismiss_column'} **/
 /** No params detected :-/ **/
 
 
-/** Function ajax_install_activate_yaymail() called by wp_ajax hooks: {'yaymail_banner_install_activate', 'yaymail_wc_settings_install_activate'} **/
+/** Function ajax_install_activate_yaymail() called by wp_ajax hooks: {'yaymail_wc_settings_install_activate', 'yaymail_banner_install_activate'} **/
+/** No params detected :-/ **/
+
+
+/** Function fbv_save_review() called by wp_ajax hooks: {'fbv_save_review'} **/
 /** No params detected :-/ **/
 
 

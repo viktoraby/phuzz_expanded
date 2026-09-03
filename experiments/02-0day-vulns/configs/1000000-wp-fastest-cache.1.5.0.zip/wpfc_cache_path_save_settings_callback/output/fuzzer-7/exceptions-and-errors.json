@@ -1,0 +1,117 @@
+[
+  {
+    "coverage_id": "1787114864-bb398d91-8fbf-4737-a518-82d0f2468437",
+    "priority": 2,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "wpfc_cache_path_save_settings"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "optimizedpath": "fuzz",
+        "cachepath": "f\r\nuzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Cookie_Jar::offsetExists($key) should either be compatible with ArrayAccess::offsetExists(mixed $offset): bool, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Cookie/Jar.php",
+        "errline": 63
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Cookie_Jar::offsetGet($key) should either be compatible with ArrayAccess::offsetGet(mixed $offset): mixed, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Cookie/Jar.php",
+        "errline": 73
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Cookie_Jar::offsetSet($key, $value) should either be compatible with ArrayAccess::offsetSet(mixed $offset, mixed $value): void, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Cookie/Jar.php",
+        "errline": 89
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Cookie_Jar::offsetUnset($key) should either be compatible with ArrayAccess::offsetUnset(mixed $offset): void, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Cookie/Jar.php",
+        "errline": 102
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Cookie_Jar::getIterator() should either be compatible with IteratorAggregate::getIterator(): Traversable, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Cookie/Jar.php",
+        "errline": 111
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Utility_CaseInsensitiveDictionary::offsetExists($key) should either be compatible with ArrayAccess::offsetExists(mixed $offset): bool, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Utility/CaseInsensitiveDictionary.php",
+        "errline": 40
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Utility_CaseInsensitiveDictionary::offsetGet($key) should either be compatible with ArrayAccess::offsetGet(mixed $offset): mixed, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Utility/CaseInsensitiveDictionary.php",
+        "errline": 51
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Utility_CaseInsensitiveDictionary::offsetSet($key, $value) should either be compatible with ArrayAccess::offsetSet(mixed $offset, mixed $value): void, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Utility/CaseInsensitiveDictionary.php",
+        "errline": 68
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Utility_CaseInsensitiveDictionary::offsetUnset($key) should either be compatible with ArrayAccess::offsetUnset(mixed $offset): void, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Utility/CaseInsensitiveDictionary.php",
+        "errline": 82
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Utility_CaseInsensitiveDictionary::getIterator() should either be compatible with IteratorAggregate::getIterator(): Traversable, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Utility/CaseInsensitiveDictionary.php",
+        "errline": 91
+      }
+    ],
+    "exceptions": null,
+    "response_body": "",
+    "response.body.length": 0,
+    "response.headers": {},
+    "response.status.code": 0,
+    "response.time": 0,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787114816-d6381af2-061f-4134-8898-edd9a502badf",
+    "paths": [
+      "/var/www/html/wp-content/plugins/wp-fastest-cache/wpFastestCache.php::::100_101_102_104_106_107_111_112_113_114_115_116_117_118_1186_119_120_121_122_1224_1225_123_124_125_126_1268_1275_128_129_130_133_134_135_136_137_1391_1394_1397_1398_140_144_150_151_154_155_158_163_166_169_170_171_174_177_180_183_1987_1989_1990_1991_2001_2002_201_206_213_219_233_2336_2337_2338_2342_2343_2344_2348_2349_235_2350_2354_2355_2356_2360_2361_2362_2366_2367_2368_237_2372_2373_2374_2378_2379_2380_2384_2385_2386_2390_2391_2392_2396_2397_2398_240_2402_2403_2404_2408_2409_2410_2414_2415_2416_242_2420_2421_2422_2426_2427_2428_2432_2433_2434_2438_2439_244_2440_2444_2445_2446_2450_2451_2452_2456_2457_2458_246_2462_2466_2467_2470_2474_2475_25_258_259_26_261_27_2705_2743_2747_28_329_34_35_38_385_39_391_42_43_46_488_491_501_512_513_516_517_81_82_92_920_921_923_924_926_94",
+      "/var/www/html/wp-content/plugins/wp-fastest-cache/inc/column.php::::10_11_12_3_33_6_7"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 2,
+    "is_interesting": false,
+    "fuzzer_id": "7",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "cachepath"
+  }
+]

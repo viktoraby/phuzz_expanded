@@ -5,9 +5,13 @@
 *Found functions:4
 *Extracted functions:4
 *Total parameter names extracted: 2
-*Overview: {'NextendSocialLoginAdmin::ajax_save_form_data': {'nextend-social-login'}, 'NextendSocialLoginAdmin::search_oauth_proxy_pages': {'nsl_search_oauth_proxy_pages'}, 'NextendSocialLoginAdmin::search_register_flow_pages': {'nsl_search_register_flow_pages'}, 'NextendSocialLoginAdmin::save_review_state': {'nsl_save_review_state'}}
+*Overview: {'NextendSocialLoginAdmin::search_oauth_proxy_pages': {'nsl_search_oauth_proxy_pages'}, 'NextendSocialLoginAdmin::ajax_save_form_data': {'nextend-social-login'}, 'NextendSocialLoginAdmin::search_register_flow_pages': {'nsl_search_register_flow_pages'}, 'NextendSocialLoginAdmin::save_review_state': {'nsl_save_review_state'}}
 *
 ***/
+
+/** Function NextendSocialLoginAdmin::search_oauth_proxy_pages() called by wp_ajax hooks: {'nsl_search_oauth_proxy_pages'} **/
+/** No params detected :-/ **/
+
 
 /** Function NextendSocialLoginAdmin::ajax_save_form_data() called by wp_ajax hooks: {'nextend-social-login'} **/
 /** Parameters found in function NextendSocialLoginAdmin::ajax_save_form_data(): {"post": ["view", "ordering"]} **/
@@ -30,10 +34,6 @@ function ajax_save_form_data() {
             }
         }
     }
-
-
-/** Function NextendSocialLoginAdmin::search_oauth_proxy_pages() called by wp_ajax hooks: {'nsl_search_oauth_proxy_pages'} **/
-/** No params detected :-/ **/
 
 
 /** Function NextendSocialLoginAdmin::search_register_flow_pages() called by wp_ajax hooks: {'nsl_search_register_flow_pages'} **/

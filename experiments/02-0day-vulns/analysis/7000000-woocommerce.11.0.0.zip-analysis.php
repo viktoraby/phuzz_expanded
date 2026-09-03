@@ -5,69 +5,166 @@
 *Found functions:14
 *Extracted functions:14
 *Total parameter names extracted: 9
-*Overview: {'handle_edit_review': {'edit-comment'}, 'handle_reply_to_review': {'replyto-comment'}, 'handle_ajax_opt_out': {'wc_egg_opt_out'}, 'ajax_tracks': {'jetpack_tracks'}, 'ajax_check_refund_fix_needed': {'woocommerce_check_refund_fix_needed'}, 'delete_zone_count_transient': {'woocommerce_shipping_zones_save_changes', 'woocommerce_shipping_zone_methods_save_changes'}, 'ajax_remind_later': {'woocommerce_remind_later_product_usage_notice'}, 'post_add_dismissed_suggestion_handler': {'woocommerce_add_dismissed_marketplace_suggestion'}, 'do_ajax_product_export': {'woocommerce_do_ajax_product_export'}, 'handle_ajax_dismiss': {'wc_egg_dismiss'}, 'sync_email_styles_with_theme': {'wp_save_styles'}, 'ajax_action_inbox_notification_search': {'woocommerce_json_inbox_notifications_search'}, 'do_ajax_product_import': {'woocommerce_do_ajax_product_import'}, 'ajax_dismiss': {'woocommerce_dismiss_product_usage_notice'}}
+*Overview: {'do_ajax_product_import': {'woocommerce_do_ajax_product_import'}, 'do_ajax_product_export': {'woocommerce_do_ajax_product_export'}, 'ajax_dismiss': {'woocommerce_dismiss_product_usage_notice'}, 'ajax_remind_later': {'woocommerce_remind_later_product_usage_notice'}, 'ajax_action_inbox_notification_search': {'woocommerce_json_inbox_notifications_search'}, 'handle_reply_to_review': {'replyto-comment'}, 'ajax_tracks': {'jetpack_tracks'}, 'handle_ajax_opt_out': {'wc_egg_opt_out'}, 'handle_ajax_dismiss': {'wc_egg_dismiss'}, 'delete_zone_count_transient': {'woocommerce_shipping_zone_methods_save_changes', 'woocommerce_shipping_zones_save_changes'}, 'post_add_dismissed_suggestion_handler': {'woocommerce_add_dismissed_marketplace_suggestion'}, 'ajax_check_refund_fix_needed': {'woocommerce_check_refund_fix_needed'}, 'handle_edit_review': {'edit-comment'}, 'sync_email_styles_with_theme': {'wp_save_styles'}}
 *
 ***/
 
-/** Function handle_edit_review() called by wp_ajax hooks: {'edit-comment'} **/
-/** Parameters found in function handle_edit_review(): {"post": ["mode", "comment_ID", "content", "status", "comment_status", "position"]} **/
-function handle_edit_review(): void {
-		// Don't interfere with comment functionality relating to the reviews meta box within the product editor.
-		if ( sanitize_text_field( wp_unslash( $_POST['mode'] ?? '' ) ) === 'single' ) {
-			return;
+/** Function do_ajax_product_import() called by wp_ajax hooks: {'woocommerce_do_ajax_product_import'} **/
+/** No params detected :-/ **/
+
+
+/** Function do_ajax_product_export() called by wp_ajax hooks: {'woocommerce_do_ajax_product_export'} **/
+/** Parameters found in function do_ajax_product_export(): {"post": ["step", "columns", "selected_columns", "export_meta", "export_types", "export_category", "export_product_ids", "filename"]} **/
+function do_ajax_product_export() {
+		check_ajax_referer( 'wc-product-export', 'security' );
+
+		if ( ! $this->export_allowed() ) {
+			wp_send_json_error( array( 'message' => __( 'Insufficient privileges to export products.', 'woocommerce' ) ) );
 		}
 
-		check_ajax_referer( 'replyto-comment', '_ajax_nonce-replyto-comment' );
+		include_once WC_ABSPATH . 'includes/export/class-wc-product-csv-exporter.php';
 
-		$comment_id = isset( $_POST['comment_ID'] ) ? (int) sanitize_text_field( wp_unslash( $_POST['comment_ID'] ) ) : 0;
+		$step     = isset( $_POST['step'] ) ? absint( $_POST['step'] ) : 1; // WPCS: input var ok, sanitization ok.
+		$exporter = new WC_Product_CSV_Exporter();
 
-		if ( empty( $comment_id ) || ! current_user_can( 'edit_comment', $comment_id ) ) {
-			wp_die( -1 );
+		if ( ! empty( $_POST['columns'] ) ) { // WPCS: input var ok.
+			$exporter->set_column_names( wp_unslash( $_POST['columns'] ) ); // WPCS: input var ok, sanitization ok.
 		}
 
-		$review = get_comment( $comment_id );
-
-		// Bail silently if this is not a review, or a reply to a review. That allows `wp_ajax_edit_comment()` to handle any further actions.
-		if ( ! $this->is_review_or_reply( $review ) ) {
-			return;
+		if ( ! empty( $_POST['selected_columns'] ) ) { // WPCS: input var ok.
+			$exporter->set_columns_to_export( wp_unslash( $_POST['selected_columns'] ) ); // WPCS: input var ok, sanitization ok.
 		}
 
-		if ( empty( $review->comment_ID ) ) {
-			wp_die( -1 );
+		if ( ! empty( $_POST['export_meta'] ) ) { // WPCS: input var ok.
+			$exporter->enable_meta_export( true );
 		}
 
-		if ( empty( $_POST['content'] ) ) {
-			wp_die( esc_html__( 'Error: Please type your review text.', 'woocommerce' ) );
+		if ( ! empty( $_POST['export_types'] ) ) { // WPCS: input var ok.
+			$exporter->set_product_types_to_export( wp_unslash( $_POST['export_types'] ) ); // WPCS: input var ok, sanitization ok.
 		}
 
-		if ( isset( $_POST['status'] ) ) {
-			$_POST['comment_status'] = sanitize_text_field( wp_unslash( $_POST['status'] ) );
+		if ( ! empty( $_POST['export_category'] ) && is_array( $_POST['export_category'] ) ) {// WPCS: input var ok.
+			$exporter->set_product_category_to_export( wp_unslash( array_values( $_POST['export_category'] ) ) ); // WPCS: input var ok, sanitization ok.
 		}
 
-		$updated = edit_comment();
-		if ( is_wp_error( $updated ) ) {
-			wp_die( esc_html( $updated->get_error_message() ) );
+		// Set specific product IDs if provided.
+		if ( ! empty( $_POST['export_product_ids'] ) ) { // WPCS: input var ok.
+			$ids_raw = explode( ',', sanitize_text_field( wp_unslash( $_POST['export_product_ids'] ) ) ); // WPCS: input var ok, sanitization ok.
+
+			if ( ! empty( $ids_raw ) ) {
+				$exporter->set_product_ids_to_export( $ids_raw );
+			}
 		}
 
-		$position      = isset( $_POST['position'] ) ? (int) sanitize_text_field( wp_unslash( $_POST['position'] ) ) : -1;
-		$wp_list_table = $this->make_reviews_list_table();
+		if ( ! empty( $_POST['filename'] ) ) { // WPCS: input var ok.
+			$exporter->set_filename( wp_unslash( $_POST['filename'] ) ); // WPCS: input var ok, sanitization ok.
+		}
 
-		ob_start();
-		$wp_list_table->single_row( $review );
-		$review_list_item = ob_get_clean();
+		$exporter->set_page( $step );
+		$exporter->generate_file();
 
-		$x = new WP_Ajax_Response();
-
-		$x->add(
+		$query_args = apply_filters(
+			'woocommerce_export_get_ajax_query_args',
 			array(
-				'what'     => 'edit_comment',
-				'id'       => $review->comment_ID,
-				'data'     => $review_list_item,
-				'position' => $position,
+				'nonce'    => wp_create_nonce( 'product-csv' ),
+				'action'   => 'download_product_csv',
+				'filename' => $exporter->get_filename(),
 			)
 		);
 
-		$x->send();
+		if ( 100 === $exporter->get_percent_complete() ) {
+			wp_send_json_success(
+				array(
+					'step'       => 'done',
+					'percentage' => 100,
+					'url'        => add_query_arg( $query_args, admin_url( 'edit.php?post_type=product&page=product_exporter' ) ),
+				)
+			);
+		} else {
+			wp_send_json_success(
+				array(
+					'step'       => ++$step,
+					'percentage' => $exporter->get_percent_complete(),
+					'columns'    => $exporter->get_column_names(),
+				)
+			);
+		}
+	}
+
+
+/** Function ajax_dismiss() called by wp_ajax hooks: {'woocommerce_dismiss_product_usage_notice'} **/
+/** Parameters found in function ajax_dismiss(): {"get": ["product_id"]} **/
+function ajax_dismiss() {
+		if ( ! check_ajax_referer( 'dismiss_product_usage_notice' ) ) {
+			wp_die( -1 );
+		}
+
+		$user_id = get_current_user_id();
+		if ( ! $user_id ) {
+			wp_die( -1 );
+		}
+
+		$product_id = absint( $_GET['product_id'] ?? 0 );
+		if ( ! $product_id ) {
+			wp_die( -1 );
+		}
+
+		$dismiss_count = absint( get_user_meta( $user_id, self::DISMISSED_COUNT_META_PREFIX . $product_id, true ) );
+		update_user_meta( $user_id, self::DISMISSED_COUNT_META_PREFIX . $product_id, $dismiss_count + 1 );
+
+		update_user_meta( $user_id, self::DISMISSED_TIMESTAMP_META_PREFIX . $product_id, time() );
+		update_user_meta( $user_id, self::LAST_DISMISSED_TIMESTAMP_META, time() );
+
+		wp_die( 1 );
+	}
+
+
+/** Function ajax_remind_later() called by wp_ajax hooks: {'woocommerce_remind_later_product_usage_notice'} **/
+/** Parameters found in function ajax_remind_later(): {"get": ["product_id"]} **/
+function ajax_remind_later() {
+		if ( ! check_ajax_referer( 'remind_later_product_usage_notice' ) ) {
+			wp_die( -1 );
+		}
+
+		$user_id = get_current_user_id();
+		if ( ! $user_id ) {
+			wp_die( -1 );
+		}
+
+		$product_id = absint( $_GET['product_id'] ?? 0 );
+		if ( ! $product_id ) {
+			wp_die( -1 );
+		}
+
+		update_user_meta( $user_id, self::REMIND_LATER_TIMESTAMP_META_PREFIX . $product_id, time() );
+
+		wp_die( 1 );
+	}
+
+
+/** Function ajax_action_inbox_notification_search() called by wp_ajax hooks: {'woocommerce_json_inbox_notifications_search'} **/
+/** Parameters found in function ajax_action_inbox_notification_search(): {"get": ["term"]} **/
+function ajax_action_inbox_notification_search() {
+		global $wpdb;
+
+		check_ajax_referer( 'search-products', 'security' );
+
+		if ( ! isset( $_GET['term'] ) ) {
+			wp_send_json( array() );
+		}
+
+		$search  = wc_clean( sanitize_text_field( wp_unslash( $_GET['term'] ) ) );
+		$results = $wpdb->get_results(
+			$wpdb->prepare(
+				"SELECT note_id, name FROM {$wpdb->prefix}wc_admin_notes WHERE name LIKE %s",
+				'%' . $wpdb->esc_like( $search ) . '%'
+			)
+		);
+		$rows    = array();
+		foreach ( $results as $result ) {
+			$rows[ $result->note_id ] = $result->name;
+		}
+		wp_send_json( $rows );
 	}
 
 
@@ -215,10 +312,6 @@ function handle_reply_to_review(): void {
 	}
 
 
-/** Function handle_ajax_opt_out() called by wp_ajax hooks: {'wc_egg_opt_out'} **/
-/** No params detected :-/ **/
-
-
 /** Function ajax_tracks() called by wp_ajax hooks: {'jetpack_tracks'} **/
 /** Parameters found in function ajax_tracks(): {"request": ["tracksNonce", "tracksEventName", "tracksEventType", "tracksEventProp"]} **/
 function ajax_tracks() {
@@ -255,118 +348,8 @@ function ajax_tracks() {
 	}
 
 
-/** Function ajax_check_refund_fix_needed() called by wp_ajax hooks: {'woocommerce_check_refund_fix_needed'} **/
+/** Function handle_ajax_opt_out() called by wp_ajax hooks: {'wc_egg_opt_out'} **/
 /** No params detected :-/ **/
-
-
-/** Function delete_zone_count_transient() called by wp_ajax hooks: {'woocommerce_shipping_zones_save_changes', 'woocommerce_shipping_zone_methods_save_changes'} **/
-/** No params detected :-/ **/
-
-
-/** Function ajax_remind_later() called by wp_ajax hooks: {'woocommerce_remind_later_product_usage_notice'} **/
-/** Parameters found in function ajax_remind_later(): {"get": ["product_id"]} **/
-function ajax_remind_later() {
-		if ( ! check_ajax_referer( 'remind_later_product_usage_notice' ) ) {
-			wp_die( -1 );
-		}
-
-		$user_id = get_current_user_id();
-		if ( ! $user_id ) {
-			wp_die( -1 );
-		}
-
-		$product_id = absint( $_GET['product_id'] ?? 0 );
-		if ( ! $product_id ) {
-			wp_die( -1 );
-		}
-
-		update_user_meta( $user_id, self::REMIND_LATER_TIMESTAMP_META_PREFIX . $product_id, time() );
-
-		wp_die( 1 );
-	}
-
-
-/** Function post_add_dismissed_suggestion_handler() called by wp_ajax hooks: {'woocommerce_add_dismissed_marketplace_suggestion'} **/
-/** No params detected :-/ **/
-
-
-/** Function do_ajax_product_export() called by wp_ajax hooks: {'woocommerce_do_ajax_product_export'} **/
-/** Parameters found in function do_ajax_product_export(): {"post": ["step", "columns", "selected_columns", "export_meta", "export_types", "export_category", "export_product_ids", "filename"]} **/
-function do_ajax_product_export() {
-		check_ajax_referer( 'wc-product-export', 'security' );
-
-		if ( ! $this->export_allowed() ) {
-			wp_send_json_error( array( 'message' => __( 'Insufficient privileges to export products.', 'woocommerce' ) ) );
-		}
-
-		include_once WC_ABSPATH . 'includes/export/class-wc-product-csv-exporter.php';
-
-		$step     = isset( $_POST['step'] ) ? absint( $_POST['step'] ) : 1; // WPCS: input var ok, sanitization ok.
-		$exporter = new WC_Product_CSV_Exporter();
-
-		if ( ! empty( $_POST['columns'] ) ) { // WPCS: input var ok.
-			$exporter->set_column_names( wp_unslash( $_POST['columns'] ) ); // WPCS: input var ok, sanitization ok.
-		}
-
-		if ( ! empty( $_POST['selected_columns'] ) ) { // WPCS: input var ok.
-			$exporter->set_columns_to_export( wp_unslash( $_POST['selected_columns'] ) ); // WPCS: input var ok, sanitization ok.
-		}
-
-		if ( ! empty( $_POST['export_meta'] ) ) { // WPCS: input var ok.
-			$exporter->enable_meta_export( true );
-		}
-
-		if ( ! empty( $_POST['export_types'] ) ) { // WPCS: input var ok.
-			$exporter->set_product_types_to_export( wp_unslash( $_POST['export_types'] ) ); // WPCS: input var ok, sanitization ok.
-		}
-
-		if ( ! empty( $_POST['export_category'] ) && is_array( $_POST['export_category'] ) ) {// WPCS: input var ok.
-			$exporter->set_product_category_to_export( wp_unslash( array_values( $_POST['export_category'] ) ) ); // WPCS: input var ok, sanitization ok.
-		}
-
-		// Set specific product IDs if provided.
-		if ( ! empty( $_POST['export_product_ids'] ) ) { // WPCS: input var ok.
-			$ids_raw = explode( ',', sanitize_text_field( wp_unslash( $_POST['export_product_ids'] ) ) ); // WPCS: input var ok, sanitization ok.
-
-			if ( ! empty( $ids_raw ) ) {
-				$exporter->set_product_ids_to_export( $ids_raw );
-			}
-		}
-
-		if ( ! empty( $_POST['filename'] ) ) { // WPCS: input var ok.
-			$exporter->set_filename( wp_unslash( $_POST['filename'] ) ); // WPCS: input var ok, sanitization ok.
-		}
-
-		$exporter->set_page( $step );
-		$exporter->generate_file();
-
-		$query_args = apply_filters(
-			'woocommerce_export_get_ajax_query_args',
-			array(
-				'nonce'    => wp_create_nonce( 'product-csv' ),
-				'action'   => 'download_product_csv',
-				'filename' => $exporter->get_filename(),
-			)
-		);
-
-		if ( 100 === $exporter->get_percent_complete() ) {
-			wp_send_json_success(
-				array(
-					'step'       => 'done',
-					'percentage' => 100,
-					'url'        => add_query_arg( $query_args, admin_url( 'edit.php?post_type=product&page=product_exporter' ) ),
-				)
-			);
-		} else {
-			wp_send_json_success(
-				array(
-					'step'       => ++$step,
-					'percentage' => $exporter->get_percent_complete(),
-					'columns'    => $exporter->get_column_names(),
-				)
-			);
-		}
-	}
 
 
 /** Function handle_ajax_dismiss() called by wp_ajax hooks: {'wc_egg_dismiss'} **/
@@ -381,64 +364,81 @@ function handle_ajax_dismiss(): void {
 	}
 
 
-/** Function sync_email_styles_with_theme() called by wp_ajax hooks: {'wp_save_styles'} **/
+/** Function delete_zone_count_transient() called by wp_ajax hooks: {'woocommerce_shipping_zone_methods_save_changes', 'woocommerce_shipping_zones_save_changes'} **/
 /** No params detected :-/ **/
 
 
-/** Function ajax_action_inbox_notification_search() called by wp_ajax hooks: {'woocommerce_json_inbox_notifications_search'} **/
-/** Parameters found in function ajax_action_inbox_notification_search(): {"get": ["term"]} **/
-function ajax_action_inbox_notification_search() {
-		global $wpdb;
+/** Function post_add_dismissed_suggestion_handler() called by wp_ajax hooks: {'woocommerce_add_dismissed_marketplace_suggestion'} **/
+/** No params detected :-/ **/
 
-		check_ajax_referer( 'search-products', 'security' );
 
-		if ( ! isset( $_GET['term'] ) ) {
-			wp_send_json( array() );
+/** Function ajax_check_refund_fix_needed() called by wp_ajax hooks: {'woocommerce_check_refund_fix_needed'} **/
+/** No params detected :-/ **/
+
+
+/** Function handle_edit_review() called by wp_ajax hooks: {'edit-comment'} **/
+/** Parameters found in function handle_edit_review(): {"post": ["mode", "comment_ID", "content", "status", "comment_status", "position"]} **/
+function handle_edit_review(): void {
+		// Don't interfere with comment functionality relating to the reviews meta box within the product editor.
+		if ( sanitize_text_field( wp_unslash( $_POST['mode'] ?? '' ) ) === 'single' ) {
+			return;
 		}
 
-		$search  = wc_clean( sanitize_text_field( wp_unslash( $_GET['term'] ) ) );
-		$results = $wpdb->get_results(
-			$wpdb->prepare(
-				"SELECT note_id, name FROM {$wpdb->prefix}wc_admin_notes WHERE name LIKE %s",
-				'%' . $wpdb->esc_like( $search ) . '%'
+		check_ajax_referer( 'replyto-comment', '_ajax_nonce-replyto-comment' );
+
+		$comment_id = isset( $_POST['comment_ID'] ) ? (int) sanitize_text_field( wp_unslash( $_POST['comment_ID'] ) ) : 0;
+
+		if ( empty( $comment_id ) || ! current_user_can( 'edit_comment', $comment_id ) ) {
+			wp_die( -1 );
+		}
+
+		$review = get_comment( $comment_id );
+
+		// Bail silently if this is not a review, or a reply to a review. That allows `wp_ajax_edit_comment()` to handle any further actions.
+		if ( ! $this->is_review_or_reply( $review ) ) {
+			return;
+		}
+
+		if ( empty( $review->comment_ID ) ) {
+			wp_die( -1 );
+		}
+
+		if ( empty( $_POST['content'] ) ) {
+			wp_die( esc_html__( 'Error: Please type your review text.', 'woocommerce' ) );
+		}
+
+		if ( isset( $_POST['status'] ) ) {
+			$_POST['comment_status'] = sanitize_text_field( wp_unslash( $_POST['status'] ) );
+		}
+
+		$updated = edit_comment();
+		if ( is_wp_error( $updated ) ) {
+			wp_die( esc_html( $updated->get_error_message() ) );
+		}
+
+		$position      = isset( $_POST['position'] ) ? (int) sanitize_text_field( wp_unslash( $_POST['position'] ) ) : -1;
+		$wp_list_table = $this->make_reviews_list_table();
+
+		ob_start();
+		$wp_list_table->single_row( $review );
+		$review_list_item = ob_get_clean();
+
+		$x = new WP_Ajax_Response();
+
+		$x->add(
+			array(
+				'what'     => 'edit_comment',
+				'id'       => $review->comment_ID,
+				'data'     => $review_list_item,
+				'position' => $position,
 			)
 		);
-		$rows    = array();
-		foreach ( $results as $result ) {
-			$rows[ $result->note_id ] = $result->name;
-		}
-		wp_send_json( $rows );
+
+		$x->send();
 	}
 
 
-/** Function do_ajax_product_import() called by wp_ajax hooks: {'woocommerce_do_ajax_product_import'} **/
+/** Function sync_email_styles_with_theme() called by wp_ajax hooks: {'wp_save_styles'} **/
 /** No params detected :-/ **/
-
-
-/** Function ajax_dismiss() called by wp_ajax hooks: {'woocommerce_dismiss_product_usage_notice'} **/
-/** Parameters found in function ajax_dismiss(): {"get": ["product_id"]} **/
-function ajax_dismiss() {
-		if ( ! check_ajax_referer( 'dismiss_product_usage_notice' ) ) {
-			wp_die( -1 );
-		}
-
-		$user_id = get_current_user_id();
-		if ( ! $user_id ) {
-			wp_die( -1 );
-		}
-
-		$product_id = absint( $_GET['product_id'] ?? 0 );
-		if ( ! $product_id ) {
-			wp_die( -1 );
-		}
-
-		$dismiss_count = absint( get_user_meta( $user_id, self::DISMISSED_COUNT_META_PREFIX . $product_id, true ) );
-		update_user_meta( $user_id, self::DISMISSED_COUNT_META_PREFIX . $product_id, $dismiss_count + 1 );
-
-		update_user_meta( $user_id, self::DISMISSED_TIMESTAMP_META_PREFIX . $product_id, time() );
-		update_user_meta( $user_id, self::LAST_DISMISSED_TIMESTAMP_META, time() );
-
-		wp_die( 1 );
-	}
 
 

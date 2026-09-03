@@ -1,0 +1,128 @@
+[
+  {
+    "coverage_id": "1787097599-663d9610-0387-4598-a113-69c8a805fe0e",
+    "priority": 2,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "GET",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "cookieadmin_ajax_handler"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "cookieadmin_act": "fuzz%,"
+      },
+      "body_params": {}
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 0.25
+    },
+    "errors": [
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Cookie_Jar::offsetExists($key) should either be compatible with ArrayAccess::offsetExists(mixed $offset): bool, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Cookie/Jar.php",
+        "errline": 63
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Cookie_Jar::offsetGet($key) should either be compatible with ArrayAccess::offsetGet(mixed $offset): mixed, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Cookie/Jar.php",
+        "errline": 73
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Cookie_Jar::offsetSet($key, $value) should either be compatible with ArrayAccess::offsetSet(mixed $offset, mixed $value): void, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Cookie/Jar.php",
+        "errline": 89
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Cookie_Jar::offsetUnset($key) should either be compatible with ArrayAccess::offsetUnset(mixed $offset): void, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Cookie/Jar.php",
+        "errline": 102
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Cookie_Jar::getIterator() should either be compatible with IteratorAggregate::getIterator(): Traversable, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Cookie/Jar.php",
+        "errline": 111
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Utility_CaseInsensitiveDictionary::offsetExists($key) should either be compatible with ArrayAccess::offsetExists(mixed $offset): bool, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Utility/CaseInsensitiveDictionary.php",
+        "errline": 40
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Utility_CaseInsensitiveDictionary::offsetGet($key) should either be compatible with ArrayAccess::offsetGet(mixed $offset): mixed, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Utility/CaseInsensitiveDictionary.php",
+        "errline": 51
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Utility_CaseInsensitiveDictionary::offsetSet($key, $value) should either be compatible with ArrayAccess::offsetSet(mixed $offset, mixed $value): void, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Utility/CaseInsensitiveDictionary.php",
+        "errline": 68
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Utility_CaseInsensitiveDictionary::offsetUnset($key) should either be compatible with ArrayAccess::offsetUnset(mixed $offset): void, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Utility/CaseInsensitiveDictionary.php",
+        "errline": 82
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Utility_CaseInsensitiveDictionary::getIterator() should either be compatible with IteratorAggregate::getIterator(): Traversable, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Utility/CaseInsensitiveDictionary.php",
+        "errline": 91
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"success\":false,\"data\":{\"message\":\"Unauthorized action\"}}",
+    "response.body.length": 59,
+    "response.headers": {
+      "Date": "Tue, 18 Aug 2026 23:59:59 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "59",
+      "Content-Type": "application/json; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 789.012,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787097451-2fcf52ae-188d-46a0-b720-185aaee2e270",
+    "paths": [
+      "/var/www/html/wp-content/plugins/cookieadmin/includes/functions.php::::100_103_104_105_106_108_114_146_148_153_155_16_165_169_17_175_186_193_20_21_3_40_46_47_48_51_533_534_537_544_57_58_89_93_95_98_99",
+      "/var/www/html/wp-content/plugins/cookieadmin/cookieadmin.php::::105_23_27_33_37_38_39_40_41_42_43_44_46_50_51_52_57_58_68_71_77_80_81"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 2,
+    "is_interesting": false,
+    "fuzzer_id": "7",
+    "is_initial_candidate": false,
+    "mutated_param_type": "query_params",
+    "mutated_param_name": "cookieadmin_act"
+  }
+]

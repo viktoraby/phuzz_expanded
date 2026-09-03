@@ -1,0 +1,167 @@
+[
+  {
+    "coverage_id": "1787160102-820453ea-c156-463f-b3ff-1222cf8c5eea",
+    "priority": 50,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "tnpc_options"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "context_type": "fuzz",
+        "options": "fyzz",
+        "id": "fuzz"
+      },
+      "body_params": {
+        "composer": "fuzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Cookie_Jar::offsetExists($key) should either be compatible with ArrayAccess::offsetExists(mixed $offset): bool, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Cookie/Jar.php",
+        "errline": 63
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Cookie_Jar::offsetGet($key) should either be compatible with ArrayAccess::offsetGet(mixed $offset): mixed, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Cookie/Jar.php",
+        "errline": 73
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Cookie_Jar::offsetSet($key, $value) should either be compatible with ArrayAccess::offsetSet(mixed $offset, mixed $value): void, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Cookie/Jar.php",
+        "errline": 89
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Cookie_Jar::offsetUnset($key) should either be compatible with ArrayAccess::offsetUnset(mixed $offset): void, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Cookie/Jar.php",
+        "errline": 102
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Cookie_Jar::getIterator() should either be compatible with IteratorAggregate::getIterator(): Traversable, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Cookie/Jar.php",
+        "errline": 111
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Utility_CaseInsensitiveDictionary::offsetExists($key) should either be compatible with ArrayAccess::offsetExists(mixed $offset): bool, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Utility/CaseInsensitiveDictionary.php",
+        "errline": 40
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Utility_CaseInsensitiveDictionary::offsetGet($key) should either be compatible with ArrayAccess::offsetGet(mixed $offset): mixed, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Utility/CaseInsensitiveDictionary.php",
+        "errline": 51
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Utility_CaseInsensitiveDictionary::offsetSet($key, $value) should either be compatible with ArrayAccess::offsetSet(mixed $offset, mixed $value): void, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Utility/CaseInsensitiveDictionary.php",
+        "errline": 68
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Utility_CaseInsensitiveDictionary::offsetUnset($key) should either be compatible with ArrayAccess::offsetUnset(mixed $offset): void, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Utility/CaseInsensitiveDictionary.php",
+        "errline": 82
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Utility_CaseInsensitiveDictionary::getIterator() should either be compatible with IteratorAggregate::getIterator(): Traversable, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Utility/CaseInsensitiveDictionary.php",
+        "errline": 91
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\nBlock not found with id fuzz",
+    "response.body.length": 29,
+    "response.headers": {
+      "Date": "Wed, 19 Aug 2026 17:21:42 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "29",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 851.987,
+    "number_of_new_paths": 1,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787160069-9b4afaed-3ece-4643-8365-7041760a7702",
+    "paths": [
+      "/var/www/html/wp-content/plugins/newsletter/includes/fields.php::::924",
+      "/var/www/html/wp-content/plugins/newsletter/users/users-admin.php::::13_14_16_20_21_3_45",
+      "/var/www/html/wp-content/plugins/newsletter/profile/profile.php::::13_14_16_20_21_22_23_24_25_26_28_29_3_30_32_771_772",
+      "/var/www/html/wp-content/plugins/newsletter/profile/profile-admin.php::::3_59",
+      "/var/www/html/wp-content/plugins/newsletter/includes/TNP.php::::266",
+      "/var/www/html/wp-content/plugins/newsletter/statistics/statistics.php::::156_157_158_159_27_28_3_30_34_35_36_37_550_552",
+      "/var/www/html/wp-content/plugins/newsletter/includes/module.php::::100_1303_18_19_22_25_3_43_47_5_51_53_57_6_63_64_65_68_7_70_8_85_86_88_89_91_92_96_97",
+      "/var/www/html/wp-content/plugins/newsletter/users/users.php::::16_17_19_23_24_28_29_3",
+      "/var/www/html/wp-content/plugins/newsletter/includes/controls.php::::2_2580_4",
+      "/var/www/html/wp-content/plugins/newsletter/includes/defaults.php::::113_115_120_122_13_14_15_20_21_22_23_24_25_26_27_277_28_29_30_31_32_33_34_35_36_37_39_40_44_55_66_81_89",
+      "/var/www/html/wp-content/plugins/newsletter/includes/classes.php::::428",
+      "/var/www/html/wp-content/plugins/newsletter/system/system-admin.php::::3_370",
+      "/var/www/html/wp-content/plugins/newsletter/subscription/subscription.php::::18_19_2_2020_2035_21_26_30_31_312_315_35_36_37_40_41_42_45_49_52_54_56_60_61",
+      "/var/www/html/wp-content/plugins/newsletter/emails/emails.php::::18_19_22_26_27_28_29_3_33_476_477",
+      "/var/www/html/wp-content/plugins/newsletter/main/main-admin.php::::13_14_158_16_20_21_22_25_3_43",
+      "/var/www/html/wp-content/plugins/newsletter/subscription/subscription-admin.php::::3_97",
+      "/var/www/html/wp-content/plugins/newsletter/composer/composer.php::::1080_134_135_146_150_152_154_157_159_160_162_167_169_182_183_187_188_189_191_193_194_195_196_197_200_202_206_208_209_220_221_222_223_227_229_230_232_233_234_236_237_240_243_244_246_3_30_31_34_38_39",
+      "/var/www/html/wp-content/plugins/newsletter/includes/composer.php::::843",
+      "/var/www/html/wp-content/plugins/newsletter/includes/addon-admin.php::::213",
+      "/var/www/html/wp-content/plugins/newsletter/widget/standard.php::::10_11_156_157_158_159_2",
+      "/var/www/html/wp-content/plugins/newsletter/includes/module-admin.php::::18_19_22_3_5_647",
+      "/var/www/html/wp-content/plugins/newsletter/includes/logger.php::::122_123_128_28_29_32_35_37_38_41_42_47_5_51_55_57_58_7_8",
+      "/var/www/html/wp-content/plugins/newsletter/includes/store.php::::21_22_24_257_3_32_33_5",
+      "/var/www/html/wp-content/plugins/newsletter/unsubscription/unsubscription-admin.php::::3_33",
+      "/var/www/html/wp-content/plugins/newsletter/emails/emails-admin.php::::14_15_17_21_22_24_259_29_3_30",
+      "/var/www/html/wp-content/plugins/newsletter/includes/themes.php::::200_3_49_50_51",
+      "/var/www/html/wp-content/plugins/newsletter/widget/minimal.php::::107_108_109_110_2_7_8",
+      "/var/www/html/wp-content/plugins/newsletter/plugin.php::::107_109_110_111_112_113_114_130_131_133_139_143_145_148_149_150_152_154_156_157_159_160_172_175_176_177_210_215_216_218_228_229_242_247_249_250_253_255_257_259_260_263_267_268_277_279_282_290_291_295_296_33_344_348_350_354_38_39_41_42_44_45_47_48_50_51_53_54_56_57_59_60_65_66_69_70_72_73_76_769_77_772_773_774_775_776_777_778_779_780_782_783_788_79_81_82_84_85_87_88_90_91_93_94_96_97_99",
+      "/var/www/html/wp-content/plugins/newsletter/admin.php::::10_11_12_13_14_15_150_153_158_16_162_256_257_258_259_28_29_3_31_35_36_37_38_39_4_40_44_45_46_48_55_56_6_60_62_64_7_78_8_81_83_85_9_93_94",
+      "/var/www/html/wp-content/plugins/newsletter/unsubscription/unsubscription.php::::13_14_16_20_22_23_24_26_27_29_3_30_31_33_345_346",
+      "/var/www/html/wp-content/plugins/newsletter/composer/composer-admin.php::::13_14_16_20_21_236_237_238_239_24_25_26_27_28_29_3_30_31_32_33_36_37_39_549",
+      "/var/www/html/wp-content/plugins/newsletter/includes/cron.php::::10_14_17_32_33_34_35_37_38_41_43_45_47_48_6_9",
+      "/var/www/html/wp-content/plugins/newsletter/statistics/statistics-admin.php::::235_3",
+      "/var/www/html/wp-content/plugins/newsletter/includes/cron.php::::10_14_17_32_38_41_43_45_47_48_6_9",
+      "/var/www/html/wp-content/plugins/newsletter/includes/module-base.php::::1184_1185_1188_1498_152_155_208_211_28_29_30_32_35_36_39_67"
+    ],
+    "new_paths": [
+      "/var/www/html/wp-content/plugins/newsletter/includes/cron.php::::10_14_17_32_33_34_35_37_38_41_43_45_47_48_6_9"
+    ],
+    "vulns": [],
+    "score": 50,
+    "is_interesting": false,
+    "fuzzer_id": "9",
+    "is_initial_candidate": false,
+    "mutated_param_type": "query_params",
+    "mutated_param_name": "options"
+  }
+]

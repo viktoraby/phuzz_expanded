@@ -5,9 +5,41 @@
 *Found functions:25
 *Extracted functions:25
 *Total parameter names extracted: 19
-*Overview: {'ajax_update_widget_columns': {'megamenu_update_widget_columns'}, 'ajax_save_grid_data': {'megamenu_save_grid_data'}, 'ajax_show_menu_item_form': {'megamenu_edit_menu_item'}, 'output_menu_toggle_block_html': {'mm_get_toggle_block_menu_toggle'}, 'ajax_get_location_settings_html': {'megamenu_get_location_settings_html'}, 'output_menu_toggle_block_animated_html': {'mm_get_toggle_block_menu_toggle_animated'}, 'output_spacer_block_html': {'mm_get_toggle_block_spacer'}, 'ajax_save_widget': {'megamenu_save_widget'}, 'ajax_get_empty_grid_column': {'megamenu_get_empty_grid_column'}, 'ajax_show_widget_form': {'megamenu_edit_widget'}, 'ajax_get_theme_scss_variables': {'megamenu_get_theme_scss_variables'}, 'ajax_dismiss_admin_notice': {'megamenu_dismiss_admin_notice'}, 'ajax_get_dialog_html': {'megamenu_get_dialog_html'}, 'ajax_delete_widget': {'megamenu_delete_widget'}, 'ajax_update_menu_item_columns': {'megamenu_update_menu_item_columns'}, 'ajax_reorder_items': {'megamenu_reorder_items'}, 'ajax_save_location_settings': {'megamenu_save_location_settings'}, 'ajax_save_theme': {'megamenu_save_theme'}, 'ajax_save_custom_location_title': {'megamenu_save_custom_location_title'}, 'ajax_get_empty_grid_row': {'megamenu_get_empty_grid_row'}, 'ajax_save_menu_item_settings': {'megamenu_save_menu_item_settings', 'mm_save_menu_item_settings'}, 'ajax_delete_menu_location': {'megamenu_delete_menu_location'}, 'ajax_save_menu_item': {'megamenu_save_menu_item'}, 'ajax_add_widget': {'megamenu_add_widget'}, 'ajax_toggle_location_mmm': {'megamenu_toggle_location_mmm'}}
+*Overview: {'ajax_save_menu_item': {'megamenu_save_menu_item'}, 'ajax_update_widget_columns': {'megamenu_update_widget_columns'}, 'output_menu_toggle_block_html': {'mm_get_toggle_block_menu_toggle'}, 'ajax_get_empty_grid_row': {'megamenu_get_empty_grid_row'}, 'ajax_get_location_settings_html': {'megamenu_get_location_settings_html'}, 'ajax_save_grid_data': {'megamenu_save_grid_data'}, 'ajax_update_menu_item_columns': {'megamenu_update_menu_item_columns'}, 'ajax_show_menu_item_form': {'megamenu_edit_menu_item'}, 'ajax_toggle_location_mmm': {'megamenu_toggle_location_mmm'}, 'ajax_get_empty_grid_column': {'megamenu_get_empty_grid_column'}, 'output_menu_toggle_block_animated_html': {'mm_get_toggle_block_menu_toggle_animated'}, 'ajax_reorder_items': {'megamenu_reorder_items'}, 'ajax_get_dialog_html': {'megamenu_get_dialog_html'}, 'ajax_show_widget_form': {'megamenu_edit_widget'}, 'ajax_save_menu_item_settings': {'mm_save_menu_item_settings', 'megamenu_save_menu_item_settings'}, 'ajax_save_location_settings': {'megamenu_save_location_settings'}, 'ajax_save_widget': {'megamenu_save_widget'}, 'ajax_delete_widget': {'megamenu_delete_widget'}, 'ajax_delete_menu_location': {'megamenu_delete_menu_location'}, 'ajax_save_theme': {'megamenu_save_theme'}, 'output_spacer_block_html': {'mm_get_toggle_block_spacer'}, 'ajax_dismiss_admin_notice': {'megamenu_dismiss_admin_notice'}, 'ajax_get_theme_scss_variables': {'megamenu_get_theme_scss_variables'}, 'ajax_save_custom_location_title': {'megamenu_save_custom_location_title'}, 'ajax_add_widget': {'megamenu_add_widget'}}
 *
 ***/
+
+/** Function ajax_save_menu_item() called by wp_ajax hooks: {'megamenu_save_menu_item'} **/
+/** Parameters found in function ajax_save_menu_item(): {"post": ["menu_item_id", "settings"]} **/
+function ajax_save_menu_item() {
+
+			$menu_item_id = absint( sanitize_text_field( $_POST['menu_item_id'] ) );
+
+			check_ajax_referer( 'megamenu_save_menu_item_' . $menu_item_id );
+
+			$capability = apply_filters( 'megamenu_options_capability', 'edit_theme_options' );
+
+			if ( ! current_user_can( $capability ) ) {
+				return;
+			}
+
+			$submitted_settings = isset( $_POST['settings'] ) ? $_POST['settings'] : [];
+
+			if ( $menu_item_id > 0 && is_array( $submitted_settings ) ) {
+
+				$existing_settings = get_post_meta( $menu_item_id, '_megamenu', true );
+
+				if ( is_array( $existing_settings ) ) {
+					$submitted_settings = array_merge( $existing_settings, $submitted_settings );
+				}
+
+				update_post_meta( $menu_item_id, '_megamenu', $submitted_settings );
+			}
+
+			$this->send_json_success( sprintf( __( 'Saved %s', 'megamenu' ), $id_base ) );
+
+		}
+
 
 /** Function ajax_update_widget_columns() called by wp_ajax hooks: {'megamenu_update_widget_columns'} **/
 /** Parameters found in function ajax_update_widget_columns(): {"post": ["id", "columns"]} **/
@@ -31,110 +63,6 @@ function ajax_update_widget_columns() {
 			} else {
 				$this->send_json_error( sprintf( __( 'Failed to update %s', 'megamenu' ), $widget_id ) );
 			}
-
-		}
-
-
-/** Function ajax_save_grid_data() called by wp_ajax hooks: {'megamenu_save_grid_data'} **/
-/** Parameters found in function ajax_save_grid_data(): {"post": ["grid", "parent_menu_item"]} **/
-function ajax_save_grid_data() {
-
-			check_ajax_referer( 'megamenu_edit' );
-
-			$capability = apply_filters( 'megamenu_options_capability', 'edit_theme_options' );
-
-			if ( ! current_user_can( $capability ) ) {
-				return;
-			}
-
-			$grid = isset( $_POST['grid'] ) ? $_POST['grid'] : false;
-			$parent_menu_item_id = absint( $_POST['parent_menu_item'] );
-			$saved = false;
-
-			if ( is_array( $grid ) && get_post_type( $parent_menu_item_id ) == 'nav_menu_item' ) {
-				$existing_settings = get_post_meta( $parent_menu_item_id, '_megamenu', true );
-				$submitted_settings = array_merge( $existing_settings, [ 'grid' => $grid ] );
-				update_post_meta( $parent_menu_item_id, '_megamenu', $submitted_settings );
-				$saved = true;
-			}
-
-			if ( $saved ) {
-				$this->send_json_success( sprintf( __( 'Saved (%s)', 'megamenu' ), json_encode( $grid ) ) );
-			} else {
-				$this->send_json_error( sprintf( __( "Didn't save", 'megamenu' ), json_encode( $grid ) ) );
-			}
-
-		}
-
-
-/** Function ajax_show_menu_item_form() called by wp_ajax hooks: {'megamenu_edit_menu_item'} **/
-/** Parameters found in function ajax_show_menu_item_form(): {"post": ["widget_id"]} **/
-function ajax_show_menu_item_form() {
-
-			check_ajax_referer( 'megamenu_edit' );
-
-			$capability = apply_filters( 'megamenu_options_capability', 'edit_theme_options' );
-
-			if ( ! current_user_can( $capability ) ) {
-				return;
-			}
-
-			$menu_item_id = sanitize_text_field( $_POST['widget_id'] );
-
-			$nonce = wp_create_nonce( 'megamenu_save_menu_item_' . $menu_item_id );
-
-			$saved_settings = array_filter( (array) get_post_meta( $menu_item_id, '_megamenu', true ) );
-			$menu_item_meta = array_merge( Mega_Menu_Nav_Menus::get_menu_item_defaults(), $saved_settings );
-
-			if ( ob_get_contents() ) {
-				ob_clean(); // remove any warnings or output from other plugins which may corrupt the response
-			}
-
-			$dialog_title = __( 'Sub menu item', 'megamenu' );
-			$post         = get_post( (int) $menu_item_id );
-			if ( $post && 'nav_menu_item' === $post->post_type ) {
-				$menu_item_obj = wp_setup_nav_menu_item( $post );
-				if ( $menu_item_obj && ! empty( $menu_item_obj->title ) ) {
-					$dialog_title = $menu_item_obj->title;
-				}
-			}
-			?>
-
-		<form method='post'>
-			<input type='hidden' name='action' value='megamenu_save_menu_item' />
-			<input type='hidden' name='menu_item_id' value='<?php echo esc_attr( $menu_item_id ); ?>' />
-			<input type='hidden' name='_wpnonce'  value='<?php echo esc_attr( $nonce ); ?>' />
-			<div class='mega-widget-dialog-header'>
-				<h2 class='mega-widget-dialog-title'><?php echo esc_html( $dialog_title ); ?></h2>
-				<button type='button' class='mega-widget-dialog-close' aria-label='<?php echo esc_attr__( 'Close', 'megamenu' ); ?>'>
-					<span class='dashicons dashicons-no-alt' aria-hidden='true'></span>
-				</button>
-			</div>
-			<div class='mega-widget-content widget-content'>
-				<p>
-					<label><?php _e( 'Sub menu columns', 'megamenu' ); ?></label>
-
-					<select name="settings[submenu_columns]">
-						<option value='1' <?php selected( $menu_item_meta['submenu_columns'], 1, true ); ?> >1 <?php __( 'column', 'megamenu' ); ?></option>
-						<option value='2' <?php selected( $menu_item_meta['submenu_columns'], 2, true ); ?> >2 <?php __( 'columns', 'megamenu' ); ?></option>
-						<option value='3' <?php selected( $menu_item_meta['submenu_columns'], 3, true ); ?> >3 <?php __( 'columns', 'megamenu' ); ?></option>
-						<option value='4' <?php selected( $menu_item_meta['submenu_columns'], 4, true ); ?> >4 <?php __( 'columns', 'megamenu' ); ?></option>
-						<option value='5' <?php selected( $menu_item_meta['submenu_columns'], 5, true ); ?> >5 <?php __( 'columns', 'megamenu' ); ?></option>
-						<option value='6' <?php selected( $menu_item_meta['submenu_columns'], 6, true ); ?> >6 <?php __( 'columns', 'megamenu' ); ?></option>
-					</select>
-				</p>
-			</div>
-			<div class='mega-widget-form-footer widget-control-actions'>
-				<div class='mega-widget-controls widget-controls'>
-					<a class='mega-delete' href='#delete' data-mega-tooltip='<?php echo esc_attr__( 'Delete', 'megamenu' ); ?>' data-mega-tooltip-position='right' aria-label='<?php echo esc_attr__( 'Delete', 'megamenu' ); ?>'>
-						<span class='dashicons dashicons-trash' aria-hidden='true'></span>
-					</a>
-				</div>
-				<button type="submit" name="savewidget" id="savewidget" class="button button-primary button-compact"><?php echo esc_html__( 'Save', 'megamenu' ); ?></button>
-			</div>
-		</form>
-
-			<?php
 
 		}
 
@@ -214,6 +142,10 @@ function output_menu_toggle_block_html( $block_id, $settings = [] ) {
 		}
 
 
+/** Function ajax_get_empty_grid_row() called by wp_ajax hooks: {'megamenu_get_empty_grid_row'} **/
+/** No params detected :-/ **/
+
+
 /** Function ajax_get_location_settings_html() called by wp_ajax hooks: {'megamenu_get_location_settings_html'} **/
 /** Parameters found in function ajax_get_location_settings_html(): {"post": ["cards_context", "editing_menu_id"]} **/
 function ajax_get_location_settings_html() {
@@ -254,22 +186,11 @@ function ajax_get_location_settings_html() {
 		}
 
 
-/** Function output_menu_toggle_block_animated_html() called by wp_ajax hooks: {'mm_get_toggle_block_menu_toggle_animated'} **/
-/** No params detected :-/ **/
+/** Function ajax_save_grid_data() called by wp_ajax hooks: {'megamenu_save_grid_data'} **/
+/** Parameters found in function ajax_save_grid_data(): {"post": ["grid", "parent_menu_item"]} **/
+function ajax_save_grid_data() {
 
-
-/** Function output_spacer_block_html() called by wp_ajax hooks: {'mm_get_toggle_block_spacer'} **/
-/** No params detected :-/ **/
-
-
-/** Function ajax_save_widget() called by wp_ajax hooks: {'megamenu_save_widget'} **/
-/** Parameters found in function ajax_save_widget(): {"post": ["widget_id", "id_base"]} **/
-function ajax_save_widget() {
-
-			$widget_id = sanitize_text_field( $_POST['widget_id'] );
-			$id_base   = sanitize_text_field( $_POST['id_base'] );
-
-			check_ajax_referer( 'megamenu_save_widget_' . $widget_id );
+			check_ajax_referer( 'megamenu_edit' );
 
 			$capability = apply_filters( 'megamenu_options_capability', 'edit_theme_options' );
 
@@ -277,133 +198,21 @@ function ajax_save_widget() {
 				return;
 			}
 
-			$saved = $this->save_widget( $id_base );
+			$grid = isset( $_POST['grid'] ) ? $_POST['grid'] : false;
+			$parent_menu_item_id = absint( $_POST['parent_menu_item'] );
+			$saved = false;
+
+			if ( is_array( $grid ) && get_post_type( $parent_menu_item_id ) == 'nav_menu_item' ) {
+				$existing_settings = get_post_meta( $parent_menu_item_id, '_megamenu', true );
+				$submitted_settings = array_merge( $existing_settings, [ 'grid' => $grid ] );
+				update_post_meta( $parent_menu_item_id, '_megamenu', $submitted_settings );
+				$saved = true;
+			}
 
 			if ( $saved ) {
-				$this->send_json_success( sprintf( __( 'Saved %s', 'megamenu' ), $id_base ) );
+				$this->send_json_success( sprintf( __( 'Saved (%s)', 'megamenu' ), json_encode( $grid ) ) );
 			} else {
-				$this->send_json_error( sprintf( __( 'Failed to save %s', 'megamenu' ), $id_base ) );
-			}
-
-		}
-
-
-/** Function ajax_get_empty_grid_column() called by wp_ajax hooks: {'megamenu_get_empty_grid_column'} **/
-/** No params detected :-/ **/
-
-
-/** Function ajax_show_widget_form() called by wp_ajax hooks: {'megamenu_edit_widget'} **/
-/** Parameters found in function ajax_show_widget_form(): {"post": ["widget_id"]} **/
-function ajax_show_widget_form() {
-
-			check_ajax_referer( 'megamenu_edit' );
-
-			$capability = apply_filters( 'megamenu_options_capability', 'edit_theme_options' );
-
-			if ( ! current_user_can( $capability ) ) {
-				return;
-			}
-
-			$widget_id = sanitize_text_field( $_POST['widget_id'] );
-
-			if ( ob_get_contents() ) {
-				ob_clean(); // remove any warnings or output from other plugins which may corrupt the response
-			}
-
-			wp_die( trim( $this->show_widget_form( $widget_id ) ) );
-
-		}
-
-
-/** Function ajax_get_theme_scss_variables() called by wp_ajax hooks: {'megamenu_get_theme_scss_variables'} **/
-/** Parameters found in function ajax_get_theme_scss_variables(): {"post": ["settings", "theme_id"]} **/
-function ajax_get_theme_scss_variables() {
-			check_ajax_referer( 'megamenu_save_theme' );
-
-			$capability = apply_filters( 'megamenu_options_capability', 'edit_theme_options' );
-
-			if ( ! current_user_can( $capability ) ) {
-				wp_send_json_error(
-					[
-						'message' => __( 'Sorry, you are not allowed to do that.', 'megamenu' ),
-					]
-				);
-			}
-
-			if ( ! isset( $_POST['settings'] ) || ! is_array( $_POST['settings'] ) ) {
-				wp_send_json_error(
-					[
-						'message' => __( 'Invalid request.', 'megamenu' ),
-					]
-				);
-			}
-
-			$prepared = $this->get_prepared_theme_for_saving();
-			$theme_id = isset( $_POST['theme_id'] ) ? sanitize_text_field( wp_unslash( $_POST['theme_id'] ) ) : 'default';
-			$theme    = new Mega_Menu_Theme( $theme_id, $prepared );
-			$location = new Mega_Menu_Location( 'test', 'Test', [] );
-			$vars     = $location->get_scss_variables( $theme );
-
-			wp_send_json_success( [ 'variables' => $vars ] );
-		}
-
-
-/** Function ajax_dismiss_admin_notice() called by wp_ajax hooks: {'megamenu_dismiss_admin_notice'} **/
-/** Parameters found in function ajax_dismiss_admin_notice(): {"post": ["notice"]} **/
-function ajax_dismiss_admin_notice() {
-		check_ajax_referer( 'megamenu_dismiss_admin_notice', 'nonce' );
-
-		if ( ! current_user_can( 'manage_options' ) && ! current_user_can( apply_filters( 'megamenu_options_capability', 'edit_theme_options' ) ) ) {
-			wp_send_json_error( null, 403 );
-		}
-
-		$notice = isset( $_POST['notice'] ) ? sanitize_key( wp_unslash( $_POST['notice'] ) ) : '';
-		if ( '' === $notice ) {
-			wp_send_json_error( null, 400 );
-		}
-
-		/**
-		 * Notice keys allowed to be dismissed via AJAX / GET.
-		 *
-		 * @since 3.9
-		 *
-		 * @param string[] $keys Sanitized notice identifiers.
-		 */
-		$allowed = apply_filters( 'megamenu_dismissible_admin_notice_keys', [ 'review' ] );
-
-		if ( ! is_array( $allowed ) || ! in_array( $notice, array_map( 'sanitize_key', $allowed ), true ) ) {
-			wp_send_json_error( null, 400 );
-		}
-
-		self::dismiss( $notice );
-		wp_send_json_success();
-	}
-
-
-/** Function ajax_get_dialog_html() called by wp_ajax hooks: {'megamenu_get_dialog_html'} **/
-/** No params detected :-/ **/
-
-
-/** Function ajax_delete_widget() called by wp_ajax hooks: {'megamenu_delete_widget'} **/
-/** Parameters found in function ajax_delete_widget(): {"post": ["widget_id"]} **/
-function ajax_delete_widget() {
-
-			check_ajax_referer( 'megamenu_edit' );
-
-			$capability = apply_filters( 'megamenu_options_capability', 'edit_theme_options' );
-
-			if ( ! current_user_can( $capability ) ) {
-				return;
-			}
-
-			$widget_id = sanitize_text_field( $_POST['widget_id'] );
-
-			$deleted = $this->delete_widget( $widget_id );
-
-			if ( $deleted ) {
-				$this->send_json_success( sprintf( __( 'Deleted %s', 'megamenu' ), $widget_id ) );
-			} else {
-				$this->send_json_error( sprintf( __( 'Failed to delete %s', 'megamenu' ), $widget_id ) );
+				$this->send_json_error( sprintf( __( "Didn't save", 'megamenu' ), json_encode( $grid ) ) );
 			}
 
 		}
@@ -435,6 +244,115 @@ function ajax_update_menu_item_columns() {
 		}
 
 
+/** Function ajax_show_menu_item_form() called by wp_ajax hooks: {'megamenu_edit_menu_item'} **/
+/** Parameters found in function ajax_show_menu_item_form(): {"post": ["widget_id"]} **/
+function ajax_show_menu_item_form() {
+
+			check_ajax_referer( 'megamenu_edit' );
+
+			$capability = apply_filters( 'megamenu_options_capability', 'edit_theme_options' );
+
+			if ( ! current_user_can( $capability ) ) {
+				return;
+			}
+
+			$menu_item_id = sanitize_text_field( $_POST['widget_id'] );
+
+			$nonce = wp_create_nonce( 'megamenu_save_menu_item_' . $menu_item_id );
+
+			$saved_settings = array_filter( (array) get_post_meta( $menu_item_id, '_megamenu', true ) );
+			$menu_item_meta = array_merge( Mega_Menu_Nav_Menus::get_menu_item_defaults(), $saved_settings );
+
+			if ( ob_get_contents() ) {
+				ob_clean(); // remove any warnings or output from other plugins which may corrupt the response
+			}
+
+			$dialog_title = __( 'Sub menu item', 'megamenu' );
+			$post         = get_post( (int) $menu_item_id );
+			if ( $post && 'nav_menu_item' === $post->post_type ) {
+				$menu_item_obj = wp_setup_nav_menu_item( $post );
+				if ( $menu_item_obj && ! empty( $menu_item_obj->title ) ) {
+					$dialog_title = $menu_item_obj->title;
+				}
+			}
+			?>
+
+		<form method='post'>
+			<input type='hidden' name='action' value='megamenu_save_menu_item' />
+			<input type='hidden' name='menu_item_id' value='<?php echo esc_attr( $menu_item_id ); ?>' />
+			<input type='hidden' name='_wpnonce'  value='<?php echo esc_attr( $nonce ); ?>' />
+			<div class='mega-widget-dialog-header'>
+				<h2 class='mega-widget-dialog-title'><?php echo esc_html( $dialog_title ); ?></h2>
+				<button type='button' class='mega-widget-dialog-close' aria-label='<?php echo esc_attr__( 'Close', 'megamenu' ); ?>'>
+					<span class='dashicons dashicons-no-alt' aria-hidden='true'></span>
+				</button>
+			</div>
+			<div class='mega-widget-content widget-content'>
+				<p>
+					<label><?php _e( 'Sub menu columns', 'megamenu' ); ?></label>
+
+					<select name="settings[submenu_columns]">
+						<option value='1' <?php selected( $menu_item_meta['submenu_columns'], 1, true ); ?> >1 <?php __( 'column', 'megamenu' ); ?></option>
+						<option value='2' <?php selected( $menu_item_meta['submenu_columns'], 2, true ); ?> >2 <?php __( 'columns', 'megamenu' ); ?></option>
+						<option value='3' <?php selected( $menu_item_meta['submenu_columns'], 3, true ); ?> >3 <?php __( 'columns', 'megamenu' ); ?></option>
+						<option value='4' <?php selected( $menu_item_meta['submenu_columns'], 4, true ); ?> >4 <?php __( 'columns', 'megamenu' ); ?></option>
+						<option value='5' <?php selected( $menu_item_meta['submenu_columns'], 5, true ); ?> >5 <?php __( 'columns', 'megamenu' ); ?></option>
+						<option value='6' <?php selected( $menu_item_meta['submenu_columns'], 6, true ); ?> >6 <?php __( 'columns', 'megamenu' ); ?></option>
+					</select>
+				</p>
+			</div>
+			<div class='mega-widget-form-footer widget-control-actions'>
+				<div class='mega-widget-controls widget-controls'>
+					<a class='mega-delete' href='#delete' data-mega-tooltip='<?php echo esc_attr__( 'Delete', 'megamenu' ); ?>' data-mega-tooltip-position='right' aria-label='<?php echo esc_attr__( 'Delete', 'megamenu' ); ?>'>
+						<span class='dashicons dashicons-trash' aria-hidden='true'></span>
+					</a>
+				</div>
+				<button type="submit" name="savewidget" id="savewidget" class="button button-primary button-compact"><?php echo esc_html__( 'Save', 'megamenu' ); ?></button>
+			</div>
+		</form>
+
+			<?php
+
+		}
+
+
+/** Function ajax_toggle_location_mmm() called by wp_ajax hooks: {'megamenu_toggle_location_mmm'} **/
+/** Parameters found in function ajax_toggle_location_mmm(): {"post": ["enabled"]} **/
+function ajax_toggle_location_mmm() {
+			$location = $this->validate_ajax_location_request();
+
+			$raw_on = isset( $_POST['enabled'] ) ? wp_unslash( $_POST['enabled'] ) : '0';
+			$on     = $this->is_setting_enabled( $raw_on );
+
+			$settings = $this->get_plugin_settings();
+
+			if ( ! isset( $settings[ $location ] ) || ! is_array( $settings[ $location ] ) ) {
+				$settings[ $location ] = [];
+			}
+
+			if ( $on ) {
+				$settings[ $location ]['enabled'] = '1';
+			} else {
+				unset( $settings[ $location ]['enabled'] );
+			}
+
+			update_option( 'megamenu_settings', $settings );
+
+			do_action( 'megamenu_after_save_settings' );
+			do_action( 'megamenu_delete_cache' );
+
+			wp_send_json_success( [ 'enabled' => $on ] );
+		}
+
+
+/** Function ajax_get_empty_grid_column() called by wp_ajax hooks: {'megamenu_get_empty_grid_column'} **/
+/** No params detected :-/ **/
+
+
+/** Function output_menu_toggle_block_animated_html() called by wp_ajax hooks: {'mm_get_toggle_block_menu_toggle_animated'} **/
+/** No params detected :-/ **/
+
+
 /** Function ajax_reorder_items() called by wp_ajax hooks: {'megamenu_reorder_items'} **/
 /** Parameters found in function ajax_reorder_items(): {"post": ["items"]} **/
 function ajax_reorder_items() {
@@ -464,66 +382,34 @@ function ajax_reorder_items() {
 		}
 
 
-/** Function ajax_save_location_settings() called by wp_ajax hooks: {'megamenu_save_location_settings'} **/
-/** Parameters found in function ajax_save_location_settings(): {"post": ["megamenu_meta"]} **/
-function ajax_save_location_settings() {
-			$location = $this->validate_ajax_location_request();
-
-			if ( ! isset( $_POST['megamenu_meta'][ $location ] ) || ! is_array( $_POST['megamenu_meta'][ $location ] ) ) {
-				wp_send_json_error();
-			}
-
-			$this->persist_submitted_megamenu_meta(
-				[
-					$location => wp_unslash( $_POST['megamenu_meta'][ $location ] ),
-				]
-			);
-
-			wp_send_json_success();
-		}
-
-
-/** Function ajax_save_theme() called by wp_ajax hooks: {'megamenu_save_theme'} **/
+/** Function ajax_get_dialog_html() called by wp_ajax hooks: {'megamenu_get_dialog_html'} **/
 /** No params detected :-/ **/
 
 
-/** Function ajax_save_custom_location_title() called by wp_ajax hooks: {'megamenu_save_custom_location_title'} **/
-/** Parameters found in function ajax_save_custom_location_title(): {"post": ["title"]} **/
-function ajax_save_custom_location_title() {
-			$location = $this->validate_ajax_location_request();
+/** Function ajax_show_widget_form() called by wp_ajax hooks: {'megamenu_edit_widget'} **/
+/** Parameters found in function ajax_show_widget_form(): {"post": ["widget_id"]} **/
+function ajax_show_widget_form() {
 
-			if ( 0 !== strpos( $location, 'max_mega_menu_' ) ) {
-				wp_send_json_error();
+			check_ajax_referer( 'megamenu_edit' );
+
+			$capability = apply_filters( 'megamenu_options_capability', 'edit_theme_options' );
+
+			if ( ! current_user_can( $capability ) ) {
+				return;
 			}
 
-			$title = isset( $_POST['title'] ) ? sanitize_text_field( wp_unslash( $_POST['title'] ) ) : '';
+			$widget_id = sanitize_text_field( $_POST['widget_id'] );
 
-			$locations = get_option( 'megamenu_locations', [] );
-
-			if ( ! is_array( $locations ) ) {
-				$locations = [];
+			if ( ob_get_contents() ) {
+				ob_clean(); // remove any warnings or output from other plugins which may corrupt the response
 			}
 
-			$locations[ $location ] = $title;
-			update_option( 'megamenu_locations', $locations );
+			wp_die( trim( $this->show_widget_form( $widget_id ) ) );
 
-			do_action( 'megamenu_after_save_settings' );
-			do_action( 'megamenu_delete_cache' );
-
-			wp_send_json_success(
-				[
-					'title'         => $title,
-					'preview_title' => Mega_Menu_Location_Preview::get_preview_title( $location, $title ),
-				]
-			);
 		}
 
 
-/** Function ajax_get_empty_grid_row() called by wp_ajax hooks: {'megamenu_get_empty_grid_row'} **/
-/** No params detected :-/ **/
-
-
-/** Function ajax_save_menu_item_settings() called by wp_ajax hooks: {'megamenu_save_menu_item_settings', 'mm_save_menu_item_settings'} **/
+/** Function ajax_save_menu_item_settings() called by wp_ajax hooks: {'mm_save_menu_item_settings', 'megamenu_save_menu_item_settings'} **/
 /** Parameters found in function ajax_save_menu_item_settings(): {"post": ["settings", "menu_item_id", "tab", "clear_cache"]} **/
 function ajax_save_menu_item_settings() {
 
@@ -584,6 +470,76 @@ function ajax_save_menu_item_settings() {
 		}
 
 
+/** Function ajax_save_location_settings() called by wp_ajax hooks: {'megamenu_save_location_settings'} **/
+/** Parameters found in function ajax_save_location_settings(): {"post": ["megamenu_meta"]} **/
+function ajax_save_location_settings() {
+			$location = $this->validate_ajax_location_request();
+
+			if ( ! isset( $_POST['megamenu_meta'][ $location ] ) || ! is_array( $_POST['megamenu_meta'][ $location ] ) ) {
+				wp_send_json_error();
+			}
+
+			$this->persist_submitted_megamenu_meta(
+				[
+					$location => wp_unslash( $_POST['megamenu_meta'][ $location ] ),
+				]
+			);
+
+			wp_send_json_success();
+		}
+
+
+/** Function ajax_save_widget() called by wp_ajax hooks: {'megamenu_save_widget'} **/
+/** Parameters found in function ajax_save_widget(): {"post": ["widget_id", "id_base"]} **/
+function ajax_save_widget() {
+
+			$widget_id = sanitize_text_field( $_POST['widget_id'] );
+			$id_base   = sanitize_text_field( $_POST['id_base'] );
+
+			check_ajax_referer( 'megamenu_save_widget_' . $widget_id );
+
+			$capability = apply_filters( 'megamenu_options_capability', 'edit_theme_options' );
+
+			if ( ! current_user_can( $capability ) ) {
+				return;
+			}
+
+			$saved = $this->save_widget( $id_base );
+
+			if ( $saved ) {
+				$this->send_json_success( sprintf( __( 'Saved %s', 'megamenu' ), $id_base ) );
+			} else {
+				$this->send_json_error( sprintf( __( 'Failed to save %s', 'megamenu' ), $id_base ) );
+			}
+
+		}
+
+
+/** Function ajax_delete_widget() called by wp_ajax hooks: {'megamenu_delete_widget'} **/
+/** Parameters found in function ajax_delete_widget(): {"post": ["widget_id"]} **/
+function ajax_delete_widget() {
+
+			check_ajax_referer( 'megamenu_edit' );
+
+			$capability = apply_filters( 'megamenu_options_capability', 'edit_theme_options' );
+
+			if ( ! current_user_can( $capability ) ) {
+				return;
+			}
+
+			$widget_id = sanitize_text_field( $_POST['widget_id'] );
+
+			$deleted = $this->delete_widget( $widget_id );
+
+			if ( $deleted ) {
+				$this->send_json_success( sprintf( __( 'Deleted %s', 'megamenu' ), $widget_id ) );
+			} else {
+				$this->send_json_error( sprintf( __( 'Failed to delete %s', 'megamenu' ), $widget_id ) );
+			}
+
+		}
+
+
 /** Function ajax_delete_menu_location() called by wp_ajax hooks: {'megamenu_delete_menu_location'} **/
 /** Parameters found in function ajax_delete_menu_location(): {"post": ["location"]} **/
 function ajax_delete_menu_location() {
@@ -606,35 +562,108 @@ function ajax_delete_menu_location() {
 		}
 
 
-/** Function ajax_save_menu_item() called by wp_ajax hooks: {'megamenu_save_menu_item'} **/
-/** Parameters found in function ajax_save_menu_item(): {"post": ["menu_item_id", "settings"]} **/
-function ajax_save_menu_item() {
+/** Function ajax_save_theme() called by wp_ajax hooks: {'megamenu_save_theme'} **/
+/** No params detected :-/ **/
 
-			$menu_item_id = absint( sanitize_text_field( $_POST['menu_item_id'] ) );
 
-			check_ajax_referer( 'megamenu_save_menu_item_' . $menu_item_id );
+/** Function output_spacer_block_html() called by wp_ajax hooks: {'mm_get_toggle_block_spacer'} **/
+/** No params detected :-/ **/
+
+
+/** Function ajax_dismiss_admin_notice() called by wp_ajax hooks: {'megamenu_dismiss_admin_notice'} **/
+/** Parameters found in function ajax_dismiss_admin_notice(): {"post": ["notice"]} **/
+function ajax_dismiss_admin_notice() {
+		check_ajax_referer( 'megamenu_dismiss_admin_notice', 'nonce' );
+
+		if ( ! current_user_can( 'manage_options' ) && ! current_user_can( apply_filters( 'megamenu_options_capability', 'edit_theme_options' ) ) ) {
+			wp_send_json_error( null, 403 );
+		}
+
+		$notice = isset( $_POST['notice'] ) ? sanitize_key( wp_unslash( $_POST['notice'] ) ) : '';
+		if ( '' === $notice ) {
+			wp_send_json_error( null, 400 );
+		}
+
+		/**
+		 * Notice keys allowed to be dismissed via AJAX / GET.
+		 *
+		 * @since 3.9
+		 *
+		 * @param string[] $keys Sanitized notice identifiers.
+		 */
+		$allowed = apply_filters( 'megamenu_dismissible_admin_notice_keys', [ 'review' ] );
+
+		if ( ! is_array( $allowed ) || ! in_array( $notice, array_map( 'sanitize_key', $allowed ), true ) ) {
+			wp_send_json_error( null, 400 );
+		}
+
+		self::dismiss( $notice );
+		wp_send_json_success();
+	}
+
+
+/** Function ajax_get_theme_scss_variables() called by wp_ajax hooks: {'megamenu_get_theme_scss_variables'} **/
+/** Parameters found in function ajax_get_theme_scss_variables(): {"post": ["settings", "theme_id"]} **/
+function ajax_get_theme_scss_variables() {
+			check_ajax_referer( 'megamenu_save_theme' );
 
 			$capability = apply_filters( 'megamenu_options_capability', 'edit_theme_options' );
 
 			if ( ! current_user_can( $capability ) ) {
-				return;
+				wp_send_json_error(
+					[
+						'message' => __( 'Sorry, you are not allowed to do that.', 'megamenu' ),
+					]
+				);
 			}
 
-			$submitted_settings = isset( $_POST['settings'] ) ? $_POST['settings'] : [];
-
-			if ( $menu_item_id > 0 && is_array( $submitted_settings ) ) {
-
-				$existing_settings = get_post_meta( $menu_item_id, '_megamenu', true );
-
-				if ( is_array( $existing_settings ) ) {
-					$submitted_settings = array_merge( $existing_settings, $submitted_settings );
-				}
-
-				update_post_meta( $menu_item_id, '_megamenu', $submitted_settings );
+			if ( ! isset( $_POST['settings'] ) || ! is_array( $_POST['settings'] ) ) {
+				wp_send_json_error(
+					[
+						'message' => __( 'Invalid request.', 'megamenu' ),
+					]
+				);
 			}
 
-			$this->send_json_success( sprintf( __( 'Saved %s', 'megamenu' ), $id_base ) );
+			$prepared = $this->get_prepared_theme_for_saving();
+			$theme_id = isset( $_POST['theme_id'] ) ? sanitize_text_field( wp_unslash( $_POST['theme_id'] ) ) : 'default';
+			$theme    = new Mega_Menu_Theme( $theme_id, $prepared );
+			$location = new Mega_Menu_Location( 'test', 'Test', [] );
+			$vars     = $location->get_scss_variables( $theme );
 
+			wp_send_json_success( [ 'variables' => $vars ] );
+		}
+
+
+/** Function ajax_save_custom_location_title() called by wp_ajax hooks: {'megamenu_save_custom_location_title'} **/
+/** Parameters found in function ajax_save_custom_location_title(): {"post": ["title"]} **/
+function ajax_save_custom_location_title() {
+			$location = $this->validate_ajax_location_request();
+
+			if ( 0 !== strpos( $location, 'max_mega_menu_' ) ) {
+				wp_send_json_error();
+			}
+
+			$title = isset( $_POST['title'] ) ? sanitize_text_field( wp_unslash( $_POST['title'] ) ) : '';
+
+			$locations = get_option( 'megamenu_locations', [] );
+
+			if ( ! is_array( $locations ) ) {
+				$locations = [];
+			}
+
+			$locations[ $location ] = $title;
+			update_option( 'megamenu_locations', $locations );
+
+			do_action( 'megamenu_after_save_settings' );
+			do_action( 'megamenu_delete_cache' );
+
+			wp_send_json_success(
+				[
+					'title'         => $title,
+					'preview_title' => Mega_Menu_Location_Preview::get_preview_title( $location, $title ),
+				]
+			);
 		}
 
 
@@ -663,35 +692,6 @@ function ajax_add_widget() {
 				$this->send_json_error( sprintf( __( 'Failed to add %1$s to %2$d', 'megamenu' ), $id_base, $menu_item_id ) );
 			}
 
-		}
-
-
-/** Function ajax_toggle_location_mmm() called by wp_ajax hooks: {'megamenu_toggle_location_mmm'} **/
-/** Parameters found in function ajax_toggle_location_mmm(): {"post": ["enabled"]} **/
-function ajax_toggle_location_mmm() {
-			$location = $this->validate_ajax_location_request();
-
-			$raw_on = isset( $_POST['enabled'] ) ? wp_unslash( $_POST['enabled'] ) : '0';
-			$on     = $this->is_setting_enabled( $raw_on );
-
-			$settings = $this->get_plugin_settings();
-
-			if ( ! isset( $settings[ $location ] ) || ! is_array( $settings[ $location ] ) ) {
-				$settings[ $location ] = [];
-			}
-
-			if ( $on ) {
-				$settings[ $location ]['enabled'] = '1';
-			} else {
-				unset( $settings[ $location ]['enabled'] );
-			}
-
-			update_option( 'megamenu_settings', $settings );
-
-			do_action( 'megamenu_after_save_settings' );
-			do_action( 'megamenu_delete_cache' );
-
-			wp_send_json_success( [ 'enabled' => $on ] );
 		}
 
 

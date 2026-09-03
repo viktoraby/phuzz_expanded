@@ -1,0 +1,1313 @@
+[
+  {
+    "coverage_id": "1786808801-b0f8b342-8e13-4e87-bf37-545b45d7dc01",
+    "priority": 12,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "test_fb_banner"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "attribute": "1uzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "",
+    "response.body.length": 0,
+    "response.headers": {},
+    "response.status.code": 0,
+    "response.time": 0,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786808801-9e658fb4-f2c8-4d1a-9e75-eae8c618f431",
+    "paths": [
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/composer/autoload_static.php::::405_406_407_408_410_413",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_499_500_515_522_528_531_544_551_555_563_575_576_577_578_580",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Checks/WPCompatibility.php::::10_22_25_56_57_60",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Checks/CompatCheck.php::::112_113_115_116_118_12_151_160_161_171_172_173_191_55_56_57_60",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Checks/WCCompatibility.php::::103_104_105_12_379_383_384_388_52",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/composer/platform_check.php::::11_26_5_7",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/facebook-for-woocommerce.php::::100_103_104_108_1109_1110_1113_1118_1119_116_117_121_122_125_126_127_131_214_215_216_218_220_221_222_223_224_225_229_231_234_235_238_239_240_242_27_274_275_30_31_310_312_313_722_724_730_731_733_738_750_756_838_856_859",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/composer/autoload_real.php::::11_12_14_21_25_27_28_29_31_32_34_36_39",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/includes/Framework/PluginCrashHandler.php::::115_119_120_121_122_15_1724",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Exception/IncompatibleException.php::::12_18",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/autoload.php::::20_22_5",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Checker.php::::104_13_33_34_37_47_57_58_60_66_78_82_83_86_89_90_95_96_97"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 12,
+    "is_interesting": false,
+    "fuzzer_id": "2",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "attribute"
+  },
+  {
+    "coverage_id": "1786808801-6a888a95-1081-40d1-aae3-e960d730bbd6",
+    "priority": 12,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "test_fb_banner"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "attribute": "guzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "",
+    "response.body.length": 0,
+    "response.headers": {},
+    "response.status.code": 0,
+    "response.time": 0,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786808801-9e658fb4-f2c8-4d1a-9e75-eae8c618f431",
+    "paths": [
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/composer/autoload_static.php::::405_406_407_408_410_413",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_499_500_515_522_528_531_544_551_555_563_575_576_577_578_580",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Checks/WPCompatibility.php::::10_22_25_56_57_60",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Checks/CompatCheck.php::::112_113_115_116_118_12_151_160_161_171_172_173_191_55_56_57_60",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Checks/WCCompatibility.php::::103_104_105_12_379_383_384_388_52",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/composer/platform_check.php::::11_26_5_7",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/facebook-for-woocommerce.php::::100_103_104_108_1109_1110_1113_1118_1119_116_117_121_122_125_126_127_131_214_215_216_218_220_221_222_223_224_225_229_231_234_235_238_239_240_242_27_274_275_30_31_310_312_313_722_724_730_731_733_738_750_756_838_856_859",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/composer/autoload_real.php::::11_12_14_21_25_27_28_29_31_32_34_36_39",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/includes/Framework/PluginCrashHandler.php::::115_119_120_121_122_15_1724",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Exception/IncompatibleException.php::::12_18",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/autoload.php::::20_22_5",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Checker.php::::104_13_33_34_37_47_57_58_60_66_78_82_83_86_89_90_95_96_97"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 12,
+    "is_interesting": false,
+    "fuzzer_id": "2",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "attribute"
+  },
+  {
+    "coverage_id": "1786808802-0ee02093-1f5b-4585-b914-3b325823faf2",
+    "priority": 12,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "test_fb_banner"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "attribute": "fuz2"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "",
+    "response.body.length": 0,
+    "response.headers": {},
+    "response.status.code": 0,
+    "response.time": 0,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786808801-9e658fb4-f2c8-4d1a-9e75-eae8c618f431",
+    "paths": [
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/composer/autoload_static.php::::405_406_407_408_410_413",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_499_500_515_522_528_531_544_551_555_563_575_576_577_578_580",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Checks/WPCompatibility.php::::10_22_25_56_57_60",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Checks/CompatCheck.php::::112_113_115_116_118_12_151_160_161_171_172_173_191_55_56_57_60",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Checks/WCCompatibility.php::::103_104_105_12_379_383_384_388_52",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/composer/platform_check.php::::11_26_5_7",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/facebook-for-woocommerce.php::::100_103_104_108_1109_1110_1113_1118_1119_116_117_121_122_125_126_127_131_214_215_216_218_220_221_222_223_224_225_229_231_234_235_238_239_240_242_27_274_275_30_31_310_312_313_722_724_730_731_733_738_750_756_838_856_859",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/composer/autoload_real.php::::11_12_14_21_25_27_28_29_31_32_34_36_39",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/includes/Framework/PluginCrashHandler.php::::115_119_120_121_122_15_1724",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Exception/IncompatibleException.php::::12_18",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/autoload.php::::20_22_5",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Checker.php::::104_13_33_34_37_47_57_58_60_66_78_82_83_86_89_90_95_96_97"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 12,
+    "is_interesting": false,
+    "fuzzer_id": "2",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "attribute"
+  },
+  {
+    "coverage_id": "1786808802-f44e0576-5e5c-418a-9d37-73a212715fb5",
+    "priority": 12,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "test_fb_banner"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "attribute": "fuz{"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "",
+    "response.body.length": 0,
+    "response.headers": {},
+    "response.status.code": 0,
+    "response.time": 0,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786808801-9e658fb4-f2c8-4d1a-9e75-eae8c618f431",
+    "paths": [
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/composer/autoload_static.php::::405_406_407_408_410_413",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_499_500_515_522_528_531_544_551_555_563_575_576_577_578_580",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Checks/WPCompatibility.php::::10_22_25_56_57_60",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Checks/CompatCheck.php::::112_113_115_116_118_12_151_160_161_171_172_173_191_55_56_57_60",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Checks/WCCompatibility.php::::103_104_105_12_379_383_384_388_52",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/composer/platform_check.php::::11_26_5_7",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/facebook-for-woocommerce.php::::100_103_104_108_1109_1110_1113_1118_1119_116_117_121_122_125_126_127_131_214_215_216_218_220_221_222_223_224_225_229_231_234_235_238_239_240_242_27_274_275_30_31_310_312_313_722_724_730_731_733_738_750_756_838_856_859",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/composer/autoload_real.php::::11_12_14_21_25_27_28_29_31_32_34_36_39",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/includes/Framework/PluginCrashHandler.php::::115_119_120_121_122_15_1724",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Exception/IncompatibleException.php::::12_18",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/autoload.php::::20_22_5",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Checker.php::::104_13_33_34_37_47_57_58_60_66_78_82_83_86_89_90_95_96_97"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 12,
+    "is_interesting": false,
+    "fuzzer_id": "2",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "attribute"
+  },
+  {
+    "coverage_id": "1786808803-920578a8-73e7-4dfb-bb5d-434ed46b29ac",
+    "priority": 12,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "test_fb_banner"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "attribute": "\u0007fuzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "",
+    "response.body.length": 0,
+    "response.headers": {},
+    "response.status.code": 0,
+    "response.time": 0,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786808801-9e658fb4-f2c8-4d1a-9e75-eae8c618f431",
+    "paths": [
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/composer/autoload_static.php::::405_406_407_408_410_413",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_499_500_515_522_528_531_544_551_555_563_575_576_577_578_580",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Checks/WPCompatibility.php::::10_22_25_56_57_60",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Checks/CompatCheck.php::::112_113_115_116_118_12_151_160_161_171_172_173_191_55_56_57_60",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Checks/WCCompatibility.php::::103_104_105_12_379_383_384_388_52",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/composer/platform_check.php::::11_26_5_7",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/facebook-for-woocommerce.php::::100_103_104_108_1109_1110_1113_1118_1119_116_117_121_122_125_126_127_131_214_215_216_218_220_221_222_223_224_225_229_231_234_235_238_239_240_242_27_274_275_30_31_310_312_313_722_724_730_731_733_738_750_756_838_856_859",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/composer/autoload_real.php::::11_12_14_21_25_27_28_29_31_32_34_36_39",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/includes/Framework/PluginCrashHandler.php::::115_119_120_121_122_15_1724",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Exception/IncompatibleException.php::::12_18",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/autoload.php::::20_22_5",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Checker.php::::104_13_33_34_37_47_57_58_60_66_78_82_83_86_89_90_95_96_97"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 12,
+    "is_interesting": false,
+    "fuzzer_id": "2",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "attribute"
+  },
+  {
+    "coverage_id": "1786808803-e86d5b3e-c8a4-4aca-9f9a-01f289a3ebf2",
+    "priority": 12,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "test_fb_banner"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "attribute": "auzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "",
+    "response.body.length": 0,
+    "response.headers": {},
+    "response.status.code": 0,
+    "response.time": 0,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786808801-9e658fb4-f2c8-4d1a-9e75-eae8c618f431",
+    "paths": [
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/composer/autoload_static.php::::405_406_407_408_410_413",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_499_500_515_522_528_531_544_551_555_563_575_576_577_578_580",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Checks/WPCompatibility.php::::10_22_25_56_57_60",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Checks/CompatCheck.php::::112_113_115_116_118_12_151_160_161_171_172_173_191_55_56_57_60",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Checks/WCCompatibility.php::::103_104_105_12_379_383_384_388_52",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/composer/platform_check.php::::11_26_5_7",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/facebook-for-woocommerce.php::::100_103_104_108_1109_1110_1113_1118_1119_116_117_121_122_125_126_127_131_214_215_216_218_220_221_222_223_224_225_229_231_234_235_238_239_240_242_27_274_275_30_31_310_312_313_722_724_730_731_733_738_750_756_838_856_859",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/composer/autoload_real.php::::11_12_14_21_25_27_28_29_31_32_34_36_39",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/includes/Framework/PluginCrashHandler.php::::115_119_120_121_122_15_1724",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Exception/IncompatibleException.php::::12_18",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/autoload.php::::20_22_5",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Checker.php::::104_13_33_34_37_47_57_58_60_66_78_82_83_86_89_90_95_96_97"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 12,
+    "is_interesting": false,
+    "fuzzer_id": "2",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "attribute"
+  },
+  {
+    "coverage_id": "1786808803-a3a45e6b-dccc-4350-9e09-dd6b81f198a6",
+    "priority": 12,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "test_fb_banner"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "attribute": "cfuzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "",
+    "response.body.length": 0,
+    "response.headers": {},
+    "response.status.code": 0,
+    "response.time": 0,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786808801-9e658fb4-f2c8-4d1a-9e75-eae8c618f431",
+    "paths": [
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/composer/autoload_static.php::::405_406_407_408_410_413",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_499_500_515_522_528_531_544_551_555_563_575_576_577_578_580",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Checks/WPCompatibility.php::::10_22_25_56_57_60",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Checks/CompatCheck.php::::112_113_115_116_118_12_151_160_161_171_172_173_191_55_56_57_60",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Checks/WCCompatibility.php::::103_104_105_12_379_383_384_388_52",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/composer/platform_check.php::::11_26_5_7",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/facebook-for-woocommerce.php::::100_103_104_108_1109_1110_1113_1118_1119_116_117_121_122_125_126_127_131_214_215_216_218_220_221_222_223_224_225_229_231_234_235_238_239_240_242_27_274_275_30_31_310_312_313_722_724_730_731_733_738_750_756_838_856_859",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/composer/autoload_real.php::::11_12_14_21_25_27_28_29_31_32_34_36_39",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/includes/Framework/PluginCrashHandler.php::::115_119_120_121_122_15_1724",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Exception/IncompatibleException.php::::12_18",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/autoload.php::::20_22_5",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Checker.php::::104_13_33_34_37_47_57_58_60_66_78_82_83_86_89_90_95_96_97"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 12,
+    "is_interesting": false,
+    "fuzzer_id": "2",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "attribute"
+  },
+  {
+    "coverage_id": "1786808804-6f665cb5-71c9-4de9-bb26-36716b7f6e54",
+    "priority": 12,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "test_fb_banner"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "attribute": "muzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "",
+    "response.body.length": 0,
+    "response.headers": {},
+    "response.status.code": 0,
+    "response.time": 0,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786808801-9e658fb4-f2c8-4d1a-9e75-eae8c618f431",
+    "paths": [
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/composer/autoload_static.php::::405_406_407_408_410_413",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_499_500_515_522_528_531_544_551_555_563_575_576_577_578_580",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Checks/WPCompatibility.php::::10_22_25_56_57_60",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Checks/CompatCheck.php::::112_113_115_116_118_12_151_160_161_171_172_173_191_55_56_57_60",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Checks/WCCompatibility.php::::103_104_105_12_379_383_384_388_52",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/composer/platform_check.php::::11_26_5_7",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/facebook-for-woocommerce.php::::100_103_104_108_1109_1110_1113_1118_1119_116_117_121_122_125_126_127_131_214_215_216_218_220_221_222_223_224_225_229_231_234_235_238_239_240_242_27_274_275_30_31_310_312_313_722_724_730_731_733_738_750_756_838_856_859",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/composer/autoload_real.php::::11_12_14_21_25_27_28_29_31_32_34_36_39",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/includes/Framework/PluginCrashHandler.php::::115_119_120_121_122_15_1724",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Exception/IncompatibleException.php::::12_18",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/autoload.php::::20_22_5",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Checker.php::::104_13_33_34_37_47_57_58_60_66_78_82_83_86_89_90_95_96_97"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 12,
+    "is_interesting": false,
+    "fuzzer_id": "2",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "attribute"
+  },
+  {
+    "coverage_id": "1786808804-2bcd88d5-ba59-452b-ad4d-ae7487c021b4",
+    "priority": 12,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "test_fb_banner"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "attribute": "fuzz0"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "",
+    "response.body.length": 0,
+    "response.headers": {},
+    "response.status.code": 0,
+    "response.time": 0,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786808801-9e658fb4-f2c8-4d1a-9e75-eae8c618f431",
+    "paths": [
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/composer/autoload_static.php::::405_406_407_408_410_413",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_499_500_515_522_528_531_544_551_555_563_575_576_577_578_580",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Checks/WPCompatibility.php::::10_22_25_56_57_60",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Checks/CompatCheck.php::::112_113_115_116_118_12_151_160_161_171_172_173_191_55_56_57_60",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Checks/WCCompatibility.php::::103_104_105_12_379_383_384_388_52",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/composer/platform_check.php::::11_26_5_7",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/facebook-for-woocommerce.php::::100_103_104_108_1109_1110_1113_1118_1119_116_117_121_122_125_126_127_131_214_215_216_218_220_221_222_223_224_225_229_231_234_235_238_239_240_242_27_274_275_30_31_310_312_313_722_724_730_731_733_738_750_756_838_856_859",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/composer/autoload_real.php::::11_12_14_21_25_27_28_29_31_32_34_36_39",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/includes/Framework/PluginCrashHandler.php::::115_119_120_121_122_15_1724",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Exception/IncompatibleException.php::::12_18",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/autoload.php::::20_22_5",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Checker.php::::104_13_33_34_37_47_57_58_60_66_78_82_83_86_89_90_95_96_97"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 12,
+    "is_interesting": false,
+    "fuzzer_id": "2",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "attribute"
+  },
+  {
+    "coverage_id": "1786808805-f7c5e03f-d18e-4122-8edc-00949377d376",
+    "priority": 12,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "test_fb_banner"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "attribute": "fuzzv"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "",
+    "response.body.length": 0,
+    "response.headers": {},
+    "response.status.code": 0,
+    "response.time": 0,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786808801-9e658fb4-f2c8-4d1a-9e75-eae8c618f431",
+    "paths": [
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/composer/autoload_static.php::::405_406_407_408_410_413",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_499_500_515_522_528_531_544_551_555_563_575_576_577_578_580",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Checks/WPCompatibility.php::::10_22_25_56_57_60",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Checks/CompatCheck.php::::112_113_115_116_118_12_151_160_161_171_172_173_191_55_56_57_60",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Checks/WCCompatibility.php::::103_104_105_12_379_383_384_388_52",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/composer/platform_check.php::::11_26_5_7",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/facebook-for-woocommerce.php::::100_103_104_108_1109_1110_1113_1118_1119_116_117_121_122_125_126_127_131_214_215_216_218_220_221_222_223_224_225_229_231_234_235_238_239_240_242_27_274_275_30_31_310_312_313_722_724_730_731_733_738_750_756_838_856_859",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/composer/autoload_real.php::::11_12_14_21_25_27_28_29_31_32_34_36_39",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/includes/Framework/PluginCrashHandler.php::::115_119_120_121_122_15_1724",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Exception/IncompatibleException.php::::12_18",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/autoload.php::::20_22_5",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Checker.php::::104_13_33_34_37_47_57_58_60_66_78_82_83_86_89_90_95_96_97"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 12,
+    "is_interesting": false,
+    "fuzzer_id": "2",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "attribute"
+  },
+  {
+    "coverage_id": "1786808805-7717a3c9-c9f2-4a86-b44a-3ff2f460d63e",
+    "priority": 12,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "test_fb_banner"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "attribute": "f-zz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "",
+    "response.body.length": 0,
+    "response.headers": {},
+    "response.status.code": 0,
+    "response.time": 0,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786808801-9e658fb4-f2c8-4d1a-9e75-eae8c618f431",
+    "paths": [
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/composer/autoload_static.php::::405_406_407_408_410_413",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_499_500_515_522_528_531_544_551_555_563_575_576_577_578_580",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Checks/WPCompatibility.php::::10_22_25_56_57_60",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Checks/CompatCheck.php::::112_113_115_116_118_12_151_160_161_171_172_173_191_55_56_57_60",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Checks/WCCompatibility.php::::103_104_105_12_379_383_384_388_52",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/composer/platform_check.php::::11_26_5_7",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/facebook-for-woocommerce.php::::100_103_104_108_1109_1110_1113_1118_1119_116_117_121_122_125_126_127_131_214_215_216_218_220_221_222_223_224_225_229_231_234_235_238_239_240_242_27_274_275_30_31_310_312_313_722_724_730_731_733_738_750_756_838_856_859",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/composer/autoload_real.php::::11_12_14_21_25_27_28_29_31_32_34_36_39",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/includes/Framework/PluginCrashHandler.php::::115_119_120_121_122_15_1724",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Exception/IncompatibleException.php::::12_18",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/autoload.php::::20_22_5",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Checker.php::::104_13_33_34_37_47_57_58_60_66_78_82_83_86_89_90_95_96_97"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 12,
+    "is_interesting": false,
+    "fuzzer_id": "2",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "attribute"
+  },
+  {
+    "coverage_id": "1786808805-189df5c9-a83c-46e5-a956-b55c5f6459ac",
+    "priority": 12,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "test_fb_banner"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "attribute": "fuz\r\nz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "",
+    "response.body.length": 0,
+    "response.headers": {},
+    "response.status.code": 0,
+    "response.time": 0,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786808801-9e658fb4-f2c8-4d1a-9e75-eae8c618f431",
+    "paths": [
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/composer/autoload_static.php::::405_406_407_408_410_413",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_499_500_515_522_528_531_544_551_555_563_575_576_577_578_580",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Checks/WPCompatibility.php::::10_22_25_56_57_60",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Checks/CompatCheck.php::::112_113_115_116_118_12_151_160_161_171_172_173_191_55_56_57_60",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Checks/WCCompatibility.php::::103_104_105_12_379_383_384_388_52",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/composer/platform_check.php::::11_26_5_7",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/facebook-for-woocommerce.php::::100_103_104_108_1109_1110_1113_1118_1119_116_117_121_122_125_126_127_131_214_215_216_218_220_221_222_223_224_225_229_231_234_235_238_239_240_242_27_274_275_30_31_310_312_313_722_724_730_731_733_738_750_756_838_856_859",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/composer/autoload_real.php::::11_12_14_21_25_27_28_29_31_32_34_36_39",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/includes/Framework/PluginCrashHandler.php::::115_119_120_121_122_15_1724",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Exception/IncompatibleException.php::::12_18",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/autoload.php::::20_22_5",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Checker.php::::104_13_33_34_37_47_57_58_60_66_78_82_83_86_89_90_95_96_97"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 12,
+    "is_interesting": false,
+    "fuzzer_id": "2",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "attribute"
+  },
+  {
+    "coverage_id": "1786808806-6cbf7305-b694-4a1d-8083-89280287b40d",
+    "priority": 12,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "test_fb_banner"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "attribute": "}uzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "",
+    "response.body.length": 0,
+    "response.headers": {},
+    "response.status.code": 0,
+    "response.time": 0,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786808801-9e658fb4-f2c8-4d1a-9e75-eae8c618f431",
+    "paths": [
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/composer/autoload_static.php::::405_406_407_408_410_413",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_499_500_515_522_528_531_544_551_555_563_575_576_577_578_580",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Checks/WPCompatibility.php::::10_22_25_56_57_60",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Checks/CompatCheck.php::::112_113_115_116_118_12_151_160_161_171_172_173_191_55_56_57_60",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Checks/WCCompatibility.php::::103_104_105_12_379_383_384_388_52",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/composer/platform_check.php::::11_26_5_7",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/facebook-for-woocommerce.php::::100_103_104_108_1109_1110_1113_1118_1119_116_117_121_122_125_126_127_131_214_215_216_218_220_221_222_223_224_225_229_231_234_235_238_239_240_242_27_274_275_30_31_310_312_313_722_724_730_731_733_738_750_756_838_856_859",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/composer/autoload_real.php::::11_12_14_21_25_27_28_29_31_32_34_36_39",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/includes/Framework/PluginCrashHandler.php::::115_119_120_121_122_15_1724",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Exception/IncompatibleException.php::::12_18",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/autoload.php::::20_22_5",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Checker.php::::104_13_33_34_37_47_57_58_60_66_78_82_83_86_89_90_95_96_97"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 12,
+    "is_interesting": false,
+    "fuzzer_id": "2",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "attribute"
+  },
+  {
+    "coverage_id": "1786808806-a5da175d-1b5a-4220-b0eb-9d898bea38cd",
+    "priority": 12,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "test_fb_banner"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "attribute": "f%uzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "",
+    "response.body.length": 0,
+    "response.headers": {},
+    "response.status.code": 0,
+    "response.time": 0,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786808801-9e658fb4-f2c8-4d1a-9e75-eae8c618f431",
+    "paths": [
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/composer/autoload_static.php::::405_406_407_408_410_413",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_499_500_515_522_528_531_544_551_555_563_575_576_577_578_580",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Checks/WPCompatibility.php::::10_22_25_56_57_60",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Checks/CompatCheck.php::::112_113_115_116_118_12_151_160_161_171_172_173_191_55_56_57_60",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Checks/WCCompatibility.php::::103_104_105_12_379_383_384_388_52",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/composer/platform_check.php::::11_26_5_7",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/facebook-for-woocommerce.php::::100_103_104_108_1109_1110_1113_1118_1119_116_117_121_122_125_126_127_131_214_215_216_218_220_221_222_223_224_225_229_231_234_235_238_239_240_242_27_274_275_30_31_310_312_313_722_724_730_731_733_738_750_756_838_856_859",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/composer/autoload_real.php::::11_12_14_21_25_27_28_29_31_32_34_36_39",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/includes/Framework/PluginCrashHandler.php::::115_119_120_121_122_15_1724",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Exception/IncompatibleException.php::::12_18",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/autoload.php::::20_22_5",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Checker.php::::104_13_33_34_37_47_57_58_60_66_78_82_83_86_89_90_95_96_97"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 12,
+    "is_interesting": false,
+    "fuzzer_id": "2",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "attribute"
+  },
+  {
+    "coverage_id": "1786808806-07814c58-b99c-49b3-99fc-221f51e8c040",
+    "priority": 12,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "test_fb_banner"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "attribute": "fuzQz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "",
+    "response.body.length": 0,
+    "response.headers": {},
+    "response.status.code": 0,
+    "response.time": 0,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786808801-9e658fb4-f2c8-4d1a-9e75-eae8c618f431",
+    "paths": [
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/composer/autoload_static.php::::405_406_407_408_410_413",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_499_500_515_522_528_531_544_551_555_563_575_576_577_578_580",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Checks/WPCompatibility.php::::10_22_25_56_57_60",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Checks/CompatCheck.php::::112_113_115_116_118_12_151_160_161_171_172_173_191_55_56_57_60",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Checks/WCCompatibility.php::::103_104_105_12_379_383_384_388_52",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/composer/platform_check.php::::11_26_5_7",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/facebook-for-woocommerce.php::::100_103_104_108_1109_1110_1113_1118_1119_116_117_121_122_125_126_127_131_214_215_216_218_220_221_222_223_224_225_229_231_234_235_238_239_240_242_27_274_275_30_31_310_312_313_722_724_730_731_733_738_750_756_838_856_859",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/composer/autoload_real.php::::11_12_14_21_25_27_28_29_31_32_34_36_39",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/includes/Framework/PluginCrashHandler.php::::115_119_120_121_122_15_1724",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Exception/IncompatibleException.php::::12_18",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/autoload.php::::20_22_5",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Checker.php::::104_13_33_34_37_47_57_58_60_66_78_82_83_86_89_90_95_96_97"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 12,
+    "is_interesting": false,
+    "fuzzer_id": "2",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "attribute"
+  },
+  {
+    "coverage_id": "1786808807-fe0e2c9b-4c62-4d82-94a3-051c4fde0e84",
+    "priority": 12,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "test_fb_banner"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "attribute": "fuzT"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "",
+    "response.body.length": 0,
+    "response.headers": {},
+    "response.status.code": 0,
+    "response.time": 0,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786808801-9e658fb4-f2c8-4d1a-9e75-eae8c618f431",
+    "paths": [
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/composer/autoload_static.php::::405_406_407_408_410_413",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_499_500_515_522_528_531_544_551_555_563_575_576_577_578_580",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Checks/WPCompatibility.php::::10_22_25_56_57_60",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Checks/CompatCheck.php::::112_113_115_116_118_12_151_160_161_171_172_173_191_55_56_57_60",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Checks/WCCompatibility.php::::103_104_105_12_379_383_384_388_52",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/composer/platform_check.php::::11_26_5_7",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/facebook-for-woocommerce.php::::100_103_104_108_1109_1110_1113_1118_1119_116_117_121_122_125_126_127_131_214_215_216_218_220_221_222_223_224_225_229_231_234_235_238_239_240_242_27_274_275_30_31_310_312_313_722_724_730_731_733_738_750_756_838_856_859",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/composer/autoload_real.php::::11_12_14_21_25_27_28_29_31_32_34_36_39",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/includes/Framework/PluginCrashHandler.php::::115_119_120_121_122_15_1724",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Exception/IncompatibleException.php::::12_18",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/autoload.php::::20_22_5",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Checker.php::::104_13_33_34_37_47_57_58_60_66_78_82_83_86_89_90_95_96_97"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 12,
+    "is_interesting": false,
+    "fuzzer_id": "2",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "attribute"
+  },
+  {
+    "coverage_id": "1786808807-e6aa0a28-3b36-46a7-9b77-a1b5a0c4374c",
+    "priority": 12,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "test_fb_banner"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "attribute": "fuzzy"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "",
+    "response.body.length": 0,
+    "response.headers": {},
+    "response.status.code": 0,
+    "response.time": 0,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786808801-9e658fb4-f2c8-4d1a-9e75-eae8c618f431",
+    "paths": [
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/composer/autoload_static.php::::405_406_407_408_410_413",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_499_500_515_522_528_531_544_551_555_563_575_576_577_578_580",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Checks/WPCompatibility.php::::10_22_25_56_57_60",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Checks/CompatCheck.php::::112_113_115_116_118_12_151_160_161_171_172_173_191_55_56_57_60",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Checks/WCCompatibility.php::::103_104_105_12_379_383_384_388_52",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/composer/platform_check.php::::11_26_5_7",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/facebook-for-woocommerce.php::::100_103_104_108_1109_1110_1113_1118_1119_116_117_121_122_125_126_127_131_214_215_216_218_220_221_222_223_224_225_229_231_234_235_238_239_240_242_27_274_275_30_31_310_312_313_722_724_730_731_733_738_750_756_838_856_859",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/composer/autoload_real.php::::11_12_14_21_25_27_28_29_31_32_34_36_39",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/includes/Framework/PluginCrashHandler.php::::115_119_120_121_122_15_1724",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Exception/IncompatibleException.php::::12_18",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/autoload.php::::20_22_5",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Checker.php::::104_13_33_34_37_47_57_58_60_66_78_82_83_86_89_90_95_96_97"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 12,
+    "is_interesting": false,
+    "fuzzer_id": "2",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "attribute"
+  },
+  {
+    "coverage_id": "1786808807-8756e7d3-46da-45e5-98d2-c4185ee0c982",
+    "priority": 12,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "test_fb_banner"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "attribute": "f?uzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "",
+    "response.body.length": 0,
+    "response.headers": {},
+    "response.status.code": 0,
+    "response.time": 0,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786808801-9e658fb4-f2c8-4d1a-9e75-eae8c618f431",
+    "paths": [
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/composer/autoload_static.php::::405_406_407_408_410_413",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_499_500_515_522_528_531_544_551_555_563_575_576_577_578_580",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Checks/WPCompatibility.php::::10_22_25_56_57_60",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Checks/CompatCheck.php::::112_113_115_116_118_12_151_160_161_171_172_173_191_55_56_57_60",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Checks/WCCompatibility.php::::103_104_105_12_379_383_384_388_52",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/composer/platform_check.php::::11_26_5_7",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/facebook-for-woocommerce.php::::100_103_104_108_1109_1110_1113_1118_1119_116_117_121_122_125_126_127_131_214_215_216_218_220_221_222_223_224_225_229_231_234_235_238_239_240_242_27_274_275_30_31_310_312_313_722_724_730_731_733_738_750_756_838_856_859",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/composer/autoload_real.php::::11_12_14_21_25_27_28_29_31_32_34_36_39",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/includes/Framework/PluginCrashHandler.php::::115_119_120_121_122_15_1724",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Exception/IncompatibleException.php::::12_18",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/autoload.php::::20_22_5",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Checker.php::::104_13_33_34_37_47_57_58_60_66_78_82_83_86_89_90_95_96_97"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 12,
+    "is_interesting": false,
+    "fuzzer_id": "2",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "attribute"
+  },
+  {
+    "coverage_id": "1786808808-24ef1245-5f4a-4be0-956a-9fac4efdc468",
+    "priority": 12,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "test_fb_banner"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "attribute": "fuzmz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "",
+    "response.body.length": 0,
+    "response.headers": {},
+    "response.status.code": 0,
+    "response.time": 0,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786808801-9e658fb4-f2c8-4d1a-9e75-eae8c618f431",
+    "paths": [
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/composer/autoload_static.php::::405_406_407_408_410_413",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_499_500_515_522_528_531_544_551_555_563_575_576_577_578_580",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Checks/WPCompatibility.php::::10_22_25_56_57_60",
+      "/var/www/html/wp-content/plugins/facebook-for-woocommerce/vendor/woocommerce/grow/src/Checks/CompatCheck.php::::112_113_115_116_118_12_151_160_161_171_172_173_191_55_56_57_60"

@@ -1,0 +1,4256 @@
+[
+  {
+    "coverage_id": "1787006564-1f50c518-aac6-4ca4-a3e7-dfc4192a015d",
+    "priority": 1,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "mk_file_manager_single_backup_restore"
+      },
+      "body_params": {
+        "nonce": "fuzz"
+      }
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "others": "fuzz",
+        "uploads": "fuzz",
+        "themes": "fuzz",
+        "plugins": "fuzz",
+        "database": "fzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key \"id\"",
+        "errfile": "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php",
+        "errline": 153
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"step\":0,\"database\":\"false\",\"plugins\":\"false\",\"themes\":\"false\",\"uploads\":\"false\",\"others\":\"false\",\"bkpid\":\"\",\"msg\":\"<li class=\\\"fm-running-list fm-custom-unchecked\\\">Unable to restore plugins.<\\/li>\"}",
+    "response.body.length": 202,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 22:42:47 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Vary": "Accept-Encoding",
+      "Content-Length": "202",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 201.276,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787006563-c455cf46-de16-461c-8549-f50dde741a15",
+    "paths": [
+      "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php::::109_11_110_111_116_117_12_130_131_139_14_145_147_148_15_150_151_152_153_154_1542_1547_155_1565_157_1582_1583_160_163_164_165_166_167_168_17_18_26_27_28_29_30_307_308_31_32_33_34_35_39_40_44_46_48_49_50_51_52_53_67_68_742_750_756_757_758_759_762_763_766"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 1,
+    "is_interesting": false,
+    "fuzzer_id": "9",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "database"
+  },
+  {
+    "coverage_id": "1787006567-c7ffad8b-c400-4f53-a3cc-810a320309e6",
+    "priority": 1,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "mk_file_manager_single_backup_restore"
+      },
+      "body_params": {
+        "nonce": "fuzz"
+      }
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "others": "fuzz",
+        "uploads": "fuzz",
+        "themes": "fuzz",
+        "plugins": "fuzz",
+        "database": "fuz "
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key \"id\"",
+        "errfile": "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php",
+        "errline": 153
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"step\":0,\"database\":\"false\",\"plugins\":\"false\",\"themes\":\"false\",\"uploads\":\"false\",\"others\":\"false\",\"bkpid\":\"\",\"msg\":\"<li class=\\\"fm-running-list fm-custom-unchecked\\\">Unable to restore plugins.<\\/li>\"}",
+    "response.body.length": 202,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 22:42:48 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Vary": "Accept-Encoding",
+      "Content-Length": "202",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 983.88,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787006563-c455cf46-de16-461c-8549-f50dde741a15",
+    "paths": [
+      "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php::::109_11_110_111_116_117_12_130_131_139_14_145_147_148_15_150_151_152_153_154_1542_1547_155_1565_157_1582_1583_160_163_164_165_166_167_168_17_18_26_27_28_29_30_307_308_31_32_33_34_35_39_40_44_46_48_49_50_51_52_53_67_68_742_750_756_757_758_759_762_763_766"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 1,
+    "is_interesting": false,
+    "fuzzer_id": "9",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "database"
+  },
+  {
+    "coverage_id": "1787006569-b63ffae7-4d1e-4626-a353-d0871e48a071",
+    "priority": 1,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "mk_file_manager_single_backup_restore"
+      },
+      "body_params": {
+        "nonce": "fuzz"
+      }
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "others": "#{99901*99991}",
+        "uploads": "fuzz",
+        "themes": "fuzz",
+        "plugins": "fuzz",
+        "database": "fuzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key \"id\"",
+        "errfile": "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php",
+        "errline": 153
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"step\":0,\"database\":\"false\",\"plugins\":\"false\",\"themes\":\"false\",\"uploads\":\"false\",\"others\":\"false\",\"bkpid\":\"\",\"msg\":\"<li class=\\\"fm-running-list fm-custom-unchecked\\\">Unable to restore plugins.<\\/li>\"}",
+    "response.body.length": 202,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 22:42:49 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Vary": "Accept-Encoding",
+      "Content-Length": "202",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 411.397,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787006563-c455cf46-de16-461c-8549-f50dde741a15",
+    "paths": [
+      "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php::::109_11_110_111_116_117_12_130_131_139_14_145_147_148_15_150_151_152_153_154_1542_1547_155_1565_157_1582_1583_160_163_164_165_166_167_168_17_18_26_27_28_29_30_307_308_31_32_33_34_35_39_40_44_46_48_49_50_51_52_53_67_68_742_750_756_757_758_759_762_763_766"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 1,
+    "is_interesting": false,
+    "fuzzer_id": "9",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "others"
+  },
+  {
+    "coverage_id": "1787006569-1204896f-a25b-4eaa-b285-5c25b2e42dda",
+    "priority": 1,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "mk_file_manager_single_backup_restore"
+      },
+      "body_params": {
+        "nonce": "fuzz"
+      }
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "others": "fuzz",
+        "uploads": "fu{z",
+        "themes": "fuzz",
+        "plugins": "fuzz",
+        "database": "fuzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key \"id\"",
+        "errfile": "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php",
+        "errline": 153
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"step\":0,\"database\":\"false\",\"plugins\":\"false\",\"themes\":\"false\",\"uploads\":\"false\",\"others\":\"false\",\"bkpid\":\"\",\"msg\":\"<li class=\\\"fm-running-list fm-custom-unchecked\\\">Unable to restore plugins.<\\/li>\"}",
+    "response.body.length": 202,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 22:42:49 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Vary": "Accept-Encoding",
+      "Content-Length": "202",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 288.895,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787006563-c455cf46-de16-461c-8549-f50dde741a15",
+    "paths": [
+      "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php::::109_11_110_111_116_117_12_130_131_139_14_145_147_148_15_150_151_152_153_154_1542_1547_155_1565_157_1582_1583_160_163_164_165_166_167_168_17_18_26_27_28_29_30_307_308_31_32_33_34_35_39_40_44_46_48_49_50_51_52_53_67_68_742_750_756_757_758_759_762_763_766"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 1,
+    "is_interesting": false,
+    "fuzzer_id": "9",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "uploads"
+  },
+  {
+    "coverage_id": "1787006569-6199622e-3950-431d-b458-6c807fde14f1",
+    "priority": 1,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "mk_file_manager_single_backup_restore"
+      },
+      "body_params": {
+        "nonce": "fuzz"
+      }
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "others": "fuzz",
+        "uploads": "fuzz",
+        "themes": "fuzz",
+        "plugins": "fuzz",
+        "database": "fuzoz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key \"id\"",
+        "errfile": "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php",
+        "errline": 153
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"step\":0,\"database\":\"false\",\"plugins\":\"false\",\"themes\":\"false\",\"uploads\":\"false\",\"others\":\"false\",\"bkpid\":\"\",\"msg\":\"<li class=\\\"fm-running-list fm-custom-unchecked\\\">Unable to restore plugins.<\\/li>\"}",
+    "response.body.length": 202,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 22:42:49 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Vary": "Accept-Encoding",
+      "Content-Length": "202",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 341.341,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787006563-c455cf46-de16-461c-8549-f50dde741a15",
+    "paths": [
+      "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php::::109_11_110_111_116_117_12_130_131_139_14_145_147_148_15_150_151_152_153_154_1542_1547_155_1565_157_1582_1583_160_163_164_165_166_167_168_17_18_26_27_28_29_30_307_308_31_32_33_34_35_39_40_44_46_48_49_50_51_52_53_67_68_742_750_756_757_758_759_762_763_766"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 1,
+    "is_interesting": false,
+    "fuzzer_id": "9",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "database"
+  },
+  {
+    "coverage_id": "1787006570-cc752359-5b02-43a8-bc86-13b3edbb054a",
+    "priority": 1,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "mk_file_manager_single_backup_restore"
+      },
+      "body_params": {
+        "nonce": "fuzz"
+      }
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "others": "fuzz",
+        "uploads": "fuzz",
+        "themes": "fuzz",
+        "plugins": "fuzY",
+        "database": "fuzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key \"id\"",
+        "errfile": "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php",
+        "errline": 153
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"step\":0,\"database\":\"false\",\"plugins\":\"false\",\"themes\":\"false\",\"uploads\":\"false\",\"others\":\"false\",\"bkpid\":\"\",\"msg\":\"<li class=\\\"fm-running-list fm-custom-unchecked\\\">Unable to restore plugins.<\\/li>\"}",
+    "response.body.length": 202,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 22:42:50 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Vary": "Accept-Encoding",
+      "Content-Length": "202",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 361.323,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787006563-c455cf46-de16-461c-8549-f50dde741a15",
+    "paths": [
+      "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php::::109_11_110_111_116_117_12_130_131_139_14_145_147_148_15_150_151_152_153_154_1542_1547_155_1565_157_1582_1583_160_163_164_165_166_167_168_17_18_26_27_28_29_30_307_308_31_32_33_34_35_39_40_44_46_48_49_50_51_52_53_67_68_742_750_756_757_758_759_762_763_766"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 1,
+    "is_interesting": false,
+    "fuzzer_id": "9",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "plugins"
+  },
+  {
+    "coverage_id": "1787006570-b02c1a44-b74e-48a6-bc8f-9ec6787ce8b6",
+    "priority": 1,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "mk_file_manager_single_backup_restore"
+      },
+      "body_params": {
+        "nonce": "fuzz"
+      }
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "others": "fu1z",
+        "uploads": "fuzz",
+        "themes": "fuzz",
+        "plugins": "fuzz",
+        "database": "fuzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key \"id\"",
+        "errfile": "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php",
+        "errline": 153
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"step\":0,\"database\":\"false\",\"plugins\":\"false\",\"themes\":\"false\",\"uploads\":\"false\",\"others\":\"false\",\"bkpid\":\"\",\"msg\":\"<li class=\\\"fm-running-list fm-custom-unchecked\\\">Unable to restore plugins.<\\/li>\"}",
+    "response.body.length": 202,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 22:42:50 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Vary": "Accept-Encoding",
+      "Content-Length": "202",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 291.397,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787006563-c455cf46-de16-461c-8549-f50dde741a15",
+    "paths": [
+      "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php::::109_11_110_111_116_117_12_130_131_139_14_145_147_148_15_150_151_152_153_154_1542_1547_155_1565_157_1582_1583_160_163_164_165_166_167_168_17_18_26_27_28_29_30_307_308_31_32_33_34_35_39_40_44_46_48_49_50_51_52_53_67_68_742_750_756_757_758_759_762_763_766"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 1,
+    "is_interesting": false,
+    "fuzzer_id": "9",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "others"
+  },
+  {
+    "coverage_id": "1787006571-f7b93f38-6d9c-4c15-af4b-fc27aba9126c",
+    "priority": 1,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "mk_file_manager_single_backup_restore"
+      },
+      "body_params": {
+        "nonce": "fuzz"
+      }
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "others": "fuzz",
+        "uploads": "fuzz",
+        "themes": "fuzz",
+        "plugins": "fuzz",
+        "database": "$uzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key \"id\"",
+        "errfile": "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php",
+        "errline": 153
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"step\":0,\"database\":\"false\",\"plugins\":\"false\",\"themes\":\"false\",\"uploads\":\"false\",\"others\":\"false\",\"bkpid\":\"\",\"msg\":\"<li class=\\\"fm-running-list fm-custom-unchecked\\\">Unable to restore plugins.<\\/li>\"}",
+    "response.body.length": 202,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 22:42:51 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Vary": "Accept-Encoding",
+      "Content-Length": "202",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 313.009,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787006563-c455cf46-de16-461c-8549-f50dde741a15",
+    "paths": [
+      "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php::::109_11_110_111_116_117_12_130_131_139_14_145_147_148_15_150_151_152_153_154_1542_1547_155_1565_157_1582_1583_160_163_164_165_166_167_168_17_18_26_27_28_29_30_307_308_31_32_33_34_35_39_40_44_46_48_49_50_51_52_53_67_68_742_750_756_757_758_759_762_763_766"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 1,
+    "is_interesting": false,
+    "fuzzer_id": "9",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "database"
+  },
+  {
+    "coverage_id": "1787006571-dfeb082b-34cd-4cb1-8249-e77074b555b7",
+    "priority": 1,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "mk_file_manager_single_backup_restore"
+      },
+      "body_params": {
+        "nonce": "fuzz"
+      }
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "others": "fuzz",
+        "uploads": "fuzz",
+        "themes": "fu4z",
+        "plugins": "fuzz",
+        "database": "fuzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key \"id\"",
+        "errfile": "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php",
+        "errline": 153
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"step\":0,\"database\":\"false\",\"plugins\":\"false\",\"themes\":\"false\",\"uploads\":\"false\",\"others\":\"false\",\"bkpid\":\"\",\"msg\":\"<li class=\\\"fm-running-list fm-custom-unchecked\\\">Unable to restore plugins.<\\/li>\"}",
+    "response.body.length": 202,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 22:42:53 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Vary": "Accept-Encoding",
+      "Content-Length": "202",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 120.627,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787006563-c455cf46-de16-461c-8549-f50dde741a15",
+    "paths": [
+      "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php::::109_11_110_111_116_117_12_130_131_139_14_145_147_148_15_150_151_152_153_154_1542_1547_155_1565_157_1582_1583_160_163_164_165_166_167_168_17_18_26_27_28_29_30_307_308_31_32_33_34_35_39_40_44_46_48_49_50_51_52_53_67_68_742_750_756_757_758_759_762_763_766"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 1,
+    "is_interesting": false,
+    "fuzzer_id": "9",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "themes"
+  },
+  {
+    "coverage_id": "1787006573-2ddf5c9f-f51f-45ef-86a6-66237b422358",
+    "priority": 1,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "mk_file_manager_single_backup_restore"
+      },
+      "body_params": {
+        "nonce": "fuzz"
+      }
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "others": "fuzz",
+        "uploads": "fuzz",
+        "themes": "fuzz",
+        "plugins": "%7B%22%24ne%22%3Anull%7D",
+        "database": "fuzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key \"id\"",
+        "errfile": "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php",
+        "errline": 153
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"step\":0,\"database\":\"false\",\"plugins\":\"false\",\"themes\":\"false\",\"uploads\":\"false\",\"others\":\"false\",\"bkpid\":\"\",\"msg\":\"<li class=\\\"fm-running-list fm-custom-unchecked\\\">Unable to restore plugins.<\\/li>\"}",
+    "response.body.length": 202,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 22:42:54 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Vary": "Accept-Encoding",
+      "Content-Length": "202",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 351.096,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787006563-c455cf46-de16-461c-8549-f50dde741a15",
+    "paths": [
+      "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php::::109_11_110_111_116_117_12_130_131_139_14_145_147_148_15_150_151_152_153_154_1542_1547_155_1565_157_1582_1583_160_163_164_165_166_167_168_17_18_26_27_28_29_30_307_308_31_32_33_34_35_39_40_44_46_48_49_50_51_52_53_67_68_742_750_756_757_758_759_762_763_766"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 1,
+    "is_interesting": false,
+    "fuzzer_id": "9",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "plugins"
+  },
+  {
+    "coverage_id": "1787006574-4fb966ae-41ae-47cd-9b4a-e800140351e5",
+    "priority": 1,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "mk_file_manager_single_backup_restore"
+      },
+      "body_params": {
+        "nonce": "fuzz"
+      }
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "others": "fuzz",
+        "uploads": "{\"$ne\":null}",
+        "themes": "fuzz",
+        "plugins": "fuzz",
+        "database": "fuzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key \"id\"",
+        "errfile": "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php",
+        "errline": 153
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"step\":0,\"database\":\"false\",\"plugins\":\"false\",\"themes\":\"false\",\"uploads\":\"false\",\"others\":\"false\",\"bkpid\":\"\",\"msg\":\"<li class=\\\"fm-running-list fm-custom-unchecked\\\">Unable to restore plugins.<\\/li>\"}",
+    "response.body.length": 202,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 22:42:54 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Vary": "Accept-Encoding",
+      "Content-Length": "202",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 188.715,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787006563-c455cf46-de16-461c-8549-f50dde741a15",
+    "paths": [
+      "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php::::109_11_110_111_116_117_12_130_131_139_14_145_147_148_15_150_151_152_153_154_1542_1547_155_1565_157_1582_1583_160_163_164_165_166_167_168_17_18_26_27_28_29_30_307_308_31_32_33_34_35_39_40_44_46_48_49_50_51_52_53_67_68_742_750_756_757_758_759_762_763_766"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 1,
+    "is_interesting": false,
+    "fuzzer_id": "9",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "uploads"
+  },
+  {
+    "coverage_id": "1787006574-c785ce24-e43b-4a07-9770-80303dc43250",
+    "priority": 1,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "mk_file_manager_single_backup_restore"
+      },
+      "body_params": {
+        "nonce": "fuzz"
+      }
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "others": "f0zz",
+        "uploads": "fuzz",
+        "themes": "fuzz",
+        "plugins": "fuzz",
+        "database": "fuzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key \"id\"",
+        "errfile": "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php",
+        "errline": 153
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"step\":0,\"database\":\"false\",\"plugins\":\"false\",\"themes\":\"false\",\"uploads\":\"false\",\"others\":\"false\",\"bkpid\":\"\",\"msg\":\"<li class=\\\"fm-running-list fm-custom-unchecked\\\">Unable to restore plugins.<\\/li>\"}",
+    "response.body.length": 202,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 22:42:54 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Vary": "Accept-Encoding",
+      "Content-Length": "202",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 270.641,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787006563-c455cf46-de16-461c-8549-f50dde741a15",
+    "paths": [
+      "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php::::109_11_110_111_116_117_12_130_131_139_14_145_147_148_15_150_151_152_153_154_1542_1547_155_1565_157_1582_1583_160_163_164_165_166_167_168_17_18_26_27_28_29_30_307_308_31_32_33_34_35_39_40_44_46_48_49_50_51_52_53_67_68_742_750_756_757_758_759_762_763_766"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 1,
+    "is_interesting": false,
+    "fuzzer_id": "9",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "others"
+  },
+  {
+    "coverage_id": "1787006575-13f38240-6cba-4104-9f28-1d4eb0aefee2",
+    "priority": 1,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "mk_file_manager_single_backup_restore"
+      },
+      "body_params": {
+        "nonce": "fuzz"
+      }
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "others": "fuzz",
+        "uploads": "fuzz",
+        "themes": "fuzz",
+        "plugins": "fuzz",
+        "database": "fDuzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key \"id\"",
+        "errfile": "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php",
+        "errline": 153
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"step\":0,\"database\":\"false\",\"plugins\":\"false\",\"themes\":\"false\",\"uploads\":\"false\",\"others\":\"false\",\"bkpid\":\"\",\"msg\":\"<li class=\\\"fm-running-list fm-custom-unchecked\\\">Unable to restore plugins.<\\/li>\"}",
+    "response.body.length": 202,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 22:42:55 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Vary": "Accept-Encoding",
+      "Content-Length": "202",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 201.609,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787006563-c455cf46-de16-461c-8549-f50dde741a15",
+    "paths": [
+      "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php::::109_11_110_111_116_117_12_130_131_139_14_145_147_148_15_150_151_152_153_154_1542_1547_155_1565_157_1582_1583_160_163_164_165_166_167_168_17_18_26_27_28_29_30_307_308_31_32_33_34_35_39_40_44_46_48_49_50_51_52_53_67_68_742_750_756_757_758_759_762_763_766"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 1,
+    "is_interesting": false,
+    "fuzzer_id": "9",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "database"
+  },
+  {
+    "coverage_id": "1787006575-ee4c79cf-015f-46f9-aa5c-4ab66e4937cd",
+    "priority": 1,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "mk_file_manager_single_backup_restore"
+      },
+      "body_params": {
+        "nonce": "fuzz"
+      }
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "others": "fuzz",
+        "uploads": "fuzz",
+        "themes": "fuzz",
+        "plugins": "fuzz",
+        "database": "fuz6"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key \"id\"",
+        "errfile": "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php",
+        "errline": 153
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"step\":0,\"database\":\"false\",\"plugins\":\"false\",\"themes\":\"false\",\"uploads\":\"false\",\"others\":\"false\",\"bkpid\":\"\",\"msg\":\"<li class=\\\"fm-running-list fm-custom-unchecked\\\">Unable to restore plugins.<\\/li>\"}",
+    "response.body.length": 202,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 22:42:55 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Vary": "Accept-Encoding",
+      "Content-Length": "202",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 469.895,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787006563-c455cf46-de16-461c-8549-f50dde741a15",
+    "paths": [
+      "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php::::109_11_110_111_116_117_12_130_131_139_14_145_147_148_15_150_151_152_153_154_1542_1547_155_1565_157_1582_1583_160_163_164_165_166_167_168_17_18_26_27_28_29_30_307_308_31_32_33_34_35_39_40_44_46_48_49_50_51_52_53_67_68_742_750_756_757_758_759_762_763_766"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 1,
+    "is_interesting": false,
+    "fuzzer_id": "9",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "database"
+  },
+  {
+    "coverage_id": "1787006576-f925ed44-0fdd-4585-ae5a-c5ec93798c8b",
+    "priority": 1,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "mk_file_manager_single_backup_restore"
+      },
+      "body_params": {
+        "nonce": "fuzz"
+      }
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "others": "fuzz",
+        "uploads": "fuzz",
+        "themes": "fuzz",
+        "plugins": "fuzzx",
+        "database": "fuzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key \"id\"",
+        "errfile": "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php",
+        "errline": 153
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"step\":0,\"database\":\"false\",\"plugins\":\"false\",\"themes\":\"false\",\"uploads\":\"false\",\"others\":\"false\",\"bkpid\":\"\",\"msg\":\"<li class=\\\"fm-running-list fm-custom-unchecked\\\">Unable to restore plugins.<\\/li>\"}",
+    "response.body.length": 202,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 22:42:56 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Vary": "Accept-Encoding",
+      "Content-Length": "202",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 221.275,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787006563-c455cf46-de16-461c-8549-f50dde741a15",
+    "paths": [
+      "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php::::109_11_110_111_116_117_12_130_131_139_14_145_147_148_15_150_151_152_153_154_1542_1547_155_1565_157_1582_1583_160_163_164_165_166_167_168_17_18_26_27_28_29_30_307_308_31_32_33_34_35_39_40_44_46_48_49_50_51_52_53_67_68_742_750_756_757_758_759_762_763_766"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 1,
+    "is_interesting": false,
+    "fuzzer_id": "9",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "plugins"
+  },
+  {
+    "coverage_id": "1787006576-bc8bd3f0-5557-43d4-b07a-ea338121d94e",
+    "priority": 1,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "mk_file_manager_single_backup_restore"
+      },
+      "body_params": {
+        "nonce": "fuzz"
+      }
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "others": "fuzz",
+        "uploads": "fuzz",
+        "themes": "fjkiuzz",
+        "plugins": "fuzz",
+        "database": "fuzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key \"id\"",
+        "errfile": "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php",
+        "errline": 153
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"step\":0,\"database\":\"false\",\"plugins\":\"false\",\"themes\":\"false\",\"uploads\":\"false\",\"others\":\"false\",\"bkpid\":\"\",\"msg\":\"<li class=\\\"fm-running-list fm-custom-unchecked\\\">Unable to restore plugins.<\\/li>\"}",
+    "response.body.length": 202,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 22:42:56 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Vary": "Accept-Encoding",
+      "Content-Length": "202",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 240.002,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787006563-c455cf46-de16-461c-8549-f50dde741a15",
+    "paths": [
+      "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php::::109_11_110_111_116_117_12_130_131_139_14_145_147_148_15_150_151_152_153_154_1542_1547_155_1565_157_1582_1583_160_163_164_165_166_167_168_17_18_26_27_28_29_30_307_308_31_32_33_34_35_39_40_44_46_48_49_50_51_52_53_67_68_742_750_756_757_758_759_762_763_766"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 1,
+    "is_interesting": false,
+    "fuzzer_id": "9",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "themes"
+  },
+  {
+    "coverage_id": "1787006576-cd7e5fea-c0d7-41f8-9fe9-cce6c52a9e52",
+    "priority": 1,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "mk_file_manager_single_backup_restore"
+      },
+      "body_params": {
+        "nonce": "fuzz"
+      }
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "others": "fuzz",
+        "uploads": "fuzz",
+        "themes": "fuzz",
+        "plugins": "fYzz",
+        "database": "fuzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key \"id\"",
+        "errfile": "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php",
+        "errline": 153
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"step\":0,\"database\":\"false\",\"plugins\":\"false\",\"themes\":\"false\",\"uploads\":\"false\",\"others\":\"false\",\"bkpid\":\"\",\"msg\":\"<li class=\\\"fm-running-list fm-custom-unchecked\\\">Unable to restore plugins.<\\/li>\"}",
+    "response.body.length": 202,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 22:42:56 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Vary": "Accept-Encoding",
+      "Content-Length": "202",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 183.054,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787006563-c455cf46-de16-461c-8549-f50dde741a15",
+    "paths": [
+      "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php::::109_11_110_111_116_117_12_130_131_139_14_145_147_148_15_150_151_152_153_154_1542_1547_155_1565_157_1582_1583_160_163_164_165_166_167_168_17_18_26_27_28_29_30_307_308_31_32_33_34_35_39_40_44_46_48_49_50_51_52_53_67_68_742_750_756_757_758_759_762_763_766"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 1,
+    "is_interesting": false,
+    "fuzzer_id": "9",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "plugins"
+  },
+  {
+    "coverage_id": "1787006577-e0cd62b7-1ac7-43da-80fc-9fa72ac329a5",
+    "priority": 1,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "mk_file_manager_single_backup_restore"
+      },
+      "body_params": {
+        "nonce": "fuzz"
+      }
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "others": "fvzz",
+        "uploads": "fuzz",
+        "themes": "fuzz",
+        "plugins": "fuzz",
+        "database": "fuzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key \"id\"",
+        "errfile": "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php",
+        "errline": 153
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"step\":0,\"database\":\"false\",\"plugins\":\"false\",\"themes\":\"false\",\"uploads\":\"false\",\"others\":\"false\",\"bkpid\":\"\",\"msg\":\"<li class=\\\"fm-running-list fm-custom-unchecked\\\">Unable to restore plugins.<\\/li>\"}",
+    "response.body.length": 202,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 22:42:57 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Vary": "Accept-Encoding",
+      "Content-Length": "202",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 227.363,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787006563-c455cf46-de16-461c-8549-f50dde741a15",
+    "paths": [
+      "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php::::109_11_110_111_116_117_12_130_131_139_14_145_147_148_15_150_151_152_153_154_1542_1547_155_1565_157_1582_1583_160_163_164_165_166_167_168_17_18_26_27_28_29_30_307_308_31_32_33_34_35_39_40_44_46_48_49_50_51_52_53_67_68_742_750_756_757_758_759_762_763_766"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 1,
+    "is_interesting": false,
+    "fuzzer_id": "9",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "others"
+  },
+  {
+    "coverage_id": "1787006577-78622c18-2714-4048-b497-86142b97d8a5",
+    "priority": 1,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "mk_file_manager_single_backup_restore"
+      },
+      "body_params": {
+        "nonce": "fuzz"
+      }
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "others": "fuzz",
+        "uploads": "fuzz",
+        "themes": "Wuzz",
+        "plugins": "fuzz",
+        "database": "fuzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key \"id\"",
+        "errfile": "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php",
+        "errline": 153
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"step\":0,\"database\":\"false\",\"plugins\":\"false\",\"themes\":\"false\",\"uploads\":\"false\",\"others\":\"false\",\"bkpid\":\"\",\"msg\":\"<li class=\\\"fm-running-list fm-custom-unchecked\\\">Unable to restore plugins.<\\/li>\"}",
+    "response.body.length": 202,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 22:42:57 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Vary": "Accept-Encoding",
+      "Content-Length": "202",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 247.868,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787006563-c455cf46-de16-461c-8549-f50dde741a15",
+    "paths": [
+      "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php::::109_11_110_111_116_117_12_130_131_139_14_145_147_148_15_150_151_152_153_154_1542_1547_155_1565_157_1582_1583_160_163_164_165_166_167_168_17_18_26_27_28_29_30_307_308_31_32_33_34_35_39_40_44_46_48_49_50_51_52_53_67_68_742_750_756_757_758_759_762_763_766"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 1,
+    "is_interesting": false,
+    "fuzzer_id": "9",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "themes"
+  },
+  {
+    "coverage_id": "1787006577-696f9a50-8d9e-4d86-b02a-18635f630445",
+    "priority": 1,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "mk_file_manager_single_backup_restore"
+      },
+      "body_params": {
+        "nonce": "fuzz"
+      }
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "others": "fduzz",
+        "uploads": "fuzz",
+        "themes": "fuzz",
+        "plugins": "fuzz",
+        "database": "fuzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key \"id\"",
+        "errfile": "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php",
+        "errline": 153
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"step\":0,\"database\":\"false\",\"plugins\":\"false\",\"themes\":\"false\",\"uploads\":\"false\",\"others\":\"false\",\"bkpid\":\"\",\"msg\":\"<li class=\\\"fm-running-list fm-custom-unchecked\\\">Unable to restore plugins.<\\/li>\"}",
+    "response.body.length": 202,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 22:42:57 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Vary": "Accept-Encoding",
+      "Content-Length": "202",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 251.674,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787006563-c455cf46-de16-461c-8549-f50dde741a15",
+    "paths": [
+      "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php::::109_11_110_111_116_117_12_130_131_139_14_145_147_148_15_150_151_152_153_154_1542_1547_155_1565_157_1582_1583_160_163_164_165_166_167_168_17_18_26_27_28_29_30_307_308_31_32_33_34_35_39_40_44_46_48_49_50_51_52_53_67_68_742_750_756_757_758_759_762_763_766"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 1,
+    "is_interesting": false,
+    "fuzzer_id": "9",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "others"
+  },
+  {
+    "coverage_id": "1787006578-3c02911b-bc11-4ae6-af6a-5591a9a6645e",
+    "priority": 1,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "mk_file_manager_single_backup_restore"
+      },
+      "body_params": {
+        "nonce": "fuzz"
+      }
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "others": "fuzz",
+        "uploads": "fuzz",
+        "themes": "fuzz",
+        "plugins": "fuzz",
+        "database": "fuzz<img src='x' onerror='alert(0xdeadbeef)'>"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key \"id\"",
+        "errfile": "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php",
+        "errline": 153
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"step\":0,\"database\":\"false\",\"plugins\":\"false\",\"themes\":\"false\",\"uploads\":\"false\",\"others\":\"false\",\"bkpid\":\"\",\"msg\":\"<li class=\\\"fm-running-list fm-custom-unchecked\\\">Unable to restore plugins.<\\/li>\"}",
+    "response.body.length": 202,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 22:42:58 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Vary": "Accept-Encoding",
+      "Content-Length": "202",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 231.145,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787006563-c455cf46-de16-461c-8549-f50dde741a15",
+    "paths": [
+      "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php::::109_11_110_111_116_117_12_130_131_139_14_145_147_148_15_150_151_152_153_154_1542_1547_155_1565_157_1582_1583_160_163_164_165_166_167_168_17_18_26_27_28_29_30_307_308_31_32_33_34_35_39_40_44_46_48_49_50_51_52_53_67_68_742_750_756_757_758_759_762_763_766"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 1,
+    "is_interesting": false,
+    "fuzzer_id": "9",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "database"
+  },
+  {
+    "coverage_id": "1787006578-cca017c1-0856-450c-9d0e-45d199e71eae",
+    "priority": 1,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "mk_file_manager_single_backup_restore"
+      },
+      "body_params": {
+        "nonce": "fuzz"
+      }
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "others": "fuzz",
+        "uploads": "fuzz",
+        "themes": "fvzz",
+        "plugins": "fuzz",
+        "database": "fuzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key \"id\"",
+        "errfile": "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php",
+        "errline": 153
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"step\":0,\"database\":\"false\",\"plugins\":\"false\",\"themes\":\"false\",\"uploads\":\"false\",\"others\":\"false\",\"bkpid\":\"\",\"msg\":\"<li class=\\\"fm-running-list fm-custom-unchecked\\\">Unable to restore plugins.<\\/li>\"}",
+    "response.body.length": 202,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 22:42:58 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Vary": "Accept-Encoding",
+      "Content-Length": "202",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 262.236,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787006563-c455cf46-de16-461c-8549-f50dde741a15",
+    "paths": [
+      "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php::::109_11_110_111_116_117_12_130_131_139_14_145_147_148_15_150_151_152_153_154_1542_1547_155_1565_157_1582_1583_160_163_164_165_166_167_168_17_18_26_27_28_29_30_307_308_31_32_33_34_35_39_40_44_46_48_49_50_51_52_53_67_68_742_750_756_757_758_759_762_763_766"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 1,
+    "is_interesting": false,
+    "fuzzer_id": "9",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "themes"
+  },
+  {
+    "coverage_id": "1787006578-064f849c-bd26-4032-a851-42b98d8b1678",
+    "priority": 1,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "mk_file_manager_single_backup_restore"
+      },
+      "body_params": {
+        "nonce": "fuzz"
+      }
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "others": "8uzz",
+        "uploads": "fuzz",
+        "themes": "fuzz",
+        "plugins": "fuzz",
+        "database": "fuzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key \"id\"",
+        "errfile": "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php",
+        "errline": 153
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"step\":0,\"database\":\"false\",\"plugins\":\"false\",\"themes\":\"false\",\"uploads\":\"false\",\"others\":\"false\",\"bkpid\":\"\",\"msg\":\"<li class=\\\"fm-running-list fm-custom-unchecked\\\">Unable to restore plugins.<\\/li>\"}",
+    "response.body.length": 202,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 22:42:58 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Vary": "Accept-Encoding",
+      "Content-Length": "202",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 194.712,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787006563-c455cf46-de16-461c-8549-f50dde741a15",
+    "paths": [
+      "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php::::109_11_110_111_116_117_12_130_131_139_14_145_147_148_15_150_151_152_153_154_1542_1547_155_1565_157_1582_1583_160_163_164_165_166_167_168_17_18_26_27_28_29_30_307_308_31_32_33_34_35_39_40_44_46_48_49_50_51_52_53_67_68_742_750_756_757_758_759_762_763_766"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 1,
+    "is_interesting": false,
+    "fuzzer_id": "9",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "others"
+  },
+  {
+    "coverage_id": "1787006579-fe038394-ab37-484f-8dd4-d62c1916f4c3",
+    "priority": 1,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "mk_file_manager_single_backup_restore"
+      },
+      "body_params": {
+        "nonce": "fuzz"
+      }
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "others": "{{99901 * 99991}}",
+        "uploads": "fuzz",
+        "themes": "fuzz",
+        "plugins": "fuzz",
+        "database": "fuzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key \"id\"",
+        "errfile": "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php",
+        "errline": 153
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"step\":0,\"database\":\"false\",\"plugins\":\"false\",\"themes\":\"false\",\"uploads\":\"false\",\"others\":\"false\",\"bkpid\":\"\",\"msg\":\"<li class=\\\"fm-running-list fm-custom-unchecked\\\">Unable to restore plugins.<\\/li>\"}",
+    "response.body.length": 202,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 22:42:59 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Vary": "Accept-Encoding",
+      "Content-Length": "202",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 789.743,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787006563-c455cf46-de16-461c-8549-f50dde741a15",
+    "paths": [
+      "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php::::109_11_110_111_116_117_12_130_131_139_14_145_147_148_15_150_151_152_153_154_1542_1547_155_1565_157_1582_1583_160_163_164_165_166_167_168_17_18_26_27_28_29_30_307_308_31_32_33_34_35_39_40_44_46_48_49_50_51_52_53_67_68_742_750_756_757_758_759_762_763_766"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 1,
+    "is_interesting": false,
+    "fuzzer_id": "9",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "others"
+  },
+  {
+    "coverage_id": "1787006580-227de4f8-ea38-4c0f-b2c4-13899b2f78d6",
+    "priority": 1,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "mk_file_manager_single_backup_restore"
+      },
+      "body_params": {
+        "nonce": "fuzz"
+      }
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "others": "fuzz",
+        "uploads": "fuzz",
+        "themes": "fuzz",
+        "plugins": "fuzz",
+        "database": "fu:z"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key \"id\"",
+        "errfile": "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php",
+        "errline": 153
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"step\":0,\"database\":\"false\",\"plugins\":\"false\",\"themes\":\"false\",\"uploads\":\"false\",\"others\":\"false\",\"bkpid\":\"\",\"msg\":\"<li class=\\\"fm-running-list fm-custom-unchecked\\\">Unable to restore plugins.<\\/li>\"}",
+    "response.body.length": 202,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 22:43:00 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Vary": "Accept-Encoding",
+      "Content-Length": "202",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 976.429,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787006563-c455cf46-de16-461c-8549-f50dde741a15",
+    "paths": [
+      "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php::::109_11_110_111_116_117_12_130_131_139_14_145_147_148_15_150_151_152_153_154_1542_1547_155_1565_157_1582_1583_160_163_164_165_166_167_168_17_18_26_27_28_29_30_307_308_31_32_33_34_35_39_40_44_46_48_49_50_51_52_53_67_68_742_750_756_757_758_759_762_763_766"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 1,
+    "is_interesting": false,
+    "fuzzer_id": "9",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "database"
+  },
+  {
+    "coverage_id": "1787006581-3a577f67-6bc4-4146-9b75-2d9e7a5a188c",
+    "priority": 1,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "mk_file_manager_single_backup_restore"
+      },
+      "body_params": {
+        "nonce": "fuzz"
+      }
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "others": "fuzCz",
+        "uploads": "fuzz",
+        "themes": "fuzz",
+        "plugins": "fuzz",
+        "database": "fuzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key \"id\"",
+        "errfile": "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php",
+        "errline": 153
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"step\":0,\"database\":\"false\",\"plugins\":\"false\",\"themes\":\"false\",\"uploads\":\"false\",\"others\":\"false\",\"bkpid\":\"\",\"msg\":\"<li class=\\\"fm-running-list fm-custom-unchecked\\\">Unable to restore plugins.<\\/li>\"}",
+    "response.body.length": 202,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 22:43:01 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Vary": "Accept-Encoding",
+      "Content-Length": "202",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 259.259,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787006563-c455cf46-de16-461c-8549-f50dde741a15",
+    "paths": [
+      "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php::::109_11_110_111_116_117_12_130_131_139_14_145_147_148_15_150_151_152_153_154_1542_1547_155_1565_157_1582_1583_160_163_164_165_166_167_168_17_18_26_27_28_29_30_307_308_31_32_33_34_35_39_40_44_46_48_49_50_51_52_53_67_68_742_750_756_757_758_759_762_763_766"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 1,
+    "is_interesting": false,
+    "fuzzer_id": "9",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "others"
+  },
+  {
+    "coverage_id": "1787006581-158f912b-d508-47ae-8f41-61d581a84ebf",
+    "priority": 1,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "mk_file_manager_single_backup_restore"
+      },
+      "body_params": {
+        "nonce": "fuzz"
+      }
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "others": "fuzz",
+        "uploads": "fuz0",
+        "themes": "fuzz",
+        "plugins": "fuzz",
+        "database": "fuzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key \"id\"",
+        "errfile": "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php",
+        "errline": 153
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"step\":0,\"database\":\"false\",\"plugins\":\"false\",\"themes\":\"false\",\"uploads\":\"false\",\"others\":\"false\",\"bkpid\":\"\",\"msg\":\"<li class=\\\"fm-running-list fm-custom-unchecked\\\">Unable to restore plugins.<\\/li>\"}",
+    "response.body.length": 202,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 22:43:01 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Vary": "Accept-Encoding",
+      "Content-Length": "202",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 226.965,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787006563-c455cf46-de16-461c-8549-f50dde741a15",
+    "paths": [
+      "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php::::109_11_110_111_116_117_12_130_131_139_14_145_147_148_15_150_151_152_153_154_1542_1547_155_1565_157_1582_1583_160_163_164_165_166_167_168_17_18_26_27_28_29_30_307_308_31_32_33_34_35_39_40_44_46_48_49_50_51_52_53_67_68_742_750_756_757_758_759_762_763_766"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 1,
+    "is_interesting": false,
+    "fuzzer_id": "9",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "uploads"
+  },
+  {
+    "coverage_id": "1787006581-f01cb298-a0da-456d-8c5b-7e8220929804",
+    "priority": 1,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "mk_file_manager_single_backup_restore"
+      },
+      "body_params": {
+        "nonce": "fuzz"
+      }
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "others": "fuzz",
+        "uploads": "fuzz",
+        "themes": "fuzz",
+        "plugins": "fuzz",
+        "database": "fuz../z"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key \"id\"",
+        "errfile": "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php",
+        "errline": 153
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"step\":0,\"database\":\"false\",\"plugins\":\"false\",\"themes\":\"false\",\"uploads\":\"false\",\"others\":\"false\",\"bkpid\":\"\",\"msg\":\"<li class=\\\"fm-running-list fm-custom-unchecked\\\">Unable to restore plugins.<\\/li>\"}",
+    "response.body.length": 202,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 22:43:01 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Vary": "Accept-Encoding",
+      "Content-Length": "202",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 221.069,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787006563-c455cf46-de16-461c-8549-f50dde741a15",
+    "paths": [
+      "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php::::109_11_110_111_116_117_12_130_131_139_14_145_147_148_15_150_151_152_153_154_1542_1547_155_1565_157_1582_1583_160_163_164_165_166_167_168_17_18_26_27_28_29_30_307_308_31_32_33_34_35_39_40_44_46_48_49_50_51_52_53_67_68_742_750_756_757_758_759_762_763_766"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 1,
+    "is_interesting": false,
+    "fuzzer_id": "9",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "database"
+  },
+  {
+    "coverage_id": "1787006582-f17a6fd0-624e-404d-acf4-fd017ad08d6e",
+    "priority": 1,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "mk_file_manager_single_backup_restore"
+      },
+      "body_params": {
+        "nonce": "fuzz"
+      }
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "others": "fuzz",
+        "uploads": "fuzz",
+        "themes": "fuzz",
+        "plugins": "fuzz",
+        "database": "\u0005fuzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key \"id\"",
+        "errfile": "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php",
+        "errline": 153
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"step\":0,\"database\":\"false\",\"plugins\":\"false\",\"themes\":\"false\",\"uploads\":\"false\",\"others\":\"false\",\"bkpid\":\"\",\"msg\":\"<li class=\\\"fm-running-list fm-custom-unchecked\\\">Unable to restore plugins.<\\/li>\"}",
+    "response.body.length": 202,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 22:43:02 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Vary": "Accept-Encoding",
+      "Content-Length": "202",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 272.227,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787006563-c455cf46-de16-461c-8549-f50dde741a15",
+    "paths": [
+      "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php::::109_11_110_111_116_117_12_130_131_139_14_145_147_148_15_150_151_152_153_154_1542_1547_155_1565_157_1582_1583_160_163_164_165_166_167_168_17_18_26_27_28_29_30_307_308_31_32_33_34_35_39_40_44_46_48_49_50_51_52_53_67_68_742_750_756_757_758_759_762_763_766"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 1,
+    "is_interesting": false,
+    "fuzzer_id": "9",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "database"
+  },
+  {
+    "coverage_id": "1787006582-bf8e50f2-7d09-4c3b-9863-6c938fc2523a",
+    "priority": 1,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "mk_file_manager_single_backup_restore"
+      },
+      "body_params": {
+        "nonce": "fuzz"
+      }
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "others": "fuzz",
+        "uploads": "fuzz",
+        "themes": "fuzz",
+        "plugins": "fuzz",
+        "database": "fuzrz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key \"id\"",
+        "errfile": "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php",
+        "errline": 153
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"step\":0,\"database\":\"false\",\"plugins\":\"false\",\"themes\":\"false\",\"uploads\":\"false\",\"others\":\"false\",\"bkpid\":\"\",\"msg\":\"<li class=\\\"fm-running-list fm-custom-unchecked\\\">Unable to restore plugins.<\\/li>\"}",
+    "response.body.length": 202,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 22:43:02 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Vary": "Accept-Encoding",
+      "Content-Length": "202",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 173.542,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787006563-c455cf46-de16-461c-8549-f50dde741a15",
+    "paths": [
+      "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php::::109_11_110_111_116_117_12_130_131_139_14_145_147_148_15_150_151_152_153_154_1542_1547_155_1565_157_1582_1583_160_163_164_165_166_167_168_17_18_26_27_28_29_30_307_308_31_32_33_34_35_39_40_44_46_48_49_50_51_52_53_67_68_742_750_756_757_758_759_762_763_766"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 1,
+    "is_interesting": false,
+    "fuzzer_id": "9",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "database"
+  },
+  {
+    "coverage_id": "1787006582-78980f56-9903-436b-b134-a2feace142da",
+    "priority": 1,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "mk_file_manager_single_backup_restore"
+      },
+      "body_params": {
+        "nonce": "fuzz"
+      }
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "others": "fuzz",
+        "uploads": "fuzz",
+        "themes": "fuzz",
+        "plugins": "fuzz",
+        "database": "f0zz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key \"id\"",
+        "errfile": "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php",
+        "errline": 153
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"step\":0,\"database\":\"false\",\"plugins\":\"false\",\"themes\":\"false\",\"uploads\":\"false\",\"others\":\"false\",\"bkpid\":\"\",\"msg\":\"<li class=\\\"fm-running-list fm-custom-unchecked\\\">Unable to restore plugins.<\\/li>\"}",
+    "response.body.length": 202,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 22:43:02 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Vary": "Accept-Encoding",
+      "Content-Length": "202",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 263.118,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787006563-c455cf46-de16-461c-8549-f50dde741a15",
+    "paths": [
+      "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php::::109_11_110_111_116_117_12_130_131_139_14_145_147_148_15_150_151_152_153_154_1542_1547_155_1565_157_1582_1583_160_163_164_165_166_167_168_17_18_26_27_28_29_30_307_308_31_32_33_34_35_39_40_44_46_48_49_50_51_52_53_67_68_742_750_756_757_758_759_762_763_766"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 1,
+    "is_interesting": false,
+    "fuzzer_id": "9",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "database"
+  },
+  {
+    "coverage_id": "1787006583-ceefbdd4-ae48-47a6-8ab9-042453ad8a00",
+    "priority": 1,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "mk_file_manager_single_backup_restore"
+      },
+      "body_params": {
+        "nonce": "fuzz"
+      }
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "others": "fuzz",
+        "uploads": "fuzz",
+        "themes": "fuzz",
+        "plugins": "fuz!4~z",
+        "database": "fuzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key \"id\"",
+        "errfile": "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php",
+        "errline": 153
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"step\":0,\"database\":\"false\",\"plugins\":\"false\",\"themes\":\"false\",\"uploads\":\"false\",\"others\":\"false\",\"bkpid\":\"\",\"msg\":\"<li class=\\\"fm-running-list fm-custom-unchecked\\\">Unable to restore plugins.<\\/li>\"}",
+    "response.body.length": 202,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 22:43:03 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Vary": "Accept-Encoding",
+      "Content-Length": "202",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 161.057,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787006563-c455cf46-de16-461c-8549-f50dde741a15",
+    "paths": [
+      "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php::::109_11_110_111_116_117_12_130_131_139_14_145_147_148_15_150_151_152_153_154_1542_1547_155_1565_157_1582_1583_160_163_164_165_166_167_168_17_18_26_27_28_29_30_307_308_31_32_33_34_35_39_40_44_46_48_49_50_51_52_53_67_68_742_750_756_757_758_759_762_763_766"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 1,
+    "is_interesting": false,
+    "fuzzer_id": "9",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "plugins"
+  },
+  {
+    "coverage_id": "1787006583-b98fb9e8-cf91-4588-bafa-0360be674368",
+    "priority": 1,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "mk_file_manager_single_backup_restore"
+      },
+      "body_params": {
+        "nonce": "fuzz"
+      }
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "others": "f|zz",
+        "uploads": "fuzz",
+        "themes": "fuzz",
+        "plugins": "fuzz",
+        "database": "fuzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key \"id\"",
+        "errfile": "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php",
+        "errline": 153
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"step\":0,\"database\":\"false\",\"plugins\":\"false\",\"themes\":\"false\",\"uploads\":\"false\",\"others\":\"false\",\"bkpid\":\"\",\"msg\":\"<li class=\\\"fm-running-list fm-custom-unchecked\\\">Unable to restore plugins.<\\/li>\"}",
+    "response.body.length": 202,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 22:43:03 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Vary": "Accept-Encoding",
+      "Content-Length": "202",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 166.314,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787006563-c455cf46-de16-461c-8549-f50dde741a15",
+    "paths": [
+      "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php::::109_11_110_111_116_117_12_130_131_139_14_145_147_148_15_150_151_152_153_154_1542_1547_155_1565_157_1582_1583_160_163_164_165_166_167_168_17_18_26_27_28_29_30_307_308_31_32_33_34_35_39_40_44_46_48_49_50_51_52_53_67_68_742_750_756_757_758_759_762_763_766"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 1,
+    "is_interesting": false,
+    "fuzzer_id": "9",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "others"
+  },
+  {
+    "coverage_id": "1787006583-e06ba2b8-f30c-463f-b084-9c4f93c99e76",
+    "priority": 1,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "mk_file_manager_single_backup_restore"
+      },
+      "body_params": {
+        "nonce": "fuzz"
+      }
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "others": "fuzz",
+        "uploads": "#{99901*99991}",
+        "themes": "fuzz",
+        "plugins": "fuzz",
+        "database": "fuzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key \"id\"",
+        "errfile": "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php",
+        "errline": 153
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"step\":0,\"database\":\"false\",\"plugins\":\"false\",\"themes\":\"false\",\"uploads\":\"false\",\"others\":\"false\",\"bkpid\":\"\",\"msg\":\"<li class=\\\"fm-running-list fm-custom-unchecked\\\">Unable to restore plugins.<\\/li>\"}",
+    "response.body.length": 202,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 22:43:03 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Vary": "Accept-Encoding",
+      "Content-Length": "202",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 265.791,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787006563-c455cf46-de16-461c-8549-f50dde741a15",
+    "paths": [
+      "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php::::109_11_110_111_116_117_12_130_131_139_14_145_147_148_15_150_151_152_153_154_1542_1547_155_1565_157_1582_1583_160_163_164_165_166_167_168_17_18_26_27_28_29_30_307_308_31_32_33_34_35_39_40_44_46_48_49_50_51_52_53_67_68_742_750_756_757_758_759_762_763_766"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 1,
+    "is_interesting": false,
+    "fuzzer_id": "9",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "uploads"
+  },
+  {
+    "coverage_id": "1787006584-021aa21e-a035-4b54-ba09-9f54a7995a53",
+    "priority": 1,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "mk_file_manager_single_backup_restore"
+      },
+      "body_params": {
+        "nonce": "fuzz"
+      }
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "others": "fuzz",
+        "uploads": "fuzz",
+        "themes": "fuzz",
+        "plugins": "fuzz",
+        "database": "fuz3z"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key \"id\"",
+        "errfile": "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php",
+        "errline": 153
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"step\":0,\"database\":\"false\",\"plugins\":\"false\",\"themes\":\"false\",\"uploads\":\"false\",\"others\":\"false\",\"bkpid\":\"\",\"msg\":\"<li class=\\\"fm-running-list fm-custom-unchecked\\\">Unable to restore plugins.<\\/li>\"}",
+    "response.body.length": 202,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 22:43:04 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Vary": "Accept-Encoding",
+      "Content-Length": "202",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 166.188,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787006563-c455cf46-de16-461c-8549-f50dde741a15",
+    "paths": [
+      "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php::::109_11_110_111_116_117_12_130_131_139_14_145_147_148_15_150_151_152_153_154_1542_1547_155_1565_157_1582_1583_160_163_164_165_166_167_168_17_18_26_27_28_29_30_307_308_31_32_33_34_35_39_40_44_46_48_49_50_51_52_53_67_68_742_750_756_757_758_759_762_763_766"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 1,
+    "is_interesting": false,
+    "fuzzer_id": "9",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "database"
+  },
+  {
+    "coverage_id": "1787006584-fdd8e001-238e-4dcc-854a-e3bedbbd126f",
+    "priority": 1,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "mk_file_manager_single_backup_restore"
+      },
+      "body_params": {
+        "nonce": "fuzz"
+      }
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "others": "fuzz",
+        "uploads": "fuzz",
+        "themes": "fuzz",
+        "plugins": "fu|z",
+        "database": "fuzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key \"id\"",
+        "errfile": "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php",
+        "errline": 153
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"step\":0,\"database\":\"false\",\"plugins\":\"false\",\"themes\":\"false\",\"uploads\":\"false\",\"others\":\"false\",\"bkpid\":\"\",\"msg\":\"<li class=\\\"fm-running-list fm-custom-unchecked\\\">Unable to restore plugins.<\\/li>\"}",
+    "response.body.length": 202,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 22:43:04 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Vary": "Accept-Encoding",
+      "Content-Length": "202",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 249.565,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787006563-c455cf46-de16-461c-8549-f50dde741a15",
+    "paths": [
+      "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php::::109_11_110_111_116_117_12_130_131_139_14_145_147_148_15_150_151_152_153_154_1542_1547_155_1565_157_1582_1583_160_163_164_165_166_167_168_17_18_26_27_28_29_30_307_308_31_32_33_34_35_39_40_44_46_48_49_50_51_52_53_67_68_742_750_756_757_758_759_762_763_766"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 1,
+    "is_interesting": false,
+    "fuzzer_id": "9",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "plugins"
+  },
+  {
+    "coverage_id": "1787006584-c09b80fb-9b4a-405c-b611-e4aad8084094",
+    "priority": 1,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "mk_file_manager_single_backup_restore"
+      },
+      "body_params": {
+        "nonce": "fuzz"
+      }
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "others": "fuzz",
+        "uploads": "fuzz",
+        "themes": "fuzzV",
+        "plugins": "fuzz",
+        "database": "fuzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key \"id\"",
+        "errfile": "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php",
+        "errline": 153
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"step\":0,\"database\":\"false\",\"plugins\":\"false\",\"themes\":\"false\",\"uploads\":\"false\",\"others\":\"false\",\"bkpid\":\"\",\"msg\":\"<li class=\\\"fm-running-list fm-custom-unchecked\\\">Unable to restore plugins.<\\/li>\"}",
+    "response.body.length": 202,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 22:43:04 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Vary": "Accept-Encoding",
+      "Content-Length": "202",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 261.664,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787006563-c455cf46-de16-461c-8549-f50dde741a15",
+    "paths": [
+      "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php::::109_11_110_111_116_117_12_130_131_139_14_145_147_148_15_150_151_152_153_154_1542_1547_155_1565_157_1582_1583_160_163_164_165_166_167_168_17_18_26_27_28_29_30_307_308_31_32_33_34_35_39_40_44_46_48_49_50_51_52_53_67_68_742_750_756_757_758_759_762_763_766"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 1,
+    "is_interesting": false,
+    "fuzzer_id": "9",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "themes"
+  },
+  {
+    "coverage_id": "1787006585-a5d43b79-689d-4d48-af0d-eb97d50749a9",
+    "priority": 1,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "mk_file_manager_single_backup_restore"
+      },
+      "body_params": {
+        "nonce": "fuzz"
+      }
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "others": "fuzz",
+        "uploads": "fuzz",
+        "themes": "fujz",
+        "plugins": "fuzz",
+        "database": "fuzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key \"id\"",
+        "errfile": "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php",
+        "errline": 153
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"step\":0,\"database\":\"false\",\"plugins\":\"false\",\"themes\":\"false\",\"uploads\":\"false\",\"others\":\"false\",\"bkpid\":\"\",\"msg\":\"<li class=\\\"fm-running-list fm-custom-unchecked\\\">Unable to restore plugins.<\\/li>\"}",
+    "response.body.length": 202,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 22:43:05 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Vary": "Accept-Encoding",
+      "Content-Length": "202",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 189.523,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787006563-c455cf46-de16-461c-8549-f50dde741a15",
+    "paths": [
+      "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php::::109_11_110_111_116_117_12_130_131_139_14_145_147_148_15_150_151_152_153_154_1542_1547_155_1565_157_1582_1583_160_163_164_165_166_167_168_17_18_26_27_28_29_30_307_308_31_32_33_34_35_39_40_44_46_48_49_50_51_52_53_67_68_742_750_756_757_758_759_762_763_766"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 1,
+    "is_interesting": false,
+    "fuzzer_id": "9",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "themes"
+  },
+  {
+    "coverage_id": "1787006585-c7cb07d2-305c-403b-b5c8-3d43c29a2e02",
+    "priority": 1,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "mk_file_manager_single_backup_restore"
+      },
+      "body_params": {
+        "nonce": "fuzz"
+      }
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "others": "fuz3",
+        "uploads": "fuzz",
+        "themes": "fuzz",
+        "plugins": "fuzz",
+        "database": "fuzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key \"id\"",
+        "errfile": "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php",
+        "errline": 153
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"step\":0,\"database\":\"false\",\"plugins\":\"false\",\"themes\":\"false\",\"uploads\":\"false\",\"others\":\"false\",\"bkpid\":\"\",\"msg\":\"<li class=\\\"fm-running-list fm-custom-unchecked\\\">Unable to restore plugins.<\\/li>\"}",
+    "response.body.length": 202,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 22:43:05 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Vary": "Accept-Encoding",
+      "Content-Length": "202",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 200.089,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787006563-c455cf46-de16-461c-8549-f50dde741a15",
+    "paths": [
+      "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php::::109_11_110_111_116_117_12_130_131_139_14_145_147_148_15_150_151_152_153_154_1542_1547_155_1565_157_1582_1583_160_163_164_165_166_167_168_17_18_26_27_28_29_30_307_308_31_32_33_34_35_39_40_44_46_48_49_50_51_52_53_67_68_742_750_756_757_758_759_762_763_766"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 1,
+    "is_interesting": false,
+    "fuzzer_id": "9",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "others"
+  },
+  {
+    "coverage_id": "1787006585-41632b6a-b4a0-47c5-955c-0277bdb673b2",
+    "priority": 1,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "mk_file_manager_single_backup_restore"
+      },
+      "body_params": {
+        "nonce": "fuzz"
+      }
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "others": "fuzz",
+        "uploads": "fuzz",
+        "themes": "%7B%22%24ne%22%3Anull%7D",
+        "plugins": "fuzz",
+        "database": "fuzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key \"id\"",
+        "errfile": "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php",
+        "errline": 153
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"step\":0,\"database\":\"false\",\"plugins\":\"false\",\"themes\":\"false\",\"uploads\":\"false\",\"others\":\"false\",\"bkpid\":\"\",\"msg\":\"<li class=\\\"fm-running-list fm-custom-unchecked\\\">Unable to restore plugins.<\\/li>\"}",
+    "response.body.length": 202,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 22:43:05 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Vary": "Accept-Encoding",
+      "Content-Length": "202",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 237.353,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787006563-c455cf46-de16-461c-8549-f50dde741a15",
+    "paths": [
+      "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php::::109_11_110_111_116_117_12_130_131_139_14_145_147_148_15_150_151_152_153_154_1542_1547_155_1565_157_1582_1583_160_163_164_165_166_167_168_17_18_26_27_28_29_30_307_308_31_32_33_34_35_39_40_44_46_48_49_50_51_52_53_67_68_742_750_756_757_758_759_762_763_766"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 1,
+    "is_interesting": false,
+    "fuzzer_id": "9",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "themes"
+  },
+  {
+    "coverage_id": "1787006586-185840bd-1da2-4116-84eb-3dd78e2a9936",
+    "priority": 1,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "mk_file_manager_single_backup_restore"
+      },
+      "body_params": {
+        "nonce": "fuzz"
+      }
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "others": "fu7z",
+        "uploads": "fuzz",
+        "themes": "fuzz",
+        "plugins": "fuzz",
+        "database": "fuzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key \"id\"",
+        "errfile": "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php",
+        "errline": 153
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"step\":0,\"database\":\"false\",\"plugins\":\"false\",\"themes\":\"false\",\"uploads\":\"false\",\"others\":\"false\",\"bkpid\":\"\",\"msg\":\"<li class=\\\"fm-running-list fm-custom-unchecked\\\">Unable to restore plugins.<\\/li>\"}",
+    "response.body.length": 202,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 22:43:06 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Vary": "Accept-Encoding",
+      "Content-Length": "202",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 211.637,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787006563-c455cf46-de16-461c-8549-f50dde741a15",
+    "paths": [
+      "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php::::109_11_110_111_116_117_12_130_131_139_14_145_147_148_15_150_151_152_153_154_1542_1547_155_1565_157_1582_1583_160_163_164_165_166_167_168_17_18_26_27_28_29_30_307_308_31_32_33_34_35_39_40_44_46_48_49_50_51_52_53_67_68_742_750_756_757_758_759_762_763_766"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 1,
+    "is_interesting": false,
+    "fuzzer_id": "9",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "others"
+  },
+  {
+    "coverage_id": "1787006586-d24bf543-9824-41a1-9017-0f764f0b7b92",
+    "priority": 1,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "mk_file_manager_single_backup_restore"
+      },
+      "body_params": {
+        "nonce": "fuzz"
+      }
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "others": "fuzz",
+        "uploads": "fuzz6",
+        "themes": "fuzz",
+        "plugins": "fuzz",
+        "database": "fuzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key \"id\"",
+        "errfile": "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php",
+        "errline": 153
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"step\":0,\"database\":\"false\",\"plugins\":\"false\",\"themes\":\"false\",\"uploads\":\"false\",\"others\":\"false\",\"bkpid\":\"\",\"msg\":\"<li class=\\\"fm-running-list fm-custom-unchecked\\\">Unable to restore plugins.<\\/li>\"}",
+    "response.body.length": 202,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 22:43:06 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Vary": "Accept-Encoding",
+      "Content-Length": "202",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 209.428,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787006563-c455cf46-de16-461c-8549-f50dde741a15",
+    "paths": [
+      "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php::::109_11_110_111_116_117_12_130_131_139_14_145_147_148_15_150_151_152_153_154_1542_1547_155_1565_157_1582_1583_160_163_164_165_166_167_168_17_18_26_27_28_29_30_307_308_31_32_33_34_35_39_40_44_46_48_49_50_51_52_53_67_68_742_750_756_757_758_759_762_763_766"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 1,
+    "is_interesting": false,
+    "fuzzer_id": "9",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "uploads"
+  },
+  {
+    "coverage_id": "1787006587-2ad79d14-957d-4849-b06f-696e9aba92e4",
+    "priority": 1,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "mk_file_manager_single_backup_restore"
+      },
+      "body_params": {
+        "nonce": "fuzz"
+      }
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "others": "fuzz",
+        "uploads": "\r\nfuzz",
+        "themes": "fuzz",
+        "plugins": "fuzz",
+        "database": "fuzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key \"id\"",
+        "errfile": "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php",
+        "errline": 153
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"step\":0,\"database\":\"false\",\"plugins\":\"false\",\"themes\":\"false\",\"uploads\":\"false\",\"others\":\"false\",\"bkpid\":\"\",\"msg\":\"<li class=\\\"fm-running-list fm-custom-unchecked\\\">Unable to restore plugins.<\\/li>\"}",
+    "response.body.length": 202,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 22:43:07 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Vary": "Accept-Encoding",
+      "Content-Length": "202",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 213.619,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787006563-c455cf46-de16-461c-8549-f50dde741a15",
+    "paths": [
+      "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php::::109_11_110_111_116_117_12_130_131_139_14_145_147_148_15_150_151_152_153_154_1542_1547_155_1565_157_1582_1583_160_163_164_165_166_167_168_17_18_26_27_28_29_30_307_308_31_32_33_34_35_39_40_44_46_48_49_50_51_52_53_67_68_742_750_756_757_758_759_762_763_766"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 1,
+    "is_interesting": false,
+    "fuzzer_id": "9",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "uploads"
+  },
+  {
+    "coverage_id": "1787006587-266ef739-f086-4114-9066-2d9013cbf0e4",
+    "priority": 1,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "mk_file_manager_single_backup_restore"
+      },
+      "body_params": {
+        "nonce": "fuzz"
+      }
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "others": "fuzz",
+        "uploads": "fjzz",
+        "themes": "fuzz",
+        "plugins": "fuzz",
+        "database": "fuzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key \"id\"",
+        "errfile": "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php",
+        "errline": 153
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"step\":0,\"database\":\"false\",\"plugins\":\"false\",\"themes\":\"false\",\"uploads\":\"false\",\"others\":\"false\",\"bkpid\":\"\",\"msg\":\"<li class=\\\"fm-running-list fm-custom-unchecked\\\">Unable to restore plugins.<\\/li>\"}",
+    "response.body.length": 202,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 22:43:08 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Vary": "Accept-Encoding",
+      "Content-Length": "202",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 840.724,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787006563-c455cf46-de16-461c-8549-f50dde741a15",
+    "paths": [
+      "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php::::109_11_110_111_116_117_12_130_131_139_14_145_147_148_15_150_151_152_153_154_1542_1547_155_1565_157_1582_1583_160_163_164_165_166_167_168_17_18_26_27_28_29_30_307_308_31_32_33_34_35_39_40_44_46_48_49_50_51_52_53_67_68_742_750_756_757_758_759_762_763_766"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 1,
+    "is_interesting": false,
+    "fuzzer_id": "9",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "uploads"
+  },
+  {
+    "coverage_id": "1787006588-1ae300ea-d83b-4f70-8bf8-294b0ebde603",
+    "priority": 1,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "mk_file_manager_single_backup_restore"
+      },
+      "body_params": {
+        "nonce": "fuzz"
+      }
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "others": "fuzz",
+        "uploads": "fuzz",
+        "themes": "fuzz",
+        "plugins": "fuzz",
+        "database": "frzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key \"id\"",
+        "errfile": "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php",
+        "errline": 153
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"step\":0,\"database\":\"false\",\"plugins\":\"false\",\"themes\":\"false\",\"uploads\":\"false\",\"others\":\"false\",\"bkpid\":\"\",\"msg\":\"<li class=\\\"fm-running-list fm-custom-unchecked\\\">Unable to restore plugins.<\\/li>\"}",
+    "response.body.length": 202,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 22:43:08 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Vary": "Accept-Encoding",
+      "Content-Length": "202",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 219.698,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787006563-c455cf46-de16-461c-8549-f50dde741a15",
+    "paths": [
+      "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php::::109_11_110_111_116_117_12_130_131_139_14_145_147_148_15_150_151_152_153_154_1542_1547_155_1565_157_1582_1583_160_163_164_165_166_167_168_17_18_26_27_28_29_30_307_308_31_32_33_34_35_39_40_44_46_48_49_50_51_52_53_67_68_742_750_756_757_758_759_762_763_766"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 1,
+    "is_interesting": false,
+    "fuzzer_id": "9",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "database"
+  },
+  {
+    "coverage_id": "1787006588-5b03407d-d296-4f4e-832e-8912bd9b14c5",
+    "priority": 1,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "mk_file_manager_single_backup_restore"
+      },
+      "body_params": {
+        "nonce": "fuzz"
+      }
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "others": "fuzz",
+        "uploads": "fuzz",
+        "themes": "fuzz",
+        "plugins": "fuzz",
+        "database": "iuzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key \"id\"",
+        "errfile": "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php",
+        "errline": 153
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"step\":0,\"database\":\"false\",\"plugins\":\"false\",\"themes\":\"false\",\"uploads\":\"false\",\"others\":\"false\",\"bkpid\":\"\",\"msg\":\"<li class=\\\"fm-running-list fm-custom-unchecked\\\">Unable to restore plugins.<\\/li>\"}",
+    "response.body.length": 202,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 22:43:08 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Vary": "Accept-Encoding",
+      "Content-Length": "202",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 212.54,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787006563-c455cf46-de16-461c-8549-f50dde741a15",
+    "paths": [
+      "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php::::109_11_110_111_116_117_12_130_131_139_14_145_147_148_15_150_151_152_153_154_1542_1547_155_1565_157_1582_1583_160_163_164_165_166_167_168_17_18_26_27_28_29_30_307_308_31_32_33_34_35_39_40_44_46_48_49_50_51_52_53_67_68_742_750_756_757_758_759_762_763_766"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 1,
+    "is_interesting": false,
+    "fuzzer_id": "9",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "database"
+  },
+  {
+    "coverage_id": "1787006589-6e8b10e3-9efa-4dc5-b2d6-1f561e0d3542",
+    "priority": 1,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "mk_file_manager_single_backup_restore"
+      },
+      "body_params": {
+        "nonce": "fuzz"
+      }
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "others": "fuzz",
+        "uploads": "fuzz",
+        "themes": "f6zz",
+        "plugins": "fuzz",
+        "database": "fuzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key \"id\"",
+        "errfile": "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php",
+        "errline": 153
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"step\":0,\"database\":\"false\",\"plugins\":\"false\",\"themes\":\"false\",\"uploads\":\"false\",\"others\":\"false\",\"bkpid\":\"\",\"msg\":\"<li class=\\\"fm-running-list fm-custom-unchecked\\\">Unable to restore plugins.<\\/li>\"}",
+    "response.body.length": 202,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 22:43:09 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Vary": "Accept-Encoding",
+      "Content-Length": "202",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 202.871,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787006563-c455cf46-de16-461c-8549-f50dde741a15",
+    "paths": [
+      "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php::::109_11_110_111_116_117_12_130_131_139_14_145_147_148_15_150_151_152_153_154_1542_1547_155_1565_157_1582_1583_160_163_164_165_166_167_168_17_18_26_27_28_29_30_307_308_31_32_33_34_35_39_40_44_46_48_49_50_51_52_53_67_68_742_750_756_757_758_759_762_763_766"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 1,
+    "is_interesting": false,
+    "fuzzer_id": "9",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "themes"
+  },
+  {
+    "coverage_id": "1787006589-79e17aef-1778-4057-b210-9cba5c871b3a",
+    "priority": 1,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "mk_file_manager_single_backup_restore"
+      },
+      "body_params": {
+        "nonce": "fuzz"
+      }
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "others": "fuzz",
+        "uploads": "fuzz",
+        "themes": "fuzz",
+        "plugins": "fuzz",
+        "database": "f'zz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key \"id\"",
+        "errfile": "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php",
+        "errline": 153
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"step\":0,\"database\":\"false\",\"plugins\":\"false\",\"themes\":\"false\",\"uploads\":\"false\",\"others\":\"false\",\"bkpid\":\"\",\"msg\":\"<li class=\\\"fm-running-list fm-custom-unchecked\\\">Unable to restore plugins.<\\/li>\"}",
+    "response.body.length": 202,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 22:43:09 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Vary": "Accept-Encoding",
+      "Content-Length": "202",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 202.797,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787006563-c455cf46-de16-461c-8549-f50dde741a15",
+    "paths": [
+      "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php::::109_11_110_111_116_117_12_130_131_139_14_145_147_148_15_150_151_152_153_154_1542_1547_155_1565_157_1582_1583_160_163_164_165_166_167_168_17_18_26_27_28_29_30_307_308_31_32_33_34_35_39_40_44_46_48_49_50_51_52_53_67_68_742_750_756_757_758_759_762_763_766"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 1,
+    "is_interesting": false,
+    "fuzzer_id": "9",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "database"
+  },
+  {
+    "coverage_id": "1787006589-24318e0a-ef70-4cb1-b3f7-e57b55930685",
+    "priority": 1,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "mk_file_manager_single_backup_restore"
+      },
+      "body_params": {
+        "nonce": "fuzz"
+      }
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "others": "fuzz",
+        "uploads": "fuzz",
+        "themes": "fudz",
+        "plugins": "fuzz",
+        "database": "fuzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key \"id\"",
+        "errfile": "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php",
+        "errline": 153
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"step\":0,\"database\":\"false\",\"plugins\":\"false\",\"themes\":\"false\",\"uploads\":\"false\",\"others\":\"false\",\"bkpid\":\"\",\"msg\":\"<li class=\\\"fm-running-list fm-custom-unchecked\\\">Unable to restore plugins.<\\/li>\"}",
+    "response.body.length": 202,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 22:43:09 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Vary": "Accept-Encoding",
+      "Content-Length": "202",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 270.679,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787006563-c455cf46-de16-461c-8549-f50dde741a15",
+    "paths": [
+      "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php::::109_11_110_111_116_117_12_130_131_139_14_145_147_148_15_150_151_152_153_154_1542_1547_155_1565_157_1582_1583_160_163_164_165_166_167_168_17_18_26_27_28_29_30_307_308_31_32_33_34_35_39_40_44_46_48_49_50_51_52_53_67_68_742_750_756_757_758_759_762_763_766"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 1,
+    "is_interesting": false,
+    "fuzzer_id": "9",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "themes"
+  },
+  {
+    "coverage_id": "1787006590-11d292f1-1771-42cd-84b2-d295793dac7d",
+    "priority": 1,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "mk_file_manager_single_backup_restore"
+      },
+      "body_params": {
+        "nonce": "fuzz"
+      }
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "others": "fuzz",
+        "uploads": "fuzz",
+        "themes": "fuzz",
+        "plugins": "fuz~",
+        "database": "fuzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key \"id\"",
+        "errfile": "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php",
+        "errline": 153
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"step\":0,\"database\":\"false\",\"plugins\":\"false\",\"themes\":\"false\",\"uploads\":\"false\",\"others\":\"false\",\"bkpid\":\"\",\"msg\":\"<li class=\\\"fm-running-list fm-custom-unchecked\\\">Unable to restore plugins.<\\/li>\"}",
+    "response.body.length": 202,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 22:43:10 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Vary": "Accept-Encoding",
+      "Content-Length": "202",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 293.254,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787006563-c455cf46-de16-461c-8549-f50dde741a15",
+    "paths": [
+      "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php::::109_11_110_111_116_117_12_130_131_139_14_145_147_148_15_150_151_152_153_154_1542_1547_155_1565_157_1582_1583_160_163_164_165_166_167_168_17_18_26_27_28_29_30_307_308_31_32_33_34_35_39_40_44_46_48_49_50_51_52_53_67_68_742_750_756_757_758_759_762_763_766"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 1,
+    "is_interesting": false,
+    "fuzzer_id": "9",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "plugins"
+  },
+  {
+    "coverage_id": "1787006590-e4f6752f-9a61-410d-aaf3-c3476ddfe740",
+    "priority": 1,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "mk_file_manager_single_backup_restore"
+      },
+      "body_params": {
+        "nonce": "fuzz"
+      }
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "others": "fuzz",
+        "uploads": "fuz8",
+        "themes": "fuzz",
+        "plugins": "fuzz",
+        "database": "fuzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key \"id\"",
+        "errfile": "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php",
+        "errline": 153
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"step\":0,\"database\":\"false\",\"plugins\":\"false\",\"themes\":\"false\",\"uploads\":\"false\",\"others\":\"false\",\"bkpid\":\"\",\"msg\":\"<li class=\\\"fm-running-list fm-custom-unchecked\\\">Unable to restore plugins.<\\/li>\"}",
+    "response.body.length": 202,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 22:43:10 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Vary": "Accept-Encoding",
+      "Content-Length": "202",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 302.136,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787006563-c455cf46-de16-461c-8549-f50dde741a15",
+    "paths": [
+      "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php::::109_11_110_111_116_117_12_130_131_139_14_145_147_148_15_150_151_152_153_154_1542_1547_155_1565_157_1582_1583_160_163_164_165_166_167_168_17_18_26_27_28_29_30_307_308_31_32_33_34_35_39_40_44_46_48_49_50_51_52_53_67_68_742_750_756_757_758_759_762_763_766"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 1,
+    "is_interesting": false,
+    "fuzzer_id": "9",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "uploads"
+  },
+  {
+    "coverage_id": "1787006590-146832b0-8b22-40ab-9aff-25cac4689a88",
+    "priority": 1,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "mk_file_manager_single_backup_restore"
+      },
+      "body_params": {
+        "nonce": "fuzz"
+      }
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "others": "fuzz",
+        "uploads": "zfuzz",
+        "themes": "fuzz",
+        "plugins": "fuzz",
+        "database": "fuzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key \"id\"",
+        "errfile": "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php",
+        "errline": 153
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"step\":0,\"database\":\"false\",\"plugins\":\"false\",\"themes\":\"false\",\"uploads\":\"false\",\"others\":\"false\",\"bkpid\":\"\",\"msg\":\"<li class=\\\"fm-running-list fm-custom-unchecked\\\">Unable to restore plugins.<\\/li>\"}",
+    "response.body.length": 202,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 22:43:10 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Vary": "Accept-Encoding",
+      "Content-Length": "202",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 171.377,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787006563-c455cf46-de16-461c-8549-f50dde741a15",
+    "paths": [
+      "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php::::109_11_110_111_116_117_12_130_131_139_14_145_147_148_15_150_151_152_153_154_1542_1547_155_1565_157_1582_1583_160_163_164_165_166_167_168_17_18_26_27_28_29_30_307_308_31_32_33_34_35_39_40_44_46_48_49_50_51_52_53_67_68_742_750_756_757_758_759_762_763_766"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 1,
+    "is_interesting": false,
+    "fuzzer_id": "9",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "uploads"
+  },
+  {
+    "coverage_id": "1787006591-aa31fef5-65fb-4232-b863-2e9d047e42b6",
+    "priority": 1,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "mk_file_manager_single_backup_restore"
+      },
+      "body_params": {
+        "nonce": "fuzz"
+      }
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "others": "fuzz",
+        "uploads": "fuzz",
+        "themes": "fuzK",
+        "plugins": "fuzz",
+        "database": "fuzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key \"id\"",
+        "errfile": "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php",
+        "errline": 153
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"step\":0,\"database\":\"false\",\"plugins\":\"false\",\"themes\":\"false\",\"uploads\":\"false\",\"others\":\"false\",\"bkpid\":\"\",\"msg\":\"<li class=\\\"fm-running-list fm-custom-unchecked\\\">Unable to restore plugins.<\\/li>\"}",
+    "response.body.length": 202,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 22:43:11 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Vary": "Accept-Encoding",
+      "Content-Length": "202",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 262.913,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787006563-c455cf46-de16-461c-8549-f50dde741a15",
+    "paths": [
+      "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php::::109_11_110_111_116_117_12_130_131_139_14_145_147_148_15_150_151_152_153_154_1542_1547_155_1565_157_1582_1583_160_163_164_165_166_167_168_17_18_26_27_28_29_30_307_308_31_32_33_34_35_39_40_44_46_48_49_50_51_52_53_67_68_742_750_756_757_758_759_762_763_766"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 1,
+    "is_interesting": false,
+    "fuzzer_id": "9",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "themes"
+  },
+  {
+    "coverage_id": "1787006591-8a843564-7bed-4bf9-a827-53b3d1692590",
+    "priority": 1,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "mk_file_manager_single_backup_restore"
+      },
+      "body_params": {
+        "nonce": "fuzz"
+      }
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "others": "fuzz",
+        "uploads": "fuzz",
+        "themes": "fuzz",
+        "plugins": "zfuzz",
+        "database": "fuzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key \"id\"",
+        "errfile": "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php",
+        "errline": 153
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"step\":0,\"database\":\"false\",\"plugins\":\"false\",\"themes\":\"false\",\"uploads\":\"false\",\"others\":\"false\",\"bkpid\":\"\",\"msg\":\"<li class=\\\"fm-running-list fm-custom-unchecked\\\">Unable to restore plugins.<\\/li>\"}",
+    "response.body.length": 202,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 22:43:11 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Vary": "Accept-Encoding",
+      "Content-Length": "202",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 216.761,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787006563-c455cf46-de16-461c-8549-f50dde741a15",
+    "paths": [
+      "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php::::109_11_110_111_116_117_12_130_131_139_14_145_147_148_15_150_151_152_153_154_1542_1547_155_1565_157_1582_1583_160_163_164_165_166_167_168_17_18_26_27_28_29_30_307_308_31_32_33_34_35_39_40_44_46_48_49_50_51_52_53_67_68_742_750_756_757_758_759_762_763_766"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 1,
+    "is_interesting": false,
+    "fuzzer_id": "9",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "plugins"
+  },
+  {
+    "coverage_id": "1787006591-d4832010-8449-4829-ae6f-491ea02132c2",
+    "priority": 1,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "mk_file_manager_single_backup_restore"
+      },
+      "body_params": {
+        "nonce": "fuzz"
+      }
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "others": "fuzz",
+        "uploads": "fuzzV",
+        "themes": "fuzz",
+        "plugins": "fuzz",
+        "database": "fuzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key \"id\"",
+        "errfile": "/var/www/html/wp-content/plugins/wp-file-manager/file_folder_manager.php",
+        "errline": 153
+      }
+    ],
+    "exceptions": null,
+    "response_body": 

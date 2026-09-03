@@ -1,0 +1,172 @@
+[
+  {
+    "coverage_id": "1787132283-a394362d-4133-4286-a870-bf2c1cdf6930",
+    "priority": 46,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "eael_lr_send_otp"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "otp_token": "fuhNzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Cookie_Jar::offsetExists($key) should either be compatible with ArrayAccess::offsetExists(mixed $offset): bool, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Cookie/Jar.php",
+        "errline": 63
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Cookie_Jar::offsetGet($key) should either be compatible with ArrayAccess::offsetGet(mixed $offset): mixed, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Cookie/Jar.php",
+        "errline": 73
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Cookie_Jar::offsetSet($key, $value) should either be compatible with ArrayAccess::offsetSet(mixed $offset, mixed $value): void, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Cookie/Jar.php",
+        "errline": 89
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Cookie_Jar::offsetUnset($key) should either be compatible with ArrayAccess::offsetUnset(mixed $offset): void, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Cookie/Jar.php",
+        "errline": 102
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Cookie_Jar::getIterator() should either be compatible with IteratorAggregate::getIterator(): Traversable, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Cookie/Jar.php",
+        "errline": 111
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Utility_CaseInsensitiveDictionary::offsetExists($key) should either be compatible with ArrayAccess::offsetExists(mixed $offset): bool, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Utility/CaseInsensitiveDictionary.php",
+        "errline": 40
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Utility_CaseInsensitiveDictionary::offsetGet($key) should either be compatible with ArrayAccess::offsetGet(mixed $offset): mixed, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Utility/CaseInsensitiveDictionary.php",
+        "errline": 51
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Utility_CaseInsensitiveDictionary::offsetSet($key, $value) should either be compatible with ArrayAccess::offsetSet(mixed $offset, mixed $value): void, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Utility/CaseInsensitiveDictionary.php",
+        "errline": 68
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Utility_CaseInsensitiveDictionary::offsetUnset($key) should either be compatible with ArrayAccess::offsetUnset(mixed $offset): void, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Utility/CaseInsensitiveDictionary.php",
+        "errline": 82
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Utility_CaseInsensitiveDictionary::getIterator() should either be compatible with IteratorAggregate::getIterator(): Traversable, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Utility/CaseInsensitiveDictionary.php",
+        "errline": 91
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"success\":false,\"data\":{\"message\":\"Your verification session has expired. Please start over.\"}}",
+    "response.body.length": 97,
+    "response.headers": {
+      "Date": "Wed, 19 Aug 2026 09:38:03 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "97",
+      "Content-Type": "application/json; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 931.263,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787132218-feddb76e-8262-4dd0-966c-0149d118f9f4",
+    "paths": [
+      "/var/www/html/wp-content/plugins/essential-addons-for-elementor-lite/includes/Classes/ThinkRank_Promotion.php::::5_599_69_74_77_82_83_84_85_86_89_90",
+      "/var/www/html/wp-content/plugins/essential-addons-for-elementor-lite/vendor/composer/autoload_real.php::::11_12_14_21_25_26_27_29_30_32_34_37",
+      "/var/www/html/wp-content/plugins/essential-addons-for-elementor-lite/vendor/priyomukul/wp-notice/src/Notices.php::::104_105_108_109_110_111_113_114_115_118_120_121_124_125_128_129_144_209_211_212_234_84_89_90_94_98_99",
+      "/var/www/html/wp-content/plugins/essential-addons-for-elementor-lite/includes/Extensions/Scroll_to_Top.php::::17_18_460_5",
+      "/var/www/html/wp-content/plugins/essential-addons-for-elementor-lite/vendor/priyomukul/wp-notice/src/Utils/Storage.php::::15_16_17_18_38_40_41_58",
+      "/var/www/html/wp-content/plugins/essential-addons-for-elementor-lite/includes/Traits/Login_Registration.php::::1630_1631_2391_2393_2394_2398_2399_2400_3498_64_66_68_70_72_74_77_79_8",
+      "/var/www/html/wp-content/plugins/essential-addons-for-elementor-lite/includes/Extensions/Hover_Effect.php::::1637_18_19_20_8",
+      "/var/www/html/wp-content/plugins/essential-addons-for-elementor-lite/includes/Traits/Core.php::::131_132_136_137_138_141_143_144_22_23_425_5",
+      "/var/www/html/wp-content/plugins/essential-addons-for-elementor-lite/essential_adons_elementor.php::::101_102_103_104_105_106_108_116_117_118_123_131_132_133_138_146_147_148_153_154_155_158_159_160_161_165_166_17_170_171_173_181_182_183_187_189_26_27_28_29_30_31_32_38_61_80_87_88_89_90_91_93",
+      "/var/www/html/wp-content/plugins/essential-addons-for-elementor-lite/includes/Extensions/Reading_Progress.php::::16_17_219_4",
+      "/var/www/html/wp-content/plugins/essential-addons-for-elementor-lite/includes/Classes/Compatibility_Support.php::::10_13_4_54_55_58_60_89",
+      "/var/www/html/wp-content/plugins/essential-addons-for-elementor-lite/includes/Extensions/Vertical_Text_Orientation.php::::16_17_18_19_20_21_22_560_6",
+      "/var/www/html/wp-content/plugins/essential-addons-for-elementor-lite/includes/Traits/Template_Query.php::::297_5",
+      "/var/www/html/wp-content/plugins/essential-addons-for-elementor-lite/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_445_448_451_458_461_465_469_474_495_497_498_499_500_501_502_503_504_505_506_507_563_575_576_577_578_580",
+      "/var/www/html/wp-content/plugins/essential-addons-for-elementor-lite/includes/Classes/Bootstrap.php::::102_105_108_111_114_117_120_121_125_128_130_135_137_139_143_145_147_148_149_152_153_154_158_161_162_165_166_168_170_181_182_183_184_187_188_189_190_191_192_193_194_196_197_200_201_202_205_206_207_208_214_217_218_220_230_231_232_233_234_235_236_237_238_239_240_241_242_245_252_259_264_265_266_267_268_271_335_337_338_343_344_345_348_349_354_355_356_359_362_367_372_374_414_418_421_435_5_87_88_91",
+      "/var/www/html/wp-content/plugins/essential-addons-for-elementor-lite/includes/Classes/Migration.php::::112_5_70_75_76",
+      "/var/www/html/wp-content/plugins/essential-addons-for-elementor-lite/includes/bfcm-pointer.php::::2_6_62_65_66_67_69_7_73_74_8",
+      "/var/www/html/wp-content/plugins/essential-addons-for-elementor-lite/vendor/composer/autoload_static.php::::29_30_31_32_34_37",
+      "/var/www/html/wp-content/plugins/essential-addons-for-elementor-lite/includes/Traits/Helper.php::::43_5_53_769_960",
+      "/var/www/html/wp-content/plugins/essential-addons-for-elementor-lite/includes/Classes/Plugin_Usage_Tracker.php::::11_1292_161_162_166_170_171_172_173_65_66_668_669_670_671_673_674_675_68_76_77_78_79_81_83_84_85_86_87_91_95_96",
+      "/var/www/html/wp-content/plugins/essential-addons-for-elementor-lite/includes/Extensions/Custom_JS.php::::14_15_4_76",
+      "/var/www/html/wp-content/plugins/essential-addons-for-elementor-lite/includes/Traits/Enqueue.php::::145_5",
+      "/var/www/html/wp-content/plugins/essential-addons-for-elementor-lite/includes/Traits/Facebook_Feed.php::::349_5",
+      "/var/www/html/wp-content/plugins/essential-addons-for-elementor-lite/includes/Classes/WPDeveloper_Plugin_Installer.php::::13_14_15_16_17_18_294_4",
+      "/var/www/html/wp-content/plugins/essential-addons-for-elementor-lite/includes/Traits/Elements.php::::103_106_1061_108_109_113_114_117_5",
+      "/var/www/html/wp-content/plugins/essential-addons-for-elementor-lite/vendor/priyomukul/wp-notice/src/Notice.php::::301_49_51_52_53_54_55_57_59_71_74_77",
+      "/var/www/html/wp-content/plugins/essential-addons-for-elementor-lite/vendor/priyomukul/wp-notice/src/Utils/CacheBank.php::::147_18_19_22_26_27_28_32_34_38_39_42_44_45_48_52_53_55_58_59",
+      "/var/www/html/wp-content/plugins/essential-addons-for-elementor-lite/vendor/autoload.php::::20_22_5",
+      "/var/www/html/wp-content/plugins/essential-addons-for-elementor-lite/includes/Extensions/Table_of_Content.php::::1367_20_21_4",
+      "/var/www/html/wp-content/plugins/essential-addons-for-elementor-lite/includes/Classes/WPDeveloper_Setup_Wizard.php::::1012_11_20_21_22_23_24_25_26_27_28_35_36_43_44_6",
+      "/var/www/html/wp-content/plugins/essential-addons-for-elementor-lite/vendor/priyomukul/wp-notice/src/Utils/Base.php::::43_45",
+      "/var/www/html/wp-content/plugins/essential-addons-for-elementor-lite/includes/Extensions/Promotion.php::::13_14_15_16_17_18_19_20_21_22_222_25_26_27_28_29_31_4",
+      "/var/www/html/wp-content/plugins/essential-addons-for-elementor-lite/includes/Traits/Admin.php::::1908_1910_1914_1916_1917_1919_1920_1921_1922_1923_1924_1925_1928_1929_1930_1931_1934_1935_1936_1937_1940_1941_1947_1948_1954_1955_1956_1959_1960_1968_1969_1972_1973_1974_1979_1980_1981_1986_1987_1990_1991_1993_1994_2024_2026_2044_2045_2046_2049_2050_2053_2056_2057_2058_2062_2063_2064_2108_5",
+      "/var/www/html/wp-content/plugins/essential-addons-for-elementor-lite/includes/Extensions/Image_Masking.php::::26_27_28_29_30_31_32_33_34_652_7",
+      "/var/www/html/wp-content/plugins/essential-addons-for-elementor-lite/includes/Traits/Woo_Product_Comparable.php::::16_2357",
+      "/var/www/html/wp-content/plugins/essential-addons-for-elementor-lite/vendor/priyomukul/wp-notice/src/Dismiss.php::::165_22_23_25_26_27_31_33_34",
+      "/var/www/html/wp-content/plugins/essential-addons-for-elementor-lite/includes/Traits/Ajax_Handler.php::::14_1804_34_35_37_38_40_41_43_44_46_47_49_50_52_53_55_56_58_59_61_62_63_64_67_68_70_71_72",
+      "/var/www/html/wp-content/plugins/essential-addons-for-elementor-lite/includes/Extensions/Wrapper_Link.php::::136_18_19_20_21_22_24_25_8",
+      "/var/www/html/wp-content/plugins/essential-addons-for-elementor-lite/includes/Traits/Controls.php::::2398_6",
+      "/var/www/html/wp-content/plugins/essential-addons-for-elementor-lite/vendor/priyomukul/wp-notice/src/Utils/Helper.php::::23_34_47",
+      "/var/www/html/wp-content/plugins/essential-addons-for-elementor-lite/vendor/priyomukul/wp-notice/src/Utils/NoticeRemover.php::::11_12_15_19_38_39_40",
+      "/var/www/html/wp-content/plugins/essential-addons-for-elementor-lite/autoload.php::::12_15_16_18_22_27_3_30_31_33_7_9",
+      "/var/www/html/wp-content/plugins/essential-addons-for-elementor-lite/includes/Traits/Library.php::::30_31_32_34_350_5",
+      "/var/www/html/wp-content/plugins/essential-addons-for-elementor-lite/includes/Extensions/Liquid_Glass_Effect.php::::20_21_22_23_24_25_28_29_681_8",
+      "/var/www/html/wp-content/plugins/essential-addons-for-elementor-lite/includes/Extensions/Post_Duplicator.php::::12_13_14_15_17_187_5",
+      "/var/www/html/wp-content/plugins/essential-addons-for-elementor-lite/config.php::::1002_1003_1004_101_1010_1014_1015_1016_102_1025_1029_103_1030_1031_1034_1035_1036_1041_1042_1043_1046_1047_1048_1054_1058_1059_1060_1063_1064_1065_1070_1071_1072_1075_1076_1077_1080_1081_1082_1085_1086_1087_109_1090_1091_1092_11_1106_1110_1111_1112_1117_1118_1119_1125_1129_113_1130_1131_1136_1137_1138_114_1144_1148_1149_115_1150_1155_1156_1157_1160_1161_1162_1176_1180_1181_1182_1188_1192_1193_1194_1197_1198_1199_12_120_121_122_1221_1222_1223_1226_1227_1228_1234_1238_1239_1240_1245_1246_1247_1250_1251_1252_1258_1262_1263_1264_1267_1268_1269_1272_1273_1274_1279_128_1280_1281_1284_1285_1286_1289_1290_1291_1294_1295_1296_1299_13_1300_1301_1307_1311_1312_1313_1318_1319_132_1320_1323_1324_1325_133_1339_134_1343_1344_1345_1350_1351_1352_1355_1356_1357_1363_1367_1368_1369_1374_1375_1376_1379_1380_1381_1387_139_1391_1392_1393_1398_1399_140_1400_141_1414_1425_1426_1427_1438_144_1449_145_1450_1451_146_1460_1464_1465_1466_1472_1476_1477_1478_1484_1488_1489_149_1490_1495_1496_1497_150_1503_1507_1508_1509_151_1515_1519_1520_1521_1524_1525_1526_1529_1530_1531_1534_1535_1536_1542_1546_1547_1548_1553_1554_1555_1563_157_16_161_162_163_169_17_173_174_175_18_181_185_186_187_193_197_198_199_204_205_206_21_212_216_217_218_22_224_228_229_23_230_236_240_241_242_245_246_247_250_251_252_257_258_259_262_263_264_267_268_269_275_279_28_280_281_286_287_288_29_291_292_293_296_297_298_30_301_302_303_309_313_314_315_318_319_320_325_326_327_33_330_331_332_335_336_337_34_343_347_348_349_35_352_353_354_359_360_361_364_365_366_369_370_371_374_375_376_38_382_386_387_388_39_393_394_395_4_40_401_405_406_407_410_411_412_415_416_417_422_423_424_427_428_429_43_432_433_434_437_438_439_44_442_443_444_45_450_454_455_456_461_462_463_469_473_474_475_480_481_482_488_493_494_495_501_505_506_507_51_512_513_514_520_524_525_526_531_532_533_539_543_544_545_55_550_551_552_555_556_557_56_563_567_568_569_57_575_579_580_581_584_585_586_589_590_591_596_597_598_60_601_602_603_606_607_608_61_611_612_613_616_617_618_62_624_628_629_630_633_634_635_638_639_640_645_646_647_650_651_652_655_656_657_660_661_662_665_666_667_67_673_677_678_679_68_685_689_69_690_691_697_7_701_702_703_709_713_714_715_721_725_726_727_733_737_738_739_745_749_75_750_751_757_761_762_763_766_767_768_771_772_773_778_779_780_783_784_785_79_791_795_796_797_80_800_801_802_805_806_807_81_810_811_812_817_818_819_822_823_824_827_828_829_835_839_840_841_846_847_848_854_858_859_86_860_866_87_870_871_872_878_88_882_883_884_890_894_895_896_902_906_907_908_91_913_914_915_92_921_925_926_927_93_933_937_938_939_945_949_950_951_957_96_961_962_963_968_969_97_970_973_974_975_98_981_985_986_987_992_993_994_997_998_999"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 46,
+    "is_interesting": false,
+    "fuzzer_id": "5",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "otp_token"
+  }
+]

@@ -1,0 +1,3044 @@
+[
+  {
+    "coverage_id": "1786974983-141ea27d-ba28-424d-b94c-7aa28cf12a03",
+    "priority": 69,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "joinchat_onboard"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "data": "uzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"success\":false}",
+    "response.body.length": 18,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 13:56:26 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "18",
+      "Content-Type": "application/json; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 511.301,
+    "number_of_new_paths": 1,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786974983-41cbe2c7-aef0-4198-a33a-4658300fa773",
+    "paths": [
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-onboard.php::::224_227_230_231_234_236_255_256_263_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-util.php::::124_34_37_460_48_50_51_52_53_55_681_69_698_703_8_81",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-common.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_116_117_118_119_120_121_122_123_124_125_128_130_131_148_152_155_158_167_170_174_178_181_183_185_214_226_227_230_292_293_294_297_299_300_337_340_67_68_71_8_83_84_86_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/gutenberg/class-joinchat-gutenberg.php::::152_157_167_179_183_185_186_187_188_190_191_203_205_212_213_215_250_73_74_76_77_8_81",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_532_544_546_621_63_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-page.php::::100_142_143_145_146_147_148_149_150_151_152_154_155_159_160_161_162_163_165_166_169_170_174_176_177_180_181_185_186_187_188_189_190_191_192_193_194_199_200_204_206_219_220_222_223_225_226_227_228_229_232_235_239_64_65_67_68_69_73_75_77_79_8_80_82_84_85_86_864_866_867_868_87_881_882_89_90_93_97_983",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat.php::::109_111_113_124_128_130_141_143_145_149_150_152_164_168_170_172_173_175_176_178_180_192_196_197_198_200_202_204_205_206_207_208_209_211_212_214_215_216_218_219_221_223_224_226_228_229_230_232_234_235_236_237_239_251_252_289_290_324_328_330_332_333_334_335_337_339_350_352_354_356_383_47_48_49_51_52_53_54_57_59_61_8_84_85_86_87_88_89_91_92_93_95",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-tracking.php::::203_207_209_211_616_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-i18n.php::::33_34_465_69_70_71_72_74_75_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-abilities.php::::15_41_42_44_523",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-premium.php::::104_49_51_63_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/joinchat.php::::23_30_31_32_33_34_40_54_56_58_60_61",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-integrations.php::::100_235_31_36_60_79_8_84_89_96",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_535_536_537_538_540_541_544_546_621_63_64_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-loader.php::::100_101_102_103_106_175_176_179_180_183_186_49_50_52_65_66_79_8_80_98_99"
+    ],
+    "new_paths": [
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_532_544_546_621_63_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99"
+    ],
+    "vulns": [],
+    "score": 69,
+    "is_interesting": true,
+    "fuzzer_id": "4",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "data"
+  },
+  {
+    "coverage_id": "1786974991-9c27e35b-2745-4b10-9cb3-c3d0121864bf",
+    "priority": 74,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "joinchat_onboard"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "data": "fuzUz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"success\":false}",
+    "response.body.length": 18,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 13:56:31 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "18",
+      "Content-Type": "application/json; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 162.871,
+    "number_of_new_paths": 1,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786974983-41cbe2c7-aef0-4198-a33a-4658300fa773",
+    "paths": [
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-onboard.php::::224_227_230_231_234_236_255_256_263_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-util.php::::124_34_37_460_48_50_51_52_53_55_681_69_698_703_8_81",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-common.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_116_117_118_119_120_121_122_123_124_125_128_130_131_148_152_155_158_167_170_174_178_181_183_185_214_226_227_230_292_293_294_297_299_300_337_340_67_68_71_8_83_84_86_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_535_536_537_538_540_541_544_546_621_63_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/gutenberg/class-joinchat-gutenberg.php::::152_157_167_179_183_185_186_187_188_190_191_203_205_212_213_215_250_73_74_76_77_8_81",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-page.php::::100_142_143_145_146_147_148_149_150_151_152_154_155_159_160_161_162_163_165_166_169_170_174_176_177_180_181_185_186_187_188_189_190_191_192_193_194_199_200_204_206_219_220_222_223_225_226_227_228_229_232_235_239_64_65_67_68_69_73_75_77_79_8_80_82_84_85_86_864_866_867_868_87_881_882_89_90_93_97_983",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat.php::::109_111_113_124_128_130_141_143_145_149_150_152_164_168_170_172_173_175_176_178_180_192_196_197_198_200_202_204_205_206_207_208_209_211_212_214_215_216_218_219_221_223_224_226_228_229_230_232_234_235_236_237_239_251_252_289_290_324_328_330_332_333_334_335_337_339_350_352_354_356_383_47_48_49_51_52_53_54_57_59_61_8_84_85_86_87_88_89_91_92_93_95",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-tracking.php::::203_207_209_211_616_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-i18n.php::::33_34_465_69_70_71_72_74_75_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-abilities.php::::15_41_42_44_523",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-premium.php::::104_49_51_63_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/joinchat.php::::23_30_31_32_33_34_40_54_56_58_60_61",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-integrations.php::::100_235_31_36_60_79_8_84_89_96",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_535_536_537_538_540_541_544_546_621_63_64_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-loader.php::::100_101_102_103_106_175_176_179_180_183_186_49_50_52_65_66_79_8_80_98_99"
+    ],
+    "new_paths": [
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_535_536_537_538_540_541_544_546_621_63_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99"
+    ],
+    "vulns": [],
+    "score": 74,
+    "is_interesting": true,
+    "fuzzer_id": "4",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "data"
+  },
+  {
+    "coverage_id": "1786974996-219f63db-d543-4a35-a278-46d910ae9a5e",
+    "priority": 69,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "joinchat_onboard"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "data": "fuz8"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"success\":false}",
+    "response.body.length": 18,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 13:56:36 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "18",
+      "Content-Type": "application/json; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 153.506,
+    "number_of_new_paths": 1,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786974983-41cbe2c7-aef0-4198-a33a-4658300fa773",
+    "paths": [
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-onboard.php::::224_227_230_231_234_236_255_256_263_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-util.php::::124_34_37_460_48_50_51_52_53_55_681_69_698_703_8_81",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-common.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_116_117_118_119_120_121_122_123_124_125_128_130_131_148_152_155_158_167_170_174_178_181_183_185_214_226_227_230_292_293_294_297_299_300_337_340_67_68_71_8_83_84_86_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/gutenberg/class-joinchat-gutenberg.php::::152_157_167_179_183_185_186_187_188_190_191_203_205_212_213_215_250_73_74_76_77_8_81",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_532_544_546_621_63_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-page.php::::100_142_143_145_146_147_148_149_150_151_152_154_155_159_160_161_162_163_165_166_169_170_174_176_177_180_181_185_186_187_188_189_190_191_192_193_194_199_200_204_206_219_220_222_223_225_226_227_228_229_232_235_239_64_65_67_68_69_73_75_77_79_8_80_82_84_85_86_864_866_867_868_87_881_882_89_90_93_97_983",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat.php::::109_111_113_124_128_130_141_143_145_149_150_152_164_168_170_172_173_175_176_178_180_192_196_197_198_200_202_204_205_206_207_208_209_211_212_214_215_216_218_219_221_223_224_226_228_229_230_232_234_235_236_237_239_251_252_289_290_324_328_330_332_333_334_335_337_339_350_352_354_356_383_47_48_49_51_52_53_54_57_59_61_8_84_85_86_87_88_89_91_92_93_95",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-tracking.php::::203_207_209_211_616_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-i18n.php::::33_34_465_69_70_71_72_74_75_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-abilities.php::::15_41_42_44_523",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-premium.php::::104_49_51_63_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/joinchat.php::::23_30_31_32_33_34_40_54_56_58_60_61",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-integrations.php::::100_235_31_36_60_79_8_84_89_96",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_535_536_537_538_540_541_544_546_621_63_64_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-loader.php::::100_101_102_103_106_175_176_179_180_183_186_49_50_52_65_66_79_8_80_98_99"
+    ],
+    "new_paths": [
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_532_544_546_621_63_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99"
+    ],
+    "vulns": [],
+    "score": 69,
+    "is_interesting": false,
+    "fuzzer_id": "4",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "data"
+  },
+  {
+    "coverage_id": "1786975002-9a41f8c6-e0ad-4ba5-b2e8-329de44026f3",
+    "priority": 74,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "joinchat_onboard"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "data": "f$uzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"success\":false}",
+    "response.body.length": 18,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 13:56:42 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "18",
+      "Content-Type": "application/json; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 156.111,
+    "number_of_new_paths": 1,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786974983-41cbe2c7-aef0-4198-a33a-4658300fa773",
+    "paths": [
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-onboard.php::::224_227_230_231_234_236_255_256_263_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-util.php::::124_34_37_460_48_50_51_52_53_55_681_69_698_703_8_81",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-common.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_116_117_118_119_120_121_122_123_124_125_128_130_131_148_152_155_158_167_170_174_178_181_183_185_214_226_227_230_292_293_294_297_299_300_337_340_67_68_71_8_83_84_86_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_535_536_537_538_540_541_544_546_621_63_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/gutenberg/class-joinchat-gutenberg.php::::152_157_167_179_183_185_186_187_188_190_191_203_205_212_213_215_250_73_74_76_77_8_81",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-page.php::::100_142_143_145_146_147_148_149_150_151_152_154_155_159_160_161_162_163_165_166_169_170_174_176_177_180_181_185_186_187_188_189_190_191_192_193_194_199_200_204_206_219_220_222_223_225_226_227_228_229_232_235_239_64_65_67_68_69_73_75_77_79_8_80_82_84_85_86_864_866_867_868_87_881_882_89_90_93_97_983",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat.php::::109_111_113_124_128_130_141_143_145_149_150_152_164_168_170_172_173_175_176_178_180_192_196_197_198_200_202_204_205_206_207_208_209_211_212_214_215_216_218_219_221_223_224_226_228_229_230_232_234_235_236_237_239_251_252_289_290_324_328_330_332_333_334_335_337_339_350_352_354_356_383_47_48_49_51_52_53_54_57_59_61_8_84_85_86_87_88_89_91_92_93_95",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-tracking.php::::203_207_209_211_616_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-i18n.php::::33_34_465_69_70_71_72_74_75_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-abilities.php::::15_41_42_44_523",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-premium.php::::104_49_51_63_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/joinchat.php::::23_30_31_32_33_34_40_54_56_58_60_61",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-integrations.php::::100_235_31_36_60_79_8_84_89_96",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_535_536_537_538_540_541_544_546_621_63_64_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-loader.php::::100_101_102_103_106_175_176_179_180_183_186_49_50_52_65_66_79_8_80_98_99"
+    ],
+    "new_paths": [
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_535_536_537_538_540_541_544_546_621_63_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99"
+    ],
+    "vulns": [],
+    "score": 74,
+    "is_interesting": false,
+    "fuzzer_id": "4",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "data"
+  },
+  {
+    "coverage_id": "1786975007-6a0c21c2-6170-4448-a5fc-dca18e38a85f",
+    "priority": 69,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "joinchat_onboard"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "data": "fuz0"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"success\":false}",
+    "response.body.length": 18,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 13:56:47 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "18",
+      "Content-Type": "application/json; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 147.858,
+    "number_of_new_paths": 1,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786974983-41cbe2c7-aef0-4198-a33a-4658300fa773",
+    "paths": [
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-onboard.php::::224_227_230_231_234_236_255_256_263_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-util.php::::124_34_37_460_48_50_51_52_53_55_681_69_698_703_8_81",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-common.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_116_117_118_119_120_121_122_123_124_125_128_130_131_148_152_155_158_167_170_174_178_181_183_185_214_226_227_230_292_293_294_297_299_300_337_340_67_68_71_8_83_84_86_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/gutenberg/class-joinchat-gutenberg.php::::152_157_167_179_183_185_186_187_188_190_191_203_205_212_213_215_250_73_74_76_77_8_81",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_532_544_546_621_63_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-page.php::::100_142_143_145_146_147_148_149_150_151_152_154_155_159_160_161_162_163_165_166_169_170_174_176_177_180_181_185_186_187_188_189_190_191_192_193_194_199_200_204_206_219_220_222_223_225_226_227_228_229_232_235_239_64_65_67_68_69_73_75_77_79_8_80_82_84_85_86_864_866_867_868_87_881_882_89_90_93_97_983",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat.php::::109_111_113_124_128_130_141_143_145_149_150_152_164_168_170_172_173_175_176_178_180_192_196_197_198_200_202_204_205_206_207_208_209_211_212_214_215_216_218_219_221_223_224_226_228_229_230_232_234_235_236_237_239_251_252_289_290_324_328_330_332_333_334_335_337_339_350_352_354_356_383_47_48_49_51_52_53_54_57_59_61_8_84_85_86_87_88_89_91_92_93_95",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-tracking.php::::203_207_209_211_616_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-i18n.php::::33_34_465_69_70_71_72_74_75_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-abilities.php::::15_41_42_44_523",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-premium.php::::104_49_51_63_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/joinchat.php::::23_30_31_32_33_34_40_54_56_58_60_61",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-integrations.php::::100_235_31_36_60_79_8_84_89_96",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_535_536_537_538_540_541_544_546_621_63_64_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-loader.php::::100_101_102_103_106_175_176_179_180_183_186_49_50_52_65_66_79_8_80_98_99"
+    ],
+    "new_paths": [
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_532_544_546_621_63_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99"
+    ],
+    "vulns": [],
+    "score": 69,
+    "is_interesting": false,
+    "fuzzer_id": "4",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "data"
+  },
+  {
+    "coverage_id": "1786975012-bf978642-3262-43f9-b68d-4dcf5a52c563",
+    "priority": 92,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "joinchat_onboard"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "data": "fuzz}"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"success\":true}",
+    "response.body.length": 17,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 13:56:52 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "17",
+      "Content-Type": "application/json; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 153.256,
+    "number_of_new_paths": 2,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786974983-41cbe2c7-aef0-4198-a33a-4658300fa773",
+    "paths": [
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-onboard.php::::224_227_230_231_234_236_255_256_263_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-util.php::::124_34_37_460_48_50_51_52_53_55_681_69_698_703_8_81",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-common.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_116_117_118_119_120_121_122_123_124_125_128_130_131_148_152_155_158_167_170_174_178_181_183_185_214_226_227_230_292_293_294_297_299_300_337_340_67_68_71_8_83_84_86_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/gutenberg/class-joinchat-gutenberg.php::::152_157_167_179_183_185_186_187_188_190_191_203_205_212_213_215_250_73_74_76_77_8_81",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-page.php::::100_142_143_145_146_147_148_149_150_151_152_154_155_159_160_161_162_163_165_166_169_170_174_176_177_180_181_185_186_187_188_189_190_191_192_193_194_199_200_204_206_219_220_222_223_225_226_227_228_229_232_235_239_64_65_67_68_69_73_75_77_79_8_80_82_84_85_86_864_866_867_868_87_881_882_89_90_93_97_983",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat.php::::109_111_113_124_128_130_141_143_145_149_150_152_164_168_170_172_173_175_176_178_180_192_196_197_198_200_202_204_205_206_207_208_209_211_212_214_215_216_218_219_221_223_224_226_228_229_230_232_234_235_236_237_239_251_252_289_290_324_328_330_332_333_334_335_337_339_350_352_354_356_383_47_48_49_51_52_53_54_57_59_61_8_84_85_86_87_88_89_91_92_93_95",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-tracking.php::::203_207_209_211_616_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-i18n.php::::33_34_465_69_70_71_72_74_75_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-abilities.php::::15_41_42_44_523",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_494_495_497_510_511_513_515_520_530_535_536_537_538_540_541_544_546_621_63_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-premium.php::::104_49_51_63_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/joinchat.php::::23_30_31_32_33_34_40_54_56_58_60_61",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-onboard.php::::224_227_230_231_234_236_255_258_263_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-integrations.php::::100_235_31_36_60_79_8_84_89_96",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_535_536_537_538_540_541_544_546_621_63_64_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-loader.php::::100_101_102_103_106_175_176_179_180_183_186_49_50_52_65_66_79_8_80_98_99"
+    ],
+    "new_paths": [
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-onboard.php::::224_227_230_231_234_236_255_258_263_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_494_495_497_510_511_513_515_520_530_535_536_537_538_540_541_544_546_621_63_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99"
+    ],
+    "vulns": [],
+    "score": 92,
+    "is_interesting": true,
+    "fuzzer_id": "4",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "data"
+  },
+  {
+    "coverage_id": "1786975017-be38f45f-a53d-4305-bafd-cdb21b140e51",
+    "priority": 87,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "joinchat_onboard"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "data": "{{99901*'99991'}}"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"success\":true}",
+    "response.body.length": 17,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 13:56:57 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "17",
+      "Content-Type": "application/json; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 168.437,
+    "number_of_new_paths": 2,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786974983-41cbe2c7-aef0-4198-a33a-4658300fa773",
+    "paths": [
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-onboard.php::::224_227_230_231_234_236_255_256_263_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-util.php::::124_34_37_460_48_50_51_52_53_55_681_69_698_703_8_81",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-common.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_116_117_118_119_120_121_122_123_124_125_128_130_131_148_152_155_158_167_170_174_178_181_183_185_214_226_227_230_292_293_294_297_299_300_337_340_67_68_71_8_83_84_86_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/gutenberg/class-joinchat-gutenberg.php::::152_157_167_179_183_185_186_187_188_190_191_203_205_212_213_215_250_73_74_76_77_8_81",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-page.php::::100_142_143_145_146_147_148_149_150_151_152_154_155_159_160_161_162_163_165_166_169_170_174_176_177_180_181_185_186_187_188_189_190_191_192_193_194_199_200_204_206_219_220_222_223_225_226_227_228_229_232_235_239_64_65_67_68_69_73_75_77_79_8_80_82_84_85_86_864_866_867_868_87_881_882_89_90_93_97_983",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat.php::::109_111_113_124_128_130_141_143_145_149_150_152_164_168_170_172_173_175_176_178_180_192_196_197_198_200_202_204_205_206_207_208_209_211_212_214_215_216_218_219_221_223_224_226_228_229_230_232_234_235_236_237_239_251_252_289_290_324_328_330_332_333_334_335_337_339_350_352_354_356_383_47_48_49_51_52_53_54_57_59_61_8_84_85_86_87_88_89_91_92_93_95",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-tracking.php::::203_207_209_211_616_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-i18n.php::::33_34_465_69_70_71_72_74_75_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-abilities.php::::15_41_42_44_523",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-premium.php::::104_49_51_63_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/joinchat.php::::23_30_31_32_33_34_40_54_56_58_60_61",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_494_495_497_510_511_513_515_520_530_532_544_546_621_63_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-onboard.php::::224_227_230_231_234_236_255_258_263_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-integrations.php::::100_235_31_36_60_79_8_84_89_96",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_535_536_537_538_540_541_544_546_621_63_64_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-loader.php::::100_101_102_103_106_175_176_179_180_183_186_49_50_52_65_66_79_8_80_98_99"
+    ],
+    "new_paths": [
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_494_495_497_510_511_513_515_520_530_532_544_546_621_63_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-onboard.php::::224_227_230_231_234_236_255_258_263_8"
+    ],
+    "vulns": [],
+    "score": 87,
+    "is_interesting": true,
+    "fuzzer_id": "4",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "data"
+  },
+  {
+    "coverage_id": "1786975023-3905560c-e151-4795-b0d3-2ee2176e3bdd",
+    "priority": 92,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "joinchat_onboard"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "data": "%7B%7Bdump%28app%29%7D%7D"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"success\":true}",
+    "response.body.length": 17,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 13:57:03 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "17",
+      "Content-Type": "application/json; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 165.763,
+    "number_of_new_paths": 2,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786974983-41cbe2c7-aef0-4198-a33a-4658300fa773",
+    "paths": [
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-onboard.php::::224_227_230_231_234_236_255_256_263_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-util.php::::124_34_37_460_48_50_51_52_53_55_681_69_698_703_8_81",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-common.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_116_117_118_119_120_121_122_123_124_125_128_130_131_148_152_155_158_167_170_174_178_181_183_185_214_226_227_230_292_293_294_297_299_300_337_340_67_68_71_8_83_84_86_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/gutenberg/class-joinchat-gutenberg.php::::152_157_167_179_183_185_186_187_188_190_191_203_205_212_213_215_250_73_74_76_77_8_81",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-page.php::::100_142_143_145_146_147_148_149_150_151_152_154_155_159_160_161_162_163_165_166_169_170_174_176_177_180_181_185_186_187_188_189_190_191_192_193_194_199_200_204_206_219_220_222_223_225_226_227_228_229_232_235_239_64_65_67_68_69_73_75_77_79_8_80_82_84_85_86_864_866_867_868_87_881_882_89_90_93_97_983",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat.php::::109_111_113_124_128_130_141_143_145_149_150_152_164_168_170_172_173_175_176_178_180_192_196_197_198_200_202_204_205_206_207_208_209_211_212_214_215_216_218_219_221_223_224_226_228_229_230_232_234_235_236_237_239_251_252_289_290_324_328_330_332_333_334_335_337_339_350_352_354_356_383_47_48_49_51_52_53_54_57_59_61_8_84_85_86_87_88_89_91_92_93_95",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-tracking.php::::203_207_209_211_616_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-i18n.php::::33_34_465_69_70_71_72_74_75_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-abilities.php::::15_41_42_44_523",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_494_495_497_510_511_513_515_520_530_535_536_537_538_540_541_544_546_621_63_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-premium.php::::104_49_51_63_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/joinchat.php::::23_30_31_32_33_34_40_54_56_58_60_61",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-onboard.php::::224_227_230_231_234_236_255_258_263_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-integrations.php::::100_235_31_36_60_79_8_84_89_96",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_535_536_537_538_540_541_544_546_621_63_64_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-loader.php::::100_101_102_103_106_175_176_179_180_183_186_49_50_52_65_66_79_8_80_98_99"
+    ],
+    "new_paths": [
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-onboard.php::::224_227_230_231_234_236_255_258_263_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_494_495_497_510_511_513_515_520_530_535_536_537_538_540_541_544_546_621_63_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99"
+    ],
+    "vulns": [],
+    "score": 92,
+    "is_interesting": false,
+    "fuzzer_id": "4",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "data"
+  },
+  {
+    "coverage_id": "1786975028-574cea31-a716-4624-a0c7-2f8e56fd9cc8",
+    "priority": 69,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "joinchat_onboard"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "data": "7uzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"success\":false}",
+    "response.body.length": 18,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 13:57:08 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "18",
+      "Content-Type": "application/json; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 138.991,
+    "number_of_new_paths": 1,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786974983-41cbe2c7-aef0-4198-a33a-4658300fa773",
+    "paths": [
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-onboard.php::::224_227_230_231_234_236_255_256_263_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-util.php::::124_34_37_460_48_50_51_52_53_55_681_69_698_703_8_81",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-common.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_116_117_118_119_120_121_122_123_124_125_128_130_131_148_152_155_158_167_170_174_178_181_183_185_214_226_227_230_292_293_294_297_299_300_337_340_67_68_71_8_83_84_86_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/gutenberg/class-joinchat-gutenberg.php::::152_157_167_179_183_185_186_187_188_190_191_203_205_212_213_215_250_73_74_76_77_8_81",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_532_544_546_621_63_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-page.php::::100_142_143_145_146_147_148_149_150_151_152_154_155_159_160_161_162_163_165_166_169_170_174_176_177_180_181_185_186_187_188_189_190_191_192_193_194_199_200_204_206_219_220_222_223_225_226_227_228_229_232_235_239_64_65_67_68_69_73_75_77_79_8_80_82_84_85_86_864_866_867_868_87_881_882_89_90_93_97_983",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat.php::::109_111_113_124_128_130_141_143_145_149_150_152_164_168_170_172_173_175_176_178_180_192_196_197_198_200_202_204_205_206_207_208_209_211_212_214_215_216_218_219_221_223_224_226_228_229_230_232_234_235_236_237_239_251_252_289_290_324_328_330_332_333_334_335_337_339_350_352_354_356_383_47_48_49_51_52_53_54_57_59_61_8_84_85_86_87_88_89_91_92_93_95",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-tracking.php::::203_207_209_211_616_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-i18n.php::::33_34_465_69_70_71_72_74_75_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-abilities.php::::15_41_42_44_523",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-premium.php::::104_49_51_63_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/joinchat.php::::23_30_31_32_33_34_40_54_56_58_60_61",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-integrations.php::::100_235_31_36_60_79_8_84_89_96",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_535_536_537_538_540_541_544_546_621_63_64_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-loader.php::::100_101_102_103_106_175_176_179_180_183_186_49_50_52_65_66_79_8_80_98_99"
+    ],
+    "new_paths": [
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_532_544_546_621_63_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99"
+    ],
+    "vulns": [],
+    "score": 69,
+    "is_interesting": false,
+    "fuzzer_id": "4",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "data"
+  },
+  {
+    "coverage_id": "1786975033-ebdc9669-ac7e-4e5b-8976-c7d79a281b0f",
+    "priority": 74,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "joinchat_onboard"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "data": "fuzz<a href='javascript:alert(0xdeadbeef)'"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Cookie_Jar::offsetExists($key) should either be compatible with ArrayAccess::offsetExists(mixed $offset): bool, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Cookie/Jar.php",
+        "errline": 63
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Cookie_Jar::offsetGet($key) should either be compatible with ArrayAccess::offsetGet(mixed $offset): mixed, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Cookie/Jar.php",
+        "errline": 73
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Cookie_Jar::offsetSet($key, $value) should either be compatible with ArrayAccess::offsetSet(mixed $offset, mixed $value): void, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Cookie/Jar.php",
+        "errline": 89
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Cookie_Jar::offsetUnset($key) should either be compatible with ArrayAccess::offsetUnset(mixed $offset): void, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Cookie/Jar.php",
+        "errline": 102
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Cookie_Jar::getIterator() should either be compatible with IteratorAggregate::getIterator(): Traversable, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Cookie/Jar.php",
+        "errline": 111
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Utility_CaseInsensitiveDictionary::offsetExists($key) should either be compatible with ArrayAccess::offsetExists(mixed $offset): bool, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Utility/CaseInsensitiveDictionary.php",
+        "errline": 40
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Utility_CaseInsensitiveDictionary::offsetGet($key) should either be compatible with ArrayAccess::offsetGet(mixed $offset): mixed, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Utility/CaseInsensitiveDictionary.php",
+        "errline": 51
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Utility_CaseInsensitiveDictionary::offsetSet($key, $value) should either be compatible with ArrayAccess::offsetSet(mixed $offset, mixed $value): void, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Utility/CaseInsensitiveDictionary.php",
+        "errline": 68
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Utility_CaseInsensitiveDictionary::offsetUnset($key) should either be compatible with ArrayAccess::offsetUnset(mixed $offset): void, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Utility/CaseInsensitiveDictionary.php",
+        "errline": 82
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Utility_CaseInsensitiveDictionary::getIterator() should either be compatible with IteratorAggregate::getIterator(): Traversable, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Utility/CaseInsensitiveDictionary.php",
+        "errline": 91
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"success\":false}",
+    "response.body.length": 18,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 13:57:13 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "18",
+      "Content-Type": "application/json; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 329.426,
+    "number_of_new_paths": 1,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786974983-41cbe2c7-aef0-4198-a33a-4658300fa773",
+    "paths": [
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-onboard.php::::224_227_230_231_234_236_255_256_263_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-util.php::::124_34_37_460_48_50_51_52_53_55_681_69_698_703_8_81",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-common.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_116_117_118_119_120_121_122_123_124_125_128_130_131_148_152_155_158_167_170_174_178_181_183_185_214_226_227_230_292_293_294_297_299_300_337_340_67_68_71_8_83_84_86_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_535_536_537_538_540_541_544_546_621_63_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/gutenberg/class-joinchat-gutenberg.php::::152_157_167_179_183_185_186_187_188_190_191_203_205_212_213_215_250_73_74_76_77_8_81",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-page.php::::100_142_143_145_146_147_148_149_150_151_152_154_155_159_160_161_162_163_165_166_169_170_174_176_177_180_181_185_186_187_188_189_190_191_192_193_194_199_200_204_206_219_220_222_223_225_226_227_228_229_232_235_239_64_65_67_68_69_73_75_77_79_8_80_82_84_85_86_864_866_867_868_87_881_882_89_90_93_97_983",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat.php::::109_111_113_124_128_130_141_143_145_149_150_152_164_168_170_172_173_175_176_178_180_192_196_197_198_200_202_204_205_206_207_208_209_211_212_214_215_216_218_219_221_223_224_226_228_229_230_232_234_235_236_237_239_251_252_289_290_324_328_330_332_333_334_335_337_339_350_352_354_356_383_47_48_49_51_52_53_54_57_59_61_8_84_85_86_87_88_89_91_92_93_95",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-tracking.php::::203_207_209_211_616_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-i18n.php::::33_34_465_69_70_71_72_74_75_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-abilities.php::::15_41_42_44_523",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-premium.php::::104_49_51_63_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/joinchat.php::::23_30_31_32_33_34_40_54_56_58_60_61",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-integrations.php::::100_235_31_36_60_79_8_84_89_96",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_535_536_537_538_540_541_544_546_621_63_64_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-loader.php::::100_101_102_103_106_175_176_179_180_183_186_49_50_52_65_66_79_8_80_98_99"
+    ],
+    "new_paths": [
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_535_536_537_538_540_541_544_546_621_63_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99"
+    ],
+    "vulns": [],
+    "score": 74,
+    "is_interesting": false,
+    "fuzzer_id": "4",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "data"
+  },
+  {
+    "coverage_id": "1786975038-5ad15cc1-9b18-45b9-a101-224d38c234f9",
+    "priority": 69,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "joinchat_onboard"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "data": "fuczz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"success\":false}",
+    "response.body.length": 18,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 13:57:18 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "18",
+      "Content-Type": "application/json; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 302.696,
+    "number_of_new_paths": 1,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786974983-41cbe2c7-aef0-4198-a33a-4658300fa773",
+    "paths": [
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-onboard.php::::224_227_230_231_234_236_255_256_263_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-util.php::::124_34_37_460_48_50_51_52_53_55_681_69_698_703_8_81",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-common.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_116_117_118_119_120_121_122_123_124_125_128_130_131_148_152_155_158_167_170_174_178_181_183_185_214_226_227_230_292_293_294_297_299_300_337_340_67_68_71_8_83_84_86_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/gutenberg/class-joinchat-gutenberg.php::::152_157_167_179_183_185_186_187_188_190_191_203_205_212_213_215_250_73_74_76_77_8_81",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_532_544_546_621_63_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-page.php::::100_142_143_145_146_147_148_149_150_151_152_154_155_159_160_161_162_163_165_166_169_170_174_176_177_180_181_185_186_187_188_189_190_191_192_193_194_199_200_204_206_219_220_222_223_225_226_227_228_229_232_235_239_64_65_67_68_69_73_75_77_79_8_80_82_84_85_86_864_866_867_868_87_881_882_89_90_93_97_983",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat.php::::109_111_113_124_128_130_141_143_145_149_150_152_164_168_170_172_173_175_176_178_180_192_196_197_198_200_202_204_205_206_207_208_209_211_212_214_215_216_218_219_221_223_224_226_228_229_230_232_234_235_236_237_239_251_252_289_290_324_328_330_332_333_334_335_337_339_350_352_354_356_383_47_48_49_51_52_53_54_57_59_61_8_84_85_86_87_88_89_91_92_93_95",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-tracking.php::::203_207_209_211_616_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-i18n.php::::33_34_465_69_70_71_72_74_75_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-abilities.php::::15_41_42_44_523",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-premium.php::::104_49_51_63_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/joinchat.php::::23_30_31_32_33_34_40_54_56_58_60_61",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-integrations.php::::100_235_31_36_60_79_8_84_89_96",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_535_536_537_538_540_541_544_546_621_63_64_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-loader.php::::100_101_102_103_106_175_176_179_180_183_186_49_50_52_65_66_79_8_80_98_99"
+    ],
+    "new_paths": [
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_532_544_546_621_63_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99"
+    ],
+    "vulns": [],
+    "score": 69,
+    "is_interesting": false,
+    "fuzzer_id": "4",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "data"
+  },
+  {
+    "coverage_id": "1786975044-1ac1b0bc-8d9d-41d8-980e-4f03ecf83728",
+    "priority": 74,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "joinchat_onboard"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "data": "f3zz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"success\":false}",
+    "response.body.length": 18,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 13:57:24 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "18",
+      "Content-Type": "application/json; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 294.565,
+    "number_of_new_paths": 1,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786974983-41cbe2c7-aef0-4198-a33a-4658300fa773",
+    "paths": [
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-onboard.php::::224_227_230_231_234_236_255_256_263_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-util.php::::124_34_37_460_48_50_51_52_53_55_681_69_698_703_8_81",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-common.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_116_117_118_119_120_121_122_123_124_125_128_130_131_148_152_155_158_167_170_174_178_181_183_185_214_226_227_230_292_293_294_297_299_300_337_340_67_68_71_8_83_84_86_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_535_536_537_538_540_541_544_546_621_63_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/gutenberg/class-joinchat-gutenberg.php::::152_157_167_179_183_185_186_187_188_190_191_203_205_212_213_215_250_73_74_76_77_8_81",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-page.php::::100_142_143_145_146_147_148_149_150_151_152_154_155_159_160_161_162_163_165_166_169_170_174_176_177_180_181_185_186_187_188_189_190_191_192_193_194_199_200_204_206_219_220_222_223_225_226_227_228_229_232_235_239_64_65_67_68_69_73_75_77_79_8_80_82_84_85_86_864_866_867_868_87_881_882_89_90_93_97_983",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat.php::::109_111_113_124_128_130_141_143_145_149_150_152_164_168_170_172_173_175_176_178_180_192_196_197_198_200_202_204_205_206_207_208_209_211_212_214_215_216_218_219_221_223_224_226_228_229_230_232_234_235_236_237_239_251_252_289_290_324_328_330_332_333_334_335_337_339_350_352_354_356_383_47_48_49_51_52_53_54_57_59_61_8_84_85_86_87_88_89_91_92_93_95",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-tracking.php::::203_207_209_211_616_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-i18n.php::::33_34_465_69_70_71_72_74_75_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-abilities.php::::15_41_42_44_523",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-premium.php::::104_49_51_63_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/joinchat.php::::23_30_31_32_33_34_40_54_56_58_60_61",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-integrations.php::::100_235_31_36_60_79_8_84_89_96",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_535_536_537_538_540_541_544_546_621_63_64_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-loader.php::::100_101_102_103_106_175_176_179_180_183_186_49_50_52_65_66_79_8_80_98_99"
+    ],
+    "new_paths": [
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_535_536_537_538_540_541_544_546_621_63_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99"
+    ],
+    "vulns": [],
+    "score": 74,
+    "is_interesting": false,
+    "fuzzer_id": "4",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "data"
+  },
+  {
+    "coverage_id": "1786975049-707ff0f2-c39e-4ec8-bbc1-1d5ff24301c3",
+    "priority": 69,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "joinchat_onboard"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "data": "fuzz\\"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"success\":false}",
+    "response.body.length": 18,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 13:57:29 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "18",
+      "Content-Type": "application/json; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 151.744,
+    "number_of_new_paths": 1,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786974983-41cbe2c7-aef0-4198-a33a-4658300fa773",
+    "paths": [
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-onboard.php::::224_227_230_231_234_236_255_256_263_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-util.php::::124_34_37_460_48_50_51_52_53_55_681_69_698_703_8_81",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-common.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_116_117_118_119_120_121_122_123_124_125_128_130_131_148_152_155_158_167_170_174_178_181_183_185_214_226_227_230_292_293_294_297_299_300_337_340_67_68_71_8_83_84_86_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/gutenberg/class-joinchat-gutenberg.php::::152_157_167_179_183_185_186_187_188_190_191_203_205_212_213_215_250_73_74_76_77_8_81",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_532_544_546_621_63_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-page.php::::100_142_143_145_146_147_148_149_150_151_152_154_155_159_160_161_162_163_165_166_169_170_174_176_177_180_181_185_186_187_188_189_190_191_192_193_194_199_200_204_206_219_220_222_223_225_226_227_228_229_232_235_239_64_65_67_68_69_73_75_77_79_8_80_82_84_85_86_864_866_867_868_87_881_882_89_90_93_97_983",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat.php::::109_111_113_124_128_130_141_143_145_149_150_152_164_168_170_172_173_175_176_178_180_192_196_197_198_200_202_204_205_206_207_208_209_211_212_214_215_216_218_219_221_223_224_226_228_229_230_232_234_235_236_237_239_251_252_289_290_324_328_330_332_333_334_335_337_339_350_352_354_356_383_47_48_49_51_52_53_54_57_59_61_8_84_85_86_87_88_89_91_92_93_95",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-tracking.php::::203_207_209_211_616_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-i18n.php::::33_34_465_69_70_71_72_74_75_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-abilities.php::::15_41_42_44_523",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-premium.php::::104_49_51_63_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/joinchat.php::::23_30_31_32_33_34_40_54_56_58_60_61",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-integrations.php::::100_235_31_36_60_79_8_84_89_96",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_535_536_537_538_540_541_544_546_621_63_64_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-loader.php::::100_101_102_103_106_175_176_179_180_183_186_49_50_52_65_66_79_8_80_98_99"
+    ],
+    "new_paths": [
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_532_544_546_621_63_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99"
+    ],
+    "vulns": [],
+    "score": 69,
+    "is_interesting": false,
+    "fuzzer_id": "4",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "data"
+  },
+  {
+    "coverage_id": "1786975055-89d3e5e6-7199-406d-a833-63d7378f9d69",
+    "priority": 76,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "joinchat_onboard"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "data": "fuP:L?z"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"success\":false}",
+    "response.body.length": 18,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 13:57:35 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "18",
+      "Content-Type": "application/json; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 155.202,
+    "number_of_new_paths": 1,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786975029-9e401549-5c53-459f-8d78-22772c23dad9",
+    "paths": [
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-onboard.php::::224_227_230_231_234_236_255_256_263_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-util.php::::124_34_37_460_48_50_51_52_53_55_681_69_698_703_8_81",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-common.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_116_117_118_119_120_121_122_123_124_125_128_130_131_148_152_155_158_167_170_174_178_181_183_185_214_226_227_230_292_293_294_297_299_300_337_340_67_68_71_8_83_84_86_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_535_536_537_538_540_541_544_546_621_63_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/gutenberg/class-joinchat-gutenberg.php::::152_157_167_179_183_185_186_187_188_190_191_203_205_212_213_215_250_73_74_76_77_8_81",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-page.php::::100_142_143_145_146_147_148_149_150_151_152_154_155_159_160_161_162_163_165_166_169_170_174_176_177_180_181_185_186_187_188_189_190_191_192_193_194_199_200_204_206_219_220_222_223_225_226_227_228_229_232_235_239_64_65_67_68_69_73_75_77_79_8_80_82_84_85_86_864_866_867_868_87_881_882_89_90_93_97_983",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat.php::::109_111_113_124_128_130_141_143_145_149_150_152_164_168_170_172_173_175_176_178_180_192_196_197_198_200_202_204_205_206_207_208_209_211_212_214_215_216_218_219_221_223_224_226_228_229_230_232_234_235_236_237_239_251_252_289_290_324_328_330_332_333_334_335_337_339_350_352_354_356_383_47_48_49_51_52_53_54_57_59_61_8_84_85_86_87_88_89_91_92_93_95",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-tracking.php::::203_207_209_211_616_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-i18n.php::::33_34_465_69_70_71_72_74_75_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-abilities.php::::15_41_42_44_523",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_494_495_497_510_511_513_515_520_530_535_536_537_538_540_541_544_546_621_63_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-premium.php::::104_49_51_63_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/joinchat.php::::23_30_31_32_33_34_40_54_56_58_60_61",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-onboard.php::::224_227_230_231_234_236_255_258_263_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-integrations.php::::100_235_31_36_60_79_8_84_89_96",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_535_536_537_538_540_541_544_546_621_63_64_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-loader.php::::100_101_102_103_106_175_176_179_180_183_186_49_50_52_65_66_79_8_80_98_99"
+    ],
+    "new_paths": [
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_535_536_537_538_540_541_544_546_621_63_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99"
+    ],
+    "vulns": [],
+    "score": 76,
+    "is_interesting": true,
+    "fuzzer_id": "4",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "data"
+  },
+  {
+    "coverage_id": "1786975060-660af3cf-f04b-4dfc-b0f7-983396ec33ce",
+    "priority": 69,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "joinchat_onboard"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "data": "fu*z"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"success\":false}",
+    "response.body.length": 18,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 13:57:40 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "18",
+      "Content-Type": "application/json; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 135.432,
+    "number_of_new_paths": 1,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786974983-41cbe2c7-aef0-4198-a33a-4658300fa773",
+    "paths": [
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-onboard.php::::224_227_230_231_234_236_255_256_263_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-util.php::::124_34_37_460_48_50_51_52_53_55_681_69_698_703_8_81",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-common.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_116_117_118_119_120_121_122_123_124_125_128_130_131_148_152_155_158_167_170_174_178_181_183_185_214_226_227_230_292_293_294_297_299_300_337_340_67_68_71_8_83_84_86_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/gutenberg/class-joinchat-gutenberg.php::::152_157_167_179_183_185_186_187_188_190_191_203_205_212_213_215_250_73_74_76_77_8_81",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_532_544_546_621_63_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-page.php::::100_142_143_145_146_147_148_149_150_151_152_154_155_159_160_161_162_163_165_166_169_170_174_176_177_180_181_185_186_187_188_189_190_191_192_193_194_199_200_204_206_219_220_222_223_225_226_227_228_229_232_235_239_64_65_67_68_69_73_75_77_79_8_80_82_84_85_86_864_866_867_868_87_881_882_89_90_93_97_983",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat.php::::109_111_113_124_128_130_141_143_145_149_150_152_164_168_170_172_173_175_176_178_180_192_196_197_198_200_202_204_205_206_207_208_209_211_212_214_215_216_218_219_221_223_224_226_228_229_230_232_234_235_236_237_239_251_252_289_290_324_328_330_332_333_334_335_337_339_350_352_354_356_383_47_48_49_51_52_53_54_57_59_61_8_84_85_86_87_88_89_91_92_93_95",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-tracking.php::::203_207_209_211_616_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-i18n.php::::33_34_465_69_70_71_72_74_75_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-abilities.php::::15_41_42_44_523",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-premium.php::::104_49_51_63_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/joinchat.php::::23_30_31_32_33_34_40_54_56_58_60_61",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-integrations.php::::100_235_31_36_60_79_8_84_89_96",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_535_536_537_538_540_541_544_546_621_63_64_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-loader.php::::100_101_102_103_106_175_176_179_180_183_186_49_50_52_65_66_79_8_80_98_99"
+    ],
+    "new_paths": [
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_532_544_546_621_63_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99"
+    ],
+    "vulns": [],
+    "score": 69,
+    "is_interesting": false,
+    "fuzzer_id": "4",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "data"
+  },
+  {
+    "coverage_id": "1786975065-f7dd2904-e26a-4dea-b7bc-34a10e84575b",
+    "priority": 74,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "joinchat_onboard"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "data": "fuzz2"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"success\":false}",
+    "response.body.length": 18,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 13:57:45 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "18",
+      "Content-Type": "application/json; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 136.57,
+    "number_of_new_paths": 1,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786974983-41cbe2c7-aef0-4198-a33a-4658300fa773",
+    "paths": [
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-onboard.php::::224_227_230_231_234_236_255_256_263_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-util.php::::124_34_37_460_48_50_51_52_53_55_681_69_698_703_8_81",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-common.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_116_117_118_119_120_121_122_123_124_125_128_130_131_148_152_155_158_167_170_174_178_181_183_185_214_226_227_230_292_293_294_297_299_300_337_340_67_68_71_8_83_84_86_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_535_536_537_538_540_541_544_546_621_63_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/gutenberg/class-joinchat-gutenberg.php::::152_157_167_179_183_185_186_187_188_190_191_203_205_212_213_215_250_73_74_76_77_8_81",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-page.php::::100_142_143_145_146_147_148_149_150_151_152_154_155_159_160_161_162_163_165_166_169_170_174_176_177_180_181_185_186_187_188_189_190_191_192_193_194_199_200_204_206_219_220_222_223_225_226_227_228_229_232_235_239_64_65_67_68_69_73_75_77_79_8_80_82_84_85_86_864_866_867_868_87_881_882_89_90_93_97_983",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat.php::::109_111_113_124_128_130_141_143_145_149_150_152_164_168_170_172_173_175_176_178_180_192_196_197_198_200_202_204_205_206_207_208_209_211_212_214_215_216_218_219_221_223_224_226_228_229_230_232_234_235_236_237_239_251_252_289_290_324_328_330_332_333_334_335_337_339_350_352_354_356_383_47_48_49_51_52_53_54_57_59_61_8_84_85_86_87_88_89_91_92_93_95",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-tracking.php::::203_207_209_211_616_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-i18n.php::::33_34_465_69_70_71_72_74_75_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-abilities.php::::15_41_42_44_523",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-premium.php::::104_49_51_63_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/joinchat.php::::23_30_31_32_33_34_40_54_56_58_60_61",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-integrations.php::::100_235_31_36_60_79_8_84_89_96",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_535_536_537_538_540_541_544_546_621_63_64_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-loader.php::::100_101_102_103_106_175_176_179_180_183_186_49_50_52_65_66_79_8_80_98_99"
+    ],
+    "new_paths": [
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_535_536_537_538_540_541_544_546_621_63_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99"
+    ],
+    "vulns": [],
+    "score": 74,
+    "is_interesting": false,
+    "fuzzer_id": "4",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "data"
+  },
+  {
+    "coverage_id": "1786975070-27573184-d942-4e9c-b363-8ae5b9f62a3f",
+    "priority": 69,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "joinchat_onboard"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "data": "f0zz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"success\":false}",
+    "response.body.length": 18,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 13:57:50 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "18",
+      "Content-Type": "application/json; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 149.592,
+    "number_of_new_paths": 1,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786974983-41cbe2c7-aef0-4198-a33a-4658300fa773",
+    "paths": [
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-onboard.php::::224_227_230_231_234_236_255_256_263_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-util.php::::124_34_37_460_48_50_51_52_53_55_681_69_698_703_8_81",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-common.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_116_117_118_119_120_121_122_123_124_125_128_130_131_148_152_155_158_167_170_174_178_181_183_185_214_226_227_230_292_293_294_297_299_300_337_340_67_68_71_8_83_84_86_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/gutenberg/class-joinchat-gutenberg.php::::152_157_167_179_183_185_186_187_188_190_191_203_205_212_213_215_250_73_74_76_77_8_81",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_532_544_546_621_63_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-page.php::::100_142_143_145_146_147_148_149_150_151_152_154_155_159_160_161_162_163_165_166_169_170_174_176_177_180_181_185_186_187_188_189_190_191_192_193_194_199_200_204_206_219_220_222_223_225_226_227_228_229_232_235_239_64_65_67_68_69_73_75_77_79_8_80_82_84_85_86_864_866_867_868_87_881_882_89_90_93_97_983",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat.php::::109_111_113_124_128_130_141_143_145_149_150_152_164_168_170_172_173_175_176_178_180_192_196_197_198_200_202_204_205_206_207_208_209_211_212_214_215_216_218_219_221_223_224_226_228_229_230_232_234_235_236_237_239_251_252_289_290_324_328_330_332_333_334_335_337_339_350_352_354_356_383_47_48_49_51_52_53_54_57_59_61_8_84_85_86_87_88_89_91_92_93_95",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-tracking.php::::203_207_209_211_616_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-i18n.php::::33_34_465_69_70_71_72_74_75_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-abilities.php::::15_41_42_44_523",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-premium.php::::104_49_51_63_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/joinchat.php::::23_30_31_32_33_34_40_54_56_58_60_61",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-integrations.php::::100_235_31_36_60_79_8_84_89_96",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_535_536_537_538_540_541_544_546_621_63_64_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-loader.php::::100_101_102_103_106_175_176_179_180_183_186_49_50_52_65_66_79_8_80_98_99"
+    ],
+    "new_paths": [
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_532_544_546_621_63_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99"
+    ],
+    "vulns": [],
+    "score": 69,
+    "is_interesting": false,
+    "fuzzer_id": "4",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "data"
+  },
+  {
+    "coverage_id": "1786975076-d6980b25-a96f-478c-a61e-82ca59f526e5",
+    "priority": 76,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "joinchat_onboard"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "data": "\u0001fuzz\u0000"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"success\":false}",
+    "response.body.length": 18,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 13:57:56 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "18",
+      "Content-Type": "application/json; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 144.301,
+    "number_of_new_paths": 1,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786975055-efc12a12-1f3d-424e-a5dd-956f7e618471",
+    "paths": [
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-onboard.php::::224_227_230_231_234_236_255_256_263_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-util.php::::124_34_37_460_48_50_51_52_53_55_681_69_698_703_8_81",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-common.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_116_117_118_119_120_121_122_123_124_125_128_130_131_148_152_155_158_167_170_174_178_181_183_185_214_226_227_230_292_293_294_297_299_300_337_340_67_68_71_8_83_84_86_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_535_536_537_538_540_541_544_546_621_63_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/gutenberg/class-joinchat-gutenberg.php::::152_157_167_179_183_185_186_187_188_190_191_203_205_212_213_215_250_73_74_76_77_8_81",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-page.php::::100_142_143_145_146_147_148_149_150_151_152_154_155_159_160_161_162_163_165_166_169_170_174_176_177_180_181_185_186_187_188_189_190_191_192_193_194_199_200_204_206_219_220_222_223_225_226_227_228_229_232_235_239_64_65_67_68_69_73_75_77_79_8_80_82_84_85_86_864_866_867_868_87_881_882_89_90_93_97_983",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat.php::::109_111_113_124_128_130_141_143_145_149_150_152_164_168_170_172_173_175_176_178_180_192_196_197_198_200_202_204_205_206_207_208_209_211_212_214_215_216_218_219_221_223_224_226_228_229_230_232_234_235_236_237_239_251_252_289_290_324_328_330_332_333_334_335_337_339_350_352_354_356_383_47_48_49_51_52_53_54_57_59_61_8_84_85_86_87_88_89_91_92_93_95",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-tracking.php::::203_207_209_211_616_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-i18n.php::::33_34_465_69_70_71_72_74_75_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-abilities.php::::15_41_42_44_523",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_494_495_497_510_511_513_515_520_530_535_536_537_538_540_541_544_546_621_63_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-premium.php::::104_49_51_63_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/joinchat.php::::23_30_31_32_33_34_40_54_56_58_60_61",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-onboard.php::::224_227_230_231_234_236_255_258_263_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-integrations.php::::100_235_31_36_60_79_8_84_89_96",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_535_536_537_538_540_541_544_546_621_63_64_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-loader.php::::100_101_102_103_106_175_176_179_180_183_186_49_50_52_65_66_79_8_80_98_99"
+    ],
+    "new_paths": [
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_535_536_537_538_540_541_544_546_621_63_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99"
+    ],
+    "vulns": [],
+    "score": 76,
+    "is_interesting": false,
+    "fuzzer_id": "4",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "data"
+  },
+  {
+    "coverage_id": "1786975081-125eb72b-31c0-48dc-be16-fe10b894e5b9",
+    "priority": 71,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "joinchat_onboard"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "data": "\u0001fuzzm"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"success\":false}",
+    "response.body.length": 18,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 13:58:01 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "18",
+      "Content-Type": "application/json; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 160.05,
+    "number_of_new_paths": 1,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786975055-efc12a12-1f3d-424e-a5dd-956f7e618471",
+    "paths": [
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-onboard.php::::224_227_230_231_234_236_255_256_263_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-util.php::::124_34_37_460_48_50_51_52_53_55_681_69_698_703_8_81",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-common.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_116_117_118_119_120_121_122_123_124_125_128_130_131_148_152_155_158_167_170_174_178_181_183_185_214_226_227_230_292_293_294_297_299_300_337_340_67_68_71_8_83_84_86_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/gutenberg/class-joinchat-gutenberg.php::::152_157_167_179_183_185_186_187_188_190_191_203_205_212_213_215_250_73_74_76_77_8_81",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_532_544_546_621_63_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-page.php::::100_142_143_145_146_147_148_149_150_151_152_154_155_159_160_161_162_163_165_166_169_170_174_176_177_180_181_185_186_187_188_189_190_191_192_193_194_199_200_204_206_219_220_222_223_225_226_227_228_229_232_235_239_64_65_67_68_69_73_75_77_79_8_80_82_84_85_86_864_866_867_868_87_881_882_89_90_93_97_983",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat.php::::109_111_113_124_128_130_141_143_145_149_150_152_164_168_170_172_173_175_176_178_180_192_196_197_198_200_202_204_205_206_207_208_209_211_212_214_215_216_218_219_221_223_224_226_228_229_230_232_234_235_236_237_239_251_252_289_290_324_328_330_332_333_334_335_337_339_350_352_354_356_383_47_48_49_51_52_53_54_57_59_61_8_84_85_86_87_88_89_91_92_93_95",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-tracking.php::::203_207_209_211_616_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-i18n.php::::33_34_465_69_70_71_72_74_75_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-abilities.php::::15_41_42_44_523",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_494_495_497_510_511_513_515_520_530_535_536_537_538_540_541_544_546_621_63_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-premium.php::::104_49_51_63_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/joinchat.php::::23_30_31_32_33_34_40_54_56_58_60_61",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-onboard.php::::224_227_230_231_234_236_255_258_263_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-integrations.php::::100_235_31_36_60_79_8_84_89_96",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_535_536_537_538_540_541_544_546_621_63_64_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-loader.php::::100_101_102_103_106_175_176_179_180_183_186_49_50_52_65_66_79_8_80_98_99"
+    ],
+    "new_paths": [
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_532_544_546_621_63_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99"
+    ],
+    "vulns": [],
+    "score": 71,
+    "is_interesting": true,
+    "fuzzer_id": "4",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "data"
+  },
+  {
+    "coverage_id": "1786975086-42be7a66-52c8-454e-b2b2-d6aac3800220",
+    "priority": 74,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "joinchat_onboard"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "data": "f../uzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"success\":false}",
+    "response.body.length": 18,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 13:58:06 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "18",
+      "Content-Type": "application/json; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 134.568,
+    "number_of_new_paths": 1,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786974983-41cbe2c7-aef0-4198-a33a-4658300fa773",
+    "paths": [
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-onboard.php::::224_227_230_231_234_236_255_256_263_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-util.php::::124_34_37_460_48_50_51_52_53_55_681_69_698_703_8_81",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-common.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_116_117_118_119_120_121_122_123_124_125_128_130_131_148_152_155_158_167_170_174_178_181_183_185_214_226_227_230_292_293_294_297_299_300_337_340_67_68_71_8_83_84_86_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_535_536_537_538_540_541_544_546_621_63_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/gutenberg/class-joinchat-gutenberg.php::::152_157_167_179_183_185_186_187_188_190_191_203_205_212_213_215_250_73_74_76_77_8_81",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-page.php::::100_142_143_145_146_147_148_149_150_151_152_154_155_159_160_161_162_163_165_166_169_170_174_176_177_180_181_185_186_187_188_189_190_191_192_193_194_199_200_204_206_219_220_222_223_225_226_227_228_229_232_235_239_64_65_67_68_69_73_75_77_79_8_80_82_84_85_86_864_866_867_868_87_881_882_89_90_93_97_983",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat.php::::109_111_113_124_128_130_141_143_145_149_150_152_164_168_170_172_173_175_176_178_180_192_196_197_198_200_202_204_205_206_207_208_209_211_212_214_215_216_218_219_221_223_224_226_228_229_230_232_234_235_236_237_239_251_252_289_290_324_328_330_332_333_334_335_337_339_350_352_354_356_383_47_48_49_51_52_53_54_57_59_61_8_84_85_86_87_88_89_91_92_93_95",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-tracking.php::::203_207_209_211_616_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-i18n.php::::33_34_465_69_70_71_72_74_75_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-abilities.php::::15_41_42_44_523",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-premium.php::::104_49_51_63_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/joinchat.php::::23_30_31_32_33_34_40_54_56_58_60_61",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-integrations.php::::100_235_31_36_60_79_8_84_89_96",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_535_536_537_538_540_541_544_546_621_63_64_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-loader.php::::100_101_102_103_106_175_176_179_180_183_186_49_50_52_65_66_79_8_80_98_99"
+    ],
+    "new_paths": [
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_535_536_537_538_540_541_544_546_621_63_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99"
+    ],
+    "vulns": [],
+    "score": 74,
+    "is_interesting": false,
+    "fuzzer_id": "4",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "data"
+  },
+  {
+    "coverage_id": "1786975091-fbce0bb7-195a-4483-ae78-3b8910991a43",
+    "priority": 69,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "joinchat_onboard"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "data": "fuzzIj\""
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"success\":false}",
+    "response.body.length": 18,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 13:58:11 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "18",
+      "Content-Type": "application/json; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 144.3,
+    "number_of_new_paths": 1,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786974983-41cbe2c7-aef0-4198-a33a-4658300fa773",
+    "paths": [
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-onboard.php::::224_227_230_231_234_236_255_256_263_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-util.php::::124_34_37_460_48_50_51_52_53_55_681_69_698_703_8_81",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-common.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_116_117_118_119_120_121_122_123_124_125_128_130_131_148_152_155_158_167_170_174_178_181_183_185_214_226_227_230_292_293_294_297_299_300_337_340_67_68_71_8_83_84_86_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/gutenberg/class-joinchat-gutenberg.php::::152_157_167_179_183_185_186_187_188_190_191_203_205_212_213_215_250_73_74_76_77_8_81",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_532_544_546_621_63_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-page.php::::100_142_143_145_146_147_148_149_150_151_152_154_155_159_160_161_162_163_165_166_169_170_174_176_177_180_181_185_186_187_188_189_190_191_192_193_194_199_200_204_206_219_220_222_223_225_226_227_228_229_232_235_239_64_65_67_68_69_73_75_77_79_8_80_82_84_85_86_864_866_867_868_87_881_882_89_90_93_97_983",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat.php::::109_111_113_124_128_130_141_143_145_149_150_152_164_168_170_172_173_175_176_178_180_192_196_197_198_200_202_204_205_206_207_208_209_211_212_214_215_216_218_219_221_223_224_226_228_229_230_232_234_235_236_237_239_251_252_289_290_324_328_330_332_333_334_335_337_339_350_352_354_356_383_47_48_49_51_52_53_54_57_59_61_8_84_85_86_87_88_89_91_92_93_95",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-tracking.php::::203_207_209_211_616_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-i18n.php::::33_34_465_69_70_71_72_74_75_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-abilities.php::::15_41_42_44_523",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-premium.php::::104_49_51_63_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/joinchat.php::::23_30_31_32_33_34_40_54_56_58_60_61",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-integrations.php::::100_235_31_36_60_79_8_84_89_96",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_535_536_537_538_540_541_544_546_621_63_64_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-loader.php::::100_101_102_103_106_175_176_179_180_183_186_49_50_52_65_66_79_8_80_98_99"
+    ],
+    "new_paths": [
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_532_544_546_621_63_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99"
+    ],
+    "vulns": [],
+    "score": 69,
+    "is_interesting": false,
+    "fuzzer_id": "4",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "data"
+  },
+  {
+    "coverage_id": "1786975097-eacfe317-e7ec-4377-9599-a4a0583223f8",
+    "priority": 74,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "joinchat_onboard"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "data": "fuzz?"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"success\":false}",
+    "response.body.length": 18,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 13:58:17 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "18",
+      "Content-Type": "application/json; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 154.892,
+    "number_of_new_paths": 1,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786974983-41cbe2c7-aef0-4198-a33a-4658300fa773",
+    "paths": [
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-onboard.php::::224_227_230_231_234_236_255_256_263_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-util.php::::124_34_37_460_48_50_51_52_53_55_681_69_698_703_8_81",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-common.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_116_117_118_119_120_121_122_123_124_125_128_130_131_148_152_155_158_167_170_174_178_181_183_185_214_226_227_230_292_293_294_297_299_300_337_340_67_68_71_8_83_84_86_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_535_536_537_538_540_541_544_546_621_63_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/gutenberg/class-joinchat-gutenberg.php::::152_157_167_179_183_185_186_187_188_190_191_203_205_212_213_215_250_73_74_76_77_8_81",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-page.php::::100_142_143_145_146_147_148_149_150_151_152_154_155_159_160_161_162_163_165_166_169_170_174_176_177_180_181_185_186_187_188_189_190_191_192_193_194_199_200_204_206_219_220_222_223_225_226_227_228_229_232_235_239_64_65_67_68_69_73_75_77_79_8_80_82_84_85_86_864_866_867_868_87_881_882_89_90_93_97_983",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat.php::::109_111_113_124_128_130_141_143_145_149_150_152_164_168_170_172_173_175_176_178_180_192_196_197_198_200_202_204_205_206_207_208_209_211_212_214_215_216_218_219_221_223_224_226_228_229_230_232_234_235_236_237_239_251_252_289_290_324_328_330_332_333_334_335_337_339_350_352_354_356_383_47_48_49_51_52_53_54_57_59_61_8_84_85_86_87_88_89_91_92_93_95",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-tracking.php::::203_207_209_211_616_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-i18n.php::::33_34_465_69_70_71_72_74_75_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-abilities.php::::15_41_42_44_523",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-premium.php::::104_49_51_63_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/joinchat.php::::23_30_31_32_33_34_40_54_56_58_60_61",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-integrations.php::::100_235_31_36_60_79_8_84_89_96",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_535_536_537_538_540_541_544_546_621_63_64_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-loader.php::::100_101_102_103_106_175_176_179_180_183_186_49_50_52_65_66_79_8_80_98_99"
+    ],
+    "new_paths": [
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_535_536_537_538_540_541_544_546_621_63_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99"
+    ],
+    "vulns": [],
+    "score": 74,
+    "is_interesting": false,
+    "fuzzer_id": "4",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "data"
+  },
+  {
+    "coverage_id": "1786975102-1ee25e9d-22f3-41bc-afa7-00993e2b8b92",
+    "priority": 69,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "joinchat_onboard"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "data": "fuz_"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"success\":false}",
+    "response.body.length": 18,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 13:58:22 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "18",
+      "Content-Type": "application/json; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 159.319,
+    "number_of_new_paths": 1,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786974983-41cbe2c7-aef0-4198-a33a-4658300fa773",
+    "paths": [
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-onboard.php::::224_227_230_231_234_236_255_256_263_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-util.php::::124_34_37_460_48_50_51_52_53_55_681_69_698_703_8_81",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-common.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_116_117_118_119_120_121_122_123_124_125_128_130_131_148_152_155_158_167_170_174_178_181_183_185_214_226_227_230_292_293_294_297_299_300_337_340_67_68_71_8_83_84_86_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/gutenberg/class-joinchat-gutenberg.php::::152_157_167_179_183_185_186_187_188_190_191_203_205_212_213_215_250_73_74_76_77_8_81",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_532_544_546_621_63_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-page.php::::100_142_143_145_146_147_148_149_150_151_152_154_155_159_160_161_162_163_165_166_169_170_174_176_177_180_181_185_186_187_188_189_190_191_192_193_194_199_200_204_206_219_220_222_223_225_226_227_228_229_232_235_239_64_65_67_68_69_73_75_77_79_8_80_82_84_85_86_864_866_867_868_87_881_882_89_90_93_97_983",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat.php::::109_111_113_124_128_130_141_143_145_149_150_152_164_168_170_172_173_175_176_178_180_192_196_197_198_200_202_204_205_206_207_208_209_211_212_214_215_216_218_219_221_223_224_226_228_229_230_232_234_235_236_237_239_251_252_289_290_324_328_330_332_333_334_335_337_339_350_352_354_356_383_47_48_49_51_52_53_54_57_59_61_8_84_85_86_87_88_89_91_92_93_95",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-tracking.php::::203_207_209_211_616_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-i18n.php::::33_34_465_69_70_71_72_74_75_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-abilities.php::::15_41_42_44_523",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-premium.php::::104_49_51_63_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/joinchat.php::::23_30_31_32_33_34_40_54_56_58_60_61",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-integrations.php::::100_235_31_36_60_79_8_84_89_96",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_535_536_537_538_540_541_544_546_621_63_64_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-loader.php::::100_101_102_103_106_175_176_179_180_183_186_49_50_52_65_66_79_8_80_98_99"
+    ],
+    "new_paths": [
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_532_544_546_621_63_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99"
+    ],
+    "vulns": [],
+    "score": 69,
+    "is_interesting": false,
+    "fuzzer_id": "4",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "data"
+  },
+  {
+    "coverage_id": "1786975107-a4b089f4-8c5f-4349-be25-9b6809a34ac4",
+    "priority": 76,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "joinchat_onboard"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "data": "f9?z"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"success\":false}",
+    "response.body.length": 18,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 13:58:27 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "18",
+      "Content-Type": "application/json; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 137.417,
+    "number_of_new_paths": 1,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786975029-9e401549-5c53-459f-8d78-22772c23dad9",
+    "paths": [
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-onboard.php::::224_227_230_231_234_236_255_256_263_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-util.php::::124_34_37_460_48_50_51_52_53_55_681_69_698_703_8_81",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-common.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_116_117_118_119_120_121_122_123_124_125_128_130_131_148_152_155_158_167_170_174_178_181_183_185_214_226_227_230_292_293_294_297_299_300_337_340_67_68_71_8_83_84_86_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_535_536_537_538_540_541_544_546_621_63_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/gutenberg/class-joinchat-gutenberg.php::::152_157_167_179_183_185_186_187_188_190_191_203_205_212_213_215_250_73_74_76_77_8_81",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-page.php::::100_142_143_145_146_147_148_149_150_151_152_154_155_159_160_161_162_163_165_166_169_170_174_176_177_180_181_185_186_187_188_189_190_191_192_193_194_199_200_204_206_219_220_222_223_225_226_227_228_229_232_235_239_64_65_67_68_69_73_75_77_79_8_80_82_84_85_86_864_866_867_868_87_881_882_89_90_93_97_983",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat.php::::109_111_113_124_128_130_141_143_145_149_150_152_164_168_170_172_173_175_176_178_180_192_196_197_198_200_202_204_205_206_207_208_209_211_212_214_215_216_218_219_221_223_224_226_228_229_230_232_234_235_236_237_239_251_252_289_290_324_328_330_332_333_334_335_337_339_350_352_354_356_383_47_48_49_51_52_53_54_57_59_61_8_84_85_86_87_88_89_91_92_93_95",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-tracking.php::::203_207_209_211_616_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-i18n.php::::33_34_465_69_70_71_72_74_75_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-abilities.php::::15_41_42_44_523",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_494_495_497_510_511_513_515_520_530_535_536_537_538_540_541_544_546_621_63_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-premium.php::::104_49_51_63_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/joinchat.php::::23_30_31_32_33_34_40_54_56_58_60_61",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-onboard.php::::224_227_230_231_234_236_255_258_263_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-integrations.php::::100_235_31_36_60_79_8_84_89_96",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_535_536_537_538_540_541_544_546_621_63_64_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-loader.php::::100_101_102_103_106_175_176_179_180_183_186_49_50_52_65_66_79_8_80_98_99"
+    ],
+    "new_paths": [
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_535_536_537_538_540_541_544_546_621_63_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99"
+    ],
+    "vulns": [],
+    "score": 76,
+    "is_interesting": false,
+    "fuzzer_id": "4",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "data"
+  },
+  {
+    "coverage_id": "1786975112-ee550644-2ac1-4692-9de4-fd73875cd2e3",
+    "priority": 71,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "joinchat_onboard"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "data": "nfzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"success\":false}",
+    "response.body.length": 18,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 13:58:32 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "18",
+      "Content-Type": "application/json; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 137.68,
+    "number_of_new_paths": 1,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786975044-fdddbf52-546c-49bb-afb7-ec0e9685f25e",
+    "paths": [
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-onboard.php::::224_227_230_231_234_236_255_256_263_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-util.php::::124_34_37_460_48_50_51_52_53_55_681_69_698_703_8_81",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-common.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_116_117_118_119_120_121_122_123_124_125_128_130_131_148_152_155_158_167_170_174_178_181_183_185_214_226_227_230_292_293_294_297_299_300_337_340_67_68_71_8_83_84_86_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/gutenberg/class-joinchat-gutenberg.php::::152_157_167_179_183_185_186_187_188_190_191_203_205_212_213_215_250_73_74_76_77_8_81",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_532_544_546_621_63_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-page.php::::100_142_143_145_146_147_148_149_150_151_152_154_155_159_160_161_162_163_165_166_169_170_174_176_177_180_181_185_186_187_188_189_190_191_192_193_194_199_200_204_206_219_220_222_223_225_226_227_228_229_232_235_239_64_65_67_68_69_73_75_77_79_8_80_82_84_85_86_864_866_867_868_87_881_882_89_90_93_97_983",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat.php::::109_111_113_124_128_130_141_143_145_149_150_152_164_168_170_172_173_175_176_178_180_192_196_197_198_200_202_204_205_206_207_208_209_211_212_214_215_216_218_219_221_223_224_226_228_229_230_232_234_235_236_237_239_251_252_289_290_324_328_330_332_333_334_335_337_339_350_352_354_356_383_47_48_49_51_52_53_54_57_59_61_8_84_85_86_87_88_89_91_92_93_95",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-tracking.php::::203_207_209_211_616_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-i18n.php::::33_34_465_69_70_71_72_74_75_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-abilities.php::::15_41_42_44_523",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_494_495_497_510_511_513_515_520_530_535_536_537_538_540_541_544_546_621_63_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-premium.php::::104_49_51_63_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/joinchat.php::::23_30_31_32_33_34_40_54_56_58_60_61",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-onboard.php::::224_227_230_231_234_236_255_258_263_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-integrations.php::::100_235_31_36_60_79_8_84_89_96",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_535_536_537_538_540_541_544_546_621_63_64_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-loader.php::::100_101_102_103_106_175_176_179_180_183_186_49_50_52_65_66_79_8_80_98_99"
+    ],
+    "new_paths": [
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_532_544_546_621_63_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99"
+    ],
+    "vulns": [],
+    "score": 71,
+    "is_interesting": false,
+    "fuzzer_id": "4",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "data"
+  },
+  {
+    "coverage_id": "1786975118-db6d5931-2eba-45ed-8e98-4c3daf650592",
+    "priority": 16,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "joinchat_onboard"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "data": "6u4z"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"success\":true}",
+    "response.body.length": 17,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 13:58:38 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "17",
+      "Content-Type": "application/json; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 158.608,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786974997-5e1469cb-023e-427e-91df-5c04199e018c",
+    "paths": [
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-onboard.php::::224_227_230_231_234_236_255_256_263_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-util.php::::124_34_37_460_48_50_51_52_53_55_681_69_698_703_8_81",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-common.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_116_117_118_119_120_121_122_123_124_125_128_130_131_148_152_155_158_167_170_174_178_181_183_185_214_226_227_230_292_293_294_297_299_300_337_340_67_68_71_8_83_84_86_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/gutenberg/class-joinchat-gutenberg.php::::152_157_167_179_183_185_186_187_188_190_191_203_205_212_213_215_250_73_74_76_77_8_81",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-page.php::::100_142_143_145_146_147_148_149_150_151_152_154_155_159_160_161_162_163_165_166_169_170_174_176_177_180_181_185_186_187_188_189_190_191_192_193_194_199_200_204_206_219_220_222_223_225_226_227_228_229_232_235_239_64_65_67_68_69_73_75_77_79_8_80_82_84_85_86_864_866_867_868_87_881_882_89_90_93_97_983",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat.php::::109_111_113_124_128_130_141_143_145_149_150_152_164_168_170_172_173_175_176_178_180_192_196_197_198_200_202_204_205_206_207_208_209_211_212_214_215_216_218_219_221_223_224_226_228_229_230_232_234_235_236_237_239_251_252_289_290_324_328_330_332_333_334_335_337_339_350_352_354_356_383_47_48_49_51_52_53_54_57_59_61_8_84_85_86_87_88_89_91_92_93_95",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-tracking.php::::203_207_209_211_616_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-i18n.php::::33_34_465_69_70_71_72_74_75_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-abilities.php::::15_41_42_44_523",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_494_495_497_510_511_513_515_520_530_535_536_537_538_540_541_544_546_621_63_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-premium.php::::104_49_51_63_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/joinchat.php::::23_30_31_32_33_34_40_54_56_58_60_61",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-onboard.php::::224_227_230_231_234_236_255_258_263_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-integrations.php::::100_235_31_36_60_79_8_84_89_96",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_535_536_537_538_540_541_544_546_621_63_64_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-loader.php::::100_101_102_103_106_175_176_179_180_183_186_49_50_52_65_66_79_8_80_98_99"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 16,
+    "is_interesting": false,
+    "fuzzer_id": "4",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "data"
+  },
+  {
+    "coverage_id": "1786975123-bdaa1978-cced-4d93-a84b-05d2e6c26d6d",
+    "priority": 71,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "joinchat_onboard"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "data": "u4z"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"success\":false}",
+    "response.body.length": 18,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 13:58:43 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "18",
+      "Content-Type": "application/json; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 154.703,
+    "number_of_new_paths": 1,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786974997-5e1469cb-023e-427e-91df-5c04199e018c",
+    "paths": [
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-onboard.php::::224_227_230_231_234_236_255_256_263_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-util.php::::124_34_37_460_48_50_51_52_53_55_681_69_698_703_8_81",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-common.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_116_117_118_119_120_121_122_123_124_125_128_130_131_148_152_155_158_167_170_174_178_181_183_185_214_226_227_230_292_293_294_297_299_300_337_340_67_68_71_8_83_84_86_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/gutenberg/class-joinchat-gutenberg.php::::152_157_167_179_183_185_186_187_188_190_191_203_205_212_213_215_250_73_74_76_77_8_81",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_532_544_546_621_63_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-page.php::::100_142_143_145_146_147_148_149_150_151_152_154_155_159_160_161_162_163_165_166_169_170_174_176_177_180_181_185_186_187_188_189_190_191_192_193_194_199_200_204_206_219_220_222_223_225_226_227_228_229_232_235_239_64_65_67_68_69_73_75_77_79_8_80_82_84_85_86_864_866_867_868_87_881_882_89_90_93_97_983",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat.php::::109_111_113_124_128_130_141_143_145_149_150_152_164_168_170_172_173_175_176_178_180_192_196_197_198_200_202_204_205_206_207_208_209_211_212_214_215_216_218_219_221_223_224_226_228_229_230_232_234_235_236_237_239_251_252_289_290_324_328_330_332_333_334_335_337_339_350_352_354_356_383_47_48_49_51_52_53_54_57_59_61_8_84_85_86_87_88_89_91_92_93_95",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-tracking.php::::203_207_209_211_616_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-i18n.php::::33_34_465_69_70_71_72_74_75_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-abilities.php::::15_41_42_44_523",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_494_495_497_510_511_513_515_520_530_535_536_537_538_540_541_544_546_621_63_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-premium.php::::104_49_51_63_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/joinchat.php::::23_30_31_32_33_34_40_54_56_58_60_61",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-onboard.php::::224_227_230_231_234_236_255_258_263_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-integrations.php::::100_235_31_36_60_79_8_84_89_96",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_535_536_537_538_540_541_544_546_621_63_64_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-loader.php::::100_101_102_103_106_175_176_179_180_183_186_49_50_52_65_66_79_8_80_98_99"
+    ],
+    "new_paths": [
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_532_544_546_621_63_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99"
+    ],
+    "vulns": [],
+    "score": 71,
+    "is_interesting": false,
+    "fuzzer_id": "4",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "data"
+  },
+  {
+    "coverage_id": "1786975128-ae8cdaac-61d9-42da-b30b-13e3d7bdeaa0",
+    "priority": 16,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "joinchat_onboard"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "data": "0uz{"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"success\":true}",
+    "response.body.length": 17,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 13:58:48 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "17",
+      "Content-Type": "application/json; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 160.175,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786974984-70b04e59-d49c-49c3-9c22-2e464caec239",
+    "paths": [
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-onboard.php::::224_227_230_231_234_236_255_256_263_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-util.php::::124_34_37_460_48_50_51_52_53_55_681_69_698_703_8_81",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-common.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_116_117_118_119_120_121_122_123_124_125_128_130_131_148_152_155_158_167_170_174_178_181_183_185_214_226_227_230_292_293_294_297_299_300_337_340_67_68_71_8_83_84_86_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/gutenberg/class-joinchat-gutenberg.php::::152_157_167_179_183_185_186_187_188_190_191_203_205_212_213_215_250_73_74_76_77_8_81",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-page.php::::100_142_143_145_146_147_148_149_150_151_152_154_155_159_160_161_162_163_165_166_169_170_174_176_177_180_181_185_186_187_188_189_190_191_192_193_194_199_200_204_206_219_220_222_223_225_226_227_228_229_232_235_239_64_65_67_68_69_73_75_77_79_8_80_82_84_85_86_864_866_867_868_87_881_882_89_90_93_97_983",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat.php::::109_111_113_124_128_130_141_143_145_149_150_152_164_168_170_172_173_175_176_178_180_192_196_197_198_200_202_204_205_206_207_208_209_211_212_214_215_216_218_219_221_223_224_226_228_229_230_232_234_235_236_237_239_251_252_289_290_324_328_330_332_333_334_335_337_339_350_352_354_356_383_47_48_49_51_52_53_54_57_59_61_8_84_85_86_87_88_89_91_92_93_95",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-tracking.php::::203_207_209_211_616_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-i18n.php::::33_34_465_69_70_71_72_74_75_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-abilities.php::::15_41_42_44_523",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_494_495_497_510_511_513_515_520_530_535_536_537_538_540_541_544_546_621_63_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-premium.php::::104_49_51_63_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/joinchat.php::::23_30_31_32_33_34_40_54_56_58_60_61",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-onboard.php::::224_227_230_231_234_236_255_258_263_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-integrations.php::::100_235_31_36_60_79_8_84_89_96",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_535_536_537_538_540_541_544_546_621_63_64_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-loader.php::::100_101_102_103_106_175_176_179_180_183_186_49_50_52_65_66_79_8_80_98_99"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 16,
+    "is_interesting": false,
+    "fuzzer_id": "4",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "data"
+  },
+  {
+    "coverage_id": "1786975133-8413399d-912d-4bf5-a3ab-697f951f262b",
+    "priority": 79,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "joinchat_onboard"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "data": "fz{"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"success\":true}",
+    "response.body.length": 17,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 13:58:53 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "17",
+      "Content-Type": "application/json; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 158.697,
+    "number_of_new_paths": 1,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786974984-70b04e59-d49c-49c3-9c22-2e464caec239",
+    "paths": [
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-onboard.php::::224_227_230_231_234_236_255_256_263_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-util.php::::124_34_37_460_48_50_51_52_53_55_681_69_698_703_8_81",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-common.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_116_117_118_119_120_121_122_123_124_125_128_130_131_148_152_155_158_167_170_174_178_181_183_185_214_226_227_230_292_293_294_297_299_300_337_340_67_68_71_8_83_84_86_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/gutenberg/class-joinchat-gutenberg.php::::152_157_167_179_183_185_186_187_188_190_191_203_205_212_213_215_250_73_74_76_77_8_81",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-page.php::::100_142_143_145_146_147_148_149_150_151_152_154_155_159_160_161_162_163_165_166_169_170_174_176_177_180_181_185_186_187_188_189_190_191_192_193_194_199_200_204_206_219_220_222_223_225_226_227_228_229_232_235_239_64_65_67_68_69_73_75_77_79_8_80_82_84_85_86_864_866_867_868_87_881_882_89_90_93_97_983",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat.php::::109_111_113_124_128_130_141_143_145_149_150_152_164_168_170_172_173_175_176_178_180_192_196_197_198_200_202_204_205_206_207_208_209_211_212_214_215_216_218_219_221_223_224_226_228_229_230_232_234_235_236_237_239_251_252_289_290_324_328_330_332_333_334_335_337_339_350_352_354_356_383_47_48_49_51_52_53_54_57_59_61_8_84_85_86_87_88_89_91_92_93_95",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-tracking.php::::203_207_209_211_616_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-i18n.php::::33_34_465_69_70_71_72_74_75_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-abilities.php::::15_41_42_44_523",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_494_495_497_510_511_513_515_520_530_535_536_537_538_540_541_544_546_621_63_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-premium.php::::104_49_51_63_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/joinchat.php::::23_30_31_32_33_34_40_54_56_58_60_61",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_494_495_497_510_511_513_515_520_530_532_544_546_621_63_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-onboard.php::::224_227_230_231_234_236_255_258_263_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-integrations.php::::100_235_31_36_60_79_8_84_89_96",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_535_536_537_538_540_541_544_546_621_63_64_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-loader.php::::100_101_102_103_106_175_176_179_180_183_186_49_50_52_65_66_79_8_80_98_99"
+    ],
+    "new_paths": [
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_494_495_497_510_511_513_515_520_530_532_544_546_621_63_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99"
+    ],
+    "vulns": [],
+    "score": 79,
+    "is_interesting": true,
+    "fuzzer_id": "4",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "data"
+  },
+  {
+    "coverage_id": "1786975139-cd768344-6712-4f2e-ac08-2463f5685847",
+    "priority": 74,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "joinchat_onboard"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "data": "fu.OSzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"success\":false}",
+    "response.body.length": 18,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 13:58:59 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "18",
+      "Content-Type": "application/json; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 137.067,
+    "number_of_new_paths": 1,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786974983-41cbe2c7-aef0-4198-a33a-4658300fa773",
+    "paths": [
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-onboard.php::::224_227_230_231_234_236_255_256_263_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-util.php::::124_34_37_460_48_50_51_52_53_55_681_69_698_703_8_81",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-common.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_116_117_118_119_120_121_122_123_124_125_128_130_131_148_152_155_158_167_170_174_178_181_183_185_214_226_227_230_292_293_294_297_299_300_337_340_67_68_71_8_83_84_86_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_535_536_537_538_540_541_544_546_621_63_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/gutenberg/class-joinchat-gutenberg.php::::152_157_167_179_183_185_186_187_188_190_191_203_205_212_213_215_250_73_74_76_77_8_81",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-page.php::::100_142_143_145_146_147_148_149_150_151_152_154_155_159_160_161_162_163_165_166_169_170_174_176_177_180_181_185_186_187_188_189_190_191_192_193_194_199_200_204_206_219_220_222_223_225_226_227_228_229_232_235_239_64_65_67_68_69_73_75_77_79_8_80_82_84_85_86_864_866_867_868_87_881_882_89_90_93_97_983",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat.php::::109_111_113_124_128_130_141_143_145_149_150_152_164_168_170_172_173_175_176_178_180_192_196_197_198_200_202_204_205_206_207_208_209_211_212_214_215_216_218_219_221_223_224_226_228_229_230_232_234_235_236_237_239_251_252_289_290_324_328_330_332_333_334_335_337_339_350_352_354_356_383_47_48_49_51_52_53_54_57_59_61_8_84_85_86_87_88_89_91_92_93_95",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-tracking.php::::203_207_209_211_616_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-i18n.php::::33_34_465_69_70_71_72_74_75_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-abilities.php::::15_41_42_44_523",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-premium.php::::104_49_51_63_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/joinchat.php::::23_30_31_32_33_34_40_54_56_58_60_61",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-integrations.php::::100_235_31_36_60_79_8_84_89_96",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_535_536_537_538_540_541_544_546_621_63_64_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-loader.php::::100_101_102_103_106_175_176_179_180_183_186_49_50_52_65_66_79_8_80_98_99"
+    ],
+    "new_paths": [
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_535_536_537_538_540_541_544_546_621_63_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99"
+    ],
+    "vulns": [],
+    "score": 74,
+    "is_interesting": false,
+    "fuzzer_id": "4",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "data"
+  },
+  {
+    "coverage_id": "1786975144-e09d99a8-aa40-4d04-aa27-6e4912008193",
+    "priority": 69,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "joinchat_onboard"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "data": "fuz/etc/passwdz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"success\":false}",
+    "response.body.length": 18,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 13:59:04 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "18",
+      "Content-Type": "application/json; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 155.422,
+    "number_of_new_paths": 1,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786974983-41cbe2c7-aef0-4198-a33a-4658300fa773",
+    "paths": [
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-onboard.php::::224_227_230_231_234_236_255_256_263_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-util.php::::124_34_37_460_48_50_51_52_53_55_681_69_698_703_8_81",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-common.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_116_117_118_119_120_121_122_123_124_125_128_130_131_148_152_155_158_167_170_174_178_181_183_185_214_226_227_230_292_293_294_297_299_300_337_340_67_68_71_8_83_84_86_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/gutenberg/class-joinchat-gutenberg.php::::152_157_167_179_183_185_186_187_188_190_191_203_205_212_213_215_250_73_74_76_77_8_81",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_532_544_546_621_63_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-page.php::::100_142_143_145_146_147_148_149_150_151_152_154_155_159_160_161_162_163_165_166_169_170_174_176_177_180_181_185_186_187_188_189_190_191_192_193_194_199_200_204_206_219_220_222_223_225_226_227_228_229_232_235_239_64_65_67_68_69_73_75_77_79_8_80_82_84_85_86_864_866_867_868_87_881_882_89_90_93_97_983",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat.php::::109_111_113_124_128_130_141_143_145_149_150_152_164_168_170_172_173_175_176_178_180_192_196_197_198_200_202_204_205_206_207_208_209_211_212_214_215_216_218_219_221_223_224_226_228_229_230_232_234_235_236_237_239_251_252_289_290_324_328_330_332_333_334_335_337_339_350_352_354_356_383_47_48_49_51_52_53_54_57_59_61_8_84_85_86_87_88_89_91_92_93_95",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-tracking.php::::203_207_209_211_616_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-i18n.php::::33_34_465_69_70_71_72_74_75_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-abilities.php::::15_41_42_44_523",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-premium.php::::104_49_51_63_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/joinchat.php::::23_30_31_32_33_34_40_54_56_58_60_61",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-integrations.php::::100_235_31_36_60_79_8_84_89_96",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_535_536_537_538_540_541_544_546_621_63_64_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-loader.php::::100_101_102_103_106_175_176_179_180_183_186_49_50_52_65_66_79_8_80_98_99"
+    ],
+    "new_paths": [
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_532_544_546_621_63_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99"
+    ],
+    "vulns": [],
+    "score": 69,
+    "is_interesting": false,
+    "fuzzer_id": "4",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "data"
+  },
+  {
+    "coverage_id": "1786975149-0151309f-558c-418b-ab31-9640f9bd330e",
+    "priority": 76,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "joinchat_onboard"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "data": "\u0001f&=_uzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"success\":false}",
+    "response.body.length": 18,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 13:59:09 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "18",
+      "Content-Type": "application/json; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 135.777,
+    "number_of_new_paths": 1,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786975055-efc12a12-1f3d-424e-a5dd-956f7e618471",
+    "paths": [
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-onboard.php::::224_227_230_231_234_236_255_256_263_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-util.php::::124_34_37_460_48_50_51_52_53_55_681_69_698_703_8_81",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-common.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_116_117_118_119_120_121_122_123_124_125_128_130_131_148_152_155_158_167_170_174_178_181_183_185_214_226_227_230_292_293_294_297_299_300_337_340_67_68_71_8_83_84_86_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_535_536_537_538_540_541_544_546_621_63_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/gutenberg/class-joinchat-gutenberg.php::::152_157_167_179_183_185_186_187_188_190_191_203_205_212_213_215_250_73_74_76_77_8_81",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-page.php::::100_142_143_145_146_147_148_149_150_151_152_154_155_159_160_161_162_163_165_166_169_170_174_176_177_180_181_185_186_187_188_189_190_191_192_193_194_199_200_204_206_219_220_222_223_225_226_227_228_229_232_235_239_64_65_67_68_69_73_75_77_79_8_80_82_84_85_86_864_866_867_868_87_881_882_89_90_93_97_983",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat.php::::109_111_113_124_128_130_141_143_145_149_150_152_164_168_170_172_173_175_176_178_180_192_196_197_198_200_202_204_205_206_207_208_209_211_212_214_215_216_218_219_221_223_224_226_228_229_230_232_234_235_236_237_239_251_252_289_290_324_328_330_332_333_334_335_337_339_350_352_354_356_383_47_48_49_51_52_53_54_57_59_61_8_84_85_86_87_88_89_91_92_93_95",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-tracking.php::::203_207_209_211_616_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-i18n.php::::33_34_465_69_70_71_72_74_75_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-abilities.php::::15_41_42_44_523",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_494_495_497_510_511_513_515_520_530_535_536_537_538_540_541_544_546_621_63_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-premium.php::::104_49_51_63_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/joinchat.php::::23_30_31_32_33_34_40_54_56_58_60_61",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-onboard.php::::224_227_230_231_234_236_255_258_263_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-integrations.php::::100_235_31_36_60_79_8_84_89_96",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_535_536_537_538_540_541_544_546_621_63_64_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-loader.php::::100_101_102_103_106_175_176_179_180_183_186_49_50_52_65_66_79_8_80_98_99"
+    ],
+    "new_paths": [
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_535_536_537_538_540_541_544_546_621_63_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99"
+    ],
+    "vulns": [],
+    "score": 76,
+    "is_interesting": false,
+    "fuzzer_id": "4",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "data"
+  },
+  {
+    "coverage_id": "1786975155-47080fbc-e7a3-4ee2-a8bb-5d04e7f7b4eb",
+    "priority": 71,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "joinchat_onboard"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "data": "8u?z"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"success\":false}",
+    "response.body.length": 18,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 13:59:15 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "18",
+      "Content-Type": "application/json; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 136.299,
+    "number_of_new_paths": 1,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786975029-9e401549-5c53-459f-8d78-22772c23dad9",
+    "paths": [
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-onboard.php::::224_227_230_231_234_236_255_256_263_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-util.php::::124_34_37_460_48_50_51_52_53_55_681_69_698_703_8_81",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-common.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_116_117_118_119_120_121_122_123_124_125_128_130_131_148_152_155_158_167_170_174_178_181_183_185_214_226_227_230_292_293_294_297_299_300_337_340_67_68_71_8_83_84_86_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/gutenberg/class-joinchat-gutenberg.php::::152_157_167_179_183_185_186_187_188_190_191_203_205_212_213_215_250_73_74_76_77_8_81",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_532_544_546_621_63_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-page.php::::100_142_143_145_146_147_148_149_150_151_152_154_155_159_160_161_162_163_165_166_169_170_174_176_177_180_181_185_186_187_188_189_190_191_192_193_194_199_200_204_206_219_220_222_223_225_226_227_228_229_232_235_239_64_65_67_68_69_73_75_77_79_8_80_82_84_85_86_864_866_867_868_87_881_882_89_90_93_97_983",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat.php::::109_111_113_124_128_130_141_143_145_149_150_152_164_168_170_172_173_175_176_178_180_192_196_197_198_200_202_204_205_206_207_208_209_211_212_214_215_216_218_219_221_223_224_226_228_229_230_232_234_235_236_237_239_251_252_289_290_324_328_330_332_333_334_335_337_339_350_352_354_356_383_47_48_49_51_52_53_54_57_59_61_8_84_85_86_87_88_89_91_92_93_95",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-tracking.php::::203_207_209_211_616_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-i18n.php::::33_34_465_69_70_71_72_74_75_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-abilities.php::::15_41_42_44_523",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_494_495_497_510_511_513_515_520_530_535_536_537_538_540_541_544_546_621_63_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-premium.php::::104_49_51_63_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/joinchat.php::::23_30_31_32_33_34_40_54_56_58_60_61",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-onboard.php::::224_227_230_231_234_236_255_258_263_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-integrations.php::::100_235_31_36_60_79_8_84_89_96",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_535_536_537_538_540_541_544_546_621_63_64_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-loader.php::::100_101_102_103_106_175_176_179_180_183_186_49_50_52_65_66_79_8_80_98_99"
+    ],
+    "new_paths": [
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_532_544_546_621_63_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99"
+    ],
+    "vulns": [],
+    "score": 71,
+    "is_interesting": false,
+    "fuzzer_id": "4",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "data"
+  },
+  {
+    "coverage_id": "1786975160-69168c0c-d08c-402d-af2c-813303429027",
+    "priority": 76,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "joinchat_onboard"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "data": "fu?z_"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"success\":false}",
+    "response.body.length": 18,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 13:59:20 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "18",
+      "Content-Type": "application/json; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 142.15,
+    "number_of_new_paths": 1,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786975029-9e401549-5c53-459f-8d78-22772c23dad9",
+    "paths": [
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-onboard.php::::224_227_230_231_234_236_255_256_263_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-util.php::::124_34_37_460_48_50_51_52_53_55_681_69_698_703_8_81",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-common.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_116_117_118_119_120_121_122_123_124_125_128_130_131_148_152_155_158_167_170_174_178_181_183_185_214_226_227_230_292_293_294_297_299_300_337_340_67_68_71_8_83_84_86_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_535_536_537_538_540_541_544_546_621_63_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/gutenberg/class-joinchat-gutenberg.php::::152_157_167_179_183_185_186_187_188_190_191_203_205_212_213_215_250_73_74_76_77_8_81",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-page.php::::100_142_143_145_146_147_148_149_150_151_152_154_155_159_160_161_162_163_165_166_169_170_174_176_177_180_181_185_186_187_188_189_190_191_192_193_194_199_200_204_206_219_220_222_223_225_226_227_228_229_232_235_239_64_65_67_68_69_73_75_77_79_8_80_82_84_85_86_864_866_867_868_87_881_882_89_90_93_97_983",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat.php::::109_111_113_124_128_130_141_143_145_149_150_152_164_168_170_172_173_175_176_178_180_192_196_197_198_200_202_204_205_206_207_208_209_211_212_214_215_216_218_219_221_223_224_226_228_229_230_232_234_235_236_237_239_251_252_289_290_324_328_330_332_333_334_335_337_339_350_352_354_356_383_47_48_49_51_52_53_54_57_59_61_8_84_85_86_87_88_89_91_92_93_95",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-tracking.php::::203_207_209_211_616_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-i18n.php::::33_34_465_69_70_71_72_74_75_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-abilities.php::::15_41_42_44_523",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_494_495_497_510_511_513_515_520_530_535_536_537_538_540_541_544_546_621_63_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-premium.php::::104_49_51_63_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/joinchat.php::::23_30_31_32_33_34_40_54_56_58_60_61",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin-onboard.php::::224_227_230_231_234_236_255_258_263_8",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-integrations.php::::100_235_31_36_60_79_8_84_89_96",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_535_536_537_538_540_541_544_546_621_63_64_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-loader.php::::100_101_102_103_106_175_176_179_180_183_186_49_50_52_65_66_79_8_80_98_99"
+    ],
+    "new_paths": [
+      "/var/www/html/wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_115_125_128_130_133_139_141_39_40_41_42_43_44_47_49_530_535_536_537_538_540_541_544_546_621_63_67_69_71_74_78_79_8_82_88_89_90_91_92_93_94_95_96_97_98_99"
+    ],
+    "vulns": [],
+    "score": 76,
+    "is_interesting": false,
+    "fuzzer_id": "4",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "data"
+  }
+]

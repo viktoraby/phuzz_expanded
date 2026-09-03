@@ -5,9 +5,32 @@
 *Found functions:2
 *Extracted functions:2
 *Total parameter names extracted: 2
-*Overview: {'ajax_run_tool': {'wp_reset_run_tool'}, 'ajax_dismiss_notice': {'wp_reset_dismiss_notice'}}
+*Overview: {'ajax_dismiss_notice': {'wp_reset_dismiss_notice'}, 'ajax_run_tool': {'wp_reset_run_tool'}}
 *
 ***/
+
+/** Function ajax_dismiss_notice() called by wp_ajax hooks: {'wp_reset_dismiss_notice'} **/
+/** Parameters found in function ajax_dismiss_notice(): {"get": ["notice_name"]} **/
+function ajax_dismiss_notice()
+    {
+        check_ajax_referer('wp-reset_dismiss_notice');
+
+        if (!current_user_can('manage_options')) {
+            wp_send_json_error(__('You are not allowed to run this action.', 'wp-reset'));
+        }
+
+        if (!isset($_GET['notice_name'])) {
+            wp_send_json_error(__('Unknown Notice.', 'wp-reset'));
+        }
+
+        $notice_name = trim(sanitize_text_field(wp_unslash($_GET['notice_name'])));
+        if (!$this->dismiss_notice($notice_name)) {
+            wp_send_json_error(__('Notice is already dismissed.', 'wp-reset'));
+        } else {
+            wp_send_json_success();
+        }
+    }
+
 
 /** Function ajax_run_tool() called by wp_ajax hooks: {'wp_reset_run_tool'} **/
 /** Parameters found in function ajax_run_tool(): {"get": ["tool", "extra_data", "slug"]} **/
@@ -180,29 +203,6 @@ function ajax_run_tool()
             wp_send_json_success();
         } else {
             wp_send_json_error(__('Unknown tool.', 'wp-reset'));
-        }
-    }
-
-
-/** Function ajax_dismiss_notice() called by wp_ajax hooks: {'wp_reset_dismiss_notice'} **/
-/** Parameters found in function ajax_dismiss_notice(): {"get": ["notice_name"]} **/
-function ajax_dismiss_notice()
-    {
-        check_ajax_referer('wp-reset_dismiss_notice');
-
-        if (!current_user_can('manage_options')) {
-            wp_send_json_error(__('You are not allowed to run this action.', 'wp-reset'));
-        }
-
-        if (!isset($_GET['notice_name'])) {
-            wp_send_json_error(__('Unknown Notice.', 'wp-reset'));
-        }
-
-        $notice_name = trim(sanitize_text_field(wp_unslash($_GET['notice_name'])));
-        if (!$this->dismiss_notice($notice_name)) {
-            wp_send_json_error(__('Notice is already dismissed.', 'wp-reset'));
-        } else {
-            wp_send_json_success();
         }
     }
 

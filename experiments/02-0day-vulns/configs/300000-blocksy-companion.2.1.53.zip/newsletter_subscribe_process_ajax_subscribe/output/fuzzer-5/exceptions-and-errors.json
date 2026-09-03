@@ -1,0 +1,362 @@
+[
+  {
+    "coverage_id": "1786813891-fbcd2835-555b-4a21-b200-f9e9a6d3f557",
+    "priority": 0,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "blc_newsletter_subscribe_process_ajax_subscribe"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "DOUBLE_OPTIN": "fuzz",
+        "FNAME": "fuzz",
+        "GROUP": "fuz0",
+        "EMAIL": "fuzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "",
+    "response.body.length": 0,
+    "response.headers": {},
+    "response.status.code": 0,
+    "response.time": 0,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786813890-bf0b4dda-d95b-487a-96b7-73f3d95d2fdb",
+    "paths": [],
+    "new_paths": [],
+    "vulns": [],
+    "score": 0,
+    "is_interesting": false,
+    "fuzzer_id": "5",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "GROUP"
+  },
+  {
+    "coverage_id": "1786813891-6828a088-44d7-46fb-b103-3b5fc628ff18",
+    "priority": 0,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "blc_newsletter_subscribe_process_ajax_subscribe"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "DOUBLE_OPTIN": "fuz{",
+        "FNAME": "fuzz",
+        "GROUP": "fuzz",
+        "EMAIL": "fuzzd"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "",
+    "response.body.length": 0,
+    "response.headers": {},
+    "response.status.code": 0,
+    "response.time": 0,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786813891-38d15b93-5d47-4150-b759-fca2f84c9893",
+    "paths": [],
+    "new_paths": [],
+    "vulns": [],
+    "score": 0,
+    "is_interesting": false,
+    "fuzzer_id": "5",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "DOUBLE_OPTIN"
+  },
+  {
+    "coverage_id": "1786813891-5da888ca-8c25-4679-b611-db42591490a1",
+    "priority": 0,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "blc_newsletter_subscribe_process_ajax_subscribe"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "DOUBLE_OPTIN": "uzz",
+        "FNAME": "fuzz",
+        "GROUP": "fuzz&Qc",
+        "EMAIL": "fuzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "",
+    "response.body.length": 0,
+    "response.headers": {},
+    "response.status.code": 0,
+    "response.time": 0,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786813891-91e29622-34b7-4a20-9944-60a739535cd9",
+    "paths": [],
+    "new_paths": [],
+    "vulns": [],
+    "score": 0,
+    "is_interesting": false,
+    "fuzzer_id": "5",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "DOUBLE_OPTIN"
+  },
+  {
+    "coverage_id": "1786813892-c311b378-4458-43f3-b6d2-b89c1cbcfbc2",
+    "priority": 0,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "blc_newsletter_subscribe_process_ajax_subscribe"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "DOUBLE_OPTIN": "fuz",
+        "FNAME": "fuzz",
+        "GROUP": "!uzz",
+        "EMAIL": "uzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "",
+    "response.body.length": 0,
+    "response.headers": {},
+    "response.status.code": 0,
+    "response.time": 0,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786813891-375d0760-9807-4ca4-be0e-d284b4a8f596",
+    "paths": [],
+    "new_paths": [],
+    "vulns": [],
+    "score": 0,
+    "is_interesting": false,
+    "fuzzer_id": "5",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "EMAIL"
+  },
+  {
+    "coverage_id": "1786813892-b371be48-d1f7-4b5f-8cc4-e038ef8bcd6f",
+    "priority": 0,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "blc_newsletter_subscribe_process_ajax_subscribe"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "DOUBLE_OPTIN": "fz3",
+        "FNAME": "fuzz",
+        "GROUP": "fuzz",
+        "EMAIL": "f5zz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "",
+    "response.body.length": 0,
+    "response.headers": {},
+    "response.status.code": 0,
+    "response.time": 0,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786813891-fe192447-c561-4d75-89ff-b599b5c1b7cf",
+    "paths": [],
+    "new_paths": [],
+    "vulns": [],
+    "score": 0,
+    "is_interesting": false,
+    "fuzzer_id": "5",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "DOUBLE_OPTIN"
+  },
+  {
+    "coverage_id": "1786813893-78edfdbf-7ebb-421e-9456-01915ce29623",
+    "priority": 0,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "blc_newsletter_subscribe_process_ajax_subscribe"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "DOUBLE_OPTIN": "fuzz",
+        "FNAME": "fuzz",
+        "GROUP": "fuzz6",
+        "EMAIL": "fkz;z"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "",
+    "response.body.length": 0,
+    "response.headers": {},
+    "response.status.code": 0,
+    "response.time": 0,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786813892-1dfdb873-4b7a-4e10-b1d4-fc2417b6607d",
+    "paths": [],
+    "new_paths": [],
+    "vulns": [],
+    "score": 0,
+    "is_interesting": false,
+    "fuzzer_id": "5",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "GROUP"
+  }
+]

@@ -5,158 +5,9 @@
 *Found functions:24
 *Extracted functions:23
 *Total parameter names extracted: 17
-*Overview: {'ajax_accept': {'cartflows_pointer_accept'}, 'check_email_exists': {'nopriv_wcf_check_email_exists'}, 'apply_coupon': {'nopriv_wcf_woo_apply_coupon', 'wcf_woo_apply_coupon'}, 'remove_coupon': {'wcf_woo_remove_coupon', 'nopriv_wcf_woo_remove_coupon'}, 'order_detail_form_shortcode': {'wpcf_order_detail_form_shortcode'}, 'optin_form_shortcode': {'wpcf_optin_form_shortcode'}, 'wp_ajax_install_plugin': {'cartflows_install_plugin'}, 'order_checkout_form_shortcode': {'wpcf_order_checkout_form_shortcode'}, 'json_search_flows': {'wcf_json_search_flows'}, 'dismiss_script_migration_complete_notice': {'cartflows_dismiss_script_migration_complete_notice'}, 'ignore_gb_notice': {'cartflows_ignore_gutenberg_notice'}, 'ajax_dismiss': {'cartflows_pointer_dismiss'}, 'dismiss_new_ui_notice': {'cartflows_dismiss_new_ui_notice'}, 'disable_weekly_report_email_notice': {'cartflows_disable_weekly_report_email_notice'}, 'ajax_save_course_template': {'cartflows_save_tutor_course_template'}, 'get_suretriggers_data': {'cartflows_get_suretriggers_data'}, 'dismiss_notice': {'astra-notice-dismiss'}, 'wcf_woo_remove_cart_product': {'wcf_woo_remove_cart_product', 'nopriv_wcf_woo_remove_cart_product'}, 'upload_checkout_file': {'wcf_upload_checkout_file', 'nopriv_wcf_upload_checkout_file'}, 'send_plugin_deactivate_feedback': {'uds_plugin_deactivate_feedback'}, 'ajax_should_show': {'cartflows_pointer_should_show'}, 'fetch_whats_new_data': {'cartflows_fetch_whats_new_data'}, 'snooze_script_migration_notice': {'cartflows_snooze_script_migration'}, 'woocommerce_user_login': {'nopriv_wcf_woocommerce_login'}}
+*Overview: {'optin_form_shortcode': {'wpcf_optin_form_shortcode'}, 'order_detail_form_shortcode': {'wpcf_order_detail_form_shortcode'}, 'dismiss_script_migration_complete_notice': {'cartflows_dismiss_script_migration_complete_notice'}, 'fetch_whats_new_data': {'cartflows_fetch_whats_new_data'}, 'dismiss_new_ui_notice': {'cartflows_dismiss_new_ui_notice'}, 'order_checkout_form_shortcode': {'wpcf_order_checkout_form_shortcode'}, 'ajax_accept': {'cartflows_pointer_accept'}, 'send_plugin_deactivate_feedback': {'uds_plugin_deactivate_feedback'}, 'upload_checkout_file': {'wcf_upload_checkout_file', 'nopriv_wcf_upload_checkout_file'}, 'get_suretriggers_data': {'cartflows_get_suretriggers_data'}, 'json_search_flows': {'wcf_json_search_flows'}, 'apply_coupon': {'wcf_woo_apply_coupon', 'nopriv_wcf_woo_apply_coupon'}, 'woocommerce_user_login': {'nopriv_wcf_woocommerce_login'}, 'remove_coupon': {'wcf_woo_remove_coupon', 'nopriv_wcf_woo_remove_coupon'}, 'snooze_script_migration_notice': {'cartflows_snooze_script_migration'}, 'disable_weekly_report_email_notice': {'cartflows_disable_weekly_report_email_notice'}, 'ajax_save_course_template': {'cartflows_save_tutor_course_template'}, 'ignore_gb_notice': {'cartflows_ignore_gutenberg_notice'}, 'check_email_exists': {'nopriv_wcf_check_email_exists'}, 'wp_ajax_install_plugin': {'cartflows_install_plugin'}, 'ajax_should_show': {'cartflows_pointer_should_show'}, 'ajax_dismiss': {'cartflows_pointer_dismiss'}, 'wcf_woo_remove_cart_product': {'nopriv_wcf_woo_remove_cart_product', 'wcf_woo_remove_cart_product'}, 'dismiss_notice': {'astra-notice-dismiss'}}
 *
 ***/
-
-/** Function ajax_accept() called by wp_ajax hooks: {'cartflows_pointer_accept'} **/
-/** Parameters found in function ajax_accept(): {"post": ["nonce"]} **/
-function ajax_accept() {
-			// Security: Check capability.
-			if ( ! current_user_can( $this->get_capability() ) ) {
-				wp_send_json_error( array( 'message' => __( 'Unauthorized user.', 'cartflows' ) ), 403 );
-			}
-
-			// Security: Verify nonce.
-			if ( empty( $_POST['nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'cartflows_pointer_nonce' ) ) {
-				wp_send_json_error( array( 'message' => __( 'Invalid nonce.', 'cartflows' ) ), 403 );
-			}
-
-			$this->update_pointer_data( 'accepted', time() );
-			wp_send_json_success();
-		}
-
-
-/** Function check_email_exists() called by wp_ajax hooks: {'nopriv_wcf_check_email_exists'} **/
-/** Parameters found in function check_email_exists(): {"post": ["email_address"]} **/
-function check_email_exists() {
-
-		check_ajax_referer( 'check-email-exist', 'security' );
-
-		$email_address = isset( $_POST['email_address'] ) ? sanitize_email( wp_unslash( $_POST['email_address'] ) ) : false;
-
-		$is_login_allowed = 'yes' === get_option( 'woocommerce_enable_checkout_login_reminder' );
-
-		// Security: Only check email existence when the checkout login UX needs it.
-		// Otherwise the boolean would leak registered emails for no UX benefit.
-		$is_exist = $is_login_allowed && email_exists( $email_address );
-
-		$response = array(
-			'success'          => boolval( $is_exist ),
-			'is_login_allowed' => $is_login_allowed,
-			'msg'              => $is_exist ? __( 'Email Exist.', 'cartflows' ) : __( 'Email not exist', 'cartflows' ),
-		);
-
-		wp_send_json_success( $response );
-	}
-
-
-/** Function apply_coupon() called by wp_ajax hooks: {'nopriv_wcf_woo_apply_coupon', 'wcf_woo_apply_coupon'} **/
-/** Parameters found in function apply_coupon(): {"post": ["coupon_code"]} **/
-function apply_coupon() {
-		$response = '';
-
-		if ( ! check_ajax_referer( 'wcf-apply-coupon', 'security', false ) ) {
-			$response_data = array(
-				'status' => false,
-				'error'  => __( 'Nonce validation failed', 'cartflows' ),
-			);
-			wp_send_json_error( $response_data );
-		}
-
-		// Update the billing email before adding a coupon required for coupon conditions.
-		$this->update_billing_email();
-
-		ob_start();
-
-		if ( ! empty( $_POST['coupon_code'] ) ) {
-			$result = WC()->cart->add_discount( sanitize_text_field( wp_unslash( $_POST['coupon_code'] ) ) );
-		} else {
-			wc_add_notice( WC_Coupon::get_generic_coupon_error( WC_Coupon::E_WC_COUPON_PLEASE_ENTER ), 'error' );
-		}
-
-		$response = array(
-			'status' => $result,
-			'msg'    => wc_print_notices( true ),
-		);
-
-		ob_clean(); // Clearing the uncessary echo HTML.
-		wp_send_json( $response );
-
-		die();
-	}
-
-
-/** Function remove_coupon() called by wp_ajax hooks: {'wcf_woo_remove_coupon', 'nopriv_wcf_woo_remove_coupon'} **/
-/** Parameters found in function remove_coupon(): {"post": ["coupon_code"]} **/
-function remove_coupon() {
-		check_ajax_referer( 'wcf-remove-coupon', 'security' );
-		$coupon = isset( $_POST['coupon_code'] ) ? sanitize_text_field( wp_unslash( $_POST['coupon_code'] ) ) : false;
-
-		if ( empty( $coupon ) ) {
-			echo "<div class='woocommerce-error'>" . esc_html__( 'Sorry there was a problem removing this coupon.', 'cartflows' ) . '</div>';
-		} else {
-			WC()->cart->remove_coupon( $coupon );
-			echo "<div class='woocommerce-error'>" . esc_html__( 'Coupon has been removed.', 'cartflows' ) . '</div>';
-		}
-		wc_print_notices();
-		wp_die();
-	}
-
-
-/** Function order_detail_form_shortcode() called by wp_ajax hooks: {'wpcf_order_detail_form_shortcode'} **/
-/** Parameters found in function order_detail_form_shortcode(): {"post": ["thanyouText", "layout", "id"]} **/
-function order_detail_form_shortcode() {
-
-		check_ajax_referer( 'wpcf_ajax_nonce', 'nonce' );
-
-		if ( ! current_user_can( 'cartflows_manage_flows_steps' ) ) {
-			wp_send_json_error( array( 'message' => __( 'Permission denied.', 'cartflows' ) ) );
-		}
-
-		add_filter(
-			'cartflows_show_demo_order_details',
-			function() {
-				return true;
-			}
-		);
-
-		if ( ! empty( $_POST['thanyouText'] ) ) {
-
-			add_filter(
-				'cartflows_thankyou_meta_wcf-tq-text',
-				function( $text ) {
-					check_ajax_referer( 'wpcf_ajax_nonce', 'nonce' );
-
-					$text = isset( $_POST['thanyouText'] ) ? sanitize_text_field( wp_unslash( $_POST['thanyouText'] ) ) : '';
-
-					return $text;
-				},
-				10,
-				1
-			);
-		}
-
-		add_filter(
-			'cartflows_thankyou_meta_wcf-tq-layout',
-			function( $layout ) {
-				check_ajax_referer( 'wpcf_ajax_nonce', 'nonce' );
-
-				$layout = isset( $_POST['layout'] ) ? sanitize_title( wp_unslash( $_POST['layout'] ) ) : '';
-				return $layout;
-			},
-			10,
-			1
-		);
-
-		$thankyou_id          = isset( $_POST['id'] ) ? intval( wp_unslash( $_POST['id'] ) ) : 0;
-		$data['html']         = do_shortcode( '[cartflows_order_details]' );
-		$data['thankyouText'] = wcf()->options->get_thankyou_meta_value( $thankyou_id, 'wcf-tq-text' );
-		$data['layout']       = wcf()->options->get_thankyou_meta_value( $thankyou_id, 'wcf-tq-layout' );
-		
-		wp_send_json_success( $data );
-	}
-
 
 /** Function optin_form_shortcode() called by wp_ajax hooks: {'wpcf_optin_form_shortcode'} **/
 /** Parameters found in function optin_form_shortcode(): {"post": ["id", "input_skins"]} **/
@@ -228,8 +79,88 @@ function optin_form_shortcode() {
 	}
 
 
-/** Function wp_ajax_install_plugin() called by wp_ajax hooks: {'cartflows_install_plugin'} **/
-/** No function found :-/ **/
+/** Function order_detail_form_shortcode() called by wp_ajax hooks: {'wpcf_order_detail_form_shortcode'} **/
+/** Parameters found in function order_detail_form_shortcode(): {"post": ["thanyouText", "layout", "id"]} **/
+function order_detail_form_shortcode() {
+
+		check_ajax_referer( 'wpcf_ajax_nonce', 'nonce' );
+
+		if ( ! current_user_can( 'cartflows_manage_flows_steps' ) ) {
+			wp_send_json_error( array( 'message' => __( 'Permission denied.', 'cartflows' ) ) );
+		}
+
+		add_filter(
+			'cartflows_show_demo_order_details',
+			function() {
+				return true;
+			}
+		);
+
+		if ( ! empty( $_POST['thanyouText'] ) ) {
+
+			add_filter(
+				'cartflows_thankyou_meta_wcf-tq-text',
+				function( $text ) {
+					check_ajax_referer( 'wpcf_ajax_nonce', 'nonce' );
+
+					$text = isset( $_POST['thanyouText'] ) ? sanitize_text_field( wp_unslash( $_POST['thanyouText'] ) ) : '';
+
+					return $text;
+				},
+				10,
+				1
+			);
+		}
+
+		add_filter(
+			'cartflows_thankyou_meta_wcf-tq-layout',
+			function( $layout ) {
+				check_ajax_referer( 'wpcf_ajax_nonce', 'nonce' );
+
+				$layout = isset( $_POST['layout'] ) ? sanitize_title( wp_unslash( $_POST['layout'] ) ) : '';
+				return $layout;
+			},
+			10,
+			1
+		);
+
+		$thankyou_id          = isset( $_POST['id'] ) ? intval( wp_unslash( $_POST['id'] ) ) : 0;
+		$data['html']         = do_shortcode( '[cartflows_order_details]' );
+		$data['thankyouText'] = wcf()->options->get_thankyou_meta_value( $thankyou_id, 'wcf-tq-text' );
+		$data['layout']       = wcf()->options->get_thankyou_meta_value( $thankyou_id, 'wcf-tq-layout' );
+		
+		wp_send_json_success( $data );
+	}
+
+
+/** Function dismiss_script_migration_complete_notice() called by wp_ajax hooks: {'cartflows_dismiss_script_migration_complete_notice'} **/
+/** No params detected :-/ **/
+
+
+/** Function fetch_whats_new_data() called by wp_ajax hooks: {'cartflows_fetch_whats_new_data'} **/
+/** Parameters found in function fetch_whats_new_data(): {"get": ["nonce"]} **/
+function fetch_whats_new_data() {
+		if ( ! isset( $_GET['nonce'] ) || ! wp_verify_nonce( sanitize_text_field( $_GET['nonce'] ), 'cartflows_fetch_whats_new_data' ) ) {
+			// Verify the nonce, if it fails, return an error.
+			wp_send_json_error( array( 'message' => __( 'Nonce verification failed.', 'cartflows' ) ) );
+		}
+
+		// Security: Require admin capability to access RSS feed proxy.
+		if ( ! current_user_can( 'cartflows_manage_flows_steps' ) ) {
+			wp_send_json_error( array( 'message' => __( 'Permission denied.', 'cartflows' ) ) );
+		}
+
+		// Fetch the RSS feed from the URL. This saves us from the CORS issue.
+		$feed = wp_remote_retrieve_body( wp_safe_remote_get( 'https://cartflows.com/product/cartflows/feed/' ) ); // phpcs:ignore -- This is a valid use case cannot use VIP rules here.
+
+		// Security: Set proper content type header and strip script tags to prevent XSS.
+		echo $feed; // phpcs:ignore -- RSS feed content sanitized via wp_kses_post.
+		exit;
+	}
+
+
+/** Function dismiss_new_ui_notice() called by wp_ajax hooks: {'cartflows_dismiss_new_ui_notice'} **/
+/** No params detected :-/ **/
 
 
 /** Function order_checkout_form_shortcode() called by wp_ajax hooks: {'wpcf_order_checkout_form_shortcode'} **/
@@ -339,6 +270,140 @@ function order_checkout_form_shortcode() {
 	}
 
 
+/** Function ajax_accept() called by wp_ajax hooks: {'cartflows_pointer_accept'} **/
+/** Parameters found in function ajax_accept(): {"post": ["nonce"]} **/
+function ajax_accept() {
+			// Security: Check capability.
+			if ( ! current_user_can( $this->get_capability() ) ) {
+				wp_send_json_error( array( 'message' => __( 'Unauthorized user.', 'cartflows' ) ), 403 );
+			}
+
+			// Security: Verify nonce.
+			if ( empty( $_POST['nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'cartflows_pointer_nonce' ) ) {
+				wp_send_json_error( array( 'message' => __( 'Invalid nonce.', 'cartflows' ) ), 403 );
+			}
+
+			$this->update_pointer_data( 'accepted', time() );
+			wp_send_json_success();
+		}
+
+
+/** Function send_plugin_deactivate_feedback() called by wp_ajax hooks: {'uds_plugin_deactivate_feedback'} **/
+/** Parameters found in function send_plugin_deactivate_feedback(): {"post": ["reason", "feedback", "referer", "version", "source"]} **/
+function send_plugin_deactivate_feedback() {
+
+			$response_data = array( 'message' => __( 'Sorry, you are not allowed to do this operation.' ) );
+
+			/**
+			 * Check permission
+			 */
+			if ( ! current_user_can( 'manage_options' ) ) {
+				wp_send_json_error( $response_data );
+			}
+
+			/**
+			 * Nonce verification
+			 */
+			if ( ! check_ajax_referer( 'uds_plugin_deactivate_feedback', 'security', false ) ) {
+				$response_data = array( 'message' => __( 'Nonce validation failed' ) );
+				wp_send_json_error( $response_data );
+			}
+
+			$feedback_data = array(
+				'reason'      => isset( $_POST['reason'] ) ? sanitize_text_field( wp_unslash( $_POST['reason'] ) ) : '',
+				'feedback'    => isset( $_POST['feedback'] ) ? sanitize_text_field( wp_unslash( $_POST['feedback'] ) ) : '',
+				'domain_name' => isset( $_POST['referer'] ) ? sanitize_text_field( wp_unslash( $_POST['referer'] ) ) : '',
+				'version'     => isset( $_POST['version'] ) ? sanitize_text_field( wp_unslash( $_POST['version'] ) ) : '',
+				'plugin'      => isset( $_POST['source'] ) ? sanitize_text_field( wp_unslash( $_POST['source'] ) ) : '',
+			);
+
+			$api_args = array(
+				'body'    => wp_json_encode( $feedback_data ),
+				'headers' => BSF_Analytics_Helper::get_api_headers(),
+				'timeout' => 15, //phpcs:ignore WordPressVIPMinimum.Performance.RemoteRequestTimeout.timeout_timeout
+			);
+
+			$target_url = BSF_Analytics_Helper::get_api_url() . self::$feedback_api_endpoint;
+
+			$response = wp_safe_remote_post( $target_url, $api_args );
+
+			$has_errors = BSF_Analytics_Helper::is_api_error( $response );
+
+			if ( $has_errors['error'] ) {
+				wp_send_json_error(
+					array(
+						'success' => false,
+						'message' => $has_errors['error_message'],
+					)
+				);
+			}
+
+			wp_send_json_success();
+		}
+
+
+/** Function upload_checkout_file() called by wp_ajax hooks: {'wcf_upload_checkout_file', 'nopriv_wcf_upload_checkout_file'} **/
+/** Parameters found in function upload_checkout_file(): {"files": ["wcf_checkout_file"]} **/
+function upload_checkout_file() {
+
+		if ( ! check_ajax_referer( 'wcf-file-upload', 'security', false ) ) {
+			wp_send_json_error(
+				array( 'error' => __( 'Nonce validation failed.', 'cartflows' ) )
+			);
+		}
+
+		if ( empty( $_FILES['wcf_checkout_file']['tmp_name'] ) ) {
+			wp_send_json_error(
+				array( 'error' => __( 'No file uploaded.', 'cartflows' ) )
+			);
+		}
+
+		if ( ! function_exists( 'wp_handle_upload' ) ) {
+			require_once ABSPATH . 'wp-admin/includes/file.php';
+		}
+
+		$file         = $_FILES['wcf_checkout_file']; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput, WordPress.Security.NonceVerification.Missing
+		$file['name'] = sanitize_file_name( $file['name'] );
+		$file['ext']  = strtolower( pathinfo( $file['name'], PATHINFO_EXTENSION ) );
+
+		$master_allowed = Cartflows_Helper::get_allowed_file_extensions();
+
+		$restrictions = $this->get_field_restrictions();
+
+		$allowed_extensions = empty( $restrictions['extensions'] )
+			? $master_allowed
+			: array_values( array_intersect( $master_allowed, $restrictions['extensions'] ) );
+
+		if ( ! in_array( $file['ext'], $allowed_extensions, true ) ) {
+			wp_send_json_error( array( 'error' => __( 'File type is not allowed.', 'cartflows' ) ) );
+		}
+
+		if ( (int) $file['size'] > $restrictions['max_size'] ) {
+			wp_send_json_error( array( 'error' => __( 'File size exceeds the allowed limit.', 'cartflows' ) ) );
+		}
+
+		$check = wp_check_filetype_and_ext( $file['tmp_name'], $file['name'], wp_get_mime_types() );
+
+		if ( empty( $check['ext'] ) || $check['ext'] !== $file['ext'] ) {
+			wp_send_json_error( array( 'error' => __( 'Invalid or corrupted file.', 'cartflows' ) ) );
+		}
+
+		$result = $this->move_uploaded_file( $file );
+
+		wp_send_json_success(
+			array(
+				'success'  => true,
+				'url'      => esc_url_raw( $result['url'] ),
+				'filename' => sanitize_file_name( basename( $result['file'] ) ),
+			)
+		);
+	}
+
+
+/** Function get_suretriggers_data() called by wp_ajax hooks: {'cartflows_get_suretriggers_data'} **/
+/** No params detected :-/ **/
+
+
 /** Function json_search_flows() called by wp_ajax hooks: {'wcf_json_search_flows'} **/
 /** Parameters found in function json_search_flows(): {"post": ["security", "term"]} **/
 function json_search_flows() {
@@ -384,33 +449,97 @@ function json_search_flows() {
 	}
 
 
-/** Function dismiss_script_migration_complete_notice() called by wp_ajax hooks: {'cartflows_dismiss_script_migration_complete_notice'} **/
-/** No params detected :-/ **/
+/** Function apply_coupon() called by wp_ajax hooks: {'wcf_woo_apply_coupon', 'nopriv_wcf_woo_apply_coupon'} **/
+/** Parameters found in function apply_coupon(): {"post": ["coupon_code"]} **/
+function apply_coupon() {
+		$response = '';
 
-
-/** Function ignore_gb_notice() called by wp_ajax hooks: {'cartflows_ignore_gutenberg_notice'} **/
-/** No params detected :-/ **/
-
-
-/** Function ajax_dismiss() called by wp_ajax hooks: {'cartflows_pointer_dismiss'} **/
-/** Parameters found in function ajax_dismiss(): {"post": ["nonce"]} **/
-function ajax_dismiss() {
-			// Security: Check capability.
-			if ( ! current_user_can( $this->get_capability() ) ) {
-				wp_send_json_error( array( 'message' => __( 'Unauthorized user.', 'cartflows' ) ), 403 );
-			}
-
-			// Security: Verify nonce.
-			if ( empty( $_POST['nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'cartflows_pointer_nonce' ) ) {
-				wp_send_json_error( array( 'message' => __( 'Invalid nonce.', 'cartflows' ) ), 403 );
-			}
-
-			$this->update_pointer_data( 'dismissed', time() );
-			wp_send_json_success();
+		if ( ! check_ajax_referer( 'wcf-apply-coupon', 'security', false ) ) {
+			$response_data = array(
+				'status' => false,
+				'error'  => __( 'Nonce validation failed', 'cartflows' ),
+			);
+			wp_send_json_error( $response_data );
 		}
 
+		// Update the billing email before adding a coupon required for coupon conditions.
+		$this->update_billing_email();
 
-/** Function dismiss_new_ui_notice() called by wp_ajax hooks: {'cartflows_dismiss_new_ui_notice'} **/
+		ob_start();
+
+		if ( ! empty( $_POST['coupon_code'] ) ) {
+			$result = WC()->cart->add_discount( sanitize_text_field( wp_unslash( $_POST['coupon_code'] ) ) );
+		} else {
+			wc_add_notice( WC_Coupon::get_generic_coupon_error( WC_Coupon::E_WC_COUPON_PLEASE_ENTER ), 'error' );
+		}
+
+		$response = array(
+			'status' => $result,
+			'msg'    => wc_print_notices( true ),
+		);
+
+		ob_clean(); // Clearing the uncessary echo HTML.
+		wp_send_json( $response );
+
+		die();
+	}
+
+
+/** Function woocommerce_user_login() called by wp_ajax hooks: {'nopriv_wcf_woocommerce_login'} **/
+/** Parameters found in function woocommerce_user_login(): {"post": ["email", "password"]} **/
+function woocommerce_user_login() {
+
+		check_ajax_referer( 'woocommerce-login', 'security' );
+
+		$response = array(
+			'success' => false,
+		);
+
+		// wp_signon() accepts username or email via user_login; sanitize_email() would drop usernames.
+		$user_login = isset( $_POST['email'] ) ? sanitize_text_field( wp_unslash( $_POST['email'] ) ) : '';
+		$password   = isset( $_POST['password'] ) ? wp_unslash( $_POST['password'] ) : ''; // phpcs:disable WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+
+		$creds = array(
+			'user_login'    => $user_login,
+			'user_password' => $password,
+			'remember'      => false,
+		);
+
+		$user = wp_signon( $creds, false );
+
+		if ( ! is_wp_error( $user ) ) {
+			$response = array(
+				'success' => true,
+			);
+		} else {
+			// Mirror WC's process_login() so security plugins see the failure.
+			do_action( 'woocommerce_login_failed' );
+			// Generic error to prevent user enumeration.
+			$response['error'] = __( 'Invalid username or password.', 'cartflows' );
+		}
+
+		wp_send_json_success( $response );
+	}
+
+
+/** Function remove_coupon() called by wp_ajax hooks: {'wcf_woo_remove_coupon', 'nopriv_wcf_woo_remove_coupon'} **/
+/** Parameters found in function remove_coupon(): {"post": ["coupon_code"]} **/
+function remove_coupon() {
+		check_ajax_referer( 'wcf-remove-coupon', 'security' );
+		$coupon = isset( $_POST['coupon_code'] ) ? sanitize_text_field( wp_unslash( $_POST['coupon_code'] ) ) : false;
+
+		if ( empty( $coupon ) ) {
+			echo "<div class='woocommerce-error'>" . esc_html__( 'Sorry there was a problem removing this coupon.', 'cartflows' ) . '</div>';
+		} else {
+			WC()->cart->remove_coupon( $coupon );
+			echo "<div class='woocommerce-error'>" . esc_html__( 'Coupon has been removed.', 'cartflows' ) . '</div>';
+		}
+		wc_print_notices();
+		wp_die();
+	}
+
+
+/** Function snooze_script_migration_notice() called by wp_ajax hooks: {'cartflows_snooze_script_migration'} **/
 /** No params detected :-/ **/
 
 
@@ -461,8 +590,125 @@ function ajax_save_course_template() {
 	}
 
 
-/** Function get_suretriggers_data() called by wp_ajax hooks: {'cartflows_get_suretriggers_data'} **/
+/** Function ignore_gb_notice() called by wp_ajax hooks: {'cartflows_ignore_gutenberg_notice'} **/
 /** No params detected :-/ **/
+
+
+/** Function check_email_exists() called by wp_ajax hooks: {'nopriv_wcf_check_email_exists'} **/
+/** Parameters found in function check_email_exists(): {"post": ["email_address"]} **/
+function check_email_exists() {
+
+		check_ajax_referer( 'check-email-exist', 'security' );
+
+		$email_address = isset( $_POST['email_address'] ) ? sanitize_email( wp_unslash( $_POST['email_address'] ) ) : false;
+
+		$is_login_allowed = 'yes' === get_option( 'woocommerce_enable_checkout_login_reminder' );
+
+		// Security: Only check email existence when the checkout login UX needs it.
+		// Otherwise the boolean would leak registered emails for no UX benefit.
+		$is_exist = $is_login_allowed && email_exists( $email_address );
+
+		$response = array(
+			'success'          => boolval( $is_exist ),
+			'is_login_allowed' => $is_login_allowed,
+			'msg'              => $is_exist ? __( 'Email Exist.', 'cartflows' ) : __( 'Email not exist', 'cartflows' ),
+		);
+
+		wp_send_json_success( $response );
+	}
+
+
+/** Function wp_ajax_install_plugin() called by wp_ajax hooks: {'cartflows_install_plugin'} **/
+/** No function found :-/ **/
+
+
+/** Function ajax_should_show() called by wp_ajax hooks: {'cartflows_pointer_should_show'} **/
+/** Parameters found in function ajax_should_show(): {"post": ["nonce"]} **/
+function ajax_should_show() {
+			// Security: Check capability.
+			if ( ! current_user_can( $this->get_capability() ) ) {
+				wp_send_json_error( array( 'message' => __( 'Unauthorized user.', 'cartflows' ) ), 403 );
+			}
+
+			// Security: Verify nonce.
+			if ( empty( $_POST['nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'cartflows_pointer_nonce' ) ) {
+				wp_send_json_error( array( 'message' => __( 'Invalid nonce.', 'cartflows' ) ), 403 );
+			}
+
+			wp_send_json(
+				array(
+					'show'        => true,
+					'title'       => $this->config['title'],
+					'content'     => $this->config['content'],
+					'button_text' => $this->config['button_text'],
+					'button_url'  => $this->config['button_url'],
+					'dismiss'     => $this->config['dismiss_text'],
+				)
+			);
+		}
+
+
+/** Function ajax_dismiss() called by wp_ajax hooks: {'cartflows_pointer_dismiss'} **/
+/** Parameters found in function ajax_dismiss(): {"post": ["nonce"]} **/
+function ajax_dismiss() {
+			// Security: Check capability.
+			if ( ! current_user_can( $this->get_capability() ) ) {
+				wp_send_json_error( array( 'message' => __( 'Unauthorized user.', 'cartflows' ) ), 403 );
+			}
+
+			// Security: Verify nonce.
+			if ( empty( $_POST['nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'cartflows_pointer_nonce' ) ) {
+				wp_send_json_error( array( 'message' => __( 'Invalid nonce.', 'cartflows' ) ), 403 );
+			}
+
+			$this->update_pointer_data( 'dismissed', time() );
+			wp_send_json_success();
+		}
+
+
+/** Function wcf_woo_remove_cart_product() called by wp_ajax hooks: {'nopriv_wcf_woo_remove_cart_product', 'wcf_woo_remove_cart_product'} **/
+/** Parameters found in function wcf_woo_remove_cart_product(): {"post": ["p_key", "p_id"]} **/
+function wcf_woo_remove_cart_product() {
+		check_ajax_referer( 'wcf-remove-cart-product', 'security' );
+		$product_key   = isset( $_POST['p_key'] ) ? sanitize_text_field( wp_unslash( $_POST['p_key'] ) ) : false;
+		$product_id    = isset( $_POST['p_id'] ) ? sanitize_text_field( wp_unslash( $_POST['p_id'] ) ) : '';
+		$product_title = get_the_title( $product_id );
+
+		$needs_shipping = false;
+		$is_order_bump  = false;
+		$order_bump_id  = '';
+
+		// Check if the product is an order bump before removing it.
+		if ( ! empty( $product_key ) ) {
+			$cart_item = WC()->cart->get_cart_item( $product_key );
+			if ( isset( $cart_item['cartflows_bump'] ) && $cart_item['cartflows_bump'] ) {
+				$is_order_bump = true;
+				$order_bump_id = isset( $cart_item['ob_id'] ) ? $cart_item['ob_id'] : '';
+			}
+			
+			WC()->cart->remove_cart_item( $product_key );
+			$msg = "<div class='woocommerce-message'>" . $product_title . __( ' has been removed.', 'cartflows' ) . '</div>';
+		} else {
+			$msg = "<div class='woocommerce-message'>" . __( 'Sorry there was a problem removing ', 'cartflows' ) . $product_title;
+		}
+
+		foreach ( WC()->cart->get_cart() as $cart_item_key => $values ) {
+			if ( $values['data']->needs_shipping() ) {
+				$needs_shipping = true;
+				break;
+			}
+		}
+
+		$response = array(
+			'need_shipping' => $needs_shipping,
+			'msg'           => $msg,
+			'is_order_bump' => $is_order_bump,
+			'order_bump_id' => $order_bump_id,
+		);
+
+		echo wp_json_encode( $response );
+		wp_die();
+	}
 
 
 /** Function dismiss_notice() called by wp_ajax hooks: {'astra-notice-dismiss'} **/
@@ -526,251 +772,5 @@ function dismiss_notice() {
 
 			wp_send_json_error();
 		}
-
-
-/** Function wcf_woo_remove_cart_product() called by wp_ajax hooks: {'wcf_woo_remove_cart_product', 'nopriv_wcf_woo_remove_cart_product'} **/
-/** Parameters found in function wcf_woo_remove_cart_product(): {"post": ["p_key", "p_id"]} **/
-function wcf_woo_remove_cart_product() {
-		check_ajax_referer( 'wcf-remove-cart-product', 'security' );
-		$product_key   = isset( $_POST['p_key'] ) ? sanitize_text_field( wp_unslash( $_POST['p_key'] ) ) : false;
-		$product_id    = isset( $_POST['p_id'] ) ? sanitize_text_field( wp_unslash( $_POST['p_id'] ) ) : '';
-		$product_title = get_the_title( $product_id );
-
-		$needs_shipping = false;
-		$is_order_bump  = false;
-		$order_bump_id  = '';
-
-		// Check if the product is an order bump before removing it.
-		if ( ! empty( $product_key ) ) {
-			$cart_item = WC()->cart->get_cart_item( $product_key );
-			if ( isset( $cart_item['cartflows_bump'] ) && $cart_item['cartflows_bump'] ) {
-				$is_order_bump = true;
-				$order_bump_id = isset( $cart_item['ob_id'] ) ? $cart_item['ob_id'] : '';
-			}
-			
-			WC()->cart->remove_cart_item( $product_key );
-			$msg = "<div class='woocommerce-message'>" . $product_title . __( ' has been removed.', 'cartflows' ) . '</div>';
-		} else {
-			$msg = "<div class='woocommerce-message'>" . __( 'Sorry there was a problem removing ', 'cartflows' ) . $product_title;
-		}
-
-		foreach ( WC()->cart->get_cart() as $cart_item_key => $values ) {
-			if ( $values['data']->needs_shipping() ) {
-				$needs_shipping = true;
-				break;
-			}
-		}
-
-		$response = array(
-			'need_shipping' => $needs_shipping,
-			'msg'           => $msg,
-			'is_order_bump' => $is_order_bump,
-			'order_bump_id' => $order_bump_id,
-		);
-
-		echo wp_json_encode( $response );
-		wp_die();
-	}
-
-
-/** Function upload_checkout_file() called by wp_ajax hooks: {'wcf_upload_checkout_file', 'nopriv_wcf_upload_checkout_file'} **/
-/** Parameters found in function upload_checkout_file(): {"files": ["wcf_checkout_file"]} **/
-function upload_checkout_file() {
-
-		if ( ! check_ajax_referer( 'wcf-file-upload', 'security', false ) ) {
-			wp_send_json_error(
-				array( 'error' => __( 'Nonce validation failed.', 'cartflows' ) )
-			);
-		}
-
-		if ( empty( $_FILES['wcf_checkout_file']['tmp_name'] ) ) {
-			wp_send_json_error(
-				array( 'error' => __( 'No file uploaded.', 'cartflows' ) )
-			);
-		}
-
-		if ( ! function_exists( 'wp_handle_upload' ) ) {
-			require_once ABSPATH . 'wp-admin/includes/file.php';
-		}
-
-		$file         = $_FILES['wcf_checkout_file']; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput, WordPress.Security.NonceVerification.Missing
-		$file['name'] = sanitize_file_name( $file['name'] );
-		$file['ext']  = strtolower( pathinfo( $file['name'], PATHINFO_EXTENSION ) );
-
-		$master_allowed = Cartflows_Helper::get_allowed_file_extensions();
-
-		$restrictions = $this->get_field_restrictions();
-
-		$allowed_extensions = empty( $restrictions['extensions'] )
-			? $master_allowed
-			: array_values( array_intersect( $master_allowed, $restrictions['extensions'] ) );
-
-		if ( ! in_array( $file['ext'], $allowed_extensions, true ) ) {
-			wp_send_json_error( array( 'error' => __( 'File type is not allowed.', 'cartflows' ) ) );
-		}
-
-		if ( (int) $file['size'] > $restrictions['max_size'] ) {
-			wp_send_json_error( array( 'error' => __( 'File size exceeds the allowed limit.', 'cartflows' ) ) );
-		}
-
-		$check = wp_check_filetype_and_ext( $file['tmp_name'], $file['name'], wp_get_mime_types() );
-
-		if ( empty( $check['ext'] ) || $check['ext'] !== $file['ext'] ) {
-			wp_send_json_error( array( 'error' => __( 'Invalid or corrupted file.', 'cartflows' ) ) );
-		}
-
-		$result = $this->move_uploaded_file( $file );
-
-		wp_send_json_success(
-			array(
-				'success'  => true,
-				'url'      => esc_url_raw( $result['url'] ),
-				'filename' => sanitize_file_name( basename( $result['file'] ) ),
-			)
-		);
-	}
-
-
-/** Function send_plugin_deactivate_feedback() called by wp_ajax hooks: {'uds_plugin_deactivate_feedback'} **/
-/** Parameters found in function send_plugin_deactivate_feedback(): {"post": ["reason", "feedback", "referer", "version", "source"]} **/
-function send_plugin_deactivate_feedback() {
-
-			$response_data = array( 'message' => __( 'Sorry, you are not allowed to do this operation.' ) );
-
-			/**
-			 * Check permission
-			 */
-			if ( ! current_user_can( 'manage_options' ) ) {
-				wp_send_json_error( $response_data );
-			}
-
-			/**
-			 * Nonce verification
-			 */
-			if ( ! check_ajax_referer( 'uds_plugin_deactivate_feedback', 'security', false ) ) {
-				$response_data = array( 'message' => __( 'Nonce validation failed' ) );
-				wp_send_json_error( $response_data );
-			}
-
-			$feedback_data = array(
-				'reason'      => isset( $_POST['reason'] ) ? sanitize_text_field( wp_unslash( $_POST['reason'] ) ) : '',
-				'feedback'    => isset( $_POST['feedback'] ) ? sanitize_text_field( wp_unslash( $_POST['feedback'] ) ) : '',
-				'domain_name' => isset( $_POST['referer'] ) ? sanitize_text_field( wp_unslash( $_POST['referer'] ) ) : '',
-				'version'     => isset( $_POST['version'] ) ? sanitize_text_field( wp_unslash( $_POST['version'] ) ) : '',
-				'plugin'      => isset( $_POST['source'] ) ? sanitize_text_field( wp_unslash( $_POST['source'] ) ) : '',
-			);
-
-			$api_args = array(
-				'body'    => wp_json_encode( $feedback_data ),
-				'headers' => BSF_Analytics_Helper::get_api_headers(),
-				'timeout' => 15, //phpcs:ignore WordPressVIPMinimum.Performance.RemoteRequestTimeout.timeout_timeout
-			);
-
-			$target_url = BSF_Analytics_Helper::get_api_url() . self::$feedback_api_endpoint;
-
-			$response = wp_safe_remote_post( $target_url, $api_args );
-
-			$has_errors = BSF_Analytics_Helper::is_api_error( $response );
-
-			if ( $has_errors['error'] ) {
-				wp_send_json_error(
-					array(
-						'success' => false,
-						'message' => $has_errors['error_message'],
-					)
-				);
-			}
-
-			wp_send_json_success();
-		}
-
-
-/** Function ajax_should_show() called by wp_ajax hooks: {'cartflows_pointer_should_show'} **/
-/** Parameters found in function ajax_should_show(): {"post": ["nonce"]} **/
-function ajax_should_show() {
-			// Security: Check capability.
-			if ( ! current_user_can( $this->get_capability() ) ) {
-				wp_send_json_error( array( 'message' => __( 'Unauthorized user.', 'cartflows' ) ), 403 );
-			}
-
-			// Security: Verify nonce.
-			if ( empty( $_POST['nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'cartflows_pointer_nonce' ) ) {
-				wp_send_json_error( array( 'message' => __( 'Invalid nonce.', 'cartflows' ) ), 403 );
-			}
-
-			wp_send_json(
-				array(
-					'show'        => true,
-					'title'       => $this->config['title'],
-					'content'     => $this->config['content'],
-					'button_text' => $this->config['button_text'],
-					'button_url'  => $this->config['button_url'],
-					'dismiss'     => $this->config['dismiss_text'],
-				)
-			);
-		}
-
-
-/** Function fetch_whats_new_data() called by wp_ajax hooks: {'cartflows_fetch_whats_new_data'} **/
-/** Parameters found in function fetch_whats_new_data(): {"get": ["nonce"]} **/
-function fetch_whats_new_data() {
-		if ( ! isset( $_GET['nonce'] ) || ! wp_verify_nonce( sanitize_text_field( $_GET['nonce'] ), 'cartflows_fetch_whats_new_data' ) ) {
-			// Verify the nonce, if it fails, return an error.
-			wp_send_json_error( array( 'message' => __( 'Nonce verification failed.', 'cartflows' ) ) );
-		}
-
-		// Security: Require admin capability to access RSS feed proxy.
-		if ( ! current_user_can( 'cartflows_manage_flows_steps' ) ) {
-			wp_send_json_error( array( 'message' => __( 'Permission denied.', 'cartflows' ) ) );
-		}
-
-		// Fetch the RSS feed from the URL. This saves us from the CORS issue.
-		$feed = wp_remote_retrieve_body( wp_safe_remote_get( 'https://cartflows.com/product/cartflows/feed/' ) ); // phpcs:ignore -- This is a valid use case cannot use VIP rules here.
-
-		// Security: Set proper content type header and strip script tags to prevent XSS.
-		echo $feed; // phpcs:ignore -- RSS feed content sanitized via wp_kses_post.
-		exit;
-	}
-
-
-/** Function snooze_script_migration_notice() called by wp_ajax hooks: {'cartflows_snooze_script_migration'} **/
-/** No params detected :-/ **/
-
-
-/** Function woocommerce_user_login() called by wp_ajax hooks: {'nopriv_wcf_woocommerce_login'} **/
-/** Parameters found in function woocommerce_user_login(): {"post": ["email", "password"]} **/
-function woocommerce_user_login() {
-
-		check_ajax_referer( 'woocommerce-login', 'security' );
-
-		$response = array(
-			'success' => false,
-		);
-
-		// wp_signon() accepts username or email via user_login; sanitize_email() would drop usernames.
-		$user_login = isset( $_POST['email'] ) ? sanitize_text_field( wp_unslash( $_POST['email'] ) ) : '';
-		$password   = isset( $_POST['password'] ) ? wp_unslash( $_POST['password'] ) : ''; // phpcs:disable WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-
-		$creds = array(
-			'user_login'    => $user_login,
-			'user_password' => $password,
-			'remember'      => false,
-		);
-
-		$user = wp_signon( $creds, false );
-
-		if ( ! is_wp_error( $user ) ) {
-			$response = array(
-				'success' => true,
-			);
-		} else {
-			// Mirror WC's process_login() so security plugins see the failure.
-			do_action( 'woocommerce_login_failed' );
-			// Generic error to prevent user enumeration.
-			$response['error'] = __( 'Invalid username or password.', 'cartflows' );
-		}
-
-		wp_send_json_success( $response );
-	}
 
 

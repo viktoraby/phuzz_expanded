@@ -1,0 +1,1927 @@
+[
+  {
+    "coverage_id": "1787210262-1071a58f-8d57-4e16-8bf7-d5ebe61af41e",
+    "priority": 6,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "cmp_ajax_import_settings"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "json": "{\"$<script>alert(0xdeadbeef)</script>ne\":null}"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key 0",
+        "errfile": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "errline": 3112
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"result\":\"error\",\"message\":\"JSON file is valid but it does not contain CMP Settings.\"}",
+    "response.body.length": 88,
+    "response.headers": {
+      "Date": "Thu, 20 Aug 2026 07:17:42 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Vary": "Accept-Encoding",
+      "Content-Length": "88",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 411.001,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787210245-ddae1e96-a4d2-4c55-904f-b461dac146d3",
+    "paths": [
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_115_116_117_118_120_121_123_125_129_130_141_142_144_152_155_157_159_161_162_163_164_165_166_167_168_169_17_170_171_173_182_183_194_2022_2023_2024_2025_2026_2027_2028_2030_21_215_225_259_3097_3100_3104_3106_3107_3108_3111_3152_3153_3154_3158_3159_3284_3287_3299_3303_3305_3312_476_56_57_58_59_60_63_636_641_644_646_69_70_71_72_73_74_75_757_758_76_768_77_79_80_87_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_settings.php::::11_2_21_47",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/cmp-update-process.php::::10_13_3_372_6",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-feedback.php::::14_194_195_196_197_199_40_41_43_44_50_53_54_55",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_115_116_117_118_120_121_123_125_129_130_141_142_144_152_155_157_159_161_162_163_164_165_166_167_168_169_17_170_171_173_182_183_194_2022_2023_2024_2025_2026_2027_2028_2030_21_215_225_259_3097_3100_3104_3106_3107_3108_3111_3112_3146_3147_3148_3158_3159_3284_3287_3299_3303_3305_3312_476_56_57_58_59_60_63_636_641_644_646_69_70_71_72_73_74_75_757_758_76_768_77_79_80_87_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_html.php::::2_475"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 6,
+    "is_interesting": false,
+    "fuzzer_id": "9",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "json"
+  },
+  {
+    "coverage_id": "1787210276-1b54589e-8b29-44bf-ba05-ab972577d289",
+    "priority": 6,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "cmp_ajax_import_settings"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "json": "{\"$)e\":null}"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key 0",
+        "errfile": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "errline": 3112
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"result\":\"error\",\"message\":\"JSON file is valid but it does not contain CMP Settings.\"}",
+    "response.body.length": 88,
+    "response.headers": {
+      "Date": "Thu, 20 Aug 2026 07:17:56 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Vary": "Accept-Encoding",
+      "Content-Length": "88",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 398.433,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787210245-ddae1e96-a4d2-4c55-904f-b461dac146d3",
+    "paths": [
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_115_116_117_118_120_121_123_125_129_130_141_142_144_152_155_157_159_161_162_163_164_165_166_167_168_169_17_170_171_173_182_183_194_2022_2023_2024_2025_2026_2027_2028_2030_21_215_225_259_3097_3100_3104_3106_3107_3108_3111_3152_3153_3154_3158_3159_3284_3287_3299_3303_3305_3312_476_56_57_58_59_60_63_636_641_644_646_69_70_71_72_73_74_75_757_758_76_768_77_79_80_87_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_settings.php::::11_2_21_47",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/cmp-update-process.php::::10_13_3_372_6",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-feedback.php::::14_194_195_196_197_199_40_41_43_44_50_53_54_55",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_115_116_117_118_120_121_123_125_129_130_141_142_144_152_155_157_159_161_162_163_164_165_166_167_168_169_17_170_171_173_182_183_194_2022_2023_2024_2025_2026_2027_2028_2030_21_215_225_259_3097_3100_3104_3106_3107_3108_3111_3112_3146_3147_3148_3158_3159_3284_3287_3299_3303_3305_3312_476_56_57_58_59_60_63_636_641_644_646_69_70_71_72_73_74_75_757_758_76_768_77_79_80_87_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_html.php::::2_475"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 6,
+    "is_interesting": false,
+    "fuzzer_id": "9",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "json"
+  },
+  {
+    "coverage_id": "1787210280-09bc0f49-f625-4658-9823-6c645170f30e",
+    "priority": 6,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "cmp_ajax_import_settings"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "json": "{\"9ne\":null}"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key 0",
+        "errfile": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "errline": 3112
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"result\":\"error\",\"message\":\"JSON file is valid but it does not contain CMP Settings.\"}",
+    "response.body.length": 88,
+    "response.headers": {
+      "Date": "Thu, 20 Aug 2026 07:18:00 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Vary": "Accept-Encoding",
+      "Content-Length": "88",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 684.694,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787210245-ddae1e96-a4d2-4c55-904f-b461dac146d3",
+    "paths": [
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_115_116_117_118_120_121_123_125_129_130_141_142_144_152_155_157_159_161_162_163_164_165_166_167_168_169_17_170_171_173_182_183_194_2022_2023_2024_2025_2026_2027_2028_2030_21_215_225_259_3097_3100_3104_3106_3107_3108_3111_3152_3153_3154_3158_3159_3284_3287_3299_3303_3305_3312_476_56_57_58_59_60_63_636_641_644_646_69_70_71_72_73_74_75_757_758_76_768_77_79_80_87_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_settings.php::::11_2_21_47",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/cmp-update-process.php::::10_13_3_372_6",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-feedback.php::::14_194_195_196_197_199_40_41_43_44_50_53_54_55",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_115_116_117_118_120_121_123_125_129_130_141_142_144_152_155_157_159_161_162_163_164_165_166_167_168_169_17_170_171_173_182_183_194_2022_2023_2024_2025_2026_2027_2028_2030_21_215_225_259_3097_3100_3104_3106_3107_3108_3111_3112_3146_3147_3148_3158_3159_3284_3287_3299_3303_3305_3312_476_56_57_58_59_60_63_636_641_644_646_69_70_71_72_73_74_75_757_758_76_768_77_79_80_87_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_html.php::::2_475"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 6,
+    "is_interesting": false,
+    "fuzzer_id": "9",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "json"
+  },
+  {
+    "coverage_id": "1787210282-2f55150e-6c3e-499e-b7cb-079601b74c41",
+    "priority": 6,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "cmp_ajax_import_settings"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "json": "{\"Cne\":null}"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key 0",
+        "errfile": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "errline": 3112
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"result\":\"error\",\"message\":\"JSON file is valid but it does not contain CMP Settings.\"}",
+    "response.body.length": 88,
+    "response.headers": {
+      "Date": "Thu, 20 Aug 2026 07:18:02 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Vary": "Accept-Encoding",
+      "Content-Length": "88",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 352.162,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787210245-ddae1e96-a4d2-4c55-904f-b461dac146d3",
+    "paths": [
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_115_116_117_118_120_121_123_125_129_130_141_142_144_152_155_157_159_161_162_163_164_165_166_167_168_169_17_170_171_173_182_183_194_2022_2023_2024_2025_2026_2027_2028_2030_21_215_225_259_3097_3100_3104_3106_3107_3108_3111_3152_3153_3154_3158_3159_3284_3287_3299_3303_3305_3312_476_56_57_58_59_60_63_636_641_644_646_69_70_71_72_73_74_75_757_758_76_768_77_79_80_87_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_settings.php::::11_2_21_47",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/cmp-update-process.php::::10_13_3_372_6",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-feedback.php::::14_194_195_196_197_199_40_41_43_44_50_53_54_55",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_115_116_117_118_120_121_123_125_129_130_141_142_144_152_155_157_159_161_162_163_164_165_166_167_168_169_17_170_171_173_182_183_194_2022_2023_2024_2025_2026_2027_2028_2030_21_215_225_259_3097_3100_3104_3106_3107_3108_3111_3112_3146_3147_3148_3158_3159_3284_3287_3299_3303_3305_3312_476_56_57_58_59_60_63_636_641_644_646_69_70_71_72_73_74_75_757_758_76_768_77_79_80_87_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_html.php::::2_475"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 6,
+    "is_interesting": false,
+    "fuzzer_id": "9",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "json"
+  },
+  {
+    "coverage_id": "1787210283-d4a5526c-1855-4edd-8715-62984816971f",
+    "priority": 6,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "cmp_ajax_import_settings"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "json": "{\"${-0ne\":null}"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key 0",
+        "errfile": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "errline": 3112
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"result\":\"error\",\"message\":\"JSON file is valid but it does not contain CMP Settings.\"}",
+    "response.body.length": 88,
+    "response.headers": {
+      "Date": "Thu, 20 Aug 2026 07:18:03 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Vary": "Accept-Encoding",
+      "Content-Length": "88",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 315.221,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787210245-ddae1e96-a4d2-4c55-904f-b461dac146d3",
+    "paths": [
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_115_116_117_118_120_121_123_125_129_130_141_142_144_152_155_157_159_161_162_163_164_165_166_167_168_169_17_170_171_173_182_183_194_2022_2023_2024_2025_2026_2027_2028_2030_21_215_225_259_3097_3100_3104_3106_3107_3108_3111_3152_3153_3154_3158_3159_3284_3287_3299_3303_3305_3312_476_56_57_58_59_60_63_636_641_644_646_69_70_71_72_73_74_75_757_758_76_768_77_79_80_87_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_settings.php::::11_2_21_47",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/cmp-update-process.php::::10_13_3_372_6",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-feedback.php::::14_194_195_196_197_199_40_41_43_44_50_53_54_55",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_115_116_117_118_120_121_123_125_129_130_141_142_144_152_155_157_159_161_162_163_164_165_166_167_168_169_17_170_171_173_182_183_194_2022_2023_2024_2025_2026_2027_2028_2030_21_215_225_259_3097_3100_3104_3106_3107_3108_3111_3112_3146_3147_3148_3158_3159_3284_3287_3299_3303_3305_3312_476_56_57_58_59_60_63_636_641_644_646_69_70_71_72_73_74_75_757_758_76_768_77_79_80_87_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_html.php::::2_475"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 6,
+    "is_interesting": false,
+    "fuzzer_id": "9",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "json"
+  },
+  {
+    "coverage_id": "1787210290-c9f0e4d1-218c-4f51-af83-56ae8186ae22",
+    "priority": 6,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "cmp_ajax_import_settings"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "json": "{\"?ne\":null}"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key 0",
+        "errfile": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "errline": 3112
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"result\":\"error\",\"message\":\"JSON file is valid but it does not contain CMP Settings.\"}",
+    "response.body.length": 88,
+    "response.headers": {
+      "Date": "Thu, 20 Aug 2026 07:18:10 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Vary": "Accept-Encoding",
+      "Content-Length": "88",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 564.107,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787210245-ddae1e96-a4d2-4c55-904f-b461dac146d3",
+    "paths": [
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_115_116_117_118_120_121_123_125_129_130_141_142_144_152_155_157_159_161_162_163_164_165_166_167_168_169_17_170_171_173_182_183_194_2022_2023_2024_2025_2026_2027_2028_2030_21_215_225_259_3097_3100_3104_3106_3107_3108_3111_3152_3153_3154_3158_3159_3284_3287_3299_3303_3305_3312_476_56_57_58_59_60_63_636_641_644_646_69_70_71_72_73_74_75_757_758_76_768_77_79_80_87_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_settings.php::::11_2_21_47",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/cmp-update-process.php::::10_13_3_372_6",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-feedback.php::::14_194_195_196_197_199_40_41_43_44_50_53_54_55",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_115_116_117_118_120_121_123_125_129_130_141_142_144_152_155_157_159_161_162_163_164_165_166_167_168_169_17_170_171_173_182_183_194_2022_2023_2024_2025_2026_2027_2028_2030_21_215_225_259_3097_3100_3104_3106_3107_3108_3111_3112_3146_3147_3148_3158_3159_3284_3287_3299_3303_3305_3312_476_56_57_58_59_60_63_636_641_644_646_69_70_71_72_73_74_75_757_758_76_768_77_79_80_87_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_html.php::::2_475"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 6,
+    "is_interesting": false,
+    "fuzzer_id": "9",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "json"
+  },
+  {
+    "coverage_id": "1787210296-228e05d7-7e66-4d47-bf83-c0b64b71794d",
+    "priority": 6,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "cmp_ajax_import_settings"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "json": "{\"$nGe\":null}"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key 0",
+        "errfile": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "errline": 3112
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"result\":\"error\",\"message\":\"JSON file is valid but it does not contain CMP Settings.\"}",
+    "response.body.length": 88,
+    "response.headers": {
+      "Date": "Thu, 20 Aug 2026 07:18:16 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Vary": "Accept-Encoding",
+      "Content-Length": "88",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 448.459,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787210245-ddae1e96-a4d2-4c55-904f-b461dac146d3",
+    "paths": [
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_115_116_117_118_120_121_123_125_129_130_141_142_144_152_155_157_159_161_162_163_164_165_166_167_168_169_17_170_171_173_182_183_194_2022_2023_2024_2025_2026_2027_2028_2030_21_215_225_259_3097_3100_3104_3106_3107_3108_3111_3152_3153_3154_3158_3159_3284_3287_3299_3303_3305_3312_476_56_57_58_59_60_63_636_641_644_646_69_70_71_72_73_74_75_757_758_76_768_77_79_80_87_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_settings.php::::11_2_21_47",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/cmp-update-process.php::::10_13_3_372_6",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-feedback.php::::14_194_195_196_197_199_40_41_43_44_50_53_54_55",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_115_116_117_118_120_121_123_125_129_130_141_142_144_152_155_157_159_161_162_163_164_165_166_167_168_169_17_170_171_173_182_183_194_2022_2023_2024_2025_2026_2027_2028_2030_21_215_225_259_3097_3100_3104_3106_3107_3108_3111_3112_3146_3147_3148_3158_3159_3284_3287_3299_3303_3305_3312_476_56_57_58_59_60_63_636_641_644_646_69_70_71_72_73_74_75_757_758_76_768_77_79_80_87_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_html.php::::2_475"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 6,
+    "is_interesting": false,
+    "fuzzer_id": "9",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "json"
+  },
+  {
+    "coverage_id": "1787210305-f40b2cb9-7bff-482c-99dc-c8d854391969",
+    "priority": 6,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "cmp_ajax_import_settings"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "json": "{\"bne\":null}"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key 0",
+        "errfile": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "errline": 3112
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"result\":\"error\",\"message\":\"JSON file is valid but it does not contain CMP Settings.\"}",
+    "response.body.length": 88,
+    "response.headers": {
+      "Date": "Thu, 20 Aug 2026 07:18:25 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Vary": "Accept-Encoding",
+      "Content-Length": "88",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 500.746,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787210245-ddae1e96-a4d2-4c55-904f-b461dac146d3",
+    "paths": [
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_115_116_117_118_120_121_123_125_129_130_141_142_144_152_155_157_159_161_162_163_164_165_166_167_168_169_17_170_171_173_182_183_194_2022_2023_2024_2025_2026_2027_2028_2030_21_215_225_259_3097_3100_3104_3106_3107_3108_3111_3152_3153_3154_3158_3159_3284_3287_3299_3303_3305_3312_476_56_57_58_59_60_63_636_641_644_646_69_70_71_72_73_74_75_757_758_76_768_77_79_80_87_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_settings.php::::11_2_21_47",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/cmp-update-process.php::::10_13_3_372_6",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-feedback.php::::14_194_195_196_197_199_40_41_43_44_50_53_54_55",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_115_116_117_118_120_121_123_125_129_130_141_142_144_152_155_157_159_161_162_163_164_165_166_167_168_169_17_170_171_173_182_183_194_2022_2023_2024_2025_2026_2027_2028_2030_21_215_225_259_3097_3100_3104_3106_3107_3108_3111_3112_3146_3147_3148_3158_3159_3284_3287_3299_3303_3305_3312_476_56_57_58_59_60_63_636_641_644_646_69_70_71_72_73_74_75_757_758_76_768_77_79_80_87_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_html.php::::2_475"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 6,
+    "is_interesting": false,
+    "fuzzer_id": "9",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "json"
+  },
+  {
+    "coverage_id": "1787210317-bb669ec8-bdca-450d-95a4-359924ccd6d7",
+    "priority": 6,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "cmp_ajax_import_settings"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "json": "{\"f$ne\":null}"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key 0",
+        "errfile": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "errline": 3112
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"result\":\"error\",\"message\":\"JSON file is valid but it does not contain CMP Settings.\"}",
+    "response.body.length": 88,
+    "response.headers": {
+      "Date": "Thu, 20 Aug 2026 07:18:37 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Vary": "Accept-Encoding",
+      "Content-Length": "88",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 489.488,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787210245-ddae1e96-a4d2-4c55-904f-b461dac146d3",
+    "paths": [
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_115_116_117_118_120_121_123_125_129_130_141_142_144_152_155_157_159_161_162_163_164_165_166_167_168_169_17_170_171_173_182_183_194_2022_2023_2024_2025_2026_2027_2028_2030_21_215_225_259_3097_3100_3104_3106_3107_3108_3111_3152_3153_3154_3158_3159_3284_3287_3299_3303_3305_3312_476_56_57_58_59_60_63_636_641_644_646_69_70_71_72_73_74_75_757_758_76_768_77_79_80_87_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_settings.php::::11_2_21_47",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/cmp-update-process.php::::10_13_3_372_6",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-feedback.php::::14_194_195_196_197_199_40_41_43_44_50_53_54_55",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_115_116_117_118_120_121_123_125_129_130_141_142_144_152_155_157_159_161_162_163_164_165_166_167_168_169_17_170_171_173_182_183_194_2022_2023_2024_2025_2026_2027_2028_2030_21_215_225_259_3097_3100_3104_3106_3107_3108_3111_3112_3146_3147_3148_3158_3159_3284_3287_3299_3303_3305_3312_476_56_57_58_59_60_63_636_641_644_646_69_70_71_72_73_74_75_757_758_76_768_77_79_80_87_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_html.php::::2_475"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 6,
+    "is_interesting": false,
+    "fuzzer_id": "9",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "json"
+  },
+  {
+    "coverage_id": "1787210318-403ea566-fcad-4313-9079-5a41d55f50c1",
+    "priority": 6,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "cmp_ajax_import_settings"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "json": "{\"Dne\":null}"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key 0",
+        "errfile": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "errline": 3112
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"result\":\"error\",\"message\":\"JSON file is valid but it does not contain CMP Settings.\"}",
+    "response.body.length": 88,
+    "response.headers": {
+      "Date": "Thu, 20 Aug 2026 07:18:38 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Vary": "Accept-Encoding",
+      "Content-Length": "88",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 376.827,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787210245-ddae1e96-a4d2-4c55-904f-b461dac146d3",
+    "paths": [
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_115_116_117_118_120_121_123_125_129_130_141_142_144_152_155_157_159_161_162_163_164_165_166_167_168_169_17_170_171_173_182_183_194_2022_2023_2024_2025_2026_2027_2028_2030_21_215_225_259_3097_3100_3104_3106_3107_3108_3111_3152_3153_3154_3158_3159_3284_3287_3299_3303_3305_3312_476_56_57_58_59_60_63_636_641_644_646_69_70_71_72_73_74_75_757_758_76_768_77_79_80_87_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_settings.php::::11_2_21_47",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/cmp-update-process.php::::10_13_3_372_6",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-feedback.php::::14_194_195_196_197_199_40_41_43_44_50_53_54_55",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_115_116_117_118_120_121_123_125_129_130_141_142_144_152_155_157_159_161_162_163_164_165_166_167_168_169_17_170_171_173_182_183_194_2022_2023_2024_2025_2026_2027_2028_2030_21_215_225_259_3097_3100_3104_3106_3107_3108_3111_3112_3146_3147_3148_3158_3159_3284_3287_3299_3303_3305_3312_476_56_57_58_59_60_63_636_641_644_646_69_70_71_72_73_74_75_757_758_76_768_77_79_80_87_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_html.php::::2_475"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 6,
+    "is_interesting": false,
+    "fuzzer_id": "9",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "json"
+  },
+  {
+    "coverage_id": "1787210318-259a0ba3-f564-4030-bd52-9fea4e8eff3b",
+    "priority": 6,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "cmp_ajax_import_settings"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "json": "{\"$ze\":null}"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key 0",
+        "errfile": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "errline": 3112
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"result\":\"error\",\"message\":\"JSON file is valid but it does not contain CMP Settings.\"}",
+    "response.body.length": 88,
+    "response.headers": {
+      "Date": "Thu, 20 Aug 2026 07:18:38 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Vary": "Accept-Encoding",
+      "Content-Length": "88",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 464.318,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787210245-ddae1e96-a4d2-4c55-904f-b461dac146d3",
+    "paths": [
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_115_116_117_118_120_121_123_125_129_130_141_142_144_152_155_157_159_161_162_163_164_165_166_167_168_169_17_170_171_173_182_183_194_2022_2023_2024_2025_2026_2027_2028_2030_21_215_225_259_3097_3100_3104_3106_3107_3108_3111_3152_3153_3154_3158_3159_3284_3287_3299_3303_3305_3312_476_56_57_58_59_60_63_636_641_644_646_69_70_71_72_73_74_75_757_758_76_768_77_79_80_87_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_settings.php::::11_2_21_47",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/cmp-update-process.php::::10_13_3_372_6",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-feedback.php::::14_194_195_196_197_199_40_41_43_44_50_53_54_55",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_115_116_117_118_120_121_123_125_129_130_141_142_144_152_155_157_159_161_162_163_164_165_166_167_168_169_17_170_171_173_182_183_194_2022_2023_2024_2025_2026_2027_2028_2030_21_215_225_259_3097_3100_3104_3106_3107_3108_3111_3112_3146_3147_3148_3158_3159_3284_3287_3299_3303_3305_3312_476_56_57_58_59_60_63_636_641_644_646_69_70_71_72_73_74_75_757_758_76_768_77_79_80_87_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_html.php::::2_475"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 6,
+    "is_interesting": false,
+    "fuzzer_id": "9",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "json"
+  },
+  {
+    "coverage_id": "1787210320-e66429a6-a92c-4e25-a335-3f632d865332",
+    "priority": 6,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "cmp_ajax_import_settings"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "json": "{\"$<img src='x' onerror='alert(0xdeadbeef)'>ne\":null}"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key 0",
+        "errfile": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "errline": 3112
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"result\":\"error\",\"message\":\"JSON file is valid but it does not contain CMP Settings.\"}",
+    "response.body.length": 88,
+    "response.headers": {
+      "Date": "Thu, 20 Aug 2026 07:18:40 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Vary": "Accept-Encoding",
+      "Content-Length": "88",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 493.772,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787210245-ddae1e96-a4d2-4c55-904f-b461dac146d3",
+    "paths": [
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_115_116_117_118_120_121_123_125_129_130_141_142_144_152_155_157_159_161_162_163_164_165_166_167_168_169_17_170_171_173_182_183_194_2022_2023_2024_2025_2026_2027_2028_2030_21_215_225_259_3097_3100_3104_3106_3107_3108_3111_3152_3153_3154_3158_3159_3284_3287_3299_3303_3305_3312_476_56_57_58_59_60_63_636_641_644_646_69_70_71_72_73_74_75_757_758_76_768_77_79_80_87_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_settings.php::::11_2_21_47",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/cmp-update-process.php::::10_13_3_372_6",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-feedback.php::::14_194_195_196_197_199_40_41_43_44_50_53_54_55",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_115_116_117_118_120_121_123_125_129_130_141_142_144_152_155_157_159_161_162_163_164_165_166_167_168_169_17_170_171_173_182_183_194_2022_2023_2024_2025_2026_2027_2028_2030_21_215_225_259_3097_3100_3104_3106_3107_3108_3111_3112_3146_3147_3148_3158_3159_3284_3287_3299_3303_3305_3312_476_56_57_58_59_60_63_636_641_644_646_69_70_71_72_73_74_75_757_758_76_768_77_79_80_87_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_html.php::::2_475"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 6,
+    "is_interesting": false,
+    "fuzzer_id": "9",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "json"
+  },
+  {
+    "coverage_id": "1787210333-d66b1c1c-0897-4660-afe5-b6afdf21e31c",
+    "priority": 6,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "cmp_ajax_import_settings"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "json": "{\"$n.e\":null}"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key 0",
+        "errfile": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "errline": 3112
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"result\":\"error\",\"message\":\"JSON file is valid but it does not contain CMP Settings.\"}",
+    "response.body.length": 88,
+    "response.headers": {
+      "Date": "Thu, 20 Aug 2026 07:18:53 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Vary": "Accept-Encoding",
+      "Content-Length": "88",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 458.202,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787210245-ddae1e96-a4d2-4c55-904f-b461dac146d3",
+    "paths": [
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_115_116_117_118_120_121_123_125_129_130_141_142_144_152_155_157_159_161_162_163_164_165_166_167_168_169_17_170_171_173_182_183_194_2022_2023_2024_2025_2026_2027_2028_2030_21_215_225_259_3097_3100_3104_3106_3107_3108_3111_3152_3153_3154_3158_3159_3284_3287_3299_3303_3305_3312_476_56_57_58_59_60_63_636_641_644_646_69_70_71_72_73_74_75_757_758_76_768_77_79_80_87_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_settings.php::::11_2_21_47",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/cmp-update-process.php::::10_13_3_372_6",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-feedback.php::::14_194_195_196_197_199_40_41_43_44_50_53_54_55",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_115_116_117_118_120_121_123_125_129_130_141_142_144_152_155_157_159_161_162_163_164_165_166_167_168_169_17_170_171_173_182_183_194_2022_2023_2024_2025_2026_2027_2028_2030_21_215_225_259_3097_3100_3104_3106_3107_3108_3111_3112_3146_3147_3148_3158_3159_3284_3287_3299_3303_3305_3312_476_56_57_58_59_60_63_636_641_644_646_69_70_71_72_73_74_75_757_758_76_768_77_79_80_87_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_html.php::::2_475"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 6,
+    "is_interesting": false,
+    "fuzzer_id": "9",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "json"
+  },
+  {
+    "coverage_id": "1787210342-3790faee-47d4-4085-a95e-3b4d3f862671",
+    "priority": 6,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "cmp_ajax_import_settings"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "json": "{\"Rne\":null}"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key 0",
+        "errfile": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "errline": 3112
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"result\":\"error\",\"message\":\"JSON file is valid but it does not contain CMP Settings.\"}",
+    "response.body.length": 88,
+    "response.headers": {
+      "Date": "Thu, 20 Aug 2026 07:19:02 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Vary": "Accept-Encoding",
+      "Content-Length": "88",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 548.658,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787210245-ddae1e96-a4d2-4c55-904f-b461dac146d3",
+    "paths": [
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_115_116_117_118_120_121_123_125_129_130_141_142_144_152_155_157_159_161_162_163_164_165_166_167_168_169_17_170_171_173_182_183_194_2022_2023_2024_2025_2026_2027_2028_2030_21_215_225_259_3097_3100_3104_3106_3107_3108_3111_3152_3153_3154_3158_3159_3284_3287_3299_3303_3305_3312_476_56_57_58_59_60_63_636_641_644_646_69_70_71_72_73_74_75_757_758_76_768_77_79_80_87_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_settings.php::::11_2_21_47",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/cmp-update-process.php::::10_13_3_372_6",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-feedback.php::::14_194_195_196_197_199_40_41_43_44_50_53_54_55",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_115_116_117_118_120_121_123_125_129_130_141_142_144_152_155_157_159_161_162_163_164_165_166_167_168_169_17_170_171_173_182_183_194_2022_2023_2024_2025_2026_2027_2028_2030_21_215_225_259_3097_3100_3104_3106_3107_3108_3111_3112_3146_3147_3148_3158_3159_3284_3287_3299_3303_3305_3312_476_56_57_58_59_60_63_636_641_644_646_69_70_71_72_73_74_75_757_758_76_768_77_79_80_87_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_html.php::::2_475"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 6,
+    "is_interesting": false,
+    "fuzzer_id": "9",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "json"
+  },
+  {
+    "coverage_id": "1787210351-e75a6bb3-ccfa-418e-b833-8cec9ef5cffc",
+    "priority": 6,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "cmp_ajax_import_settings"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "json": "{\"$>e\":null}"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key 0",
+        "errfile": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "errline": 3112
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"result\":\"error\",\"message\":\"JSON file is valid but it does not contain CMP Settings.\"}",
+    "response.body.length": 88,
+    "response.headers": {
+      "Date": "Thu, 20 Aug 2026 07:19:11 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Vary": "Accept-Encoding",
+      "Content-Length": "88",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 499.028,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787210245-ddae1e96-a4d2-4c55-904f-b461dac146d3",
+    "paths": [
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_115_116_117_118_120_121_123_125_129_130_141_142_144_152_155_157_159_161_162_163_164_165_166_167_168_169_17_170_171_173_182_183_194_2022_2023_2024_2025_2026_2027_2028_2030_21_215_225_259_3097_3100_3104_3106_3107_3108_3111_3152_3153_3154_3158_3159_3284_3287_3299_3303_3305_3312_476_56_57_58_59_60_63_636_641_644_646_69_70_71_72_73_74_75_757_758_76_768_77_79_80_87_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_settings.php::::11_2_21_47",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/cmp-update-process.php::::10_13_3_372_6",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-feedback.php::::14_194_195_196_197_199_40_41_43_44_50_53_54_55",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_115_116_117_118_120_121_123_125_129_130_141_142_144_152_155_157_159_161_162_163_164_165_166_167_168_169_17_170_171_173_182_183_194_2022_2023_2024_2025_2026_2027_2028_2030_21_215_225_259_3097_3100_3104_3106_3107_3108_3111_3112_3146_3147_3148_3158_3159_3284_3287_3299_3303_3305_3312_476_56_57_58_59_60_63_636_641_644_646_69_70_71_72_73_74_75_757_758_76_768_77_79_80_87_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_html.php::::2_475"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 6,
+    "is_interesting": false,
+    "fuzzer_id": "9",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "json"
+  },
+  {
+    "coverage_id": "1787210356-6d790ce0-de60-421b-a392-db0c846ebd49",
+    "priority": 6,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "cmp_ajax_import_settings"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "json": "{\"$nr\":null}"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key 0",
+        "errfile": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "errline": 3112
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"result\":\"error\",\"message\":\"JSON file is valid but it does not contain CMP Settings.\"}",
+    "response.body.length": 88,
+    "response.headers": {
+      "Date": "Thu, 20 Aug 2026 07:19:16 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Vary": "Accept-Encoding",
+      "Content-Length": "88",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 513.992,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787210245-ddae1e96-a4d2-4c55-904f-b461dac146d3",
+    "paths": [
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_115_116_117_118_120_121_123_125_129_130_141_142_144_152_155_157_159_161_162_163_164_165_166_167_168_169_17_170_171_173_182_183_194_2022_2023_2024_2025_2026_2027_2028_2030_21_215_225_259_3097_3100_3104_3106_3107_3108_3111_3152_3153_3154_3158_3159_3284_3287_3299_3303_3305_3312_476_56_57_58_59_60_63_636_641_644_646_69_70_71_72_73_74_75_757_758_76_768_77_79_80_87_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_settings.php::::11_2_21_47",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/cmp-update-process.php::::10_13_3_372_6",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-feedback.php::::14_194_195_196_197_199_40_41_43_44_50_53_54_55",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_115_116_117_118_120_121_123_125_129_130_141_142_144_152_155_157_159_161_162_163_164_165_166_167_168_169_17_170_171_173_182_183_194_2022_2023_2024_2025_2026_2027_2028_2030_21_215_225_259_3097_3100_3104_3106_3107_3108_3111_3112_3146_3147_3148_3158_3159_3284_3287_3299_3303_3305_3312_476_56_57_58_59_60_63_636_641_644_646_69_70_71_72_73_74_75_757_758_76_768_77_79_80_87_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_html.php::::2_475"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 6,
+    "is_interesting": false,
+    "fuzzer_id": "9",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "json"
+  },
+  {
+    "coverage_id": "1787210358-20de89fe-f9a6-4154-adc4-15a482bb66a0",
+    "priority": 6,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "cmp_ajax_import_settings"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "json": "{\">ne\":null}"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key 0",
+        "errfile": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "errline": 3112
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"result\":\"error\",\"message\":\"JSON file is valid but it does not contain CMP Settings.\"}",
+    "response.body.length": 88,
+    "response.headers": {
+      "Date": "Thu, 20 Aug 2026 07:19:18 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Vary": "Accept-Encoding",
+      "Content-Length": "88",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 234.888,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787210245-ddae1e96-a4d2-4c55-904f-b461dac146d3",
+    "paths": [
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_115_116_117_118_120_121_123_125_129_130_141_142_144_152_155_157_159_161_162_163_164_165_166_167_168_169_17_170_171_173_182_183_194_2022_2023_2024_2025_2026_2027_2028_2030_21_215_225_259_3097_3100_3104_3106_3107_3108_3111_3152_3153_3154_3158_3159_3284_3287_3299_3303_3305_3312_476_56_57_58_59_60_63_636_641_644_646_69_70_71_72_73_74_75_757_758_76_768_77_79_80_87_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_settings.php::::11_2_21_47",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/cmp-update-process.php::::10_13_3_372_6",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-feedback.php::::14_194_195_196_197_199_40_41_43_44_50_53_54_55",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_115_116_117_118_120_121_123_125_129_130_141_142_144_152_155_157_159_161_162_163_164_165_166_167_168_169_17_170_171_173_182_183_194_2022_2023_2024_2025_2026_2027_2028_2030_21_215_225_259_3097_3100_3104_3106_3107_3108_3111_3112_3146_3147_3148_3158_3159_3284_3287_3299_3303_3305_3312_476_56_57_58_59_60_63_636_641_644_646_69_70_71_72_73_74_75_757_758_76_768_77_79_80_87_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_html.php::::2_475"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 6,
+    "is_interesting": false,
+    "fuzzer_id": "9",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "json"
+  },
+  {
+    "coverage_id": "1787210368-7444fcd4-bd77-48ad-b868-49e0590c8f53",
+    "priority": 6,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "cmp_ajax_import_settings"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "json": "{\"$Fne\":null}"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key 0",
+        "errfile": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "errline": 3112
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"result\":\"error\",\"message\":\"JSON file is valid but it does not contain CMP Settings.\"}",
+    "response.body.length": 88,
+    "response.headers": {
+      "Date": "Thu, 20 Aug 2026 07:19:28 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Vary": "Accept-Encoding",
+      "Content-Length": "88",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 514.921,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787210245-ddae1e96-a4d2-4c55-904f-b461dac146d3",
+    "paths": [
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_115_116_117_118_120_121_123_125_129_130_141_142_144_152_155_157_159_161_162_163_164_165_166_167_168_169_17_170_171_173_182_183_194_2022_2023_2024_2025_2026_2027_2028_2030_21_215_225_259_3097_3100_3104_3106_3107_3108_3111_3152_3153_3154_3158_3159_3284_3287_3299_3303_3305_3312_476_56_57_58_59_60_63_636_641_644_646_69_70_71_72_73_74_75_757_758_76_768_77_79_80_87_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_settings.php::::11_2_21_47",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/cmp-update-process.php::::10_13_3_372_6",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-feedback.php::::14_194_195_196_197_199_40_41_43_44_50_53_54_55",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_115_116_117_118_120_121_123_125_129_130_141_142_144_152_155_157_159_161_162_163_164_165_166_167_168_169_17_170_171_173_182_183_194_2022_2023_2024_2025_2026_2027_2028_2030_21_215_225_259_3097_3100_3104_3106_3107_3108_3111_3112_3146_3147_3148_3158_3159_3284_3287_3299_3303_3305_3312_476_56_57_58_59_60_63_636_641_644_646_69_70_71_72_73_74_75_757_758_76_768_77_79_80_87_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_html.php::::2_475"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 6,
+    "is_interesting": false,
+    "fuzzer_id": "9",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "json"
+  },
+  {
+    "coverage_id": "1787210369-f26c22ca-5aa4-489f-923a-1795624d164f",
+    "priority": 6,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "cmp_ajax_import_settings"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "json": "{\"Gne\":null}"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key 0",
+        "errfile": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "errline": 3112
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"result\":\"error\",\"message\":\"JSON file is valid but it does not contain CMP Settings.\"}",
+    "response.body.length": 88,
+    "response.headers": {
+      "Date": "Thu, 20 Aug 2026 07:19:29 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Vary": "Accept-Encoding",
+      "Content-Length": "88",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 501.689,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787210245-ddae1e96-a4d2-4c55-904f-b461dac146d3",
+    "paths": [
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_115_116_117_118_120_121_123_125_129_130_141_142_144_152_155_157_159_161_162_163_164_165_166_167_168_169_17_170_171_173_182_183_194_2022_2023_2024_2025_2026_2027_2028_2030_21_215_225_259_3097_3100_3104_3106_3107_3108_3111_3152_3153_3154_3158_3159_3284_3287_3299_3303_3305_3312_476_56_57_58_59_60_63_636_641_644_646_69_70_71_72_73_74_75_757_758_76_768_77_79_80_87_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_settings.php::::11_2_21_47",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/cmp-update-process.php::::10_13_3_372_6",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-feedback.php::::14_194_195_196_197_199_40_41_43_44_50_53_54_55",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_115_116_117_118_120_121_123_125_129_130_141_142_144_152_155_157_159_161_162_163_164_165_166_167_168_169_17_170_171_173_182_183_194_2022_2023_2024_2025_2026_2027_2028_2030_21_215_225_259_3097_3100_3104_3106_3107_3108_3111_3112_3146_3147_3148_3158_3159_3284_3287_3299_3303_3305_3312_476_56_57_58_59_60_63_636_641_644_646_69_70_71_72_73_74_75_757_758_76_768_77_79_80_87_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_html.php::::2_475"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 6,
+    "is_interesting": false,
+    "fuzzer_id": "9",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "json"
+  },
+  {
+    "coverage_id": "1787210375-84c393f4-7bf4-48b0-b3fc-977fc1303c1a",
+    "priority": 6,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "cmp_ajax_import_settings"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "json": "{\"$ne3`%\":null}"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key 0",
+        "errfile": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "errline": 3112
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"result\":\"error\",\"message\":\"JSON file is valid but it does not contain CMP Settings.\"}",
+    "response.body.length": 88,
+    "response.headers": {
+      "Date": "Thu, 20 Aug 2026 07:19:35 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Vary": "Accept-Encoding",
+      "Content-Length": "88",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 650.929,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787210245-ddae1e96-a4d2-4c55-904f-b461dac146d3",
+    "paths": [
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_115_116_117_118_120_121_123_125_129_130_141_142_144_152_155_157_159_161_162_163_164_165_166_167_168_169_17_170_171_173_182_183_194_2022_2023_2024_2025_2026_2027_2028_2030_21_215_225_259_3097_3100_3104_3106_3107_3108_3111_3152_3153_3154_3158_3159_3284_3287_3299_3303_3305_3312_476_56_57_58_59_60_63_636_641_644_646_69_70_71_72_73_74_75_757_758_76_768_77_79_80_87_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_settings.php::::11_2_21_47",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/cmp-update-process.php::::10_13_3_372_6",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-feedback.php::::14_194_195_196_197_199_40_41_43_44_50_53_54_55",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_115_116_117_118_120_121_123_125_129_130_141_142_144_152_155_157_159_161_162_163_164_165_166_167_168_169_17_170_171_173_182_183_194_2022_2023_2024_2025_2026_2027_2028_2030_21_215_225_259_3097_3100_3104_3106_3107_3108_3111_3112_3146_3147_3148_3158_3159_3284_3287_3299_3303_3305_3312_476_56_57_58_59_60_63_636_641_644_646_69_70_71_72_73_74_75_757_758_76_768_77_79_80_87_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_html.php::::2_475"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 6,
+    "is_interesting": false,
+    "fuzzer_id": "9",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "json"
+  },
+  {
+    "coverage_id": "1787210386-9122cba3-ef36-42b8-83e0-7728b0cbaa76",
+    "priority": 6,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "cmp_ajax_import_settings"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "json": "{\"$ne3\":null}"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key 0",
+        "errfile": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "errline": 3112
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"result\":\"error\",\"message\":\"JSON file is valid but it does not contain CMP Settings.\"}",
+    "response.body.length": 88,
+    "response.headers": {
+      "Date": "Thu, 20 Aug 2026 07:19:46 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Vary": "Accept-Encoding",
+      "Content-Length": "88",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 558.391,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787210245-ddae1e96-a4d2-4c55-904f-b461dac146d3",
+    "paths": [
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_115_116_117_118_120_121_123_125_129_130_141_142_144_152_155_157_159_161_162_163_164_165_166_167_168_169_17_170_171_173_182_183_194_2022_2023_2024_2025_2026_2027_2028_2030_21_215_225_259_3097_3100_3104_3106_3107_3108_3111_3152_3153_3154_3158_3159_3284_3287_3299_3303_3305_3312_476_56_57_58_59_60_63_636_641_644_646_69_70_71_72_73_74_75_757_758_76_768_77_79_80_87_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_settings.php::::11_2_21_47",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/cmp-update-process.php::::10_13_3_372_6",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-feedback.php::::14_194_195_196_197_199_40_41_43_44_50_53_54_55",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_115_116_117_118_120_121_123_125_129_130_141_142_144_152_155_157_159_161_162_163_164_165_166_167_168_169_17_170_171_173_182_183_194_2022_2023_2024_2025_2026_2027_2028_2030_21_215_225_259_3097_3100_3104_3106_3107_3108_3111_3112_3146_3147_3148_3158_3159_3284_3287_3299_3303_3305_3312_476_56_57_58_59_60_63_636_641_644_646_69_70_71_72_73_74_75_757_758_76_768_77_79_80_87_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_html.php::::2_475"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 6,
+    "is_interesting": false,
+    "fuzzer_id": "9",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "json"
+  },
+  {
+    "coverage_id": "1787210387-3f9b32a2-4c3c-462a-a832-3c04e999f62d",
+    "priority": 6,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "cmp_ajax_import_settings"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "json": "{\"kne\":null}"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key 0",
+        "errfile": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "errline": 3112
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"result\":\"error\",\"message\":\"JSON file is valid but it does not contain CMP Settings.\"}",
+    "response.body.length": 88,
+    "response.headers": {
+      "Date": "Thu, 20 Aug 2026 07:19:47 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Vary": "Accept-Encoding",
+      "Content-Length": "88",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 587.674,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787210245-ddae1e96-a4d2-4c55-904f-b461dac146d3",
+    "paths": [
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_115_116_117_118_120_121_123_125_129_130_141_142_144_152_155_157_159_161_162_163_164_165_166_167_168_169_17_170_171_173_182_183_194_2022_2023_2024_2025_2026_2027_2028_2030_21_215_225_259_3097_3100_3104_3106_3107_3108_3111_3152_3153_3154_3158_3159_3284_3287_3299_3303_3305_3312_476_56_57_58_59_60_63_636_641_644_646_69_70_71_72_73_74_75_757_758_76_768_77_79_80_87_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_settings.php::::11_2_21_47",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/cmp-update-process.php::::10_13_3_372_6",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-feedback.php::::14_194_195_196_197_199_40_41_43_44_50_53_54_55",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_115_116_117_118_120_121_123_125_129_130_141_142_144_152_155_157_159_161_162_163_164_165_166_167_168_169_17_170_171_173_182_183_194_2022_2023_2024_2025_2026_2027_2028_2030_21_215_225_259_3097_3100_3104_3106_3107_3108_3111_3112_3146_3147_3148_3158_3159_3284_3287_3299_3303_3305_3312_476_56_57_58_59_60_63_636_641_644_646_69_70_71_72_73_74_75_757_758_76_768_77_79_80_87_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_html.php::::2_475"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 6,
+    "is_interesting": false,
+    "fuzzer_id": "9",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "json"
+  },
+  {
+    "coverage_id": "1787210389-566accf5-1aca-464e-bf50-7f28eef6c651",
+    "priority": 6,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "cmp_ajax_import_settings"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "json": "{\"u$ne\":null}"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key 0",
+        "errfile": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "errline": 3112
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"result\":\"error\",\"message\":\"JSON file is valid but it does not contain CMP Settings.\"}",
+    "response.body.length": 88,
+    "response.headers": {
+      "Date": "Thu, 20 Aug 2026 07:19:49 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Vary": "Accept-Encoding",
+      "Content-Length": "88",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 356.387,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787210245-ddae1e96-a4d2-4c55-904f-b461dac146d3",
+    "paths": [
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_115_116_117_118_120_121_123_125_129_130_141_142_144_152_155_157_159_161_162_163_164_165_166_167_168_169_17_170_171_173_182_183_194_2022_2023_2024_2025_2026_2027_2028_2030_21_215_225_259_3097_3100_3104_3106_3107_3108_3111_3152_3153_3154_3158_3159_3284_3287_3299_3303_3305_3312_476_56_57_58_59_60_63_636_641_644_646_69_70_71_72_73_74_75_757_758_76_768_77_79_80_87_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_settings.php::::11_2_21_47",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/cmp-update-process.php::::10_13_3_372_6",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-feedback.php::::14_194_195_196_197_199_40_41_43_44_50_53_54_55",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_115_116_117_118_120_121_123_125_129_130_141_142_144_152_155_157_159_161_162_163_164_165_166_167_168_169_17_170_171_173_182_183_194_2022_2023_2024_2025_2026_2027_2028_2030_21_215_225_259_3097_3100_3104_3106_3107_3108_3111_3112_3146_3147_3148_3158_3159_3284_3287_3299_3303_3305_3312_476_56_57_58_59_60_63_636_641_644_646_69_70_71_72_73_74_75_757_758_76_768_77_79_80_87_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_html.php::::2_475"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 6,
+    "is_interesting": false,
+    "fuzzer_id": "9",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "json"
+  },
+  {
+    "coverage_id": "1787210390-6e37e3e7-e8c1-4699-a148-65e05bb49a9b",
+    "priority": 6,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "cmp_ajax_import_settings"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "json": "{\" ne\":null}"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key 0",
+        "errfile": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "errline": 3112
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"result\":\"error\",\"message\":\"JSON file is valid but it does not contain CMP Settings.\"}",
+    "response.body.length": 88,
+    "response.headers": {
+      "Date": "Thu, 20 Aug 2026 07:19:50 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Vary": "Accept-Encoding",
+      "Content-Length": "88",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 528.004,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787210245-ddae1e96-a4d2-4c55-904f-b461dac146d3",
+    "paths": [
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_115_116_117_118_120_121_123_125_129_130_141_142_144_152_155_157_159_161_162_163_164_165_166_167_168_169_17_170_171_173_182_183_194_2022_2023_2024_2025_2026_2027_2028_2030_21_215_225_259_3097_3100_3104_3106_3107_3108_3111_3152_3153_3154_3158_3159_3284_3287_3299_3303_3305_3312_476_56_57_58_59_60_63_636_641_644_646_69_70_71_72_73_74_75_757_758_76_768_77_79_80_87_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_settings.php::::11_2_21_47",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/cmp-update-process.php::::10_13_3_372_6",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-feedback.php::::14_194_195_196_197_199_40_41_43_44_50_53_54_55",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_115_116_117_118_120_121_123_125_129_130_141_142_144_152_155_157_159_161_162_163_164_165_166_167_168_169_17_170_171_173_182_183_194_2022_2023_2024_2025_2026_2027_2028_2030_21_215_225_259_3097_3100_3104_3106_3107_3108_3111_3112_3146_3147_3148_3158_3159_3284_3287_3299_3303_3305_3312_476_56_57_58_59_60_63_636_641_644_646_69_70_71_72_73_74_75_757_758_76_768_77_79_80_87_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_html.php::::2_475"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 6,
+    "is_interesting": false,
+    "fuzzer_id": "9",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "json"
+  },
+  {
+    "coverage_id": "1787210416-565d793a-7ae4-4f0f-a4e5-d926cb31fbb6",
+    "priority": 6,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "cmp_ajax_import_settings"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "json": "{\"$Ce\":null}"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key 0",
+        "errfile": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "errline": 3112
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"result\":\"error\",\"message\":\"JSON file is valid but it does not contain CMP Settings.\"}",
+    "response.body.length": 88,
+    "response.headers": {
+      "Date": "Thu, 20 Aug 2026 07:20:16 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Vary": "Accept-Encoding",
+      "Content-Length": "88",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 233.838,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787210245-ddae1e96-a4d2-4c55-904f-b461dac146d3",
+    "paths": [
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_115_116_117_118_120_121_123_125_129_130_141_142_144_152_155_157_159_161_162_163_164_165_166_167_168_169_17_170_171_173_182_183_194_2022_2023_2024_2025_2026_2027_2028_2030_21_215_225_259_3097_3100_3104_3106_3107_3108_3111_3152_3153_3154_3158_3159_3284_3287_3299_3303_3305_3312_476_56_57_58_59_60_63_636_641_644_646_69_70_71_72_73_74_75_757_758_76_768_77_79_80_87_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_settings.php::::11_2_21_47",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/cmp-update-process.php::::10_13_3_372_6",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-feedback.php::::14_194_195_196_197_199_40_41_43_44_50_53_54_55",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_115_116_117_118_120_121_123_125_129_130_141_142_144_152_155_157_159_161_162_163_164_165_166_167_168_169_17_170_171_173_182_183_194_2022_2023_2024_2025_2026_2027_2028_2030_21_215_225_259_3097_3100_3104_3106_3107_3108_3111_3112_3146_3147_3148_3158_3159_3284_3287_3299_3303_3305_3312_476_56_57_58_59_60_63_636_641_644_646_69_70_71_72_73_74_75_757_758_76_768_77_79_80_87_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_html.php::::2_475"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 6,
+    "is_interesting": false,
+    "fuzzer_id": "9",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "json"
+  }
+]

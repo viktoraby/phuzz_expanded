@@ -1,0 +1,166 @@
+[
+  {
+    "coverage_id": "1786910026-03304868-e578-4d7b-a98d-ad95feecda74",
+    "priority": 39,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "GET",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "yith_plugin_fw_gutenberg_do_shortcode"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "shortcode": "f(Xauzz",
+        "context": "fuzz"
+      },
+      "body_params": {}
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 0.25
+    },
+    "errors": [
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Cookie_Jar::offsetExists($key) should either be compatible with ArrayAccess::offsetExists(mixed $offset): bool, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Cookie/Jar.php",
+        "errline": 63
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Cookie_Jar::offsetGet($key) should either be compatible with ArrayAccess::offsetGet(mixed $offset): mixed, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Cookie/Jar.php",
+        "errline": 73
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Cookie_Jar::offsetSet($key, $value) should either be compatible with ArrayAccess::offsetSet(mixed $offset, mixed $value): void, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Cookie/Jar.php",
+        "errline": 89
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Cookie_Jar::offsetUnset($key) should either be compatible with ArrayAccess::offsetUnset(mixed $offset): void, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Cookie/Jar.php",
+        "errline": 102
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Cookie_Jar::getIterator() should either be compatible with IteratorAggregate::getIterator(): Traversable, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Cookie/Jar.php",
+        "errline": 111
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Utility_CaseInsensitiveDictionary::offsetExists($key) should either be compatible with ArrayAccess::offsetExists(mixed $offset): bool, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Utility/CaseInsensitiveDictionary.php",
+        "errline": 40
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Utility_CaseInsensitiveDictionary::offsetGet($key) should either be compatible with ArrayAccess::offsetGet(mixed $offset): mixed, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Utility/CaseInsensitiveDictionary.php",
+        "errline": 51
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Utility_CaseInsensitiveDictionary::offsetSet($key, $value) should either be compatible with ArrayAccess::offsetSet(mixed $offset, mixed $value): void, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Utility/CaseInsensitiveDictionary.php",
+        "errline": 68
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Utility_CaseInsensitiveDictionary::offsetUnset($key) should either be compatible with ArrayAccess::offsetUnset(mixed $offset): void, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Utility/CaseInsensitiveDictionary.php",
+        "errline": 82
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Utility_CaseInsensitiveDictionary::getIterator() should either be compatible with IteratorAggregate::getIterator(): Traversable, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Utility/CaseInsensitiveDictionary.php",
+        "errline": 91
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n0",
+    "response.body.length": 2,
+    "response.headers": {
+      "Date": "Sun, 16 Aug 2026 19:53:46 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "2",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 784.124,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786909883-33d6278c-23f5-4000-93ad-2cca5ad870a2",
+    "paths": [
+      "/var/www/html/wp-content/plugins/yith-woocommerce-wishlist/plugin-fw/includes/builders/elementor/class-yith-elementor.php::::10_12_135_136_40_47_55",
+      "/var/www/html/wp-content/plugins/yith-woocommerce-wishlist/plugin-fw/includes/privacy/class-yith-privacy-plugin-abstract.php::::11_13_73",
+      "/var/www/html/wp-content/plugins/yith-woocommerce-wishlist/includes/class-yith-wcwl-autoloader.php::::11_13_130_131_26_30_31_65_66_68_69",
+      "/var/www/html/wp-content/plugins/yith-woocommerce-wishlist/plugin-fw/yit-plugin-registration-hook.php::::10_24_8",
+      "/var/www/html/wp-content/plugins/yith-woocommerce-wishlist/plugin-fw/includes/class-yith-post-type-admin.php::::11_539_9",
+      "/var/www/html/wp-content/plugins/yith-woocommerce-wishlist/plugin-fw/includes/class-yit-ajax.php::::11_280_281_32_39_46_47_48_50_9",
+      "/var/www/html/wp-content/plugins/yith-woocommerce-wishlist/plugin-fw/dist/gutenberg/index.asset.php::::1",
+      "/var/www/html/wp-content/plugins/yith-woocommerce-wishlist/plugin-fw/includes/class-yit-upgrade.php::::10_12_30_38_59_66_70_71",
+      "/var/www/html/wp-content/plugins/yith-woocommerce-wishlist/plugin-fw/includes/privacy/class-yith-privacy.php::::100_103_106_11_114_115_13_32_50_51_57_58_60_61_62_65_73_74_75_76_77_80_89_90_93_94_97",
+      "/var/www/html/wp-content/plugins/yith-woocommerce-wishlist/plugin-fw/includes/class-yit-theme-licence.php::::11_64_74_9",
+      "/var/www/html/wp-content/plugins/yith-woocommerce-wishlist/plugin-fw/dist/lapilli-ui/date/index.asset.php::::1",
+      "/var/www/html/wp-content/plugins/yith-woocommerce-wishlist/plugin-fw/includes/class-yit-icons.php::::11_1226_1233_1237_1238_9_952_970_971_972",
+      "/var/www/html/wp-content/plugins/yith-woocommerce-wishlist/plugin-fw/yit-woocommerce-compatibility.php::::10_11_8",
+      "/var/www/html/wp-content/plugins/yith-woocommerce-wishlist/plugin-fw/includes/class-yit-pointers.php::::10_100_101_102_105_106_108_112_115_116_118_119_12_120_130_136_137_138_141_148_153_368_376_380_381_70_80_81_82_84_85_86_89_90_92_96_97_98",
+      "/var/www/html/wp-content/plugins/yith-woocommerce-wishlist/plugin-fw/templates/privacy/html-policy-content.php::::12_13_14_16_17_18_20_21_25_26_29_33_38_41_42_43_44_9",
+      "/var/www/html/wp-content/plugins/yith-woocommerce-wishlist/plugin-fw/init.php::::100_103_105_14_18_26_27_28_30_31_32_34_41_45_46_47_48_49_51_53_57_58_62_94_95_96_97_99",
+      "/var/www/html/wp-content/plugins/yith-woocommerce-wishlist/plugin-fw/includes/class-yith-bh-onboarding.php::::11_110_111_29_36_37_38_9",
+      "/var/www/html/wp-content/plugins/yith-woocommerce-wishlist/plugin-fw/includes/class-yit-gradients.php::::10_12_506",
+      "/var/www/html/wp-content/plugins/yith-woocommerce-wishlist/plugin-fw/dist/lapilli-ui/block-editor/index.asset.php::::1",
+      "/var/www/html/wp-content/plugins/yith-woocommerce-wishlist/plugin-fw/includes/class-yit-plugin-licence.php::::11_85_9_95",
+      "/var/www/html/wp-content/plugins/yith-woocommerce-wishlist/plugin-fw/yit-plugin.php::::12_13_14_15_17_18_19_20_21_22_224_23_24_25_250_26_27_28_29_298_30_300_301_302_308_309_31_310_312_32_33_34_35_36_37_38_39_40_41_42_45_46_49_52_54_56_58_9",
+      "/var/www/html/wp-content/plugins/yith-woocommerce-wishlist/plugin-fw/includes/class-yit-plugin-panel-woocommerce.php::::11_9_975",
+      "/var/www/html/wp-content/plugins/yith-woocommerce-wishlist/plugin-fw/dist/lapilli-ui/components/index.asset.php::::1",
+      "/var/www/html/wp-content/plugins/yith-woocommerce-wishlist/plugin-fw/includes/class-yit-help-desk.php::::11_183_9",
+      "/var/www/html/wp-content/plugins/yith-woocommerce-wishlist/plugin-fw/includes/class-yith-dashboard.php::::10_12_145_146_147_150",
+      "/var/www/html/wp-content/plugins/yith-woocommerce-wishlist/plugin-fw/includes/class-yith-system-status.php::::10_100_101_102_12_133_134_135_136_137_138_139_140_141_142_143_144_145_146_148_214_298_69_70_73_817_825_829_830_84_92_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/yith-woocommerce-wishlist/plugin-fw/includes/class-yit-metabox.php::::11_533_545_9",
+      "/var/www/html/wp-content/plugins/yith-woocommerce-wishlist/plugin-fw/includes/class-yith-debug.php::::11_144_155_9",
+      "/var/www/html/wp-content/plugins/yith-woocommerce-wishlist/plugin-fw/includes/class-yit-plugin-common.php::::11_1182_9",
+      "/var/www/html/wp-content/plugins/yith-woocommerce-wishlist/init.php::::109_117_118_121_122_128_131_148_164_165_167_168_169_20_22_23_24_25_26_27_28_29_30_31_32_33_34_35_36_37_39_40_43_51_52_54_57_64_65_67_68_71",
+      "/var/www/html/wp-content/plugins/yith-woocommerce-wishlist/plugin-fw/yit-deactive-plugin.php::::10_24_8_90",
+      "/var/www/html/wp-content/plugins/yith-woocommerce-wishlist/plugin-fw/dist/lapilli-ui/styles/index.asset.php::::1",
+      "/var/www/html/wp-content/plugins/yith-woocommerce-wishlist/plugin-fw/includes/class-yit-video.php::::10_12_193",
+      "/var/www/html/wp-content/plugins/yith-woocommerce-wishlist/plugin-fw/includes/class-yith-external-services.php::::106_11_13_34_41",
+      "/var/www/html/wp-content/plugins/yith-woocommerce-wishlist/plugin-fw/includes/class-yit-assets.php::::10_101_102_103_104_105_106_107_108_109_110_111_114_115_116_117_12_120_384_385_39_46_47_48_50_52_53_54_60_61_62_68_69_70_77_78_80_81_82_83_85_87_88_91_95_97",
+      "/var/www/html/wp-content/plugins/yith-woocommerce-wishlist/plugin-fw/includes/class-yit-plugin-panel.php::::10_12_2586",
+      "/var/www/html/wp-content/plugins/yith-woocommerce-wishlist/plugin-fw/includes/class-yit-plugin-subpanel.php::::11_148_9",
+      "/var/www/html/wp-content/plugins/yith-woocommerce-wishlist/plugin-fw/yit-functions.php::::1006_1027_1051_1075_11_1153_1174_1206_1220_1233_1244_1294_1301_1303_1307_1320_1334_1347_1358_1377_1388_1399_1410_1422_1438_1453_1483_1504_1528_1565_1585_1599_1623_1639_1664_1678_1697_1722_1767_178_1789_1808_1855_1894_2046_206_2161_2184_226_2284_2321_2392_2444_288_312_342_36_375_403_471_498_530_556_601_602_612_614_618_641_670_70_703_726_729_749_769_789_806_825_844_859_875_898_9_968",
+      "/var/www/html/wp-content/plugins/yith-woocommerce-wishlist/plugin-fw/includes/builders/gutenberg/class-yith-gutenberg.php::::10_100_101_103_104_12_127_129_135_141_280_282_283_284_285_286_287_289_311_336_337_443_450_454_455_53_60_61_62_63_64_65_72_78_79_80_81_82_83_85_87_89_90_91_92_93_94_97_98"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 39,
+    "is_interesting": false,
+    "fuzzer_id": "10",
+    "is_initial_candidate": false,
+    "mutated_param_type": "query_params",
+    "mutated_param_name": "shortcode"
+  }
+]

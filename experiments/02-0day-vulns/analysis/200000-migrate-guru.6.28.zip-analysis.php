@@ -5,7 +5,7 @@
 *Found functions:4
 *Extracted functions:4
 *Total parameter names extracted: 2
-*Overview: {'bvAdmExecuteWithUser': {'bvadm'}, 'ajaxInitiateMigration': {'mg_initiate_migration'}, 'ajaxValidateKey': {'mg_validate_key'}, 'bvAdmExecuteWithoutUser': {'nopriv_bvadm'}}
+*Overview: {'bvAdmExecuteWithUser': {'bvadm'}, 'ajaxInitiateMigration': {'mg_initiate_migration'}, 'bvAdmExecuteWithoutUser': {'nopriv_bvadm'}, 'ajaxValidateKey': {'mg_validate_key'}}
 *
 ***/
 
@@ -120,6 +120,10 @@ function ajaxInitiateMigration() {
 	}
 
 
+/** Function bvAdmExecuteWithoutUser() called by wp_ajax hooks: {'nopriv_bvadm'} **/
+/** No params detected :-/ **/
+
+
 /** Function ajaxValidateKey() called by wp_ajax hooks: {'mg_validate_key'} **/
 /** Parameters found in function ajaxValidateKey(): {"post": ["nonce", "destination_key", "source_key"]} **/
 function ajaxValidateKey() {
@@ -156,9 +160,5 @@ function ajaxValidateKey() {
 			'destination_key' => $destination_key
 		));
 	}
-
-
-/** Function bvAdmExecuteWithoutUser() called by wp_ajax hooks: {'nopriv_bvadm'} **/
-/** No params detected :-/ **/
 
 

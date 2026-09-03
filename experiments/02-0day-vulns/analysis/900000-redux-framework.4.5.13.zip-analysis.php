@@ -5,7 +5,7 @@
 *Found functions:6
 *Extracted functions:6
 *Total parameter names extracted: 5
-*Overview: {'get_icons': {'redux_get_icons'}, 'ajax': {'redux_custom_fonts', 'redux_hide_admin_notice'}, 'timer': {'redux_custom_font_timer'}, 'parse_ajax': {'redux_color_schemes'}, 'google_fonts_update': {'redux_update_google_fonts'}, 'redux_delete_widget_area_area': {'redux_delete_widget_area'}}
+*Overview: {'get_icons': {'redux_get_icons'}, 'ajax': {'redux_custom_fonts', 'redux_hide_admin_notice'}, 'google_fonts_update': {'redux_update_google_fonts'}, 'redux_delete_widget_area_area': {'redux_delete_widget_area'}, 'parse_ajax': {'redux_color_schemes'}, 'timer': {'redux_custom_font_timer'}}
 *
 ***/
 
@@ -115,21 +115,30 @@ function ajax() {
 		}
 
 
-/** Function timer() called by wp_ajax hooks: {'redux_custom_font_timer'} **/
-/** Parameters found in function timer(): {"post": ["nonce"]} **/
-function timer() {
+/** Function google_fonts_update() called by wp_ajax hooks: {'redux_update_google_fonts'} **/
+/** No params detected :-/ **/
+
+
+/** Function redux_delete_widget_area_area() called by wp_ajax hooks: {'redux_delete_widget_area'} **/
+/** Parameters found in function redux_delete_widget_area_area(): {"post": ["_wpnonce", "name"]} **/
+function redux_delete_widget_area_area() {
 			if ( ! is_user_logged_in() && ! is_admin() && ! current_user_can( $this->parent->args['page_permissions'] ) ) {
-				wp_die( esc_html__( 'You do not have permission to perform this action.', 'redux-framework' ), 403 );
+				wp_die( esc_html__( 'You do not have permission to perform this action.', 'redux-framework' ) );
 			}
 
-			if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( sanitize_key( wp_unslash( $_POST['nonce'] ) ), 'redux_custom_fonts' ) ) {
-				die( 0 );
-			}
+			if ( isset( $_POST ) && isset( $_POST['_wpnonce'] ) && wp_verify_nonce( sanitize_key( wp_unslash( $_POST['_wpnonce'] ) ), 'delete-redux-widget_area-nonce' ) ) {
+				if ( isset( $_POST['name'] ) && ! empty( sanitize_text_field( wp_unslash( $_POST['name'] ) ) ) ) {
+					$name               = sanitize_text_field( wp_unslash( $_POST['name'] ) );
+					$this->widget_areas = $this->get_widget_areas();
+					$key                = array_search( $name, $this->widget_areas, true );
 
-			$name = get_option( 'redux_custom_font_current' );
+					if ( $key >= 0 ) {
+						unset( $this->widget_areas[ $key ] );
+						$this->save_widget_areas();
+					}
 
-			if ( ! empty( $name ) ) {
-				echo esc_html( $name );
+					echo 'widget_area-deleted';
+				}
 			}
 
 			die();
@@ -170,30 +179,21 @@ function parse_ajax() {
 		}
 
 
-/** Function google_fonts_update() called by wp_ajax hooks: {'redux_update_google_fonts'} **/
-/** No params detected :-/ **/
-
-
-/** Function redux_delete_widget_area_area() called by wp_ajax hooks: {'redux_delete_widget_area'} **/
-/** Parameters found in function redux_delete_widget_area_area(): {"post": ["_wpnonce", "name"]} **/
-function redux_delete_widget_area_area() {
+/** Function timer() called by wp_ajax hooks: {'redux_custom_font_timer'} **/
+/** Parameters found in function timer(): {"post": ["nonce"]} **/
+function timer() {
 			if ( ! is_user_logged_in() && ! is_admin() && ! current_user_can( $this->parent->args['page_permissions'] ) ) {
-				wp_die( esc_html__( 'You do not have permission to perform this action.', 'redux-framework' ) );
+				wp_die( esc_html__( 'You do not have permission to perform this action.', 'redux-framework' ), 403 );
 			}
 
-			if ( isset( $_POST ) && isset( $_POST['_wpnonce'] ) && wp_verify_nonce( sanitize_key( wp_unslash( $_POST['_wpnonce'] ) ), 'delete-redux-widget_area-nonce' ) ) {
-				if ( isset( $_POST['name'] ) && ! empty( sanitize_text_field( wp_unslash( $_POST['name'] ) ) ) ) {
-					$name               = sanitize_text_field( wp_unslash( $_POST['name'] ) );
-					$this->widget_areas = $this->get_widget_areas();
-					$key                = array_search( $name, $this->widget_areas, true );
+			if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( sanitize_key( wp_unslash( $_POST['nonce'] ) ), 'redux_custom_fonts' ) ) {
+				die( 0 );
+			}
 
-					if ( $key >= 0 ) {
-						unset( $this->widget_areas[ $key ] );
-						$this->save_widget_areas();
-					}
+			$name = get_option( 'redux_custom_font_current' );
 
-					echo 'widget_area-deleted';
-				}
+			if ( ! empty( $name ) ) {
+				echo esc_html( $name );
 			}
 
 			die();

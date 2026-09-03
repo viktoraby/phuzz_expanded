@@ -1,0 +1,551 @@
+[
+  {
+    "coverage_id": "1786962849-4a43a719-3db5-404f-a958-815488a2531e",
+    "priority": 42,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "seedprod_lite_v2_bulk_action_lpages"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "page_ids": "fuzz",
+        "bulk_action": "fu+z"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": [
+      {
+        "code": 0,
+        "file": "/var/www/html/wp-content/plugins/coming-soon/admin/includes/template-functions.php",
+        "message": "array_map(): Argument #2 ($array) must be of type array, string given",
+        "line": 816,
+        "previous": null,
+        "trace": [
+          {
+            "file": "/var/www/html/wp-content/plugins/coming-soon/admin/includes/template-functions.php",
+            "line": 816,
+            "function": "array_map",
+            "args": [
+              "absint",
+              "fuzz"
+            ]
+          },
+          {
+            "function": "seedprod_lite_v2_bulk_action_lpages",
+            "args": [
+              ""
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/class-wp-hook.php",
+            "line": 308,
+            "function": "call_user_func_array",
+            "args": [
+              "seedprod_lite_v2_bulk_action_lpages",
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/class-wp-hook.php",
+            "line": 332,
+            "function": "apply_filters",
+            "class": "WP_Hook",
+            "type": "->",
+            "args": [
+              "",
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/plugin.php",
+            "line": 517,
+            "function": "do_action",
+            "class": "WP_Hook",
+            "type": "->",
+            "args": [
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-admin/admin-ajax.php",
+            "line": 188,
+            "function": "do_action",
+            "args": [
+              "wp_ajax_seedprod_lite_v2_bulk_action_lpages"
+            ]
+          }
+        ],
+        "traceAsString": "#0 /var/www/html/wp-content/plugins/coming-soon/admin/includes/template-functions.php(816): array_map('absint', 'fuzz')\n#1 [internal function]: seedprod_lite_v2_bulk_action_lpages('')\n#2 /var/www/html/wp-includes/class-wp-hook.php(308): call_user_func_array('seedprod_lite_v...', Array)\n#3 /var/www/html/wp-includes/class-wp-hook.php(332): WP_Hook->apply_filters('', Array)\n#4 /var/www/html/wp-includes/plugin.php(517): WP_Hook->do_action(Array)\n#5 /var/www/html/wp-admin/admin-ajax.php(188): do_action('wp_ajax_seedpro...')\n#6 {main}"
+      }
+    ],
+    "response_body": "\n",
+    "response.body.length": 1,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 10:34:11 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "1",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 171.974,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786962848-074b16b0-bd2d-4641-bf21-3f1ab3939c55",
+    "paths": [
+      "/var/www/html/wp-content/plugins/coming-soon/admin/includes/utility-functions.php::::12_24_33_34_340",
+      "/var/www/html/wp-content/plugins/coming-soon/app/class-seedprod-notifications.php::::12_408_410_421_52_53_56_63_64_72_73_8_81_82",
+      "/var/www/html/wp-content/plugins/coming-soon/app/bootstrap.php::::294_304_305_306_307_308_309_310_314_315_316_317_318_322_323_330_442_464_500_532_9",
+      "/var/www/html/wp-content/plugins/coming-soon/app/nestednavmenu.php::::173_2_225_6_92",
+      "/var/www/html/wp-content/plugins/coming-soon/app/functions-inline-help.php::::18_2_203",
+      "/var/www/html/wp-content/plugins/coming-soon/admin/includes/plugin-functions.php::::12_951",
+      "/var/www/html/wp-content/plugins/coming-soon/includes/class-seedprod-init.php::::105_106_11_117_51_52_54_55_56_65_70_75_77_78_84_87_88_91_94_98_99",
+      "/var/www/html/wp-content/plugins/coming-soon/app/includes/functions-template-type-labels.php::::13_132_158_67_9",
+      "/var/www/html/wp-content/plugins/coming-soon/admin/includes/import-export-utilities.php::::12_716",
+      "/var/www/html/wp-content/plugins/coming-soon/admin/includes/import-export-functions.php::::13_18_659",
+      "/var/www/html/wp-content/plugins/coming-soon/app/functions-wpforms.php::::2_54",
+      "/var/www/html/wp-content/plugins/coming-soon/app/settings.php::::180_9",
+      "/var/www/html/wp-content/plugins/coming-soon/app/subscriber.php::::2_6",
+      "/var/www/html/wp-content/plugins/coming-soon/app/license.php::::193_9",
+      "/var/www/html/wp-content/plugins/coming-soon/includes/class-seedprod-loader.php::::101_108_109_11_112_113_115_117_51_52_53_65_66_78_79_93_94_95_96_97_98",
+      "/var/www/html/wp-content/plugins/coming-soon/admin/class-seedprod-admin.php::::102_105_108_111_114_117_121_124_125_127_134_137_140_143_146_149_150_151_152_155_156_157_158_161_162_163_166_167_168_169_170_171_172_176_177_1798_180_181_182_183_184_185_193_198_199_2_208_216_221_226_45_46_49_52_55_58_61_63_64_67_70_71_74_75_81_84_87_90_93_96_99",
+      "/var/www/html/wp-content/plugins/coming-soon/app/render-lp.php::::2_48_6",
+      "/var/www/html/wp-content/plugins/coming-soon/app/lpage.php::::1091_2_236_57_58_60",
+      "/var/www/html/wp-content/plugins/coming-soon/admin/includes/edit-with-seedprod-functions.php::::1077_1110_1111_159_20_257_474_88_896_905_922_970",
+      "/var/www/html/wp-content/plugins/coming-soon/app/render-csp-mm.php::::102_123_124_127_128_130_164_2_29_30_328_33_37_38_39_40_41_42_49_89_90_98_99",
+      "/var/www/html/wp-content/plugins/coming-soon/app/load_controller.php::::10_13_14_15_16_17_19_2_23_25_27_28_29_30_31_33_35_36_38_43_44_47_7_9",
+      "/var/www/html/wp-content/plugins/coming-soon/app/setup-wizard.php::::2_426",
+      "/var/www/html/wp-content/plugins/coming-soon/admin/includes/system-info-functions.php::::10_205",
+      "/var/www/html/wp-content/plugins/coming-soon/app/cpt.php::::15_16_18_19_2_21_22_23_24_29_31_32_33_35_39_40_41_42_50_51_52_53",
+      "/var/www/html/wp-content/plugins/coming-soon/app/functions-envira-gallaries.php::::2_30",
+      "/var/www/html/wp-content/plugins/coming-soon/coming-soon.php::::135_146_153_154_155_156_168_17_176_177_178_179_181_186_196_203_204_205_25_26_27_28_30_34_41_42_43_53_54_56",
+      "/var/www/html/wp-content/plugins/coming-soon/app/routes.php::::101_102_103_104_106_107_109_110_111_112_114_115_117_118_120_122_125_126_127_128_131_132_146_33_60_64_66_67_69_72_73_74_75_76_77_78_81_82_83_84_85_86_87_9_91_92_95_97_98_99",
+      "/var/www/html/wp-content/plugins/coming-soon/app/functions-addons.php::::2_564",
+      "/var/www/html/wp-content/plugins/coming-soon/admin/includes/settings-functions.php::::249_9",
+      "/var/www/html/wp-content/plugins/coming-soon/admin/includes/setup-wizard-functions.php::::13_539",
+      "/var/www/html/wp-content/plugins/coming-soon/app/functions-rafflepress.php::::2_58",
+      "/var/www/html/wp-content/plugins/coming-soon/admin/includes/debug-functions.php::::10_95",
+      "/var/www/html/wp-content/plugins/coming-soon/app/includes/upgrade.php::::190_2_86",
+      "/var/www/html/wp-content/plugins/coming-soon/admin/includes/template-functions.php::::805_810_815_816_874_9",
+      "/var/www/html/wp-content/plugins/coming-soon/admin/includes/license-functions.php::::12_228",
+      "/var/www/html/wp-content/plugins/coming-soon/admin/includes/subscriber-functions.php::::412_9",
+      "/var/www/html/wp-content/plugins/coming-soon/app/backwards/backwards_compatibility.php::::11_12_15_16_17_2_22_26_392_397_399",
+      "/var/www/html/wp-content/plugins/coming-soon/app/functions-utils.php::::1735_1736_1737_1740_1786_1788_1958_1985_2_2493_2494_2495",
+      "/var/www/html/wp-content/plugins/coming-soon/admin/includes/utm-functions.php::::12_200",
+      "/var/www/html/wp-content/plugins/coming-soon/app/functions-mypaykit.php::::2_83",
+      "/var/www/html/wp-content/plugins/coming-soon/admin/includes/product-education-functions.php::::13_358",
+      "/var/www/html/wp-content/plugins/coming-soon/admin/includes/review-functions.php::::13_24_248_40"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 42,
+    "is_interesting": false,
+    "fuzzer_id": "7",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "bulk_action"
+  },
+  {
+    "coverage_id": "1786962852-3800599f-d4f0-4d17-b480-cf773a14fe83",
+    "priority": 42,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "seedprod_lite_v2_bulk_action_lpages"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "page_ids": "fuzA",
+        "bulk_action": "fuzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": [
+      {
+        "code": 0,
+        "file": "/var/www/html/wp-content/plugins/coming-soon/admin/includes/template-functions.php",
+        "message": "array_map(): Argument #2 ($array) must be of type array, string given",
+        "line": 816,
+        "previous": null,
+        "trace": [
+          {
+            "file": "/var/www/html/wp-content/plugins/coming-soon/admin/includes/template-functions.php",
+            "line": 816,
+            "function": "array_map",
+            "args": [
+              "absint",
+              "fuzA"
+            ]
+          },
+          {
+            "function": "seedprod_lite_v2_bulk_action_lpages",
+            "args": [
+              ""
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/class-wp-hook.php",
+            "line": 308,
+            "function": "call_user_func_array",
+            "args": [
+              "seedprod_lite_v2_bulk_action_lpages",
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/class-wp-hook.php",
+            "line": 332,
+            "function": "apply_filters",
+            "class": "WP_Hook",
+            "type": "->",
+            "args": [
+              "",
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/plugin.php",
+            "line": 517,
+            "function": "do_action",
+            "class": "WP_Hook",
+            "type": "->",
+            "args": [
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-admin/admin-ajax.php",
+            "line": 188,
+            "function": "do_action",
+            "args": [
+              "wp_ajax_seedprod_lite_v2_bulk_action_lpages"
+            ]
+          }
+        ],
+        "traceAsString": "#0 /var/www/html/wp-content/plugins/coming-soon/admin/includes/template-functions.php(816): array_map('absint', 'fuzA')\n#1 [internal function]: seedprod_lite_v2_bulk_action_lpages('')\n#2 /var/www/html/wp-includes/class-wp-hook.php(308): call_user_func_array('seedprod_lite_v...', Array)\n#3 /var/www/html/wp-includes/class-wp-hook.php(332): WP_Hook->apply_filters('', Array)\n#4 /var/www/html/wp-includes/plugin.php(517): WP_Hook->do_action(Array)\n#5 /var/www/html/wp-admin/admin-ajax.php(188): do_action('wp_ajax_seedpro...')\n#6 {main}"
+      }
+    ],
+    "response_body": "\n",
+    "response.body.length": 1,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 10:34:12 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "1",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 944.957,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786962848-074b16b0-bd2d-4641-bf21-3f1ab3939c55",
+    "paths": [
+      "/var/www/html/wp-content/plugins/coming-soon/admin/includes/utility-functions.php::::12_24_33_34_340",
+      "/var/www/html/wp-content/plugins/coming-soon/app/class-seedprod-notifications.php::::12_408_410_421_52_53_56_63_64_72_73_8_81_82",
+      "/var/www/html/wp-content/plugins/coming-soon/app/bootstrap.php::::294_304_305_306_307_308_309_310_314_315_316_317_318_322_323_330_442_464_500_532_9",
+      "/var/www/html/wp-content/plugins/coming-soon/app/nestednavmenu.php::::173_2_225_6_92",
+      "/var/www/html/wp-content/plugins/coming-soon/app/functions-inline-help.php::::18_2_203",
+      "/var/www/html/wp-content/plugins/coming-soon/admin/includes/plugin-functions.php::::12_951",
+      "/var/www/html/wp-content/plugins/coming-soon/includes/class-seedprod-init.php::::105_106_11_117_51_52_54_55_56_65_70_75_77_78_84_87_88_91_94_98_99",
+      "/var/www/html/wp-content/plugins/coming-soon/app/includes/functions-template-type-labels.php::::13_132_158_67_9",
+      "/var/www/html/wp-content/plugins/coming-soon/admin/includes/import-export-utilities.php::::12_716",
+      "/var/www/html/wp-content/plugins/coming-soon/admin/includes/import-export-functions.php::::13_18_659",
+      "/var/www/html/wp-content/plugins/coming-soon/app/functions-wpforms.php::::2_54",
+      "/var/www/html/wp-content/plugins/coming-soon/app/settings.php::::180_9",
+      "/var/www/html/wp-content/plugins/coming-soon/app/subscriber.php::::2_6",
+      "/var/www/html/wp-content/plugins/coming-soon/app/license.php::::193_9",
+      "/var/www/html/wp-content/plugins/coming-soon/includes/class-seedprod-loader.php::::101_108_109_11_112_113_115_117_51_52_53_65_66_78_79_93_94_95_96_97_98",
+      "/var/www/html/wp-content/plugins/coming-soon/admin/class-seedprod-admin.php::::102_105_108_111_114_117_121_124_125_127_134_137_140_143_146_149_150_151_152_155_156_157_158_161_162_163_166_167_168_169_170_171_172_176_177_1798_180_181_182_183_184_185_193_198_199_2_208_216_221_226_45_46_49_52_55_58_61_63_64_67_70_71_74_75_81_84_87_90_93_96_99",
+      "/var/www/html/wp-content/plugins/coming-soon/app/render-lp.php::::2_48_6",
+      "/var/www/html/wp-content/plugins/coming-soon/app/lpage.php::::1091_2_236_57_58_60",
+      "/var/www/html/wp-content/plugins/coming-soon/admin/includes/edit-with-seedprod-functions.php::::1077_1110_1111_159_20_257_474_88_896_905_922_970",
+      "/var/www/html/wp-content/plugins/coming-soon/app/render-csp-mm.php::::102_123_124_127_128_130_164_2_29_30_328_33_37_38_39_40_41_42_49_89_90_98_99",
+      "/var/www/html/wp-content/plugins/coming-soon/app/load_controller.php::::10_13_14_15_16_17_19_2_23_25_27_28_29_30_31_33_35_36_38_43_44_47_7_9",
+      "/var/www/html/wp-content/plugins/coming-soon/app/setup-wizard.php::::2_426",
+      "/var/www/html/wp-content/plugins/coming-soon/admin/includes/system-info-functions.php::::10_205",
+      "/var/www/html/wp-content/plugins/coming-soon/app/cpt.php::::15_16_18_19_2_21_22_23_24_29_31_32_33_35_39_40_41_42_50_51_52_53",
+      "/var/www/html/wp-content/plugins/coming-soon/app/functions-envira-gallaries.php::::2_30",
+      "/var/www/html/wp-content/plugins/coming-soon/coming-soon.php::::135_146_153_154_155_156_168_17_176_177_178_179_181_186_196_203_204_205_25_26_27_28_30_34_41_42_43_53_54_56",
+      "/var/www/html/wp-content/plugins/coming-soon/app/routes.php::::101_102_103_104_106_107_109_110_111_112_114_115_117_118_120_122_125_126_127_128_131_132_146_33_60_64_66_67_69_72_73_74_75_76_77_78_81_82_83_84_85_86_87_9_91_92_95_97_98_99",
+      "/var/www/html/wp-content/plugins/coming-soon/app/functions-addons.php::::2_564",
+      "/var/www/html/wp-content/plugins/coming-soon/admin/includes/settings-functions.php::::249_9",
+      "/var/www/html/wp-content/plugins/coming-soon/admin/includes/setup-wizard-functions.php::::13_539",
+      "/var/www/html/wp-content/plugins/coming-soon/app/functions-rafflepress.php::::2_58",
+      "/var/www/html/wp-content/plugins/coming-soon/admin/includes/debug-functions.php::::10_95",
+      "/var/www/html/wp-content/plugins/coming-soon/app/includes/upgrade.php::::190_2_86",
+      "/var/www/html/wp-content/plugins/coming-soon/admin/includes/template-functions.php::::805_810_815_816_874_9",
+      "/var/www/html/wp-content/plugins/coming-soon/admin/includes/license-functions.php::::12_228",
+      "/var/www/html/wp-content/plugins/coming-soon/admin/includes/subscriber-functions.php::::412_9",
+      "/var/www/html/wp-content/plugins/coming-soon/app/backwards/backwards_compatibility.php::::11_12_15_16_17_2_22_26_392_397_399",
+      "/var/www/html/wp-content/plugins/coming-soon/app/functions-utils.php::::1735_1736_1737_1740_1786_1788_1958_1985_2_2493_2494_2495",
+      "/var/www/html/wp-content/plugins/coming-soon/admin/includes/utm-functions.php::::12_200",
+      "/var/www/html/wp-content/plugins/coming-soon/app/functions-mypaykit.php::::2_83",
+      "/var/www/html/wp-content/plugins/coming-soon/admin/includes/product-education-functions.php::::13_358",
+      "/var/www/html/wp-content/plugins/coming-soon/admin/includes/review-functions.php::::13_24_248_40"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 42,
+    "is_interesting": false,
+    "fuzzer_id": "7",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "page_ids"
+  },
+  {
+    "coverage_id": "1786962853-113957fc-bf61-4562-8eeb-9445c016f373",
+    "priority": 42,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "seedprod_lite_v2_bulk_action_lpages"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "page_ids": "fu\u0000zz",
+        "bulk_action": "fuzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": [
+      {
+        "code": 0,
+        "file": "/var/www/html/wp-content/plugins/coming-soon/admin/includes/template-functions.php",
+        "message": "array_map(): Argument #2 ($array) must be of type array, string given",
+        "line": 816,
+        "previous": null,
+        "trace": [
+          {
+            "file": "/var/www/html/wp-content/plugins/coming-soon/admin/includes/template-functions.php",
+            "line": 816,
+            "function": "array_map",
+            "args": [
+              "absint",
+              "fu\\0zz"
+            ]
+          },
+          {
+            "function": "seedprod_lite_v2_bulk_action_lpages",
+            "args": [
+              ""
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/class-wp-hook.php",
+            "line": 308,
+            "function": "call_user_func_array",
+            "args": [
+              "seedprod_lite_v2_bulk_action_lpages",
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/class-wp-hook.php",
+            "line": 332,
+            "function": "apply_filters",
+            "class": "WP_Hook",
+            "type": "->",
+            "args": [
+              "",
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/plugin.php",
+            "line": 517,
+            "function": "do_action",
+            "class": "WP_Hook",
+            "type": "->",
+            "args": [
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-admin/admin-ajax.php",
+            "line": 188,
+            "function": "do_action",
+            "args": [
+              "wp_ajax_seedprod_lite_v2_bulk_action_lpages"
+            ]
+          }
+        ],
+        "traceAsString": "#0 /var/www/html/wp-content/plugins/coming-soon/admin/includes/template-functions.php(816): array_map('absint', 'fu\\\\0zz')\n#1 [internal function]: seedprod_lite_v2_bulk_action_lpages('')\n#2 /var/www/html/wp-includes/class-wp-hook.php(308): call_user_func_array('seedprod_lite_v...', Array)\n#3 /var/www/html/wp-includes/class-wp-hook.php(332): WP_Hook->apply_filters('', Array)\n#4 /var/www/html/wp-includes/plugin.php(517): WP_Hook->do_action(Array)\n#5 /var/www/html/wp-admin/admin-ajax.php(188): do_action('wp_ajax_seedpro...')\n#6 {main}"
+      }
+    ],
+    "response_body": "\n",
+    "response.body.length": 1,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 10:34:13 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "1",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 249.582,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786962848-074b16b0-bd2d-4641-bf21-3f1ab3939c55",
+    "paths": [
+      "/var/www/html/wp-content/plugins/coming-soon/admin/includes/utility-functions.php::::12_24_33_34_340",
+      "/var/www/html/wp-content/plugins/coming-soon/app/class-seedprod-notifications.php::::12_408_410_421_52_53_56_63_64_72_73_8_81_82",
+      "/var/www/html/wp-content/plugins/coming-soon/app/bootstrap.php::::294_304_305_306_307_308_309_310_314_315_316_317_318_322_323_330_442_464_500_532_9",
+      "/var/www/html/wp-content/plugins/coming-soon/app/nestednavmenu.php::::173_2_225_6_92",
+      "/var/www/html/wp-content/plugins/coming-soon/app/functions-inline-help.php::::18_2_203",
+      "/var/www/html/wp-content/plugins/coming-soon/admin/includes/plugin-functions.php::::12_951",
+      "/var/www/html/wp-content/plugins/coming-soon/includes/class-seedprod-init.php::::105_106_11_117_51_52_54_55_56_65_70_75_77_78_84_87_88_91_94_98_99",
+      "/var/www/html/wp-content/plugins/coming-soon/app/includes/functions-template-type-labels.php::::13_132_158_67_9",
+      "/var/www/html/wp-content/plugins/coming-soon/admin/includes/import-export-utilities.php::::12_716",
+      "/var/www/html/wp-content/plugins/coming-soon/admin/includes/import-export-functions.php::::13_18_659",
+      "/var/www/html/wp-content/plugins/coming-soon/app/functions-wpforms.php::::2_54",
+      "/var/www/html/wp-content/plugins/coming-soon/app/settings.php::::180_9",
+      "/var/www/html/wp-content/plugins/coming-soon/app/subscriber.php::::2_6",
+      "/var/www/html/wp-content/plugins/coming-soon/app/license.php::::193_9",
+      "/var/www/html/wp-content/plugins/coming-soon/includes/class-seedprod-loader.php::::101_108_109_11_112_113_115_117_51_52_53_65_66_78_79_93_94_95_96_97_98",
+      "/var/www/html/wp-content/plugins/coming-soon/admin/class-seedprod-admin.php::::102_105_108_111_114_117_121_124_125_127_134_137_140_143_146_149_150_151_152_155_156_157_158_161_162_163_166_167_168_169_170_171_172_176_177_1798_180_181_182_183_184_185_193_198_199_2_208_216_221_226_45_46_49_52_55_58_61_63_64_67_70_71_74_75_81_84_87_90_93_96_99",
+      "/var/www/html/wp-content/plugins/coming-soon/app/render-lp.php::::2_48_6",
+      "/var/www/html/wp-content/plugins/coming-soon/app/lpage.php::::1091_2_236_57_58_60",
+      "/var/www/html/wp-content/plugins/coming-soon/admin/includes/edit-with-seedprod-functions.php::::1077_1110_1111_159_20_257_474_88_896_905_922_970",
+      "/var/www/html/wp-content/plugins/coming-soon/app/render-csp-mm.php::::102_123_124_127_128_130_164_2_29_30_328_33_37_38_39_40_41_42_49_89_90_98_99",
+      "/var/www/html/wp-content/plugins/coming-soon/app/load_controller.php::::10_13_14_15_16_17_19_2_23_25_27_28_29_30_31_33_35_36_38_43_44_47_7_9",
+      "/var/www/html/wp-content/plugins/coming-soon/app/setup-wizard.php::::2_426",
+      "/var/www/html/wp-content/plugins/coming-soon/admin/includes/system-info-functions.php::::10_205",
+      "/var/www/html/wp-content/plugins/coming-soon/app/cpt.php::::15_16_18_19_2_21_22_23_24_29_31_32_33_35_39_40_41_42_50_51_52_53",
+      "/var/www/html/wp-content/plugins/coming-soon/app/functions-envira-gallaries.php::::2_30",
+      "/var/www/html/wp-content/plugins/coming-soon/coming-soon.php::::135_146_153_154_155_156_168_17_176_177_178_179_181_186_196_203_204_205_25_26_27_28_30_34_41_42_43_53_54_56",
+      "/var/www/html/wp-content/plugins/coming-soon/app/routes.php::::101_102_103_104_106_107_109_110_111_112_114_115_117_118_120_122_125_126_127_128_131_132_146_33_60_64_66_67_69_72_73_74_75_76_77_78_81_82_83_84_85_86_87_9_91_92_95_97_98_99",
+      "/var/www/html/wp-content/plugins/coming-soon/app/functions-addons.php::::2_564",
+      "/var/www/html/wp-content/plugins/coming-soon/admin/includes/settings-functions.php::::249_9",
+      "/var/www/html/wp-content/plugins/coming-soon/admin/includes/setup-wizard-functions.php::::13_539",
+      "/var/www/html/wp-content/plugins/coming-soon/app/functions-rafflepress.php::::2_58",
+      "/var/www/html/wp-content/plugins/coming-soon/admin/includes/debug-functions.php::::10_95",
+      "/var/www/html/wp-content/plugins/coming-soon/app/includes/upgrade.php::::190_2_86",
+      "/var/www/html/wp-content/plugins/coming-soon/admin/includes/template-functions.php::::805_810_815_816_874_9",
+      "/var/www/html/wp-content/plugins/coming-soon/admin/includes/license-functions.php::::12_228",
+      "/var/www/html/wp-content/plugins/coming-soon/admin/includes/subscriber-functions.php::::412_9",
+      "/var/www/html/wp-content/plugins/coming-soon/app/backwards/backwards_compatibility.php::::11_12_15_16_17_2_22_26_392_397_399",
+      "/var/www/html/wp-content/plugins/coming-soon/app/functions-utils.php::::1735_1736_1737_1740_1786_1788_1958_1985_2_2493_2494_2495",
+      "/var/www/html/wp-content/plugins/coming-soon/admin/includes/utm-functions.php::::12_200",
+      "/var/www/html/wp-content/plugins/coming-soon/app/functions-mypaykit.php::::2_83",
+      "/var/www/html/wp-content/plugins/coming-soon/admin/includes/product-education-functions.php::::13_358",
+      "/var/www/html/wp-content/plugins/coming-soon/admin/includes/review-functions.php::::13_24_248_40"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 42,
+    "is_interesting": false,
+    "fuzzer_id": "7",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "page_ids"
+  }
+]

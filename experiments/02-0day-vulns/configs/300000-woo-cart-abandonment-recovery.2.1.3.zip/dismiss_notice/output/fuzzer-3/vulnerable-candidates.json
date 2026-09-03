@@ -1,0 +1,2344 @@
+{
+  "PathTraversal": [
+    {
+      "coverage_id": "1786874888-24d05ab0-dc5f-4091-b5c0-455fcda4c7f8",
+      "priority": 24,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "astra-notice-dismiss"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "repeat_notice_after": "fuzz",
+          "notice_id": ""
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n0",
+      "response.body.length": 2,
+      "response.headers": {
+        "Date": "Sun, 16 Aug 2026 10:08:08 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "2",
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 376.998,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1786874868-e86d3421-a50d-425f-bb6a-e9edf9c6ec5c",
+      "paths": [
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/classes/class-cartflows-ca-loader.php::::100_101_103_105_106_107_108_110_111_112_114_115_12_126_127_128_297_298_301_302_305_307_310_311_312_313_314_315_316_319_320_321_322_323_324_325_335_336_340_341_343_357_364_369_371_372_382_383_386_387_389_392_397_399_427_428_431_432_433_434_435_436_437_439_440_50_53_56_57_58_59_60_623_624_63_65_652_655_66_665_73_75_8_84_87_96_97_98_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/modules/deactivation-survey/classes/class-deactivation-survey-feedback.php::::13_316_318_43_44_46_53_54_55_9",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics-events.php::::12_16_202",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/woo-cart-abandonment-recovery.php::::20_25_26",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/classes/class-bsf-analytics-helper.php::::12_8_98",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/astra-notices/class-astra-notices.php::::11_119_121_122_123_124_126_130_133_142_143_15_210_212_223_227_228_231_235_415_418_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-abilities-register.php::::10_118_47_48_49_50_58_59_61",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-product-stats.php::::10_138",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics-stats.php::::12_235_261_8",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-settings.php::::10_203",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-dashboard-stats.php::::10_130",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-update-setting.php::::10_153",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics-loader.php::::10_100_101_106_107_112_113_114_117_119_57_58_61_68_69_78_79_87_89_90_91_93_94_95_96_97_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/class-cartflows-ca-nps-survey.php::::12_123_126_36_37_40_49_50_51_52_62_65_67_71_73_75_76_8_80_81_82_85_96_97_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-setting.php::::10_122",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/admin/inc/meta-options.php::::10_1155",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/nps-survey/nps-survey.php::::14_18_19_20_21_22_23_24",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics.php::::10_100_111_113_115_14_169_173_175_176_178_183_195_196_198_199_207_239_243_248_249_253_255_256_259_260_332_341_347_348_349_350_356_357_412_413_414_417_418_419_428_429_46_471_473_484_485_50_513_53_55_56_58_59_60_611_612_62_64_66_68_689_69_80_84_85_86_95_96_97_98",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/modules/utm-analytics.php::::13_15_16_169_9",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/nps-survey/classes/nps-survey-script.php::::10_13_34_35_44_45_47_605_606",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/astra-notices/class-astra-notices.php::::11_119_121_122_123_124_126_130_133_142_143_15_223_224_415_418_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/nps-survey/nps-survey-plugin-loader.php::::102_11_35_36_37_46_47_49_92_93_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/class-cartflows-ca-bsf-analytics.php::::10_100_14_46_47_50_62_643_646_67_68_70_79_82_96_97",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-abstract-ability.php::::10_346"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 24,
+      "is_interesting": false,
+      "fuzzer_id": "3",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "notice_id"
+    },
+    {
+      "coverage_id": "1786874888-24d05ab0-dc5f-4091-b5c0-455fcda4c7f8",
+      "priority": 24,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "astra-notice-dismiss"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "repeat_notice_after": "fuzz",
+          "notice_id": ""
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n0",
+      "response.body.length": 2,
+      "response.headers": {
+        "Date": "Sun, 16 Aug 2026 10:08:08 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "2",
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 376.998,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1786874868-e86d3421-a50d-425f-bb6a-e9edf9c6ec5c",
+      "paths": [
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/classes/class-cartflows-ca-loader.php::::100_101_103_105_106_107_108_110_111_112_114_115_12_126_127_128_297_298_301_302_305_307_310_311_312_313_314_315_316_319_320_321_322_323_324_325_335_336_340_341_343_357_364_369_371_372_382_383_386_387_389_392_397_399_427_428_431_432_433_434_435_436_437_439_440_50_53_56_57_58_59_60_623_624_63_65_652_655_66_665_73_75_8_84_87_96_97_98_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/modules/deactivation-survey/classes/class-deactivation-survey-feedback.php::::13_316_318_43_44_46_53_54_55_9",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics-events.php::::12_16_202",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/woo-cart-abandonment-recovery.php::::20_25_26",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/classes/class-bsf-analytics-helper.php::::12_8_98",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/astra-notices/class-astra-notices.php::::11_119_121_122_123_124_126_130_133_142_143_15_210_212_223_227_228_231_235_415_418_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-abilities-register.php::::10_118_47_48_49_50_58_59_61",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-product-stats.php::::10_138",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics-stats.php::::12_235_261_8",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-settings.php::::10_203",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-dashboard-stats.php::::10_130",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-update-setting.php::::10_153",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics-loader.php::::10_100_101_106_107_112_113_114_117_119_57_58_61_68_69_78_79_87_89_90_91_93_94_95_96_97_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/class-cartflows-ca-nps-survey.php::::12_123_126_36_37_40_49_50_51_52_62_65_67_71_73_75_76_8_80_81_82_85_96_97_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-setting.php::::10_122",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/admin/inc/meta-options.php::::10_1155",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/nps-survey/nps-survey.php::::14_18_19_20_21_22_23_24",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics.php::::10_100_111_113_115_14_169_173_175_176_178_183_195_196_198_199_207_239_243_248_249_253_255_256_259_260_332_341_347_348_349_350_356_357_412_413_414_417_418_419_428_429_46_471_473_484_485_50_513_53_55_56_58_59_60_611_612_62_64_66_68_689_69_80_84_85_86_95_96_97_98",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/modules/utm-analytics.php::::13_15_16_169_9",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/nps-survey/classes/nps-survey-script.php::::10_13_34_35_44_45_47_605_606",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/astra-notices/class-astra-notices.php::::11_119_121_122_123_124_126_130_133_142_143_15_223_224_415_418_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/nps-survey/nps-survey-plugin-loader.php::::102_11_35_36_37_46_47_49_92_93_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/class-cartflows-ca-bsf-analytics.php::::10_100_14_46_47_50_62_643_646_67_68_70_79_82_96_97",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-abstract-ability.php::::10_346"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 24,
+      "is_interesting": false,
+      "fuzzer_id": "3",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "notice_id"
+    },
+    {
+      "coverage_id": "1786874893-f5e22bb7-265c-4932-b54b-034db423e492",
+      "priority": 24,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "astra-notice-dismiss"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "repeat_notice_after": "fuzz",
+          "notice_id": "b"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n0",
+      "response.body.length": 2,
+      "response.headers": {
+        "Date": "Sun, 16 Aug 2026 10:08:13 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "2",
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 271.03,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1786874868-e86d3421-a50d-425f-bb6a-e9edf9c6ec5c",
+      "paths": [
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/classes/class-cartflows-ca-loader.php::::100_101_103_105_106_107_108_110_111_112_114_115_12_126_127_128_297_298_301_302_305_307_310_311_312_313_314_315_316_319_320_321_322_323_324_325_335_336_340_341_343_357_364_369_371_372_382_383_386_387_389_392_397_399_427_428_431_432_433_434_435_436_437_439_440_50_53_56_57_58_59_60_623_624_63_65_652_655_66_665_73_75_8_84_87_96_97_98_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/modules/deactivation-survey/classes/class-deactivation-survey-feedback.php::::13_316_318_43_44_46_53_54_55_9",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics-events.php::::12_16_202",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/woo-cart-abandonment-recovery.php::::20_25_26",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/astra-notices/class-astra-notices.php::::11_119_121_122_123_124_126_130_133_142_143_15_210_212_223_227_228_231_235_415_418_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/classes/class-bsf-analytics-helper.php::::12_8_98",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-abilities-register.php::::10_118_47_48_49_50_58_59_61",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-product-stats.php::::10_138",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics-stats.php::::12_235_261_8",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-settings.php::::10_203",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-dashboard-stats.php::::10_130",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-update-setting.php::::10_153",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics-loader.php::::10_100_101_106_107_112_113_114_117_119_57_58_61_68_69_78_79_87_89_90_91_93_94_95_96_97_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/class-cartflows-ca-nps-survey.php::::12_123_126_36_37_40_49_50_51_52_62_65_67_71_73_75_76_8_80_81_82_85_96_97_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-setting.php::::10_122",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/admin/inc/meta-options.php::::10_1155",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/nps-survey/nps-survey.php::::14_18_19_20_21_22_23_24",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics.php::::10_100_111_113_115_14_169_173_175_176_178_183_195_196_198_199_207_239_243_248_249_253_255_256_259_260_332_341_347_348_349_350_356_357_412_413_414_417_418_419_428_429_46_471_473_484_485_50_513_53_55_56_58_59_60_611_612_62_64_66_68_689_69_80_84_85_86_95_96_97_98",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/modules/utm-analytics.php::::13_15_16_169_9",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/nps-survey/classes/nps-survey-script.php::::10_13_34_35_44_45_47_605_606",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/astra-notices/class-astra-notices.php::::11_119_121_122_123_124_126_130_133_142_143_15_223_224_415_418_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/nps-survey/nps-survey-plugin-loader.php::::102_11_35_36_37_46_47_49_92_93_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/class-cartflows-ca-bsf-analytics.php::::10_100_14_46_47_50_62_643_646_67_68_70_79_82_96_97",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-abstract-ability.php::::10_346"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 24,
+      "is_interesting": false,
+      "fuzzer_id": "3",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "notice_id"
+    },
+    {
+      "coverage_id": "1786874893-f5e22bb7-265c-4932-b54b-034db423e492",
+      "priority": 24,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "astra-notice-dismiss"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "repeat_notice_after": "fuzz",
+          "notice_id": "b"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n0",
+      "response.body.length": 2,
+      "response.headers": {
+        "Date": "Sun, 16 Aug 2026 10:08:13 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "2",
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 271.03,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1786874868-e86d3421-a50d-425f-bb6a-e9edf9c6ec5c",
+      "paths": [
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/classes/class-cartflows-ca-loader.php::::100_101_103_105_106_107_108_110_111_112_114_115_12_126_127_128_297_298_301_302_305_307_310_311_312_313_314_315_316_319_320_321_322_323_324_325_335_336_340_341_343_357_364_369_371_372_382_383_386_387_389_392_397_399_427_428_431_432_433_434_435_436_437_439_440_50_53_56_57_58_59_60_623_624_63_65_652_655_66_665_73_75_8_84_87_96_97_98_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/modules/deactivation-survey/classes/class-deactivation-survey-feedback.php::::13_316_318_43_44_46_53_54_55_9",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics-events.php::::12_16_202",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/woo-cart-abandonment-recovery.php::::20_25_26",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/astra-notices/class-astra-notices.php::::11_119_121_122_123_124_126_130_133_142_143_15_210_212_223_227_228_231_235_415_418_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/classes/class-bsf-analytics-helper.php::::12_8_98",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-abilities-register.php::::10_118_47_48_49_50_58_59_61",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-product-stats.php::::10_138",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics-stats.php::::12_235_261_8",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-settings.php::::10_203",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-dashboard-stats.php::::10_130",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-update-setting.php::::10_153",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics-loader.php::::10_100_101_106_107_112_113_114_117_119_57_58_61_68_69_78_79_87_89_90_91_93_94_95_96_97_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/class-cartflows-ca-nps-survey.php::::12_123_126_36_37_40_49_50_51_52_62_65_67_71_73_75_76_8_80_81_82_85_96_97_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-setting.php::::10_122",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/admin/inc/meta-options.php::::10_1155",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/nps-survey/nps-survey.php::::14_18_19_20_21_22_23_24",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics.php::::10_100_111_113_115_14_169_173_175_176_178_183_195_196_198_199_207_239_243_248_249_253_255_256_259_260_332_341_347_348_349_350_356_357_412_413_414_417_418_419_428_429_46_471_473_484_485_50_513_53_55_56_58_59_60_611_612_62_64_66_68_689_69_80_84_85_86_95_96_97_98",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/modules/utm-analytics.php::::13_15_16_169_9",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/nps-survey/classes/nps-survey-script.php::::10_13_34_35_44_45_47_605_606",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/astra-notices/class-astra-notices.php::::11_119_121_122_123_124_126_130_133_142_143_15_223_224_415_418_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/nps-survey/nps-survey-plugin-loader.php::::102_11_35_36_37_46_47_49_92_93_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/class-cartflows-ca-bsf-analytics.php::::10_100_14_46_47_50_62_643_646_67_68_70_79_82_96_97",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-abstract-ability.php::::10_346"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 24,
+      "is_interesting": false,
+      "fuzzer_id": "3",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "notice_id"
+    },
+    {
+      "coverage_id": "1786874902-b50f5cfb-e9eb-485b-89c4-a1294cc7a5fc",
+      "priority": 24,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "astra-notice-dismiss"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "repeat_notice_after": "fuzz",
+          "notice_id": "a"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n0",
+      "response.body.length": 2,
+      "response.headers": {
+        "Date": "Sun, 16 Aug 2026 10:08:22 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "2",
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 164.875,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1786874868-e86d3421-a50d-425f-bb6a-e9edf9c6ec5c",
+      "paths": [
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/classes/class-cartflows-ca-loader.php::::100_101_103_105_106_107_108_110_111_112_114_115_12_126_127_128_297_298_301_302_305_307_310_311_312_313_314_315_316_319_320_321_322_323_324_325_335_336_340_341_343_357_364_369_371_372_382_383_386_387_389_392_397_399_427_428_431_432_433_434_435_436_437_439_440_50_53_56_57_58_59_60_623_624_63_65_652_655_66_665_73_75_8_84_87_96_97_98_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/modules/deactivation-survey/classes/class-deactivation-survey-feedback.php::::13_316_318_43_44_46_53_54_55_9",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics-events.php::::12_16_202",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/woo-cart-abandonment-recovery.php::::20_25_26",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/astra-notices/class-astra-notices.php::::11_119_121_122_123_124_126_130_133_142_143_15_210_212_223_227_228_231_235_415_418_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/classes/class-bsf-analytics-helper.php::::12_8_98",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-abilities-register.php::::10_118_47_48_49_50_58_59_61",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-product-stats.php::::10_138",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics-stats.php::::12_235_261_8",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-settings.php::::10_203",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-dashboard-stats.php::::10_130",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-update-setting.php::::10_153",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics-loader.php::::10_100_101_106_107_112_113_114_117_119_57_58_61_68_69_78_79_87_89_90_91_93_94_95_96_97_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/class-cartflows-ca-nps-survey.php::::12_123_126_36_37_40_49_50_51_52_62_65_67_71_73_75_76_8_80_81_82_85_96_97_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-setting.php::::10_122",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/admin/inc/meta-options.php::::10_1155",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/nps-survey/nps-survey.php::::14_18_19_20_21_22_23_24",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics.php::::10_100_111_113_115_14_169_173_175_176_178_183_195_196_198_199_207_239_243_248_249_253_255_256_259_260_332_341_347_348_349_350_356_357_412_413_414_417_418_419_428_429_46_471_473_484_485_50_513_53_55_56_58_59_60_611_612_62_64_66_68_689_69_80_84_85_86_95_96_97_98",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/modules/utm-analytics.php::::13_15_16_169_9",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/nps-survey/classes/nps-survey-script.php::::10_13_34_35_44_45_47_605_606",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/astra-notices/class-astra-notices.php::::11_119_121_122_123_124_126_130_133_142_143_15_223_224_415_418_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/nps-survey/nps-survey-plugin-loader.php::::102_11_35_36_37_46_47_49_92_93_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/class-cartflows-ca-bsf-analytics.php::::10_100_14_46_47_50_62_643_646_67_68_70_79_82_96_97",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-abstract-ability.php::::10_346"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 24,
+      "is_interesting": false,
+      "fuzzer_id": "3",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "notice_id"
+    },
+    {
+      "coverage_id": "1786874902-b50f5cfb-e9eb-485b-89c4-a1294cc7a5fc",
+      "priority": 24,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "astra-notice-dismiss"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "repeat_notice_after": "fuzz",
+          "notice_id": "a"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n0",
+      "response.body.length": 2,
+      "response.headers": {
+        "Date": "Sun, 16 Aug 2026 10:08:22 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "2",
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 164.875,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1786874868-e86d3421-a50d-425f-bb6a-e9edf9c6ec5c",
+      "paths": [
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/classes/class-cartflows-ca-loader.php::::100_101_103_105_106_107_108_110_111_112_114_115_12_126_127_128_297_298_301_302_305_307_310_311_312_313_314_315_316_319_320_321_322_323_324_325_335_336_340_341_343_357_364_369_371_372_382_383_386_387_389_392_397_399_427_428_431_432_433_434_435_436_437_439_440_50_53_56_57_58_59_60_623_624_63_65_652_655_66_665_73_75_8_84_87_96_97_98_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/modules/deactivation-survey/classes/class-deactivation-survey-feedback.php::::13_316_318_43_44_46_53_54_55_9",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics-events.php::::12_16_202",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/woo-cart-abandonment-recovery.php::::20_25_26",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/astra-notices/class-astra-notices.php::::11_119_121_122_123_124_126_130_133_142_143_15_210_212_223_227_228_231_235_415_418_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/classes/class-bsf-analytics-helper.php::::12_8_98",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-abilities-register.php::::10_118_47_48_49_50_58_59_61",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-product-stats.php::::10_138",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics-stats.php::::12_235_261_8",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-settings.php::::10_203",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-dashboard-stats.php::::10_130",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-update-setting.php::::10_153",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics-loader.php::::10_100_101_106_107_112_113_114_117_119_57_58_61_68_69_78_79_87_89_90_91_93_94_95_96_97_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/class-cartflows-ca-nps-survey.php::::12_123_126_36_37_40_49_50_51_52_62_65_67_71_73_75_76_8_80_81_82_85_96_97_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-setting.php::::10_122",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/admin/inc/meta-options.php::::10_1155",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/nps-survey/nps-survey.php::::14_18_19_20_21_22_23_24",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics.php::::10_100_111_113_115_14_169_173_175_176_178_183_195_196_198_199_207_239_243_248_249_253_255_256_259_260_332_341_347_348_349_350_356_357_412_413_414_417_418_419_428_429_46_471_473_484_485_50_513_53_55_56_58_59_60_611_612_62_64_66_68_689_69_80_84_85_86_95_96_97_98",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/modules/utm-analytics.php::::13_15_16_169_9",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/nps-survey/classes/nps-survey-script.php::::10_13_34_35_44_45_47_605_606",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/astra-notices/class-astra-notices.php::::11_119_121_122_123_124_126_130_133_142_143_15_223_224_415_418_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/nps-survey/nps-survey-plugin-loader.php::::102_11_35_36_37_46_47_49_92_93_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/class-cartflows-ca-bsf-analytics.php::::10_100_14_46_47_50_62_643_646_67_68_70_79_82_96_97",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-abstract-ability.php::::10_346"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 24,
+      "is_interesting": false,
+      "fuzzer_id": "3",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "notice_id"
+    },
+    {
+      "coverage_id": "1786874931-c49be3bc-99c3-46d9-aca2-4017a92708d9",
+      "priority": 24,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "astra-notice-dismiss"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "repeat_notice_after": "fuzz",
+          "notice_id": "U"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n0",
+      "response.body.length": 2,
+      "response.headers": {
+        "Date": "Sun, 16 Aug 2026 10:08:51 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "2",
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 251.602,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1786874868-e86d3421-a50d-425f-bb6a-e9edf9c6ec5c",
+      "paths": [
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/classes/class-cartflows-ca-loader.php::::100_101_103_105_106_107_108_110_111_112_114_115_12_126_127_128_297_298_301_302_305_307_310_311_312_313_314_315_316_319_320_321_322_323_324_325_335_336_340_341_343_357_364_369_371_372_382_383_386_387_389_392_397_399_427_428_431_432_433_434_435_436_437_439_440_50_53_56_57_58_59_60_623_624_63_65_652_655_66_665_73_75_8_84_87_96_97_98_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/modules/deactivation-survey/classes/class-deactivation-survey-feedback.php::::13_316_318_43_44_46_53_54_55_9",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics-events.php::::12_16_202",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/woo-cart-abandonment-recovery.php::::20_25_26",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/astra-notices/class-astra-notices.php::::11_119_121_122_123_124_126_130_133_142_143_15_210_212_223_227_228_231_235_415_418_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/classes/class-bsf-analytics-helper.php::::12_8_98",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-abilities-register.php::::10_118_47_48_49_50_58_59_61",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-product-stats.php::::10_138",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics-stats.php::::12_235_261_8",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-settings.php::::10_203",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-dashboard-stats.php::::10_130",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-update-setting.php::::10_153",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics-loader.php::::10_100_101_106_107_112_113_114_117_119_57_58_61_68_69_78_79_87_89_90_91_93_94_95_96_97_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/class-cartflows-ca-nps-survey.php::::12_123_126_36_37_40_49_50_51_52_62_65_67_71_73_75_76_8_80_81_82_85_96_97_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-setting.php::::10_122",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/admin/inc/meta-options.php::::10_1155",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/nps-survey/nps-survey.php::::14_18_19_20_21_22_23_24",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics.php::::10_100_111_113_115_14_169_173_175_176_178_183_195_196_198_199_207_239_243_248_249_253_255_256_259_260_332_341_347_348_349_350_356_357_412_413_414_417_418_419_428_429_46_471_473_484_485_50_513_53_55_56_58_59_60_611_612_62_64_66_68_689_69_80_84_85_86_95_96_97_98",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/modules/utm-analytics.php::::13_15_16_169_9",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/nps-survey/classes/nps-survey-script.php::::10_13_34_35_44_45_47_605_606",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/astra-notices/class-astra-notices.php::::11_119_121_122_123_124_126_130_133_142_143_15_223_224_415_418_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/nps-survey/nps-survey-plugin-loader.php::::102_11_35_36_37_46_47_49_92_93_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/class-cartflows-ca-bsf-analytics.php::::10_100_14_46_47_50_62_643_646_67_68_70_79_82_96_97",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-abstract-ability.php::::10_346"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 24,
+      "is_interesting": false,
+      "fuzzer_id": "3",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "notice_id"
+    },
+    {
+      "coverage_id": "1786874931-c49be3bc-99c3-46d9-aca2-4017a92708d9",
+      "priority": 24,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "astra-notice-dismiss"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "repeat_notice_after": "fuzz",
+          "notice_id": "U"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n0",
+      "response.body.length": 2,
+      "response.headers": {
+        "Date": "Sun, 16 Aug 2026 10:08:51 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "2",
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 251.602,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1786874868-e86d3421-a50d-425f-bb6a-e9edf9c6ec5c",
+      "paths": [
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/classes/class-cartflows-ca-loader.php::::100_101_103_105_106_107_108_110_111_112_114_115_12_126_127_128_297_298_301_302_305_307_310_311_312_313_314_315_316_319_320_321_322_323_324_325_335_336_340_341_343_357_364_369_371_372_382_383_386_387_389_392_397_399_427_428_431_432_433_434_435_436_437_439_440_50_53_56_57_58_59_60_623_624_63_65_652_655_66_665_73_75_8_84_87_96_97_98_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/modules/deactivation-survey/classes/class-deactivation-survey-feedback.php::::13_316_318_43_44_46_53_54_55_9",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics-events.php::::12_16_202",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/woo-cart-abandonment-recovery.php::::20_25_26",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/astra-notices/class-astra-notices.php::::11_119_121_122_123_124_126_130_133_142_143_15_210_212_223_227_228_231_235_415_418_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/classes/class-bsf-analytics-helper.php::::12_8_98",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-abilities-register.php::::10_118_47_48_49_50_58_59_61",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-product-stats.php::::10_138",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics-stats.php::::12_235_261_8",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-settings.php::::10_203",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-dashboard-stats.php::::10_130",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-update-setting.php::::10_153",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics-loader.php::::10_100_101_106_107_112_113_114_117_119_57_58_61_68_69_78_79_87_89_90_91_93_94_95_96_97_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/class-cartflows-ca-nps-survey.php::::12_123_126_36_37_40_49_50_51_52_62_65_67_71_73_75_76_8_80_81_82_85_96_97_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-setting.php::::10_122",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/admin/inc/meta-options.php::::10_1155",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/nps-survey/nps-survey.php::::14_18_19_20_21_22_23_24",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics.php::::10_100_111_113_115_14_169_173_175_176_178_183_195_196_198_199_207_239_243_248_249_253_255_256_259_260_332_341_347_348_349_350_356_357_412_413_414_417_418_419_428_429_46_471_473_484_485_50_513_53_55_56_58_59_60_611_612_62_64_66_68_689_69_80_84_85_86_95_96_97_98",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/modules/utm-analytics.php::::13_15_16_169_9",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/nps-survey/classes/nps-survey-script.php::::10_13_34_35_44_45_47_605_606",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/astra-notices/class-astra-notices.php::::11_119_121_122_123_124_126_130_133_142_143_15_223_224_415_418_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/nps-survey/nps-survey-plugin-loader.php::::102_11_35_36_37_46_47_49_92_93_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/class-cartflows-ca-bsf-analytics.php::::10_100_14_46_47_50_62_643_646_67_68_70_79_82_96_97",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-abstract-ability.php::::10_346"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 24,
+      "is_interesting": false,
+      "fuzzer_id": "3",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "notice_id"
+    },
+    {
+      "coverage_id": "1786874956-d9d4927f-2d0c-480a-9078-87afc297a913",
+      "priority": 24,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "astra-notice-dismiss"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "repeat_notice_after": "fuzz",
+          "notice_id": "y"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n0",
+      "response.body.length": 2,
+      "response.headers": {
+        "Date": "Sun, 16 Aug 2026 10:09:16 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "2",
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 370.88,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1786874868-e86d3421-a50d-425f-bb6a-e9edf9c6ec5c",
+      "paths": [
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/classes/class-cartflows-ca-loader.php::::100_101_103_105_106_107_108_110_111_112_114_115_12_126_127_128_297_298_301_302_305_307_310_311_312_313_314_315_316_319_320_321_322_323_324_325_335_336_340_341_343_357_364_369_371_372_382_383_386_387_389_392_397_399_427_428_431_432_433_434_435_436_437_439_440_50_53_56_57_58_59_60_623_624_63_65_652_655_66_665_73_75_8_84_87_96_97_98_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/modules/deactivation-survey/classes/class-deactivation-survey-feedback.php::::13_316_318_43_44_46_53_54_55_9",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics-events.php::::12_16_202",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/woo-cart-abandonment-recovery.php::::20_25_26",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/astra-notices/class-astra-notices.php::::11_119_121_122_123_124_126_130_133_142_143_15_210_212_223_227_228_231_235_415_418_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/classes/class-bsf-analytics-helper.php::::12_8_98",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-abilities-register.php::::10_118_47_48_49_50_58_59_61",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-product-stats.php::::10_138",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics-stats.php::::12_235_261_8",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-settings.php::::10_203",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-dashboard-stats.php::::10_130",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-update-setting.php::::10_153",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics-loader.php::::10_100_101_106_107_112_113_114_117_119_57_58_61_68_69_78_79_87_89_90_91_93_94_95_96_97_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/class-cartflows-ca-nps-survey.php::::12_123_126_36_37_40_49_50_51_52_62_65_67_71_73_75_76_8_80_81_82_85_96_97_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-setting.php::::10_122",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/admin/inc/meta-options.php::::10_1155",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/nps-survey/nps-survey.php::::14_18_19_20_21_22_23_24",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics.php::::10_100_111_113_115_14_169_173_175_176_178_183_195_196_198_199_207_239_243_248_249_253_255_256_259_260_332_341_347_348_349_350_356_357_412_413_414_417_418_419_428_429_46_471_473_484_485_50_513_53_55_56_58_59_60_611_612_62_64_66_68_689_69_80_84_85_86_95_96_97_98",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/modules/utm-analytics.php::::13_15_16_169_9",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/nps-survey/classes/nps-survey-script.php::::10_13_34_35_44_45_47_605_606",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/astra-notices/class-astra-notices.php::::11_119_121_122_123_124_126_130_133_142_143_15_223_224_415_418_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/nps-survey/nps-survey-plugin-loader.php::::102_11_35_36_37_46_47_49_92_93_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/class-cartflows-ca-bsf-analytics.php::::10_100_14_46_47_50_62_643_646_67_68_70_79_82_96_97",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-abstract-ability.php::::10_346"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 24,
+      "is_interesting": false,
+      "fuzzer_id": "3",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "notice_id"
+    },
+    {
+      "coverage_id": "1786874956-d9d4927f-2d0c-480a-9078-87afc297a913",
+      "priority": 24,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "astra-notice-dismiss"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "repeat_notice_after": "fuzz",
+          "notice_id": "y"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n0",
+      "response.body.length": 2,
+      "response.headers": {
+        "Date": "Sun, 16 Aug 2026 10:09:16 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "2",
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 370.88,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1786874868-e86d3421-a50d-425f-bb6a-e9edf9c6ec5c",
+      "paths": [
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/classes/class-cartflows-ca-loader.php::::100_101_103_105_106_107_108_110_111_112_114_115_12_126_127_128_297_298_301_302_305_307_310_311_312_313_314_315_316_319_320_321_322_323_324_325_335_336_340_341_343_357_364_369_371_372_382_383_386_387_389_392_397_399_427_428_431_432_433_434_435_436_437_439_440_50_53_56_57_58_59_60_623_624_63_65_652_655_66_665_73_75_8_84_87_96_97_98_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/modules/deactivation-survey/classes/class-deactivation-survey-feedback.php::::13_316_318_43_44_46_53_54_55_9",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics-events.php::::12_16_202",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/woo-cart-abandonment-recovery.php::::20_25_26",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/astra-notices/class-astra-notices.php::::11_119_121_122_123_124_126_130_133_142_143_15_210_212_223_227_228_231_235_415_418_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/classes/class-bsf-analytics-helper.php::::12_8_98",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-abilities-register.php::::10_118_47_48_49_50_58_59_61",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-product-stats.php::::10_138",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics-stats.php::::12_235_261_8",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-settings.php::::10_203",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-dashboard-stats.php::::10_130",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-update-setting.php::::10_153",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics-loader.php::::10_100_101_106_107_112_113_114_117_119_57_58_61_68_69_78_79_87_89_90_91_93_94_95_96_97_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/class-cartflows-ca-nps-survey.php::::12_123_126_36_37_40_49_50_51_52_62_65_67_71_73_75_76_8_80_81_82_85_96_97_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-setting.php::::10_122",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/admin/inc/meta-options.php::::10_1155",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/nps-survey/nps-survey.php::::14_18_19_20_21_22_23_24",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics.php::::10_100_111_113_115_14_169_173_175_176_178_183_195_196_198_199_207_239_243_248_249_253_255_256_259_260_332_341_347_348_349_350_356_357_412_413_414_417_418_419_428_429_46_471_473_484_485_50_513_53_55_56_58_59_60_611_612_62_64_66_68_689_69_80_84_85_86_95_96_97_98",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/modules/utm-analytics.php::::13_15_16_169_9",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/nps-survey/classes/nps-survey-script.php::::10_13_34_35_44_45_47_605_606",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/astra-notices/class-astra-notices.php::::11_119_121_122_123_124_126_130_133_142_143_15_223_224_415_418_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/nps-survey/nps-survey-plugin-loader.php::::102_11_35_36_37_46_47_49_92_93_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/class-cartflows-ca-bsf-analytics.php::::10_100_14_46_47_50_62_643_646_67_68_70_79_82_96_97",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-abstract-ability.php::::10_346"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 24,
+      "is_interesting": false,
+      "fuzzer_id": "3",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "notice_id"
+    },
+    {
+      "coverage_id": "1786874994-0c99a8d8-199a-4878-a7d1-5834bdd8493e",
+      "priority": 24,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "astra-notice-dismiss"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "repeat_notice_after": "fuzz",
+          "notice_id": "."
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n0",
+      "response.body.length": 2,
+      "response.headers": {
+        "Date": "Sun, 16 Aug 2026 10:09:54 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "2",
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 327.588,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1786874868-e86d3421-a50d-425f-bb6a-e9edf9c6ec5c",
+      "paths": [
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/classes/class-cartflows-ca-loader.php::::100_101_103_105_106_107_108_110_111_112_114_115_12_126_127_128_297_298_301_302_305_307_310_311_312_313_314_315_316_319_320_321_322_323_324_325_335_336_340_341_343_357_364_369_371_372_382_383_386_387_389_392_397_399_427_428_431_432_433_434_435_436_437_439_440_50_53_56_57_58_59_60_623_624_63_65_652_655_66_665_73_75_8_84_87_96_97_98_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/modules/deactivation-survey/classes/class-deactivation-survey-feedback.php::::13_316_318_43_44_46_53_54_55_9",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics-events.php::::12_16_202",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/woo-cart-abandonment-recovery.php::::20_25_26",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/classes/class-bsf-analytics-helper.php::::12_8_98",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/astra-notices/class-astra-notices.php::::11_119_121_122_123_124_126_130_133_142_143_15_210_212_223_227_228_231_235_415_418_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-abilities-register.php::::10_118_47_48_49_50_58_59_61",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-product-stats.php::::10_138",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics-stats.php::::12_235_261_8",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-settings.php::::10_203",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-dashboard-stats.php::::10_130",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-update-setting.php::::10_153",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics-loader.php::::10_100_101_106_107_112_113_114_117_119_57_58_61_68_69_78_79_87_89_90_91_93_94_95_96_97_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/class-cartflows-ca-nps-survey.php::::12_123_126_36_37_40_49_50_51_52_62_65_67_71_73_75_76_8_80_81_82_85_96_97_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-setting.php::::10_122",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/admin/inc/meta-options.php::::10_1155",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/nps-survey/nps-survey.php::::14_18_19_20_21_22_23_24",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics.php::::10_100_111_113_115_14_169_173_175_176_178_183_195_196_198_199_207_239_243_248_249_253_255_256_259_260_332_341_347_348_349_350_356_357_412_413_414_417_418_419_428_429_46_471_473_484_485_50_513_53_55_56_58_59_60_611_612_62_64_66_68_689_69_80_84_85_86_95_96_97_98",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/modules/utm-analytics.php::::13_15_16_169_9",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/nps-survey/classes/nps-survey-script.php::::10_13_34_35_44_45_47_605_606",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/astra-notices/class-astra-notices.php::::11_119_121_122_123_124_126_130_133_142_143_15_223_224_415_418_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/nps-survey/nps-survey-plugin-loader.php::::102_11_35_36_37_46_47_49_92_93_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/class-cartflows-ca-bsf-analytics.php::::10_100_14_46_47_50_62_643_646_67_68_70_79_82_96_97",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-abstract-ability.php::::10_346"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 24,
+      "is_interesting": false,
+      "fuzzer_id": "3",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "notice_id"
+    },
+    {
+      "coverage_id": "1786874994-0c99a8d8-199a-4878-a7d1-5834bdd8493e",
+      "priority": 24,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "astra-notice-dismiss"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "repeat_notice_after": "fuzz",
+          "notice_id": "."
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n0",
+      "response.body.length": 2,
+      "response.headers": {
+        "Date": "Sun, 16 Aug 2026 10:09:54 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "2",
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 327.588,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1786874868-e86d3421-a50d-425f-bb6a-e9edf9c6ec5c",
+      "paths": [
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/classes/class-cartflows-ca-loader.php::::100_101_103_105_106_107_108_110_111_112_114_115_12_126_127_128_297_298_301_302_305_307_310_311_312_313_314_315_316_319_320_321_322_323_324_325_335_336_340_341_343_357_364_369_371_372_382_383_386_387_389_392_397_399_427_428_431_432_433_434_435_436_437_439_440_50_53_56_57_58_59_60_623_624_63_65_652_655_66_665_73_75_8_84_87_96_97_98_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/modules/deactivation-survey/classes/class-deactivation-survey-feedback.php::::13_316_318_43_44_46_53_54_55_9",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics-events.php::::12_16_202",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/woo-cart-abandonment-recovery.php::::20_25_26",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/classes/class-bsf-analytics-helper.php::::12_8_98",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/astra-notices/class-astra-notices.php::::11_119_121_122_123_124_126_130_133_142_143_15_210_212_223_227_228_231_235_415_418_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-abilities-register.php::::10_118_47_48_49_50_58_59_61",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-product-stats.php::::10_138",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics-stats.php::::12_235_261_8",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-settings.php::::10_203",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-dashboard-stats.php::::10_130",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-update-setting.php::::10_153",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics-loader.php::::10_100_101_106_107_112_113_114_117_119_57_58_61_68_69_78_79_87_89_90_91_93_94_95_96_97_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/class-cartflows-ca-nps-survey.php::::12_123_126_36_37_40_49_50_51_52_62_65_67_71_73_75_76_8_80_81_82_85_96_97_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-setting.php::::10_122",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/admin/inc/meta-options.php::::10_1155",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/nps-survey/nps-survey.php::::14_18_19_20_21_22_23_24",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics.php::::10_100_111_113_115_14_169_173_175_176_178_183_195_196_198_199_207_239_243_248_249_253_255_256_259_260_332_341_347_348_349_350_356_357_412_413_414_417_418_419_428_429_46_471_473_484_485_50_513_53_55_56_58_59_60_611_612_62_64_66_68_689_69_80_84_85_86_95_96_97_98",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/modules/utm-analytics.php::::13_15_16_169_9",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/nps-survey/classes/nps-survey-script.php::::10_13_34_35_44_45_47_605_606",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/astra-notices/class-astra-notices.php::::11_119_121_122_123_124_126_130_133_142_143_15_223_224_415_418_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/nps-survey/nps-survey-plugin-loader.php::::102_11_35_36_37_46_47_49_92_93_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/class-cartflows-ca-bsf-analytics.php::::10_100_14_46_47_50_62_643_646_67_68_70_79_82_96_97",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-abstract-ability.php::::10_346"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 24,
+      "is_interesting": false,
+      "fuzzer_id": "3",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "notice_id"
+    },
+    {
+      "coverage_id": "1786874996-6a141289-cc89-40af-9baa-6dd6287da58f",
+      "priority": 24,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "astra-notice-dismiss"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "repeat_notice_after": "fuzz",
+          "notice_id": "o"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n0",
+      "response.body.length": 2,
+      "response.headers": {
+        "Date": "Sun, 16 Aug 2026 10:09:56 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "2",
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 245.008,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1786874868-e86d3421-a50d-425f-bb6a-e9edf9c6ec5c",
+      "paths": [
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/classes/class-cartflows-ca-loader.php::::100_101_103_105_106_107_108_110_111_112_114_115_12_126_127_128_297_298_301_302_305_307_310_311_312_313_314_315_316_319_320_321_322_323_324_325_335_336_340_341_343_357_364_369_371_372_382_383_386_387_389_392_397_399_427_428_431_432_433_434_435_436_437_439_440_50_53_56_57_58_59_60_623_624_63_65_652_655_66_665_73_75_8_84_87_96_97_98_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/modules/deactivation-survey/classes/class-deactivation-survey-feedback.php::::13_316_318_43_44_46_53_54_55_9",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics-events.php::::12_16_202",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/woo-cart-abandonment-recovery.php::::20_25_26",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/astra-notices/class-astra-notices.php::::11_119_121_122_123_124_126_130_133_142_143_15_210_212_223_227_228_231_235_415_418_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/classes/class-bsf-analytics-helper.php::::12_8_98",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-abilities-register.php::::10_118_47_48_49_50_58_59_61",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-product-stats.php::::10_138",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics-stats.php::::12_235_261_8",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-settings.php::::10_203",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-dashboard-stats.php::::10_130",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-update-setting.php::::10_153",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics-loader.php::::10_100_101_106_107_112_113_114_117_119_57_58_61_68_69_78_79_87_89_90_91_93_94_95_96_97_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/class-cartflows-ca-nps-survey.php::::12_123_126_36_37_40_49_50_51_52_62_65_67_71_73_75_76_8_80_81_82_85_96_97_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-setting.php::::10_122",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/admin/inc/meta-options.php::::10_1155",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/nps-survey/nps-survey.php::::14_18_19_20_21_22_23_24",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics.php::::10_100_111_113_115_14_169_173_175_176_178_183_195_196_198_199_207_239_243_248_249_253_255_256_259_260_332_341_347_348_349_350_356_357_412_413_414_417_418_419_428_429_46_471_473_484_485_50_513_53_55_56_58_59_60_611_612_62_64_66_68_689_69_80_84_85_86_95_96_97_98",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/modules/utm-analytics.php::::13_15_16_169_9",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/nps-survey/classes/nps-survey-script.php::::10_13_34_35_44_45_47_605_606",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/astra-notices/class-astra-notices.php::::11_119_121_122_123_124_126_130_133_142_143_15_223_224_415_418_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/nps-survey/nps-survey-plugin-loader.php::::102_11_35_36_37_46_47_49_92_93_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/class-cartflows-ca-bsf-analytics.php::::10_100_14_46_47_50_62_643_646_67_68_70_79_82_96_97",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-abstract-ability.php::::10_346"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 24,
+      "is_interesting": false,
+      "fuzzer_id": "3",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "notice_id"
+    },
+    {
+      "coverage_id": "1786874996-6a141289-cc89-40af-9baa-6dd6287da58f",
+      "priority": 24,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "astra-notice-dismiss"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "repeat_notice_after": "fuzz",
+          "notice_id": "o"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n0",
+      "response.body.length": 2,
+      "response.headers": {
+        "Date": "Sun, 16 Aug 2026 10:09:56 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "2",
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 245.008,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1786874868-e86d3421-a50d-425f-bb6a-e9edf9c6ec5c",
+      "paths": [
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/classes/class-cartflows-ca-loader.php::::100_101_103_105_106_107_108_110_111_112_114_115_12_126_127_128_297_298_301_302_305_307_310_311_312_313_314_315_316_319_320_321_322_323_324_325_335_336_340_341_343_357_364_369_371_372_382_383_386_387_389_392_397_399_427_428_431_432_433_434_435_436_437_439_440_50_53_56_57_58_59_60_623_624_63_65_652_655_66_665_73_75_8_84_87_96_97_98_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/modules/deactivation-survey/classes/class-deactivation-survey-feedback.php::::13_316_318_43_44_46_53_54_55_9",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics-events.php::::12_16_202",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/woo-cart-abandonment-recovery.php::::20_25_26",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/astra-notices/class-astra-notices.php::::11_119_121_122_123_124_126_130_133_142_143_15_210_212_223_227_228_231_235_415_418_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/classes/class-bsf-analytics-helper.php::::12_8_98",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-abilities-register.php::::10_118_47_48_49_50_58_59_61",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-product-stats.php::::10_138",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics-stats.php::::12_235_261_8",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-settings.php::::10_203",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-dashboard-stats.php::::10_130",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-update-setting.php::::10_153",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics-loader.php::::10_100_101_106_107_112_113_114_117_119_57_58_61_68_69_78_79_87_89_90_91_93_94_95_96_97_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/class-cartflows-ca-nps-survey.php::::12_123_126_36_37_40_49_50_51_52_62_65_67_71_73_75_76_8_80_81_82_85_96_97_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-setting.php::::10_122",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/admin/inc/meta-options.php::::10_1155",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/nps-survey/nps-survey.php::::14_18_19_20_21_22_23_24",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics.php::::10_100_111_113_115_14_169_173_175_176_178_183_195_196_198_199_207_239_243_248_249_253_255_256_259_260_332_341_347_348_349_350_356_357_412_413_414_417_418_419_428_429_46_471_473_484_485_50_513_53_55_56_58_59_60_611_612_62_64_66_68_689_69_80_84_85_86_95_96_97_98",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/modules/utm-analytics.php::::13_15_16_169_9",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/nps-survey/classes/nps-survey-script.php::::10_13_34_35_44_45_47_605_606",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/astra-notices/class-astra-notices.php::::11_119_121_122_123_124_126_130_133_142_143_15_223_224_415_418_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/nps-survey/nps-survey-plugin-loader.php::::102_11_35_36_37_46_47_49_92_93_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/class-cartflows-ca-bsf-analytics.php::::10_100_14_46_47_50_62_643_646_67_68_70_79_82_96_97",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-abstract-ability.php::::10_346"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 24,
+      "is_interesting": false,
+      "fuzzer_id": "3",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "notice_id"
+    },
+    {
+      "coverage_id": "1786875002-44c1f251-31cd-4fe6-85bb-de79bfae4a7e",
+      "priority": 24,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "astra-notice-dismiss"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "repeat_notice_after": "fuzz",
+          "notice_id": "k"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n0",
+      "response.body.length": 2,
+      "response.headers": {
+        "Date": "Sun, 16 Aug 2026 10:10:02 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "2",
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 293.117,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1786874868-e86d3421-a50d-425f-bb6a-e9edf9c6ec5c",
+      "paths": [
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/classes/class-cartflows-ca-loader.php::::100_101_103_105_106_107_108_110_111_112_114_115_12_126_127_128_297_298_301_302_305_307_310_311_312_313_314_315_316_319_320_321_322_323_324_325_335_336_340_341_343_357_364_369_371_372_382_383_386_387_389_392_397_399_427_428_431_432_433_434_435_436_437_439_440_50_53_56_57_58_59_60_623_624_63_65_652_655_66_665_73_75_8_84_87_96_97_98_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/modules/deactivation-survey/classes/class-deactivation-survey-feedback.php::::13_316_318_43_44_46_53_54_55_9",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics-events.php::::12_16_202",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/woo-cart-abandonment-recovery.php::::20_25_26",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/astra-notices/class-astra-notices.php::::11_119_121_122_123_124_126_130_133_142_143_15_210_212_223_227_228_231_235_415_418_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/classes/class-bsf-analytics-helper.php::::12_8_98",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-abilities-register.php::::10_118_47_48_49_50_58_59_61",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-product-stats.php::::10_138",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics-stats.php::::12_235_261_8",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-settings.php::::10_203",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-dashboard-stats.php::::10_130",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-update-setting.php::::10_153",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics-loader.php::::10_100_101_106_107_112_113_114_117_119_57_58_61_68_69_78_79_87_89_90_91_93_94_95_96_97_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/class-cartflows-ca-nps-survey.php::::12_123_126_36_37_40_49_50_51_52_62_65_67_71_73_75_76_8_80_81_82_85_96_97_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-setting.php::::10_122",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/admin/inc/meta-options.php::::10_1155",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/nps-survey/nps-survey.php::::14_18_19_20_21_22_23_24",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics.php::::10_100_111_113_115_14_169_173_175_176_178_183_195_196_198_199_207_239_243_248_249_253_255_256_259_260_332_341_347_348_349_350_356_357_412_413_414_417_418_419_428_429_46_471_473_484_485_50_513_53_55_56_58_59_60_611_612_62_64_66_68_689_69_80_84_85_86_95_96_97_98",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/modules/utm-analytics.php::::13_15_16_169_9",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/nps-survey/classes/nps-survey-script.php::::10_13_34_35_44_45_47_605_606",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/astra-notices/class-astra-notices.php::::11_119_121_122_123_124_126_130_133_142_143_15_223_224_415_418_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/nps-survey/nps-survey-plugin-loader.php::::102_11_35_36_37_46_47_49_92_93_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/class-cartflows-ca-bsf-analytics.php::::10_100_14_46_47_50_62_643_646_67_68_70_79_82_96_97",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-abstract-ability.php::::10_346"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 24,
+      "is_interesting": false,
+      "fuzzer_id": "3",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "notice_id"
+    },
+    {
+      "coverage_id": "1786875002-44c1f251-31cd-4fe6-85bb-de79bfae4a7e",
+      "priority": 24,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "astra-notice-dismiss"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "repeat_notice_after": "fuzz",
+          "notice_id": "k"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n0",
+      "response.body.length": 2,
+      "response.headers": {
+        "Date": "Sun, 16 Aug 2026 10:10:02 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "2",
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 293.117,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1786874868-e86d3421-a50d-425f-bb6a-e9edf9c6ec5c",
+      "paths": [
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/classes/class-cartflows-ca-loader.php::::100_101_103_105_106_107_108_110_111_112_114_115_12_126_127_128_297_298_301_302_305_307_310_311_312_313_314_315_316_319_320_321_322_323_324_325_335_336_340_341_343_357_364_369_371_372_382_383_386_387_389_392_397_399_427_428_431_432_433_434_435_436_437_439_440_50_53_56_57_58_59_60_623_624_63_65_652_655_66_665_73_75_8_84_87_96_97_98_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/modules/deactivation-survey/classes/class-deactivation-survey-feedback.php::::13_316_318_43_44_46_53_54_55_9",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics-events.php::::12_16_202",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/woo-cart-abandonment-recovery.php::::20_25_26",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/astra-notices/class-astra-notices.php::::11_119_121_122_123_124_126_130_133_142_143_15_210_212_223_227_228_231_235_415_418_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/classes/class-bsf-analytics-helper.php::::12_8_98",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-abilities-register.php::::10_118_47_48_49_50_58_59_61",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-product-stats.php::::10_138",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics-stats.php::::12_235_261_8",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-settings.php::::10_203",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-dashboard-stats.php::::10_130",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-update-setting.php::::10_153",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics-loader.php::::10_100_101_106_107_112_113_114_117_119_57_58_61_68_69_78_79_87_89_90_91_93_94_95_96_97_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/class-cartflows-ca-nps-survey.php::::12_123_126_36_37_40_49_50_51_52_62_65_67_71_73_75_76_8_80_81_82_85_96_97_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-setting.php::::10_122",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/admin/inc/meta-options.php::::10_1155",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/nps-survey/nps-survey.php::::14_18_19_20_21_22_23_24",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics.php::::10_100_111_113_115_14_169_173_175_176_178_183_195_196_198_199_207_239_243_248_249_253_255_256_259_260_332_341_347_348_349_350_356_357_412_413_414_417_418_419_428_429_46_471_473_484_485_50_513_53_55_56_58_59_60_611_612_62_64_66_68_689_69_80_84_85_86_95_96_97_98",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/modules/utm-analytics.php::::13_15_16_169_9",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/nps-survey/classes/nps-survey-script.php::::10_13_34_35_44_45_47_605_606",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/astra-notices/class-astra-notices.php::::11_119_121_122_123_124_126_130_133_142_143_15_223_224_415_418_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/nps-survey/nps-survey-plugin-loader.php::::102_11_35_36_37_46_47_49_92_93_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/class-cartflows-ca-bsf-analytics.php::::10_100_14_46_47_50_62_643_646_67_68_70_79_82_96_97",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-abstract-ability.php::::10_346"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 24,
+      "is_interesting": false,
+      "fuzzer_id": "3",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "notice_id"
+    },
+    {
+      "coverage_id": "1786875007-5b9de43e-a8fb-4b6c-948d-06f572faa9f9",
+      "priority": 24,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "astra-notice-dismiss"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "repeat_notice_after": "fuzz",
+          "notice_id": "v"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n0",
+      "response.body.length": 2,
+      "response.headers": {
+        "Date": "Sun, 16 Aug 2026 10:10:07 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "2",
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 233.117,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1786874868-e86d3421-a50d-425f-bb6a-e9edf9c6ec5c",
+      "paths": [
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/classes/class-cartflows-ca-loader.php::::100_101_103_105_106_107_108_110_111_112_114_115_12_126_127_128_297_298_301_302_305_307_310_311_312_313_314_315_316_319_320_321_322_323_324_325_335_336_340_341_343_357_364_369_371_372_382_383_386_387_389_392_397_399_427_428_431_432_433_434_435_436_437_439_440_50_53_56_57_58_59_60_623_624_63_65_652_655_66_665_73_75_8_84_87_96_97_98_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/modules/deactivation-survey/classes/class-deactivation-survey-feedback.php::::13_316_318_43_44_46_53_54_55_9",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics-events.php::::12_16_202",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/woo-cart-abandonment-recovery.php::::20_25_26",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/astra-notices/class-astra-notices.php::::11_119_121_122_123_124_126_130_133_142_143_15_210_212_223_227_228_231_235_415_418_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/classes/class-bsf-analytics-helper.php::::12_8_98",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-abilities-register.php::::10_118_47_48_49_50_58_59_61",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-product-stats.php::::10_138",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics-stats.php::::12_235_261_8",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-settings.php::::10_203",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-dashboard-stats.php::::10_130",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-update-setting.php::::10_153",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics-loader.php::::10_100_101_106_107_112_113_114_117_119_57_58_61_68_69_78_79_87_89_90_91_93_94_95_96_97_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/class-cartflows-ca-nps-survey.php::::12_123_126_36_37_40_49_50_51_52_62_65_67_71_73_75_76_8_80_81_82_85_96_97_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-setting.php::::10_122",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/admin/inc/meta-options.php::::10_1155",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/nps-survey/nps-survey.php::::14_18_19_20_21_22_23_24",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics.php::::10_100_111_113_115_14_169_173_175_176_178_183_195_196_198_199_207_239_243_248_249_253_255_256_259_260_332_341_347_348_349_350_356_357_412_413_414_417_418_419_428_429_46_471_473_484_485_50_513_53_55_56_58_59_60_611_612_62_64_66_68_689_69_80_84_85_86_95_96_97_98",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/modules/utm-analytics.php::::13_15_16_169_9",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/nps-survey/classes/nps-survey-script.php::::10_13_34_35_44_45_47_605_606",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/astra-notices/class-astra-notices.php::::11_119_121_122_123_124_126_130_133_142_143_15_223_224_415_418_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/nps-survey/nps-survey-plugin-loader.php::::102_11_35_36_37_46_47_49_92_93_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/class-cartflows-ca-bsf-analytics.php::::10_100_14_46_47_50_62_643_646_67_68_70_79_82_96_97",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-abstract-ability.php::::10_346"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 24,
+      "is_interesting": false,
+      "fuzzer_id": "3",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "notice_id"
+    },
+    {
+      "coverage_id": "1786875007-5b9de43e-a8fb-4b6c-948d-06f572faa9f9",
+      "priority": 24,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "astra-notice-dismiss"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "repeat_notice_after": "fuzz",
+          "notice_id": "v"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n0",
+      "response.body.length": 2,
+      "response.headers": {
+        "Date": "Sun, 16 Aug 2026 10:10:07 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "2",
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 233.117,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1786874868-e86d3421-a50d-425f-bb6a-e9edf9c6ec5c",
+      "paths": [
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/classes/class-cartflows-ca-loader.php::::100_101_103_105_106_107_108_110_111_112_114_115_12_126_127_128_297_298_301_302_305_307_310_311_312_313_314_315_316_319_320_321_322_323_324_325_335_336_340_341_343_357_364_369_371_372_382_383_386_387_389_392_397_399_427_428_431_432_433_434_435_436_437_439_440_50_53_56_57_58_59_60_623_624_63_65_652_655_66_665_73_75_8_84_87_96_97_98_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/modules/deactivation-survey/classes/class-deactivation-survey-feedback.php::::13_316_318_43_44_46_53_54_55_9",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics-events.php::::12_16_202",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/woo-cart-abandonment-recovery.php::::20_25_26",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/astra-notices/class-astra-notices.php::::11_119_121_122_123_124_126_130_133_142_143_15_210_212_223_227_228_231_235_415_418_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/classes/class-bsf-analytics-helper.php::::12_8_98",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-abilities-register.php::::10_118_47_48_49_50_58_59_61",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-product-stats.php::::10_138",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics-stats.php::::12_235_261_8",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-settings.php::::10_203",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-dashboard-stats.php::::10_130",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-update-setting.php::::10_153",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics-loader.php::::10_100_101_106_107_112_113_114_117_119_57_58_61_68_69_78_79_87_89_90_91_93_94_95_96_97_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/class-cartflows-ca-nps-survey.php::::12_123_126_36_37_40_49_50_51_52_62_65_67_71_73_75_76_8_80_81_82_85_96_97_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-setting.php::::10_122",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/admin/inc/meta-options.php::::10_1155",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/nps-survey/nps-survey.php::::14_18_19_20_21_22_23_24",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics.php::::10_100_111_113_115_14_169_173_175_176_178_183_195_196_198_199_207_239_243_248_249_253_255_256_259_260_332_341_347_348_349_350_356_357_412_413_414_417_418_419_428_429_46_471_473_484_485_50_513_53_55_56_58_59_60_611_612_62_64_66_68_689_69_80_84_85_86_95_96_97_98",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/modules/utm-analytics.php::::13_15_16_169_9",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/nps-survey/classes/nps-survey-script.php::::10_13_34_35_44_45_47_605_606",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/astra-notices/class-astra-notices.php::::11_119_121_122_123_124_126_130_133_142_143_15_223_224_415_418_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/nps-survey/nps-survey-plugin-loader.php::::102_11_35_36_37_46_47_49_92_93_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/class-cartflows-ca-bsf-analytics.php::::10_100_14_46_47_50_62_643_646_67_68_70_79_82_96_97",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-abstract-ability.php::::10_346"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 24,
+      "is_interesting": false,
+      "fuzzer_id": "3",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "notice_id"
+    },
+    {
+      "coverage_id": "1786875007-9be93ef1-b540-4bd0-8590-5fdbd2ac599e",
+      "priority": 24,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "astra-notice-dismiss"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "repeat_notice_after": "fuzz",
+          "notice_id": "/"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n0",
+      "response.body.length": 2,
+      "response.headers": {
+        "Date": "Sun, 16 Aug 2026 10:10:07 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "2",
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 238.461,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1786874868-e86d3421-a50d-425f-bb6a-e9edf9c6ec5c",
+      "paths": [
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/classes/class-cartflows-ca-loader.php::::100_101_103_105_106_107_108_110_111_112_114_115_12_126_127_128_297_298_301_302_305_307_310_311_312_313_314_315_316_319_320_321_322_323_324_325_335_336_340_341_343_357_364_369_371_372_382_383_386_387_389_392_397_399_427_428_431_432_433_434_435_436_437_439_440_50_53_56_57_58_59_60_623_624_63_65_652_655_66_665_73_75_8_84_87_96_97_98_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/modules/deactivation-survey/classes/class-deactivation-survey-feedback.php::::13_316_318_43_44_46_53_54_55_9",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics-events.php::::12_16_202",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/woo-cart-abandonment-recovery.php::::20_25_26",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/classes/class-bsf-analytics-helper.php::::12_8_98",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/astra-notices/class-astra-notices.php::::11_119_121_122_123_124_126_130_133_142_143_15_210_212_223_227_228_231_235_415_418_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-abilities-register.php::::10_118_47_48_49_50_58_59_61",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-product-stats.php::::10_138",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics-stats.php::::12_235_261_8",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-settings.php::::10_203",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-dashboard-stats.php::::10_130",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-update-setting.php::::10_153",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics-loader.php::::10_100_101_106_107_112_113_114_117_119_57_58_61_68_69_78_79_87_89_90_91_93_94_95_96_97_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/class-cartflows-ca-nps-survey.php::::12_123_126_36_37_40_49_50_51_52_62_65_67_71_73_75_76_8_80_81_82_85_96_97_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-setting.php::::10_122",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/admin/inc/meta-options.php::::10_1155",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/nps-survey/nps-survey.php::::14_18_19_20_21_22_23_24",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics.php::::10_100_111_113_115_14_169_173_175_176_178_183_195_196_198_199_207_239_243_248_249_253_255_256_259_260_332_341_347_348_349_350_356_357_412_413_414_417_418_419_428_429_46_471_473_484_485_50_513_53_55_56_58_59_60_611_612_62_64_66_68_689_69_80_84_85_86_95_96_97_98",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/modules/utm-analytics.php::::13_15_16_169_9",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/nps-survey/classes/nps-survey-script.php::::10_13_34_35_44_45_47_605_606",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/astra-notices/class-astra-notices.php::::11_119_121_122_123_124_126_130_133_142_143_15_223_224_415_418_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/nps-survey/nps-survey-plugin-loader.php::::102_11_35_36_37_46_47_49_92_93_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/class-cartflows-ca-bsf-analytics.php::::10_100_14_46_47_50_62_643_646_67_68_70_79_82_96_97",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-abstract-ability.php::::10_346"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 24,
+      "is_interesting": false,
+      "fuzzer_id": "3",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "notice_id"
+    },
+    {
+      "coverage_id": "1786875007-9be93ef1-b540-4bd0-8590-5fdbd2ac599e",
+      "priority": 24,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "astra-notice-dismiss"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "repeat_notice_after": "fuzz",
+          "notice_id": "/"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n0",
+      "response.body.length": 2,
+      "response.headers": {
+        "Date": "Sun, 16 Aug 2026 10:10:07 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "2",
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 238.461,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1786874868-e86d3421-a50d-425f-bb6a-e9edf9c6ec5c",
+      "paths": [
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/classes/class-cartflows-ca-loader.php::::100_101_103_105_106_107_108_110_111_112_114_115_12_126_127_128_297_298_301_302_305_307_310_311_312_313_314_315_316_319_320_321_322_323_324_325_335_336_340_341_343_357_364_369_371_372_382_383_386_387_389_392_397_399_427_428_431_432_433_434_435_436_437_439_440_50_53_56_57_58_59_60_623_624_63_65_652_655_66_665_73_75_8_84_87_96_97_98_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/modules/deactivation-survey/classes/class-deactivation-survey-feedback.php::::13_316_318_43_44_46_53_54_55_9",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics-events.php::::12_16_202",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/woo-cart-abandonment-recovery.php::::20_25_26",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/classes/class-bsf-analytics-helper.php::::12_8_98",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/astra-notices/class-astra-notices.php::::11_119_121_122_123_124_126_130_133_142_143_15_210_212_223_227_228_231_235_415_418_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-abilities-register.php::::10_118_47_48_49_50_58_59_61",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-product-stats.php::::10_138",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics-stats.php::::12_235_261_8",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-settings.php::::10_203",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-dashboard-stats.php::::10_130",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-update-setting.php::::10_153",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics-loader.php::::10_100_101_106_107_112_113_114_117_119_57_58_61_68_69_78_79_87_89_90_91_93_94_95_96_97_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/class-cartflows-ca-nps-survey.php::::12_123_126_36_37_40_49_50_51_52_62_65_67_71_73_75_76_8_80_81_82_85_96_97_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-setting.php::::10_122",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/admin/inc/meta-options.php::::10_1155",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/nps-survey/nps-survey.php::::14_18_19_20_21_22_23_24",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics.php::::10_100_111_113_115_14_169_173_175_176_178_183_195_196_198_199_207_239_243_248_249_253_255_256_259_260_332_341_347_348_349_350_356_357_412_413_414_417_418_419_428_429_46_471_473_484_485_50_513_53_55_56_58_59_60_611_612_62_64_66_68_689_69_80_84_85_86_95_96_97_98",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/modules/utm-analytics.php::::13_15_16_169_9",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/nps-survey/classes/nps-survey-script.php::::10_13_34_35_44_45_47_605_606",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/astra-notices/class-astra-notices.php::::11_119_121_122_123_124_126_130_133_142_143_15_223_224_415_418_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/nps-survey/nps-survey-plugin-loader.php::::102_11_35_36_37_46_47_49_92_93_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/class-cartflows-ca-bsf-analytics.php::::10_100_14_46_47_50_62_643_646_67_68_70_79_82_96_97",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-abstract-ability.php::::10_346"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 24,
+      "is_interesting": false,
+      "fuzzer_id": "3",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "notice_id"
+    },
+    {
+      "coverage_id": "1786875021-6d5708f2-4e86-42bd-b834-385c49a32f87",
+      "priority": 24,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "astra-notice-dismiss"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "repeat_notice_after": "fuzz",
+          "notice_id": "r"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n0",
+      "response.body.length": 2,
+      "response.headers": {
+        "Date": "Sun, 16 Aug 2026 10:10:21 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "2",
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 322.127,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1786874868-e86d3421-a50d-425f-bb6a-e9edf9c6ec5c",
+      "paths": [
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/classes/class-cartflows-ca-loader.php::::100_101_103_105_106_107_108_110_111_112_114_115_12_126_127_128_297_298_301_302_305_307_310_311_312_313_314_315_316_319_320_321_322_323_324_325_335_336_340_341_343_357_364_369_371_372_382_383_386_387_389_392_397_399_427_428_431_432_433_434_435_436_437_439_440_50_53_56_57_58_59_60_623_624_63_65_652_655_66_665_73_75_8_84_87_96_97_98_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/modules/deactivation-survey/classes/class-deactivation-survey-feedback.php::::13_316_318_43_44_46_53_54_55_9",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics-events.php::::12_16_202",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/woo-cart-abandonment-recovery.php::::20_25_26",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/astra-notices/class-astra-notices.php::::11_119_121_122_123_124_126_130_133_142_143_15_210_212_223_227_228_231_235_415_418_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/classes/class-bsf-analytics-helper.php::::12_8_98",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-abilities-register.php::::10_118_47_48_49_50_58_59_61",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-product-stats.php::::10_138",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics-stats.php::::12_235_261_8",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-settings.php::::10_203",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-dashboard-stats.php::::10_130",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-update-setting.php::::10_153",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics-loader.php::::10_100_101_106_107_112_113_114_117_119_57_58_61_68_69_78_79_87_89_90_91_93_94_95_96_97_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/class-cartflows-ca-nps-survey.php::::12_123_126_36_37_40_49_50_51_52_62_65_67_71_73_75_76_8_80_81_82_85_96_97_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-setting.php::::10_122",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/admin/inc/meta-options.php::::10_1155",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/nps-survey/nps-survey.php::::14_18_19_20_21_22_23_24",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics.php::::10_100_111_113_115_14_169_173_175_176_178_183_195_196_198_199_207_239_243_248_249_253_255_256_259_260_332_341_347_348_349_350_356_357_412_413_414_417_418_419_428_429_46_471_473_484_485_50_513_53_55_56_58_59_60_611_612_62_64_66_68_689_69_80_84_85_86_95_96_97_98",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/modules/utm-analytics.php::::13_15_16_169_9",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/nps-survey/classes/nps-survey-script.php::::10_13_34_35_44_45_47_605_606",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/astra-notices/class-astra-notices.php::::11_119_121_122_123_124_126_130_133_142_143_15_223_224_415_418_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/nps-survey/nps-survey-plugin-loader.php::::102_11_35_36_37_46_47_49_92_93_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/class-cartflows-ca-bsf-analytics.php::::10_100_14_46_47_50_62_643_646_67_68_70_79_82_96_97",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-abstract-ability.php::::10_346"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 24,
+      "is_interesting": false,
+      "fuzzer_id": "3",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "notice_id"
+    },
+    {
+      "coverage_id": "1786875021-6d5708f2-4e86-42bd-b834-385c49a32f87",
+      "priority": 24,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "astra-notice-dismiss"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "repeat_notice_after": "fuzz",
+          "notice_id": "r"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n0",
+      "response.body.length": 2,
+      "response.headers": {
+        "Date": "Sun, 16 Aug 2026 10:10:21 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "2",
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 322.127,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1786874868-e86d3421-a50d-425f-bb6a-e9edf9c6ec5c",
+      "paths": [
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/classes/class-cartflows-ca-loader.php::::100_101_103_105_106_107_108_110_111_112_114_115_12_126_127_128_297_298_301_302_305_307_310_311_312_313_314_315_316_319_320_321_322_323_324_325_335_336_340_341_343_357_364_369_371_372_382_383_386_387_389_392_397_399_427_428_431_432_433_434_435_436_437_439_440_50_53_56_57_58_59_60_623_624_63_65_652_655_66_665_73_75_8_84_87_96_97_98_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/modules/deactivation-survey/classes/class-deactivation-survey-feedback.php::::13_316_318_43_44_46_53_54_55_9",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics-events.php::::12_16_202",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/woo-cart-abandonment-recovery.php::::20_25_26",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/astra-notices/class-astra-notices.php::::11_119_121_122_123_124_126_130_133_142_143_15_210_212_223_227_228_231_235_415_418_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/classes/class-bsf-analytics-helper.php::::12_8_98",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-abilities-register.php::::10_118_47_48_49_50_58_59_61",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-product-stats.php::::10_138",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics-stats.php::::12_235_261_8",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-settings.php::::10_203",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-dashboard-stats.php::::10_130",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-update-setting.php::::10_153",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics-loader.php::::10_100_101_106_107_112_113_114_117_119_57_58_61_68_69_78_79_87_89_90_91_93_94_95_96_97_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/class-cartflows-ca-nps-survey.php::::12_123_126_36_37_40_49_50_51_52_62_65_67_71_73_75_76_8_80_81_82_85_96_97_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-setting.php::::10_122",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/admin/inc/meta-options.php::::10_1155",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/nps-survey/nps-survey.php::::14_18_19_20_21_22_23_24",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics.php::::10_100_111_113_115_14_169_173_175_176_178_183_195_196_198_199_207_239_243_248_249_253_255_256_259_260_332_341_347_348_349_350_356_357_412_413_414_417_418_419_428_429_46_471_473_484_485_50_513_53_55_56_58_59_60_611_612_62_64_66_68_689_69_80_84_85_86_95_96_97_98",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/modules/utm-analytics.php::::13_15_16_169_9",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/nps-survey/classes/nps-survey-script.php::::10_13_34_35_44_45_47_605_606",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/astra-notices/class-astra-notices.php::::11_119_121_122_123_124_126_130_133_142_143_15_223_224_415_418_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/nps-survey/nps-survey-plugin-loader.php::::102_11_35_36_37_46_47_49_92_93_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/class-cartflows-ca-bsf-analytics.php::::10_100_14_46_47_50_62_643_646_67_68_70_79_82_96_97",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-abstract-ability.php::::10_346"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 24,
+      "is_interesting": false,
+      "fuzzer_id": "3",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "notice_id"
+    },
+    {
+      "coverage_id": "1786875034-b7cf2f05-a32a-42ce-beec-084f9c3b98dc",
+      "priority": 24,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "astra-notice-dismiss"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "repeat_notice_after": "fuzz",
+          "notice_id": "e"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n0",
+      "response.body.length": 2,
+      "response.headers": {
+        "Date": "Sun, 16 Aug 2026 10:10:34 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "2",
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 246.96,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1786874868-e86d3421-a50d-425f-bb6a-e9edf9c6ec5c",
+      "paths": [
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/classes/class-cartflows-ca-loader.php::::100_101_103_105_106_107_108_110_111_112_114_115_12_126_127_128_297_298_301_302_305_307_310_311_312_313_314_315_316_319_320_321_322_323_324_325_335_336_340_341_343_357_364_369_371_372_382_383_386_387_389_392_397_399_427_428_431_432_433_434_435_436_437_439_440_50_53_56_57_58_59_60_623_624_63_65_652_655_66_665_73_75_8_84_87_96_97_98_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/modules/deactivation-survey/classes/class-deactivation-survey-feedback.php::::13_316_318_43_44_46_53_54_55_9",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics-events.php::::12_16_202",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/woo-cart-abandonment-recovery.php::::20_25_26",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/astra-notices/class-astra-notices.php::::11_119_121_122_123_124_126_130_133_142_143_15_210_212_223_227_228_231_235_415_418_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/classes/class-bsf-analytics-helper.php::::12_8_98",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-abilities-register.php::::10_118_47_48_49_50_58_59_61",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-product-stats.php::::10_138",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics-stats.php::::12_235_261_8",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-settings.php::::10_203",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-dashboard-stats.php::::10_130",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-update-setting.php::::10_153",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics-loader.php::::10_100_101_106_107_112_113_114_117_119_57_58_61_68_69_78_79_87_89_90_91_93_94_95_96_97_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/class-cartflows-ca-nps-survey.php::::12_123_126_36_37_40_49_50_51_52_62_65_67_71_73_75_76_8_80_81_82_85_96_97_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-setting.php::::10_122",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/admin/inc/meta-options.php::::10_1155",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/nps-survey/nps-survey.php::::14_18_19_20_21_22_23_24",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics.php::::10_100_111_113_115_14_169_173_175_176_178_183_195_196_198_199_207_239_243_248_249_253_255_256_259_260_332_341_347_348_349_350_356_357_412_413_414_417_418_419_428_429_46_471_473_484_485_50_513_53_55_56_58_59_60_611_612_62_64_66_68_689_69_80_84_85_86_95_96_97_98",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/modules/utm-analytics.php::::13_15_16_169_9",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/nps-survey/classes/nps-survey-script.php::::10_13_34_35_44_45_47_605_606",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/astra-notices/class-astra-notices.php::::11_119_121_122_123_124_126_130_133_142_143_15_223_224_415_418_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/nps-survey/nps-survey-plugin-loader.php::::102_11_35_36_37_46_47_49_92_93_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/class-cartflows-ca-bsf-analytics.php::::10_100_14_46_47_50_62_643_646_67_68_70_79_82_96_97",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-abstract-ability.php::::10_346"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 24,
+      "is_interesting": false,
+      "fuzzer_id": "3",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "notice_id"
+    },
+    {
+      "coverage_id": "1786875034-b7cf2f05-a32a-42ce-beec-084f9c3b98dc",
+      "priority": 24,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "astra-notice-dismiss"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "repeat_notice_after": "fuzz",
+          "notice_id": "e"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n0",
+      "response.body.length": 2,
+      "response.headers": {
+        "Date": "Sun, 16 Aug 2026 10:10:34 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "2",
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 246.96,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1786874868-e86d3421-a50d-425f-bb6a-e9edf9c6ec5c",
+      "paths": [
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/classes/class-cartflows-ca-loader.php::::100_101_103_105_106_107_108_110_111_112_114_115_12_126_127_128_297_298_301_302_305_307_310_311_312_313_314_315_316_319_320_321_322_323_324_325_335_336_340_341_343_357_364_369_371_372_382_383_386_387_389_392_397_399_427_428_431_432_433_434_435_436_437_439_440_50_53_56_57_58_59_60_623_624_63_65_652_655_66_665_73_75_8_84_87_96_97_98_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/modules/deactivation-survey/classes/class-deactivation-survey-feedback.php::::13_316_318_43_44_46_53_54_55_9",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics-events.php::::12_16_202",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/woo-cart-abandonment-recovery.php::::20_25_26",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/astra-notices/class-astra-notices.php::::11_119_121_122_123_124_126_130_133_142_143_15_210_212_223_227_228_231_235_415_418_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/classes/class-bsf-analytics-helper.php::::12_8_98",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-abilities-register.php::::10_118_47_48_49_50_58_59_61",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-product-stats.php::::10_138",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics-stats.php::::12_235_261_8",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-settings.php::::10_203",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-dashboard-stats.php::::10_130",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-update-setting.php::::10_153",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics-loader.php::::10_100_101_106_107_112_113_114_117_119_57_58_61_68_69_78_79_87_89_90_91_93_94_95_96_97_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/class-cartflows-ca-nps-survey.php::::12_123_126_36_37_40_49_50_51_52_62_65_67_71_73_75_76_8_80_81_82_85_96_97_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-setting.php::::10_122",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/admin/inc/meta-options.php::::10_1155",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/nps-survey/nps-survey.php::::14_18_19_20_21_22_23_24",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics.php::::10_100_111_113_115_14_169_173_175_176_178_183_195_196_198_199_207_239_243_248_249_253_255_256_259_260_332_341_347_348_349_350_356_357_412_413_414_417_418_419_428_429_46_471_473_484_485_50_513_53_55_56_58_59_60_611_612_62_64_66_68_689_69_80_84_85_86_95_96_97_98",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/modules/utm-analytics.php::::13_15_16_169_9",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/nps-survey/classes/nps-survey-script.php::::10_13_34_35_44_45_47_605_606",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/astra-notices/class-astra-notices.php::::11_119_121_122_123_124_126_130_133_142_143_15_223_224_415_418_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/nps-survey/nps-survey-plugin-loader.php::::102_11_35_36_37_46_47_49_92_93_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/class-cartflows-ca-bsf-analytics.php::::10_100_14_46_47_50_62_643_646_67_68_70_79_82_96_97",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-abstract-ability.php::::10_346"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 24,
+      "is_interesting": false,
+      "fuzzer_id": "3",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "notice_id"
+    },
+    {
+      "coverage_id": "1786875034-fa1d1cf8-d03d-4413-ba6d-9d71297abe13",
+      "priority": 24,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "astra-notice-dismiss"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "repeat_notice_after": "fuzz",
+          "notice_id": "n"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n0",
+      "response.body.length": 2,
+      "response.headers": {
+        "Date": "Sun, 16 Aug 2026 10:10:34 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "2",
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 360.45,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1786874868-e86d3421-a50d-425f-bb6a-e9edf9c6ec5c",
+      "paths": [
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/classes/class-cartflows-ca-loader.php::::100_101_103_105_106_107_108_110_111_112_114_115_12_126_127_128_297_298_301_302_305_307_310_311_312_313_314_315_316_319_320_321_322_323_324_325_335_336_340_341_343_357_364_369_371_372_382_383_386_387_389_392_397_399_427_428_431_432_433_434_435_436_437_439_440_50_53_56_57_58_59_60_623_624_63_65_652_655_66_665_73_75_8_84_87_96_97_98_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/modules/deactivation-survey/classes/class-deactivation-survey-feedback.php::::13_316_318_43_44_46_53_54_55_9",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics-events.php::::12_16_202",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/woo-cart-abandonment-recovery.php::::20_25_26",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/astra-notices/class-astra-notices.php::::11_119_121_122_123_124_126_130_133_142_143_15_210_212_223_227_228_231_235_415_418_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/classes/class-bsf-analytics-helper.php::::12_8_98",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-abilities-register.php::::10_118_47_48_49_50_58_59_61",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-product-stats.php::::10_138",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics-stats.php::::12_235_261_8",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-settings.php::::10_203",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-dashboard-stats.php::::10_130",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-update-setting.php::::10_153",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics-loader.php::::10_100_101_106_107_112_113_114_117_119_57_58_61_68_69_78_79_87_89_90_91_93_94_95_96_97_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/class-cartflows-ca-nps-survey.php::::12_123_126_36_37_40_49_50_51_52_62_65_67_71_73_75_76_8_80_81_82_85_96_97_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-setting.php::::10_122",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/admin/inc/meta-options.php::::10_1155",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/nps-survey/nps-survey.php::::14_18_19_20_21_22_23_24",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics.php::::10_100_111_113_115_14_169_173_175_176_178_183_195_196_198_199_207_239_243_248_249_253_255_256_259_260_332_341_347_348_349_350_356_357_412_413_414_417_418_419_428_429_46_471_473_484_485_50_513_53_55_56_58_59_60_611_612_62_64_66_68_689_69_80_84_85_86_95_96_97_98",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/modules/utm-analytics.php::::13_15_16_169_9",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/nps-survey/classes/nps-survey-script.php::::10_13_34_35_44_45_47_605_606",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/astra-notices/class-astra-notices.php::::11_119_121_122_123_124_126_130_133_142_143_15_223_224_415_418_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/nps-survey/nps-survey-plugin-loader.php::::102_11_35_36_37_46_47_49_92_93_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/class-cartflows-ca-bsf-analytics.php::::10_100_14_46_47_50_62_643_646_67_68_70_79_82_96_97",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-abstract-ability.php::::10_346"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 24,
+      "is_interesting": false,
+      "fuzzer_id": "3",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "notice_id"
+    },
+    {
+      "coverage_id": "1786875034-fa1d1cf8-d03d-4413-ba6d-9d71297abe13",
+      "priority": 24,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "astra-notice-dismiss"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "repeat_notice_after": "fuzz",
+          "notice_id": "n"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n0",
+      "response.body.length": 2,
+      "response.headers": {
+        "Date": "Sun, 16 Aug 2026 10:10:34 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "2",
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 360.45,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1786874868-e86d3421-a50d-425f-bb6a-e9edf9c6ec5c",
+      "paths": [
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/classes/class-cartflows-ca-loader.php::::100_101_103_105_106_107_108_110_111_112_114_115_12_126_127_128_297_298_301_302_305_307_310_311_312_313_314_315_316_319_320_321_322_323_324_325_335_336_340_341_343_357_364_369_371_372_382_383_386_387_389_392_397_399_427_428_431_432_433_434_435_436_437_439_440_50_53_56_57_58_59_60_623_624_63_65_652_655_66_665_73_75_8_84_87_96_97_98_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/modules/deactivation-survey/classes/class-deactivation-survey-feedback.php::::13_316_318_43_44_46_53_54_55_9",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics-events.php::::12_16_202",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/woo-cart-abandonment-recovery.php::::20_25_26",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/astra-notices/class-astra-notices.php::::11_119_121_122_123_124_126_130_133_142_143_15_210_212_223_227_228_231_235_415_418_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/classes/class-bsf-analytics-helper.php::::12_8_98",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-abilities-register.php::::10_118_47_48_49_50_58_59_61",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-product-stats.php::::10_138",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics-stats.php::::12_235_261_8",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-settings.php::::10_203",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-dashboard-stats.php::::10_130",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-update-setting.php::::10_153",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics-loader.php::::10_100_101_106_107_112_113_114_117_119_57_58_61_68_69_78_79_87_89_90_91_93_94_95_96_97_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/class-cartflows-ca-nps-survey.php::::12_123_126_36_37_40_49_50_51_52_62_65_67_71_73_75_76_8_80_81_82_85_96_97_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-ability-get-setting.php::::10_122",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/admin/inc/meta-options.php::::10_1155",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/nps-survey/nps-survey.php::::14_18_19_20_21_22_23_24",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/class-bsf-analytics.php::::10_100_111_113_115_14_169_173_175_176_178_183_195_196_198_199_207_239_243_248_249_253_255_256_259_260_332_341_347_348_349_350_356_357_412_413_414_417_418_419_428_429_46_471_473_484_485_50_513_53_55_56_58_59_60_611_612_62_64_66_68_689_69_80_84_85_86_95_96_97_98",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/bsf-analytics/modules/utm-analytics.php::::13_15_16_169_9",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/nps-survey/classes/nps-survey-script.php::::10_13_34_35_44_45_47_605_606",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/astra-notices/class-astra-notices.php::::11_119_121_122_123_124_126_130_133_142_143_15_223_224_415_418_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/nps-survey/nps-survey-plugin-loader.php::::102_11_35_36_37_46_47_49_92_93_99",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/lib/class-cartflows-ca-bsf-analytics.php::::10_100_14_46_47_50_62_643_646_67_68_70_79_82_96_97",
+        "/var/www/html/wp-content/plugins/woo-cart-abandonment-recovery/inc/abilities/class-wcar-abstract-ability.php::::10_346"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 24,
+      "is_interesting": false,
+      "fuzzer_id": "3",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "notice_id"
+    }
+  ]
+}

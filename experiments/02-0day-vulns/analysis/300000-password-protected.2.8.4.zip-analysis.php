@@ -5,9 +5,13 @@
 *Found functions:2
 *Extracted functions:2
 *Total parameter names extracted: 1
-*Overview: {'dismiss_notice_ajax_callback': {'fs_dismiss_notice_action_{$ajax_action_suffix}'}, '_toggle_debug_mode': {'fs_toggle_debug_mode'}}
+*Overview: {'_toggle_debug_mode': {'fs_toggle_debug_mode'}, 'dismiss_notice_ajax_callback': {'fs_dismiss_notice_action_{$ajax_action_suffix}'}}
 *
 ***/
+
+/** Function _toggle_debug_mode() called by wp_ajax hooks: {'fs_toggle_debug_mode'} **/
+/** No params detected :-/ **/
+
 
 /** Function dismiss_notice_ajax_callback() called by wp_ajax hooks: {'fs_dismiss_notice_action_{$ajax_action_suffix}'} **/
 /** Parameters found in function dismiss_notice_ajax_callback(): {"post": ["message_id"]} **/
@@ -20,9 +24,5 @@ function dismiss_notice_ajax_callback() {
 
             wp_die();
         }
-
-
-/** Function _toggle_debug_mode() called by wp_ajax hooks: {'fs_toggle_debug_mode'} **/
-/** No params detected :-/ **/
 
 

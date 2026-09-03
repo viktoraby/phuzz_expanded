@@ -88,7 +88,9 @@ def main():
 
             plugin_file_name = leaf_dir.replace(DIRS['configs'],"").split("/")[0]
             src_plugin_file_path = os.path.join(DIRS['plugins'], plugin_file_name)
-            assert os.path.isfile(src_plugin_file_path)
+            if not os.path.isfile(src_plugin_file_path):
+                print(f"WARNING: Plugin file does not exist: {src_plugin_file_path}")
+                continue
 
             dst_docker_compose_path = os.path.join(DIRS['code'], docker_compose_name)
             dst_fuzzer_config_path = os.path.join(DIRS['fuzzer_configs'], fuzzer_config_name)
@@ -116,6 +118,8 @@ def main():
             #run_docker_command("up db -d", os.path.abspath(DIRS['code']), docker_compose_name)
             #time.sleep(5) # Wait for containers to stop
             #run_docker_command("build web", os.path.abspath(DIRS['code']), docker_compose_name)
+            run_docker_command(f"rm -sf {' '.join(the_containers)}", os.path.abspath(DIRS['code']), docker_compose_name)
+            subprocess.run(["docker", "volume", "rm", "-f", "code_shared-tmpfs", "code_sync-tmpfs"], check=True)
             run_docker_command("up -d --force-recreate web", os.path.abspath(DIRS['code']), docker_compose_name)
             while True:
                 print("Waiting for web server...")
@@ -147,12 +151,20 @@ def main():
             os.remove(dst_fuzzer_config_path)
             os.remove(dst_plugin_file_path)
 
-            assert not os.path.exists(dst_docker_compose_path)
-            assert not os.path.exists(dst_fuzzer_config_path)
-            assert not os.path.exists(dst_plugin_file_path)
+            if not os.path.isfile(dst_docker_compose_path):
+                print(f"WARNING: Compose file does not exist: {dst_docker_compose_path}")
+                continue
+
+            if not os.path.isfile(dst_fuzzer_config_path):
+                print(f"WARNING: Fuzzer config does not exist: {dst_fuzzer_config_path}")
+                continue
+
+            if not os.path.isfile(dst_plugin_file_path):
+                print(f"WARNING: Plugin file does not exist: {dst_plugin_file_path}")
+                continue
 
             print("Finished. Waiting a bit")
-            time.sleep(5)
+            time.sleep(1)
 
 
 if __name__ == "__main__":

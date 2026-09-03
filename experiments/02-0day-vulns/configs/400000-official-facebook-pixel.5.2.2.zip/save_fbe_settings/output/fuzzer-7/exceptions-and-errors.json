@@ -1,0 +1,586 @@
+[
+  {
+    "coverage_id": "1786850460-e2e61200-1e30-4d87-b543-77b7071b85da",
+    "priority": 181,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "save_fbe_settings"
+      },
+      "body_params": {
+        "externalBusinessId": "fu8z",
+        "pixelId": "fuzzz"
+      }
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "accessToken": "fIuQy"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": null,
+    "exceptions": [
+      {
+        "code": 0,
+        "file": "/var/www/html/wp-content/plugins/official-facebook-pixel/FacebookAds/Http/Adapter/Curl/AbstractCurl.php",
+        "message": "curl_setopt_array(): cURL option must not contain any null bytes",
+        "line": 112,
+        "previous": null,
+        "trace": [
+          {
+            "file": "/var/www/html/wp-content/plugins/official-facebook-pixel/FacebookAds/Http/Adapter/Curl/AbstractCurl.php",
+            "line": 112,
+            "function": "curl_setopt_array",
+            "args": [
+              {},
+              {
+                "78": 10,
+                "13": 60,
+                "19913": true,
+                "42": true,
+                "64": 0,
+                "10002": "https://connect.facebook.net/signals/config/json/fuz\u0000(/",
+                "10023": [
+                  "User-Agent: fbbizsdk-php-v23.0.2",
+                  "Accept-Encoding: *"
+                ]
+              }
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-content/plugins/official-facebook-pixel/FacebookAds/Http/Adapter/CurlAdapter.php",
+            "line": 183,
+            "function": "setoptArray",
+            "class": "FacebookPixelPlugin\\FacebookAds\\Http\\Adapter\\Curl\\AbstractCurl",
+            "type": "->",
+            "args": [
+              {
+                "78": 10,
+                "13": 60,
+                "19913": true,
+                "42": true,
+                "64": 0,
+                "10002": "https://connect.facebook.net/signals/config/json/fuz\u0000(/",
+                "10023": [
+                  "User-Agent: fbbizsdk-php-v23.0.2",
+                  "Accept-Encoding: *"
+                ]
+              }
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-content/plugins/official-facebook-pixel/FacebookAds/Http/Client.php",
+            "line": 216,
+            "function": "sendRequest",
+            "class": "FacebookPixelPlugin\\FacebookAds\\Http\\Adapter\\CurlAdapter",
+            "type": "->",
+            "args": [
+              {}
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-content/plugins/official-facebook-pixel/FacebookAds/Object/ServerSide/AdsPixelSettings.php",
+            "line": 85,
+            "function": "sendRequest",
+            "class": "FacebookPixelPlugin\\FacebookAds\\Http\\Client",
+            "type": "->",
+            "args": [
+              {}
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-content/plugins/official-facebook-pixel/FacebookAds/Object/ServerSide/AdsPixelSettings.php",
+            "line": 62,
+            "function": "callPixelSettingsEndpoint",
+            "class": "FacebookPixelPlugin\\FacebookAds\\Object\\ServerSide\\AdsPixelSettings",
+            "type": "::",
+            "args": [
+              "fuz\u0000("
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-content/plugins/official-facebook-pixel/core/class-facebookwordpressoptions.php",
+            "line": 630,
+            "function": "buildFromPixelId",
+            "class": "FacebookPixelPlugin\\FacebookAds\\Object\\ServerSide\\AdsPixelSettings",
+            "type": "::",
+            "args": [
+              "fuz\u0000("
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-content/plugins/official-facebook-pixel/core/class-facebookwordpressoptions.php",
+            "line": 700,
+            "function": "set_fbe_based_aam_settings",
+            "class": "FacebookPixelPlugin\\Core\\FacebookWordpressOptions",
+            "type": "::",
+            "args": []
+          },
+          {
+            "file": "/var/www/html/wp-content/plugins/official-facebook-pixel/core/class-facebookwordpressoptions.php",
+            "line": 103,
+            "function": "set_aam_settings",
+            "class": "FacebookPixelPlugin\\Core\\FacebookWordpressOptions",
+            "type": "::",
+            "args": []
+          },
+          {
+            "file": "/var/www/html/wp-content/plugins/official-facebook-pixel/facebook-for-wordpress.php",
+            "line": 68,
+            "function": "initialize",
+            "class": "FacebookPixelPlugin\\Core\\FacebookWordpressOptions",
+            "type": "::",
+            "args": []
+          },
+          {
+            "file": "/var/www/html/wp-content/plugins/official-facebook-pixel/facebook-for-wordpress.php",
+            "line": 220,
+            "function": "__construct",
+            "class": "FacebookPixelPlugin\\FacebookForWordpress",
+            "type": "->",
+            "args": []
+          },
+          {
+            "file": "/var/www/html/wp-settings.php",
+            "line": 447,
+            "args": [
+              "/var/www/html/wp-content/plugins/official-facebook-pixel/facebook-for-wordpress.php"
+            ],
+            "function": "include_once"
+          },
+          {
+            "file": "/var/www/html/wp-config.php",
+            "line": 104,
+            "args": [
+              "/var/www/html/wp-settings.php"
+            ],
+            "function": "require_once"
+          },
+          {
+            "file": "/var/www/html/wp-load.php",
+            "line": 50,
+            "args": [
+              "/var/www/html/wp-config.php"
+            ],
+            "function": "require_once"
+          },
+          {
+            "file": "/var/www/html/wp-admin/admin-ajax.php",
+            "line": 22,
+            "args": [
+              "/var/www/html/wp-load.php"
+            ],
+            "function": "require_once"
+          }
+        ],
+        "traceAsString": "#0 /var/www/html/wp-content/plugins/official-facebook-pixel/FacebookAds/Http/Adapter/Curl/AbstractCurl.php(112): curl_setopt_array(Object(CurlHandle), Array)\n#1 /var/www/html/wp-content/plugins/official-facebook-pixel/FacebookAds/Http/Adapter/CurlAdapter.php(183): FacebookPixelPlugin\\FacebookAds\\Http\\Adapter\\Curl\\AbstractCurl->setoptArray(Array)\n#2 /var/www/html/wp-content/plugins/official-facebook-pixel/FacebookAds/Http/Client.php(216): FacebookPixelPlugin\\FacebookAds\\Http\\Adapter\\CurlAdapter->sendRequest(Object(FacebookPixelPlugin\\FacebookAds\\Http\\SimpleRequest))\n#3 /var/www/html/wp-content/plugins/official-facebook-pixel/FacebookAds/Object/ServerSide/AdsPixelSettings.php(85): FacebookPixelPlugin\\FacebookAds\\Http\\Client->sendRequest(Object(FacebookPixelPlugin\\FacebookAds\\Http\\SimpleRequest))\n#4 /var/www/html/wp-content/plugins/official-facebook-pixel/FacebookAds/Object/ServerSide/AdsPixelSettings.php(62): FacebookPixelPlugin\\FacebookAds\\Object\\ServerSide\\AdsPixelSettings::callPixelSettingsEndpoint('fuz\\x00(')\n#5 /var/www/html/wp-content/plugins/official-facebook-pixel/core/class-facebookwordpressoptions.php(630): FacebookPixelPlugin\\FacebookAds\\Object\\ServerSide\\AdsPixelSettings::buildFromPixelId('fuz\\x00(')\n#6 /var/www/html/wp-content/plugins/official-facebook-pixel/core/class-facebookwordpressoptions.php(700): FacebookPixelPlugin\\Core\\FacebookWordpressOptions::set_fbe_based_aam_settings()\n#7 /var/www/html/wp-content/plugins/official-facebook-pixel/core/class-facebookwordpressoptions.php(103): FacebookPixelPlugin\\Core\\FacebookWordpressOptions::set_aam_settings()\n#8 /var/www/html/wp-content/plugins/official-facebook-pixel/facebook-for-wordpress.php(68): FacebookPixelPlugin\\Core\\FacebookWordpressOptions::initialize()\n#9 /var/www/html/wp-content/plugins/official-facebook-pixel/facebook-for-wordpress.php(220): FacebookPixelPlugin\\FacebookForWordpress->__construct()\n#10 /var/www/html/wp-settings.php(447): include_once('/var/www/html/w...')\n#11 /var/www/html/wp-config.php(104): require_once('/var/www/html/w...')\n#12 /var/www/html/wp-load.php(50): require_once('/var/www/html/w...')\n#13 /var/www/html/wp-admin/admin-ajax.php(22): require_once('/var/www/html/w...')\n#14 {main}"
+      }
+    ],
+    "response_body": "\n",
+    "response.body.length": 1,
+    "response.headers": {
+      "Date": "Sun, 16 Aug 2026 03:21:00 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "Content-Length": "1",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 39.406,
+    "number_of_new_paths": 10,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786850430-1e92e03f-6a47-4157-97a8-847bc0433254",
+    "paths": [
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/core/class-facebookwordpresssettingsrecorder.php::::103_104_105_107_154_157_158_160_161_162_164_165_166_168_169_170_172_173_174_177_178_179_180_181_182_184_185_188_189_191_192_193_194_195_196_198_29_30_31_33_34_36_37_40_41_43_44_47_48_50_51_54_55_57_58_61_62_64_65_69_70_71_73_74_75_77_78_780_79_81_82_83_85_86_87_89_90_91_93",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/core/class-facebooksignalstate.php::::20_201",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/vendor/composer/autoload_real.php::::11_12_14_21_25_27_28_29_31_32_34_36_39",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/FacebookAds/Http/Adapter/Curl/AbstractCurl.php::::105_106_112_113_132_39_42_58_59_76_83_90_98",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/FacebookAds/Object/ServerSide/AdsPixelSettings.php::::202_62_63_72_80_81_82_83_85_87_88",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/FacebookAds/Http/Adapter/Curl/AbstractCurl.php::::105_106_112_132_39_42_58_59",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/core/class-releasesignalsajax.php::::23_618_89_90_91",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/core/class-signals.php::::141_18",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/FacebookAds/Http/Response.php::::126",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/FacebookAds/Http/Adapter/Curl/CurlInterface.php::::107",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/FacebookAds/Http/Headers.php::::43",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/FacebookAds/Http/Adapter/AbstractAdapter.php::::40_41_47_57",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/FacebookAds/Http/Parameters.php::::38_40_44_48_49_72_73_79_82",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/vendor/facebook/capi-param-builder-php/php/capi-param-builder/src/model/FbcParamConfig.php::::19_20_21_22_24",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/vendor/autoload.php::::20_22_5",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/facebook-for-wordpress.php::::104_107_108_109_119_122_123_140_141_142_153_154_155_156_158_215_216_217_220_221_31_34_35_39_40_41_42_68_70_71_72_73_76_77_78_79_81_86_88_89_91_92_94_96_97",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/vendor/facebook/capi-param-builder-php/php/capi-param-builder/src/util/AppendixProvider.php::::10_11_16_19_23_24_25_26_29_31_32_37_38_39_46_47_48_49_53_65",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/core/class-facebookpluginutils.php::::147_148_149_155_30_44_45",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/vendor/facebook/capi-param-builder-php/php/capi-param-builder/src/piiUtil/ZipCodeUtils.php::::11_34",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/vendor/facebook/capi-param-builder-php/php/capi-param-builder/src/piiUtil/StringUtils.php::::11_541",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_515_522_528_531_544_551_555_563_575_576_577_578_580",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/core/class-facebookwordpresssettingspage.php::::1213_1215_1224_1233_1242_1251_1259_1297_32_52_53_54_56_57_59_60_61_63_64_65",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/core/class-facebookwordpressoptions.php::::101_102_103_104_105_106_107_108_109_117_135_136_137_157_158_159_184_185_186_188_214_215_216_312_313_314_315_33_359_370_371_418_420_466_467_469_472_474_487_488_491_493_494_495_497_498_499_501_502_504_534_535_536_537_539_594_610_611_612_613_626_627_628_629_630_631_647_691_692_693_696_697_699_700_704_758_759_760_763_847_856_857_870_873_917",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/core/class-aamfieldsextractor.php::::111_43_44_45_46",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/core/class-facebookpluginconfig.php::::170_30",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/FacebookAds/Http/Adapter/CurlAdapter.php::::141_142_143_144_147_148_149_153_155_156_157_158_160_163_164_165_173_174_179_183_203_54_55_56_57_63_70_80_87_88",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/core/class-servereventasynctask.php::::156_25",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/FacebookAds/Http/Adapter/Curl/Curl55.php::::36_37_40_79_80_98",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/vendor/composer/autoload_static.php::::2499_2500_2501_2502_2504_2507",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/FacebookAds/Http/SimpleRequest.php::::38_40_41_42_43_44_45_46_52_53_54_55_58_65_66_69_70_71_72_75",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/FacebookAds/Http/Request.php::::106_113_158_159_162_176_190_197_198_218_219_222_297_93_94",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/core/class-facebookwordpresspixelinjection.php::::231_30_47_60_61_85",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/FacebookAds/Http/Response.php::::111_112_113_126_79_80_86_87_90",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/FacebookAds/Http/Client.php::::105_106_109_123_130_131_132_133_137_176_177_180_216_233",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/FacebookAds/ApiConfig.php::::16",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/vendor/facebook/capi-param-builder-php/php/capi-param-builder/src/piiUtil/DOBUtils.php::::11_113",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/vendor/composer/platform_check.php::::11_26_5_7",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/FacebookAds/Exception/Exception.php::::30",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/core/class-signals.php::::141_18_42_43_44_46_47_48_50_58_59_88",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/vendor/facebook/capi-param-builder-php/php/capi-param-builder/src/model/Constants.php::::43_44_45_46_47_48_49_50_51_52_53_54_55_56_57_58_59_60_61_62",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/FacebookAds/Http/RequestInterface.php::::170",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/vendor/facebook/capi-param-builder-php/php/capi-param-builder/src/piiUtil/PIIUtils.php::::108_11_12_13_14_15_16_17_18_19",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/core/class-facebookcapievent.php::::34_402_88_89_90_92",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/FacebookAds/Http/Adapter/CurlAdapter.php::::103_105_106_108_116_120_122_124_125_126_127_133_141_142_143_144_147_148_149_153_155_156_157_158_160_163_164_165_173_174_179_183_184_186_187_188_190_192_193_194_196_197_203_54_55_56_57_63_70_80_87_88_94",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/FacebookAds/Http/ResponseInterface.php::::74",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/core/class-facebookparambuilder.php::::100_110_113_116_117_121_123_145_146_147_148_149_151_152_153_154_156_161_162_163_165_168_228_25_74_76_77_78_80_81_82_83_84_88",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/vendor/techcrunch/wp-async-task/wp-async-task.php::::10_267_77_80_81_82_84_85_87",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/vendor/facebook/capi-param-builder-php/php/capi-param-builder/src/util/VersionProvider.php::::13_14_15_16_17_18_19_25",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/FacebookAds/Object/ServerSide/AdsPixelSettings.php::::202_62_80_81_82_83_85_87",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/vendor/facebook/capi-param-builder-php/php/capi-param-builder/src/ParamBuilder.php::::11_12_13_14_15_161_163_165_166_174_178_179_186_195_198_203_204_233_234_235_238_239_241_242_243_247_267_268_269_270_271_272_273_274_275_276_277_278_279_280_284_290_291_296_323_325_326_329_330_332_333_340_373_374_376_377_379_380_403_406_412_418_420_421_422_429_431_432_433_440_442_443_444_452_454_46_460_466_468_47_474_50_51_513_52_522_53_530_532_533_534_536_537_538_539_54_542_543_545_546_548_549_55_551_552_555_556_559_56_560_563_565_57_570_571_580_581_586_587_59_596_597_603_606_61_62_63_64_65_66_70_91_92",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/core/class-facebookpixel.php::::113_114_30_470",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/core/class-facebooksignalstate.php::::20_201_80_81_82",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/vendor/facebook/capi-param-builder-php/php/capi-param-builder/src/model/CookieSettings.php::::20_21_22_23_24_26",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/vendor/facebook/capi-param-builder-php/php/capi-param-builder/src/piiUtil/GenderUtils.php::::11_115",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/vendor/facebook/capi-param-builder-php/php/capi-param-builder/src/piiUtil/SharedUtils.php::::67",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/vendor/facebook/capi-param-builder-php/php/capi-param-builder/src/piiUtil/EmailUtils.php::::11_29",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/core/class-releasesignalsajax.php::::23_618",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_445_446_563_575_576_577_578_580",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/FacebookAds/Http/Adapter/AdapterInterface.php::::65",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/vendor/facebook/capi-param-builder-php/php/capi-param-builder/src/piiUtil/PhoneUtils.php::::11_27",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/facebook-for-wordpress.php::::215_216_217_220_31_34_35_39_40_41_42_68",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/core/class-facebookwordpressoptions.php::::101_102_103_312_313_314_315_33_359_370_371_418_420_534_535_536_537_539_610_611_612_613_626_627_628_630_691_692_693_696_697_699_700_758_759_760_763_847_856_857_870_873_917",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/core/class-aamsettingsfields.php::::67"
+    ],
+    "new_paths": [
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_445_446_563_575_576_577_578_580",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/core/class-facebooksignalstate.php::::20_201",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/FacebookAds/Object/ServerSide/AdsPixelSettings.php::::202_62_80_81_82_83_85_87",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/FacebookAds/Http/Adapter/CurlAdapter.php::::141_142_143_144_147_148_149_153_155_156_157_158_160_163_164_165_173_174_179_183_203_54_55_56_57_63_70_80_87_88",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/FacebookAds/Http/Adapter/Curl/AbstractCurl.php::::105_106_112_132_39_42_58_59",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/core/class-signals.php::::141_18",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/FacebookAds/Http/Response.php::::126",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/facebook-for-wordpress.php::::215_216_217_220_31_34_35_39_40_41_42_68",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/core/class-facebookwordpressoptions.php::::101_102_103_312_313_314_315_33_359_370_371_418_420_534_535_536_537_539_610_611_612_613_626_627_628_630_691_692_693_696_697_699_700_758_759_760_763_847_856_857_870_873_917",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/core/class-releasesignalsajax.php::::23_618"
+    ],
+    "vulns": [],
+    "score": 181,
+    "is_interesting": true,
+    "fuzzer_id": "7",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "accessToken"
+  },
+  {
+    "coverage_id": "1786850493-b18669fa-2282-428e-a611-3f20b82b5511",
+    "priority": 197,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "save_fbe_settings"
+      },
+      "body_params": {
+        "pixelId": "fuz"
+      }
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "externalBusinessId": "fuz",
+        "accessToken": "fu$z"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": null,
+    "exceptions": [
+      {
+        "code": 0,
+        "file": "/var/www/html/wp-content/plugins/official-facebook-pixel/FacebookAds/Http/Adapter/Curl/AbstractCurl.php",
+        "message": "curl_setopt_array(): cURL option must not contain any null bytes",
+        "line": 112,
+        "previous": null,
+        "trace": [
+          {
+            "file": "/var/www/html/wp-content/plugins/official-facebook-pixel/FacebookAds/Http/Adapter/Curl/AbstractCurl.php",
+            "line": 112,
+            "function": "curl_setopt_array",
+            "args": [
+              {},
+              {
+                "78": 10,
+                "13": 60,
+                "19913": true,
+                "42": true,
+                "64": 0,
+                "10002": "https://connect.facebook.net/signals/config/json/fu\u0000zz/",
+                "10023": [
+                  "User-Agent: fbbizsdk-php-v23.0.2",
+                  "Accept-Encoding: *"
+                ]
+              }
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-content/plugins/official-facebook-pixel/FacebookAds/Http/Adapter/CurlAdapter.php",
+            "line": 183,
+            "function": "setoptArray",
+            "class": "FacebookPixelPlugin\\FacebookAds\\Http\\Adapter\\Curl\\AbstractCurl",
+            "type": "->",
+            "args": [
+              {
+                "78": 10,
+                "13": 60,
+                "19913": true,
+                "42": true,
+                "64": 0,
+                "10002": "https://connect.facebook.net/signals/config/json/fu\u0000zz/",
+                "10023": [
+                  "User-Agent: fbbizsdk-php-v23.0.2",
+                  "Accept-Encoding: *"
+                ]
+              }
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-content/plugins/official-facebook-pixel/FacebookAds/Http/Client.php",
+            "line": 216,
+            "function": "sendRequest",
+            "class": "FacebookPixelPlugin\\FacebookAds\\Http\\Adapter\\CurlAdapter",
+            "type": "->",
+            "args": [
+              {}
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-content/plugins/official-facebook-pixel/FacebookAds/Object/ServerSide/AdsPixelSettings.php",
+            "line": 85,
+            "function": "sendRequest",
+            "class": "FacebookPixelPlugin\\FacebookAds\\Http\\Client",
+            "type": "->",
+            "args": [
+              {}
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-content/plugins/official-facebook-pixel/FacebookAds/Object/ServerSide/AdsPixelSettings.php",
+            "line": 62,
+            "function": "callPixelSettingsEndpoint",
+            "class": "FacebookPixelPlugin\\FacebookAds\\Object\\ServerSide\\AdsPixelSettings",
+            "type": "::",
+            "args": [
+              "fu\u0000zz"
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-content/plugins/official-facebook-pixel/core/class-facebookwordpressoptions.php",
+            "line": 630,
+            "function": "buildFromPixelId",
+            "class": "FacebookPixelPlugin\\FacebookAds\\Object\\ServerSide\\AdsPixelSettings",
+            "type": "::",
+            "args": [
+              "fu\u0000zz"
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-content/plugins/official-facebook-pixel/core/class-facebookwordpressoptions.php",
+            "line": 700,
+            "function": "set_fbe_based_aam_settings",
+            "class": "FacebookPixelPlugin\\Core\\FacebookWordpressOptions",
+            "type": "::",
+            "args": []
+          },
+          {
+            "file": "/var/www/html/wp-content/plugins/official-facebook-pixel/core/class-facebookwordpressoptions.php",
+            "line": 103,
+            "function": "set_aam_settings",
+            "class": "FacebookPixelPlugin\\Core\\FacebookWordpressOptions",
+            "type": "::",
+            "args": []
+          },
+          {
+            "file": "/var/www/html/wp-content/plugins/official-facebook-pixel/facebook-for-wordpress.php",
+            "line": 68,
+            "function": "initialize",
+            "class": "FacebookPixelPlugin\\Core\\FacebookWordpressOptions",
+            "type": "::",
+            "args": []
+          },
+          {
+            "file": "/var/www/html/wp-content/plugins/official-facebook-pixel/facebook-for-wordpress.php",
+            "line": 220,
+            "function": "__construct",
+            "class": "FacebookPixelPlugin\\FacebookForWordpress",
+            "type": "->",
+            "args": []
+          },
+          {
+            "file": "/var/www/html/wp-settings.php",
+            "line": 447,
+            "args": [
+              "/var/www/html/wp-content/plugins/official-facebook-pixel/facebook-for-wordpress.php"
+            ],
+            "function": "include_once"
+          },
+          {
+            "file": "/var/www/html/wp-config.php",
+            "line": 104,
+            "args": [
+              "/var/www/html/wp-settings.php"
+            ],
+            "function": "require_once"
+          },
+          {
+            "file": "/var/www/html/wp-load.php",
+            "line": 50,
+            "args": [
+              "/var/www/html/wp-config.php"
+            ],
+            "function": "require_once"
+          },
+          {
+            "file": "/var/www/html/wp-admin/admin-ajax.php",
+            "line": 22,
+            "args": [
+              "/var/www/html/wp-load.php"
+            ],
+            "function": "require_once"
+          }
+        ],
+        "traceAsString": "#0 /var/www/html/wp-content/plugins/official-facebook-pixel/FacebookAds/Http/Adapter/Curl/AbstractCurl.php(112): curl_setopt_array(Object(CurlHandle), Array)\n#1 /var/www/html/wp-content/plugins/official-facebook-pixel/FacebookAds/Http/Adapter/CurlAdapter.php(183): FacebookPixelPlugin\\FacebookAds\\Http\\Adapter\\Curl\\AbstractCurl->setoptArray(Array)\n#2 /var/www/html/wp-content/plugins/official-facebook-pixel/FacebookAds/Http/Client.php(216): FacebookPixelPlugin\\FacebookAds\\Http\\Adapter\\CurlAdapter->sendRequest(Object(FacebookPixelPlugin\\FacebookAds\\Http\\SimpleRequest))\n#3 /var/www/html/wp-content/plugins/official-facebook-pixel/FacebookAds/Object/ServerSide/AdsPixelSettings.php(85): FacebookPixelPlugin\\FacebookAds\\Http\\Client->sendRequest(Object(FacebookPixelPlugin\\FacebookAds\\Http\\SimpleRequest))\n#4 /var/www/html/wp-content/plugins/official-facebook-pixel/FacebookAds/Object/ServerSide/AdsPixelSettings.php(62): FacebookPixelPlugin\\FacebookAds\\Object\\ServerSide\\AdsPixelSettings::callPixelSettingsEndpoint('fu\\x00zz')\n#5 /var/www/html/wp-content/plugins/official-facebook-pixel/core/class-facebookwordpressoptions.php(630): FacebookPixelPlugin\\FacebookAds\\Object\\ServerSide\\AdsPixelSettings::buildFromPixelId('fu\\x00zz')\n#6 /var/www/html/wp-content/plugins/official-facebook-pixel/core/class-facebookwordpressoptions.php(700): FacebookPixelPlugin\\Core\\FacebookWordpressOptions::set_fbe_based_aam_settings()\n#7 /var/www/html/wp-content/plugins/official-facebook-pixel/core/class-facebookwordpressoptions.php(103): FacebookPixelPlugin\\Core\\FacebookWordpressOptions::set_aam_settings()\n#8 /var/www/html/wp-content/plugins/official-facebook-pixel/facebook-for-wordpress.php(68): FacebookPixelPlugin\\Core\\FacebookWordpressOptions::initialize()\n#9 /var/www/html/wp-content/plugins/official-facebook-pixel/facebook-for-wordpress.php(220): FacebookPixelPlugin\\FacebookForWordpress->__construct()\n#10 /var/www/html/wp-settings.php(447): include_once('/var/www/html/w...')\n#11 /var/www/html/wp-config.php(104): require_once('/var/www/html/w...')\n#12 /var/www/html/wp-load.php(50): require_once('/var/www/html/w...')\n#13 /var/www/html/wp-admin/admin-ajax.php(22): require_once('/var/www/html/w...')\n#14 {main}"
+      }
+    ],
+    "response_body": "\n",
+    "response.body.length": 1,
+    "response.headers": {
+      "Date": "Sun, 16 Aug 2026 03:21:33 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "Content-Length": "1",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 47.427,
+    "number_of_new_paths": 11,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786850345-b735391c-e256-4049-901b-6ddecab2e3e5",
+    "paths": [
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/core/class-facebookwordpresssettingsrecorder.php::::103_104_105_107_154_157_158_160_161_162_164_165_166_168_169_170_172_173_174_177_178_179_180_181_182_184_185_188_189_191_192_193_194_195_196_198_29_30_31_33_34_36_37_40_41_43_44_47_48_50_51_54_55_57_58_61_62_64_65_69_70_71_73_74_75_77_78_780_79_81_82_83_85_86_87_89_90_91_93",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/core/class-facebooksignalstate.php::::20_201",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/vendor/composer/autoload_real.php::::11_12_14_21_25_27_28_29_31_32_34_36_39",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/FacebookAds/Http/Response.php::::104_111_112_113_119_120_123_126_65_66_79_80_86_87_90",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/FacebookAds/Object/ServerSide/AdsPixelSettings.php::::202_62_63_72_80_81_82_83_85_87_88",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/FacebookAds/Http/Adapter/Curl/AbstractCurl.php::::105_106_112_132_39_42_58_59",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/core/class-releasesignalsajax.php::::23_618_89_90_91",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/core/class-signals.php::::141_18",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/FacebookAds/Http/Response.php::::126",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/FacebookAds/Http/Adapter/Curl/CurlInterface.php::::107",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/FacebookAds/Http/Headers.php::::43",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/FacebookAds/Http/Adapter/AbstractAdapter.php::::40_41_47_57",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/FacebookAds/Http/Parameters.php::::38_40_44_48_49_72_73_79_82",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/vendor/facebook/capi-param-builder-php/php/capi-param-builder/src/model/FbcParamConfig.php::::19_20_21_22_24",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/vendor/autoload.php::::20_22_5",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/facebook-for-wordpress.php::::104_107_108_109_119_122_123_140_141_142_153_154_155_156_158_215_216_217_220_221_31_34_35_39_40_41_42_68_70_71_72_73_76_77_78_79_81_86_88_89_91_92_94_96_97",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/vendor/facebook/capi-param-builder-php/php/capi-param-builder/src/util/AppendixProvider.php::::10_11_16_19_23_24_25_26_29_31_32_37_38_39_46_47_48_49_53_65",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/core/class-facebookpluginutils.php::::147_148_149_155_30_44_45",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/vendor/facebook/capi-param-builder-php/php/capi-param-builder/src/piiUtil/ZipCodeUtils.php::::11_34",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/vendor/facebook/capi-param-builder-php/php/capi-param-builder/src/piiUtil/StringUtils.php::::11_541",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_515_522_528_531_544_551_555_563_575_576_577_578_580",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/core/class-facebookwordpresssettingspage.php::::1213_1215_1224_1233_1242_1251_1259_1297_32_52_53_54_56_57_59_60_61_63_64_65",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/core/class-aamfieldsextractor.php::::111_43_44_45_46",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/core/class-facebookwordpressoptions.php::::101_102_103_104_105_106_107_108_109_117_135_136_137_157_158_159_184_185_186_188_214_215_216_312_313_314_315_33_359_370_371_418_420_466_467_469_472_474_487_488_491_493_494_495_497_498_499_501_502_504_534_535_536_537_539_594_610_611_612_613_626_627_628_629_630_631_647_691_692_693_696_697_699_700_704_758_759_760_763_847_856_857_870_873_917",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/core/class-facebookpluginconfig.php::::170_30",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/FacebookAds/Http/Adapter/CurlAdapter.php::::141_142_143_144_147_148_149_153_155_156_157_158_160_163_164_165_173_174_179_183_203_54_55_56_57_63_70_80_87_88",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/core/class-servereventasynctask.php::::156_25",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/FacebookAds/Http/Adapter/Curl/Curl55.php::::36_37_40_79_80_98",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/vendor/composer/autoload_static.php::::2499_2500_2501_2502_2504_2507",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/FacebookAds/Http/SimpleRequest.php::::38_40_41_42_43_44_45_46_52_53_54_55_58_65_66_69_70_71_72_75",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/FacebookAds/Http/Request.php::::106_113_158_159_162_176_190_197_198_218_219_222_297_93_94",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/core/class-facebookwordpresspixelinjection.php::::231_30_47_60_61_85",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/FacebookAds/Http/Client.php::::105_106_109_123_130_131_132_133_137_176_177_180_216_233",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/FacebookAds/ApiConfig.php::::16",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/vendor/facebook/capi-param-builder-php/php/capi-param-builder/src/piiUtil/DOBUtils.php::::11_113",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/vendor/composer/platform_check.php::::11_26_5_7",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/FacebookAds/Exception/Exception.php::::30",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/FacebookAds/Http/Exception/RequestException.php::::113_117_121_122_123_131_132_135_137_142_143_148_149_150_151_152_154_155_156_157_258_86_87_88_90_92_93_94_95_96_97",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/core/class-signals.php::::141_18_42_43_44_46_47_48_50_58_59_88",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/vendor/facebook/capi-param-builder-php/php/capi-param-builder/src/model/Constants.php::::43_44_45_46_47_48_49_50_51_52_53_54_55_56_57_58_59_60_61_62",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/FacebookAds/Http/RequestInterface.php::::170",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/vendor/facebook/capi-param-builder-php/php/capi-param-builder/src/piiUtil/PIIUtils.php::::108_11_12_13_14_15_16_17_18_19",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/core/class-facebookcapievent.php::::34_402_88_89_90_92",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/FacebookAds/Http/Adapter/CurlAdapter.php::::103_105_106_108_116_120_122_124_125_126_127_129_130_133_141_142_143_144_147_148_149_153_155_156_157_158_160_163_164_165_173_174_179_183_184_186_187_188_190_192_193_194_196_200_203_54_55_56_57_63_70_80_87_88_94",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/FacebookAds/Http/ResponseInterface.php::::74",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/core/class-facebookparambuilder.php::::100_110_113_116_117_121_123_145_146_147_148_149_151_152_153_154_156_161_162_163_165_168_228_25_74_76_77_78_80_81_82_83_84_88",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/vendor/techcrunch/wp-async-task/wp-async-task.php::::10_267_77_80_81_82_84_85_87",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/FacebookAds/Http/Adapter/Curl/AbstractCurl.php::::105_106_112_113_132_39_42_58_59_76_90_98",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/vendor/facebook/capi-param-builder-php/php/capi-param-builder/src/util/VersionProvider.php::::13_14_15_16_17_18_19_25",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/FacebookAds/Object/ServerSide/AdsPixelSettings.php::::202_62_80_81_82_83_85_87",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/vendor/facebook/capi-param-builder-php/php/capi-param-builder/src/ParamBuilder.php::::11_12_13_14_15_161_163_165_166_174_178_179_186_195_198_203_204_233_234_235_238_239_241_242_243_247_267_268_269_270_271_272_273_274_275_276_277_278_279_280_284_290_291_296_323_325_326_329_330_332_333_340_373_374_376_377_379_380_403_406_412_418_420_421_422_429_431_432_433_440_442_443_444_452_454_46_460_466_468_47_474_50_51_513_52_522_53_530_532_533_534_536_537_538_539_54_542_543_545_546_548_549_55_551_552_555_556_559_56_560_563_565_57_570_571_580_581_586_587_59_596_597_603_606_61_62_63_64_65_66_70_91_92",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/core/class-facebookpixel.php::::113_114_30_470",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/vendor/facebook/capi-param-builder-php/php/capi-param-builder/src/model/CookieSettings.php::::20_21_22_23_24_26",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/core/class-facebooksignalstate.php::::20_201_80_81_82",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/vendor/facebook/capi-param-builder-php/php/capi-param-builder/src/piiUtil/GenderUtils.php::::11_115",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/vendor/facebook/capi-param-builder-php/php/capi-param-builder/src/piiUtil/SharedUtils.php::::67",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/FacebookAds/Http/Exception/EmptyResponseException.php::::35_39_40_41_43",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/vendor/facebook/capi-param-builder-php/php/capi-param-builder/src/piiUtil/EmailUtils.php::::11_29",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/core/class-releasesignalsajax.php::::23_618",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_445_446_563_575_576_577_578_580",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/FacebookAds/Http/Adapter/AdapterInterface.php::::65",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/vendor/facebook/capi-param-builder-php/php/capi-param-builder/src/piiUtil/PhoneUtils.php::::11_27",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/facebook-for-wordpress.php::::215_216_217_220_31_34_35_39_40_41_42_68",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/core/class-facebookwordpressoptions.php::::101_102_103_312_313_314_315_33_359_370_371_418_420_534_535_536_537_539_610_611_612_613_626_627_628_630_691_692_693_696_697_699_700_758_759_760_763_847_856_857_870_873_917",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/core/class-aamsettingsfields.php::::67",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/FacebookAds/Http/Client.php::::105_106_109_123_130_131_132_133_137_176_177_180_216_217_218_220_221_233"
+    ],
+    "new_paths": [
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_445_446_563_575_576_577_578_580",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/core/class-facebooksignalstate.php::::20_201",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/FacebookAds/Object/ServerSide/AdsPixelSettings.php::::202_62_80_81_82_83_85_87",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/FacebookAds/Http/Adapter/CurlAdapter.php::::141_142_143_144_147_148_149_153_155_156_157_158_160_163_164_165_173_174_179_183_203_54_55_56_57_63_70_80_87_88",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/FacebookAds/Http/Client.php::::105_106_109_123_130_131_132_133_137_176_177_180_216_233",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/FacebookAds/Http/Adapter/Curl/AbstractCurl.php::::105_106_112_132_39_42_58_59",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/core/class-signals.php::::141_18",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/FacebookAds/Http/Response.php::::126",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/facebook-for-wordpress.php::::215_216_217_220_31_34_35_39_40_41_42_68",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/core/class-facebookwordpressoptions.php::::101_102_103_312_313_314_315_33_359_370_371_418_420_534_535_536_537_539_610_611_612_613_626_627_628_630_691_692_693_696_697_699_700_758_759_760_763_847_856_857_870_873_917",
+      "/var/www/html/wp-content/plugins/official-facebook-pixel/core/class-releasesignalsajax.php::::23_618"
+    ],
+    "vulns": [],
+    "score": 197,
+    "is_interesting": false,
+    "fuzzer_id": "7",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "accessToken"
+  }
+]

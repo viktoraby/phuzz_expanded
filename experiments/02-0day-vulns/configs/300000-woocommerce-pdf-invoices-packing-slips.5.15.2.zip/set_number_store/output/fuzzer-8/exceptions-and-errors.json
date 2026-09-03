@@ -1,0 +1,2440 @@
+[
+  {
+    "coverage_id": "1786971066-20f76e4b-b662-4979-ab3d-62f4b83e8dfb",
+    "priority": 11,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "wpo_wcpdf_set_next_number"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "number": "fuz",
+        "store": "fuzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "",
+    "response.body.length": 0,
+    "response.headers": {},
+    "response.status.code": 0,
+    "response.time": 0,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786971065-335eb857-1562-41e9-be1e-58275088b580",
+    "paths": [
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/strauss/autoload-classmap.php::::10_100_101_102_103_104_105_106_107_108_109_11_110_111_112_113_114_115_116_117_118_119_12_120_121_122_123_124_125_126_127_128_129_13_130_131_132_133_134_135_136_137_138_139_14_140_141_142_143_144_145_146_147_148_149_15_150_151_152_153_154_155_156_157_158_159_16_160_161_162_163_164_165_166_167_168_169_17_170_171_172_173_174_175_176_177_178_179_18_180_181_182_183_184_185_186_187_188_189_19_190_191_192_193_194_195_196_197_198_199_20_200_201_202_203_204_205_206_207_208_209_21_210_211_212_213_214_215_216_217_218_219_22_220_221_222_223_224_225_226_227_228_229_23_230_231_232_233_234_235_24_25_26_27_28_29_30_31_32_33_34_35_36_37_38_39_40_41_42_43_44_45_46_47_48_49_5_50_51_52_53_54_55_56_57_58_59_60_61_62_63_64_65_66_67_68_69_70_71_72_73_74_75_76_77_78_79_8_80_81_82_83_84_85_86_87_88_89_9_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-mbstring/bootstrap80.php::::101_104_107_110_114_118_121_124_127_131_135_139_14_143_147_151_155_156_17_20_23_26_29_32_35_38_41_44_47_50_53_56_59_62_65_68_71_74_77_80_83_86_89_92_95_98",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/strauss/autoload.php::::12_15_18_20_4_5_6_7_8_9",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_499_500_515_522_528_531_544_551_555_563_575_576_577_578_580",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/woocommerce-pdf-invoices-packingslips.php::::119_120_122_130_131_133_143_144_145_146_147_149_17_191_192_209_21_210_211_251_252_253_255_259_53_54_56_63_64_66_67_68_77_80_81_82_83_84_85_86_87_88_89_892_899_90_900_905_91_919_92_922_923_93_96_97",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-iconv/bootstrap.php::::14_15",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/autoload.php::::20_22_5",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-mbstring/bootstrap.php::::14_15",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/autoload_real.php::::11_12_14_21_25_26_27_29_30_32_34_35_36_37_39_41_42_43_46_49",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/autoload_static.php::::142_143_144_145_147_150",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/includes/Semaphore.php::::461_462_481_5_9"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 11,
+    "is_interesting": false,
+    "fuzzer_id": "8",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "number"
+  },
+  {
+    "coverage_id": "1786971066-ca0cc92f-f4ff-4d94-ba71-01542e4844eb",
+    "priority": 11,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "wpo_wcpdf_set_next_number"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "number": "fuzz",
+        "store": "fuz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "",
+    "response.body.length": 0,
+    "response.headers": {},
+    "response.status.code": 0,
+    "response.time": 0,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786971065-335eb857-1562-41e9-be1e-58275088b580",
+    "paths": [
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/strauss/autoload-classmap.php::::10_100_101_102_103_104_105_106_107_108_109_11_110_111_112_113_114_115_116_117_118_119_12_120_121_122_123_124_125_126_127_128_129_13_130_131_132_133_134_135_136_137_138_139_14_140_141_142_143_144_145_146_147_148_149_15_150_151_152_153_154_155_156_157_158_159_16_160_161_162_163_164_165_166_167_168_169_17_170_171_172_173_174_175_176_177_178_179_18_180_181_182_183_184_185_186_187_188_189_19_190_191_192_193_194_195_196_197_198_199_20_200_201_202_203_204_205_206_207_208_209_21_210_211_212_213_214_215_216_217_218_219_22_220_221_222_223_224_225_226_227_228_229_23_230_231_232_233_234_235_24_25_26_27_28_29_30_31_32_33_34_35_36_37_38_39_40_41_42_43_44_45_46_47_48_49_5_50_51_52_53_54_55_56_57_58_59_60_61_62_63_64_65_66_67_68_69_70_71_72_73_74_75_76_77_78_79_8_80_81_82_83_84_85_86_87_88_89_9_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-mbstring/bootstrap80.php::::101_104_107_110_114_118_121_124_127_131_135_139_14_143_147_151_155_156_17_20_23_26_29_32_35_38_41_44_47_50_53_56_59_62_65_68_71_74_77_80_83_86_89_92_95_98",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/strauss/autoload.php::::12_15_18_20_4_5_6_7_8_9",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_499_500_515_522_528_531_544_551_555_563_575_576_577_578_580",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/woocommerce-pdf-invoices-packingslips.php::::119_120_122_130_131_133_143_144_145_146_147_149_17_191_192_209_21_210_211_251_252_253_255_259_53_54_56_63_64_66_67_68_77_80_81_82_83_84_85_86_87_88_89_892_899_90_900_905_91_919_92_922_923_93_96_97",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-iconv/bootstrap.php::::14_15",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/autoload.php::::20_22_5",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-mbstring/bootstrap.php::::14_15",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/autoload_real.php::::11_12_14_21_25_26_27_29_30_32_34_35_36_37_39_41_42_43_46_49",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/autoload_static.php::::142_143_144_145_147_150",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/includes/Semaphore.php::::461_462_481_5_9"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 11,
+    "is_interesting": false,
+    "fuzzer_id": "8",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "store"
+  },
+  {
+    "coverage_id": "1786971067-8c1b022d-49dd-4641-87b3-d0bdc6f939d4",
+    "priority": 11,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "wpo_wcpdf_set_next_number"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "number": "fu8z",
+        "store": "fuzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "",
+    "response.body.length": 0,
+    "response.headers": {},
+    "response.status.code": 0,
+    "response.time": 0,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786971065-335eb857-1562-41e9-be1e-58275088b580",
+    "paths": [
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/strauss/autoload-classmap.php::::10_100_101_102_103_104_105_106_107_108_109_11_110_111_112_113_114_115_116_117_118_119_12_120_121_122_123_124_125_126_127_128_129_13_130_131_132_133_134_135_136_137_138_139_14_140_141_142_143_144_145_146_147_148_149_15_150_151_152_153_154_155_156_157_158_159_16_160_161_162_163_164_165_166_167_168_169_17_170_171_172_173_174_175_176_177_178_179_18_180_181_182_183_184_185_186_187_188_189_19_190_191_192_193_194_195_196_197_198_199_20_200_201_202_203_204_205_206_207_208_209_21_210_211_212_213_214_215_216_217_218_219_22_220_221_222_223_224_225_226_227_228_229_23_230_231_232_233_234_235_24_25_26_27_28_29_30_31_32_33_34_35_36_37_38_39_40_41_42_43_44_45_46_47_48_49_5_50_51_52_53_54_55_56_57_58_59_60_61_62_63_64_65_66_67_68_69_70_71_72_73_74_75_76_77_78_79_8_80_81_82_83_84_85_86_87_88_89_9_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-mbstring/bootstrap80.php::::101_104_107_110_114_118_121_124_127_131_135_139_14_143_147_151_155_156_17_20_23_26_29_32_35_38_41_44_47_50_53_56_59_62_65_68_71_74_77_80_83_86_89_92_95_98",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/strauss/autoload.php::::12_15_18_20_4_5_6_7_8_9",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_499_500_515_522_528_531_544_551_555_563_575_576_577_578_580",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/woocommerce-pdf-invoices-packingslips.php::::119_120_122_130_131_133_143_144_145_146_147_149_17_191_192_209_21_210_211_251_252_253_255_259_53_54_56_63_64_66_67_68_77_80_81_82_83_84_85_86_87_88_89_892_899_90_900_905_91_919_92_922_923_93_96_97",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-iconv/bootstrap.php::::14_15",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/autoload.php::::20_22_5",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-mbstring/bootstrap.php::::14_15",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/autoload_real.php::::11_12_14_21_25_26_27_29_30_32_34_35_36_37_39_41_42_43_46_49",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/autoload_static.php::::142_143_144_145_147_150",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/includes/Semaphore.php::::461_462_481_5_9"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 11,
+    "is_interesting": false,
+    "fuzzer_id": "8",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "number"
+  },
+  {
+    "coverage_id": "1786971067-b1de7560-f7aa-4b0d-9df0-ad00afc00f44",
+    "priority": 11,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "wpo_wcpdf_set_next_number"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "number": "fuzz",
+        "store": "fuz8"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "",
+    "response.body.length": 0,
+    "response.headers": {},
+    "response.status.code": 0,
+    "response.time": 0,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786971065-335eb857-1562-41e9-be1e-58275088b580",
+    "paths": [
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/strauss/autoload-classmap.php::::10_100_101_102_103_104_105_106_107_108_109_11_110_111_112_113_114_115_116_117_118_119_12_120_121_122_123_124_125_126_127_128_129_13_130_131_132_133_134_135_136_137_138_139_14_140_141_142_143_144_145_146_147_148_149_15_150_151_152_153_154_155_156_157_158_159_16_160_161_162_163_164_165_166_167_168_169_17_170_171_172_173_174_175_176_177_178_179_18_180_181_182_183_184_185_186_187_188_189_19_190_191_192_193_194_195_196_197_198_199_20_200_201_202_203_204_205_206_207_208_209_21_210_211_212_213_214_215_216_217_218_219_22_220_221_222_223_224_225_226_227_228_229_23_230_231_232_233_234_235_24_25_26_27_28_29_30_31_32_33_34_35_36_37_38_39_40_41_42_43_44_45_46_47_48_49_5_50_51_52_53_54_55_56_57_58_59_60_61_62_63_64_65_66_67_68_69_70_71_72_73_74_75_76_77_78_79_8_80_81_82_83_84_85_86_87_88_89_9_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-mbstring/bootstrap80.php::::101_104_107_110_114_118_121_124_127_131_135_139_14_143_147_151_155_156_17_20_23_26_29_32_35_38_41_44_47_50_53_56_59_62_65_68_71_74_77_80_83_86_89_92_95_98",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/strauss/autoload.php::::12_15_18_20_4_5_6_7_8_9",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_499_500_515_522_528_531_544_551_555_563_575_576_577_578_580",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/woocommerce-pdf-invoices-packingslips.php::::119_120_122_130_131_133_143_144_145_146_147_149_17_191_192_209_21_210_211_251_252_253_255_259_53_54_56_63_64_66_67_68_77_80_81_82_83_84_85_86_87_88_89_892_899_90_900_905_91_919_92_922_923_93_96_97",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-iconv/bootstrap.php::::14_15",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/autoload.php::::20_22_5",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-mbstring/bootstrap.php::::14_15",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/autoload_real.php::::11_12_14_21_25_26_27_29_30_32_34_35_36_37_39_41_42_43_46_49",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/autoload_static.php::::142_143_144_145_147_150",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/includes/Semaphore.php::::461_462_481_5_9"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 11,
+    "is_interesting": false,
+    "fuzzer_id": "8",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "store"
+  },
+  {
+    "coverage_id": "1786971068-9adef0c9-edc8-4b89-ac7d-30e1e86adc2e",
+    "priority": 11,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "wpo_wcpdf_set_next_number"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "number": "fuzz",
+        "store": "\u0006fuzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "",
+    "response.body.length": 0,
+    "response.headers": {},
+    "response.status.code": 0,
+    "response.time": 0,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786971065-335eb857-1562-41e9-be1e-58275088b580",
+    "paths": [
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/strauss/autoload-classmap.php::::10_100_101_102_103_104_105_106_107_108_109_11_110_111_112_113_114_115_116_117_118_119_12_120_121_122_123_124_125_126_127_128_129_13_130_131_132_133_134_135_136_137_138_139_14_140_141_142_143_144_145_146_147_148_149_15_150_151_152_153_154_155_156_157_158_159_16_160_161_162_163_164_165_166_167_168_169_17_170_171_172_173_174_175_176_177_178_179_18_180_181_182_183_184_185_186_187_188_189_19_190_191_192_193_194_195_196_197_198_199_20_200_201_202_203_204_205_206_207_208_209_21_210_211_212_213_214_215_216_217_218_219_22_220_221_222_223_224_225_226_227_228_229_23_230_231_232_233_234_235_24_25_26_27_28_29_30_31_32_33_34_35_36_37_38_39_40_41_42_43_44_45_46_47_48_49_5_50_51_52_53_54_55_56_57_58_59_60_61_62_63_64_65_66_67_68_69_70_71_72_73_74_75_76_77_78_79_8_80_81_82_83_84_85_86_87_88_89_9_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-mbstring/bootstrap80.php::::101_104_107_110_114_118_121_124_127_131_135_139_14_143_147_151_155_156_17_20_23_26_29_32_35_38_41_44_47_50_53_56_59_62_65_68_71_74_77_80_83_86_89_92_95_98",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/strauss/autoload.php::::12_15_18_20_4_5_6_7_8_9",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_499_500_515_522_528_531_544_551_555_563_575_576_577_578_580",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/woocommerce-pdf-invoices-packingslips.php::::119_120_122_130_131_133_143_144_145_146_147_149_17_191_192_209_21_210_211_251_252_253_255_259_53_54_56_63_64_66_67_68_77_80_81_82_83_84_85_86_87_88_89_892_899_90_900_905_91_919_92_922_923_93_96_97",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-iconv/bootstrap.php::::14_15",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/autoload.php::::20_22_5",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-mbstring/bootstrap.php::::14_15",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/autoload_real.php::::11_12_14_21_25_26_27_29_30_32_34_35_36_37_39_41_42_43_46_49",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/autoload_static.php::::142_143_144_145_147_150",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/includes/Semaphore.php::::461_462_481_5_9"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 11,
+    "is_interesting": false,
+    "fuzzer_id": "8",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "store"
+  },
+  {
+    "coverage_id": "1786971068-3962f4de-bc00-4c4d-8198-8a1d221a008b",
+    "priority": 11,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "wpo_wcpdf_set_next_number"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "number": "fuzz",
+        "store": "fvzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "",
+    "response.body.length": 0,
+    "response.headers": {},
+    "response.status.code": 0,
+    "response.time": 0,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786971065-335eb857-1562-41e9-be1e-58275088b580",
+    "paths": [
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/strauss/autoload-classmap.php::::10_100_101_102_103_104_105_106_107_108_109_11_110_111_112_113_114_115_116_117_118_119_12_120_121_122_123_124_125_126_127_128_129_13_130_131_132_133_134_135_136_137_138_139_14_140_141_142_143_144_145_146_147_148_149_15_150_151_152_153_154_155_156_157_158_159_16_160_161_162_163_164_165_166_167_168_169_17_170_171_172_173_174_175_176_177_178_179_18_180_181_182_183_184_185_186_187_188_189_19_190_191_192_193_194_195_196_197_198_199_20_200_201_202_203_204_205_206_207_208_209_21_210_211_212_213_214_215_216_217_218_219_22_220_221_222_223_224_225_226_227_228_229_23_230_231_232_233_234_235_24_25_26_27_28_29_30_31_32_33_34_35_36_37_38_39_40_41_42_43_44_45_46_47_48_49_5_50_51_52_53_54_55_56_57_58_59_60_61_62_63_64_65_66_67_68_69_70_71_72_73_74_75_76_77_78_79_8_80_81_82_83_84_85_86_87_88_89_9_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-mbstring/bootstrap80.php::::101_104_107_110_114_118_121_124_127_131_135_139_14_143_147_151_155_156_17_20_23_26_29_32_35_38_41_44_47_50_53_56_59_62_65_68_71_74_77_80_83_86_89_92_95_98",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/strauss/autoload.php::::12_15_18_20_4_5_6_7_8_9",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_499_500_515_522_528_531_544_551_555_563_575_576_577_578_580",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/woocommerce-pdf-invoices-packingslips.php::::119_120_122_130_131_133_143_144_145_146_147_149_17_191_192_209_21_210_211_251_252_253_255_259_53_54_56_63_64_66_67_68_77_80_81_82_83_84_85_86_87_88_89_892_899_90_900_905_91_919_92_922_923_93_96_97",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-iconv/bootstrap.php::::14_15",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/autoload.php::::20_22_5",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-mbstring/bootstrap.php::::14_15",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/autoload_real.php::::11_12_14_21_25_26_27_29_30_32_34_35_36_37_39_41_42_43_46_49",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/autoload_static.php::::142_143_144_145_147_150",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/includes/Semaphore.php::::461_462_481_5_9"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 11,
+    "is_interesting": false,
+    "fuzzer_id": "8",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "store"
+  },
+  {
+    "coverage_id": "1786971068-deb50140-3286-47f1-b3b5-8dba8d4dbec3",
+    "priority": 11,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "wpo_wcpdf_set_next_number"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "number": "fzz",
+        "store": "fuzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "",
+    "response.body.length": 0,
+    "response.headers": {},
+    "response.status.code": 0,
+    "response.time": 0,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786971065-335eb857-1562-41e9-be1e-58275088b580",
+    "paths": [
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/strauss/autoload-classmap.php::::10_100_101_102_103_104_105_106_107_108_109_11_110_111_112_113_114_115_116_117_118_119_12_120_121_122_123_124_125_126_127_128_129_13_130_131_132_133_134_135_136_137_138_139_14_140_141_142_143_144_145_146_147_148_149_15_150_151_152_153_154_155_156_157_158_159_16_160_161_162_163_164_165_166_167_168_169_17_170_171_172_173_174_175_176_177_178_179_18_180_181_182_183_184_185_186_187_188_189_19_190_191_192_193_194_195_196_197_198_199_20_200_201_202_203_204_205_206_207_208_209_21_210_211_212_213_214_215_216_217_218_219_22_220_221_222_223_224_225_226_227_228_229_23_230_231_232_233_234_235_24_25_26_27_28_29_30_31_32_33_34_35_36_37_38_39_40_41_42_43_44_45_46_47_48_49_5_50_51_52_53_54_55_56_57_58_59_60_61_62_63_64_65_66_67_68_69_70_71_72_73_74_75_76_77_78_79_8_80_81_82_83_84_85_86_87_88_89_9_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-mbstring/bootstrap80.php::::101_104_107_110_114_118_121_124_127_131_135_139_14_143_147_151_155_156_17_20_23_26_29_32_35_38_41_44_47_50_53_56_59_62_65_68_71_74_77_80_83_86_89_92_95_98",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/strauss/autoload.php::::12_15_18_20_4_5_6_7_8_9",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_499_500_515_522_528_531_544_551_555_563_575_576_577_578_580",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/woocommerce-pdf-invoices-packingslips.php::::119_120_122_130_131_133_143_144_145_146_147_149_17_191_192_209_21_210_211_251_252_253_255_259_53_54_56_63_64_66_67_68_77_80_81_82_83_84_85_86_87_88_89_892_899_90_900_905_91_919_92_922_923_93_96_97",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-iconv/bootstrap.php::::14_15",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/autoload.php::::20_22_5",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-mbstring/bootstrap.php::::14_15",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/autoload_real.php::::11_12_14_21_25_26_27_29_30_32_34_35_36_37_39_41_42_43_46_49",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/autoload_static.php::::142_143_144_145_147_150",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/includes/Semaphore.php::::461_462_481_5_9"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 11,
+    "is_interesting": false,
+    "fuzzer_id": "8",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "number"
+  },
+  {
+    "coverage_id": "1786971069-44add20e-8cd6-4520-85bc-d75869d020f2",
+    "priority": 11,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "wpo_wcpdf_set_next_number"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "number": "fuzz",
+        "store": "fuzm"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "",
+    "response.body.length": 0,
+    "response.headers": {},
+    "response.status.code": 0,
+    "response.time": 0,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786971065-335eb857-1562-41e9-be1e-58275088b580",
+    "paths": [
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/strauss/autoload-classmap.php::::10_100_101_102_103_104_105_106_107_108_109_11_110_111_112_113_114_115_116_117_118_119_12_120_121_122_123_124_125_126_127_128_129_13_130_131_132_133_134_135_136_137_138_139_14_140_141_142_143_144_145_146_147_148_149_15_150_151_152_153_154_155_156_157_158_159_16_160_161_162_163_164_165_166_167_168_169_17_170_171_172_173_174_175_176_177_178_179_18_180_181_182_183_184_185_186_187_188_189_19_190_191_192_193_194_195_196_197_198_199_20_200_201_202_203_204_205_206_207_208_209_21_210_211_212_213_214_215_216_217_218_219_22_220_221_222_223_224_225_226_227_228_229_23_230_231_232_233_234_235_24_25_26_27_28_29_30_31_32_33_34_35_36_37_38_39_40_41_42_43_44_45_46_47_48_49_5_50_51_52_53_54_55_56_57_58_59_60_61_62_63_64_65_66_67_68_69_70_71_72_73_74_75_76_77_78_79_8_80_81_82_83_84_85_86_87_88_89_9_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-mbstring/bootstrap80.php::::101_104_107_110_114_118_121_124_127_131_135_139_14_143_147_151_155_156_17_20_23_26_29_32_35_38_41_44_47_50_53_56_59_62_65_68_71_74_77_80_83_86_89_92_95_98",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/strauss/autoload.php::::12_15_18_20_4_5_6_7_8_9",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_499_500_515_522_528_531_544_551_555_563_575_576_577_578_580",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/woocommerce-pdf-invoices-packingslips.php::::119_120_122_130_131_133_143_144_145_146_147_149_17_191_192_209_21_210_211_251_252_253_255_259_53_54_56_63_64_66_67_68_77_80_81_82_83_84_85_86_87_88_89_892_899_90_900_905_91_919_92_922_923_93_96_97",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-iconv/bootstrap.php::::14_15",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/autoload.php::::20_22_5",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-mbstring/bootstrap.php::::14_15",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/autoload_real.php::::11_12_14_21_25_26_27_29_30_32_34_35_36_37_39_41_42_43_46_49",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/autoload_static.php::::142_143_144_145_147_150",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/includes/Semaphore.php::::461_462_481_5_9"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 11,
+    "is_interesting": false,
+    "fuzzer_id": "8",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "store"
+  },
+  {
+    "coverage_id": "1786971069-830ee293-d640-47f3-8802-7e4f7f17d688",
+    "priority": 11,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "wpo_wcpdf_set_next_number"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "number": "kuzz",
+        "store": "fuzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "",
+    "response.body.length": 0,
+    "response.headers": {},
+    "response.status.code": 0,
+    "response.time": 0,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786971065-335eb857-1562-41e9-be1e-58275088b580",
+    "paths": [
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/strauss/autoload-classmap.php::::10_100_101_102_103_104_105_106_107_108_109_11_110_111_112_113_114_115_116_117_118_119_12_120_121_122_123_124_125_126_127_128_129_13_130_131_132_133_134_135_136_137_138_139_14_140_141_142_143_144_145_146_147_148_149_15_150_151_152_153_154_155_156_157_158_159_16_160_161_162_163_164_165_166_167_168_169_17_170_171_172_173_174_175_176_177_178_179_18_180_181_182_183_184_185_186_187_188_189_19_190_191_192_193_194_195_196_197_198_199_20_200_201_202_203_204_205_206_207_208_209_21_210_211_212_213_214_215_216_217_218_219_22_220_221_222_223_224_225_226_227_228_229_23_230_231_232_233_234_235_24_25_26_27_28_29_30_31_32_33_34_35_36_37_38_39_40_41_42_43_44_45_46_47_48_49_5_50_51_52_53_54_55_56_57_58_59_60_61_62_63_64_65_66_67_68_69_70_71_72_73_74_75_76_77_78_79_8_80_81_82_83_84_85_86_87_88_89_9_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-mbstring/bootstrap80.php::::101_104_107_110_114_118_121_124_127_131_135_139_14_143_147_151_155_156_17_20_23_26_29_32_35_38_41_44_47_50_53_56_59_62_65_68_71_74_77_80_83_86_89_92_95_98",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/strauss/autoload.php::::12_15_18_20_4_5_6_7_8_9",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_499_500_515_522_528_531_544_551_555_563_575_576_577_578_580",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/woocommerce-pdf-invoices-packingslips.php::::119_120_122_130_131_133_143_144_145_146_147_149_17_191_192_209_21_210_211_251_252_253_255_259_53_54_56_63_64_66_67_68_77_80_81_82_83_84_85_86_87_88_89_892_899_90_900_905_91_919_92_922_923_93_96_97",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-iconv/bootstrap.php::::14_15",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/autoload.php::::20_22_5",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-mbstring/bootstrap.php::::14_15",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/autoload_real.php::::11_12_14_21_25_26_27_29_30_32_34_35_36_37_39_41_42_43_46_49",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/autoload_static.php::::142_143_144_145_147_150",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/includes/Semaphore.php::::461_462_481_5_9"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 11,
+    "is_interesting": false,
+    "fuzzer_id": "8",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "number"
+  },
+  {
+    "coverage_id": "1786971070-63d3a2bb-d24d-4334-8a79-ffcda657d707",
+    "priority": 11,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "wpo_wcpdf_set_next_number"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "number": "fuzz",
+        "store": "4uzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "",
+    "response.body.length": 0,
+    "response.headers": {},
+    "response.status.code": 0,
+    "response.time": 0,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786971065-335eb857-1562-41e9-be1e-58275088b580",
+    "paths": [
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/strauss/autoload-classmap.php::::10_100_101_102_103_104_105_106_107_108_109_11_110_111_112_113_114_115_116_117_118_119_12_120_121_122_123_124_125_126_127_128_129_13_130_131_132_133_134_135_136_137_138_139_14_140_141_142_143_144_145_146_147_148_149_15_150_151_152_153_154_155_156_157_158_159_16_160_161_162_163_164_165_166_167_168_169_17_170_171_172_173_174_175_176_177_178_179_18_180_181_182_183_184_185_186_187_188_189_19_190_191_192_193_194_195_196_197_198_199_20_200_201_202_203_204_205_206_207_208_209_21_210_211_212_213_214_215_216_217_218_219_22_220_221_222_223_224_225_226_227_228_229_23_230_231_232_233_234_235_24_25_26_27_28_29_30_31_32_33_34_35_36_37_38_39_40_41_42_43_44_45_46_47_48_49_5_50_51_52_53_54_55_56_57_58_59_60_61_62_63_64_65_66_67_68_69_70_71_72_73_74_75_76_77_78_79_8_80_81_82_83_84_85_86_87_88_89_9_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-mbstring/bootstrap80.php::::101_104_107_110_114_118_121_124_127_131_135_139_14_143_147_151_155_156_17_20_23_26_29_32_35_38_41_44_47_50_53_56_59_62_65_68_71_74_77_80_83_86_89_92_95_98",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/strauss/autoload.php::::12_15_18_20_4_5_6_7_8_9",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_499_500_515_522_528_531_544_551_555_563_575_576_577_578_580",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/woocommerce-pdf-invoices-packingslips.php::::119_120_122_130_131_133_143_144_145_146_147_149_17_191_192_209_21_210_211_251_252_253_255_259_53_54_56_63_64_66_67_68_77_80_81_82_83_84_85_86_87_88_89_892_899_90_900_905_91_919_92_922_923_93_96_97",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-iconv/bootstrap.php::::14_15",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/autoload.php::::20_22_5",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-mbstring/bootstrap.php::::14_15",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/autoload_real.php::::11_12_14_21_25_26_27_29_30_32_34_35_36_37_39_41_42_43_46_49",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/autoload_static.php::::142_143_144_145_147_150",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/includes/Semaphore.php::::461_462_481_5_9"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 11,
+    "is_interesting": false,
+    "fuzzer_id": "8",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "store"
+  },
+  {
+    "coverage_id": "1786971070-20ba3f38-47a8-46af-b01a-44adb1111fdd",
+    "priority": 11,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "wpo_wcpdf_set_next_number"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "number": "fuzz",
+        "store": "fuzz*"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "",
+    "response.body.length": 0,
+    "response.headers": {},
+    "response.status.code": 0,
+    "response.time": 0,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786971065-335eb857-1562-41e9-be1e-58275088b580",
+    "paths": [
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/strauss/autoload-classmap.php::::10_100_101_102_103_104_105_106_107_108_109_11_110_111_112_113_114_115_116_117_118_119_12_120_121_122_123_124_125_126_127_128_129_13_130_131_132_133_134_135_136_137_138_139_14_140_141_142_143_144_145_146_147_148_149_15_150_151_152_153_154_155_156_157_158_159_16_160_161_162_163_164_165_166_167_168_169_17_170_171_172_173_174_175_176_177_178_179_18_180_181_182_183_184_185_186_187_188_189_19_190_191_192_193_194_195_196_197_198_199_20_200_201_202_203_204_205_206_207_208_209_21_210_211_212_213_214_215_216_217_218_219_22_220_221_222_223_224_225_226_227_228_229_23_230_231_232_233_234_235_24_25_26_27_28_29_30_31_32_33_34_35_36_37_38_39_40_41_42_43_44_45_46_47_48_49_5_50_51_52_53_54_55_56_57_58_59_60_61_62_63_64_65_66_67_68_69_70_71_72_73_74_75_76_77_78_79_8_80_81_82_83_84_85_86_87_88_89_9_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-mbstring/bootstrap80.php::::101_104_107_110_114_118_121_124_127_131_135_139_14_143_147_151_155_156_17_20_23_26_29_32_35_38_41_44_47_50_53_56_59_62_65_68_71_74_77_80_83_86_89_92_95_98",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/strauss/autoload.php::::12_15_18_20_4_5_6_7_8_9",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_499_500_515_522_528_531_544_551_555_563_575_576_577_578_580",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/woocommerce-pdf-invoices-packingslips.php::::119_120_122_130_131_133_143_144_145_146_147_149_17_191_192_209_21_210_211_251_252_253_255_259_53_54_56_63_64_66_67_68_77_80_81_82_83_84_85_86_87_88_89_892_899_90_900_905_91_919_92_922_923_93_96_97",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-iconv/bootstrap.php::::14_15",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/autoload.php::::20_22_5",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-mbstring/bootstrap.php::::14_15",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/autoload_real.php::::11_12_14_21_25_26_27_29_30_32_34_35_36_37_39_41_42_43_46_49",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/autoload_static.php::::142_143_144_145_147_150",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/includes/Semaphore.php::::461_462_481_5_9"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 11,
+    "is_interesting": false,
+    "fuzzer_id": "8",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "store"
+  },
+  {
+    "coverage_id": "1786971071-1cc6440c-79d3-4db9-82e0-9c0eac89c8c2",
+    "priority": 11,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "wpo_wcpdf_set_next_number"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "number": "f0zz",
+        "store": "fuzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "",
+    "response.body.length": 0,
+    "response.headers": {},
+    "response.status.code": 0,
+    "response.time": 0,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786971065-335eb857-1562-41e9-be1e-58275088b580",
+    "paths": [
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/strauss/autoload-classmap.php::::10_100_101_102_103_104_105_106_107_108_109_11_110_111_112_113_114_115_116_117_118_119_12_120_121_122_123_124_125_126_127_128_129_13_130_131_132_133_134_135_136_137_138_139_14_140_141_142_143_144_145_146_147_148_149_15_150_151_152_153_154_155_156_157_158_159_16_160_161_162_163_164_165_166_167_168_169_17_170_171_172_173_174_175_176_177_178_179_18_180_181_182_183_184_185_186_187_188_189_19_190_191_192_193_194_195_196_197_198_199_20_200_201_202_203_204_205_206_207_208_209_21_210_211_212_213_214_215_216_217_218_219_22_220_221_222_223_224_225_226_227_228_229_23_230_231_232_233_234_235_24_25_26_27_28_29_30_31_32_33_34_35_36_37_38_39_40_41_42_43_44_45_46_47_48_49_5_50_51_52_53_54_55_56_57_58_59_60_61_62_63_64_65_66_67_68_69_70_71_72_73_74_75_76_77_78_79_8_80_81_82_83_84_85_86_87_88_89_9_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-mbstring/bootstrap80.php::::101_104_107_110_114_118_121_124_127_131_135_139_14_143_147_151_155_156_17_20_23_26_29_32_35_38_41_44_47_50_53_56_59_62_65_68_71_74_77_80_83_86_89_92_95_98",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/strauss/autoload.php::::12_15_18_20_4_5_6_7_8_9",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_499_500_515_522_528_531_544_551_555_563_575_576_577_578_580",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/woocommerce-pdf-invoices-packingslips.php::::119_120_122_130_131_133_143_144_145_146_147_149_17_191_192_209_21_210_211_251_252_253_255_259_53_54_56_63_64_66_67_68_77_80_81_82_83_84_85_86_87_88_89_892_899_90_900_905_91_919_92_922_923_93_96_97",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-iconv/bootstrap.php::::14_15",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/autoload.php::::20_22_5",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-mbstring/bootstrap.php::::14_15",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/autoload_real.php::::11_12_14_21_25_26_27_29_30_32_34_35_36_37_39_41_42_43_46_49",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/autoload_static.php::::142_143_144_145_147_150",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/includes/Semaphore.php::::461_462_481_5_9"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 11,
+    "is_interesting": false,
+    "fuzzer_id": "8",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "number"
+  },
+  {
+    "coverage_id": "1786971071-37d35a8c-7d4f-477e-8bb9-5b619256cd0f",
+    "priority": 11,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "wpo_wcpdf_set_next_number"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "number": "fu@z",
+        "store": "fuzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "",
+    "response.body.length": 0,
+    "response.headers": {},
+    "response.status.code": 0,
+    "response.time": 0,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786971065-335eb857-1562-41e9-be1e-58275088b580",
+    "paths": [
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/strauss/autoload-classmap.php::::10_100_101_102_103_104_105_106_107_108_109_11_110_111_112_113_114_115_116_117_118_119_12_120_121_122_123_124_125_126_127_128_129_13_130_131_132_133_134_135_136_137_138_139_14_140_141_142_143_144_145_146_147_148_149_15_150_151_152_153_154_155_156_157_158_159_16_160_161_162_163_164_165_166_167_168_169_17_170_171_172_173_174_175_176_177_178_179_18_180_181_182_183_184_185_186_187_188_189_19_190_191_192_193_194_195_196_197_198_199_20_200_201_202_203_204_205_206_207_208_209_21_210_211_212_213_214_215_216_217_218_219_22_220_221_222_223_224_225_226_227_228_229_23_230_231_232_233_234_235_24_25_26_27_28_29_30_31_32_33_34_35_36_37_38_39_40_41_42_43_44_45_46_47_48_49_5_50_51_52_53_54_55_56_57_58_59_60_61_62_63_64_65_66_67_68_69_70_71_72_73_74_75_76_77_78_79_8_80_81_82_83_84_85_86_87_88_89_9_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-mbstring/bootstrap80.php::::101_104_107_110_114_118_121_124_127_131_135_139_14_143_147_151_155_156_17_20_23_26_29_32_35_38_41_44_47_50_53_56_59_62_65_68_71_74_77_80_83_86_89_92_95_98",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/strauss/autoload.php::::12_15_18_20_4_5_6_7_8_9",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_499_500_515_522_528_531_544_551_555_563_575_576_577_578_580",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/woocommerce-pdf-invoices-packingslips.php::::119_120_122_130_131_133_143_144_145_146_147_149_17_191_192_209_21_210_211_251_252_253_255_259_53_54_56_63_64_66_67_68_77_80_81_82_83_84_85_86_87_88_89_892_899_90_900_905_91_919_92_922_923_93_96_97",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-iconv/bootstrap.php::::14_15",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/autoload.php::::20_22_5",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-mbstring/bootstrap.php::::14_15",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/autoload_real.php::::11_12_14_21_25_26_27_29_30_32_34_35_36_37_39_41_42_43_46_49",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/autoload_static.php::::142_143_144_145_147_150",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/includes/Semaphore.php::::461_462_481_5_9"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 11,
+    "is_interesting": false,
+    "fuzzer_id": "8",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "number"
+  },
+  {
+    "coverage_id": "1786971072-0c5bd55e-00cd-4621-9ad2-2e1f4b478f87",
+    "priority": 11,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "wpo_wcpdf_set_next_number"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "number": "fuzz:",
+        "store": "fuzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "",
+    "response.body.length": 0,
+    "response.headers": {},
+    "response.status.code": 0,
+    "response.time": 0,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786971065-335eb857-1562-41e9-be1e-58275088b580",
+    "paths": [
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/strauss/autoload-classmap.php::::10_100_101_102_103_104_105_106_107_108_109_11_110_111_112_113_114_115_116_117_118_119_12_120_121_122_123_124_125_126_127_128_129_13_130_131_132_133_134_135_136_137_138_139_14_140_141_142_143_144_145_146_147_148_149_15_150_151_152_153_154_155_156_157_158_159_16_160_161_162_163_164_165_166_167_168_169_17_170_171_172_173_174_175_176_177_178_179_18_180_181_182_183_184_185_186_187_188_189_19_190_191_192_193_194_195_196_197_198_199_20_200_201_202_203_204_205_206_207_208_209_21_210_211_212_213_214_215_216_217_218_219_22_220_221_222_223_224_225_226_227_228_229_23_230_231_232_233_234_235_24_25_26_27_28_29_30_31_32_33_34_35_36_37_38_39_40_41_42_43_44_45_46_47_48_49_5_50_51_52_53_54_55_56_57_58_59_60_61_62_63_64_65_66_67_68_69_70_71_72_73_74_75_76_77_78_79_8_80_81_82_83_84_85_86_87_88_89_9_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-mbstring/bootstrap80.php::::101_104_107_110_114_118_121_124_127_131_135_139_14_143_147_151_155_156_17_20_23_26_29_32_35_38_41_44_47_50_53_56_59_62_65_68_71_74_77_80_83_86_89_92_95_98",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/strauss/autoload.php::::12_15_18_20_4_5_6_7_8_9",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_499_500_515_522_528_531_544_551_555_563_575_576_577_578_580",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/woocommerce-pdf-invoices-packingslips.php::::119_120_122_130_131_133_143_144_145_146_147_149_17_191_192_209_21_210_211_251_252_253_255_259_53_54_56_63_64_66_67_68_77_80_81_82_83_84_85_86_87_88_89_892_899_90_900_905_91_919_92_922_923_93_96_97",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-iconv/bootstrap.php::::14_15",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/autoload.php::::20_22_5",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-mbstring/bootstrap.php::::14_15",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/autoload_real.php::::11_12_14_21_25_26_27_29_30_32_34_35_36_37_39_41_42_43_46_49",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/autoload_static.php::::142_143_144_145_147_150",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/includes/Semaphore.php::::461_462_481_5_9"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 11,
+    "is_interesting": false,
+    "fuzzer_id": "8",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "number"
+  },
+  {
+    "coverage_id": "1786971072-0a8c98a9-e35e-4741-b372-8c0a7ef3af21",
+    "priority": 11,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "wpo_wcpdf_set_next_number"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "number": "fuzz",
+        "store": "fuzz\u0004"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "",
+    "response.body.length": 0,
+    "response.headers": {},
+    "response.status.code": 0,
+    "response.time": 0,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786971065-335eb857-1562-41e9-be1e-58275088b580",
+    "paths": [
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/strauss/autoload-classmap.php::::10_100_101_102_103_104_105_106_107_108_109_11_110_111_112_113_114_115_116_117_118_119_12_120_121_122_123_124_125_126_127_128_129_13_130_131_132_133_134_135_136_137_138_139_14_140_141_142_143_144_145_146_147_148_149_15_150_151_152_153_154_155_156_157_158_159_16_160_161_162_163_164_165_166_167_168_169_17_170_171_172_173_174_175_176_177_178_179_18_180_181_182_183_184_185_186_187_188_189_19_190_191_192_193_194_195_196_197_198_199_20_200_201_202_203_204_205_206_207_208_209_21_210_211_212_213_214_215_216_217_218_219_22_220_221_222_223_224_225_226_227_228_229_23_230_231_232_233_234_235_24_25_26_27_28_29_30_31_32_33_34_35_36_37_38_39_40_41_42_43_44_45_46_47_48_49_5_50_51_52_53_54_55_56_57_58_59_60_61_62_63_64_65_66_67_68_69_70_71_72_73_74_75_76_77_78_79_8_80_81_82_83_84_85_86_87_88_89_9_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-mbstring/bootstrap80.php::::101_104_107_110_114_118_121_124_127_131_135_139_14_143_147_151_155_156_17_20_23_26_29_32_35_38_41_44_47_50_53_56_59_62_65_68_71_74_77_80_83_86_89_92_95_98",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/strauss/autoload.php::::12_15_18_20_4_5_6_7_8_9",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_499_500_515_522_528_531_544_551_555_563_575_576_577_578_580",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/woocommerce-pdf-invoices-packingslips.php::::119_120_122_130_131_133_143_144_145_146_147_149_17_191_192_209_21_210_211_251_252_253_255_259_53_54_56_63_64_66_67_68_77_80_81_82_83_84_85_86_87_88_89_892_899_90_900_905_91_919_92_922_923_93_96_97",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-iconv/bootstrap.php::::14_15",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/autoload.php::::20_22_5",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-mbstring/bootstrap.php::::14_15",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/autoload_real.php::::11_12_14_21_25_26_27_29_30_32_34_35_36_37_39_41_42_43_46_49",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/autoload_static.php::::142_143_144_145_147_150",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/includes/Semaphore.php::::461_462_481_5_9"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 11,
+    "is_interesting": false,
+    "fuzzer_id": "8",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "store"
+  },
+  {
+    "coverage_id": "1786971073-cb8ad67e-8f46-49a9-861c-5c2677dbbb31",
+    "priority": 11,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "wpo_wcpdf_set_next_number"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "number": "fuzz",
+        "store": "f\r\nuzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "",
+    "response.body.length": 0,
+    "response.headers": {},
+    "response.status.code": 0,
+    "response.time": 0,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786971065-335eb857-1562-41e9-be1e-58275088b580",
+    "paths": [
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/strauss/autoload-classmap.php::::10_100_101_102_103_104_105_106_107_108_109_11_110_111_112_113_114_115_116_117_118_119_12_120_121_122_123_124_125_126_127_128_129_13_130_131_132_133_134_135_136_137_138_139_14_140_141_142_143_144_145_146_147_148_149_15_150_151_152_153_154_155_156_157_158_159_16_160_161_162_163_164_165_166_167_168_169_17_170_171_172_173_174_175_176_177_178_179_18_180_181_182_183_184_185_186_187_188_189_19_190_191_192_193_194_195_196_197_198_199_20_200_201_202_203_204_205_206_207_208_209_21_210_211_212_213_214_215_216_217_218_219_22_220_221_222_223_224_225_226_227_228_229_23_230_231_232_233_234_235_24_25_26_27_28_29_30_31_32_33_34_35_36_37_38_39_40_41_42_43_44_45_46_47_48_49_5_50_51_52_53_54_55_56_57_58_59_60_61_62_63_64_65_66_67_68_69_70_71_72_73_74_75_76_77_78_79_8_80_81_82_83_84_85_86_87_88_89_9_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-mbstring/bootstrap80.php::::101_104_107_110_114_118_121_124_127_131_135_139_14_143_147_151_155_156_17_20_23_26_29_32_35_38_41_44_47_50_53_56_59_62_65_68_71_74_77_80_83_86_89_92_95_98",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/strauss/autoload.php::::12_15_18_20_4_5_6_7_8_9",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_499_500_515_522_528_531_544_551_555_563_575_576_577_578_580",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/woocommerce-pdf-invoices-packingslips.php::::119_120_122_130_131_133_143_144_145_146_147_149_17_191_192_209_21_210_211_251_252_253_255_259_53_54_56_63_64_66_67_68_77_80_81_82_83_84_85_86_87_88_89_892_899_90_900_905_91_919_92_922_923_93_96_97",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-iconv/bootstrap.php::::14_15",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/autoload.php::::20_22_5",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-mbstring/bootstrap.php::::14_15",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/autoload_real.php::::11_12_14_21_25_26_27_29_30_32_34_35_36_37_39_41_42_43_46_49",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/autoload_static.php::::142_143_144_145_147_150",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/includes/Semaphore.php::::461_462_481_5_9"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 11,
+    "is_interesting": false,
+    "fuzzer_id": "8",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "store"
+  },
+  {
+    "coverage_id": "1786971073-d7359655-b379-4495-ad5d-ceb9213369a0",
+    "priority": 11,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "wpo_wcpdf_set_next_number"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "number": "{{99901*'99991'}}",
+        "store": "fuzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "",
+    "response.body.length": 0,
+    "response.headers": {},
+    "response.status.code": 0,
+    "response.time": 0,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786971065-335eb857-1562-41e9-be1e-58275088b580",
+    "paths": [
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/strauss/autoload-classmap.php::::10_100_101_102_103_104_105_106_107_108_109_11_110_111_112_113_114_115_116_117_118_119_12_120_121_122_123_124_125_126_127_128_129_13_130_131_132_133_134_135_136_137_138_139_14_140_141_142_143_144_145_146_147_148_149_15_150_151_152_153_154_155_156_157_158_159_16_160_161_162_163_164_165_166_167_168_169_17_170_171_172_173_174_175_176_177_178_179_18_180_181_182_183_184_185_186_187_188_189_19_190_191_192_193_194_195_196_197_198_199_20_200_201_202_203_204_205_206_207_208_209_21_210_211_212_213_214_215_216_217_218_219_22_220_221_222_223_224_225_226_227_228_229_23_230_231_232_233_234_235_24_25_26_27_28_29_30_31_32_33_34_35_36_37_38_39_40_41_42_43_44_45_46_47_48_49_5_50_51_52_53_54_55_56_57_58_59_60_61_62_63_64_65_66_67_68_69_70_71_72_73_74_75_76_77_78_79_8_80_81_82_83_84_85_86_87_88_89_9_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-mbstring/bootstrap80.php::::101_104_107_110_114_118_121_124_127_131_135_139_14_143_147_151_155_156_17_20_23_26_29_32_35_38_41_44_47_50_53_56_59_62_65_68_71_74_77_80_83_86_89_92_95_98",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/strauss/autoload.php::::12_15_18_20_4_5_6_7_8_9",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_499_500_515_522_528_531_544_551_555_563_575_576_577_578_580",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/woocommerce-pdf-invoices-packingslips.php::::119_120_122_130_131_133_143_144_145_146_147_149_17_191_192_209_21_210_211_251_252_253_255_259_53_54_56_63_64_66_67_68_77_80_81_82_83_84_85_86_87_88_89_892_899_90_900_905_91_919_92_922_923_93_96_97",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-iconv/bootstrap.php::::14_15",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/autoload.php::::20_22_5",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-mbstring/bootstrap.php::::14_15",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/autoload_real.php::::11_12_14_21_25_26_27_29_30_32_34_35_36_37_39_41_42_43_46_49",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/autoload_static.php::::142_143_144_145_147_150",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/includes/Semaphore.php::::461_462_481_5_9"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 11,
+    "is_interesting": false,
+    "fuzzer_id": "8",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "number"
+  },
+  {
+    "coverage_id": "1786971074-d89c6c68-af7f-4f85-937c-fd9466508c8c",
+    "priority": 11,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "wpo_wcpdf_set_next_number"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "number": "fuzz",
+        "store": "\u0003fuzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "",
+    "response.body.length": 0,
+    "response.headers": {},
+    "response.status.code": 0,
+    "response.time": 0,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786971065-335eb857-1562-41e9-be1e-58275088b580",
+    "paths": [
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/strauss/autoload-classmap.php::::10_100_101_102_103_104_105_106_107_108_109_11_110_111_112_113_114_115_116_117_118_119_12_120_121_122_123_124_125_126_127_128_129_13_130_131_132_133_134_135_136_137_138_139_14_140_141_142_143_144_145_146_147_148_149_15_150_151_152_153_154_155_156_157_158_159_16_160_161_162_163_164_165_166_167_168_169_17_170_171_172_173_174_175_176_177_178_179_18_180_181_182_183_184_185_186_187_188_189_19_190_191_192_193_194_195_196_197_198_199_20_200_201_202_203_204_205_206_207_208_209_21_210_211_212_213_214_215_216_217_218_219_22_220_221_222_223_224_225_226_227_228_229_23_230_231_232_233_234_235_24_25_26_27_28_29_30_31_32_33_34_35_36_37_38_39_40_41_42_43_44_45_46_47_48_49_5_50_51_52_53_54_55_56_57_58_59_60_61_62_63_64_65_66_67_68_69_70_71_72_73_74_75_76_77_78_79_8_80_81_82_83_84_85_86_87_88_89_9_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-mbstring/bootstrap80.php::::101_104_107_110_114_118_121_124_127_131_135_139_14_143_147_151_155_156_17_20_23_26_29_32_35_38_41_44_47_50_53_56_59_62_65_68_71_74_77_80_83_86_89_92_95_98",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/strauss/autoload.php::::12_15_18_20_4_5_6_7_8_9",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_499_500_515_522_528_531_544_551_555_563_575_576_577_578_580",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/woocommerce-pdf-invoices-packingslips.php::::119_120_122_130_131_133_143_144_145_146_147_149_17_191_192_209_21_210_211_251_252_253_255_259_53_54_56_63_64_66_67_68_77_80_81_82_83_84_85_86_87_88_89_892_899_90_900_905_91_919_92_922_923_93_96_97",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-iconv/bootstrap.php::::14_15",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/autoload.php::::20_22_5",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-mbstring/bootstrap.php::::14_15",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/autoload_real.php::::11_12_14_21_25_26_27_29_30_32_34_35_36_37_39_41_42_43_46_49",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/autoload_static.php::::142_143_144_145_147_150",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/includes/Semaphore.php::::461_462_481_5_9"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 11,
+    "is_interesting": false,
+    "fuzzer_id": "8",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "store"
+  },
+  {
+    "coverage_id": "1786971074-b9a48b2f-71ed-4873-b33d-5c8d85659fa2",
+    "priority": 11,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "wpo_wcpdf_set_next_number"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "number": "ouzz",
+        "store": "fuzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "",
+    "response.body.length": 0,
+    "response.headers": {},
+    "response.status.code": 0,
+    "response.time": 0,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786971065-335eb857-1562-41e9-be1e-58275088b580",
+    "paths": [
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/strauss/autoload-classmap.php::::10_100_101_102_103_104_105_106_107_108_109_11_110_111_112_113_114_115_116_117_118_119_12_120_121_122_123_124_125_126_127_128_129_13_130_131_132_133_134_135_136_137_138_139_14_140_141_142_143_144_145_146_147_148_149_15_150_151_152_153_154_155_156_157_158_159_16_160_161_162_163_164_165_166_167_168_169_17_170_171_172_173_174_175_176_177_178_179_18_180_181_182_183_184_185_186_187_188_189_19_190_191_192_193_194_195_196_197_198_199_20_200_201_202_203_204_205_206_207_208_209_21_210_211_212_213_214_215_216_217_218_219_22_220_221_222_223_224_225_226_227_228_229_23_230_231_232_233_234_235_24_25_26_27_28_29_30_31_32_33_34_35_36_37_38_39_40_41_42_43_44_45_46_47_48_49_5_50_51_52_53_54_55_56_57_58_59_60_61_62_63_64_65_66_67_68_69_70_71_72_73_74_75_76_77_78_79_8_80_81_82_83_84_85_86_87_88_89_9_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-mbstring/bootstrap80.php::::101_104_107_110_114_118_121_124_127_131_135_139_14_143_147_151_155_156_17_20_23_26_29_32_35_38_41_44_47_50_53_56_59_62_65_68_71_74_77_80_83_86_89_92_95_98",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/strauss/autoload.php::::12_15_18_20_4_5_6_7_8_9",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_499_500_515_522_528_531_544_551_555_563_575_576_577_578_580",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/woocommerce-pdf-invoices-packingslips.php::::119_120_122_130_131_133_143_144_145_146_147_149_17_191_192_209_21_210_211_251_252_253_255_259_53_54_56_63_64_66_67_68_77_80_81_82_83_84_85_86_87_88_89_892_899_90_900_905_91_919_92_922_923_93_96_97",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-iconv/bootstrap.php::::14_15",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/autoload.php::::20_22_5",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-mbstring/bootstrap.php::::14_15",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/autoload_real.php::::11_12_14_21_25_26_27_29_30_32_34_35_36_37_39_41_42_43_46_49",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/autoload_static.php::::142_143_144_145_147_150",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/includes/Semaphore.php::::461_462_481_5_9"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 11,
+    "is_interesting": false,
+    "fuzzer_id": "8",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "number"
+  },
+  {
+    "coverage_id": "1786971075-19d8ca27-b4fc-487f-b389-7d22e6fff4e2",
+    "priority": 11,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "wpo_wcpdf_set_next_number"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "number": "fuzpz",
+        "store": "fuzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "",
+    "response.body.length": 0,
+    "response.headers": {},
+    "response.status.code": 0,
+    "response.time": 0,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786971065-335eb857-1562-41e9-be1e-58275088b580",
+    "paths": [
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/strauss/autoload-classmap.php::::10_100_101_102_103_104_105_106_107_108_109_11_110_111_112_113_114_115_116_117_118_119_12_120_121_122_123_124_125_126_127_128_129_13_130_131_132_133_134_135_136_137_138_139_14_140_141_142_143_144_145_146_147_148_149_15_150_151_152_153_154_155_156_157_158_159_16_160_161_162_163_164_165_166_167_168_169_17_170_171_172_173_174_175_176_177_178_179_18_180_181_182_183_184_185_186_187_188_189_19_190_191_192_193_194_195_196_197_198_199_20_200_201_202_203_204_205_206_207_208_209_21_210_211_212_213_214_215_216_217_218_219_22_220_221_222_223_224_225_226_227_228_229_23_230_231_232_233_234_235_24_25_26_27_28_29_30_31_32_33_34_35_36_37_38_39_40_41_42_43_44_45_46_47_48_49_5_50_51_52_53_54_55_56_57_58_59_60_61_62_63_64_65_66_67_68_69_70_71_72_73_74_75_76_77_78_79_8_80_81_82_83_84_85_86_87_88_89_9_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-mbstring/bootstrap80.php::::101_104_107_110_114_118_121_124_127_131_135_139_14_143_147_151_155_156_17_20_23_26_29_32_35_38_41_44_47_50_53_56_59_62_65_68_71_74_77_80_83_86_89_92_95_98",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/strauss/autoload.php::::12_15_18_20_4_5_6_7_8_9",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_499_500_515_522_528_531_544_551_555_563_575_576_577_578_580",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/woocommerce-pdf-invoices-packingslips.php::::119_120_122_130_131_133_143_144_145_146_147_149_17_191_192_209_21_210_211_251_252_253_255_259_53_54_56_63_64_66_67_68_77_80_81_82_83_84_85_86_87_88_89_892_899_90_900_905_91_919_92_922_923_93_96_97",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-iconv/bootstrap.php::::14_15",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/autoload.php::::20_22_5",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-mbstring/bootstrap.php::::14_15",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/autoload_real.php::::11_12_14_21_25_26_27_29_30_32_34_35_36_37_39_41_42_43_46_49",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/autoload_static.php::::142_143_144_145_147_150",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/includes/Semaphore.php::::461_462_481_5_9"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 11,
+    "is_interesting": false,
+    "fuzzer_id": "8",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "number"
+  },
+  {
+    "coverage_id": "1786971075-a7c59c82-8aa7-4a35-a577-2c85c0c4596f",
+    "priority": 11,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "wpo_wcpdf_set_next_number"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "number": "fu5z",
+        "store": "fuzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "",
+    "response.body.length": 0,
+    "response.headers": {},
+    "response.status.code": 0,
+    "response.time": 0,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786971065-335eb857-1562-41e9-be1e-58275088b580",
+    "paths": [
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/strauss/autoload-classmap.php::::10_100_101_102_103_104_105_106_107_108_109_11_110_111_112_113_114_115_116_117_118_119_12_120_121_122_123_124_125_126_127_128_129_13_130_131_132_133_134_135_136_137_138_139_14_140_141_142_143_144_145_146_147_148_149_15_150_151_152_153_154_155_156_157_158_159_16_160_161_162_163_164_165_166_167_168_169_17_170_171_172_173_174_175_176_177_178_179_18_180_181_182_183_184_185_186_187_188_189_19_190_191_192_193_194_195_196_197_198_199_20_200_201_202_203_204_205_206_207_208_209_21_210_211_212_213_214_215_216_217_218_219_22_220_221_222_223_224_225_226_227_228_229_23_230_231_232_233_234_235_24_25_26_27_28_29_30_31_32_33_34_35_36_37_38_39_40_41_42_43_44_45_46_47_48_49_5_50_51_52_53_54_55_56_57_58_59_60_61_62_63_64_65_66_67_68_69_70_71_72_73_74_75_76_77_78_79_8_80_81_82_83_84_85_86_87_88_89_9_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-mbstring/bootstrap80.php::::101_104_107_110_114_118_121_124_127_131_135_139_14_143_147_151_155_156_17_20_23_26_29_32_35_38_41_44_47_50_53_56_59_62_65_68_71_74_77_80_83_86_89_92_95_98",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/strauss/autoload.php::::12_15_18_20_4_5_6_7_8_9",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_499_500_515_522_528_531_544_551_555_563_575_576_577_578_580",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/woocommerce-pdf-invoices-packingslips.php::::119_120_122_130_131_133_143_144_145_146_147_149_17_191_192_209_21_210_211_251_252_253_255_259_53_54_56_63_64_66_67_68_77_80_81_82_83_84_85_86_87_88_89_892_899_90_900_905_91_919_92_922_923_93_96_97",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-iconv/bootstrap.php::::14_15",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/autoload.php::::20_22_5",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-mbstring/bootstrap.php::::14_15",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/autoload_real.php::::11_12_14_21_25_26_27_29_30_32_34_35_36_37_39_41_42_43_46_49",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/autoload_static.php::::142_143_144_145_147_150",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/includes/Semaphore.php::::461_462_481_5_9"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 11,
+    "is_interesting": false,
+    "fuzzer_id": "8",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "number"
+  },
+  {
+    "coverage_id": "1786971075-101bee5f-cc7e-4416-aa10-6218a0e748ed",
+    "priority": 11,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "wpo_wcpdf_set_next_number"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "number": "fuz../z",
+        "store": "fuzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "",
+    "response.body.length": 0,
+    "response.headers": {},
+    "response.status.code": 0,
+    "response.time": 0,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786971065-335eb857-1562-41e9-be1e-58275088b580",
+    "paths": [
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/strauss/autoload-classmap.php::::10_100_101_102_103_104_105_106_107_108_109_11_110_111_112_113_114_115_116_117_118_119_12_120_121_122_123_124_125_126_127_128_129_13_130_131_132_133_134_135_136_137_138_139_14_140_141_142_143_144_145_146_147_148_149_15_150_151_152_153_154_155_156_157_158_159_16_160_161_162_163_164_165_166_167_168_169_17_170_171_172_173_174_175_176_177_178_179_18_180_181_182_183_184_185_186_187_188_189_19_190_191_192_193_194_195_196_197_198_199_20_200_201_202_203_204_205_206_207_208_209_21_210_211_212_213_214_215_216_217_218_219_22_220_221_222_223_224_225_226_227_228_229_23_230_231_232_233_234_235_24_25_26_27_28_29_30_31_32_33_34_35_36_37_38_39_40_41_42_43_44_45_46_47_48_49_5_50_51_52_53_54_55_56_57_58_59_60_61_62_63_64_65_66_67_68_69_70_71_72_73_74_75_76_77_78_79_8_80_81_82_83_84_85_86_87_88_89_9_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-mbstring/bootstrap80.php::::101_104_107_110_114_118_121_124_127_131_135_139_14_143_147_151_155_156_17_20_23_26_29_32_35_38_41_44_47_50_53_56_59_62_65_68_71_74_77_80_83_86_89_92_95_98",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/strauss/autoload.php::::12_15_18_20_4_5_6_7_8_9",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_499_500_515_522_528_531_544_551_555_563_575_576_577_578_580",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/woocommerce-pdf-invoices-packingslips.php::::119_120_122_130_131_133_143_144_145_146_147_149_17_191_192_209_21_210_211_251_252_253_255_259_53_54_56_63_64_66_67_68_77_80_81_82_83_84_85_86_87_88_89_892_899_90_900_905_91_919_92_922_923_93_96_97",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-iconv/bootstrap.php::::14_15",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/autoload.php::::20_22_5",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-mbstring/bootstrap.php::::14_15",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/autoload_real.php::::11_12_14_21_25_26_27_29_30_32_34_35_36_37_39_41_42_43_46_49",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/autoload_static.php::::142_143_144_145_147_150",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/includes/Semaphore.php::::461_462_481_5_9"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 11,
+    "is_interesting": false,
+    "fuzzer_id": "8",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "number"
+  },
+  {
+    "coverage_id": "1786971076-b224c725-8aca-442a-aec3-6ab6a3a10c9a",
+    "priority": 11,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "wpo_wcpdf_set_next_number"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "number": "fuzz",
+        "store": "fu5z"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "",
+    "response.body.length": 0,
+    "response.headers": {},
+    "response.status.code": 0,
+    "response.time": 0,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786971065-335eb857-1562-41e9-be1e-58275088b580",
+    "paths": [
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/strauss/autoload-classmap.php::::10_100_101_102_103_104_105_106_107_108_109_11_110_111_112_113_114_115_116_117_118_119_12_120_121_122_123_124_125_126_127_128_129_13_130_131_132_133_134_135_136_137_138_139_14_140_141_142_143_144_145_146_147_148_149_15_150_151_152_153_154_155_156_157_158_159_16_160_161_162_163_164_165_166_167_168_169_17_170_171_172_173_174_175_176_177_178_179_18_180_181_182_183_184_185_186_187_188_189_19_190_191_192_193_194_195_196_197_198_199_20_200_201_202_203_204_205_206_207_208_209_21_210_211_212_213_214_215_216_217_218_219_22_220_221_222_223_224_225_226_227_228_229_23_230_231_232_233_234_235_24_25_26_27_28_29_30_31_32_33_34_35_36_37_38_39_40_41_42_43_44_45_46_47_48_49_5_50_51_52_53_54_55_56_57_58_59_60_61_62_63_64_65_66_67_68_69_70_71_72_73_74_75_76_77_78_79_8_80_81_82_83_84_85_86_87_88_89_9_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-mbstring/bootstrap80.php::::101_104_107_110_114_118_121_124_127_131_135_139_14_143_147_151_155_156_17_20_23_26_29_32_35_38_41_44_47_50_53_56_59_62_65_68_71_74_77_80_83_86_89_92_95_98",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/strauss/autoload.php::::12_15_18_20_4_5_6_7_8_9",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_499_500_515_522_528_531_544_551_555_563_575_576_577_578_580",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/woocommerce-pdf-invoices-packingslips.php::::119_120_122_130_131_133_143_144_145_146_147_149_17_191_192_209_21_210_211_251_252_253_255_259_53_54_56_63_64_66_67_68_77_80_81_82_83_84_85_86_87_88_89_892_899_90_900_905_91_919_92_922_923_93_96_97",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-iconv/bootstrap.php::::14_15",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/autoload.php::::20_22_5",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-mbstring/bootstrap.php::::14_15",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/autoload_real.php::::11_12_14_21_25_26_27_29_30_32_34_35_36_37_39_41_42_43_46_49",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/autoload_static.php::::142_143_144_145_147_150",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/includes/Semaphore.php::::461_462_481_5_9"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 11,
+    "is_interesting": false,
+    "fuzzer_id": "8",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "store"
+  },
+  {
+    "coverage_id": "1786971076-c37d26b8-34c2-48a9-9841-bbbc3d37822f",
+    "priority": 11,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "wpo_wcpdf_set_next_number"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "number": "fuzz",
+        "store": "tuzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "",
+    "response.body.length": 0,
+    "response.headers": {},
+    "response.status.code": 0,
+    "response.time": 0,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786971065-335eb857-1562-41e9-be1e-58275088b580",
+    "paths": [
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/strauss/autoload-classmap.php::::10_100_101_102_103_104_105_106_107_108_109_11_110_111_112_113_114_115_116_117_118_119_12_120_121_122_123_124_125_126_127_128_129_13_130_131_132_133_134_135_136_137_138_139_14_140_141_142_143_144_145_146_147_148_149_15_150_151_152_153_154_155_156_157_158_159_16_160_161_162_163_164_165_166_167_168_169_17_170_171_172_173_174_175_176_177_178_179_18_180_181_182_183_184_185_186_187_188_189_19_190_191_192_193_194_195_196_197_198_199_20_200_201_202_203_204_205_206_207_208_209_21_210_211_212_213_214_215_216_217_218_219_22_220_221_222_223_224_225_226_227_228_229_23_230_231_232_233_234_235_24_25_26_27_28_29_30_31_32_33_34_35_36_37_38_39_40_41_42_43_44_45_46_47_48_49_5_50_51_52_53_54_55_56_57_58_59_60_61_62_63_64_65_66_67_68_69_70_71_72_73_74_75_76_77_78_79_8_80_81_82_83_84_85_86_87_88_89_9_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-mbstring/bootstrap80.php::::101_104_107_110_114_118_121_124_127_131_135_139_14_143_147_151_155_156_17_20_23_26_29_32_35_38_41_44_47_50_53_56_59_62_65_68_71_74_77_80_83_86_89_92_95_98",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/strauss/autoload.php::::12_15_18_20_4_5_6_7_8_9",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_499_500_515_522_528_531_544_551_555_563_575_576_577_578_580",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/woocommerce-pdf-invoices-packingslips.php::::119_120_122_130_131_133_143_144_145_146_147_149_17_191_192_209_21_210_211_251_252_253_255_259_53_54_56_63_64_66_67_68_77_80_81_82_83_84_85_86_87_88_89_892_899_90_900_905_91_919_92_922_923_93_96_97",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-iconv/bootstrap.php::::14_15",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/autoload.php::::20_22_5",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-mbstring/bootstrap.php::::14_15",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/autoload_real.php::::11_12_14_21_25_26_27_29_30_32_34_35_36_37_39_41_42_43_46_49",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/autoload_static.php::::142_143_144_145_147_150",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/includes/Semaphore.php::::461_462_481_5_9"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 11,
+    "is_interesting": false,
+    "fuzzer_id": "8",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "store"
+  },
+  {
+    "coverage_id": "1786971077-fbeecbde-68ff-44bb-b885-9616767dda2c",
+    "priority": 11,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "wpo_wcpdf_set_next_number"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "number": "fuzz",
+        "store": "fuzz\u0002"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "",
+    "response.body.length": 0,
+    "response.headers": {},
+    "response.status.code": 0,
+    "response.time": 0,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786971065-335eb857-1562-41e9-be1e-58275088b580",
+    "paths": [
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/strauss/autoload-classmap.php::::10_100_101_102_103_104_105_106_107_108_109_11_110_111_112_113_114_115_116_117_118_119_12_120_121_122_123_124_125_126_127_128_129_13_130_131_132_133_134_135_136_137_138_139_14_140_141_142_143_144_145_146_147_148_149_15_150_151_152_153_154_155_156_157_158_159_16_160_161_162_163_164_165_166_167_168_169_17_170_171_172_173_174_175_176_177_178_179_18_180_181_182_183_184_185_186_187_188_189_19_190_191_192_193_194_195_196_197_198_199_20_200_201_202_203_204_205_206_207_208_209_21_210_211_212_213_214_215_216_217_218_219_22_220_221_222_223_224_225_226_227_228_229_23_230_231_232_233_234_235_24_25_26_27_28_29_30_31_32_33_34_35_36_37_38_39_40_41_42_43_44_45_46_47_48_49_5_50_51_52_53_54_55_56_57_58_59_60_61_62_63_64_65_66_67_68_69_70_71_72_73_74_75_76_77_78_79_8_80_81_82_83_84_85_86_87_88_89_9_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-mbstring/bootstrap80.php::::101_104_107_110_114_118_121_124_127_131_135_139_14_143_147_151_155_156_17_20_23_26_29_32_35_38_41_44_47_50_53_56_59_62_65_68_71_74_77_80_83_86_89_92_95_98",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/strauss/autoload.php::::12_15_18_20_4_5_6_7_8_9",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_499_500_515_522_528_531_544_551_555_563_575_576_577_578_580",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/woocommerce-pdf-invoices-packingslips.php::::119_120_122_130_131_133_143_144_145_146_147_149_17_191_192_209_21_210_211_251_252_253_255_259_53_54_56_63_64_66_67_68_77_80_81_82_83_84_85_86_87_88_89_892_899_90_900_905_91_919_92_922_923_93_96_97",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-iconv/bootstrap.php::::14_15",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/autoload.php::::20_22_5",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-mbstring/bootstrap.php::::14_15",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/autoload_real.php::::11_12_14_21_25_26_27_29_30_32_34_35_36_37_39_41_42_43_46_49",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/autoload_static.php::::142_143_144_145_147_150",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/includes/Semaphore.php::::461_462_481_5_9"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 11,
+    "is_interesting": false,
+    "fuzzer_id": "8",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "store"
+  },
+  {
+    "coverage_id": "1786971077-1a0441d8-f52c-4dca-a8e9-89529f2e87bb",
+    "priority": 11,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "wpo_wcpdf_set_next_number"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "number": "3uzz",
+        "store": "fuzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "",
+    "response.body.length": 0,
+    "response.headers": {},
+    "response.status.code": 0,
+    "response.time": 0,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786971065-335eb857-1562-41e9-be1e-58275088b580",
+    "paths": [
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/strauss/autoload-classmap.php::::10_100_101_102_103_104_105_106_107_108_109_11_110_111_112_113_114_115_116_117_118_119_12_120_121_122_123_124_125_126_127_128_129_13_130_131_132_133_134_135_136_137_138_139_14_140_141_142_143_144_145_146_147_148_149_15_150_151_152_153_154_155_156_157_158_159_16_160_161_162_163_164_165_166_167_168_169_17_170_171_172_173_174_175_176_177_178_179_18_180_181_182_183_184_185_186_187_188_189_19_190_191_192_193_194_195_196_197_198_199_20_200_201_202_203_204_205_206_207_208_209_21_210_211_212_213_214_215_216_217_218_219_22_220_221_222_223_224_225_226_227_228_229_23_230_231_232_233_234_235_24_25_26_27_28_29_30_31_32_33_34_35_36_37_38_39_40_41_42_43_44_45_46_47_48_49_5_50_51_52_53_54_55_56_57_58_59_60_61_62_63_64_65_66_67_68_69_70_71_72_73_74_75_76_77_78_79_8_80_81_82_83_84_85_86_87_88_89_9_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-mbstring/bootstrap80.php::::101_104_107_110_114_118_121_124_127_131_135_139_14_143_147_151_155_156_17_20_23_26_29_32_35_38_41_44_47_50_53_56_59_62_65_68_71_74_77_80_83_86_89_92_95_98",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/strauss/autoload.php::::12_15_18_20_4_5_6_7_8_9",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_499_500_515_522_528_531_544_551_555_563_575_576_577_578_580",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/woocommerce-pdf-invoices-packingslips.php::::119_120_122_130_131_133_143_144_145_146_147_149_17_191_192_209_21_210_211_251_252_253_255_259_53_54_56_63_64_66_67_68_77_80_81_82_83_84_85_86_87_88_89_892_899_90_900_905_91_919_92_922_923_93_96_97",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-iconv/bootstrap.php::::14_15",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/autoload.php::::20_22_5",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-mbstring/bootstrap.php::::14_15",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/autoload_real.php::::11_12_14_21_25_26_27_29_30_32_34_35_36_37_39_41_42_43_46_49",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/autoload_static.php::::142_143_144_145_147_150",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/includes/Semaphore.php::::461_462_481_5_9"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 11,
+    "is_interesting": false,
+    "fuzzer_id": "8",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "number"
+  },
+  {
+    "coverage_id": "1786971078-d31d4310-26c5-40a7-916c-16d0dd21ad72",
+    "priority": 11,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "wpo_wcpdf_set_next_number"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "number": "fuzz",
+        "store": "fuDz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "",
+    "response.body.length": 0,
+    "response.headers": {},
+    "response.status.code": 0,
+    "response.time": 0,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786971065-335eb857-1562-41e9-be1e-58275088b580",
+    "paths": [
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/strauss/autoload-classmap.php::::10_100_101_102_103_104_105_106_107_108_109_11_110_111_112_113_114_115_116_117_118_119_12_120_121_122_123_124_125_126_127_128_129_13_130_131_132_133_134_135_136_137_138_139_14_140_141_142_143_144_145_146_147_148_149_15_150_151_152_153_154_155_156_157_158_159_16_160_161_162_163_164_165_166_167_168_169_17_170_171_172_173_174_175_176_177_178_179_18_180_181_182_183_184_185_186_187_188_189_19_190_191_192_193_194_195_196_197_198_199_20_200_201_202_203_204_205_206_207_208_209_21_210_211_212_213_214_215_216_217_218_219_22_220_221_222_223_224_225_226_227_228_229_23_230_231_232_233_234_235_24_25_26_27_28_29_30_31_32_33_34_35_36_37_38_39_40_41_42_43_44_45_46_47_48_49_5_50_51_52_53_54_55_56_57_58_59_60_61_62_63_64_65_66_67_68_69_70_71_72_73_74_75_76_77_78_79_8_80_81_82_83_84_85_86_87_88_89_9_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-mbstring/bootstrap80.php::::101_104_107_110_114_118_121_124_127_131_135_139_14_143_147_151_155_156_17_20_23_26_29_32_35_38_41_44_47_50_53_56_59_62_65_68_71_74_77_80_83_86_89_92_95_98",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/strauss/autoload.php::::12_15_18_20_4_5_6_7_8_9",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_499_500_515_522_528_531_544_551_555_563_575_576_577_578_580",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/woocommerce-pdf-invoices-packingslips.php::::119_120_122_130_131_133_143_144_145_146_147_149_17_191_192_209_21_210_211_251_252_253_255_259_53_54_56_63_64_66_67_68_77_80_81_82_83_84_85_86_87_88_89_892_899_90_900_905_91_919_92_922_923_93_96_97",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-iconv/bootstrap.php::::14_15",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/autoload.php::::20_22_5",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-mbstring/bootstrap.php::::14_15",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/autoload_real.php::::11_12_14_21_25_26_27_29_30_32_34_35_36_37_39_41_42_43_46_49",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/autoload_static.php::::142_143_144_145_147_150",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/includes/Semaphore.php::::461_462_481_5_9"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 11,
+    "is_interesting": false,
+    "fuzzer_id": "8",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "store"
+  },
+  {
+    "coverage_id": "1786971078-7053be50-f816-4a20-ba5b-98123ee16937",
+    "priority": 11,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "wpo_wcpdf_set_next_number"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "number": "f\u0003uzz",
+        "store": "fuzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "",
+    "response.body.length": 0,
+    "response.headers": {},
+    "response.status.code": 0,
+    "response.time": 0,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786971065-335eb857-1562-41e9-be1e-58275088b580",
+    "paths": [
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/strauss/autoload-classmap.php::::10_100_101_102_103_104_105_106_107_108_109_11_110_111_112_113_114_115_116_117_118_119_12_120_121_122_123_124_125_126_127_128_129_13_130_131_132_133_134_135_136_137_138_139_14_140_141_142_143_144_145_146_147_148_149_15_150_151_152_153_154_155_156_157_158_159_16_160_161_162_163_164_165_166_167_168_169_17_170_171_172_173_174_175_176_177_178_179_18_180_181_182_183_184_185_186_187_188_189_19_190_191_192_193_194_195_196_197_198_199_20_200_201_202_203_204_205_206_207_208_209_21_210_211_212_213_214_215_216_217_218_219_22_220_221_222_223_224_225_226_227_228_229_23_230_231_232_233_234_235_24_25_26_27_28_29_30_31_32_33_34_35_36_37_38_39_40_41_42_43_44_45_46_47_48_49_5_50_51_52_53_54_55_56_57_58_59_60_61_62_63_64_65_66_67_68_69_70_71_72_73_74_75_76_77_78_79_8_80_81_82_83_84_85_86_87_88_89_9_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-mbstring/bootstrap80.php::::101_104_107_110_114_118_121_124_127_131_135_139_14_143_147_151_155_156_17_20_23_26_29_32_35_38_41_44_47_50_53_56_59_62_65_68_71_74_77_80_83_86_89_92_95_98",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/strauss/autoload.php::::12_15_18_20_4_5_6_7_8_9",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_499_500_515_522_528_531_544_551_555_563_575_576_577_578_580",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/woocommerce-pdf-invoices-packingslips.php::::119_120_122_130_131_133_143_144_145_146_147_149_17_191_192_209_21_210_211_251_252_253_255_259_53_54_56_63_64_66_67_68_77_80_81_82_83_84_85_86_87_88_89_892_899_90_900_905_91_919_92_922_923_93_96_97",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-iconv/bootstrap.php::::14_15",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/autoload.php::::20_22_5",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-mbstring/bootstrap.php::::14_15",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/autoload_real.php::::11_12_14_21_25_26_27_29_30_32_34_35_36_37_39_41_42_43_46_49",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/autoload_static.php::::142_143_144_145_147_150",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/includes/Semaphore.php::::461_462_481_5_9"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 11,
+    "is_interesting": false,
+    "fuzzer_id": "8",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "number"
+  },
+  {
+    "coverage_id": "1786971078-83d89fda-b45d-4d30-98ac-6ae31407d364",
+    "priority": 11,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "wpo_wcpdf_set_next_number"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "number": "fuNz",
+        "store": "fuzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "",
+    "response.body.length": 0,
+    "response.headers": {},
+    "response.status.code": 0,
+    "response.time": 0,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786971065-335eb857-1562-41e9-be1e-58275088b580",
+    "paths": [
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/strauss/autoload-classmap.php::::10_100_101_102_103_104_105_106_107_108_109_11_110_111_112_113_114_115_116_117_118_119_12_120_121_122_123_124_125_126_127_128_129_13_130_131_132_133_134_135_136_137_138_139_14_140_141_142_143_144_145_146_147_148_149_15_150_151_152_153_154_155_156_157_158_159_16_160_161_162_163_164_165_166_167_168_169_17_170_171_172_173_174_175_176_177_178_179_18_180_181_182_183_184_185_186_187_188_189_19_190_191_192_193_194_195_196_197_198_199_20_200_201_202_203_204_205_206_207_208_209_21_210_211_212_213_214_215_216_217_218_219_22_220_221_222_223_224_225_226_227_228_229_23_230_231_232_233_234_235_24_25_26_27_28_29_30_31_32_33_34_35_36_37_38_39_40_41_42_43_44_45_46_47_48_49_5_50_51_52_53_54_55_56_57_58_59_60_61_62_63_64_65_66_67_68_69_70_71_72_73_74_75_76_77_78_79_8_80_81_82_83_84_85_86_87_88_89_9_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-mbstring/bootstrap80.php::::101_104_107_110_114_118_121_124_127_131_135_139_14_143_147_151_155_156_17_20_23_26_29_32_35_38_41_44_47_50_53_56_59_62_65_68_71_74_77_80_83_86_89_92_95_98",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/strauss/autoload.php::::12_15_18_20_4_5_6_7_8_9",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_499_500_515_522_528_531_544_551_555_563_575_576_577_578_580",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/woocommerce-pdf-invoices-packingslips.php::::119_120_122_130_131_133_143_144_145_146_147_149_17_191_192_209_21_210_211_251_252_253_255_259_53_54_56_63_64_66_67_68_77_80_81_82_83_84_85_86_87_88_89_892_899_90_900_905_91_919_92_922_923_93_96_97",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-iconv/bootstrap.php::::14_15",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/autoload.php::::20_22_5",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-mbstring/bootstrap.php::::14_15",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/autoload_real.php::::11_12_14_21_25_26_27_29_30_32_34_35_36_37_39_41_42_43_46_49",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/autoload_static.php::::142_143_144_145_147_150",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/includes/Semaphore.php::::461_462_481_5_9"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 11,
+    "is_interesting": false,
+    "fuzzer_id": "8",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "number"
+  },
+  {
+    "coverage_id": "1786971079-90aa223f-78a0-4e15-aff8-2f9c77915f6b",
+    "priority": 11,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "wpo_wcpdf_set_next_number"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "number": "fuzz",
+        "store": "fu-z"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "",
+    "response.body.length": 0,
+    "response.headers": {},
+    "response.status.code": 0,
+    "response.time": 0,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786971065-335eb857-1562-41e9-be1e-58275088b580",
+    "paths": [
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/strauss/autoload-classmap.php::::10_100_101_102_103_104_105_106_107_108_109_11_110_111_112_113_114_115_116_117_118_119_12_120_121_122_123_124_125_126_127_128_129_13_130_131_132_133_134_135_136_137_138_139_14_140_141_142_143_144_145_146_147_148_149_15_150_151_152_153_154_155_156_157_158_159_16_160_161_162_163_164_165_166_167_168_169_17_170_171_172_173_174_175_176_177_178_179_18_180_181_182_183_184_185_186_187_188_189_19_190_191_192_193_194_195_196_197_198_199_20_200_201_202_203_204_205_206_207_208_209_21_210_211_212_213_214_215_216_217_218_219_22_220_221_222_223_224_225_226_227_228_229_23_230_231_232_233_234_235_24_25_26_27_28_29_30_31_32_33_34_35_36_37_38_39_40_41_42_43_44_45_46_47_48_49_5_50_51_52_53_54_55_56_57_58_59_60_61_62_63_64_65_66_67_68_69_70_71_72_73_74_75_76_77_78_79_8_80_81_82_83_84_85_86_87_88_89_9_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-mbstring/bootstrap80.php::::101_104_107_110_114_118_121_124_127_131_135_139_14_143_147_151_155_156_17_20_23_26_29_32_35_38_41_44_47_50_53_56_59_62_65_68_71_74_77_80_83_86_89_92_95_98",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/strauss/autoload.php::::12_15_18_20_4_5_6_7_8_9",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_499_500_515_522_528_531_544_551_555_563_575_576_577_578_580",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/woocommerce-pdf-invoices-packingslips.php::::119_120_122_130_131_133_143_144_145_146_147_149_17_191_192_209_21_210_211_251_252_253_255_259_53_54_56_63_64_66_67_68_77_80_81_82_83_84_85_86_87_88_89_892_899_90_900_905_91_919_92_922_923_93_96_97",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-iconv/bootstrap.php::::14_15",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/autoload.php::::20_22_5",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-mbstring/bootstrap.php::::14_15",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/autoload_real.php::::11_12_14_21_25_26_27_29_30_32_34_35_36_37_39_41_42_43_46_49",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/autoload_static.php::::142_143_144_145_147_150",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/includes/Semaphore.php::::461_462_481_5_9"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 11,
+    "is_interesting": false,
+    "fuzzer_id": "8",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "store"
+  },
+  {
+    "coverage_id": "1786971079-840fec65-e4a1-4a47-b952-98ea9e923865",
+    "priority": 11,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "wpo_wcpdf_set_next_number"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "number": "f8zz",
+        "store": "fuzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "",
+    "response.body.length": 0,
+    "response.headers": {},
+    "response.status.code": 0,
+    "response.time": 0,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786971065-335eb857-1562-41e9-be1e-58275088b580",
+    "paths": [
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/strauss/autoload-classmap.php::::10_100_101_102_103_104_105_106_107_108_109_11_110_111_112_113_114_115_116_117_118_119_12_120_121_122_123_124_125_126_127_128_129_13_130_131_132_133_134_135_136_137_138_139_14_140_141_142_143_144_145_146_147_148_149_15_150_151_152_153_154_155_156_157_158_159_16_160_161_162_163_164_165_166_167_168_169_17_170_171_172_173_174_175_176_177_178_179_18_180_181_182_183_184_185_186_187_188_189_19_190_191_192_193_194_195_196_197_198_199_20_200_201_202_203_204_205_206_207_208_209_21_210_211_212_213_214_215_216_217_218_219_22_220_221_222_223_224_225_226_227_228_229_23_230_231_232_233_234_235_24_25_26_27_28_29_30_31_32_33_34_35_36_37_38_39_40_41_42_43_44_45_46_47_48_49_5_50_51_52_53_54_55_56_57_58_59_60_61_62_63_64_65_66_67_68_69_70_71_72_73_74_75_76_77_78_79_8_80_81_82_83_84_85_86_87_88_89_9_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-mbstring/bootstrap80.php::::101_104_107_110_114_118_121_124_127_131_135_139_14_143_147_151_155_156_17_20_23_26_29_32_35_38_41_44_47_50_53_56_59_62_65_68_71_74_77_80_83_86_89_92_95_98",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/strauss/autoload.php::::12_15_18_20_4_5_6_7_8_9",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_499_500_515_522_528_531_544_551_555_563_575_576_577_578_580",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/woocommerce-pdf-invoices-packingslips.php::::119_120_122_130_131_133_143_144_145_146_147_149_17_191_192_209_21_210_211_251_252_253_255_259_53_54_56_63_64_66_67_68_77_80_81_82_83_84_85_86_87_88_89_892_899_90_900_905_91_919_92_922_923_93_96_97",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-iconv/bootstrap.php::::14_15",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/autoload.php::::20_22_5",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-mbstring/bootstrap.php::::14_15",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/autoload_real.php::::11_12_14_21_25_26_27_29_30_32_34_35_36_37_39_41_42_43_46_49",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/autoload_static.php::::142_143_144_145_147_150",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/includes/Semaphore.php::::461_462_481_5_9"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 11,
+    "is_interesting": false,
+    "fuzzer_id": "8",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "number"
+  },
+  {
+    "coverage_id": "1786971080-9428bdf9-d0df-46d6-a901-8ab24064ec9c",
+    "priority": 11,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "wpo_wcpdf_set_next_number"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "number": "fLzz",
+        "store": "fuzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "",
+    "response.body.length": 0,
+    "response.headers": {},
+    "response.status.code": 0,
+    "response.time": 0,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786971065-335eb857-1562-41e9-be1e-58275088b580",
+    "paths": [
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/strauss/autoload-classmap.php::::10_100_101_102_103_104_105_106_107_108_109_11_110_111_112_113_114_115_116_117_118_119_12_120_121_122_123_124_125_126_127_128_129_13_130_131_132_133_134_135_136_137_138_139_14_140_141_142_143_144_145_146_147_148_149_15_150_151_152_153_154_155_156_157_158_159_16_160_161_162_163_164_165_166_167_168_169_17_170_171_172_173_174_175_176_177_178_179_18_180_181_182_183_184_185_186_187_188_189_19_190_191_192_193_194_195_196_197_198_199_20_200_201_202_203_204_205_206_207_208_209_21_210_211_212_213_214_215_216_217_218_219_22_220_221_222_223_224_225_226_227_228_229_23_230_231_232_233_234_235_24_25_26_27_28_29_30_31_32_33_34_35_36_37_38_39_40_41_42_43_44_45_46_47_48_49_5_50_51_52_53_54_55_56_57_58_59_60_61_62_63_64_65_66_67_68_69_70_71_72_73_74_75_76_77_78_79_8_80_81_82_83_84_85_86_87_88_89_9_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-mbstring/bootstrap80.php::::101_104_107_110_114_118_121_124_127_131_135_139_14_143_147_151_155_156_17_20_23_26_29_32_35_38_41_44_47_50_53_56_59_62_65_68_71_74_77_80_83_86_89_92_95_98",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/strauss/autoload.php::::12_15_18_20_4_5_6_7_8_9",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_499_500_515_522_528_531_544_551_555_563_575_576_577_578_580",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/woocommerce-pdf-invoices-packingslips.php::::119_120_122_130_131_133_143_144_145_146_147_149_17_191_192_209_21_210_211_251_252_253_255_259_53_54_56_63_64_66_67_68_77_80_81_82_83_84_85_86_87_88_89_892_899_90_900_905_91_919_92_922_923_93_96_97",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-iconv/bootstrap.php::::14_15",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/autoload.php::::20_22_5",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-mbstring/bootstrap.php::::14_15",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/autoload_real.php::::11_12_14_21_25_26_27_29_30_32_34_35_36_37_39_41_42_43_46_49",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/autoload_static.php::::142_143_144_145_147_150",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/includes/Semaphore.php::::461_462_481_5_9"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 11,
+    "is_interesting": false,
+    "fuzzer_id": "8",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "number"
+  },
+  {
+    "coverage_id": "1786971080-c22a74b9-99a3-46a0-89c2-4c5feeece428",
+    "priority": 11,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "wpo_wcpdf_set_next_number"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "number": "fuzz",
+        "store": "fuzz7"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "",
+    "response.body.length": 0,
+    "response.headers": {},
+    "response.status.code": 0,
+    "response.time": 0,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786971065-335eb857-1562-41e9-be1e-58275088b580",
+    "paths": [
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/strauss/autoload-classmap.php::::10_100_101_102_103_104_105_106_107_108_109_11_110_111_112_113_114_115_116_117_118_119_12_120_121_122_123_124_125_126_127_128_129_13_130_131_132_133_134_135_136_137_138_139_14_140_141_142_143_144_145_146_147_148_149_15_150_151_152_153_154_155_156_157_158_159_16_160_161_162_163_164_165_166_167_168_169_17_170_171_172_173_174_175_176_177_178_179_18_180_181_182_183_184_185_186_187_188_189_19_190_191_192_193_194_195_196_197_198_199_20_200_201_202_203_204_205_206_207_208_209_21_210_211_212_213_214_215_216_217_218_219_22_220_221_222_223_224_225_226_227_228_229_23_230_231_232_233_234_235_24_25_26_27_28_29_30_31_32_33_34_35_36_37_38_39_40_41_42_43_44_45_46_47_48_49_5_50_51_52_53_54_55_56_57_58_59_60_61_62_63_64_65_66_67_68_69_70_71_72_73_74_75_76_77_78_79_8_80_81_82_83_84_85_86_87_88_89_9_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-mbstring/bootstrap80.php::::101_104_107_110_114_118_121_124_127_131_135_139_14_143_147_151_155_156_17_20_23_26_29_32_35_38_41_44_47_50_53_56_59_62_65_68_71_74_77_80_83_86_89_92_95_98",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/strauss/autoload.php::::12_15_18_20_4_5_6_7_8_9",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_499_500_515_522_528_531_544_551_555_563_575_576_577_578_580",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/woocommerce-pdf-invoices-packingslips.php::::119_120_122_130_131_133_143_144_145_146_147_149_17_191_192_209_21_210_211_251_252_253_255_259_53_54_56_63_64_66_67_68_77_80_81_82_83_84_85_86_87_88_89_892_899_90_900_905_91_919_92_922_923_93_96_97",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-iconv/bootstrap.php::::14_15",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/autoload.php::::20_22_5",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-mbstring/bootstrap.php::::14_15",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/autoload_real.php::::11_12_14_21_25_26_27_29_30_32_34_35_36_37_39_41_42_43_46_49",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/autoload_static.php::::142_143_144_145_147_150",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/includes/Semaphore.php::::461_462_481_5_9"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 11,
+    "is_interesting": false,
+    "fuzzer_id": "8",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "store"
+  },
+  {
+    "coverage_id": "1786971081-3013c6ad-b11e-4182-b1ff-e1fdd0a3e653",
+    "priority": 11,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "wpo_wcpdf_set_next_number"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "number": "2fuzz",
+        "store": "fuzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "",
+    "response.body.length": 0,
+    "response.headers": {},
+    "response.status.code": 0,
+    "response.time": 0,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786971065-335eb857-1562-41e9-be1e-58275088b580",
+    "paths": [
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/strauss/autoload-classmap.php::::10_100_101_102_103_104_105_106_107_108_109_11_110_111_112_113_114_115_116_117_118_119_12_120_121_122_123_124_125_126_127_128_129_13_130_131_132_133_134_135_136_137_138_139_14_140_141_142_143_144_145_146_147_148_149_15_150_151_152_153_154_155_156_157_158_159_16_160_161_162_163_164_165_166_167_168_169_17_170_171_172_173_174_175_176_177_178_179_18_180_181_182_183_184_185_186_187_188_189_19_190_191_192_193_194_195_196_197_198_199_20_200_201_202_203_204_205_206_207_208_209_21_210_211_212_213_214_215_216_217_218_219_22_220_221_222_223_224_225_226_227_228_229_23_230_231_232_233_234_235_24_25_26_27_28_29_30_31_32_33_34_35_36_37_38_39_40_41_42_43_44_45_46_47_48_49_5_50_51_52_53_54_55_56_57_58_59_60_61_62_63_64_65_66_67_68_69_70_71_72_73_74_75_76_77_78_79_8_80_81_82_83_84_85_86_87_88_89_9_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-mbstring/bootstrap80.php::::101_104_107_110_114_118_121_124_127_131_135_139_14_143_147_151_155_156_17_20_23_26_29_32_35_38_41_44_47_50_53_56_59_62_65_68_71_74_77_80_83_86_89_92_95_98",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/strauss/autoload.php::::12_15_18_20_4_5_6_7_8_9",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_499_500_515_522_528_531_544_551_555_563_575_576_577_578_580",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/woocommerce-pdf-invoices-packingslips.php::::119_120_122_130_131_133_143_144_145_146_147_149_17_191_192_209_21_210_211_251_252_253_255_259_53_54_56_63_64_66_67_68_77_80_81_82_83_84_85_86_87_88_89_892_899_90_900_905_91_919_92_922_923_93_96_97",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-iconv/bootstrap.php::::14_15",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/autoload.php::::20_22_5",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-mbstring/bootstrap.php::::14_15",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/autoload_real.php::::11_12_14_21_25_26_27_29_30_32_34_35_36_37_39_41_42_43_46_49",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/autoload_static.php::::142_143_144_145_147_150",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/includes/Semaphore.php::::461_462_481_5_9"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 11,
+    "is_interesting": false,
+    "fuzzer_id": "8",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "number"
+  },
+  {
+    "coverage_id": "1786971081-ee144c0f-528d-418a-b04d-cd16b0cfbf19",
+    "priority": 11,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "wpo_wcpdf_set_next_number"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "number": "fuzz",
+        "store": "fu]SMzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "",
+    "response.body.length": 0,
+    "response.headers": {},
+    "response.status.code": 0,
+    "response.time": 0,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786971065-335eb857-1562-41e9-be1e-58275088b580",
+    "paths": [
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/strauss/autoload-classmap.php::::10_100_101_102_103_104_105_106_107_108_109_11_110_111_112_113_114_115_116_117_118_119_12_120_121_122_123_124_125_126_127_128_129_13_130_131_132_133_134_135_136_137_138_139_14_140_141_142_143_144_145_146_147_148_149_15_150_151_152_153_154_155_156_157_158_159_16_160_161_162_163_164_165_166_167_168_169_17_170_171_172_173_174_175_176_177_178_179_18_180_181_182_183_184_185_186_187_188_189_19_190_191_192_193_194_195_196_197_198_199_20_200_201_202_203_204_205_206_207_208_209_21_210_211_212_213_214_215_216_217_218_219_22_220_221_222_223_224_225_226_227_228_229_23_230_231_232_233_234_235_24_25_26_27_28_29_30_31_32_33_34_35_36_37_38_39_40_41_42_43_44_45_46_47_48_49_5_50_51_52_53_54_55_56_57_58_59_60_61_62_63_64_65_66_67_68_69_70_71_72_73_74_75_76_77_78_79_8_80_81_82_83_84_85_86_87_88_89_9_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-mbstring/bootstrap80.php::::101_104_107_110_114_118_121_124_127_131_135_139_14_143_147_151_155_156_17_20_23_26_29_32_35_38_41_44_47_50_53_56_59_62_65_68_71_74_77_80_83_86_89_92_95_98",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/strauss/autoload.php::::12_15_18_20_4_5_6_7_8_9",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_499_500_515_522_528_531_544_551_555_563_575_576_577_578_580",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/woocommerce-pdf-invoices-packingslips.php::::119_120_122_130_131_133_143_144_145_146_147_149_17_191_192_209_21_210_211_251_252_253_255_259_53_54_56_63_64_66_67_68_77_80_81_82_83_84_85_86_87_88_89_892_899_90_900_905_91_919_92_922_923_93_96_97",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-iconv/bootstrap.php::::14_15",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/autoload.php::::20_22_5",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/symfony/polyfill-mbstring/bootstrap.php::::14_15",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/autoload_real.php::::11_12_14_21_25_26_27_29_30_32_34_35_36_37_39_41_42_43_46_49",
+      "/var/www/html/wp-content/plugins/woocommerce-pdf-invoices-packing-slips/vendor/composer/autoload_static.php::::142_143_144_145_147_150"

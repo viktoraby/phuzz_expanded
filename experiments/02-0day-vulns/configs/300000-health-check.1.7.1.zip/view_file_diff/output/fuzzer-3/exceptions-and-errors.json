@@ -1,0 +1,142 @@
+[
+  {
+    "coverage_id": "1786915193-ba59b805-f3b5-4cbd-9f24-29ed61898534",
+    "priority": 16,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "health-check-view-file-diff"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "file": "f-uz1"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Cookie_Jar::offsetExists($key) should either be compatible with ArrayAccess::offsetExists(mixed $offset): bool, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Cookie/Jar.php",
+        "errline": 63
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Cookie_Jar::offsetGet($key) should either be compatible with ArrayAccess::offsetGet(mixed $offset): mixed, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Cookie/Jar.php",
+        "errline": 73
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Cookie_Jar::offsetSet($key, $value) should either be compatible with ArrayAccess::offsetSet(mixed $offset, mixed $value): void, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Cookie/Jar.php",
+        "errline": 89
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Cookie_Jar::offsetUnset($key) should either be compatible with ArrayAccess::offsetUnset(mixed $offset): void, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Cookie/Jar.php",
+        "errline": 102
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Cookie_Jar::getIterator() should either be compatible with IteratorAggregate::getIterator(): Traversable, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Cookie/Jar.php",
+        "errline": 111
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Utility_CaseInsensitiveDictionary::offsetExists($key) should either be compatible with ArrayAccess::offsetExists(mixed $offset): bool, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Utility/CaseInsensitiveDictionary.php",
+        "errline": 40
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Utility_CaseInsensitiveDictionary::offsetGet($key) should either be compatible with ArrayAccess::offsetGet(mixed $offset): mixed, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Utility/CaseInsensitiveDictionary.php",
+        "errline": 51
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Utility_CaseInsensitiveDictionary::offsetSet($key, $value) should either be compatible with ArrayAccess::offsetSet(mixed $offset, mixed $value): void, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Utility/CaseInsensitiveDictionary.php",
+        "errline": 68
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Utility_CaseInsensitiveDictionary::offsetUnset($key) should either be compatible with ArrayAccess::offsetUnset(mixed $offset): void, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Utility/CaseInsensitiveDictionary.php",
+        "errline": 82
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Utility_CaseInsensitiveDictionary::getIterator() should either be compatible with IteratorAggregate::getIterator(): Traversable, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Utility/CaseInsensitiveDictionary.php",
+        "errline": 91
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"success\":false,\"data\":{\"message\":\"You do not have access to this file.\"}}",
+    "response.body.length": 76,
+    "response.headers": {
+      "Date": "Sun, 16 Aug 2026 21:19:53 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "76",
+      "Content-Type": "application/json; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 519.927,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786915159-9f485f16-27cf-4b68-8564-5a4b50a53a69",
+    "paths": [
+      "/var/www/html/wp-content/plugins/health-check/compat.php::::152_186_208_219_244_254_32_4_6_90",
+      "/var/www/html/wp-content/plugins/health-check/HealthCheck/Tools/class-health-check-tool.php::::21_22_62_9",
+      "/var/www/html/wp-content/plugins/health-check/HealthCheck/Tools/class-health-check-htaccess.php::::10_20_21_23_24_53_54",
+      "/var/www/html/wp-content/plugins/health-check/HealthCheck/Tools/class-health-check-files-integrity.php::::10_20_21_23_231_233_237_238_239_24_241_245_246_247_250_251_26_27_297_298_59_60_63_65_69_72_73_74_78",
+      "/var/www/html/wp-content/plugins/health-check/HealthCheck/class-health-check-troubleshoot.php::::267_9",
+      "/var/www/html/wp-content/plugins/health-check/HealthCheck/Tools/class-health-check-robotstxt.php::::10_20_21_23_24_46_47",
+      "/var/www/html/wp-content/plugins/health-check/HealthCheck/Tools/class-health-check-files-integrity.php::::10_20_21_23_231_233_237_238_239_24_241_245_246_250_251_26_27_297_298",
+      "/var/www/html/wp-content/plugins/health-check/HealthCheck/Tools/class-health-check-beta-features.php::::10_20_21_23_25_26_29_30_70_71",
+      "/var/www/html/wp-content/plugins/health-check/HealthCheck/class-health-check.php::::120_121_35_36_441_49_51_52_54_56_58_59_61_62_63_65_67_68_70_71_79_82_9",
+      "/var/www/html/wp-content/plugins/health-check/HealthCheck/Tools/class-health-check-debug-log-viewer.php::::10_6_68_69_7_9",
+      "/var/www/html/wp-content/plugins/health-check/HealthCheck/Tools/class-health-check-mail-check.php::::10_163_164_22_23_25_27_28",
+      "/var/www/html/wp-content/plugins/health-check/HealthCheck/Tools/class-health-check-phpinfo.php::::19_21_24_27_29_30_87_88_9",
+      "/var/www/html/wp-content/plugins/health-check/health-check.php::::25_30_33_36_39_42_43_44_45_48_49_50_61_62_63_65_66_67_68_71_72_73_74_75_76_77_78_79_82_84_87_89",
+      "/var/www/html/wp-content/plugins/health-check/HealthCheck/class-health-check-screenshots.php::::25_259_260_27_44_9",
+      "/var/www/html/wp-content/plugins/health-check/HealthCheck/Tools/class-health-check-plugin-compatibility.php::::10_13_15_156_157_16_6_7_8_9",
+      "/var/www/html/wp-content/plugins/health-check/HealthCheck/class-health-check-loopback.php::::350_9"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 16,
+    "is_interesting": false,
+    "fuzzer_id": "3",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "file"
+  }
+]

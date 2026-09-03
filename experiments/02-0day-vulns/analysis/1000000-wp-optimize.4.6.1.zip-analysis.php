@@ -5,11 +5,15 @@
 *Found functions:4
 *Extracted functions:4
 *Total parameter names extracted: 2
-*Overview: {'handle_ajax_requests': {'wp_optimize_ajax'}, 'updraft_central_ajax_handler': {'updraft_central_ajax'}, 'wp_ajax_updraftcentral_receivepublickey': {'nopriv_updraftcentral_receivepublickey', 'updraftcentral_receivepublickey'}, 'updraft_smush_ajax': {'updraft_smush_ajax'}}
+*Overview: {'handle_ajax_requests': {'wp_optimize_ajax'}, 'updraft_smush_ajax': {'updraft_smush_ajax'}, 'updraft_central_ajax_handler': {'updraft_central_ajax'}, 'wp_ajax_updraftcentral_receivepublickey': {'updraftcentral_receivepublickey', 'nopriv_updraftcentral_receivepublickey'}}
 *
 ***/
 
 /** Function handle_ajax_requests() called by wp_ajax hooks: {'wp_optimize_ajax'} **/
+/** No params detected :-/ **/
+
+
+/** Function updraft_smush_ajax() called by wp_ajax hooks: {'updraft_smush_ajax'} **/
 /** No params detected :-/ **/
 
 
@@ -74,7 +78,7 @@ function updraft_central_ajax_handler() {
 	}
 
 
-/** Function wp_ajax_updraftcentral_receivepublickey() called by wp_ajax hooks: {'nopriv_updraftcentral_receivepublickey', 'updraftcentral_receivepublickey'} **/
+/** Function wp_ajax_updraftcentral_receivepublickey() called by wp_ajax hooks: {'updraftcentral_receivepublickey', 'nopriv_updraftcentral_receivepublickey'} **/
 /** Parameters found in function wp_ajax_updraftcentral_receivepublickey(): {"get": ["_wpnonce", "public_key", "updraft_key_index"]} **/
 function wp_ajax_updraftcentral_receivepublickey() {
 		global $updraftcentral_host_plugin;
@@ -135,9 +139,5 @@ function wp_ajax_updraftcentral_receivepublickey() {
 		<?php
 		die;
 	}
-
-
-/** Function updraft_smush_ajax() called by wp_ajax hooks: {'updraft_smush_ajax'} **/
-/** No params detected :-/ **/
 
 

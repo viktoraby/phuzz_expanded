@@ -1,0 +1,178 @@
+{
+  "PathTraversal": [
+    {
+      "coverage_id": "1787162032-b8daf8e7-5857-407c-a501-b6bba72c9298",
+      "priority": 22,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "omgf_hide_notice"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "warning_id": "fu"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n{\"success\":true,\"data\":\"\\t\\t\\t\\t<tr id=\\\"task-manager-notice-row\\\">\\n\\t\\t\\t<td colspan=\\\"2\\\" class=\\\"task-manager-row\\\">\\n\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t<div class=\\\"task-manager-notice info\\\">\\n\\t\\t\\t\\t\\t\\t<h4>Let&#039;s get started!<\\/h4>\\n\\t\\t\\t\\t\\t\\t<p>\\n\\t\\t\\t\\t\\t\\t\\tHit the <strong>Save &amp; Optimize<\\/strong> at the bottom of this page to run a Google Fonts optimization on your homepage. After doing so, OMGF will silently run in the background and report back to you on this Dashboard if it encounters Google Fonts it can't detect and optimize automatically.\\t\\t\\t\\t\\t\\t<\\/p>\\n\\t\\t\\t\\t\\t<\\/div>\\n\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t<div class=\\\"task-manager-notice warning\\\">\\n\\t\\t\\t\\t\\t\\t<h4>1 potential issue found in your configuration.*<\\/h4>\\n\\t\\t\\t\\t\\t\\t<ol style='list-style: none; margin-left: 0;'>\\n\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t<li id=\\\"omgf-notice-no_ssl\\\">\\n\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\tYour WordPress configuration isn't setup to use SSL (https:\\/\\/). If your frontend is showing System Fonts after optimization, this might be due to Mixed-Content and\\/or CORS warnings. Follow <a href=\\\"https:\\/\\/daan.dev\\/docs\\/omgf-pro-troubleshooting\\/system-fonts\\/\\\" rel=\\\"noopener noreferrer\\\" target=\\\"_blank\\\">these steps<\\/a> to fix it.\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t<small>[<a href=\\\"#\\\" class=\\\"hide-notice\\\"\\n\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t   data-nonce=\\\"52126d4129\\\"\\n\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t   data-warning-id=\\\"no_ssl\\\"\\n\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t   id=\\\"omgf-hide-notice-no_ssl\\\">Mark as fixed<\\/a>]<\\/small>\\n\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t<\\/li>\\n\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t<\\/ol>\\n\\t\\t\\t\\t\\t\\t<p>\\n\\t\\t\\t\\t\\t\\t\\t<sub>*<em>After making the proposed changes where needed, click <strong>Mark as fixed<\\/strong> to remove the notice. It won't disappear by itself.<\\/em><\\/sub>\\n\\t\\t\\t\\t\\t\\t<\\/p>\\n\\t\\t\\t\\t\\t<\\/div>\\n\\t\\t\\t\\t\\t\\t\\t<\\/td>\\n\\t\\t<\\/tr>\\n\\t\\t\"}",
+      "response.body.length": 2009,
+      "response.headers": {
+        "Date": "Wed, 19 Aug 2026 17:53:52 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "2009",
+        "Content-Type": "application/json; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 442.003,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787162013-87ba54ac-f204-4401-b168-d6dd16bb1733",
+      "paths": [
+        "/var/www/html/wp-content/plugins/host-webfonts-local/vendor/composer/autoload_static.php::::49_50_51_52_54_57",
+        "/var/www/html/wp-content/plugins/host-webfonts-local/src/Helper.php::::117_118_119_122_123_126_134_136_140_144_154_156_157_160_171_172_174_175_176_177_178_179_180_181_182_183_453_454_461_469_473_578_589_726_727_729_733_751",
+        "/var/www/html/wp-content/plugins/host-webfonts-local/host-webfonts-local.php::::13_18_19_20_21_26_31_32",
+        "/var/www/html/wp-content/plugins/host-webfonts-local/src/Admin.php::::309",
+        "/var/www/html/wp-content/plugins/host-webfonts-local/src/Admin/Ajax.php::::254_27_28_29_30_31_32_33_42_44_48_49_51_52_55_57_59",
+        "/var/www/html/wp-content/plugins/host-webfonts-local/src/Admin/Optimize.php::::38_39_40_42_43_51_52_97",
+        "/var/www/html/wp-content/plugins/host-webfonts-local/src/Helper.php::::117_118_119_122_123_126_134_136_140_144_154_156_157_160_171_172_174_175_176_177_178_179_180_181_182_183_308_309_310_311_312_313_314_315_453_454_461_469_473_578_589_726_727_729_730_733_751",
+        "/var/www/html/wp-content/plugins/host-webfonts-local/src/Compatibility/Core.php::::30",
+        "/var/www/html/wp-content/plugins/host-webfonts-local/src/Admin/Settings.php::::586",
+        "/var/www/html/wp-content/plugins/host-webfonts-local/src/Filters.php::::111_27_28_29_30_31_32_66_67",
+        "/var/www/html/wp-content/plugins/host-webfonts-local/src/Compatibility.php::::27_28_36_37_45_46_48_52_56_60_64_68_72_75_77",
+        "/var/www/html/wp-content/plugins/host-webfonts-local/src/Compatibility/CompatibilityHookRegistrar.php::::44_48_52_53_55_57",
+        "/var/www/html/wp-content/plugins/host-webfonts-local/src/Plugin.php::::102_28_29_30_38_43_44_45_46_47_48_49_52_57_58_59_63_70_71_72_73_75_79_80_81",
+        "/var/www/html/wp-content/plugins/host-webfonts-local/src/API/AdminbarMenu.php::::34_345_35_43_44",
+        "/var/www/html/wp-content/plugins/host-webfonts-local/src/Compatibility/CachingPlugins.php::::106_24_25",
+        "/var/www/html/wp-content/plugins/host-webfonts-local/vendor/autoload.php::::20_22_5",
+        "/var/www/html/wp-content/plugins/host-webfonts-local/src/Admin/Actions.php::::111_112_169_170_277_28_29_30_31_32_33",
+        "/var/www/html/wp-content/plugins/host-webfonts-local/src/API/Dashboard.php::::35_36_46_47_93",
+        "/var/www/html/wp-content/plugins/host-webfonts-local/vendor/composer/autoload_real.php::::11_12_14_21_25_26_27_29_30_32_34_37",
+        "/var/www/html/wp-content/plugins/host-webfonts-local/src/Admin/Dashboard.php::::100_102_111_131_132_135_136_137_138_140_144_228_229_230_232_233_234_235_236_238_241_277_366_367_368_369_370_371_372_373_374_377_378_379_380_381_382_383_394_395_396_397_398_399_401_404_405_406_407_426_427_428_447_448_449_470_484_485_486_487_488_489_490_491_492_493_495_497_499_500_501_502_504_508_511_519_520_521_522_525_526_528_531_542_543_548_557_558_564_566_570_571_576_577_585_586_594_596_600_602_609_610_615_756_98",
+        "/var/www/html/wp-content/plugins/host-webfonts-local/src/Admin/Ajax.php::::254_27_28_29_30_31_32_33_42_44_48_49_51_55_57_59",
+        "/var/www/html/wp-content/plugins/host-webfonts-local/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_448_451_458_461_465_469_471_474_495_497_498_499_500_501_502_503_504_505_506_507_515_522_528_531_544_551_555_563_575_576_577_578_580"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 22,
+      "is_interesting": false,
+      "fuzzer_id": "5",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "warning_id"
+    },
+    {
+      "coverage_id": "1787162032-b8daf8e7-5857-407c-a501-b6bba72c9298",
+      "priority": 22,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "omgf_hide_notice"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "warning_id": "fu"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n{\"success\":true,\"data\":\"\\t\\t\\t\\t<tr id=\\\"task-manager-notice-row\\\">\\n\\t\\t\\t<td colspan=\\\"2\\\" class=\\\"task-manager-row\\\">\\n\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t<div class=\\\"task-manager-notice info\\\">\\n\\t\\t\\t\\t\\t\\t<h4>Let&#039;s get started!<\\/h4>\\n\\t\\t\\t\\t\\t\\t<p>\\n\\t\\t\\t\\t\\t\\t\\tHit the <strong>Save &amp; Optimize<\\/strong> at the bottom of this page to run a Google Fonts optimization on your homepage. After doing so, OMGF will silently run in the background and report back to you on this Dashboard if it encounters Google Fonts it can't detect and optimize automatically.\\t\\t\\t\\t\\t\\t<\\/p>\\n\\t\\t\\t\\t\\t<\\/div>\\n\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t<div class=\\\"task-manager-notice warning\\\">\\n\\t\\t\\t\\t\\t\\t<h4>1 potential issue found in your configuration.*<\\/h4>\\n\\t\\t\\t\\t\\t\\t<ol style='list-style: none; margin-left: 0;'>\\n\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t<li id=\\\"omgf-notice-no_ssl\\\">\\n\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\tYour WordPress configuration isn't setup to use SSL (https:\\/\\/). If your frontend is showing System Fonts after optimization, this might be due to Mixed-Content and\\/or CORS warnings. Follow <a href=\\\"https:\\/\\/daan.dev\\/docs\\/omgf-pro-troubleshooting\\/system-fonts\\/\\\" rel=\\\"noopener noreferrer\\\" target=\\\"_blank\\\">these steps<\\/a> to fix it.\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t<small>[<a href=\\\"#\\\" class=\\\"hide-notice\\\"\\n\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t   data-nonce=\\\"52126d4129\\\"\\n\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t   data-warning-id=\\\"no_ssl\\\"\\n\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t   id=\\\"omgf-hide-notice-no_ssl\\\">Mark as fixed<\\/a>]<\\/small>\\n\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t<\\/li>\\n\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t<\\/ol>\\n\\t\\t\\t\\t\\t\\t<p>\\n\\t\\t\\t\\t\\t\\t\\t<sub>*<em>After making the proposed changes where needed, click <strong>Mark as fixed<\\/strong> to remove the notice. It won't disappear by itself.<\\/em><\\/sub>\\n\\t\\t\\t\\t\\t\\t<\\/p>\\n\\t\\t\\t\\t\\t<\\/div>\\n\\t\\t\\t\\t\\t\\t\\t<\\/td>\\n\\t\\t<\\/tr>\\n\\t\\t\"}",
+      "response.body.length": 2009,
+      "response.headers": {
+        "Date": "Wed, 19 Aug 2026 17:53:52 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "2009",
+        "Content-Type": "application/json; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 442.003,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787162013-87ba54ac-f204-4401-b168-d6dd16bb1733",
+      "paths": [
+        "/var/www/html/wp-content/plugins/host-webfonts-local/vendor/composer/autoload_static.php::::49_50_51_52_54_57",
+        "/var/www/html/wp-content/plugins/host-webfonts-local/src/Helper.php::::117_118_119_122_123_126_134_136_140_144_154_156_157_160_171_172_174_175_176_177_178_179_180_181_182_183_453_454_461_469_473_578_589_726_727_729_733_751",
+        "/var/www/html/wp-content/plugins/host-webfonts-local/host-webfonts-local.php::::13_18_19_20_21_26_31_32",
+        "/var/www/html/wp-content/plugins/host-webfonts-local/src/Admin.php::::309",
+        "/var/www/html/wp-content/plugins/host-webfonts-local/src/Admin/Ajax.php::::254_27_28_29_30_31_32_33_42_44_48_49_51_52_55_57_59",
+        "/var/www/html/wp-content/plugins/host-webfonts-local/src/Admin/Optimize.php::::38_39_40_42_43_51_52_97",
+        "/var/www/html/wp-content/plugins/host-webfonts-local/src/Helper.php::::117_118_119_122_123_126_134_136_140_144_154_156_157_160_171_172_174_175_176_177_178_179_180_181_182_183_308_309_310_311_312_313_314_315_453_454_461_469_473_578_589_726_727_729_730_733_751",
+        "/var/www/html/wp-content/plugins/host-webfonts-local/src/Compatibility/Core.php::::30",
+        "/var/www/html/wp-content/plugins/host-webfonts-local/src/Admin/Settings.php::::586",
+        "/var/www/html/wp-content/plugins/host-webfonts-local/src/Filters.php::::111_27_28_29_30_31_32_66_67",
+        "/var/www/html/wp-content/plugins/host-webfonts-local/src/Compatibility.php::::27_28_36_37_45_46_48_52_56_60_64_68_72_75_77",
+        "/var/www/html/wp-content/plugins/host-webfonts-local/src/Compatibility/CompatibilityHookRegistrar.php::::44_48_52_53_55_57",
+        "/var/www/html/wp-content/plugins/host-webfonts-local/src/Plugin.php::::102_28_29_30_38_43_44_45_46_47_48_49_52_57_58_59_63_70_71_72_73_75_79_80_81",
+        "/var/www/html/wp-content/plugins/host-webfonts-local/src/API/AdminbarMenu.php::::34_345_35_43_44",
+        "/var/www/html/wp-content/plugins/host-webfonts-local/src/Compatibility/CachingPlugins.php::::106_24_25",
+        "/var/www/html/wp-content/plugins/host-webfonts-local/vendor/autoload.php::::20_22_5",
+        "/var/www/html/wp-content/plugins/host-webfonts-local/src/Admin/Actions.php::::111_112_169_170_277_28_29_30_31_32_33",
+        "/var/www/html/wp-content/plugins/host-webfonts-local/src/API/Dashboard.php::::35_36_46_47_93",
+        "/var/www/html/wp-content/plugins/host-webfonts-local/vendor/composer/autoload_real.php::::11_12_14_21_25_26_27_29_30_32_34_37",
+        "/var/www/html/wp-content/plugins/host-webfonts-local/src/Admin/Dashboard.php::::100_102_111_131_132_135_136_137_138_140_144_228_229_230_232_233_234_235_236_238_241_277_366_367_368_369_370_371_372_373_374_377_378_379_380_381_382_383_394_395_396_397_398_399_401_404_405_406_407_426_427_428_447_448_449_470_484_485_486_487_488_489_490_491_492_493_495_497_499_500_501_502_504_508_511_519_520_521_522_525_526_528_531_542_543_548_557_558_564_566_570_571_576_577_585_586_594_596_600_602_609_610_615_756_98",
+        "/var/www/html/wp-content/plugins/host-webfonts-local/src/Admin/Ajax.php::::254_27_28_29_30_31_32_33_42_44_48_49_51_55_57_59",
+        "/var/www/html/wp-content/plugins/host-webfonts-local/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_448_451_458_461_465_469_471_474_495_497_498_499_500_501_502_503_504_505_506_507_515_522_528_531_544_551_555_563_575_576_577_578_580"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 22,
+      "is_interesting": false,
+      "fuzzer_id": "5",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "warning_id"
+    }
+  ]
+}

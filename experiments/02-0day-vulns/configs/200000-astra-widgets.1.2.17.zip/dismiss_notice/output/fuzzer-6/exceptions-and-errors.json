@@ -1,0 +1,140 @@
+[
+  {
+    "coverage_id": "1787170998-4b932e41-13af-46ce-9607-25931af6984f",
+    "priority": 11,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "astra-notice-dismiss"
+      },
+      "body_params": {
+        "nonce": "fuzz",
+        "repeat_notice_after": "8uzz"
+      }
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "notice_id": "fuzz;"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Cookie_Jar::offsetExists($key) should either be compatible with ArrayAccess::offsetExists(mixed $offset): bool, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Cookie/Jar.php",
+        "errline": 63
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Cookie_Jar::offsetGet($key) should either be compatible with ArrayAccess::offsetGet(mixed $offset): mixed, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Cookie/Jar.php",
+        "errline": 73
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Cookie_Jar::offsetSet($key, $value) should either be compatible with ArrayAccess::offsetSet(mixed $offset, mixed $value): void, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Cookie/Jar.php",
+        "errline": 89
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Cookie_Jar::offsetUnset($key) should either be compatible with ArrayAccess::offsetUnset(mixed $offset): void, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Cookie/Jar.php",
+        "errline": 102
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Cookie_Jar::getIterator() should either be compatible with IteratorAggregate::getIterator(): Traversable, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Cookie/Jar.php",
+        "errline": 111
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Utility_CaseInsensitiveDictionary::offsetExists($key) should either be compatible with ArrayAccess::offsetExists(mixed $offset): bool, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Utility/CaseInsensitiveDictionary.php",
+        "errline": 40
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Utility_CaseInsensitiveDictionary::offsetGet($key) should either be compatible with ArrayAccess::offsetGet(mixed $offset): mixed, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Utility/CaseInsensitiveDictionary.php",
+        "errline": 51
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Utility_CaseInsensitiveDictionary::offsetSet($key, $value) should either be compatible with ArrayAccess::offsetSet(mixed $offset, mixed $value): void, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Utility/CaseInsensitiveDictionary.php",
+        "errline": 68
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Utility_CaseInsensitiveDictionary::offsetUnset($key) should either be compatible with ArrayAccess::offsetUnset(mixed $offset): void, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Utility/CaseInsensitiveDictionary.php",
+        "errline": 82
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Utility_CaseInsensitiveDictionary::getIterator() should either be compatible with IteratorAggregate::getIterator(): Traversable, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Utility/CaseInsensitiveDictionary.php",
+        "errline": 91
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"success\":true}",
+    "response.body.length": 17,
+    "response.headers": {
+      "Date": "Wed, 19 Aug 2026 20:23:18 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "17",
+      "Content-Type": "application/json; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 888.964,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787170978-7dc4df57-b8dd-4d17-8acd-6fc8cd268bea",
+    "paths": [
+      "/var/www/html/wp-content/plugins/astra-widgets/astra-widgets.php::::17_24_25_26_27_28_29_31_33_38_42_43_46_48_51_52_53_54_58",
+      "/var/www/html/wp-content/plugins/astra-widgets/classes/widgets/class-astra-widget-list-icons.php::::553_68_69_70_72_73_76_80_81_82_9",
+      "/var/www/html/wp-content/plugins/astra-widgets/admin/bsf-analytics/class-bsf-analytics-stats.php::::12_231_257_8",
+      "/var/www/html/wp-content/plugins/astra-widgets/classes/class-astra-widgets-helper.php::::45_46_48_57_58_59_797_806_826_896_9_946",
+      "/var/www/html/wp-content/plugins/astra-widgets/classes/class-astra-widgets-loader.php::::29_30_32_41_44_45_46_48_49_50_51_59_60_61_62_77_78_9",
+      "/var/www/html/wp-content/plugins/astra-widgets/admin/bsf-analytics/class-bsf-analytics-loader.php::::10_100_101_106_107_112_113_114_117_119_57_58_61_68_69_78_79_87_89_90_91_93_94_95_96_97_99",
+      "/var/www/html/wp-content/plugins/astra-widgets/classes/widgets/class-astra-widget-address.php::::367_58_59_60_62_63_66_69_70_9",
+      "/var/www/html/wp-content/plugins/astra-widgets/lib/astra-notices/class-astra-notices.php::::108_109_11_110_111_112_114_118_123_125_126_131_15_181_183_194_198_199_202_206_387_390_58_59_61_70_71_72_73_74",
+      "/var/www/html/wp-content/plugins/astra-widgets/classes/class-astra-widgets.php::::31_32_34_41_42_47_49_9",
+      "/var/www/html/wp-content/plugins/astra-widgets/admin/bsf-analytics/class-bsf-analytics.php::::10_14_152_154_155_157_162_174_175_177_178_186_278_282_284_285_337_338_347_349_353_354_356_357_358_359_362_363_364_365_366_367_369_370_371_372_373_374_378_46_475_476_50_509_52_53_55_56_57_59_61_63_64_73_74_75_76_78_89_91_93",
+      "/var/www/html/wp-content/plugins/astra-widgets/classes/widgets/class-astra-widget-social-profiles.php::::606_68_69_70_72_73_76_80_81_82_9"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 11,
+    "is_interesting": false,
+    "fuzzer_id": "6",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "notice_id"
+  }
+]

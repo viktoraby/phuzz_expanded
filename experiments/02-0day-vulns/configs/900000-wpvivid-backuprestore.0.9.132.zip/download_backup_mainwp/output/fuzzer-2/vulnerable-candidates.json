@@ -1,0 +1,1126 @@
+{
+  "PathTraversal": [
+    {
+      "coverage_id": "1787308919-96ab4a34-d3a2-471e-b003-ff8ac672bdfc",
+      "priority": 77,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "GET",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "wpvivid_download_backup_mainwp"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "file_name": "fuzz",
+          "backup_id": "G"
+        },
+        "body_params": {}
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 0.25
+      },
+      "errors": [
+        {
+          "errno": 2,
+          "errstr": "Trying to access array offset on value of type bool",
+          "errfile": "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid.php",
+          "errline": 7506
+        }
+      ],
+      "exceptions": [
+        {
+          "code": 0,
+          "file": "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid.php",
+          "message": "array_key_exists(): Argument #2 ($array) must be of type array, null given",
+          "line": 7506,
+          "previous": null,
+          "trace": [
+            {
+              "file": "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid.php",
+              "line": 7506,
+              "function": "array_key_exists",
+              "args": [
+                "fuzz",
+                null
+              ]
+            },
+            {
+              "function": "download_backup_mainwp",
+              "class": "WPvivid",
+              "type": "->",
+              "args": [
+                ""
+              ]
+            },
+            {
+              "file": "/var/www/html/wp-includes/class-wp-hook.php",
+              "line": 308,
+              "function": "call_user_func_array",
+              "args": [
+                [
+                  {
+                    "wpvivid_log": {
+                      "log_file": null,
+                      "log_file_handle": false
+                    },
+                    "wpvivid_download_log": {
+                      "log_file": null,
+                      "log_file_handle": false
+                    },
+                    "current_task": null,
+                    "updater": null,
+                    "remote_collection": {},
+                    "function_realize": {},
+                    "end_shutdown_function": false,
+                    "restore_data": false,
+                    "migrate": {},
+                    "backup_uploader": {},
+                    "admin": {},
+                    "interface_mainwp": {},
+                    "staging": {
+                      "main_tab": null,
+                      "end_shutdown_function": null,
+                      "screen_ids": null,
+                      "log": {
+                        "log_file": null,
+                        "log_file_handle": false
+                      },
+                      "log_page": {
+                        "main_tab": null
+                      },
+                      "new_wp_page": null,
+                      "ui_display": {
+                        "main_tab": null,
+                        "staging_list_ui": {},
+                        "staging_create_ui": {},
+                        "fresh_install_ui": {},
+                        "log_page": {
+                          "main_tab": null
+                        }
+                      },
+                      "setting": {
+                        "main_tab": null
+                      }
+                    },
+                    "backup2": {
+                      "end_shutdown_function": null,
+                      "current_task_id": null,
+                      "task": null,
+                      "last_heartbeat": 0
+                    }
+                  },
+                  "download_backup_mainwp"
+                ],
+                [
+                  ""
+                ]
+              ]
+            },
+            {
+              "file": "/var/www/html/wp-includes/class-wp-hook.php",
+              "line": 332,
+              "function": "apply_filters",
+              "class": "WP_Hook",
+              "type": "->",
+              "args": [
+                "",
+                [
+                  ""
+                ]
+              ]
+            },
+            {
+              "file": "/var/www/html/wp-includes/plugin.php",
+              "line": 517,
+              "function": "do_action",
+              "class": "WP_Hook",
+              "type": "->",
+              "args": [
+                [
+                  ""
+                ]
+              ]
+            },
+            {
+              "file": "/var/www/html/wp-admin/admin-ajax.php",
+              "line": 188,
+              "function": "do_action",
+              "args": [
+                "wp_ajax_wpvivid_download_backup_mainwp"
+              ]
+            }
+          ],
+          "traceAsString": "#0 /var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid.php(7506): array_key_exists('fuzz', NULL)\n#1 [internal function]: WPvivid->download_backup_mainwp('')\n#2 /var/www/html/wp-includes/class-wp-hook.php(308): call_user_func_array(Array, Array)\n#3 /var/www/html/wp-includes/class-wp-hook.php(332): WP_Hook->apply_filters('', Array)\n#4 /var/www/html/wp-includes/plugin.php(517): WP_Hook->do_action(Array)\n#5 /var/www/html/wp-admin/admin-ajax.php(188): do_action('wp_ajax_wpvivid...')\n#6 {main}"
+        }
+      ],
+      "response_body": "\n",
+      "response.body.length": 1,
+      "response.headers": {
+        "Date": "Fri, 21 Aug 2026 10:41:59 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "1",
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 879.259,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787308914-a9547c50-7391-4751-949b-b02e0d8de0a8",
+      "paths": [
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/customclass/class-wpvivid-s3.php::::2_2683",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-upload.php::::148_3",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-importer.php::::11_2529",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/customclass/class-wpvivid-send-to-site.php::::10_1088_12_13_21_23_25_27_3_34_38_63_8_9",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/upload-cleaner/class-wpvivid-upload-cleaner-setting.php::::1082_2_680_681_682_684_686_687_689_690_691_7",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-compress-default.php::::81",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/new_backup/class-wpvivid-backup-task_2.php::::3_3245",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/new_backup/class-wpvivid-restore-db-2.php::::3_3369",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-db-method.php::::281",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/new_backup/class-wpvivid-backup2.php::::16_17_18_1867_20_21_23_24_26_27_28_29_3_31_32_34_36_38_40_41_43_44",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/new_backup/class-wpvivid-restore2.php::::15_16_18_1889_20_21_23_24_26_27_29_3_30_32_33_34",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-additional-db-method.php::::255",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/upload-cleaner/class-wpvivid-isolate-files.php::::13_17_21_3_384",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/customclass/class-wpvivid-sftpclass.php::::19_21_22_23_24_25_26_3_32_6_7_721_8",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-export-import.php::::14_15_17_18_20_21_22_24_25_26_28_2845_3_30_32_33_35_37_39_41_42_43_44_45_46_47_48_50_51",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/staging/class-wpvivid-fresh-install-create-ui-display.php::::12_2_947",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-backup.php::::10_11_12_14_15_16_17_19_20_21_22_2810_3_8_9",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid.php::::101_102_104_105_106_107_108_110_111_113_115_117_118_121_122_123_152_156_157_158_159_160_161_162_163_164_165_166_167_168_169_170_171_173_174_175_176_178_179_181_183_184_185_186_189_191_192_193_194_195_197_198_199_200_201_202_204_205_207_208_210_212_214_216_217_218_219_221_223_224_228_230_231_232_234_235_236_237_297_299_30_301_307_313_314_315_317_321_322_323_327_328_329_330_349_351_353_355_357_359_361_362_363_365_367_369_371_373_375_377_379_381_383_385_387_389_391_393_395_397_399_400_402_403_404_406_408_410_412_414_416_417_418_419_421_423_425_427_430_431_432_433_435_436_437_439_441_443_444_445_446_447_449_450_451_453_454_458_459_463_468_69_71_73_7478_7479_7480_7481_7486_7487_7490_75_7552_76_77_7766_79_80_81_82_83_84_85_86_88_90_93_95_96_98_99",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/staging/class-wpvivid-staging-task-ex.php::::1120_2",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-taskmanager.php::::3_452_454_456_461_747",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/staging/class-wpvivid-staging-list-ui-display.php::::12_1200_2",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/wpvivid-backuprestore.php::::176_20_222_24_26_27_28_29_30_31_32_327_328_339_34_344_348_349_35_350_351_36_37_38_39_41_42_43_44_45_47_49_50_51_53_55_57_59_61_63_65_67_69_70_71_73_75_78_79_80_81_82_84_85_87_88_90_92_93",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/staging/class-wpvivid-staging-create-new-wp.php::::2_242_7",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-backuplist.php::::10_11_12_14_15_26_3_417",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/new_backup/class-wpvivid-restore-file-2.php::::3_768",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-setting.php::::137_138_142_164_166_170_189_3_687",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-log.php::::13_14_184_3",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-i18n.php::::2_39_40_41_42_45_50",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/staging/class-wpvivid-staging.php::::1000_1009_1010_1013_1036_1052_1054_1087_1095_199_2_201_202_204_205_206_208_210_211_212_215_216_217_26_28_2893_29_30_31_32_33_34_35_36_38_39_40_41_44_45_472_48_480_483_50_51_52_54_57_58_60_61_7_9_999",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/staging/class-wpvivid-staging-create-ui-display.php::::12_2_903",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/customclass/class-wpvivid-remote-default.php::::11_13_16_18_2_21_42_6_8",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-public-interface.php::::431",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/customclass/class-wpvivid-base-s3.php::::2_296_6",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-mail-report.php::::1120_3",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-remote-collection.php::::10_11_118_119_12_120_121_122_123_124_125_126_127_13_132_134_136_137_14_15_16_25_26_27_28_9",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-tools.php::::138_3",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/customclass/class-wpvivid-base-dropbox.php::::2_373",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid.php::::101_102_104_105_106_107_108_110_111_113_115_117_118_121_122_123_152_156_157_158_159_160_161_162_163_164_165_166_167_168_169_170_171_173_174_175_176_178_179_181_183_184_185_186_189_191_192_193_194_195_197_198_199_200_201_202_204_205_207_208_210_212_214_216_217_218_219_221_223_224_228_230_231_232_234_235_236_237_2925_2927_2928_2929_297_299_30_301_307_313_314_315_317_321_322_323_327_328_329_330_349_351_353_355_357_359_361_362_363_365_367_369_371_373_375_377_379_381_383_385_387_389_391_393_395_397_399_400_402_403_404_406_408_410_412_414_416_417_418_419_421_423_425_427_430_431_432_433_435_436_437_439_441_443_444_445_446_447_449_450_451_453_454_458_459_463_468_69_71_73_7478_7479_7480_7481_7486_7487_7488_7493_7495_75_7500_7501_7502_7503_7505_7506_7552_76_77_7766_79_80_81_82_83_84_85_86_88_90_93_95_96_98_99",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/staging/class-wpvivid-staging-log-page.php::::1173_2_296_297_298_301_302_303",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-migrate.php::::12_13_14_15_16_1628_17_19_20_21_22_24_25_26_28_29_3_31_32_33_34_35_36_37_39_40_41",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/snapshot/class-wpvivid-snapshot-options.php::::14_16_2_40_42_86",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-backuplist.php::::3_417",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-function-realize.php::::222_8",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/customclass/class-wpvivid-s3compat.php::::10_11_12_2_25_26_27_28_29_30_31_36_5_6_766_8_9",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-crypt.php::::238_3",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-schedule.php::::26_27_3_389",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/staging/class-wpvivid-staging-sites-list.php::::2637_3",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/staging/class-wpvivid-staging-ui-display.php::::1212_1213_1214_1216_1217_1218_1219_1220_1540_3_8",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-interface-mainwp.php::::10_11_12_15_16_17_18_19_20_21_22_23_26_27_30_31_32_33_34_35_36_37_38_41_42_45_46_49_50_6_614_7_8_9",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-backup-uploader.php::::1113_12_13_14_15_16_17_18_20_21_22_23_3",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/customclass/class-wpvivid-ftpclass.php::::10_18_20_21_22_23_24_25_3_30_694_7_8",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/admin/class-wpvivid-admin.php::::101_102_103_1736_23_61_62_64_70_73_74_76_77_79_81_82_83_85_87_88_89_91_93_95_96_98_99",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/snapshot/class-wpvivid-snapshot.php::::15_16_17_1708_19_21_22_24_26_3_40_41_43_44_47_48_50_51_52_53_54_56_57_59_61_62_64_66_68_75",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/staging/class-wpvivid-staging-copy-db-ex.php::::1597_2",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-error-log.php::::196_3",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-setting.php::::137_138_140_142_164_166_170_189_3_43_47_50_53_56_60_687",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-tab-page-container.php::::2_266",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-zipclass.php::::1312_1477_3_7_9",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-downloader.php::::195_3",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/upload-cleaner/class-wpvivid-uploads-scanner.php::::2386_3",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/customclass/class-wpvivid-amazons3-plus.php::::10_11_2_25_27_28_29_30_31_32_38_5_6_7_8_822",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/snapshot/class-wpvivid-snapshot-function.php::::3_736",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/customclass/class-wpvivid-one-drive.php::::11_14_16_1639_184_19_21_24_26_29_3_31_41_43_45_47_49_50_51_52_53_54_55_56_57_64_65_7_79_9",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/customclass/class-wpvivid-remote.php::::2_28",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/customclass/class-wpvivid-dropbox.php::::10_11_12_23_25_27_29_3_31_33_34_35_36_37_38_386_39_40_41_42_47_474_48_6_7_9_900",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/staging/class-wpvivid-staging-copy-files-ex.php::::2_669",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/new_backup/class-wpvivid-zip.php::::3_352",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-exporter.php::::1951_9",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/new_backup/class-wpvivid-mysqldump2.php::::1060_3",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-taskmanager.php::::3_747",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid.php::::101_102_104_105_106_107_108_110_111_113_115_117_118_121_122_123_152_156_157_158_159_160_161_162_163_164_165_166_167_168_169_170_171_173_174_175_176_178_179_181_183_184_185_186_189_191_192_193_194_195_197_198_199_200_201_202_204_205_207_208_210_212_214_216_217_218_219_221_223_224_228_230_231_232_234_235_236_237_2925_2931_2932_2934_2936_2937_2938_297_299_30_301_307_313_314_315_317_321_322_323_327_328_329_330_349_351_353_355_357_359_361_362_363_365_367_369_371_373_375_377_379_381_383_385_387_389_391_393_395_397_399_400_402_403_404_406_408_410_412_414_416_417_418_419_421_423_425_427_430_431_432_433_435_436_437_439_441_443_444_445_446_447_449_450_451_453_454_458_459_463_468_69_71_73_7478_7479_7480_7481_7486_7487_7488_7493_7495_75_7500_7501_7502_7503_7505_7506_7552_76_77_7766_79_80_81_82_83_84_85_86_88_90_93_95_96_98_99",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/staging/class-wpvivid-staging-setting.php::::14_15_16_17_18_3_516",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/customclass/class-wpvivid-google-drive.php::::10_11_12_13_14_1483_15_16_200_27_29_3_31_33_35_36_37_38_39_40_41_42_43_44_52_53_62_7_76_9",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/upload-cleaner/class-wpvivid-uploads-cleaner.php::::2_3585_7_878_880_881_883_884_886_888_889_890_892_894_895_896_898_899_9_900_902_904_905_908_909_910_912_913_915_918_919_920_921",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/snapshot/class-wpvivid-snapshots-list.php::::12_2_379_7",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-restore-data.php::::3_59",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/staging/class-wpvivid-staging-log.php::::15_16_3_320"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 77,
+      "is_interesting": false,
+      "fuzzer_id": "2",
+      "is_initial_candidate": false,
+      "mutated_param_type": "query_params",
+      "mutated_param_name": "backup_id"
+    },
+    {
+      "coverage_id": "1787308919-96ab4a34-d3a2-471e-b003-ff8ac672bdfc",
+      "priority": 77,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "GET",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "wpvivid_download_backup_mainwp"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "file_name": "fuzz",
+          "backup_id": "G"
+        },
+        "body_params": {}
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 0.25
+      },
+      "errors": [
+        {
+          "errno": 2,
+          "errstr": "Trying to access array offset on value of type bool",
+          "errfile": "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid.php",
+          "errline": 7506
+        }
+      ],
+      "exceptions": [
+        {
+          "code": 0,
+          "file": "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid.php",
+          "message": "array_key_exists(): Argument #2 ($array) must be of type array, null given",
+          "line": 7506,
+          "previous": null,
+          "trace": [
+            {
+              "file": "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid.php",
+              "line": 7506,
+              "function": "array_key_exists",
+              "args": [
+                "fuzz",
+                null
+              ]
+            },
+            {
+              "function": "download_backup_mainwp",
+              "class": "WPvivid",
+              "type": "->",
+              "args": [
+                ""
+              ]
+            },
+            {
+              "file": "/var/www/html/wp-includes/class-wp-hook.php",
+              "line": 308,
+              "function": "call_user_func_array",
+              "args": [
+                [
+                  {
+                    "wpvivid_log": {
+                      "log_file": null,
+                      "log_file_handle": false
+                    },
+                    "wpvivid_download_log": {
+                      "log_file": null,
+                      "log_file_handle": false
+                    },
+                    "current_task": null,
+                    "updater": null,
+                    "remote_collection": {},
+                    "function_realize": {},
+                    "end_shutdown_function": false,
+                    "restore_data": false,
+                    "migrate": {},
+                    "backup_uploader": {},
+                    "admin": {},
+                    "interface_mainwp": {},
+                    "staging": {
+                      "main_tab": null,
+                      "end_shutdown_function": null,
+                      "screen_ids": null,
+                      "log": {
+                        "log_file": null,
+                        "log_file_handle": false
+                      },
+                      "log_page": {
+                        "main_tab": null
+                      },
+                      "new_wp_page": null,
+                      "ui_display": {
+                        "main_tab": null,
+                        "staging_list_ui": {},
+                        "staging_create_ui": {},
+                        "fresh_install_ui": {},
+                        "log_page": {
+                          "main_tab": null
+                        }
+                      },
+                      "setting": {
+                        "main_tab": null
+                      }
+                    },
+                    "backup2": {
+                      "end_shutdown_function": null,
+                      "current_task_id": null,
+                      "task": null,
+                      "last_heartbeat": 0
+                    }
+                  },
+                  "download_backup_mainwp"
+                ],
+                [
+                  ""
+                ]
+              ]
+            },
+            {
+              "file": "/var/www/html/wp-includes/class-wp-hook.php",
+              "line": 332,
+              "function": "apply_filters",
+              "class": "WP_Hook",
+              "type": "->",
+              "args": [
+                "",
+                [
+                  ""
+                ]
+              ]
+            },
+            {
+              "file": "/var/www/html/wp-includes/plugin.php",
+              "line": 517,
+              "function": "do_action",
+              "class": "WP_Hook",
+              "type": "->",
+              "args": [
+                [
+                  ""
+                ]
+              ]
+            },
+            {
+              "file": "/var/www/html/wp-admin/admin-ajax.php",
+              "line": 188,
+              "function": "do_action",
+              "args": [
+                "wp_ajax_wpvivid_download_backup_mainwp"
+              ]
+            }
+          ],
+          "traceAsString": "#0 /var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid.php(7506): array_key_exists('fuzz', NULL)\n#1 [internal function]: WPvivid->download_backup_mainwp('')\n#2 /var/www/html/wp-includes/class-wp-hook.php(308): call_user_func_array(Array, Array)\n#3 /var/www/html/wp-includes/class-wp-hook.php(332): WP_Hook->apply_filters('', Array)\n#4 /var/www/html/wp-includes/plugin.php(517): WP_Hook->do_action(Array)\n#5 /var/www/html/wp-admin/admin-ajax.php(188): do_action('wp_ajax_wpvivid...')\n#6 {main}"
+        }
+      ],
+      "response_body": "\n",
+      "response.body.length": 1,
+      "response.headers": {
+        "Date": "Fri, 21 Aug 2026 10:41:59 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "1",
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 879.259,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787308914-a9547c50-7391-4751-949b-b02e0d8de0a8",
+      "paths": [
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/customclass/class-wpvivid-s3.php::::2_2683",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-upload.php::::148_3",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-importer.php::::11_2529",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/customclass/class-wpvivid-send-to-site.php::::10_1088_12_13_21_23_25_27_3_34_38_63_8_9",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/upload-cleaner/class-wpvivid-upload-cleaner-setting.php::::1082_2_680_681_682_684_686_687_689_690_691_7",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-compress-default.php::::81",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/new_backup/class-wpvivid-backup-task_2.php::::3_3245",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/new_backup/class-wpvivid-restore-db-2.php::::3_3369",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-db-method.php::::281",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/new_backup/class-wpvivid-backup2.php::::16_17_18_1867_20_21_23_24_26_27_28_29_3_31_32_34_36_38_40_41_43_44",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/new_backup/class-wpvivid-restore2.php::::15_16_18_1889_20_21_23_24_26_27_29_3_30_32_33_34",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-additional-db-method.php::::255",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/upload-cleaner/class-wpvivid-isolate-files.php::::13_17_21_3_384",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/customclass/class-wpvivid-sftpclass.php::::19_21_22_23_24_25_26_3_32_6_7_721_8",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-export-import.php::::14_15_17_18_20_21_22_24_25_26_28_2845_3_30_32_33_35_37_39_41_42_43_44_45_46_47_48_50_51",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/staging/class-wpvivid-fresh-install-create-ui-display.php::::12_2_947",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-backup.php::::10_11_12_14_15_16_17_19_20_21_22_2810_3_8_9",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid.php::::101_102_104_105_106_107_108_110_111_113_115_117_118_121_122_123_152_156_157_158_159_160_161_162_163_164_165_166_167_168_169_170_171_173_174_175_176_178_179_181_183_184_185_186_189_191_192_193_194_195_197_198_199_200_201_202_204_205_207_208_210_212_214_216_217_218_219_221_223_224_228_230_231_232_234_235_236_237_297_299_30_301_307_313_314_315_317_321_322_323_327_328_329_330_349_351_353_355_357_359_361_362_363_365_367_369_371_373_375_377_379_381_383_385_387_389_391_393_395_397_399_400_402_403_404_406_408_410_412_414_416_417_418_419_421_423_425_427_430_431_432_433_435_436_437_439_441_443_444_445_446_447_449_450_451_453_454_458_459_463_468_69_71_73_7478_7479_7480_7481_7486_7487_7490_75_7552_76_77_7766_79_80_81_82_83_84_85_86_88_90_93_95_96_98_99",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/staging/class-wpvivid-staging-task-ex.php::::1120_2",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-taskmanager.php::::3_452_454_456_461_747",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/staging/class-wpvivid-staging-list-ui-display.php::::12_1200_2",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/wpvivid-backuprestore.php::::176_20_222_24_26_27_28_29_30_31_32_327_328_339_34_344_348_349_35_350_351_36_37_38_39_41_42_43_44_45_47_49_50_51_53_55_57_59_61_63_65_67_69_70_71_73_75_78_79_80_81_82_84_85_87_88_90_92_93",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/staging/class-wpvivid-staging-create-new-wp.php::::2_242_7",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-backuplist.php::::10_11_12_14_15_26_3_417",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/new_backup/class-wpvivid-restore-file-2.php::::3_768",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-setting.php::::137_138_142_164_166_170_189_3_687",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-log.php::::13_14_184_3",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-i18n.php::::2_39_40_41_42_45_50",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/staging/class-wpvivid-staging.php::::1000_1009_1010_1013_1036_1052_1054_1087_1095_199_2_201_202_204_205_206_208_210_211_212_215_216_217_26_28_2893_29_30_31_32_33_34_35_36_38_39_40_41_44_45_472_48_480_483_50_51_52_54_57_58_60_61_7_9_999",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/staging/class-wpvivid-staging-create-ui-display.php::::12_2_903",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/customclass/class-wpvivid-remote-default.php::::11_13_16_18_2_21_42_6_8",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-public-interface.php::::431",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/customclass/class-wpvivid-base-s3.php::::2_296_6",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-mail-report.php::::1120_3",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-remote-collection.php::::10_11_118_119_12_120_121_122_123_124_125_126_127_13_132_134_136_137_14_15_16_25_26_27_28_9",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-tools.php::::138_3",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/customclass/class-wpvivid-base-dropbox.php::::2_373",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid.php::::101_102_104_105_106_107_108_110_111_113_115_117_118_121_122_123_152_156_157_158_159_160_161_162_163_164_165_166_167_168_169_170_171_173_174_175_176_178_179_181_183_184_185_186_189_191_192_193_194_195_197_198_199_200_201_202_204_205_207_208_210_212_214_216_217_218_219_221_223_224_228_230_231_232_234_235_236_237_2925_2927_2928_2929_297_299_30_301_307_313_314_315_317_321_322_323_327_328_329_330_349_351_353_355_357_359_361_362_363_365_367_369_371_373_375_377_379_381_383_385_387_389_391_393_395_397_399_400_402_403_404_406_408_410_412_414_416_417_418_419_421_423_425_427_430_431_432_433_435_436_437_439_441_443_444_445_446_447_449_450_451_453_454_458_459_463_468_69_71_73_7478_7479_7480_7481_7486_7487_7488_7493_7495_75_7500_7501_7502_7503_7505_7506_7552_76_77_7766_79_80_81_82_83_84_85_86_88_90_93_95_96_98_99",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/staging/class-wpvivid-staging-log-page.php::::1173_2_296_297_298_301_302_303",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-migrate.php::::12_13_14_15_16_1628_17_19_20_21_22_24_25_26_28_29_3_31_32_33_34_35_36_37_39_40_41",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/snapshot/class-wpvivid-snapshot-options.php::::14_16_2_40_42_86",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-backuplist.php::::3_417",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-function-realize.php::::222_8",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/customclass/class-wpvivid-s3compat.php::::10_11_12_2_25_26_27_28_29_30_31_36_5_6_766_8_9",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-crypt.php::::238_3",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-schedule.php::::26_27_3_389",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/staging/class-wpvivid-staging-sites-list.php::::2637_3",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/staging/class-wpvivid-staging-ui-display.php::::1212_1213_1214_1216_1217_1218_1219_1220_1540_3_8",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-interface-mainwp.php::::10_11_12_15_16_17_18_19_20_21_22_23_26_27_30_31_32_33_34_35_36_37_38_41_42_45_46_49_50_6_614_7_8_9",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-backup-uploader.php::::1113_12_13_14_15_16_17_18_20_21_22_23_3",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/customclass/class-wpvivid-ftpclass.php::::10_18_20_21_22_23_24_25_3_30_694_7_8",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/admin/class-wpvivid-admin.php::::101_102_103_1736_23_61_62_64_70_73_74_76_77_79_81_82_83_85_87_88_89_91_93_95_96_98_99",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/snapshot/class-wpvivid-snapshot.php::::15_16_17_1708_19_21_22_24_26_3_40_41_43_44_47_48_50_51_52_53_54_56_57_59_61_62_64_66_68_75",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/staging/class-wpvivid-staging-copy-db-ex.php::::1597_2",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-error-log.php::::196_3",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-setting.php::::137_138_140_142_164_166_170_189_3_43_47_50_53_56_60_687",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-tab-page-container.php::::2_266",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-zipclass.php::::1312_1477_3_7_9",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-downloader.php::::195_3",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/upload-cleaner/class-wpvivid-uploads-scanner.php::::2386_3",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/customclass/class-wpvivid-amazons3-plus.php::::10_11_2_25_27_28_29_30_31_32_38_5_6_7_8_822",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/snapshot/class-wpvivid-snapshot-function.php::::3_736",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/customclass/class-wpvivid-one-drive.php::::11_14_16_1639_184_19_21_24_26_29_3_31_41_43_45_47_49_50_51_52_53_54_55_56_57_64_65_7_79_9",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/customclass/class-wpvivid-remote.php::::2_28",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/customclass/class-wpvivid-dropbox.php::::10_11_12_23_25_27_29_3_31_33_34_35_36_37_38_386_39_40_41_42_47_474_48_6_7_9_900",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/staging/class-wpvivid-staging-copy-files-ex.php::::2_669",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/new_backup/class-wpvivid-zip.php::::3_352",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-exporter.php::::1951_9",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/new_backup/class-wpvivid-mysqldump2.php::::1060_3",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-taskmanager.php::::3_747",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid.php::::101_102_104_105_106_107_108_110_111_113_115_117_118_121_122_123_152_156_157_158_159_160_161_162_163_164_165_166_167_168_169_170_171_173_174_175_176_178_179_181_183_184_185_186_189_191_192_193_194_195_197_198_199_200_201_202_204_205_207_208_210_212_214_216_217_218_219_221_223_224_228_230_231_232_234_235_236_237_2925_2931_2932_2934_2936_2937_2938_297_299_30_301_307_313_314_315_317_321_322_323_327_328_329_330_349_351_353_355_357_359_361_362_363_365_367_369_371_373_375_377_379_381_383_385_387_389_391_393_395_397_399_400_402_403_404_406_408_410_412_414_416_417_418_419_421_423_425_427_430_431_432_433_435_436_437_439_441_443_444_445_446_447_449_450_451_453_454_458_459_463_468_69_71_73_7478_7479_7480_7481_7486_7487_7488_7493_7495_75_7500_7501_7502_7503_7505_7506_7552_76_77_7766_79_80_81_82_83_84_85_86_88_90_93_95_96_98_99",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/staging/class-wpvivid-staging-setting.php::::14_15_16_17_18_3_516",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/customclass/class-wpvivid-google-drive.php::::10_11_12_13_14_1483_15_16_200_27_29_3_31_33_35_36_37_38_39_40_41_42_43_44_52_53_62_7_76_9",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/upload-cleaner/class-wpvivid-uploads-cleaner.php::::2_3585_7_878_880_881_883_884_886_888_889_890_892_894_895_896_898_899_9_900_902_904_905_908_909_910_912_913_915_918_919_920_921",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/snapshot/class-wpvivid-snapshots-list.php::::12_2_379_7",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-restore-data.php::::3_59",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/staging/class-wpvivid-staging-log.php::::15_16_3_320"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 77,
+      "is_interesting": false,
+      "fuzzer_id": "2",
+      "is_initial_candidate": false,
+      "mutated_param_type": "query_params",
+      "mutated_param_name": "backup_id"
+    },
+    {
+      "coverage_id": "1787309002-a0755d43-8c22-4eb5-9f47-66ee049f2238",
+      "priority": 77,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "GET",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "wpvivid_download_backup_mainwp"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "file_name": "fuz{",
+          "backup_id": ""
+        },
+        "body_params": {}
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 0.25
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n",
+      "response.body.length": 1,
+      "response.headers": {
+        "Date": "Fri, 21 Aug 2026 10:43:22 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "1",
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 867.932,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787308914-a9547c50-7391-4751-949b-b02e0d8de0a8",
+      "paths": [
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/customclass/class-wpvivid-s3.php::::2_2683",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-upload.php::::148_3",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-importer.php::::11_2529",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/customclass/class-wpvivid-send-to-site.php::::10_1088_12_13_21_23_25_27_3_34_38_63_8_9",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/upload-cleaner/class-wpvivid-upload-cleaner-setting.php::::1082_2_680_681_682_684_686_687_689_690_691_7",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-compress-default.php::::81",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/new_backup/class-wpvivid-backup-task_2.php::::3_3245",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/new_backup/class-wpvivid-restore-db-2.php::::3_3369",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-db-method.php::::281",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/new_backup/class-wpvivid-backup2.php::::16_17_18_1867_20_21_23_24_26_27_28_29_3_31_32_34_36_38_40_41_43_44",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/new_backup/class-wpvivid-restore2.php::::15_16_18_1889_20_21_23_24_26_27_29_3_30_32_33_34",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-additional-db-method.php::::255",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/upload-cleaner/class-wpvivid-isolate-files.php::::13_17_21_3_384",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/customclass/class-wpvivid-sftpclass.php::::19_21_22_23_24_25_26_3_32_6_7_721_8",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-export-import.php::::14_15_17_18_20_21_22_24_25_26_28_2845_3_30_32_33_35_37_39_41_42_43_44_45_46_47_48_50_51",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/staging/class-wpvivid-fresh-install-create-ui-display.php::::12_2_947",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-backup.php::::10_11_12_14_15_16_17_19_20_21_22_2810_3_8_9",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid.php::::101_102_104_105_106_107_108_110_111_113_115_117_118_121_122_123_152_156_157_158_159_160_161_162_163_164_165_166_167_168_169_170_171_173_174_175_176_178_179_181_183_184_185_186_189_191_192_193_194_195_197_198_199_200_201_202_204_205_207_208_210_212_214_216_217_218_219_221_223_224_228_230_231_232_234_235_236_237_297_299_30_301_307_313_314_315_317_321_322_323_327_328_329_330_349_351_353_355_357_359_361_362_363_365_367_369_371_373_375_377_379_381_383_385_387_389_391_393_395_397_399_400_402_403_404_406_408_410_412_414_416_417_418_419_421_423_425_427_430_431_432_433_435_436_437_439_441_443_444_445_446_447_449_450_451_453_454_458_459_463_468_69_71_73_7478_7479_7480_7481_7486_7487_7490_75_7552_76_77_7766_79_80_81_82_83_84_85_86_88_90_93_95_96_98_99",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/staging/class-wpvivid-staging-task-ex.php::::1120_2",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-taskmanager.php::::3_452_454_456_461_747",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/staging/class-wpvivid-staging-list-ui-display.php::::12_1200_2",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/wpvivid-backuprestore.php::::176_20_222_24_26_27_28_29_30_31_32_327_328_339_34_344_348_349_35_350_351_36_37_38_39_41_42_43_44_45_47_49_50_51_53_55_57_59_61_63_65_67_69_70_71_73_75_78_79_80_81_82_84_85_87_88_90_92_93",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/staging/class-wpvivid-staging-create-new-wp.php::::2_242_7",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-setting.php::::137_138_142_164_166_170_189_3_687",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/new_backup/class-wpvivid-restore-file-2.php::::3_768",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-backuplist.php::::10_11_12_14_15_26_3_417",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-log.php::::13_14_184_3",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-i18n.php::::2_39_40_41_42_45_50",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/staging/class-wpvivid-staging.php::::1000_1009_1010_1013_1036_1052_1054_1087_1095_199_2_201_202_204_205_206_208_210_211_212_215_216_217_26_28_2893_29_30_31_32_33_34_35_36_38_39_40_41_44_45_472_48_480_483_50_51_52_54_57_58_60_61_7_9_999",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/staging/class-wpvivid-staging-create-ui-display.php::::12_2_903",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/customclass/class-wpvivid-remote-default.php::::11_13_16_18_2_21_42_6_8",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-public-interface.php::::431",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/customclass/class-wpvivid-base-s3.php::::2_296_6",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-mail-report.php::::1120_3",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-remote-collection.php::::10_11_118_119_12_120_121_122_123_124_125_126_127_13_132_134_136_137_14_15_16_25_26_27_28_9",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-tools.php::::138_3",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/customclass/class-wpvivid-base-dropbox.php::::2_373",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid.php::::101_102_104_105_106_107_108_110_111_113_115_117_118_121_122_123_152_156_157_158_159_160_161_162_163_164_165_166_167_168_169_170_171_173_174_175_176_178_179_181_183_184_185_186_189_191_192_193_194_195_197_198_199_200_201_202_204_205_207_208_210_212_214_216_217_218_219_221_223_224_228_230_231_232_234_235_236_237_2925_2927_2928_2929_297_299_30_301_307_313_314_315_317_321_322_323_327_328_329_330_349_351_353_355_357_359_361_362_363_365_367_369_371_373_375_377_379_381_383_385_387_389_391_393_395_397_399_400_402_403_404_406_408_410_412_414_416_417_418_419_421_423_425_427_430_431_432_433_435_436_437_439_441_443_444_445_446_447_449_450_451_453_454_458_459_463_468_69_71_73_7478_7479_7480_7481_7486_7487_7488_7493_7495_75_7500_7501_7502_7503_7505_7506_7552_76_77_7766_79_80_81_82_83_84_85_86_88_90_93_95_96_98_99",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/staging/class-wpvivid-staging-log-page.php::::1173_2_296_297_298_301_302_303",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-migrate.php::::12_13_14_15_16_1628_17_19_20_21_22_24_25_26_28_29_3_31_32_33_34_35_36_37_39_40_41",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/snapshot/class-wpvivid-snapshot-options.php::::14_16_2_40_42_86",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-backuplist.php::::3_417",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-function-realize.php::::222_8",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/customclass/class-wpvivid-s3compat.php::::10_11_12_2_25_26_27_28_29_30_31_36_5_6_766_8_9",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-crypt.php::::238_3",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-schedule.php::::26_27_3_389",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/staging/class-wpvivid-staging-sites-list.php::::2637_3",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/staging/class-wpvivid-staging-ui-display.php::::1212_1213_1214_1216_1217_1218_1219_1220_1540_3_8",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-interface-mainwp.php::::10_11_12_15_16_17_18_19_20_21_22_23_26_27_30_31_32_33_34_35_36_37_38_41_42_45_46_49_50_6_614_7_8_9",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-backup-uploader.php::::1113_12_13_14_15_16_17_18_20_21_22_23_3",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/customclass/class-wpvivid-ftpclass.php::::10_18_20_21_22_23_24_25_3_30_694_7_8",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/admin/class-wpvivid-admin.php::::101_102_103_1736_23_61_62_64_70_73_74_76_77_79_81_82_83_85_87_88_89_91_93_95_96_98_99",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/snapshot/class-wpvivid-snapshot.php::::15_16_17_1708_19_21_22_24_26_3_40_41_43_44_47_48_50_51_52_53_54_56_57_59_61_62_64_66_68_75",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/staging/class-wpvivid-staging-copy-db-ex.php::::1597_2",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-error-log.php::::196_3",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-setting.php::::137_138_140_142_164_166_170_189_3_43_47_50_53_56_60_687",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-tab-page-container.php::::2_266",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-zipclass.php::::1312_1477_3_7_9",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-downloader.php::::195_3",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/upload-cleaner/class-wpvivid-uploads-scanner.php::::2386_3",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/customclass/class-wpvivid-amazons3-plus.php::::10_11_2_25_27_28_29_30_31_32_38_5_6_7_8_822",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/snapshot/class-wpvivid-snapshot-function.php::::3_736",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/customclass/class-wpvivid-one-drive.php::::11_14_16_1639_184_19_21_24_26_29_3_31_41_43_45_47_49_50_51_52_53_54_55_56_57_64_65_7_79_9",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/customclass/class-wpvivid-remote.php::::2_28",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/customclass/class-wpvivid-dropbox.php::::10_11_12_23_25_27_29_3_31_33_34_35_36_37_38_386_39_40_41_42_47_474_48_6_7_9_900",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/staging/class-wpvivid-staging-copy-files-ex.php::::2_669",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/new_backup/class-wpvivid-zip.php::::3_352",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-exporter.php::::1951_9",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/new_backup/class-wpvivid-mysqldump2.php::::1060_3",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-taskmanager.php::::3_747",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/staging/class-wpvivid-staging-setting.php::::14_15_16_17_18_3_516",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/customclass/class-wpvivid-google-drive.php::::10_11_12_13_14_1483_15_16_200_27_29_3_31_33_35_36_37_38_39_40_41_42_43_44_52_53_62_7_76_9",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid.php::::101_102_104_105_106_107_108_110_111_113_115_117_118_121_122_123_152_156_157_158_159_160_161_162_163_164_165_166_167_168_169_170_171_173_174_175_176_178_179_181_183_184_185_186_189_191_192_193_194_195_197_198_199_200_201_202_204_205_207_208_210_212_214_216_217_218_219_221_223_224_228_230_231_232_234_235_236_237_2925_2931_2932_2934_2936_2937_2938_297_299_30_301_307_313_314_315_317_321_322_323_327_328_329_330_349_351_353_355_357_359_361_362_363_365_367_369_371_373_375_377_379_381_383_385_387_389_391_393_395_397_399_400_402_403_404_406_408_410_412_414_416_417_418_419_421_423_425_427_430_431_432_433_435_436_437_439_441_443_444_445_446_447_449_450_451_453_454_458_459_463_468_69_71_73_7478_7479_7480_7481_7486_7487_7488_7493_7495_75_7500_7501_7502_7503_7505_7506_7552_76_77_7766_79_80_81_82_83_84_85_86_88_90_93_95_96_98_99",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/upload-cleaner/class-wpvivid-uploads-cleaner.php::::2_3585_7_878_880_881_883_884_886_888_889_890_892_894_895_896_898_899_9_900_902_904_905_908_909_910_912_913_915_918_919_920_921",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/snapshot/class-wpvivid-snapshots-list.php::::12_2_379_7",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-restore-data.php::::3_59",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/staging/class-wpvivid-staging-log.php::::15_16_3_320"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 77,
+      "is_interesting": false,
+      "fuzzer_id": "2",
+      "is_initial_candidate": false,
+      "mutated_param_type": "query_params",
+      "mutated_param_name": "file_name"
+    },
+    {
+      "coverage_id": "1787309002-a0755d43-8c22-4eb5-9f47-66ee049f2238",
+      "priority": 77,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "GET",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "wpvivid_download_backup_mainwp"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "file_name": "fuz{",
+          "backup_id": ""
+        },
+        "body_params": {}
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 0.25
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n",
+      "response.body.length": 1,
+      "response.headers": {
+        "Date": "Fri, 21 Aug 2026 10:43:22 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "1",
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 867.932,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787308914-a9547c50-7391-4751-949b-b02e0d8de0a8",
+      "paths": [
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/customclass/class-wpvivid-s3.php::::2_2683",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-upload.php::::148_3",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-importer.php::::11_2529",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/customclass/class-wpvivid-send-to-site.php::::10_1088_12_13_21_23_25_27_3_34_38_63_8_9",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/upload-cleaner/class-wpvivid-upload-cleaner-setting.php::::1082_2_680_681_682_684_686_687_689_690_691_7",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-compress-default.php::::81",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/new_backup/class-wpvivid-backup-task_2.php::::3_3245",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/new_backup/class-wpvivid-restore-db-2.php::::3_3369",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-db-method.php::::281",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/new_backup/class-wpvivid-backup2.php::::16_17_18_1867_20_21_23_24_26_27_28_29_3_31_32_34_36_38_40_41_43_44",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/new_backup/class-wpvivid-restore2.php::::15_16_18_1889_20_21_23_24_26_27_29_3_30_32_33_34",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-additional-db-method.php::::255",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/upload-cleaner/class-wpvivid-isolate-files.php::::13_17_21_3_384",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/customclass/class-wpvivid-sftpclass.php::::19_21_22_23_24_25_26_3_32_6_7_721_8",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-export-import.php::::14_15_17_18_20_21_22_24_25_26_28_2845_3_30_32_33_35_37_39_41_42_43_44_45_46_47_48_50_51",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/staging/class-wpvivid-fresh-install-create-ui-display.php::::12_2_947",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-backup.php::::10_11_12_14_15_16_17_19_20_21_22_2810_3_8_9",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid.php::::101_102_104_105_106_107_108_110_111_113_115_117_118_121_122_123_152_156_157_158_159_160_161_162_163_164_165_166_167_168_169_170_171_173_174_175_176_178_179_181_183_184_185_186_189_191_192_193_194_195_197_198_199_200_201_202_204_205_207_208_210_212_214_216_217_218_219_221_223_224_228_230_231_232_234_235_236_237_297_299_30_301_307_313_314_315_317_321_322_323_327_328_329_330_349_351_353_355_357_359_361_362_363_365_367_369_371_373_375_377_379_381_383_385_387_389_391_393_395_397_399_400_402_403_404_406_408_410_412_414_416_417_418_419_421_423_425_427_430_431_432_433_435_436_437_439_441_443_444_445_446_447_449_450_451_453_454_458_459_463_468_69_71_73_7478_7479_7480_7481_7486_7487_7490_75_7552_76_77_7766_79_80_81_82_83_84_85_86_88_90_93_95_96_98_99",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/staging/class-wpvivid-staging-task-ex.php::::1120_2",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-taskmanager.php::::3_452_454_456_461_747",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/staging/class-wpvivid-staging-list-ui-display.php::::12_1200_2",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/wpvivid-backuprestore.php::::176_20_222_24_26_27_28_29_30_31_32_327_328_339_34_344_348_349_35_350_351_36_37_38_39_41_42_43_44_45_47_49_50_51_53_55_57_59_61_63_65_67_69_70_71_73_75_78_79_80_81_82_84_85_87_88_90_92_93",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/staging/class-wpvivid-staging-create-new-wp.php::::2_242_7",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-setting.php::::137_138_142_164_166_170_189_3_687",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/new_backup/class-wpvivid-restore-file-2.php::::3_768",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-backuplist.php::::10_11_12_14_15_26_3_417",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-log.php::::13_14_184_3",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-i18n.php::::2_39_40_41_42_45_50",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/staging/class-wpvivid-staging.php::::1000_1009_1010_1013_1036_1052_1054_1087_1095_199_2_201_202_204_205_206_208_210_211_212_215_216_217_26_28_2893_29_30_31_32_33_34_35_36_38_39_40_41_44_45_472_48_480_483_50_51_52_54_57_58_60_61_7_9_999",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/staging/class-wpvivid-staging-create-ui-display.php::::12_2_903",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/customclass/class-wpvivid-remote-default.php::::11_13_16_18_2_21_42_6_8",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-public-interface.php::::431",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/customclass/class-wpvivid-base-s3.php::::2_296_6",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-mail-report.php::::1120_3",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-remote-collection.php::::10_11_118_119_12_120_121_122_123_124_125_126_127_13_132_134_136_137_14_15_16_25_26_27_28_9",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-tools.php::::138_3",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/customclass/class-wpvivid-base-dropbox.php::::2_373",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid.php::::101_102_104_105_106_107_108_110_111_113_115_117_118_121_122_123_152_156_157_158_159_160_161_162_163_164_165_166_167_168_169_170_171_173_174_175_176_178_179_181_183_184_185_186_189_191_192_193_194_195_197_198_199_200_201_202_204_205_207_208_210_212_214_216_217_218_219_221_223_224_228_230_231_232_234_235_236_237_2925_2927_2928_2929_297_299_30_301_307_313_314_315_317_321_322_323_327_328_329_330_349_351_353_355_357_359_361_362_363_365_367_369_371_373_375_377_379_381_383_385_387_389_391_393_395_397_399_400_402_403_404_406_408_410_412_414_416_417_418_419_421_423_425_427_430_431_432_433_435_436_437_439_441_443_444_445_446_447_449_450_451_453_454_458_459_463_468_69_71_73_7478_7479_7480_7481_7486_7487_7488_7493_7495_75_7500_7501_7502_7503_7505_7506_7552_76_77_7766_79_80_81_82_83_84_85_86_88_90_93_95_96_98_99",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/staging/class-wpvivid-staging-log-page.php::::1173_2_296_297_298_301_302_303",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-migrate.php::::12_13_14_15_16_1628_17_19_20_21_22_24_25_26_28_29_3_31_32_33_34_35_36_37_39_40_41",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/snapshot/class-wpvivid-snapshot-options.php::::14_16_2_40_42_86",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-backuplist.php::::3_417",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-function-realize.php::::222_8",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/customclass/class-wpvivid-s3compat.php::::10_11_12_2_25_26_27_28_29_30_31_36_5_6_766_8_9",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-crypt.php::::238_3",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-schedule.php::::26_27_3_389",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/staging/class-wpvivid-staging-sites-list.php::::2637_3",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/staging/class-wpvivid-staging-ui-display.php::::1212_1213_1214_1216_1217_1218_1219_1220_1540_3_8",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-interface-mainwp.php::::10_11_12_15_16_17_18_19_20_21_22_23_26_27_30_31_32_33_34_35_36_37_38_41_42_45_46_49_50_6_614_7_8_9",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-backup-uploader.php::::1113_12_13_14_15_16_17_18_20_21_22_23_3",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/customclass/class-wpvivid-ftpclass.php::::10_18_20_21_22_23_24_25_3_30_694_7_8",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/admin/class-wpvivid-admin.php::::101_102_103_1736_23_61_62_64_70_73_74_76_77_79_81_82_83_85_87_88_89_91_93_95_96_98_99",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/snapshot/class-wpvivid-snapshot.php::::15_16_17_1708_19_21_22_24_26_3_40_41_43_44_47_48_50_51_52_53_54_56_57_59_61_62_64_66_68_75",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/staging/class-wpvivid-staging-copy-db-ex.php::::1597_2",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-error-log.php::::196_3",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-setting.php::::137_138_140_142_164_166_170_189_3_43_47_50_53_56_60_687",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-tab-page-container.php::::2_266",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-zipclass.php::::1312_1477_3_7_9",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-downloader.php::::195_3",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/upload-cleaner/class-wpvivid-uploads-scanner.php::::2386_3",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/customclass/class-wpvivid-amazons3-plus.php::::10_11_2_25_27_28_29_30_31_32_38_5_6_7_8_822",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/snapshot/class-wpvivid-snapshot-function.php::::3_736",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/customclass/class-wpvivid-one-drive.php::::11_14_16_1639_184_19_21_24_26_29_3_31_41_43_45_47_49_50_51_52_53_54_55_56_57_64_65_7_79_9",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/customclass/class-wpvivid-remote.php::::2_28",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/customclass/class-wpvivid-dropbox.php::::10_11_12_23_25_27_29_3_31_33_34_35_36_37_38_386_39_40_41_42_47_474_48_6_7_9_900",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/staging/class-wpvivid-staging-copy-files-ex.php::::2_669",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/new_backup/class-wpvivid-zip.php::::3_352",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-exporter.php::::1951_9",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/new_backup/class-wpvivid-mysqldump2.php::::1060_3",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-taskmanager.php::::3_747",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/staging/class-wpvivid-staging-setting.php::::14_15_16_17_18_3_516",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/customclass/class-wpvivid-google-drive.php::::10_11_12_13_14_1483_15_16_200_27_29_3_31_33_35_36_37_38_39_40_41_42_43_44_52_53_62_7_76_9",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid.php::::101_102_104_105_106_107_108_110_111_113_115_117_118_121_122_123_152_156_157_158_159_160_161_162_163_164_165_166_167_168_169_170_171_173_174_175_176_178_179_181_183_184_185_186_189_191_192_193_194_195_197_198_199_200_201_202_204_205_207_208_210_212_214_216_217_218_219_221_223_224_228_230_231_232_234_235_236_237_2925_2931_2932_2934_2936_2937_2938_297_299_30_301_307_313_314_315_317_321_322_323_327_328_329_330_349_351_353_355_357_359_361_362_363_365_367_369_371_373_375_377_379_381_383_385_387_389_391_393_395_397_399_400_402_403_404_406_408_410_412_414_416_417_418_419_421_423_425_427_430_431_432_433_435_436_437_439_441_443_444_445_446_447_449_450_451_453_454_458_459_463_468_69_71_73_7478_7479_7480_7481_7486_7487_7488_7493_7495_75_7500_7501_7502_7503_7505_7506_7552_76_77_7766_79_80_81_82_83_84_85_86_88_90_93_95_96_98_99",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/upload-cleaner/class-wpvivid-uploads-cleaner.php::::2_3585_7_878_880_881_883_884_886_888_889_890_892_894_895_896_898_899_9_900_902_904_905_908_909_910_912_913_915_918_919_920_921",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/snapshot/class-wpvivid-snapshots-list.php::::12_2_379_7",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-restore-data.php::::3_59",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/staging/class-wpvivid-staging-log.php::::15_16_3_320"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 77,
+      "is_interesting": false,
+      "fuzzer_id": "2",
+      "is_initial_candidate": false,
+      "mutated_param_type": "query_params",
+      "mutated_param_name": "file_name"
+    },
+    {
+      "coverage_id": "1787309046-cccd06fd-0a1b-4f6a-bd1c-334117a9287c",
+      "priority": 77,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "GET",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "wpvivid_download_backup_mainwp"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "file_name": "fud)hzz",
+          "backup_id": ""
+        },
+        "body_params": {}
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 0.25
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n",
+      "response.body.length": 1,
+      "response.headers": {
+        "Date": "Fri, 21 Aug 2026 10:44:06 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "1",
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 370.013,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787308914-a9547c50-7391-4751-949b-b02e0d8de0a8",
+      "paths": [
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/customclass/class-wpvivid-s3.php::::2_2683",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-upload.php::::148_3",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-importer.php::::11_2529",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/customclass/class-wpvivid-send-to-site.php::::10_1088_12_13_21_23_25_27_3_34_38_63_8_9",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/upload-cleaner/class-wpvivid-upload-cleaner-setting.php::::1082_2_680_681_682_684_686_687_689_690_691_7",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-compress-default.php::::81",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/new_backup/class-wpvivid-backup-task_2.php::::3_3245",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/new_backup/class-wpvivid-restore-db-2.php::::3_3369",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-db-method.php::::281",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/new_backup/class-wpvivid-backup2.php::::16_17_18_1867_20_21_23_24_26_27_28_29_3_31_32_34_36_38_40_41_43_44",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/new_backup/class-wpvivid-restore2.php::::15_16_18_1889_20_21_23_24_26_27_29_3_30_32_33_34",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-additional-db-method.php::::255",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/upload-cleaner/class-wpvivid-isolate-files.php::::13_17_21_3_384",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/customclass/class-wpvivid-sftpclass.php::::19_21_22_23_24_25_26_3_32_6_7_721_8",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-export-import.php::::14_15_17_18_20_21_22_24_25_26_28_2845_3_30_32_33_35_37_39_41_42_43_44_45_46_47_48_50_51",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/staging/class-wpvivid-fresh-install-create-ui-display.php::::12_2_947",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-backup.php::::10_11_12_14_15_16_17_19_20_21_22_2810_3_8_9",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid.php::::101_102_104_105_106_107_108_110_111_113_115_117_118_121_122_123_152_156_157_158_159_160_161_162_163_164_165_166_167_168_169_170_171_173_174_175_176_178_179_181_183_184_185_186_189_191_192_193_194_195_197_198_199_200_201_202_204_205_207_208_210_212_214_216_217_218_219_221_223_224_228_230_231_232_234_235_236_237_297_299_30_301_307_313_314_315_317_321_322_323_327_328_329_330_349_351_353_355_357_359_361_362_363_365_367_369_371_373_375_377_379_381_383_385_387_389_391_393_395_397_399_400_402_403_404_406_408_410_412_414_416_417_418_419_421_423_425_427_430_431_432_433_435_436_437_439_441_443_444_445_446_447_449_450_451_453_454_458_459_463_468_69_71_73_7478_7479_7480_7481_7486_7487_7490_75_7552_76_77_7766_79_80_81_82_83_84_85_86_88_90_93_95_96_98_99",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/staging/class-wpvivid-staging-task-ex.php::::1120_2",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-taskmanager.php::::3_452_454_456_461_747",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/staging/class-wpvivid-staging-list-ui-display.php::::12_1200_2",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/wpvivid-backuprestore.php::::176_20_222_24_26_27_28_29_30_31_32_327_328_339_34_344_348_349_35_350_351_36_37_38_39_41_42_43_44_45_47_49_50_51_53_55_57_59_61_63_65_67_69_70_71_73_75_78_79_80_81_82_84_85_87_88_90_92_93",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/staging/class-wpvivid-staging-create-new-wp.php::::2_242_7",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-setting.php::::137_138_142_164_166_170_189_3_687",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/new_backup/class-wpvivid-restore-file-2.php::::3_768",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-backuplist.php::::10_11_12_14_15_26_3_417",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-log.php::::13_14_184_3",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-i18n.php::::2_39_40_41_42_45_50",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/staging/class-wpvivid-staging.php::::1000_1009_1010_1013_1036_1052_1054_1087_1095_199_2_201_202_204_205_206_208_210_211_212_215_216_217_26_28_2893_29_30_31_32_33_34_35_36_38_39_40_41_44_45_472_48_480_483_50_51_52_54_57_58_60_61_7_9_999",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/staging/class-wpvivid-staging-create-ui-display.php::::12_2_903",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/customclass/class-wpvivid-remote-default.php::::11_13_16_18_2_21_42_6_8",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-public-interface.php::::431",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/customclass/class-wpvivid-base-s3.php::::2_296_6",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-mail-report.php::::1120_3",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-remote-collection.php::::10_11_118_119_12_120_121_122_123_124_125_126_127_13_132_134_136_137_14_15_16_25_26_27_28_9",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-tools.php::::138_3",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/customclass/class-wpvivid-base-dropbox.php::::2_373",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid.php::::101_102_104_105_106_107_108_110_111_113_115_117_118_121_122_123_152_156_157_158_159_160_161_162_163_164_165_166_167_168_169_170_171_173_174_175_176_178_179_181_183_184_185_186_189_191_192_193_194_195_197_198_199_200_201_202_204_205_207_208_210_212_214_216_217_218_219_221_223_224_228_230_231_232_234_235_236_237_2925_2927_2928_2929_297_299_30_301_307_313_314_315_317_321_322_323_327_328_329_330_349_351_353_355_357_359_361_362_363_365_367_369_371_373_375_377_379_381_383_385_387_389_391_393_395_397_399_400_402_403_404_406_408_410_412_414_416_417_418_419_421_423_425_427_430_431_432_433_435_436_437_439_441_443_444_445_446_447_449_450_451_453_454_458_459_463_468_69_71_73_7478_7479_7480_7481_7486_7487_7488_7493_7495_75_7500_7501_7502_7503_7505_7506_7552_76_77_7766_79_80_81_82_83_84_85_86_88_90_93_95_96_98_99",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/staging/class-wpvivid-staging-log-page.php::::1173_2_296_297_298_301_302_303",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-migrate.php::::12_13_14_15_16_1628_17_19_20_21_22_24_25_26_28_29_3_31_32_33_34_35_36_37_39_40_41",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/snapshot/class-wpvivid-snapshot-options.php::::14_16_2_40_42_86",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-backuplist.php::::3_417",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-function-realize.php::::222_8",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/customclass/class-wpvivid-s3compat.php::::10_11_12_2_25_26_27_28_29_30_31_36_5_6_766_8_9",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-crypt.php::::238_3",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-schedule.php::::26_27_3_389",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/staging/class-wpvivid-staging-sites-list.php::::2637_3",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/staging/class-wpvivid-staging-ui-display.php::::1212_1213_1214_1216_1217_1218_1219_1220_1540_3_8",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-interface-mainwp.php::::10_11_12_15_16_17_18_19_20_21_22_23_26_27_30_31_32_33_34_35_36_37_38_41_42_45_46_49_50_6_614_7_8_9",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-backup-uploader.php::::1113_12_13_14_15_16_17_18_20_21_22_23_3",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/customclass/class-wpvivid-ftpclass.php::::10_18_20_21_22_23_24_25_3_30_694_7_8",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/admin/class-wpvivid-admin.php::::101_102_103_1736_23_61_62_64_70_73_74_76_77_79_81_82_83_85_87_88_89_91_93_95_96_98_99",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/snapshot/class-wpvivid-snapshot.php::::15_16_17_1708_19_21_22_24_26_3_40_41_43_44_47_48_50_51_52_53_54_56_57_59_61_62_64_66_68_75",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/staging/class-wpvivid-staging-copy-db-ex.php::::1597_2",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-error-log.php::::196_3",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-setting.php::::137_138_140_142_164_166_170_189_3_43_47_50_53_56_60_687",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-tab-page-container.php::::2_266",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-zipclass.php::::1312_1477_3_7_9",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-downloader.php::::195_3",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/upload-cleaner/class-wpvivid-uploads-scanner.php::::2386_3",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/customclass/class-wpvivid-amazons3-plus.php::::10_11_2_25_27_28_29_30_31_32_38_5_6_7_8_822",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/snapshot/class-wpvivid-snapshot-function.php::::3_736",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/customclass/class-wpvivid-one-drive.php::::11_14_16_1639_184_19_21_24_26_29_3_31_41_43_45_47_49_50_51_52_53_54_55_56_57_64_65_7_79_9",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/customclass/class-wpvivid-remote.php::::2_28",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/customclass/class-wpvivid-dropbox.php::::10_11_12_23_25_27_29_3_31_33_34_35_36_37_38_386_39_40_41_42_47_474_48_6_7_9_900",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/staging/class-wpvivid-staging-copy-files-ex.php::::2_669",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/new_backup/class-wpvivid-zip.php::::3_352",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-exporter.php::::1951_9",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/new_backup/class-wpvivid-mysqldump2.php::::1060_3",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-taskmanager.php::::3_747",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/staging/class-wpvivid-staging-setting.php::::14_15_16_17_18_3_516",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/customclass/class-wpvivid-google-drive.php::::10_11_12_13_14_1483_15_16_200_27_29_3_31_33_35_36_37_38_39_40_41_42_43_44_52_53_62_7_76_9",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid.php::::101_102_104_105_106_107_108_110_111_113_115_117_118_121_122_123_152_156_157_158_159_160_161_162_163_164_165_166_167_168_169_170_171_173_174_175_176_178_179_181_183_184_185_186_189_191_192_193_194_195_197_198_199_200_201_202_204_205_207_208_210_212_214_216_217_218_219_221_223_224_228_230_231_232_234_235_236_237_2925_2931_2932_2934_2936_2937_2938_297_299_30_301_307_313_314_315_317_321_322_323_327_328_329_330_349_351_353_355_357_359_361_362_363_365_367_369_371_373_375_377_379_381_383_385_387_389_391_393_395_397_399_400_402_403_404_406_408_410_412_414_416_417_418_419_421_423_425_427_430_431_432_433_435_436_437_439_441_443_444_445_446_447_449_450_451_453_454_458_459_463_468_69_71_73_7478_7479_7480_7481_7486_7487_7488_7493_7495_75_7500_7501_7502_7503_7505_7506_7552_76_77_7766_79_80_81_82_83_84_85_86_88_90_93_95_96_98_99",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/upload-cleaner/class-wpvivid-uploads-cleaner.php::::2_3585_7_878_880_881_883_884_886_888_889_890_892_894_895_896_898_899_9_900_902_904_905_908_909_910_912_913_915_918_919_920_921",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/snapshot/class-wpvivid-snapshots-list.php::::12_2_379_7",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-restore-data.php::::3_59",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/staging/class-wpvivid-staging-log.php::::15_16_3_320"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 77,
+      "is_interesting": false,
+      "fuzzer_id": "2",
+      "is_initial_candidate": false,
+      "mutated_param_type": "query_params",
+      "mutated_param_name": "file_name"
+    },
+    {
+      "coverage_id": "1787309046-cccd06fd-0a1b-4f6a-bd1c-334117a9287c",
+      "priority": 77,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "GET",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "wpvivid_download_backup_mainwp"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "file_name": "fud)hzz",
+          "backup_id": ""
+        },
+        "body_params": {}
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 0.25
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n",
+      "response.body.length": 1,
+      "response.headers": {
+        "Date": "Fri, 21 Aug 2026 10:44:06 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "1",
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 370.013,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787308914-a9547c50-7391-4751-949b-b02e0d8de0a8",
+      "paths": [
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/customclass/class-wpvivid-s3.php::::2_2683",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-upload.php::::148_3",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-importer.php::::11_2529",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/customclass/class-wpvivid-send-to-site.php::::10_1088_12_13_21_23_25_27_3_34_38_63_8_9",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/upload-cleaner/class-wpvivid-upload-cleaner-setting.php::::1082_2_680_681_682_684_686_687_689_690_691_7",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-compress-default.php::::81",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/new_backup/class-wpvivid-backup-task_2.php::::3_3245",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/new_backup/class-wpvivid-restore-db-2.php::::3_3369",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-db-method.php::::281",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/new_backup/class-wpvivid-backup2.php::::16_17_18_1867_20_21_23_24_26_27_28_29_3_31_32_34_36_38_40_41_43_44",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/new_backup/class-wpvivid-restore2.php::::15_16_18_1889_20_21_23_24_26_27_29_3_30_32_33_34",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-additional-db-method.php::::255",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/upload-cleaner/class-wpvivid-isolate-files.php::::13_17_21_3_384",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/customclass/class-wpvivid-sftpclass.php::::19_21_22_23_24_25_26_3_32_6_7_721_8",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-export-import.php::::14_15_17_18_20_21_22_24_25_26_28_2845_3_30_32_33_35_37_39_41_42_43_44_45_46_47_48_50_51",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/staging/class-wpvivid-fresh-install-create-ui-display.php::::12_2_947",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-backup.php::::10_11_12_14_15_16_17_19_20_21_22_2810_3_8_9",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid.php::::101_102_104_105_106_107_108_110_111_113_115_117_118_121_122_123_152_156_157_158_159_160_161_162_163_164_165_166_167_168_169_170_171_173_174_175_176_178_179_181_183_184_185_186_189_191_192_193_194_195_197_198_199_200_201_202_204_205_207_208_210_212_214_216_217_218_219_221_223_224_228_230_231_232_234_235_236_237_297_299_30_301_307_313_314_315_317_321_322_323_327_328_329_330_349_351_353_355_357_359_361_362_363_365_367_369_371_373_375_377_379_381_383_385_387_389_391_393_395_397_399_400_402_403_404_406_408_410_412_414_416_417_418_419_421_423_425_427_430_431_432_433_435_436_437_439_441_443_444_445_446_447_449_450_451_453_454_458_459_463_468_69_71_73_7478_7479_7480_7481_7486_7487_7490_75_7552_76_77_7766_79_80_81_82_83_84_85_86_88_90_93_95_96_98_99",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/staging/class-wpvivid-staging-task-ex.php::::1120_2",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-taskmanager.php::::3_452_454_456_461_747",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/staging/class-wpvivid-staging-list-ui-display.php::::12_1200_2",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/wpvivid-backuprestore.php::::176_20_222_24_26_27_28_29_30_31_32_327_328_339_34_344_348_349_35_350_351_36_37_38_39_41_42_43_44_45_47_49_50_51_53_55_57_59_61_63_65_67_69_70_71_73_75_78_79_80_81_82_84_85_87_88_90_92_93",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/staging/class-wpvivid-staging-create-new-wp.php::::2_242_7",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-setting.php::::137_138_142_164_166_170_189_3_687",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/new_backup/class-wpvivid-restore-file-2.php::::3_768",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-backuplist.php::::10_11_12_14_15_26_3_417",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-log.php::::13_14_184_3",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-i18n.php::::2_39_40_41_42_45_50",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/staging/class-wpvivid-staging.php::::1000_1009_1010_1013_1036_1052_1054_1087_1095_199_2_201_202_204_205_206_208_210_211_212_215_216_217_26_28_2893_29_30_31_32_33_34_35_36_38_39_40_41_44_45_472_48_480_483_50_51_52_54_57_58_60_61_7_9_999",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/staging/class-wpvivid-staging-create-ui-display.php::::12_2_903",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/customclass/class-wpvivid-remote-default.php::::11_13_16_18_2_21_42_6_8",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-public-interface.php::::431",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/customclass/class-wpvivid-base-s3.php::::2_296_6",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-mail-report.php::::1120_3",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-remote-collection.php::::10_11_118_119_12_120_121_122_123_124_125_126_127_13_132_134_136_137_14_15_16_25_26_27_28_9",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-tools.php::::138_3",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/customclass/class-wpvivid-base-dropbox.php::::2_373",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid.php::::101_102_104_105_106_107_108_110_111_113_115_117_118_121_122_123_152_156_157_158_159_160_161_162_163_164_165_166_167_168_169_170_171_173_174_175_176_178_179_181_183_184_185_186_189_191_192_193_194_195_197_198_199_200_201_202_204_205_207_208_210_212_214_216_217_218_219_221_223_224_228_230_231_232_234_235_236_237_2925_2927_2928_2929_297_299_30_301_307_313_314_315_317_321_322_323_327_328_329_330_349_351_353_355_357_359_361_362_363_365_367_369_371_373_375_377_379_381_383_385_387_389_391_393_395_397_399_400_402_403_404_406_408_410_412_414_416_417_418_419_421_423_425_427_430_431_432_433_435_436_437_439_441_443_444_445_446_447_449_450_451_453_454_458_459_463_468_69_71_73_7478_7479_7480_7481_7486_7487_7488_7493_7495_75_7500_7501_7502_7503_7505_7506_7552_76_77_7766_79_80_81_82_83_84_85_86_88_90_93_95_96_98_99",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/staging/class-wpvivid-staging-log-page.php::::1173_2_296_297_298_301_302_303",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-migrate.php::::12_13_14_15_16_1628_17_19_20_21_22_24_25_26_28_29_3_31_32_33_34_35_36_37_39_40_41",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/snapshot/class-wpvivid-snapshot-options.php::::14_16_2_40_42_86",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-backuplist.php::::3_417",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-function-realize.php::::222_8",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/customclass/class-wpvivid-s3compat.php::::10_11_12_2_25_26_27_28_29_30_31_36_5_6_766_8_9",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-crypt.php::::238_3",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-schedule.php::::26_27_3_389",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/staging/class-wpvivid-staging-sites-list.php::::2637_3",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/staging/class-wpvivid-staging-ui-display.php::::1212_1213_1214_1216_1217_1218_1219_1220_1540_3_8",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-interface-mainwp.php::::10_11_12_15_16_17_18_19_20_21_22_23_26_27_30_31_32_33_34_35_36_37_38_41_42_45_46_49_50_6_614_7_8_9",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-backup-uploader.php::::1113_12_13_14_15_16_17_18_20_21_22_23_3",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/customclass/class-wpvivid-ftpclass.php::::10_18_20_21_22_23_24_25_3_30_694_7_8",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/admin/class-wpvivid-admin.php::::101_102_103_1736_23_61_62_64_70_73_74_76_77_79_81_82_83_85_87_88_89_91_93_95_96_98_99",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/snapshot/class-wpvivid-snapshot.php::::15_16_17_1708_19_21_22_24_26_3_40_41_43_44_47_48_50_51_52_53_54_56_57_59_61_62_64_66_68_75",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/staging/class-wpvivid-staging-copy-db-ex.php::::1597_2",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-error-log.php::::196_3",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-setting.php::::137_138_140_142_164_166_170_189_3_43_47_50_53_56_60_687",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-tab-page-container.php::::2_266",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-zipclass.php::::1312_1477_3_7_9",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-downloader.php::::195_3",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/upload-cleaner/class-wpvivid-uploads-scanner.php::::2386_3",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/customclass/class-wpvivid-amazons3-plus.php::::10_11_2_25_27_28_29_30_31_32_38_5_6_7_8_822",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/snapshot/class-wpvivid-snapshot-function.php::::3_736",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/customclass/class-wpvivid-one-drive.php::::11_14_16_1639_184_19_21_24_26_29_3_31_41_43_45_47_49_50_51_52_53_54_55_56_57_64_65_7_79_9",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/customclass/class-wpvivid-remote.php::::2_28",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/customclass/class-wpvivid-dropbox.php::::10_11_12_23_25_27_29_3_31_33_34_35_36_37_38_386_39_40_41_42_47_474_48_6_7_9_900",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/staging/class-wpvivid-staging-copy-files-ex.php::::2_669",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/new_backup/class-wpvivid-zip.php::::3_352",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-exporter.php::::1951_9",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/new_backup/class-wpvivid-mysqldump2.php::::1060_3",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-taskmanager.php::::3_747",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/staging/class-wpvivid-staging-setting.php::::14_15_16_17_18_3_516",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/customclass/class-wpvivid-google-drive.php::::10_11_12_13_14_1483_15_16_200_27_29_3_31_33_35_36_37_38_39_40_41_42_43_44_52_53_62_7_76_9",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid.php::::101_102_104_105_106_107_108_110_111_113_115_117_118_121_122_123_152_156_157_158_159_160_161_162_163_164_165_166_167_168_169_170_171_173_174_175_176_178_179_181_183_184_185_186_189_191_192_193_194_195_197_198_199_200_201_202_204_205_207_208_210_212_214_216_217_218_219_221_223_224_228_230_231_232_234_235_236_237_2925_2931_2932_2934_2936_2937_2938_297_299_30_301_307_313_314_315_317_321_322_323_327_328_329_330_349_351_353_355_357_359_361_362_363_365_367_369_371_373_375_377_379_381_383_385_387_389_391_393_395_397_399_400_402_403_404_406_408_410_412_414_416_417_418_419_421_423_425_427_430_431_432_433_435_436_437_439_441_443_444_445_446_447_449_450_451_453_454_458_459_463_468_69_71_73_7478_7479_7480_7481_7486_7487_7488_7493_7495_75_7500_7501_7502_7503_7505_7506_7552_76_77_7766_79_80_81_82_83_84_85_86_88_90_93_95_96_98_99",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/upload-cleaner/class-wpvivid-uploads-cleaner.php::::2_3585_7_878_880_881_883_884_886_888_889_890_892_894_895_896_898_899_9_900_902_904_905_908_909_910_912_913_915_918_919_920_921",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/snapshot/class-wpvivid-snapshots-list.php::::12_2_379_7",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-restore-data.php::::3_59",
+        "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/staging/class-wpvivid-staging-log.php::::15_16_3_320"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 77,
+      "is_interesting": false,
+      "fuzzer_id": "2",
+      "is_initial_candidate": false,
+      "mutated_param_type": "query_params",
+      "mutated_param_name": "file_name"
+    }
+  ]
+}

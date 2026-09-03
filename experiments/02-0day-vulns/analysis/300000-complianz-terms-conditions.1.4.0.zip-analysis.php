@@ -5,30 +5,9 @@
 *Found functions:2
 *Extracted functions:2
 *Total parameter names extracted: 2
-*Overview: {'dismiss_review_notice_callback': {'dismiss_review_notice'}, 'ajax_create_pages': {'cmplz_tc_create_pages'}}
+*Overview: {'ajax_create_pages': {'cmplz_tc_create_pages'}, 'dismiss_review_notice_callback': {'dismiss_review_notice'}}
 *
 ***/
-
-/** Function dismiss_review_notice_callback() called by wp_ajax hooks: {'dismiss_review_notice'} **/
-/** Parameters found in function dismiss_review_notice_callback(): {"post": ["type"]} **/
-function dismiss_review_notice_callback() {
-			// Sanitise the type parameter; expected values are 'dismiss' or 'later'.
-			// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce is validated via the 'token' field in the JS payload; lightweight AJAX action poses no state-change risk beyond dismissing a UI notice.
-			$type = isset( $_POST['type'] ) ? sanitize_text_field( wp_unslash( $_POST['type'] ) ) : false;
-
-			if ( sanitize_title( $type ) === 'dismiss' ) {
-				// Permanently suppress the notice for this site.
-				update_option( 'cmplz_tc_review_notice_shown', true );
-			}
-			if ( sanitize_title( $type ) === 'later' ) {
-				// Reset activation timestamp; notice will show again in one month.
-				update_option( 'cmplz_tc_activation_time', time() );
-			}
-
-			// Required by the WordPress AJAX protocol to terminate the request cleanly.
-			wp_die();
-		}
-
 
 /** Function ajax_create_pages() called by wp_ajax hooks: {'cmplz_tc_create_pages'} **/
 /** Parameters found in function ajax_create_pages(): {"post": ["nonce", "pages"]} **/
@@ -99,6 +78,27 @@ function ajax_create_pages() {
 			header( 'Content-Type: application/json' );
 			echo wp_json_encode( $data ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- JSON-encoded response is safe for output.
 			exit;
+		}
+
+
+/** Function dismiss_review_notice_callback() called by wp_ajax hooks: {'dismiss_review_notice'} **/
+/** Parameters found in function dismiss_review_notice_callback(): {"post": ["type"]} **/
+function dismiss_review_notice_callback() {
+			// Sanitise the type parameter; expected values are 'dismiss' or 'later'.
+			// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce is validated via the 'token' field in the JS payload; lightweight AJAX action poses no state-change risk beyond dismissing a UI notice.
+			$type = isset( $_POST['type'] ) ? sanitize_text_field( wp_unslash( $_POST['type'] ) ) : false;
+
+			if ( sanitize_title( $type ) === 'dismiss' ) {
+				// Permanently suppress the notice for this site.
+				update_option( 'cmplz_tc_review_notice_shown', true );
+			}
+			if ( sanitize_title( $type ) === 'later' ) {
+				// Reset activation timestamp; notice will show again in one month.
+				update_option( 'cmplz_tc_activation_time', time() );
+			}
+
+			// Required by the WordPress AJAX protocol to terminate the request cleanly.
+			wp_die();
 		}
 
 

@@ -1,0 +1,119 @@
+{
+  "WebFuzzXSSVulnCheck": [
+    {
+      "coverage_id": "1787289044-63605f4d-3708-4cea-b602-7343920a19fe",
+      "priority": 30,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "megamenu_edit_widget"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "widget_id": "fuz<a href='javascript:alert(0xdeadbeef)'z"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": [
+        {
+          "errno": 2,
+          "errstr": "Undefined array key \"fuz&lt;a href=\\&#039;javascript:alert(0xdeadbeef)\\&#039;z\"",
+          "errfile": "/var/www/html/wp-content/plugins/megamenu/classes/widget-manager.class.php",
+          "errline": 955
+        },
+        {
+          "errno": 2,
+          "errstr": "Trying to access array offset on value of type null",
+          "errfile": "/var/www/html/wp-content/plugins/megamenu/classes/widget-manager.class.php",
+          "errline": 983
+        },
+        {
+          "errno": 8192,
+          "errstr": "trim(): Passing null to parameter #1 ($string) of type string is deprecated",
+          "errfile": "/var/www/html/wp-content/plugins/megamenu/classes/widget-manager.class.php",
+          "errline": 98
+        }
+      ],
+      "exceptions": null,
+      "response_body": "\n\t\t<form method='post'>\n\t\t\t<input type=\"hidden\" name=\"widget-id\" class=\"mega-widget-id widget-id\" value=\"fuz&lt;a href=\\&#039;javascript:alert(0xdeadbeef)\\&#039;z\" />\n\t\t\t<input type='hidden' name='action'    value='megamenu_save_widget' />\n\t\t\t<input type='hidden' name='id_base'   class=\"id_base\" value='' />\n\t\t\t<input type='hidden' name='widget_id' value='fuz&lt;a href=\\&#039;javascript:alert(0xdeadbeef)\\&#039;z' />\n\t\t\t<input type='hidden' name='_wpnonce'  value='1d25467b26' />\n\t\t\t<div class='mega-widget-dialog-header'>\n\t\t\t\t<h2 class='mega-widget-dialog-title'></h2>\n\t\t\t\t<button type='button' class='mega-widget-dialog-close' aria-label='Close'>\n\t\t\t\t\t<span class='dashicons dashicons-no-alt' aria-hidden='true'></span>\n\t\t\t\t</button>\n\t\t\t</div>\n\t\t\t<div class='mega-widget-content widget-content'>\n\t\t\t\t\t\t\t</div>\n\t\t\t<div class='mega-widget-form-footer widget-control-actions'>\n\t\t\t\t<div class='mega-widget-controls widget-controls'>\n\t\t\t\t\t<a class='mega-delete' href='#delete' data-mega-tooltip='Delete' data-mega-tooltip-position='right' aria-label='Delete'>\n\t\t\t\t\t\t<span class='dashicons dashicons-trash' aria-hidden='true'></span>\n\t\t\t\t\t</a>\n\t\t\t\t</div>\n\t\t\t\t<button type=\"submit\" name=\"savewidget\" id=\"savewidget\" class=\"button button-primary button-compact\">Save</button>\n\t\t\t</div>\n\t\t</form>\n\t\t\n\n\t\t\t",
+      "response.body.length": 1299,
+      "response.headers": {
+        "Date": "Fri, 21 Aug 2026 05:10:46 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Vary": "Accept-Encoding",
+        "Content-Length": "1299",
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 178.784,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787289035-f702fb40-fdb9-41e0-a78a-7d0b48bd5104",
+      "paths": [
+        "/var/www/html/wp-content/plugins/megamenu/classes/pages/general.php::::172_24_26_27_28_3_7",
+        "/var/www/html/wp-content/plugins/megamenu/classes/menu-item-manager.class.php::::1067_3_67_68_69_7_70_72_74_75_76_77",
+        "/var/www/html/wp-content/plugins/megamenu/integration/wpml/class-megamenu-integration-wpml.php::::10_285_35_36",
+        "/var/www/html/wp-content/plugins/megamenu/integration/wpml/scss.php::::34_35_8",
+        "/var/www/html/wp-content/plugins/megamenu/includes/functions.php::::116_134_153_172_190_208_227_245_296_3_31_60_7_89",
+        "/var/www/html/wp-content/plugins/megamenu/classes/pages/themes.php::::3_40_41_42_4280_43_44_45_46_47_49_50_52_53_54_55_7",
+        "/var/www/html/wp-content/plugins/megamenu/integration/elementor/widget-elementor-template.class.php::::137_3_7",
+        "/var/www/html/wp-content/plugins/megamenu/integration/block/widget-reusable-block.class.php::::136_26_27_28_29_3_31_7",
+        "/var/www/html/wp-content/plugins/megamenu/classes/walker.class.php::::295_3_8",
+        "/var/www/html/wp-content/plugins/megamenu/integration/polylang/functions.php::::18_22_24_25",
+        "/var/www/html/wp-content/plugins/megamenu/classes/widget-manager.class.php::::1000_1457_25_26_27_28_29_3_30_31_32_33_34_36_38_39_40_42_7_814_816_84_86_869_870_88_92_94_95_955_957_959_961_963_965_968_970_972_973_974_976_977_98_983_987_990_994",
+        "/var/www/html/wp-content/plugins/megamenu/classes/location.class.php::::3_630_631_636_686_7",
+        "/var/www/html/wp-content/plugins/megamenu/integration/block/location/block.php::::10_103_11_15_22_23_24_27_29_30_36_38_39_40_42_45_46_67",
+        "/var/www/html/wp-content/plugins/megamenu/classes/preview.class.php::::29_3_30_31_32_462_7",
+        "/var/www/html/wp-content/plugins/megamenu/classes/pages/page.php::::24_25_26_3_402_7",
+        "/var/www/html/wp-content/plugins/megamenu/classes/toggle-blocks.class.php::::1079_25_26_27_29_3_30_32_33_34_36_37_38_40_41_43_44_46_48_50_7",
+        "/var/www/html/wp-content/plugins/megamenu/classes/icons/dashicons.php::::20_21_22_23_24_25_3_562_7",
+        "/var/www/html/wp-content/plugins/megamenu/classes/pages/tools.php::::25_259_26_28_29_3_30_7",
+        "/var/www/html/wp-content/plugins/megamenu/classes/theme.class.php::::3_414_7",
+        "/var/www/html/wp-content/plugins/megamenu/integration/wpml/functions.php::::13_17_18_20_21",
+        "/var/www/html/wp-content/plugins/megamenu/integration/widget/widget.class.php::::169_23_24_25_26_28_3_7",
+        "/var/www/html/wp-content/plugins/megamenu/classes/nav-menus.class.php::::150_152_156_166_3_448_56_57_58_59_62_64_68_7_72",
+        "/var/www/html/wp-content/plugins/megamenu/classes/admin-notices.class.php::::248_255_41_42_43_44_45_466",
+        "/var/www/html/wp-content/plugins/megamenu/classes/icons/svg.php::::20_21_22_23_24_25_253_3_7",
+        "/var/www/html/wp-content/plugins/megamenu/classes/pages/locations.php::::24_25_27_28_2846_29_3_30_31_33_34_35_36_37_38_7",
+        "/var/www/html/wp-content/plugins/megamenu/megamenu.php::::100_101_103_104_106_108_109_122_123_124_129_130_133_134_137_141_142_145_146_147_150_1528_1529_1531_1535_24_270_271_273_277_278_28_300_309_310_313_314_321_345_347_348_349_352_387_388_397_398_399_400_410_411_412_413_414_415_416_417_418_419_420_421_422_423_424_425_426_427_428_429_430_431_434_445_446_449_452_453_457_458_459_460_470_472_473_474_477_478_479_482_489_490_56_57_66_67_69_70_71_72_73_74_76_78_80_81_82_83_84_85_86_88_89_90_93_94_96_97_99",
+        "/var/www/html/wp-content/plugins/megamenu/integration/polylang/class-megamenu-integration-polylang.php::::10_34_35_514",
+        "/var/www/html/wp-content/plugins/megamenu/classes/style-manager.class.php::::3_40_41_42_52_53_55_56_57_58_59_61_63_639_65_66_68_7",
+        "/var/www/html/wp-content/plugins/megamenu/classes/icons/material-symbols.php::::1123_3_7",
+        "/var/www/html/wp-content/plugins/megamenu/integration/block/location/build/index.asset.php::::1"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "WebFuzzXSSVulnCheck"
+      ],
+      "score": 30,
+      "is_interesting": false,
+      "fuzzer_id": "1",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "widget_id"
+    }
+  ]
+}

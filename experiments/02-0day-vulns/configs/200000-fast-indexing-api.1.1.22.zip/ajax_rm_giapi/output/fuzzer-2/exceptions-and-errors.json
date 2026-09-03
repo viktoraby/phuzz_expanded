@@ -1,0 +1,397 @@
+[
+  {
+    "coverage_id": "1787110153-9fea1224-bc28-4b6e-892b-932cbf54bc07",
+    "priority": 3,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "rm_giapi"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "api_action": ".uzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key \"url\"",
+        "errfile": "/var/www/html/wp-content/plugins/fast-indexing-api/includes/class-instant-indexing.php",
+        "errline": 650
+      },
+      {
+        "errno": 8192,
+        "errstr": "explode(): Passing null to parameter #2 ($string) of type string is deprecated",
+        "errfile": "/var/www/html/wp-content/plugins/fast-indexing-api/includes/class-instant-indexing.php",
+        "errline": 650
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\nfalse",
+    "response.body.length": 6,
+    "response.headers": {
+      "Date": "Wed, 19 Aug 2026 03:29:15 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "6",
+      "Content-Type": "application/json; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 142.244,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787110153-a5fa3cdb-1f5f-4351-8a1e-5b04ed7ce9ec",
+    "paths": [
+      "/var/www/html/wp-content/plugins/fast-indexing-api/includes/class-instant-indexing-module.php::::8",
+      "/var/www/html/wp-content/plugins/fast-indexing-api/instant-indexing.php::::16_18_19_20_25_30_35_43_44_45",
+      "/var/www/html/wp-content/plugins/fast-indexing-api/includes/class-instant-indexing.php::::1055_1060_1061_1062_1064_1065_1180_1181_1207_127_128_130_131_141_142_143_144_147_152_155_162_170_171_174_175_176_177_178_179_180_181_182_184_197_209_210_213_215_217_218_359_361_365_366_367_369_370_384_385_387_394_395_396_650_863_864_865_866_870_872_906_907_908_909_912_913_916_922_923_973_975_976_981"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 3,
+    "is_interesting": false,
+    "fuzzer_id": "2",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "api_action"
+  },
+  {
+    "coverage_id": "1787110156-97b32a65-b634-4aa8-abbf-51e3b8f2a24b",
+    "priority": 3,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "rm_giapi"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "api_action": "f4zz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key \"url\"",
+        "errfile": "/var/www/html/wp-content/plugins/fast-indexing-api/includes/class-instant-indexing.php",
+        "errline": 650
+      },
+      {
+        "errno": 8192,
+        "errstr": "explode(): Passing null to parameter #2 ($string) of type string is deprecated",
+        "errfile": "/var/www/html/wp-content/plugins/fast-indexing-api/includes/class-instant-indexing.php",
+        "errline": 650
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\nfalse",
+    "response.body.length": 6,
+    "response.headers": {
+      "Date": "Wed, 19 Aug 2026 03:29:16 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "6",
+      "Content-Type": "application/json; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 138.352,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787110153-a5fa3cdb-1f5f-4351-8a1e-5b04ed7ce9ec",
+    "paths": [
+      "/var/www/html/wp-content/plugins/fast-indexing-api/includes/class-instant-indexing-module.php::::8",
+      "/var/www/html/wp-content/plugins/fast-indexing-api/instant-indexing.php::::16_18_19_20_25_30_35_43_44_45",
+      "/var/www/html/wp-content/plugins/fast-indexing-api/includes/class-instant-indexing.php::::1055_1060_1061_1062_1064_1065_1180_1181_1207_127_128_130_131_141_142_143_144_147_152_155_162_170_171_174_175_176_177_178_179_180_181_182_184_197_209_210_213_215_217_218_359_361_365_366_367_369_370_384_385_387_394_395_396_650_863_864_865_866_870_872_906_907_908_909_912_913_916_922_923_973_975_976_981"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 3,
+    "is_interesting": false,
+    "fuzzer_id": "2",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "api_action"
+  },
+  {
+    "coverage_id": "1787110157-3a89763c-a18b-4925-a44b-341c24e0df6a",
+    "priority": 3,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "rm_giapi"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "api_action": "1uzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key \"url\"",
+        "errfile": "/var/www/html/wp-content/plugins/fast-indexing-api/includes/class-instant-indexing.php",
+        "errline": 650
+      },
+      {
+        "errno": 8192,
+        "errstr": "explode(): Passing null to parameter #2 ($string) of type string is deprecated",
+        "errfile": "/var/www/html/wp-content/plugins/fast-indexing-api/includes/class-instant-indexing.php",
+        "errline": 650
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\nfalse",
+    "response.body.length": 6,
+    "response.headers": {
+      "Date": "Wed, 19 Aug 2026 03:29:17 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "6",
+      "Content-Type": "application/json; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 894.976,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787110153-a5fa3cdb-1f5f-4351-8a1e-5b04ed7ce9ec",
+    "paths": [
+      "/var/www/html/wp-content/plugins/fast-indexing-api/includes/class-instant-indexing-module.php::::8",
+      "/var/www/html/wp-content/plugins/fast-indexing-api/instant-indexing.php::::16_18_19_20_25_30_35_43_44_45",
+      "/var/www/html/wp-content/plugins/fast-indexing-api/includes/class-instant-indexing.php::::1055_1060_1061_1062_1064_1065_1180_1181_1207_127_128_130_131_141_142_143_144_147_152_155_162_170_171_174_175_176_177_178_179_180_181_182_184_197_209_210_213_215_217_218_359_361_365_366_367_369_370_384_385_387_394_395_396_650_863_864_865_866_870_872_906_907_908_909_912_913_916_922_923_973_975_976_981"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 3,
+    "is_interesting": false,
+    "fuzzer_id": "2",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "api_action"
+  },
+  {
+    "coverage_id": "1787110158-04e5201e-bb45-45dd-aac1-0d7f2c961f94",
+    "priority": 3,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "rm_giapi"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "api_action": "fvzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key \"url\"",
+        "errfile": "/var/www/html/wp-content/plugins/fast-indexing-api/includes/class-instant-indexing.php",
+        "errline": 650
+      },
+      {
+        "errno": 8192,
+        "errstr": "explode(): Passing null to parameter #2 ($string) of type string is deprecated",
+        "errfile": "/var/www/html/wp-content/plugins/fast-indexing-api/includes/class-instant-indexing.php",
+        "errline": 650
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\nfalse",
+    "response.body.length": 6,
+    "response.headers": {
+      "Date": "Wed, 19 Aug 2026 03:29:18 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "6",
+      "Content-Type": "application/json; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 312.73,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787110153-a5fa3cdb-1f5f-4351-8a1e-5b04ed7ce9ec",
+    "paths": [
+      "/var/www/html/wp-content/plugins/fast-indexing-api/includes/class-instant-indexing-module.php::::8",
+      "/var/www/html/wp-content/plugins/fast-indexing-api/instant-indexing.php::::16_18_19_20_25_30_35_43_44_45",
+      "/var/www/html/wp-content/plugins/fast-indexing-api/includes/class-instant-indexing.php::::1055_1060_1061_1062_1064_1065_1180_1181_1207_127_128_130_131_141_142_143_144_147_152_155_162_170_171_174_175_176_177_178_179_180_181_182_184_197_209_210_213_215_217_218_359_361_365_366_367_369_370_384_385_387_394_395_396_650_863_864_865_866_870_872_906_907_908_909_912_913_916_922_923_973_975_976_981"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 3,
+    "is_interesting": false,
+    "fuzzer_id": "2",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "api_action"
+  },
+  {
+    "coverage_id": "1787110158-6927dfdd-c419-4490-a684-576f4c624a46",
+    "priority": 3,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "rm_giapi"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "api_action": "guzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "Undefined array key \"url\"",
+        "errfile": "/var/www/html/wp-content/plugins/fast-indexing-api/includes/class-instant-indexing.php",
+        "errline": 650
+      },
+      {
+        "errno": 8192,
+        "errstr": "explode(): Passing null to parameter #2 ($string) of type string is deprecated",
+        "errfile": "/var/www/html/wp-content/plugins/fast-indexing-api/includes/class-instant-indexing.php",
+        "errline": 650
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\nfalse",
+    "response.body.length": 6,
+    "response.headers": {
+      "Date": "Wed, 19 Aug 2026 03:29:18 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "6",
+      "Content-Type": "application/json; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 617.347,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787110153-a5fa3cdb-1f5f-4351-8a1e-5b04ed7ce9ec",
+    "paths": [
+      "/var/www/html/wp-content/plugins/fast-indexing-api/includes/class-instant-indexing-module.php::::8",
+      "/var/www/html/wp-content/plugins/fast-indexing-api/instant-indexing.php::::16_18_19_20_25_30_35_43_44_45",
+      "/var/www/html/wp-content/plugins/fast-indexing-api/includes/class-instant-indexing.php::::1055_1060_1061_1062_1064_1065_1180_1181_1207_127_128_130_131_141_142_143_144_147_152_155_162_170_171_174_175_176_177_178_179_180_181_182_184_197_209_210_213_215_217_218_359_361_365_366_367_369_370_384_385_387_394_395_396_650_863_864_865_866_870_872_906_907_908_909_912_913_916_922_923_973_975_976_981"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 3,
+    "is_interesting": false,
+    "fuzzer_id": "2",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "api_action"
+  }
+]

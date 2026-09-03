@@ -1,0 +1,2464 @@
+{
+  "PathTraversal": [
+    {
+      "coverage_id": "1787078624-e2c11065-5b85-403b-9d80-eec340c81e57",
+      "priority": 17,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "ocdi_import_created_content"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "slug": "k"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n{\"success\":false,\"data\":\"An error occured while importing this page: The demo content import file is missing.\"}",
+      "response.body.length": 112,
+      "response.headers": {
+        "Date": "Tue, 18 Aug 2026 18:43:44 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "112",
+        "Content-Type": "application/json; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 338.345,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787078619-e53787d9-8487-4949-ac1f-40bff1ed6f93",
+      "paths": [
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/ImportActions.php::::17_185_20_21_22_23_26_29_32_33_35",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Helpers.php::::28_30_36_709_711_715_717_721_823",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/autoload_real.php::::11_12_14_21_25_26_27_29_30_32_34_37",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/one-click-demo-import.php::::100_104_105_107_111_112_19_33_38_41_44_47_52_73_74_76_77_81_82_84_85_89_90_97_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/OneClickDemoImport.php::::106_107_110_121_122_123_124_125_126_127_128_129_130_131_132_133_134_135_136_137_602_607_613_614_617_618_622_623_627_628_631_634_635_638_639_640_711_715_972",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Logger.php::::63",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/WXRImporter.php::::111_19_23_24_27_30",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WXRImporter.php::::100_108_111_112_2563_86_93_94_95_96_97_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/PluginInstaller.php::::100_101_106_107_108_112_113_114_118_119_120_131_133_134_23_25_26_28_29_582_584_585_589_590_594_85_86_87_92_93_94_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Importer.php::::209_47_51_54_55_56_60_61_68_69_71_90_91",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/CreateDemoContent/DemoContentCreator.php::::100_101_102_103_107_108_109_110_121_123_125_126_130_131_133_177_180_184_186_187_29_31_33_34_437_44_45_46_47_51_52_53_54_58_59_60_61_65_66_67_68_72_73_74_75_79_80_81_82_86_87_88_89_93_94_95_96",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/autoload_static.php::::60_61_62_63_65_68",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_515_522_528_531_544_551_555_563_575_576_577_578_580",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WPImporterLogger.php::::138",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/CreateDemoContent/DemoContentCreator.php::::100_101_102_103_107_108_109_110_121_123_125_126_130_131_133_177_180_184_186_191_192_193_195_204_209_211_212_213_214_215_231_233_234_240_251_253_254_29_307_309_31_33_34_437_44_45_46_47_51_52_53_54_58_59_60_61_65_66_67_68_72_73_74_75_79_80_81_82_86_87_88_89_93_94_95_96",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WPImporterLoggerCLI.php::::45",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/autoload.php::::20_22_5"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 17,
+      "is_interesting": false,
+      "fuzzer_id": "1",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "slug"
+    },
+    {
+      "coverage_id": "1787078624-e2c11065-5b85-403b-9d80-eec340c81e57",
+      "priority": 17,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "ocdi_import_created_content"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "slug": "k"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n{\"success\":false,\"data\":\"An error occured while importing this page: The demo content import file is missing.\"}",
+      "response.body.length": 112,
+      "response.headers": {
+        "Date": "Tue, 18 Aug 2026 18:43:44 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "112",
+        "Content-Type": "application/json; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 338.345,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787078619-e53787d9-8487-4949-ac1f-40bff1ed6f93",
+      "paths": [
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/ImportActions.php::::17_185_20_21_22_23_26_29_32_33_35",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Helpers.php::::28_30_36_709_711_715_717_721_823",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/autoload_real.php::::11_12_14_21_25_26_27_29_30_32_34_37",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/one-click-demo-import.php::::100_104_105_107_111_112_19_33_38_41_44_47_52_73_74_76_77_81_82_84_85_89_90_97_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/OneClickDemoImport.php::::106_107_110_121_122_123_124_125_126_127_128_129_130_131_132_133_134_135_136_137_602_607_613_614_617_618_622_623_627_628_631_634_635_638_639_640_711_715_972",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Logger.php::::63",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/WXRImporter.php::::111_19_23_24_27_30",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WXRImporter.php::::100_108_111_112_2563_86_93_94_95_96_97_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/PluginInstaller.php::::100_101_106_107_108_112_113_114_118_119_120_131_133_134_23_25_26_28_29_582_584_585_589_590_594_85_86_87_92_93_94_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Importer.php::::209_47_51_54_55_56_60_61_68_69_71_90_91",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/CreateDemoContent/DemoContentCreator.php::::100_101_102_103_107_108_109_110_121_123_125_126_130_131_133_177_180_184_186_187_29_31_33_34_437_44_45_46_47_51_52_53_54_58_59_60_61_65_66_67_68_72_73_74_75_79_80_81_82_86_87_88_89_93_94_95_96",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/autoload_static.php::::60_61_62_63_65_68",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_515_522_528_531_544_551_555_563_575_576_577_578_580",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WPImporterLogger.php::::138",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/CreateDemoContent/DemoContentCreator.php::::100_101_102_103_107_108_109_110_121_123_125_126_130_131_133_177_180_184_186_191_192_193_195_204_209_211_212_213_214_215_231_233_234_240_251_253_254_29_307_309_31_33_34_437_44_45_46_47_51_52_53_54_58_59_60_61_65_66_67_68_72_73_74_75_79_80_81_82_86_87_88_89_93_94_95_96",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WPImporterLoggerCLI.php::::45",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/autoload.php::::20_22_5"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 17,
+      "is_interesting": false,
+      "fuzzer_id": "1",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "slug"
+    },
+    {
+      "coverage_id": "1787078626-47364eb1-1f2d-48bf-96ea-d4c7916d3acb",
+      "priority": 17,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "ocdi_import_created_content"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "slug": "d"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n{\"success\":false,\"data\":\"An error occured while importing this page: The demo content import file is missing.\"}",
+      "response.body.length": 112,
+      "response.headers": {
+        "Date": "Tue, 18 Aug 2026 18:43:46 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "112",
+        "Content-Type": "application/json; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 522.154,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787078619-e53787d9-8487-4949-ac1f-40bff1ed6f93",
+      "paths": [
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/ImportActions.php::::17_185_20_21_22_23_26_29_32_33_35",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Helpers.php::::28_30_36_709_711_715_717_721_823",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/autoload_real.php::::11_12_14_21_25_26_27_29_30_32_34_37",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/one-click-demo-import.php::::100_104_105_107_111_112_19_33_38_41_44_47_52_73_74_76_77_81_82_84_85_89_90_97_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/OneClickDemoImport.php::::106_107_110_121_122_123_124_125_126_127_128_129_130_131_132_133_134_135_136_137_602_607_613_614_617_618_622_623_627_628_631_634_635_638_639_640_711_715_972",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Logger.php::::63",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/WXRImporter.php::::111_19_23_24_27_30",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WXRImporter.php::::100_108_111_112_2563_86_93_94_95_96_97_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/PluginInstaller.php::::100_101_106_107_108_112_113_114_118_119_120_131_133_134_23_25_26_28_29_582_584_585_589_590_594_85_86_87_92_93_94_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Importer.php::::209_47_51_54_55_56_60_61_68_69_71_90_91",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/CreateDemoContent/DemoContentCreator.php::::100_101_102_103_107_108_109_110_121_123_125_126_130_131_133_177_180_184_186_187_29_31_33_34_437_44_45_46_47_51_52_53_54_58_59_60_61_65_66_67_68_72_73_74_75_79_80_81_82_86_87_88_89_93_94_95_96",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/autoload_static.php::::60_61_62_63_65_68",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_515_522_528_531_544_551_555_563_575_576_577_578_580",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WPImporterLogger.php::::138",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/CreateDemoContent/DemoContentCreator.php::::100_101_102_103_107_108_109_110_121_123_125_126_130_131_133_177_180_184_186_191_192_193_195_204_209_211_212_213_214_215_231_233_234_240_251_253_254_29_307_309_31_33_34_437_44_45_46_47_51_52_53_54_58_59_60_61_65_66_67_68_72_73_74_75_79_80_81_82_86_87_88_89_93_94_95_96",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WPImporterLoggerCLI.php::::45",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/autoload.php::::20_22_5"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 17,
+      "is_interesting": false,
+      "fuzzer_id": "1",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "slug"
+    },
+    {
+      "coverage_id": "1787078626-47364eb1-1f2d-48bf-96ea-d4c7916d3acb",
+      "priority": 17,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "ocdi_import_created_content"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "slug": "d"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n{\"success\":false,\"data\":\"An error occured while importing this page: The demo content import file is missing.\"}",
+      "response.body.length": 112,
+      "response.headers": {
+        "Date": "Tue, 18 Aug 2026 18:43:46 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "112",
+        "Content-Type": "application/json; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 522.154,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787078619-e53787d9-8487-4949-ac1f-40bff1ed6f93",
+      "paths": [
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/ImportActions.php::::17_185_20_21_22_23_26_29_32_33_35",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Helpers.php::::28_30_36_709_711_715_717_721_823",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/autoload_real.php::::11_12_14_21_25_26_27_29_30_32_34_37",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/one-click-demo-import.php::::100_104_105_107_111_112_19_33_38_41_44_47_52_73_74_76_77_81_82_84_85_89_90_97_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/OneClickDemoImport.php::::106_107_110_121_122_123_124_125_126_127_128_129_130_131_132_133_134_135_136_137_602_607_613_614_617_618_622_623_627_628_631_634_635_638_639_640_711_715_972",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Logger.php::::63",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/WXRImporter.php::::111_19_23_24_27_30",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WXRImporter.php::::100_108_111_112_2563_86_93_94_95_96_97_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/PluginInstaller.php::::100_101_106_107_108_112_113_114_118_119_120_131_133_134_23_25_26_28_29_582_584_585_589_590_594_85_86_87_92_93_94_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Importer.php::::209_47_51_54_55_56_60_61_68_69_71_90_91",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/CreateDemoContent/DemoContentCreator.php::::100_101_102_103_107_108_109_110_121_123_125_126_130_131_133_177_180_184_186_187_29_31_33_34_437_44_45_46_47_51_52_53_54_58_59_60_61_65_66_67_68_72_73_74_75_79_80_81_82_86_87_88_89_93_94_95_96",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/autoload_static.php::::60_61_62_63_65_68",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_515_522_528_531_544_551_555_563_575_576_577_578_580",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WPImporterLogger.php::::138",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/CreateDemoContent/DemoContentCreator.php::::100_101_102_103_107_108_109_110_121_123_125_126_130_131_133_177_180_184_186_191_192_193_195_204_209_211_212_213_214_215_231_233_234_240_251_253_254_29_307_309_31_33_34_437_44_45_46_47_51_52_53_54_58_59_60_61_65_66_67_68_72_73_74_75_79_80_81_82_86_87_88_89_93_94_95_96",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WPImporterLoggerCLI.php::::45",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/autoload.php::::20_22_5"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 17,
+      "is_interesting": false,
+      "fuzzer_id": "1",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "slug"
+    },
+    {
+      "coverage_id": "1787078632-257acb02-6ca6-4cf0-aed6-abfed790295d",
+      "priority": 17,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "ocdi_import_created_content"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "slug": "t"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n{\"success\":false,\"data\":\"An error occured while importing this page: The demo content import file is missing.\"}",
+      "response.body.length": 112,
+      "response.headers": {
+        "Date": "Tue, 18 Aug 2026 18:43:52 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "112",
+        "Content-Type": "application/json; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 343.359,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787078619-e53787d9-8487-4949-ac1f-40bff1ed6f93",
+      "paths": [
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/ImportActions.php::::17_185_20_21_22_23_26_29_32_33_35",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Helpers.php::::28_30_36_709_711_715_717_721_823",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/autoload_real.php::::11_12_14_21_25_26_27_29_30_32_34_37",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/one-click-demo-import.php::::100_104_105_107_111_112_19_33_38_41_44_47_52_73_74_76_77_81_82_84_85_89_90_97_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/OneClickDemoImport.php::::106_107_110_121_122_123_124_125_126_127_128_129_130_131_132_133_134_135_136_137_602_607_613_614_617_618_622_623_627_628_631_634_635_638_639_640_711_715_972",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Logger.php::::63",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/WXRImporter.php::::111_19_23_24_27_30",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WXRImporter.php::::100_108_111_112_2563_86_93_94_95_96_97_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/PluginInstaller.php::::100_101_106_107_108_112_113_114_118_119_120_131_133_134_23_25_26_28_29_582_584_585_589_590_594_85_86_87_92_93_94_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Importer.php::::209_47_51_54_55_56_60_61_68_69_71_90_91",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/CreateDemoContent/DemoContentCreator.php::::100_101_102_103_107_108_109_110_121_123_125_126_130_131_133_177_180_184_186_187_29_31_33_34_437_44_45_46_47_51_52_53_54_58_59_60_61_65_66_67_68_72_73_74_75_79_80_81_82_86_87_88_89_93_94_95_96",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/autoload_static.php::::60_61_62_63_65_68",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_515_522_528_531_544_551_555_563_575_576_577_578_580",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WPImporterLogger.php::::138",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/CreateDemoContent/DemoContentCreator.php::::100_101_102_103_107_108_109_110_121_123_125_126_130_131_133_177_180_184_186_191_192_193_195_204_209_211_212_213_214_215_231_233_234_240_251_253_254_29_307_309_31_33_34_437_44_45_46_47_51_52_53_54_58_59_60_61_65_66_67_68_72_73_74_75_79_80_81_82_86_87_88_89_93_94_95_96",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WPImporterLoggerCLI.php::::45",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/autoload.php::::20_22_5"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 17,
+      "is_interesting": false,
+      "fuzzer_id": "1",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "slug"
+    },
+    {
+      "coverage_id": "1787078632-257acb02-6ca6-4cf0-aed6-abfed790295d",
+      "priority": 17,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "ocdi_import_created_content"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "slug": "t"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n{\"success\":false,\"data\":\"An error occured while importing this page: The demo content import file is missing.\"}",
+      "response.body.length": 112,
+      "response.headers": {
+        "Date": "Tue, 18 Aug 2026 18:43:52 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "112",
+        "Content-Type": "application/json; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 343.359,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787078619-e53787d9-8487-4949-ac1f-40bff1ed6f93",
+      "paths": [
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/ImportActions.php::::17_185_20_21_22_23_26_29_32_33_35",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Helpers.php::::28_30_36_709_711_715_717_721_823",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/autoload_real.php::::11_12_14_21_25_26_27_29_30_32_34_37",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/one-click-demo-import.php::::100_104_105_107_111_112_19_33_38_41_44_47_52_73_74_76_77_81_82_84_85_89_90_97_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/OneClickDemoImport.php::::106_107_110_121_122_123_124_125_126_127_128_129_130_131_132_133_134_135_136_137_602_607_613_614_617_618_622_623_627_628_631_634_635_638_639_640_711_715_972",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Logger.php::::63",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/WXRImporter.php::::111_19_23_24_27_30",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WXRImporter.php::::100_108_111_112_2563_86_93_94_95_96_97_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/PluginInstaller.php::::100_101_106_107_108_112_113_114_118_119_120_131_133_134_23_25_26_28_29_582_584_585_589_590_594_85_86_87_92_93_94_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Importer.php::::209_47_51_54_55_56_60_61_68_69_71_90_91",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/CreateDemoContent/DemoContentCreator.php::::100_101_102_103_107_108_109_110_121_123_125_126_130_131_133_177_180_184_186_187_29_31_33_34_437_44_45_46_47_51_52_53_54_58_59_60_61_65_66_67_68_72_73_74_75_79_80_81_82_86_87_88_89_93_94_95_96",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/autoload_static.php::::60_61_62_63_65_68",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_515_522_528_531_544_551_555_563_575_576_577_578_580",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WPImporterLogger.php::::138",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/CreateDemoContent/DemoContentCreator.php::::100_101_102_103_107_108_109_110_121_123_125_126_130_131_133_177_180_184_186_191_192_193_195_204_209_211_212_213_214_215_231_233_234_240_251_253_254_29_307_309_31_33_34_437_44_45_46_47_51_52_53_54_58_59_60_61_65_66_67_68_72_73_74_75_79_80_81_82_86_87_88_89_93_94_95_96",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WPImporterLoggerCLI.php::::45",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/autoload.php::::20_22_5"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 17,
+      "is_interesting": false,
+      "fuzzer_id": "1",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "slug"
+    },
+    {
+      "coverage_id": "1787078644-1a9779cb-dde0-494e-b3eb-a119abd8199c",
+      "priority": 17,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "ocdi_import_created_content"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "slug": "h"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n{\"success\":false,\"data\":\"An error occured while importing this page: The demo content import file is missing.\"}",
+      "response.body.length": 112,
+      "response.headers": {
+        "Date": "Tue, 18 Aug 2026 18:44:04 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "112",
+        "Content-Type": "application/json; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 457.023,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787078619-e53787d9-8487-4949-ac1f-40bff1ed6f93",
+      "paths": [
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/ImportActions.php::::17_185_20_21_22_23_26_29_32_33_35",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Helpers.php::::28_30_36_709_711_715_717_721_823",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/autoload_real.php::::11_12_14_21_25_26_27_29_30_32_34_37",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/one-click-demo-import.php::::100_104_105_107_111_112_19_33_38_41_44_47_52_73_74_76_77_81_82_84_85_89_90_97_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/OneClickDemoImport.php::::106_107_110_121_122_123_124_125_126_127_128_129_130_131_132_133_134_135_136_137_602_607_613_614_617_618_622_623_627_628_631_634_635_638_639_640_711_715_972",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Logger.php::::63",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/WXRImporter.php::::111_19_23_24_27_30",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WXRImporter.php::::100_108_111_112_2563_86_93_94_95_96_97_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/PluginInstaller.php::::100_101_106_107_108_112_113_114_118_119_120_131_133_134_23_25_26_28_29_582_584_585_589_590_594_85_86_87_92_93_94_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Importer.php::::209_47_51_54_55_56_60_61_68_69_71_90_91",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/CreateDemoContent/DemoContentCreator.php::::100_101_102_103_107_108_109_110_121_123_125_126_130_131_133_177_180_184_186_187_29_31_33_34_437_44_45_46_47_51_52_53_54_58_59_60_61_65_66_67_68_72_73_74_75_79_80_81_82_86_87_88_89_93_94_95_96",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/autoload_static.php::::60_61_62_63_65_68",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_515_522_528_531_544_551_555_563_575_576_577_578_580",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WPImporterLogger.php::::138",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/CreateDemoContent/DemoContentCreator.php::::100_101_102_103_107_108_109_110_121_123_125_126_130_131_133_177_180_184_186_191_192_193_195_204_209_211_212_213_214_215_231_233_234_240_251_253_254_29_307_309_31_33_34_437_44_45_46_47_51_52_53_54_58_59_60_61_65_66_67_68_72_73_74_75_79_80_81_82_86_87_88_89_93_94_95_96",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WPImporterLoggerCLI.php::::45",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/autoload.php::::20_22_5"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 17,
+      "is_interesting": false,
+      "fuzzer_id": "1",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "slug"
+    },
+    {
+      "coverage_id": "1787078644-1a9779cb-dde0-494e-b3eb-a119abd8199c",
+      "priority": 17,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "ocdi_import_created_content"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "slug": "h"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n{\"success\":false,\"data\":\"An error occured while importing this page: The demo content import file is missing.\"}",
+      "response.body.length": 112,
+      "response.headers": {
+        "Date": "Tue, 18 Aug 2026 18:44:04 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "112",
+        "Content-Type": "application/json; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 457.023,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787078619-e53787d9-8487-4949-ac1f-40bff1ed6f93",
+      "paths": [
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/ImportActions.php::::17_185_20_21_22_23_26_29_32_33_35",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Helpers.php::::28_30_36_709_711_715_717_721_823",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/autoload_real.php::::11_12_14_21_25_26_27_29_30_32_34_37",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/one-click-demo-import.php::::100_104_105_107_111_112_19_33_38_41_44_47_52_73_74_76_77_81_82_84_85_89_90_97_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/OneClickDemoImport.php::::106_107_110_121_122_123_124_125_126_127_128_129_130_131_132_133_134_135_136_137_602_607_613_614_617_618_622_623_627_628_631_634_635_638_639_640_711_715_972",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Logger.php::::63",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/WXRImporter.php::::111_19_23_24_27_30",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WXRImporter.php::::100_108_111_112_2563_86_93_94_95_96_97_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/PluginInstaller.php::::100_101_106_107_108_112_113_114_118_119_120_131_133_134_23_25_26_28_29_582_584_585_589_590_594_85_86_87_92_93_94_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Importer.php::::209_47_51_54_55_56_60_61_68_69_71_90_91",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/CreateDemoContent/DemoContentCreator.php::::100_101_102_103_107_108_109_110_121_123_125_126_130_131_133_177_180_184_186_187_29_31_33_34_437_44_45_46_47_51_52_53_54_58_59_60_61_65_66_67_68_72_73_74_75_79_80_81_82_86_87_88_89_93_94_95_96",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/autoload_static.php::::60_61_62_63_65_68",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_515_522_528_531_544_551_555_563_575_576_577_578_580",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WPImporterLogger.php::::138",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/CreateDemoContent/DemoContentCreator.php::::100_101_102_103_107_108_109_110_121_123_125_126_130_131_133_177_180_184_186_191_192_193_195_204_209_211_212_213_214_215_231_233_234_240_251_253_254_29_307_309_31_33_34_437_44_45_46_47_51_52_53_54_58_59_60_61_65_66_67_68_72_73_74_75_79_80_81_82_86_87_88_89_93_94_95_96",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WPImporterLoggerCLI.php::::45",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/autoload.php::::20_22_5"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 17,
+      "is_interesting": false,
+      "fuzzer_id": "1",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "slug"
+    },
+    {
+      "coverage_id": "1787078648-3f68e0d6-d87b-4a64-ad87-18a586e830df",
+      "priority": 17,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "ocdi_import_created_content"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "slug": "."
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n{\"success\":false,\"data\":\"Could not import this page. Page slug is missing.\"}",
+      "response.body.length": 77,
+      "response.headers": {
+        "Date": "Tue, 18 Aug 2026 18:44:08 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "77",
+        "Content-Type": "application/json; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 312.543,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787078619-e53787d9-8487-4949-ac1f-40bff1ed6f93",
+      "paths": [
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/ImportActions.php::::17_185_20_21_22_23_26_29_32_33_35",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Helpers.php::::28_30_36_709_711_715_717_721_823",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/autoload_real.php::::11_12_14_21_25_26_27_29_30_32_34_37",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/one-click-demo-import.php::::100_104_105_107_111_112_19_33_38_41_44_47_52_73_74_76_77_81_82_84_85_89_90_97_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/OneClickDemoImport.php::::106_107_110_121_122_123_124_125_126_127_128_129_130_131_132_133_134_135_136_137_602_607_613_614_617_618_622_623_627_628_631_634_635_638_639_640_711_715_972",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Logger.php::::63",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/WXRImporter.php::::111_19_23_24_27_30",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WXRImporter.php::::100_108_111_112_2563_86_93_94_95_96_97_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/PluginInstaller.php::::100_101_106_107_108_112_113_114_118_119_120_131_133_134_23_25_26_28_29_582_584_585_589_590_594_85_86_87_92_93_94_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Importer.php::::209_47_51_54_55_56_60_61_68_69_71_90_91",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/CreateDemoContent/DemoContentCreator.php::::100_101_102_103_107_108_109_110_121_123_125_126_130_131_133_177_180_184_186_187_29_31_33_34_437_44_45_46_47_51_52_53_54_58_59_60_61_65_66_67_68_72_73_74_75_79_80_81_82_86_87_88_89_93_94_95_96",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/autoload_static.php::::60_61_62_63_65_68",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_515_522_528_531_544_551_555_563_575_576_577_578_580",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WPImporterLogger.php::::138",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/CreateDemoContent/DemoContentCreator.php::::100_101_102_103_107_108_109_110_121_123_125_126_130_131_133_177_180_184_186_191_192_193_195_204_209_211_212_213_214_215_231_233_234_240_251_253_254_29_307_309_31_33_34_437_44_45_46_47_51_52_53_54_58_59_60_61_65_66_67_68_72_73_74_75_79_80_81_82_86_87_88_89_93_94_95_96",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WPImporterLoggerCLI.php::::45",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/autoload.php::::20_22_5"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 17,
+      "is_interesting": false,
+      "fuzzer_id": "1",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "slug"
+    },
+    {
+      "coverage_id": "1787078648-3f68e0d6-d87b-4a64-ad87-18a586e830df",
+      "priority": 17,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "ocdi_import_created_content"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "slug": "."
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n{\"success\":false,\"data\":\"Could not import this page. Page slug is missing.\"}",
+      "response.body.length": 77,
+      "response.headers": {
+        "Date": "Tue, 18 Aug 2026 18:44:08 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "77",
+        "Content-Type": "application/json; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 312.543,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787078619-e53787d9-8487-4949-ac1f-40bff1ed6f93",
+      "paths": [
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/ImportActions.php::::17_185_20_21_22_23_26_29_32_33_35",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Helpers.php::::28_30_36_709_711_715_717_721_823",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/autoload_real.php::::11_12_14_21_25_26_27_29_30_32_34_37",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/one-click-demo-import.php::::100_104_105_107_111_112_19_33_38_41_44_47_52_73_74_76_77_81_82_84_85_89_90_97_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/OneClickDemoImport.php::::106_107_110_121_122_123_124_125_126_127_128_129_130_131_132_133_134_135_136_137_602_607_613_614_617_618_622_623_627_628_631_634_635_638_639_640_711_715_972",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Logger.php::::63",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/WXRImporter.php::::111_19_23_24_27_30",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WXRImporter.php::::100_108_111_112_2563_86_93_94_95_96_97_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/PluginInstaller.php::::100_101_106_107_108_112_113_114_118_119_120_131_133_134_23_25_26_28_29_582_584_585_589_590_594_85_86_87_92_93_94_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Importer.php::::209_47_51_54_55_56_60_61_68_69_71_90_91",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/CreateDemoContent/DemoContentCreator.php::::100_101_102_103_107_108_109_110_121_123_125_126_130_131_133_177_180_184_186_187_29_31_33_34_437_44_45_46_47_51_52_53_54_58_59_60_61_65_66_67_68_72_73_74_75_79_80_81_82_86_87_88_89_93_94_95_96",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/autoload_static.php::::60_61_62_63_65_68",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_515_522_528_531_544_551_555_563_575_576_577_578_580",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WPImporterLogger.php::::138",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/CreateDemoContent/DemoContentCreator.php::::100_101_102_103_107_108_109_110_121_123_125_126_130_131_133_177_180_184_186_191_192_193_195_204_209_211_212_213_214_215_231_233_234_240_251_253_254_29_307_309_31_33_34_437_44_45_46_47_51_52_53_54_58_59_60_61_65_66_67_68_72_73_74_75_79_80_81_82_86_87_88_89_93_94_95_96",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WPImporterLoggerCLI.php::::45",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/autoload.php::::20_22_5"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 17,
+      "is_interesting": false,
+      "fuzzer_id": "1",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "slug"
+    },
+    {
+      "coverage_id": "1787078649-0bc021f1-a2d4-41d2-ba0a-2bd088622696",
+      "priority": 17,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "ocdi_import_created_content"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "slug": "f"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n{\"success\":false,\"data\":\"An error occured while importing this page: The demo content import file is missing.\"}",
+      "response.body.length": 112,
+      "response.headers": {
+        "Date": "Tue, 18 Aug 2026 18:44:09 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "112",
+        "Content-Type": "application/json; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 537.838,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787078619-e53787d9-8487-4949-ac1f-40bff1ed6f93",
+      "paths": [
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/ImportActions.php::::17_185_20_21_22_23_26_29_32_33_35",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Helpers.php::::28_30_36_709_711_715_717_721_823",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/autoload_real.php::::11_12_14_21_25_26_27_29_30_32_34_37",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/one-click-demo-import.php::::100_104_105_107_111_112_19_33_38_41_44_47_52_73_74_76_77_81_82_84_85_89_90_97_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/OneClickDemoImport.php::::106_107_110_121_122_123_124_125_126_127_128_129_130_131_132_133_134_135_136_137_602_607_613_614_617_618_622_623_627_628_631_634_635_638_639_640_711_715_972",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Logger.php::::63",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/WXRImporter.php::::111_19_23_24_27_30",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WXRImporter.php::::100_108_111_112_2563_86_93_94_95_96_97_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/PluginInstaller.php::::100_101_106_107_108_112_113_114_118_119_120_131_133_134_23_25_26_28_29_582_584_585_589_590_594_85_86_87_92_93_94_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Importer.php::::209_47_51_54_55_56_60_61_68_69_71_90_91",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/CreateDemoContent/DemoContentCreator.php::::100_101_102_103_107_108_109_110_121_123_125_126_130_131_133_177_180_184_186_187_29_31_33_34_437_44_45_46_47_51_52_53_54_58_59_60_61_65_66_67_68_72_73_74_75_79_80_81_82_86_87_88_89_93_94_95_96",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/autoload_static.php::::60_61_62_63_65_68",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_515_522_528_531_544_551_555_563_575_576_577_578_580",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WPImporterLogger.php::::138",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/CreateDemoContent/DemoContentCreator.php::::100_101_102_103_107_108_109_110_121_123_125_126_130_131_133_177_180_184_186_191_192_193_195_204_209_211_212_213_214_215_231_233_234_240_251_253_254_29_307_309_31_33_34_437_44_45_46_47_51_52_53_54_58_59_60_61_65_66_67_68_72_73_74_75_79_80_81_82_86_87_88_89_93_94_95_96",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WPImporterLoggerCLI.php::::45",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/autoload.php::::20_22_5"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 17,
+      "is_interesting": false,
+      "fuzzer_id": "1",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "slug"
+    },
+    {
+      "coverage_id": "1787078649-0bc021f1-a2d4-41d2-ba0a-2bd088622696",
+      "priority": 17,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "ocdi_import_created_content"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "slug": "f"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n{\"success\":false,\"data\":\"An error occured while importing this page: The demo content import file is missing.\"}",
+      "response.body.length": 112,
+      "response.headers": {
+        "Date": "Tue, 18 Aug 2026 18:44:09 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "112",
+        "Content-Type": "application/json; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 537.838,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787078619-e53787d9-8487-4949-ac1f-40bff1ed6f93",
+      "paths": [
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/ImportActions.php::::17_185_20_21_22_23_26_29_32_33_35",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Helpers.php::::28_30_36_709_711_715_717_721_823",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/autoload_real.php::::11_12_14_21_25_26_27_29_30_32_34_37",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/one-click-demo-import.php::::100_104_105_107_111_112_19_33_38_41_44_47_52_73_74_76_77_81_82_84_85_89_90_97_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/OneClickDemoImport.php::::106_107_110_121_122_123_124_125_126_127_128_129_130_131_132_133_134_135_136_137_602_607_613_614_617_618_622_623_627_628_631_634_635_638_639_640_711_715_972",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Logger.php::::63",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/WXRImporter.php::::111_19_23_24_27_30",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WXRImporter.php::::100_108_111_112_2563_86_93_94_95_96_97_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/PluginInstaller.php::::100_101_106_107_108_112_113_114_118_119_120_131_133_134_23_25_26_28_29_582_584_585_589_590_594_85_86_87_92_93_94_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Importer.php::::209_47_51_54_55_56_60_61_68_69_71_90_91",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/CreateDemoContent/DemoContentCreator.php::::100_101_102_103_107_108_109_110_121_123_125_126_130_131_133_177_180_184_186_187_29_31_33_34_437_44_45_46_47_51_52_53_54_58_59_60_61_65_66_67_68_72_73_74_75_79_80_81_82_86_87_88_89_93_94_95_96",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/autoload_static.php::::60_61_62_63_65_68",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_515_522_528_531_544_551_555_563_575_576_577_578_580",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WPImporterLogger.php::::138",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/CreateDemoContent/DemoContentCreator.php::::100_101_102_103_107_108_109_110_121_123_125_126_130_131_133_177_180_184_186_191_192_193_195_204_209_211_212_213_214_215_231_233_234_240_251_253_254_29_307_309_31_33_34_437_44_45_46_47_51_52_53_54_58_59_60_61_65_66_67_68_72_73_74_75_79_80_81_82_86_87_88_89_93_94_95_96",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WPImporterLoggerCLI.php::::45",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/autoload.php::::20_22_5"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 17,
+      "is_interesting": false,
+      "fuzzer_id": "1",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "slug"
+    },
+    {
+      "coverage_id": "1787078659-80f4aeed-0a56-4863-9ee5-743f18e80b94",
+      "priority": 17,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "ocdi_import_created_content"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "slug": "b"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n{\"success\":false,\"data\":\"An error occured while importing this page: The demo content import file is missing.\"}",
+      "response.body.length": 112,
+      "response.headers": {
+        "Date": "Tue, 18 Aug 2026 18:44:19 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "112",
+        "Content-Type": "application/json; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 387.03,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787078619-e53787d9-8487-4949-ac1f-40bff1ed6f93",
+      "paths": [
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/ImportActions.php::::17_185_20_21_22_23_26_29_32_33_35",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Helpers.php::::28_30_36_709_711_715_717_721_823",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/autoload_real.php::::11_12_14_21_25_26_27_29_30_32_34_37",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/one-click-demo-import.php::::100_104_105_107_111_112_19_33_38_41_44_47_52_73_74_76_77_81_82_84_85_89_90_97_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/OneClickDemoImport.php::::106_107_110_121_122_123_124_125_126_127_128_129_130_131_132_133_134_135_136_137_602_607_613_614_617_618_622_623_627_628_631_634_635_638_639_640_711_715_972",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Logger.php::::63",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/WXRImporter.php::::111_19_23_24_27_30",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WXRImporter.php::::100_108_111_112_2563_86_93_94_95_96_97_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/PluginInstaller.php::::100_101_106_107_108_112_113_114_118_119_120_131_133_134_23_25_26_28_29_582_584_585_589_590_594_85_86_87_92_93_94_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Importer.php::::209_47_51_54_55_56_60_61_68_69_71_90_91",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/CreateDemoContent/DemoContentCreator.php::::100_101_102_103_107_108_109_110_121_123_125_126_130_131_133_177_180_184_186_187_29_31_33_34_437_44_45_46_47_51_52_53_54_58_59_60_61_65_66_67_68_72_73_74_75_79_80_81_82_86_87_88_89_93_94_95_96",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/autoload_static.php::::60_61_62_63_65_68",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_515_522_528_531_544_551_555_563_575_576_577_578_580",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WPImporterLogger.php::::138",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/CreateDemoContent/DemoContentCreator.php::::100_101_102_103_107_108_109_110_121_123_125_126_130_131_133_177_180_184_186_191_192_193_195_204_209_211_212_213_214_215_231_233_234_240_251_253_254_29_307_309_31_33_34_437_44_45_46_47_51_52_53_54_58_59_60_61_65_66_67_68_72_73_74_75_79_80_81_82_86_87_88_89_93_94_95_96",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WPImporterLoggerCLI.php::::45",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/autoload.php::::20_22_5"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 17,
+      "is_interesting": false,
+      "fuzzer_id": "1",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "slug"
+    },
+    {
+      "coverage_id": "1787078659-80f4aeed-0a56-4863-9ee5-743f18e80b94",
+      "priority": 17,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "ocdi_import_created_content"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "slug": "b"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n{\"success\":false,\"data\":\"An error occured while importing this page: The demo content import file is missing.\"}",
+      "response.body.length": 112,
+      "response.headers": {
+        "Date": "Tue, 18 Aug 2026 18:44:19 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "112",
+        "Content-Type": "application/json; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 387.03,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787078619-e53787d9-8487-4949-ac1f-40bff1ed6f93",
+      "paths": [
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/ImportActions.php::::17_185_20_21_22_23_26_29_32_33_35",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Helpers.php::::28_30_36_709_711_715_717_721_823",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/autoload_real.php::::11_12_14_21_25_26_27_29_30_32_34_37",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/one-click-demo-import.php::::100_104_105_107_111_112_19_33_38_41_44_47_52_73_74_76_77_81_82_84_85_89_90_97_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/OneClickDemoImport.php::::106_107_110_121_122_123_124_125_126_127_128_129_130_131_132_133_134_135_136_137_602_607_613_614_617_618_622_623_627_628_631_634_635_638_639_640_711_715_972",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Logger.php::::63",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/WXRImporter.php::::111_19_23_24_27_30",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WXRImporter.php::::100_108_111_112_2563_86_93_94_95_96_97_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/PluginInstaller.php::::100_101_106_107_108_112_113_114_118_119_120_131_133_134_23_25_26_28_29_582_584_585_589_590_594_85_86_87_92_93_94_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Importer.php::::209_47_51_54_55_56_60_61_68_69_71_90_91",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/CreateDemoContent/DemoContentCreator.php::::100_101_102_103_107_108_109_110_121_123_125_126_130_131_133_177_180_184_186_187_29_31_33_34_437_44_45_46_47_51_52_53_54_58_59_60_61_65_66_67_68_72_73_74_75_79_80_81_82_86_87_88_89_93_94_95_96",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/autoload_static.php::::60_61_62_63_65_68",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_515_522_528_531_544_551_555_563_575_576_577_578_580",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WPImporterLogger.php::::138",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/CreateDemoContent/DemoContentCreator.php::::100_101_102_103_107_108_109_110_121_123_125_126_130_131_133_177_180_184_186_191_192_193_195_204_209_211_212_213_214_215_231_233_234_240_251_253_254_29_307_309_31_33_34_437_44_45_46_47_51_52_53_54_58_59_60_61_65_66_67_68_72_73_74_75_79_80_81_82_86_87_88_89_93_94_95_96",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WPImporterLoggerCLI.php::::45",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/autoload.php::::20_22_5"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 17,
+      "is_interesting": false,
+      "fuzzer_id": "1",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "slug"
+    },
+    {
+      "coverage_id": "1787078666-4e87bba1-2e10-4e4b-be05-586589365b79",
+      "priority": 17,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "ocdi_import_created_content"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "slug": "a"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n{\"success\":false,\"data\":\"An error occured while importing this page: The demo content import file is missing.\"}",
+      "response.body.length": 112,
+      "response.headers": {
+        "Date": "Tue, 18 Aug 2026 18:44:26 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "112",
+        "Content-Type": "application/json; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 387.577,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787078619-e53787d9-8487-4949-ac1f-40bff1ed6f93",
+      "paths": [
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/ImportActions.php::::17_185_20_21_22_23_26_29_32_33_35",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Helpers.php::::28_30_36_709_711_715_717_721_823",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/autoload_real.php::::11_12_14_21_25_26_27_29_30_32_34_37",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/one-click-demo-import.php::::100_104_105_107_111_112_19_33_38_41_44_47_52_73_74_76_77_81_82_84_85_89_90_97_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/OneClickDemoImport.php::::106_107_110_121_122_123_124_125_126_127_128_129_130_131_132_133_134_135_136_137_602_607_613_614_617_618_622_623_627_628_631_634_635_638_639_640_711_715_972",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Logger.php::::63",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/WXRImporter.php::::111_19_23_24_27_30",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WXRImporter.php::::100_108_111_112_2563_86_93_94_95_96_97_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/PluginInstaller.php::::100_101_106_107_108_112_113_114_118_119_120_131_133_134_23_25_26_28_29_582_584_585_589_590_594_85_86_87_92_93_94_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Importer.php::::209_47_51_54_55_56_60_61_68_69_71_90_91",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/CreateDemoContent/DemoContentCreator.php::::100_101_102_103_107_108_109_110_121_123_125_126_130_131_133_177_180_184_186_187_29_31_33_34_437_44_45_46_47_51_52_53_54_58_59_60_61_65_66_67_68_72_73_74_75_79_80_81_82_86_87_88_89_93_94_95_96",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/autoload_static.php::::60_61_62_63_65_68",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_515_522_528_531_544_551_555_563_575_576_577_578_580",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WPImporterLogger.php::::138",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/CreateDemoContent/DemoContentCreator.php::::100_101_102_103_107_108_109_110_121_123_125_126_130_131_133_177_180_184_186_191_192_193_195_204_209_211_212_213_214_215_231_233_234_240_251_253_254_29_307_309_31_33_34_437_44_45_46_47_51_52_53_54_58_59_60_61_65_66_67_68_72_73_74_75_79_80_81_82_86_87_88_89_93_94_95_96",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WPImporterLoggerCLI.php::::45",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/autoload.php::::20_22_5"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 17,
+      "is_interesting": false,
+      "fuzzer_id": "1",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "slug"
+    },
+    {
+      "coverage_id": "1787078666-4e87bba1-2e10-4e4b-be05-586589365b79",
+      "priority": 17,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "ocdi_import_created_content"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "slug": "a"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n{\"success\":false,\"data\":\"An error occured while importing this page: The demo content import file is missing.\"}",
+      "response.body.length": 112,
+      "response.headers": {
+        "Date": "Tue, 18 Aug 2026 18:44:26 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "112",
+        "Content-Type": "application/json; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 387.577,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787078619-e53787d9-8487-4949-ac1f-40bff1ed6f93",
+      "paths": [
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/ImportActions.php::::17_185_20_21_22_23_26_29_32_33_35",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Helpers.php::::28_30_36_709_711_715_717_721_823",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/autoload_real.php::::11_12_14_21_25_26_27_29_30_32_34_37",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/one-click-demo-import.php::::100_104_105_107_111_112_19_33_38_41_44_47_52_73_74_76_77_81_82_84_85_89_90_97_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/OneClickDemoImport.php::::106_107_110_121_122_123_124_125_126_127_128_129_130_131_132_133_134_135_136_137_602_607_613_614_617_618_622_623_627_628_631_634_635_638_639_640_711_715_972",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Logger.php::::63",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/WXRImporter.php::::111_19_23_24_27_30",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WXRImporter.php::::100_108_111_112_2563_86_93_94_95_96_97_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/PluginInstaller.php::::100_101_106_107_108_112_113_114_118_119_120_131_133_134_23_25_26_28_29_582_584_585_589_590_594_85_86_87_92_93_94_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Importer.php::::209_47_51_54_55_56_60_61_68_69_71_90_91",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/CreateDemoContent/DemoContentCreator.php::::100_101_102_103_107_108_109_110_121_123_125_126_130_131_133_177_180_184_186_187_29_31_33_34_437_44_45_46_47_51_52_53_54_58_59_60_61_65_66_67_68_72_73_74_75_79_80_81_82_86_87_88_89_93_94_95_96",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/autoload_static.php::::60_61_62_63_65_68",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_515_522_528_531_544_551_555_563_575_576_577_578_580",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WPImporterLogger.php::::138",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/CreateDemoContent/DemoContentCreator.php::::100_101_102_103_107_108_109_110_121_123_125_126_130_131_133_177_180_184_186_191_192_193_195_204_209_211_212_213_214_215_231_233_234_240_251_253_254_29_307_309_31_33_34_437_44_45_46_47_51_52_53_54_58_59_60_61_65_66_67_68_72_73_74_75_79_80_81_82_86_87_88_89_93_94_95_96",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WPImporterLoggerCLI.php::::45",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/autoload.php::::20_22_5"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 17,
+      "is_interesting": false,
+      "fuzzer_id": "1",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "slug"
+    },
+    {
+      "coverage_id": "1787078677-6273a0db-268b-49f6-b78d-38a0e223d601",
+      "priority": 17,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "ocdi_import_created_content"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "slug": "-"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n{\"success\":false,\"data\":\"An error occured while importing this page: The demo content import file is missing.\"}",
+      "response.body.length": 112,
+      "response.headers": {
+        "Date": "Tue, 18 Aug 2026 18:44:37 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "112",
+        "Content-Type": "application/json; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 347.88,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787078619-e53787d9-8487-4949-ac1f-40bff1ed6f93",
+      "paths": [
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/ImportActions.php::::17_185_20_21_22_23_26_29_32_33_35",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Helpers.php::::28_30_36_709_711_715_717_721_823",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/autoload_real.php::::11_12_14_21_25_26_27_29_30_32_34_37",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/one-click-demo-import.php::::100_104_105_107_111_112_19_33_38_41_44_47_52_73_74_76_77_81_82_84_85_89_90_97_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/OneClickDemoImport.php::::106_107_110_121_122_123_124_125_126_127_128_129_130_131_132_133_134_135_136_137_602_607_613_614_617_618_622_623_627_628_631_634_635_638_639_640_711_715_972",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Logger.php::::63",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/WXRImporter.php::::111_19_23_24_27_30",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WXRImporter.php::::100_108_111_112_2563_86_93_94_95_96_97_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/PluginInstaller.php::::100_101_106_107_108_112_113_114_118_119_120_131_133_134_23_25_26_28_29_582_584_585_589_590_594_85_86_87_92_93_94_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Importer.php::::209_47_51_54_55_56_60_61_68_69_71_90_91",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/CreateDemoContent/DemoContentCreator.php::::100_101_102_103_107_108_109_110_121_123_125_126_130_131_133_177_180_184_186_187_29_31_33_34_437_44_45_46_47_51_52_53_54_58_59_60_61_65_66_67_68_72_73_74_75_79_80_81_82_86_87_88_89_93_94_95_96",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/autoload_static.php::::60_61_62_63_65_68",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_515_522_528_531_544_551_555_563_575_576_577_578_580",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WPImporterLogger.php::::138",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/CreateDemoContent/DemoContentCreator.php::::100_101_102_103_107_108_109_110_121_123_125_126_130_131_133_177_180_184_186_191_192_193_195_204_209_211_212_213_214_215_231_233_234_240_251_253_254_29_307_309_31_33_34_437_44_45_46_47_51_52_53_54_58_59_60_61_65_66_67_68_72_73_74_75_79_80_81_82_86_87_88_89_93_94_95_96",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WPImporterLoggerCLI.php::::45",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/autoload.php::::20_22_5"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 17,
+      "is_interesting": false,
+      "fuzzer_id": "1",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "slug"
+    },
+    {
+      "coverage_id": "1787078677-6273a0db-268b-49f6-b78d-38a0e223d601",
+      "priority": 17,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "ocdi_import_created_content"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "slug": "-"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n{\"success\":false,\"data\":\"An error occured while importing this page: The demo content import file is missing.\"}",
+      "response.body.length": 112,
+      "response.headers": {
+        "Date": "Tue, 18 Aug 2026 18:44:37 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "112",
+        "Content-Type": "application/json; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 347.88,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787078619-e53787d9-8487-4949-ac1f-40bff1ed6f93",
+      "paths": [
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/ImportActions.php::::17_185_20_21_22_23_26_29_32_33_35",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Helpers.php::::28_30_36_709_711_715_717_721_823",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/autoload_real.php::::11_12_14_21_25_26_27_29_30_32_34_37",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/one-click-demo-import.php::::100_104_105_107_111_112_19_33_38_41_44_47_52_73_74_76_77_81_82_84_85_89_90_97_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/OneClickDemoImport.php::::106_107_110_121_122_123_124_125_126_127_128_129_130_131_132_133_134_135_136_137_602_607_613_614_617_618_622_623_627_628_631_634_635_638_639_640_711_715_972",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Logger.php::::63",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/WXRImporter.php::::111_19_23_24_27_30",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WXRImporter.php::::100_108_111_112_2563_86_93_94_95_96_97_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/PluginInstaller.php::::100_101_106_107_108_112_113_114_118_119_120_131_133_134_23_25_26_28_29_582_584_585_589_590_594_85_86_87_92_93_94_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Importer.php::::209_47_51_54_55_56_60_61_68_69_71_90_91",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/CreateDemoContent/DemoContentCreator.php::::100_101_102_103_107_108_109_110_121_123_125_126_130_131_133_177_180_184_186_187_29_31_33_34_437_44_45_46_47_51_52_53_54_58_59_60_61_65_66_67_68_72_73_74_75_79_80_81_82_86_87_88_89_93_94_95_96",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/autoload_static.php::::60_61_62_63_65_68",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_515_522_528_531_544_551_555_563_575_576_577_578_580",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WPImporterLogger.php::::138",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/CreateDemoContent/DemoContentCreator.php::::100_101_102_103_107_108_109_110_121_123_125_126_130_131_133_177_180_184_186_191_192_193_195_204_209_211_212_213_214_215_231_233_234_240_251_253_254_29_307_309_31_33_34_437_44_45_46_47_51_52_53_54_58_59_60_61_65_66_67_68_72_73_74_75_79_80_81_82_86_87_88_89_93_94_95_96",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WPImporterLoggerCLI.php::::45",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/autoload.php::::20_22_5"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 17,
+      "is_interesting": false,
+      "fuzzer_id": "1",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "slug"
+    },
+    {
+      "coverage_id": "1787078682-d5e00db5-ab5d-47b2-b318-1899d61decf6",
+      "priority": 17,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "ocdi_import_created_content"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "slug": "i"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n{\"success\":false,\"data\":\"An error occured while importing this page: The demo content import file is missing.\"}",
+      "response.body.length": 112,
+      "response.headers": {
+        "Date": "Tue, 18 Aug 2026 18:44:42 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "112",
+        "Content-Type": "application/json; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 530.556,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787078619-e53787d9-8487-4949-ac1f-40bff1ed6f93",
+      "paths": [
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/ImportActions.php::::17_185_20_21_22_23_26_29_32_33_35",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Helpers.php::::28_30_36_709_711_715_717_721_823",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/autoload_real.php::::11_12_14_21_25_26_27_29_30_32_34_37",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/one-click-demo-import.php::::100_104_105_107_111_112_19_33_38_41_44_47_52_73_74_76_77_81_82_84_85_89_90_97_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/OneClickDemoImport.php::::106_107_110_121_122_123_124_125_126_127_128_129_130_131_132_133_134_135_136_137_602_607_613_614_617_618_622_623_627_628_631_634_635_638_639_640_711_715_972",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Logger.php::::63",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/WXRImporter.php::::111_19_23_24_27_30",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WXRImporter.php::::100_108_111_112_2563_86_93_94_95_96_97_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/PluginInstaller.php::::100_101_106_107_108_112_113_114_118_119_120_131_133_134_23_25_26_28_29_582_584_585_589_590_594_85_86_87_92_93_94_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Importer.php::::209_47_51_54_55_56_60_61_68_69_71_90_91",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/CreateDemoContent/DemoContentCreator.php::::100_101_102_103_107_108_109_110_121_123_125_126_130_131_133_177_180_184_186_187_29_31_33_34_437_44_45_46_47_51_52_53_54_58_59_60_61_65_66_67_68_72_73_74_75_79_80_81_82_86_87_88_89_93_94_95_96",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/autoload_static.php::::60_61_62_63_65_68",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_515_522_528_531_544_551_555_563_575_576_577_578_580",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WPImporterLogger.php::::138",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/CreateDemoContent/DemoContentCreator.php::::100_101_102_103_107_108_109_110_121_123_125_126_130_131_133_177_180_184_186_191_192_193_195_204_209_211_212_213_214_215_231_233_234_240_251_253_254_29_307_309_31_33_34_437_44_45_46_47_51_52_53_54_58_59_60_61_65_66_67_68_72_73_74_75_79_80_81_82_86_87_88_89_93_94_95_96",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WPImporterLoggerCLI.php::::45",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/autoload.php::::20_22_5"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 17,
+      "is_interesting": false,
+      "fuzzer_id": "1",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "slug"
+    },
+    {
+      "coverage_id": "1787078682-d5e00db5-ab5d-47b2-b318-1899d61decf6",
+      "priority": 17,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "ocdi_import_created_content"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "slug": "i"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n{\"success\":false,\"data\":\"An error occured while importing this page: The demo content import file is missing.\"}",
+      "response.body.length": 112,
+      "response.headers": {
+        "Date": "Tue, 18 Aug 2026 18:44:42 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "112",
+        "Content-Type": "application/json; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 530.556,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787078619-e53787d9-8487-4949-ac1f-40bff1ed6f93",
+      "paths": [
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/ImportActions.php::::17_185_20_21_22_23_26_29_32_33_35",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Helpers.php::::28_30_36_709_711_715_717_721_823",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/autoload_real.php::::11_12_14_21_25_26_27_29_30_32_34_37",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/one-click-demo-import.php::::100_104_105_107_111_112_19_33_38_41_44_47_52_73_74_76_77_81_82_84_85_89_90_97_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/OneClickDemoImport.php::::106_107_110_121_122_123_124_125_126_127_128_129_130_131_132_133_134_135_136_137_602_607_613_614_617_618_622_623_627_628_631_634_635_638_639_640_711_715_972",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Logger.php::::63",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/WXRImporter.php::::111_19_23_24_27_30",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WXRImporter.php::::100_108_111_112_2563_86_93_94_95_96_97_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/PluginInstaller.php::::100_101_106_107_108_112_113_114_118_119_120_131_133_134_23_25_26_28_29_582_584_585_589_590_594_85_86_87_92_93_94_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Importer.php::::209_47_51_54_55_56_60_61_68_69_71_90_91",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/CreateDemoContent/DemoContentCreator.php::::100_101_102_103_107_108_109_110_121_123_125_126_130_131_133_177_180_184_186_187_29_31_33_34_437_44_45_46_47_51_52_53_54_58_59_60_61_65_66_67_68_72_73_74_75_79_80_81_82_86_87_88_89_93_94_95_96",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/autoload_static.php::::60_61_62_63_65_68",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_515_522_528_531_544_551_555_563_575_576_577_578_580",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WPImporterLogger.php::::138",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/CreateDemoContent/DemoContentCreator.php::::100_101_102_103_107_108_109_110_121_123_125_126_130_131_133_177_180_184_186_191_192_193_195_204_209_211_212_213_214_215_231_233_234_240_251_253_254_29_307_309_31_33_34_437_44_45_46_47_51_52_53_54_58_59_60_61_65_66_67_68_72_73_74_75_79_80_81_82_86_87_88_89_93_94_95_96",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WPImporterLoggerCLI.php::::45",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/autoload.php::::20_22_5"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 17,
+      "is_interesting": false,
+      "fuzzer_id": "1",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "slug"
+    },
+    {
+      "coverage_id": "1787078683-bac79ab7-e54a-4db4-840d-8c27bb9d1c79",
+      "priority": 17,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "ocdi_import_created_content"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "slug": "m"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n{\"success\":false,\"data\":\"An error occured while importing this page: The demo content import file is missing.\"}",
+      "response.body.length": 112,
+      "response.headers": {
+        "Date": "Tue, 18 Aug 2026 18:44:43 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "112",
+        "Content-Type": "application/json; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 339.122,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787078619-e53787d9-8487-4949-ac1f-40bff1ed6f93",
+      "paths": [
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/ImportActions.php::::17_185_20_21_22_23_26_29_32_33_35",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Helpers.php::::28_30_36_709_711_715_717_721_823",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/autoload_real.php::::11_12_14_21_25_26_27_29_30_32_34_37",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/one-click-demo-import.php::::100_104_105_107_111_112_19_33_38_41_44_47_52_73_74_76_77_81_82_84_85_89_90_97_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/OneClickDemoImport.php::::106_107_110_121_122_123_124_125_126_127_128_129_130_131_132_133_134_135_136_137_602_607_613_614_617_618_622_623_627_628_631_634_635_638_639_640_711_715_972",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Logger.php::::63",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/WXRImporter.php::::111_19_23_24_27_30",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WXRImporter.php::::100_108_111_112_2563_86_93_94_95_96_97_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/PluginInstaller.php::::100_101_106_107_108_112_113_114_118_119_120_131_133_134_23_25_26_28_29_582_584_585_589_590_594_85_86_87_92_93_94_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Importer.php::::209_47_51_54_55_56_60_61_68_69_71_90_91",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/CreateDemoContent/DemoContentCreator.php::::100_101_102_103_107_108_109_110_121_123_125_126_130_131_133_177_180_184_186_187_29_31_33_34_437_44_45_46_47_51_52_53_54_58_59_60_61_65_66_67_68_72_73_74_75_79_80_81_82_86_87_88_89_93_94_95_96",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/autoload_static.php::::60_61_62_63_65_68",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_515_522_528_531_544_551_555_563_575_576_577_578_580",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WPImporterLogger.php::::138",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/CreateDemoContent/DemoContentCreator.php::::100_101_102_103_107_108_109_110_121_123_125_126_130_131_133_177_180_184_186_191_192_193_195_204_209_211_212_213_214_215_231_233_234_240_251_253_254_29_307_309_31_33_34_437_44_45_46_47_51_52_53_54_58_59_60_61_65_66_67_68_72_73_74_75_79_80_81_82_86_87_88_89_93_94_95_96",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WPImporterLoggerCLI.php::::45",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/autoload.php::::20_22_5"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 17,
+      "is_interesting": false,
+      "fuzzer_id": "1",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "slug"
+    },
+    {
+      "coverage_id": "1787078683-bac79ab7-e54a-4db4-840d-8c27bb9d1c79",
+      "priority": 17,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "ocdi_import_created_content"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "slug": "m"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n{\"success\":false,\"data\":\"An error occured while importing this page: The demo content import file is missing.\"}",
+      "response.body.length": 112,
+      "response.headers": {
+        "Date": "Tue, 18 Aug 2026 18:44:43 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "112",
+        "Content-Type": "application/json; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 339.122,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787078619-e53787d9-8487-4949-ac1f-40bff1ed6f93",
+      "paths": [
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/ImportActions.php::::17_185_20_21_22_23_26_29_32_33_35",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Helpers.php::::28_30_36_709_711_715_717_721_823",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/autoload_real.php::::11_12_14_21_25_26_27_29_30_32_34_37",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/one-click-demo-import.php::::100_104_105_107_111_112_19_33_38_41_44_47_52_73_74_76_77_81_82_84_85_89_90_97_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/OneClickDemoImport.php::::106_107_110_121_122_123_124_125_126_127_128_129_130_131_132_133_134_135_136_137_602_607_613_614_617_618_622_623_627_628_631_634_635_638_639_640_711_715_972",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Logger.php::::63",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/WXRImporter.php::::111_19_23_24_27_30",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WXRImporter.php::::100_108_111_112_2563_86_93_94_95_96_97_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/PluginInstaller.php::::100_101_106_107_108_112_113_114_118_119_120_131_133_134_23_25_26_28_29_582_584_585_589_590_594_85_86_87_92_93_94_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Importer.php::::209_47_51_54_55_56_60_61_68_69_71_90_91",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/CreateDemoContent/DemoContentCreator.php::::100_101_102_103_107_108_109_110_121_123_125_126_130_131_133_177_180_184_186_187_29_31_33_34_437_44_45_46_47_51_52_53_54_58_59_60_61_65_66_67_68_72_73_74_75_79_80_81_82_86_87_88_89_93_94_95_96",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/autoload_static.php::::60_61_62_63_65_68",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_515_522_528_531_544_551_555_563_575_576_577_578_580",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WPImporterLogger.php::::138",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/CreateDemoContent/DemoContentCreator.php::::100_101_102_103_107_108_109_110_121_123_125_126_130_131_133_177_180_184_186_191_192_193_195_204_209_211_212_213_214_215_231_233_234_240_251_253_254_29_307_309_31_33_34_437_44_45_46_47_51_52_53_54_58_59_60_61_65_66_67_68_72_73_74_75_79_80_81_82_86_87_88_89_93_94_95_96",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WPImporterLoggerCLI.php::::45",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/autoload.php::::20_22_5"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 17,
+      "is_interesting": false,
+      "fuzzer_id": "1",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "slug"
+    },
+    {
+      "coverage_id": "1787078686-3474cd89-e7ee-4c23-9365-d3c371f14456",
+      "priority": 17,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "ocdi_import_created_content"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "slug": "r"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n{\"success\":false,\"data\":\"An error occured while importing this page: The demo content import file is missing.\"}",
+      "response.body.length": 112,
+      "response.headers": {
+        "Date": "Tue, 18 Aug 2026 18:44:46 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "112",
+        "Content-Type": "application/json; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 418.948,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787078619-e53787d9-8487-4949-ac1f-40bff1ed6f93",
+      "paths": [
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/ImportActions.php::::17_185_20_21_22_23_26_29_32_33_35",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Helpers.php::::28_30_36_709_711_715_717_721_823",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/autoload_real.php::::11_12_14_21_25_26_27_29_30_32_34_37",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/one-click-demo-import.php::::100_104_105_107_111_112_19_33_38_41_44_47_52_73_74_76_77_81_82_84_85_89_90_97_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/OneClickDemoImport.php::::106_107_110_121_122_123_124_125_126_127_128_129_130_131_132_133_134_135_136_137_602_607_613_614_617_618_622_623_627_628_631_634_635_638_639_640_711_715_972",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Logger.php::::63",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/WXRImporter.php::::111_19_23_24_27_30",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WXRImporter.php::::100_108_111_112_2563_86_93_94_95_96_97_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/PluginInstaller.php::::100_101_106_107_108_112_113_114_118_119_120_131_133_134_23_25_26_28_29_582_584_585_589_590_594_85_86_87_92_93_94_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Importer.php::::209_47_51_54_55_56_60_61_68_69_71_90_91",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/CreateDemoContent/DemoContentCreator.php::::100_101_102_103_107_108_109_110_121_123_125_126_130_131_133_177_180_184_186_187_29_31_33_34_437_44_45_46_47_51_52_53_54_58_59_60_61_65_66_67_68_72_73_74_75_79_80_81_82_86_87_88_89_93_94_95_96",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/autoload_static.php::::60_61_62_63_65_68",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_515_522_528_531_544_551_555_563_575_576_577_578_580",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WPImporterLogger.php::::138",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/CreateDemoContent/DemoContentCreator.php::::100_101_102_103_107_108_109_110_121_123_125_126_130_131_133_177_180_184_186_191_192_193_195_204_209_211_212_213_214_215_231_233_234_240_251_253_254_29_307_309_31_33_34_437_44_45_46_47_51_52_53_54_58_59_60_61_65_66_67_68_72_73_74_75_79_80_81_82_86_87_88_89_93_94_95_96",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WPImporterLoggerCLI.php::::45",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/autoload.php::::20_22_5"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 17,
+      "is_interesting": false,
+      "fuzzer_id": "1",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "slug"
+    },
+    {
+      "coverage_id": "1787078686-3474cd89-e7ee-4c23-9365-d3c371f14456",
+      "priority": 17,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "ocdi_import_created_content"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "slug": "r"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n{\"success\":false,\"data\":\"An error occured while importing this page: The demo content import file is missing.\"}",
+      "response.body.length": 112,
+      "response.headers": {
+        "Date": "Tue, 18 Aug 2026 18:44:46 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "112",
+        "Content-Type": "application/json; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 418.948,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787078619-e53787d9-8487-4949-ac1f-40bff1ed6f93",
+      "paths": [
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/ImportActions.php::::17_185_20_21_22_23_26_29_32_33_35",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Helpers.php::::28_30_36_709_711_715_717_721_823",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/autoload_real.php::::11_12_14_21_25_26_27_29_30_32_34_37",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/one-click-demo-import.php::::100_104_105_107_111_112_19_33_38_41_44_47_52_73_74_76_77_81_82_84_85_89_90_97_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/OneClickDemoImport.php::::106_107_110_121_122_123_124_125_126_127_128_129_130_131_132_133_134_135_136_137_602_607_613_614_617_618_622_623_627_628_631_634_635_638_639_640_711_715_972",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Logger.php::::63",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/WXRImporter.php::::111_19_23_24_27_30",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WXRImporter.php::::100_108_111_112_2563_86_93_94_95_96_97_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/PluginInstaller.php::::100_101_106_107_108_112_113_114_118_119_120_131_133_134_23_25_26_28_29_582_584_585_589_590_594_85_86_87_92_93_94_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Importer.php::::209_47_51_54_55_56_60_61_68_69_71_90_91",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/CreateDemoContent/DemoContentCreator.php::::100_101_102_103_107_108_109_110_121_123_125_126_130_131_133_177_180_184_186_187_29_31_33_34_437_44_45_46_47_51_52_53_54_58_59_60_61_65_66_67_68_72_73_74_75_79_80_81_82_86_87_88_89_93_94_95_96",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/autoload_static.php::::60_61_62_63_65_68",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_515_522_528_531_544_551_555_563_575_576_577_578_580",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WPImporterLogger.php::::138",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/CreateDemoContent/DemoContentCreator.php::::100_101_102_103_107_108_109_110_121_123_125_126_130_131_133_177_180_184_186_191_192_193_195_204_209_211_212_213_214_215_231_233_234_240_251_253_254_29_307_309_31_33_34_437_44_45_46_47_51_52_53_54_58_59_60_61_65_66_67_68_72_73_74_75_79_80_81_82_86_87_88_89_93_94_95_96",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WPImporterLoggerCLI.php::::45",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/autoload.php::::20_22_5"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 17,
+      "is_interesting": false,
+      "fuzzer_id": "1",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "slug"
+    },
+    {
+      "coverage_id": "1787078688-832a4dd1-b3c6-4891-80fd-66aa2acc1949",
+      "priority": 17,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "ocdi_import_created_content"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "slug": "o"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n{\"success\":false,\"data\":\"An error occured while importing this page: The demo content import file is missing.\"}",
+      "response.body.length": 112,
+      "response.headers": {
+        "Date": "Tue, 18 Aug 2026 18:44:48 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "112",
+        "Content-Type": "application/json; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 381.086,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787078619-e53787d9-8487-4949-ac1f-40bff1ed6f93",
+      "paths": [
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/ImportActions.php::::17_185_20_21_22_23_26_29_32_33_35",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Helpers.php::::28_30_36_709_711_715_717_721_823",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/autoload_real.php::::11_12_14_21_25_26_27_29_30_32_34_37",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/one-click-demo-import.php::::100_104_105_107_111_112_19_33_38_41_44_47_52_73_74_76_77_81_82_84_85_89_90_97_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/OneClickDemoImport.php::::106_107_110_121_122_123_124_125_126_127_128_129_130_131_132_133_134_135_136_137_602_607_613_614_617_618_622_623_627_628_631_634_635_638_639_640_711_715_972",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Logger.php::::63",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/WXRImporter.php::::111_19_23_24_27_30",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WXRImporter.php::::100_108_111_112_2563_86_93_94_95_96_97_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/PluginInstaller.php::::100_101_106_107_108_112_113_114_118_119_120_131_133_134_23_25_26_28_29_582_584_585_589_590_594_85_86_87_92_93_94_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Importer.php::::209_47_51_54_55_56_60_61_68_69_71_90_91",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/CreateDemoContent/DemoContentCreator.php::::100_101_102_103_107_108_109_110_121_123_125_126_130_131_133_177_180_184_186_187_29_31_33_34_437_44_45_46_47_51_52_53_54_58_59_60_61_65_66_67_68_72_73_74_75_79_80_81_82_86_87_88_89_93_94_95_96",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/autoload_static.php::::60_61_62_63_65_68",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_515_522_528_531_544_551_555_563_575_576_577_578_580",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WPImporterLogger.php::::138",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/CreateDemoContent/DemoContentCreator.php::::100_101_102_103_107_108_109_110_121_123_125_126_130_131_133_177_180_184_186_191_192_193_195_204_209_211_212_213_214_215_231_233_234_240_251_253_254_29_307_309_31_33_34_437_44_45_46_47_51_52_53_54_58_59_60_61_65_66_67_68_72_73_74_75_79_80_81_82_86_87_88_89_93_94_95_96",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WPImporterLoggerCLI.php::::45",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/autoload.php::::20_22_5"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 17,
+      "is_interesting": false,
+      "fuzzer_id": "1",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "slug"
+    },
+    {
+      "coverage_id": "1787078688-832a4dd1-b3c6-4891-80fd-66aa2acc1949",
+      "priority": 17,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "ocdi_import_created_content"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "slug": "o"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n{\"success\":false,\"data\":\"An error occured while importing this page: The demo content import file is missing.\"}",
+      "response.body.length": 112,
+      "response.headers": {
+        "Date": "Tue, 18 Aug 2026 18:44:48 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "112",
+        "Content-Type": "application/json; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 381.086,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787078619-e53787d9-8487-4949-ac1f-40bff1ed6f93",
+      "paths": [
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/ImportActions.php::::17_185_20_21_22_23_26_29_32_33_35",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Helpers.php::::28_30_36_709_711_715_717_721_823",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/autoload_real.php::::11_12_14_21_25_26_27_29_30_32_34_37",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/one-click-demo-import.php::::100_104_105_107_111_112_19_33_38_41_44_47_52_73_74_76_77_81_82_84_85_89_90_97_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/OneClickDemoImport.php::::106_107_110_121_122_123_124_125_126_127_128_129_130_131_132_133_134_135_136_137_602_607_613_614_617_618_622_623_627_628_631_634_635_638_639_640_711_715_972",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Logger.php::::63",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/WXRImporter.php::::111_19_23_24_27_30",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WXRImporter.php::::100_108_111_112_2563_86_93_94_95_96_97_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/PluginInstaller.php::::100_101_106_107_108_112_113_114_118_119_120_131_133_134_23_25_26_28_29_582_584_585_589_590_594_85_86_87_92_93_94_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Importer.php::::209_47_51_54_55_56_60_61_68_69_71_90_91",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/CreateDemoContent/DemoContentCreator.php::::100_101_102_103_107_108_109_110_121_123_125_126_130_131_133_177_180_184_186_187_29_31_33_34_437_44_45_46_47_51_52_53_54_58_59_60_61_65_66_67_68_72_73_74_75_79_80_81_82_86_87_88_89_93_94_95_96",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/autoload_static.php::::60_61_62_63_65_68",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_515_522_528_531_544_551_555_563_575_576_577_578_580",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WPImporterLogger.php::::138",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/CreateDemoContent/DemoContentCreator.php::::100_101_102_103_107_108_109_110_121_123_125_126_130_131_133_177_180_184_186_191_192_193_195_204_209_211_212_213_214_215_231_233_234_240_251_253_254_29_307_309_31_33_34_437_44_45_46_47_51_52_53_54_58_59_60_61_65_66_67_68_72_73_74_75_79_80_81_82_86_87_88_89_93_94_95_96",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WPImporterLoggerCLI.php::::45",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/autoload.php::::20_22_5"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 17,
+      "is_interesting": false,
+      "fuzzer_id": "1",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "slug"
+    },
+    {
+      "coverage_id": "1787078698-6ba885d2-0446-41a5-989d-2280495ed8b3",
+      "priority": 17,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "ocdi_import_created_content"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "slug": "U"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n{\"success\":false,\"data\":\"An error occured while importing this page: The demo content import file is missing.\"}",
+      "response.body.length": 112,
+      "response.headers": {
+        "Date": "Tue, 18 Aug 2026 18:44:58 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "112",
+        "Content-Type": "application/json; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 504.21,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787078619-e53787d9-8487-4949-ac1f-40bff1ed6f93",
+      "paths": [
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/ImportActions.php::::17_185_20_21_22_23_26_29_32_33_35",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Helpers.php::::28_30_36_709_711_715_717_721_823",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/autoload_real.php::::11_12_14_21_25_26_27_29_30_32_34_37",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/one-click-demo-import.php::::100_104_105_107_111_112_19_33_38_41_44_47_52_73_74_76_77_81_82_84_85_89_90_97_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/OneClickDemoImport.php::::106_107_110_121_122_123_124_125_126_127_128_129_130_131_132_133_134_135_136_137_602_607_613_614_617_618_622_623_627_628_631_634_635_638_639_640_711_715_972",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Logger.php::::63",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/WXRImporter.php::::111_19_23_24_27_30",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WXRImporter.php::::100_108_111_112_2563_86_93_94_95_96_97_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/PluginInstaller.php::::100_101_106_107_108_112_113_114_118_119_120_131_133_134_23_25_26_28_29_582_584_585_589_590_594_85_86_87_92_93_94_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Importer.php::::209_47_51_54_55_56_60_61_68_69_71_90_91",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/CreateDemoContent/DemoContentCreator.php::::100_101_102_103_107_108_109_110_121_123_125_126_130_131_133_177_180_184_186_187_29_31_33_34_437_44_45_46_47_51_52_53_54_58_59_60_61_65_66_67_68_72_73_74_75_79_80_81_82_86_87_88_89_93_94_95_96",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/autoload_static.php::::60_61_62_63_65_68",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_515_522_528_531_544_551_555_563_575_576_577_578_580",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WPImporterLogger.php::::138",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/CreateDemoContent/DemoContentCreator.php::::100_101_102_103_107_108_109_110_121_123_125_126_130_131_133_177_180_184_186_191_192_193_195_204_209_211_212_213_214_215_231_233_234_240_251_253_254_29_307_309_31_33_34_437_44_45_46_47_51_52_53_54_58_59_60_61_65_66_67_68_72_73_74_75_79_80_81_82_86_87_88_89_93_94_95_96",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WPImporterLoggerCLI.php::::45",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/autoload.php::::20_22_5"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 17,
+      "is_interesting": false,
+      "fuzzer_id": "1",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "slug"
+    },
+    {
+      "coverage_id": "1787078698-6ba885d2-0446-41a5-989d-2280495ed8b3",
+      "priority": 17,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "ocdi_import_created_content"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "slug": "U"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n{\"success\":false,\"data\":\"An error occured while importing this page: The demo content import file is missing.\"}",
+      "response.body.length": 112,
+      "response.headers": {
+        "Date": "Tue, 18 Aug 2026 18:44:58 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "112",
+        "Content-Type": "application/json; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 504.21,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787078619-e53787d9-8487-4949-ac1f-40bff1ed6f93",
+      "paths": [
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/ImportActions.php::::17_185_20_21_22_23_26_29_32_33_35",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Helpers.php::::28_30_36_709_711_715_717_721_823",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/autoload_real.php::::11_12_14_21_25_26_27_29_30_32_34_37",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/one-click-demo-import.php::::100_104_105_107_111_112_19_33_38_41_44_47_52_73_74_76_77_81_82_84_85_89_90_97_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/OneClickDemoImport.php::::106_107_110_121_122_123_124_125_126_127_128_129_130_131_132_133_134_135_136_137_602_607_613_614_617_618_622_623_627_628_631_634_635_638_639_640_711_715_972",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Logger.php::::63",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/WXRImporter.php::::111_19_23_24_27_30",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WXRImporter.php::::100_108_111_112_2563_86_93_94_95_96_97_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/PluginInstaller.php::::100_101_106_107_108_112_113_114_118_119_120_131_133_134_23_25_26_28_29_582_584_585_589_590_594_85_86_87_92_93_94_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Importer.php::::209_47_51_54_55_56_60_61_68_69_71_90_91",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/CreateDemoContent/DemoContentCreator.php::::100_101_102_103_107_108_109_110_121_123_125_126_130_131_133_177_180_184_186_187_29_31_33_34_437_44_45_46_47_51_52_53_54_58_59_60_61_65_66_67_68_72_73_74_75_79_80_81_82_86_87_88_89_93_94_95_96",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/autoload_static.php::::60_61_62_63_65_68",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_515_522_528_531_544_551_555_563_575_576_577_578_580",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WPImporterLogger.php::::138",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/CreateDemoContent/DemoContentCreator.php::::100_101_102_103_107_108_109_110_121_123_125_126_130_131_133_177_180_184_186_191_192_193_195_204_209_211_212_213_214_215_231_233_234_240_251_253_254_29_307_309_31_33_34_437_44_45_46_47_51_52_53_54_58_59_60_61_65_66_67_68_72_73_74_75_79_80_81_82_86_87_88_89_93_94_95_96",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WPImporterLoggerCLI.php::::45",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/autoload.php::::20_22_5"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 17,
+      "is_interesting": false,
+      "fuzzer_id": "1",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "slug"
+    },
+    {
+      "coverage_id": "1787078718-96b90f15-4f1d-4eb3-b775-48e7528a5e16",
+      "priority": 17,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "ocdi_import_created_content"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "slug": "q"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n{\"success\":false,\"data\":\"An error occured while importing this page: The demo content import file is missing.\"}",
+      "response.body.length": 112,
+      "response.headers": {
+        "Date": "Tue, 18 Aug 2026 18:45:18 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "112",
+        "Content-Type": "application/json; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 552.174,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787078619-e53787d9-8487-4949-ac1f-40bff1ed6f93",
+      "paths": [
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/ImportActions.php::::17_185_20_21_22_23_26_29_32_33_35",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Helpers.php::::28_30_36_709_711_715_717_721_823",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/autoload_real.php::::11_12_14_21_25_26_27_29_30_32_34_37",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/one-click-demo-import.php::::100_104_105_107_111_112_19_33_38_41_44_47_52_73_74_76_77_81_82_84_85_89_90_97_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/OneClickDemoImport.php::::106_107_110_121_122_123_124_125_126_127_128_129_130_131_132_133_134_135_136_137_602_607_613_614_617_618_622_623_627_628_631_634_635_638_639_640_711_715_972",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Logger.php::::63",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/WXRImporter.php::::111_19_23_24_27_30",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WXRImporter.php::::100_108_111_112_2563_86_93_94_95_96_97_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/PluginInstaller.php::::100_101_106_107_108_112_113_114_118_119_120_131_133_134_23_25_26_28_29_582_584_585_589_590_594_85_86_87_92_93_94_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Importer.php::::209_47_51_54_55_56_60_61_68_69_71_90_91",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/CreateDemoContent/DemoContentCreator.php::::100_101_102_103_107_108_109_110_121_123_125_126_130_131_133_177_180_184_186_187_29_31_33_34_437_44_45_46_47_51_52_53_54_58_59_60_61_65_66_67_68_72_73_74_75_79_80_81_82_86_87_88_89_93_94_95_96",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/autoload_static.php::::60_61_62_63_65_68",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_515_522_528_531_544_551_555_563_575_576_577_578_580",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WPImporterLogger.php::::138",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/CreateDemoContent/DemoContentCreator.php::::100_101_102_103_107_108_109_110_121_123_125_126_130_131_133_177_180_184_186_191_192_193_195_204_209_211_212_213_214_215_231_233_234_240_251_253_254_29_307_309_31_33_34_437_44_45_46_47_51_52_53_54_58_59_60_61_65_66_67_68_72_73_74_75_79_80_81_82_86_87_88_89_93_94_95_96",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WPImporterLoggerCLI.php::::45",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/autoload.php::::20_22_5"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 17,
+      "is_interesting": false,
+      "fuzzer_id": "1",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "slug"
+    },
+    {
+      "coverage_id": "1787078718-96b90f15-4f1d-4eb3-b775-48e7528a5e16",
+      "priority": 17,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "ocdi_import_created_content"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "slug": "q"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n{\"success\":false,\"data\":\"An error occured while importing this page: The demo content import file is missing.\"}",
+      "response.body.length": 112,
+      "response.headers": {
+        "Date": "Tue, 18 Aug 2026 18:45:18 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "112",
+        "Content-Type": "application/json; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 552.174,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787078619-e53787d9-8487-4949-ac1f-40bff1ed6f93",
+      "paths": [
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/ImportActions.php::::17_185_20_21_22_23_26_29_32_33_35",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Helpers.php::::28_30_36_709_711_715_717_721_823",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/autoload_real.php::::11_12_14_21_25_26_27_29_30_32_34_37",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/one-click-demo-import.php::::100_104_105_107_111_112_19_33_38_41_44_47_52_73_74_76_77_81_82_84_85_89_90_97_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/OneClickDemoImport.php::::106_107_110_121_122_123_124_125_126_127_128_129_130_131_132_133_134_135_136_137_602_607_613_614_617_618_622_623_627_628_631_634_635_638_639_640_711_715_972",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Logger.php::::63",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/WXRImporter.php::::111_19_23_24_27_30",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WXRImporter.php::::100_108_111_112_2563_86_93_94_95_96_97_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/PluginInstaller.php::::100_101_106_107_108_112_113_114_118_119_120_131_133_134_23_25_26_28_29_582_584_585_589_590_594_85_86_87_92_93_94_99",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/Importer.php::::209_47_51_54_55_56_60_61_68_69_71_90_91",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/CreateDemoContent/DemoContentCreator.php::::100_101_102_103_107_108_109_110_121_123_125_126_130_131_133_177_180_184_186_187_29_31_33_34_437_44_45_46_47_51_52_53_54_58_59_60_61_65_66_67_68_72_73_74_75_79_80_81_82_86_87_88_89_93_94_95_96",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/autoload_static.php::::60_61_62_63_65_68",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/composer/ClassLoader.php::::108_109_110_389_391_395_396_401_425_426_427_429_432_445_446_448_451_458_461_465_469_471_474_495_497_498_515_522_528_531_544_551_555_563_575_576_577_578_580",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WPImporterLogger.php::::138",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/inc/CreateDemoContent/DemoContentCreator.php::::100_101_102_103_107_108_109_110_121_123_125_126_130_131_133_177_180_184_186_191_192_193_195_204_209_211_212_213_214_215_231_233_234_240_251_253_254_29_307_309_31_33_34_437_44_45_46_47_51_52_53_54_58_59_60_61_65_66_67_68_72_73_74_75_79_80_81_82_86_87_88_89_93_94_95_96",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WPImporterLoggerCLI.php::::45",
+        "/var/www/html/wp-content/plugins/one-click-demo-import/vendor/autoload.php::::20_22_5"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 17,
+      "is_interesting": false,
+      "fuzzer_id": "1",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "slug"
+    }
+  ]
+}

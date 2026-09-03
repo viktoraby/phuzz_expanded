@@ -5,15 +5,19 @@
 *Found functions:4
 *Extracted functions:4
 *Total parameter names extracted: 1
-*Overview: {'dismiss_guide': {'ogf_dismiss_guide'}, 'ajax_customizer_clear_cache': {'customizer_clear_cache'}, 'dismiss_notice': {'ogf_dismiss_notice'}, 'ajax_customizer_reset': {'customizer_reset'}}
+*Overview: {'ajax_customizer_clear_cache': {'customizer_clear_cache'}, 'ajax_customizer_reset': {'customizer_reset'}, 'dismiss_guide': {'ogf_dismiss_guide'}, 'dismiss_notice': {'ogf_dismiss_notice'}}
 *
 ***/
 
-/** Function dismiss_guide() called by wp_ajax hooks: {'ogf_dismiss_guide'} **/
+/** Function ajax_customizer_clear_cache() called by wp_ajax hooks: {'customizer_clear_cache'} **/
 /** No params detected :-/ **/
 
 
-/** Function ajax_customizer_clear_cache() called by wp_ajax hooks: {'customizer_clear_cache'} **/
+/** Function ajax_customizer_reset() called by wp_ajax hooks: {'customizer_reset'} **/
+/** No params detected :-/ **/
+
+
+/** Function dismiss_guide() called by wp_ajax hooks: {'ogf_dismiss_guide'} **/
 /** No params detected :-/ **/
 
 
@@ -31,9 +35,5 @@ function dismiss_notice() {
 				update_option( 'dismissed-' . $type, true );
 			}
 		}
-
-
-/** Function ajax_customizer_reset() called by wp_ajax hooks: {'customizer_reset'} **/
-/** No params detected :-/ **/
 
 

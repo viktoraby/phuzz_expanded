@@ -5,9 +5,527 @@
 *Found functions:29
 *Extracted functions:29
 *Total parameter names extracted: 23
-*Overview: {'welcome_screen': {'cn_welcome_screen'}, 'query_forms': {'cn_privacy_consent_get_forms'}, 'get_consent_logs': {'cn_react_consent_logs'}, 'dismiss_welcome': {'cn_dismiss_welcome', 'cn_react_dismiss_welcome'}, 'api_request': {'cn_api_request'}, 'set_form_status': {'cn_privacy_consent_form_status'}, 'export_consent_logs': {'cn_react_export_consent_logs'}, 'complete_setup_wizard': {'cn_react_complete_setup_wizard'}, 'ajax_dismiss_admin_notice': {'cn_dismiss_notice'}, 'deactivate_plugin': {'cn-deactivate-plugin'}, 'get_config': {'cn_react_config'}, 'get_api_environment': {'cn_get_api_environment'}, 'test_set_option': {'cn_react_test_set_option'}, 'test_get_option': {'cn_react_test_get_option'}, 'react_apply_languages': {'cn_react_apply_languages'}, 'get_privacy_consent_logs': {'cn_get_privacy_consent_logs'}, 'update_script': {'cn_react_script_update'}, 'get_cookie_consent_logs': {'cn_get_cookie_consent_logs'}, 'react_update_design': {'cn_react_update_design'}, 'ajax_purge_cache': {'cn_purge_cache'}, 'save_options': {'cn_react_save_options'}, 'get_dashboard': {'cn_react_dashboard'}, 'get_rule_values': {'cn_react_rule_values'}, 'display_table': {'cn_privacy_consent_display_table'}, 'dev_reset': {'cn_react_dev_reset'}, 'ajax_review_notice': {'cn_review_notice'}, 'react_apply_template': {'cn_react_apply_template'}, 'rescan_scripts': {'cn_react_rescan_scripts'}, 'get_group_rule_values': {'cn-get-group-rules-values'}}
+*Overview: {'test_set_option': {'cn_react_test_set_option'}, 'get_api_environment': {'cn_get_api_environment'}, 'display_table': {'cn_privacy_consent_display_table'}, 'get_config': {'cn_react_config'}, 'test_get_option': {'cn_react_test_get_option'}, 'get_group_rule_values': {'cn-get-group-rules-values'}, 'get_privacy_consent_logs': {'cn_get_privacy_consent_logs'}, 'react_apply_template': {'cn_react_apply_template'}, 'get_cookie_consent_logs': {'cn_get_cookie_consent_logs'}, 'ajax_purge_cache': {'cn_purge_cache'}, 'dismiss_welcome': {'cn_dismiss_welcome', 'cn_react_dismiss_welcome'}, 'complete_setup_wizard': {'cn_react_complete_setup_wizard'}, 'set_form_status': {'cn_privacy_consent_form_status'}, 'welcome_screen': {'cn_welcome_screen'}, 'ajax_review_notice': {'cn_review_notice'}, 'ajax_dismiss_admin_notice': {'cn_dismiss_notice'}, 'query_forms': {'cn_privacy_consent_get_forms'}, 'get_consent_logs': {'cn_react_consent_logs'}, 'update_script': {'cn_react_script_update'}, 'deactivate_plugin': {'cn-deactivate-plugin'}, 'react_update_design': {'cn_react_update_design'}, 'api_request': {'cn_api_request'}, 'get_rule_values': {'cn_react_rule_values'}, 'get_dashboard': {'cn_react_dashboard'}, 'dev_reset': {'cn_react_dev_reset'}, 'save_options': {'cn_react_save_options'}, 'export_consent_logs': {'cn_react_export_consent_logs'}, 'rescan_scripts': {'cn_react_rescan_scripts'}, 'react_apply_languages': {'cn_react_apply_languages'}}
 *
 ***/
+
+/** Function test_set_option() called by wp_ajax hooks: {'cn_react_test_set_option'} **/
+/** Parameters found in function test_set_option(): {"post": ["option_name", "option_value"]} **/
+function test_set_option() {
+		if ( ! defined( 'CN_DEV_MODE' ) || ! CN_DEV_MODE ) {
+			wp_send_json_error( [ 'error' => 'Not available outside CN_DEV_MODE.' ] );
+		}
+
+		$this->verify_request();
+
+		// Allowlist — only options the test suite legitimately needs to set.
+		$allowed = [
+			'cookie_notice_ui_mode',
+			'cookie_notice_status',
+			'cookie_notice_setup_wizard_complete',
+			'cookie_notice_welcome_dismissed',
+			'cookie_notice_options',
+		];
+
+		$option_name = isset( $_POST['option_name'] ) ? sanitize_key( $_POST['option_name'] ) : '';
+
+		if ( ! in_array( $option_name, $allowed, true ) ) {
+			wp_send_json_error( [ 'error' => 'Option not in allowlist: ' . $option_name ] );
+		}
+
+		// cookie_notice_options is stored as a PHP array — decode JSON input.
+		$raw_value = isset( $_POST['option_value'] ) ? wp_unslash( $_POST['option_value'] ) : '';
+
+		if ( $option_name === 'cookie_notice_options' ) {
+			$option_value = json_decode( $raw_value, true );
+			if ( ! is_array( $option_value ) ) {
+				wp_send_json_error( [ 'error' => 'cookie_notice_options must be valid JSON object.' ] );
+			}
+		} else {
+			$option_value = sanitize_text_field( $raw_value );
+		}
+
+		update_option( $option_name, $option_value );
+
+		wp_send_json_success( [ 'option' => $option_name, 'value' => $option_value ] );
+	}
+
+
+/** Function get_api_environment() called by wp_ajax hooks: {'cn_get_api_environment'} **/
+/** No params detected :-/ **/
+
+
+/** Function display_table() called by wp_ajax hooks: {'cn_privacy_consent_display_table'} **/
+/** Parameters found in function display_table(): {"request": ["action", "nonce", "source"], "get": ["orderby", "order"]} **/
+function display_table() {
+		// valid nonce?
+		if ( check_ajax_referer( 'cn-privacy-consent-list-table-nonce', 'nonce' ) === false )
+			wp_send_json_error();
+
+		// check data
+		if ( ! isset( $_REQUEST['action'], $_REQUEST['nonce'], $_REQUEST['source'] ) )
+			wp_send_json_error();
+
+		// check capability
+		if ( ! current_user_can( apply_filters( 'cn_manage_cookie_notice_cap', 'manage_options' ) ) )
+			wp_send_json_error();
+
+		// sanitize source
+		$source = sanitize_key( $_REQUEST['source'] );
+
+		if ( ! array_key_exists( $source, $this->sources ) || ! $this->sources[$source]['availability'] )
+			wp_send_json_error();
+
+		// make title column sorted
+		if ( empty( $_GET['orderby'] ) )
+			$_GET['orderby'] = 'title';
+
+		if ( empty( $_GET['order'] ) )
+			$_GET['order'] = 'asc';
+
+		// initialize list table
+		$list_table = new Cookie_Notice_Privacy_Consent_List_Table( [
+			'plural'	=> 'cn-source-' . esc_attr( $this->sources[$source]['name'] ) . '-forms',
+			'singular'	=> 'cn-source-' . esc_attr( $this->sources[$source]['name'] ) . '-form',
+			'ajax'		=> true
+		] );
+
+		// set source
+		$list_table->cn_set_source( $this->sources[$source] );
+
+		$args = [
+			'source'	=> $source,
+			'order'		=> 'asc',
+			'orderby'	=> 'title',
+			'page'		=> 1,
+			'search'	=> ''
+		];
+
+		// set source forms
+		$list_table->cn_set_forms( $this->instances[$source]->get_forms( $args ) );
+
+		// prepare items
+		$list_table->prepare_items();
+
+		ob_start();
+		// $list_table->search_box( __( 'Search', 'cookie-notice' ), $source );
+		$list_table->display();
+		$display = ob_get_clean();
+
+		wp_send_json_success( $display );
+	}
+
+
+/** Function get_config() called by wp_ajax hooks: {'cn_react_config'} **/
+/** No params detected :-/ **/
+
+
+/** Function test_get_option() called by wp_ajax hooks: {'cn_react_test_get_option'} **/
+/** Parameters found in function test_get_option(): {"post": ["option_name"]} **/
+function test_get_option() {
+		if ( ! defined( 'CN_DEV_MODE' ) || ! CN_DEV_MODE ) {
+			wp_send_json_error( [ 'error' => 'Not available outside CN_DEV_MODE.' ] );
+		}
+
+		$this->verify_request();
+
+		// Allowlist — only options the test suite legitimately needs to read.
+		$allowed = [
+			'cookie_notice_options',
+			'cookie_notice_status',
+			'cookie_notice_ui_mode',
+			'cookie_notice_setup_wizard_complete',
+			'cookie_notice_welcome_dismissed',
+			'cookie_notice_app_blocking',
+			'cookie_notice_app_design',
+		];
+
+		$option_name = isset( $_POST['option_name'] ) ? sanitize_key( $_POST['option_name'] ) : '';
+
+		if ( ! in_array( $option_name, $allowed, true ) ) {
+			wp_send_json_error( [ 'error' => 'Option not in allowlist: ' . $option_name ] );
+		}
+
+		$value = get_option( $option_name );
+
+		// Serialize arrays/objects so the test can inspect them as a string.
+		if ( is_array( $value ) || is_object( $value ) ) {
+			$value = wp_json_encode( $value );
+		}
+
+		wp_send_json_success( [ 'option' => $option_name, 'value' => (string) $value ] );
+	}
+
+
+/** Function get_group_rule_values() called by wp_ajax hooks: {'cn-get-group-rules-values'} **/
+/** Parameters found in function get_group_rule_values(): {"post": ["action", "cn_param", "cn_nonce"]} **/
+function get_group_rule_values() {
+		if (
+			isset( $_POST['action'], $_POST['cn_param'], $_POST['cn_nonce'] )
+			&& wp_verify_nonce( $_POST['cn_nonce'], 'cn-get-group-values' ) !== false
+			&& current_user_can( apply_filters( 'cn_manage_cookie_notice_cap', 'manage_options' ) )
+		) {
+			echo wp_json_encode(
+				[
+					'select'	=> $this->prepare_values( sanitize_key( $_POST['cn_param'] ) )
+				]
+			);
+		}
+
+		exit;
+	}
+
+
+/** Function get_privacy_consent_logs() called by wp_ajax hooks: {'cn_get_privacy_consent_logs'} **/
+/** Parameters found in function get_privacy_consent_logs(): {"post": ["action", "nonce"]} **/
+function get_privacy_consent_logs() {
+		// check data
+		if ( ! isset( $_POST['action'], $_POST['nonce'] ) )
+			wp_send_json_error();
+
+		// valid nonce?
+		if ( check_ajax_referer( 'cn-get-privacy-consent-logs', 'nonce' ) === false )
+			wp_send_json_error();
+
+		// check capability
+		if ( ! current_user_can( apply_filters( 'cn_manage_cookie_notice_cap', 'manage_options' ) ) )
+			wp_send_json_error();
+
+		$data = Cookie_Notice()->welcome_api->get_privacy_consent_logs();
+
+		if ( is_array( $data ) )
+			wp_send_json_success( $this->get_privacy_consent_logs_table( $data ) );
+		else
+			wp_send_json_error( $data );
+	}
+
+
+/** Function react_apply_template() called by wp_ajax hooks: {'cn_react_apply_template'} **/
+/** Parameters found in function react_apply_template(): {"post": ["template"]} **/
+function react_apply_template() {
+		$this->verify_react_request();
+
+		$cn = Cookie_Notice();
+		$app_id = $cn->options['general']['app_id'];
+
+		if ( empty( $app_id ) ) {
+			wp_send_json_error( [ 'error' => 'No app connected.' ] );
+		}
+
+		$template = isset( $_POST['template'] ) ? sanitize_key( $_POST['template'] ) : '';
+
+		// Full design presets — position/color/typography synced to portal.
+		// Colors match TemplatePresets.jsx PRESETS array.
+		$presets = [
+			'minimal' => [
+				'position'         => 'left',
+				'displayType'      => 'floating',
+				'bannerColor'      => '#f0f0f0',
+				'primaryColor'     => '#20c19e',
+				'textColor'        => '#434f58',
+				'headingColor'     => '#434f58',
+				'btnTextColor'     => '#ffffff',
+				'btnBorderRadius'  => '25px',
+				'animation'        => 'fade',
+				'bannerOpacity'    => 0.97,
+				'revokePosition'   => 'bottom-left',
+				'showBulletPoints' => true,
+			],
+			'standard' => [
+				'position'         => 'bottom',
+				'displayType'      => 'floating',
+				'bannerColor'      => '#2d3436',
+				'primaryColor'     => '#20c19e',
+				'textColor'        => '#ffffff',
+				'headingColor'     => '#ffffff',
+				'btnTextColor'     => '#ffffff',
+				'btnBorderRadius'  => '25px',
+				'animation'        => 'fade',
+				'bannerOpacity'    => 0.97,
+				'revokePosition'   => 'bottom-left',
+				'showBulletPoints' => true,
+			],
+			'bold' => [
+				'position'         => 'top',
+				'displayType'      => 'fixed',
+				'bannerColor'      => '#1a1a2e',
+				'primaryColor'     => '#20c19e',
+				'textColor'        => '#ffffff',
+				'headingColor'     => '#ffffff',
+				'btnTextColor'     => '#ffffff',
+				'btnBorderRadius'  => '6px',
+				'animation'        => 'slide',
+				'bannerOpacity'    => 1.0,
+				'revokePosition'   => 'bottom-right',
+				'showBulletPoints' => false,
+			],
+			'popup' => [
+				'position'         => 'center',
+				'displayType'      => 'floating',
+				'bannerColor'      => '#2c3e50',
+				'primaryColor'     => '#20c19e',
+				'textColor'        => '#ffffff',
+				'headingColor'     => '#ffffff',
+				'btnTextColor'     => '#ffffff',
+				'btnBorderRadius'  => '25px',
+				'animation'        => 'fade',
+				'bannerOpacity'    => 0.97,
+				'revokePosition'   => 'bottom-left',
+				'showBulletPoints' => true,
+			],
+			'panel' => [
+				'position'         => 'right',
+				'displayType'      => 'floating',
+				'bannerColor'      => '#34495e',
+				'primaryColor'     => '#3498db',
+				'textColor'        => '#ffffff',
+				'headingColor'     => '#ffffff',
+				'btnTextColor'     => '#ffffff',
+				'btnBorderRadius'  => '25px',
+				'animation'        => 'fade',
+				'bannerOpacity'    => 0.97,
+				'revokePosition'   => 'bottom-left',
+				'showBulletPoints' => true,
+			],
+			'compact' => [
+				'position'         => 'top',
+				'displayType'      => 'floating',
+				'bannerColor'      => '#1a1a2e',
+				'primaryColor'     => '#e67e22',
+				'textColor'        => '#ffffff',
+				'headingColor'     => '#ffffff',
+				'btnTextColor'     => '#ffffff',
+				'btnBorderRadius'  => '6px',
+				'animation'        => 'slide',
+				'bannerOpacity'    => 1.0,
+				'revokePosition'   => 'bottom-right',
+				'showBulletPoints' => false,
+			],
+		];
+
+		if ( ! isset( $presets[ $template ] ) ) {
+			wp_send_json_error( [ 'error' => 'Invalid template name.' ] );
+		}
+
+		$preset = $presets[ $template ];
+
+		// Build design object for quick_config (exclude displayType — WP option, not portal field)
+		$design = new stdClass();
+
+		foreach ( $preset as $key => $value ) {
+			if ( $key === 'displayType' )
+				continue;
+
+			$design->{$key} = $value;
+		}
+
+		$params = [
+			'AppID'           => $app_id,
+			'DefaultLanguage' => 'en',
+			'text'            => (object) [ 'privacyPolicyUrl' => get_privacy_policy_url() ],
+			'design'          => $design,
+		];
+
+		$write_type = $this->get_write_request_type( $app_id );
+
+		// PATCH /by-app endpoint does not accept DefaultLanguage -- strip it.
+		if ( $write_type === 'patch_by_app' ) {
+			unset( $params['DefaultLanguage'] );
+		}
+		// DevMode mock ID — return synthetic success so the UI can be tested without a real API.
+		if ( $write_type === 'devmode' ) {
+			$network = $cn->is_network_admin();
+
+			// Merge visual design fields (position, displayType, colors) from preset.
+			// #2265: API-owned fields write to cookie_notice_app_design only — never cookie_notice_options.
+			$existing_design = $network
+				? get_site_option( 'cookie_notice_app_design', [] )
+				: get_option( 'cookie_notice_app_design', [] );
+
+			$updated_design = array_merge( $existing_design, [
+				'position'     => $preset['position'],
+				'displayType'  => $preset['displayType'],
+				'bannerColor'  => $preset['bannerColor'],
+				'primaryColor' => $preset['primaryColor'],
+			] );
+
+			if ( $network ) {
+				update_site_option( 'cookie_notice_app_design', $updated_design );
+			} else {
+				update_option( 'cookie_notice_app_design', $updated_design, false );
+			}
+
+			wp_send_json_success( [ 'status' => 200, 'template' => $template, 'dev_mode' => true ] );
+			return;
+		}
+
+		$result = $this->request( $write_type, $params );
+
+		// Design record not yet created — fall back to quick_config to seed it.
+		// The API returns { i18n_msg: 'user_design_update_id_not_found', status: 400 } (HTTP 200)
+		// when no record exists, so check i18n_msg — not statusCode/404.
+		// Also restore DefaultLanguage which patch_by_app doesn't accept but quick_config requires.
+		if ( is_object( $result ) && isset( $result->i18n_msg ) && $result->i18n_msg === 'user_design_update_id_not_found' ) {
+			$params['DefaultLanguage'] = 'en';
+			$result = $this->request( 'quick_config', $params );
+		}
+
+		if ( is_object( $result ) && isset( $result->status ) && $result->status === 200 ) {
+			// #2265: API-owned fields write to cookie_notice_app_design only — never cookie_notice_options.
+			$network = $cn->is_network_admin();
+
+			// Merge visual design fields (position, displayType, colors) from preset.
+			$existing_design = $network
+				? get_site_option( 'cookie_notice_app_design', [] )
+				: get_option( 'cookie_notice_app_design', [] );
+
+			$updated_design = array_merge( $existing_design, [
+				'position'     => $preset['position'],
+				'displayType'  => $preset['displayType'],
+				'bannerColor'  => $preset['bannerColor'],
+				'primaryColor' => $preset['primaryColor'],
+			] );
+
+			if ( $network ) {
+				update_site_option( 'cookie_notice_app_design', $updated_design );
+			} else {
+				update_option( 'cookie_notice_app_design', $updated_design, false );
+			}
+
+			// Pull confirmed state from portal — makes portal unambiguous SoT.
+			// Updates cookie_notice_app_blocking, cookie_notice_app_regulations,
+			// cookie_notice_app_design, cookie_notice_status.
+			// Fires cn_configuration_updated → clears page caches (WP Rocket etc).
+			// Does NOT set cookie_notice_config_update transient (widget CDN cache).
+			$this->get_app_config( $app_id, true, true );
+
+			// Re-assert preset design values after get_app_config() — the portal may return
+			// empty position/color fields (BannerConfigJSON cherry-picks) which would
+			// overwrite our just-saved preset and cause matchTemplate() to return null
+			// on the next page load ("No template" false negative — #2261).
+			// This write is authoritative: we know what template was just applied.
+			if ( $network )
+				update_site_option( 'cookie_notice_app_design', $updated_design );
+			else
+				update_option( 'cookie_notice_app_design', $updated_design, false );
+
+			wp_send_json_success( [ 'status' => 200, 'template' => $template ] );
+		} else {
+			$error = 'Template apply failed.';
+
+			if ( is_array( $result ) && ! empty( $result['error'] ) )
+				$error = $result['error'];
+			elseif ( is_object( $result ) && ! empty( $result->message ) )
+				$error = $result->message;
+			elseif ( is_object( $result ) && ! empty( $result->error ) )
+				$error = $result->error;
+			elseif ( is_object( $result ) && ! empty( $result->i18n_msg ) )
+				$error = 'API error: ' . $result->i18n_msg;
+			elseif ( $result === null )
+				$error = 'No response from API — check connection.';
+
+			wp_send_json_error( [ 'error' => $error, 'apiSync' => false ] );
+		}
+	}
+
+
+/** Function get_cookie_consent_logs() called by wp_ajax hooks: {'cn_get_cookie_consent_logs'} **/
+/** Parameters found in function get_cookie_consent_logs(): {"post": ["action", "date", "nonce"]} **/
+function get_cookie_consent_logs() {
+		// check data
+		if ( ! isset( $_POST['action'], $_POST['date'], $_POST['nonce'] ) )
+			wp_send_json_error();
+
+		// valid nonce?
+		if ( ! check_ajax_referer( 'cn-get-cookie-consent-logs', 'nonce' ) )
+			wp_send_json_error();
+
+		// check capability
+		if ( ! current_user_can( apply_filters( 'cn_manage_cookie_notice_cap', 'manage_options' ) ) )
+			wp_send_json_error();
+
+		// sanitize date
+		$date = preg_replace( '[^\d-]', '', $_POST['date'] );
+
+		// get datetime
+		$dt = DateTime::createFromFormat( 'Y-m-d', $date );
+
+		// valid date?
+		if ( $dt && $dt->format( 'Y-m-d' ) === $date ) {
+			$data = Cookie_Notice()->welcome_api->get_cookie_consent_logs( $date );
+
+			if ( is_array( $data ) )
+				wp_send_json_success( $this->get_cookie_consent_logs_table( $data ) );
+			else
+				wp_send_json_error( $data );
+		}
+
+		wp_send_json_error();
+	}
+
+
+/** Function ajax_purge_cache() called by wp_ajax hooks: {'cn_purge_cache'} **/
+/** No params detected :-/ **/
+
+
+/** Function dismiss_welcome() called by wp_ajax hooks: {'cn_dismiss_welcome', 'cn_react_dismiss_welcome'} **/
+/** No params detected :-/ **/
+
+
+/** Function complete_setup_wizard() called by wp_ajax hooks: {'cn_react_complete_setup_wizard'} **/
+/** No params detected :-/ **/
+
+
+/** Function set_form_status() called by wp_ajax hooks: {'cn_privacy_consent_form_status'} **/
+/** Parameters found in function set_form_status(): {"post": ["source", "form_id", "status", "nonce"]} **/
+function set_form_status() {
+		if ( ! isset( $_POST['source'], $_POST['form_id'], $_POST['status'] ) || wp_verify_nonce( $_POST['nonce'], 'cn-privacy-consent-set-form-status' ) === false )
+			wp_send_json_error();
+
+		if ( ! current_user_can( apply_filters( 'cn_manage_cookie_notice_cap', 'manage_options' ) ) )
+			wp_send_json_error();
+
+		// sanitize source
+		$source = sanitize_key( $_POST['source'] );
+
+		// active source?
+		if ( array_key_exists( $source, $this->sources ) && $this->sources[$source]['availability'] ) {
+			// sanitize form id
+			if ( $this->sources[$source]['id_type'] === 'integer' )
+				$form_id = (int) $_POST['form_id'];
+			elseif ( $this->sources[$source]['id_type'] === 'string' )
+				$form_id = (string) sanitize_key( $_POST['form_id'] );
+
+			// valid form?
+			if ( $this->instances[$source]->form_exists( $form_id ) ) {
+				// inactive source?
+				if ( ! $this->sources[$source]['status'] ) {
+					// get privacy consent data
+					$data = get_option( 'cookie_notice_privacy_consent' );
+
+					// activate source
+					$data[$source . '_active'] = true;
+
+					// update privacy consent
+					update_option( 'cookie_notice_privacy_consent', $data );
+				}
+
+				// get source data
+				$data = get_option( 'cookie_notice_privacy_consent_' . $source );
+
+				// update status of specified form
+				$data[$form_id]['status'] = (bool) (int) $_POST['status'];
+
+				// update source
+				update_option( 'cookie_notice_privacy_consent_' . $source, $data );
+
+				wp_send_json_success();
+			}
+		}
+
+		wp_send_json_error();
+	}
+
 
 /** Function welcome_screen() called by wp_ajax hooks: {'cn_welcome_screen'} **/
 /** Parameters found in function welcome_screen(): {"request": ["screen"]} **/
@@ -648,6 +1166,123 @@ function welcome_screen( $screen, $echo = true ) {
 	}
 
 
+/** Function ajax_review_notice() called by wp_ajax hooks: {'cn_review_notice'} **/
+/** Parameters found in function ajax_review_notice(): {"post": ["nonce", "notice_action", "cn_network"]} **/
+function ajax_review_notice() {
+		if ( ! current_user_can( 'install_plugins' ) )
+			exit;
+
+		if ( ! isset( $_POST['nonce'], $_POST['notice_action'] ) )
+			exit;
+
+		if ( wp_verify_nonce( $_POST['nonce'], 'cn_review_notice' ) ) {
+			// get notice action
+			$notice_action = ! empty( $_POST['notice_action'] ) ? sanitize_key( $_POST['notice_action'] ) : 'dismiss';
+
+			$cn_network = isset( $_POST['cn_network'] ) ? (int) $_POST['cn_network'] : false;
+
+			// network?
+			$network = is_multisite() && $cn_network === 1;
+
+			switch ( $notice_action ) {
+				// delay notice
+				case 'delay':
+					$this->options['general']['review_notice'] = true;
+					$this->options['general']['review_notice_delay'] = time() + 2 * WEEK_IN_SECONDS;
+
+					// update options
+					if ( $network )
+						update_site_option( 'cookie_notice_options', $this->options['general'] );
+					else
+						update_option( 'cookie_notice_options', $this->options['general'] );
+					break;
+
+				// hide notice
+				case 'dismiss':
+				case 'review':
+				default:
+					$this->options['general']['review_notice'] = false;
+					$this->options['general']['review_notice_delay'] = 0;
+
+					// update options
+					if ( $network ) {
+						$this->options['general']['update_notice_diss'] = true;
+
+						update_site_option( 'cookie_notice_options', $this->options['general'] );
+					} else
+						update_option( 'cookie_notice_options', $this->options['general'] );
+			}
+		}
+
+		exit;
+	}
+
+
+/** Function ajax_dismiss_admin_notice() called by wp_ajax hooks: {'cn_dismiss_notice'} **/
+/** Parameters found in function ajax_dismiss_admin_notice(): {"post": ["nonce", "notice_action", "cn_network", "param"]} **/
+function ajax_dismiss_admin_notice() {
+		if ( ! current_user_can( 'install_plugins' ) )
+			exit;
+
+		if ( ! isset( $_POST['nonce'], $_POST['notice_action'] ) )
+			exit;
+
+		if ( wp_verify_nonce( $_POST['nonce'], 'cn_dismiss_notice' ) ) {
+			// get notice action
+			$notice_action = ! empty( $_POST['notice_action'] ) ? sanitize_key( $_POST['notice_action'] ) : 'dismiss';
+
+			$cn_network = isset( $_POST['cn_network'] ) ? (int) $_POST['cn_network'] : false;
+
+			// network?
+			$network = is_multisite() && $cn_network === 1;
+
+			switch ( $notice_action ) {
+				// threshold notice
+				case 'threshold':
+					// set delay period last cycle day
+					$delay = isset( $_POST['param'] ) ? (int) $_POST['param'] : 0;
+
+					$this->options['general']['update_threshold_date'] = $delay + DAY_IN_SECONDS;
+
+					// update options
+					if ( $network )
+						update_site_option( 'cookie_notice_options', $this->options['general'] );
+					else
+						update_option( 'cookie_notice_options', $this->options['general'] );
+					break;
+
+				// delay notice
+				case 'delay':
+					// set delay period to 2 weeks from now
+					$this->options['general']['update_delay_date'] = time() + 2 * WEEK_IN_SECONDS;
+
+					// update options
+					if ( $network )
+						update_site_option( 'cookie_notice_options', $this->options['general'] );
+					else
+						update_option( 'cookie_notice_options', $this->options['general'] );
+					break;
+
+				// hide notice
+				case 'approve':
+				default:
+					$this->options['general']['update_notice'] = false;
+					$this->options['general']['update_delay_date'] = 0;
+
+					// update options
+					if ( $network ) {
+						$this->options['general']['update_notice_diss'] = true;
+
+						update_site_option( 'cookie_notice_options', $this->options['general'] );
+					} else
+						update_option( 'cookie_notice_options', $this->options['general'] );
+			}
+		}
+
+		exit;
+	}
+
+
 /** Function query_forms() called by wp_ajax hooks: {'cn_privacy_consent_get_forms'} **/
 /** Parameters found in function query_forms(): {"request": ["action", "nonce", "source", "paged", "order", "orderby", "search"]} **/
 function query_forms() {
@@ -785,8 +1420,488 @@ function get_consent_logs() {
 	}
 
 
-/** Function dismiss_welcome() called by wp_ajax hooks: {'cn_dismiss_welcome', 'cn_react_dismiss_welcome'} **/
-/** No params detected :-/ **/
+/** Function update_script() called by wp_ajax hooks: {'cn_react_script_update'} **/
+/** Parameters found in function update_script(): {"post": ["operation", "provider_id", "category_id", "provider_name", "provider_url", "description", "script_patterns", "iframe_patterns"]} **/
+function update_script() {
+		$this->verify_request();
+
+		$operation = isset( $_POST['operation'] ) ? sanitize_text_field( $_POST['operation'] ) : '';
+
+		if ( ! in_array( $operation, [ 'add', 'edit', 'remove' ], true ) ) {
+			wp_send_json_error( [ 'error' => 'Invalid operation.' ] );
+		}
+
+		if ( $operation === 'edit' ) {
+			$provider_id = isset( $_POST['provider_id'] ) ? sanitize_text_field( $_POST['provider_id'] ) : '';
+			$category_id = isset( $_POST['category_id'] ) ? absint( $_POST['category_id'] ) : 0;
+
+			if ( empty( $provider_id ) ) {
+				wp_send_json_error( [ 'error' => 'Missing provider_id.' ] );
+			}
+
+			if ( ! in_array( $category_id, [ 1, 2, 3, 4 ], true ) ) {
+				wp_send_json_error( [ 'error' => 'Invalid category_id.' ] );
+			}
+
+			$cn      = Cookie_Notice();
+			$network = $cn->is_network_options();
+
+			$blocking = $network
+				? get_site_option( 'cookie_notice_app_blocking', [] )
+				: get_option( 'cookie_notice_app_blocking', [] );
+
+			if ( empty( $blocking ) || ! isset( $blocking['providers'] ) ) {
+				wp_send_json_error( [ 'error' => 'No blocking configuration found.' ] );
+			}
+
+			// Update the provider's CategoryID.
+			$found = false;
+
+			foreach ( $blocking['providers'] as &$provider ) {
+				$pid = is_object( $provider ) ? $provider->ProviderID : ( isset( $provider['ProviderID'] ) ? $provider['ProviderID'] : '' );
+
+				if ( (string) $pid === (string) $provider_id ) {
+					if ( is_object( $provider ) ) {
+						$provider->CategoryID = $category_id;
+					} else {
+						$provider['CategoryID'] = $category_id;
+					}
+					$found = true;
+					break;
+				}
+			}
+			unset( $provider );
+
+			if ( ! $found ) {
+				wp_send_json_error( [ 'error' => 'Provider not found.' ] );
+			}
+
+			// Propagate CategoryID to all patterns belonging to this provider.
+			if ( isset( $blocking['patterns'] ) && is_array( $blocking['patterns'] ) ) {
+				foreach ( $blocking['patterns'] as &$pattern ) {
+					$pat_pid = is_object( $pattern ) ? $pattern->ProviderID : ( isset( $pattern['ProviderID'] ) ? $pattern['ProviderID'] : '' );
+
+					if ( (string) $pat_pid === (string) $provider_id ) {
+						if ( is_object( $pattern ) ) {
+							$pattern->CategoryID = $category_id;
+						} else {
+							$pattern['CategoryID'] = $category_id;
+						}
+					}
+				}
+				unset( $pattern );
+			}
+
+			// Save back.
+			if ( $network ) {
+				update_site_option( 'cookie_notice_app_blocking', $blocking );
+			} else {
+				update_option( 'cookie_notice_app_blocking', $blocking );
+			}
+		}
+
+		if ( $operation === 'add' ) {
+			$provider_name   = isset( $_POST['provider_name'] ) ? sanitize_text_field( $_POST['provider_name'] ) : '';
+			$provider_url    = isset( $_POST['provider_url'] )  ? esc_url_raw( $_POST['provider_url'] )           : '';
+			$category_id     = isset( $_POST['category_id'] )   ? absint( $_POST['category_id'] )                  : 0;
+			$description     = isset( $_POST['description'] )   ? sanitize_text_field( $_POST['description'] )     : '';
+			$script_patterns = isset( $_POST['script_patterns'] ) && is_array( $_POST['script_patterns'] ) ? $_POST['script_patterns'] : [];
+			$iframe_patterns = isset( $_POST['iframe_patterns'] ) && is_array( $_POST['iframe_patterns'] ) ? $_POST['iframe_patterns'] : [];
+
+			if ( empty( $provider_name ) ) {
+				wp_send_json_error( [ 'error' => 'Provider name is required.' ] );
+			}
+
+			if ( ! in_array( $category_id, [ 1, 2, 3, 4 ], true ) ) {
+				wp_send_json_error( [ 'error' => 'Invalid category_id.' ] );
+			}
+
+			$cn      = Cookie_Notice();
+			$network = $cn->is_network_options();
+
+			$blocking = $network
+				? get_site_option( 'cookie_notice_app_blocking', [] )
+				: get_option( 'cookie_notice_app_blocking', [] );
+
+			if ( ! is_array( $blocking ) ) {
+				$blocking = [];
+			}
+			if ( ! isset( $blocking['providers'] ) ) {
+				$blocking['providers'] = [];
+			}
+			if ( ! isset( $blocking['patterns'] ) ) {
+				$blocking['patterns'] = [];
+			}
+
+			// Generate a unique provider ID from the name + timestamp.
+			$provider_id = 'custom-' . sanitize_title( $provider_name ) . '-' . time();
+
+			// Append the new provider.
+			$blocking['providers'][] = (object) [
+				'ProviderID'   => $provider_id,
+				'ProviderName' => $provider_name,
+				'ProviderURL'  => $provider_url,
+				'CategoryID'   => $category_id,
+				'IsCustom'     => true,
+			];
+
+			// Find current max CookieID so new patterns get unique IDs.
+			$max_cookie_id = 0;
+			foreach ( $blocking['patterns'] as $p ) {
+				$cid = is_object( $p ) ? (int) $p->CookieID : (int) ( isset( $p['CookieID'] ) ? $p['CookieID'] : 0 );
+				if ( $cid > $max_cookie_id ) {
+					$max_cookie_id = $cid;
+				}
+			}
+
+			// Append script patterns.
+			foreach ( $script_patterns as $pattern_str ) {
+				$pattern_str = sanitize_text_field( stripslashes( $pattern_str ) );
+				if ( empty( $pattern_str ) ) {
+					continue;
+				}
+				$max_cookie_id++;
+				$blocking['patterns'][] = (object) [
+					'CookieID'      => $max_cookie_id,
+					'ProviderID'    => $provider_id,
+					'CategoryID'    => $category_id,
+					'PatternType'   => 'script',
+					'PatternFormat' => 'wildcard',
+					'Pattern'       => $pattern_str,
+				];
+			}
+
+			// Append iframe patterns.
+			foreach ( $iframe_patterns as $pattern_str ) {
+				$pattern_str = sanitize_text_field( stripslashes( $pattern_str ) );
+				if ( empty( $pattern_str ) ) {
+					continue;
+				}
+				$max_cookie_id++;
+				$blocking['patterns'][] = (object) [
+					'CookieID'      => $max_cookie_id,
+					'ProviderID'    => $provider_id,
+					'CategoryID'    => $category_id,
+					'PatternType'   => 'iframe',
+					'PatternFormat' => 'wildcard',
+					'Pattern'       => $pattern_str,
+				];
+			}
+
+			if ( $network ) {
+				update_site_option( 'cookie_notice_app_blocking', $blocking );
+			} else {
+				update_option( 'cookie_notice_app_blocking', $blocking );
+			}
+
+			wp_send_json_success( [
+				'message'     => 'Script provider added.',
+				'provider_id' => $provider_id,
+			] );
+		}
+
+		if ( $operation === 'remove' ) {
+			$provider_id = isset( $_POST['provider_id'] ) ? sanitize_text_field( $_POST['provider_id'] ) : '';
+
+			if ( empty( $provider_id ) ) {
+				wp_send_json_error( [ 'error' => 'Missing provider_id.' ] );
+			}
+
+			$cn      = Cookie_Notice();
+			$network = $cn->is_network_options();
+
+			$blocking = $network
+				? get_site_option( 'cookie_notice_app_blocking', [] )
+				: get_option( 'cookie_notice_app_blocking', [] );
+
+			if ( empty( $blocking ) || ! isset( $blocking['providers'] ) ) {
+				wp_send_json_error( [ 'error' => 'No blocking configuration found.' ] );
+			}
+
+			// Remove the provider entry.
+			$blocking['providers'] = array_values( array_filter( $blocking['providers'], function( $p ) use ( $provider_id ) {
+				$pid = is_object( $p ) ? $p->ProviderID : ( isset( $p['ProviderID'] ) ? $p['ProviderID'] : '' );
+				return (string) $pid !== (string) $provider_id;
+			} ) );
+
+			// Remove all patterns belonging to this provider.
+			if ( isset( $blocking['patterns'] ) && is_array( $blocking['patterns'] ) ) {
+				$blocking['patterns'] = array_values( array_filter( $blocking['patterns'], function( $p ) use ( $provider_id ) {
+					$pid = is_object( $p ) ? $p->ProviderID : ( isset( $p['ProviderID'] ) ? $p['ProviderID'] : '' );
+					return (string) $pid !== (string) $provider_id;
+				} ) );
+			}
+
+			if ( $network ) {
+				update_site_option( 'cookie_notice_app_blocking', $blocking );
+			} else {
+				update_option( 'cookie_notice_app_blocking', $blocking );
+			}
+
+			wp_send_json_success( [ 'message' => 'Script provider removed.' ] );
+		}
+
+		wp_send_json_success( [ 'message' => 'Script provider updated.' ] );
+	}
+
+
+/** Function deactivate_plugin() called by wp_ajax hooks: {'cn-deactivate-plugin'} **/
+/** Parameters found in function deactivate_plugin(): {"post": ["nonce", "option_id", "other"]} **/
+function deactivate_plugin() {
+		// check permissions
+		if ( ! current_user_can( 'install_plugins' ) || wp_verify_nonce( $_POST['nonce'], 'cn-deactivate-plugin' ) === false )
+			return;
+
+		if ( isset( $_POST['option_id'] ) ) {
+			$option_id = (int) $_POST['option_id'];
+
+			// avoid fake submissions
+			if ( $option_id === 8 ) {
+				$other = isset( $_POST['other'] ) ? sanitize_textarea_field( $_POST['other'] ) : '';
+
+				// no reason?
+				if ( $other === '' )
+					wp_send_json_success();
+			}
+
+			wp_remote_post(
+				'https://hu-manity.co/wp-json/api/v1/forms/',
+				[
+					'timeout'		=> 15,
+					'blocking'		=> true,
+					'headers'		=> [],
+					'body'			=> [
+						'id'		=> 1,
+						'option'	=> $option_id,
+						'other'		=> $other,
+						'referrer'	=> get_site_url()
+					]
+				]
+			);
+
+			wp_send_json_success();
+		}
+
+		wp_send_json_error();
+	}
+
+
+/** Function react_update_design() called by wp_ajax hooks: {'cn_react_update_design'} **/
+/** Parameters found in function react_update_design(): {"post": ["design", "config", "consentConfig"]} **/
+function react_update_design() {
+		$this->verify_react_request();
+
+		$cn = Cookie_Notice();
+		$app_id = $cn->options['general']['app_id'];
+
+		if ( empty( $app_id ) ) {
+			wp_send_json_error( [ 'error' => 'No app connected.' ] );
+		}
+
+		$design_raw  = isset( $_POST['design'] )        && is_array( $_POST['design'] )        ? $_POST['design']        : [];
+		$config_raw  = isset( $_POST['config'] )        && is_array( $_POST['config'] )        ? $_POST['config']        : [];
+		$consent_raw = isset( $_POST['consentConfig'] ) && is_array( $_POST['consentConfig'] ) ? $_POST['consentConfig'] : [];
+
+		if ( empty( $design_raw ) && empty( $config_raw ) && empty( $consent_raw ) ) {
+			wp_send_json_error( [ 'error' => 'No update data provided.' ] );
+		}
+
+		// Allowed design fields with sanitization
+		$allowed_fields = [
+			'position'             => 'sanitize_key',
+			'displayType'          => 'sanitize_key',
+			'bannerColor'          => 'sanitize_hex_color',
+			'primaryColor'         => 'sanitize_hex_color',
+			'textColor'            => 'sanitize_hex_color',
+			'headingColor'         => 'sanitize_hex_color',
+			'btnTextColor'         => 'sanitize_hex_color',
+			'btnBorderRadius'      => 'sanitize_text_field',
+			'animation'            => 'sanitize_key',
+			'bannerOpacity'        => 'sanitize_text_field',
+			'revokePosition'       => 'sanitize_key',
+			'showBulletPoints'     => null, // boolean
+		];
+		// Note: googleConsentMode / facebookConsentMode / microsoftConsentMode are NOT design fields.
+		// The PATCH /by-app endpoint rejects them in design{}. They belong in config{} as booleans.
+		// They are handled below alongside gpcSupportMode / doNotTrackMode.
+
+		$design = new stdClass();
+
+		foreach ( $allowed_fields as $field => $sanitizer ) {
+			if ( ! array_key_exists( $field, $design_raw ) )
+				continue;
+
+			if ( $field === 'showBulletPoints' ) {
+				$design->{$field} = filter_var( $design_raw[ $field ], FILTER_VALIDATE_BOOLEAN );
+			} elseif ( $sanitizer ) {
+				$design->{$field} = call_user_func( $sanitizer, $design_raw[ $field ] );
+			}
+		}
+
+		// Validate position — translate 'popup' → 'center' (portal label vs CSS class)
+		if ( isset( $design->position ) ) {
+			if ( $design->position === 'popup' ) {
+				$design->position = 'center';
+			} elseif ( ! in_array( $design->position, [ 'bottom', 'top', 'left', 'right', 'center' ], true ) ) {
+				$design->position = 'bottom';
+			}
+		}
+
+		// Validate displayType
+		if ( isset( $design->displayType ) && ! in_array( $design->displayType, [ 'floating', 'fixed' ], true ) )
+			$design->displayType = 'floating';
+
+		// Validate animation
+		if ( isset( $design->animation ) && ! in_array( $design->animation, [ 'fade', 'slide', 'none' ], true ) )
+			$design->animation = 'fade';
+
+		// Validate bannerOpacity
+		if ( isset( $design->bannerOpacity ) ) {
+			$opacity = (float) $design->bannerOpacity;
+			$design->bannerOpacity = max( 0.0, min( 1.0, $opacity ) );
+		}
+
+		// Build config object from allowed behavior fields
+		$config_allowed = [ 'revokeConsent', 'revokeMethod', 'onScroll', 'onScrollOffset', 'onClick', 'reloading' ];
+		$config = new stdClass();
+		foreach ( $config_allowed as $f ) {
+			if ( isset( $config_raw[ $f ] ) )
+				$config->$f = sanitize_text_field( $config_raw[ $f ] );
+		}
+
+		// Merge consent mode fields into config{} — the Designer API stores all of these
+		// under BannerConfigJSON, not a separate consentConfig key. The PATCH /by-app endpoint
+		// rejects a top-level consentConfig key entirely.
+		//
+		// Field name mapping (JS POST key → API config key):
+		//   gpcSupport  → gpcSupportMode  (boolean)
+		//   doNotTrack  → doNotTrackMode  (boolean)
+		//   All GCM/Facebook/Microsoft map fields keep their names, as integers.
+		// Map/level fields: must be integers (0–4).
+		$consent_int_fields = [
+			'googleConsentMapAdStorage', 'googleConsentMapAnalytics', 'googleConsentMapFunctionality',
+			'googleConsentMapPersonalization', 'googleConsentMapSecurity', 'googleConsentMapAdPersonalization',
+			'googleConsentMapAdUserData', 'facebookConsentMapConsent', 'microsoftConsentMapAdStorage',
+			'microsoftConsentMapAnalyticsStorage',
+		];
+		foreach ( $consent_int_fields as $f ) {
+			if ( isset( $consent_raw[ $f ] ) )
+				$config->$f = (int) $consent_raw[ $f ];
+		}
+		// IMPORTANT: Toggle fields MUST use (bool)(int) — NOT bare (int).
+		// wp_json_encode((int)1) = JSON 1 (integer) — API silently drops it.
+		// wp_json_encode((bool)true) = JSON true (boolean) — API persists it.
+		// See commit 8ff1432 for the original fix. Do NOT revert to (int).
+		$consent_bool_fields = [ 'microsoftConsentModePixie', 'microsoftConsentModeClarity' ];
+		foreach ( $consent_bool_fields as $f ) {
+			if ( isset( $consent_raw[ $f ] ) )
+				$config->$f = (bool) (int) $consent_raw[ $f ];
+		}
+		// gpcSupport → gpcSupportMode (bool). Pro-gated with grandfather:
+		// Free apps cannot set gpcSupportMode=true unless it's already true
+		// (grandfathered). Disabling is always allowed; once disabled on Free,
+		// the app loses its grandfather and cannot re-enable. See KnowledgeHub
+		// decisions.md (gpc-pro-gating-with-grandfather).
+		if ( isset( $consent_raw['gpcSupport'] ) ) {
+			$incoming_gpc = (bool) (int) $consent_raw['gpcSupport'];
+			$is_pro       = $cn->get_subscription() === 'pro';
+
+			if ( $is_pro || ! $incoming_gpc ) {
+				// Pro: anything goes. Free + setting to false: always allowed.
+				$config->gpcSupportMode = $incoming_gpc;
+			} else {
+				// Free + setting to true: only honor if already true (grandfather).
+				$existing_blocking = $cn->is_network_options()
+					? get_site_option( 'cookie_notice_app_blocking', [] )
+					: get_option( 'cookie_notice_app_blocking', [] );
+				if ( ! empty( $existing_blocking['banner_config']['gpcSupportMode'] ) )
+					$config->gpcSupportMode = true;
+				// else: silently strip — UI gate should have prevented this anyway.
+			}
+		}
+		// gpcBannerMode → gpcBannerMode (string enum). Not Pro-gated directly:
+		// it's only consulted when gpcSupportMode is true, so transitive gating
+		// via the parent toggle is sufficient. Validate the enum here and let
+		// stray values fall through to the persisted/default value.
+		if ( isset( $consent_raw['gpcBannerMode'] ) ) {
+			$mode = sanitize_key( $consent_raw['gpcBannerMode'] );
+			if ( in_array( $mode, [ 'banner', 'hidden', 'passive' ], true ) )
+				$config->gpcBannerMode = $mode;
+		}
+		// doNotTrack → doNotTrackMode (bool)
+		if ( isset( $consent_raw['doNotTrack'] ) )
+			$config->doNotTrackMode = (bool) (int) $consent_raw['doNotTrack'];
+		// Consent mode flags (google/facebook/microsoft) — sent in design_raw from the React POST
+		// but must be placed in config{} as booleans. The PATCH /by-app endpoint rejects them in design{}.
+		foreach ( [ 'googleConsentMode', 'facebookConsentMode', 'microsoftConsentMode' ] as $mode_field ) {
+			if ( isset( $design_raw[ $mode_field ] ) )
+				$config->$mode_field = (bool) (int) $design_raw[ $mode_field ];
+		}
+
+		// Build params — only include non-empty objects
+		$params = [
+			'AppID'           => $app_id,
+			'DefaultLanguage' => 'en',
+			'text'            => (object) [ 'privacyPolicyUrl' => get_privacy_policy_url() ],
+		];
+		if ( ! empty( (array) $design ) )
+			$params['design'] = $design;
+		if ( ! empty( (array) $config ) )
+			$params['config'] = $config;
+
+		$write_type = $this->get_write_request_type( $app_id );
+
+		// PATCH /by-app endpoint does not accept DefaultLanguage -- strip it.
+		if ( $write_type === 'patch_by_app' ) {
+			unset( $params['DefaultLanguage'] );
+		}
+		// DevMode mock ID — return synthetic success so the UI can be tested without a real API.
+		if ( $write_type === 'devmode' ) {
+			wp_send_json_success( [ 'status' => 200, 'dev_mode' => true ] );
+			return;
+		}
+
+		$result = $this->request( $write_type, $params );
+
+		// debug: log raw API response for consent mode debugging.
+		if ( $cn->options['general']['debug_mode'] ) {
+			error_log( 'react_update_design API result: ' . var_export( $result, true ) );
+		}
+
+		// Design record not yet created — fall back to quick_config to seed it.
+		// The API returns { i18n_msg: 'user_design_update_id_not_found', status: 400 } (HTTP 200)
+		// when no record exists, so check i18n_msg — not statusCode/404.
+		// Also restore DefaultLanguage which patch_by_app doesn't accept but quick_config requires.
+		if ( is_object( $result ) && isset( $result->i18n_msg ) && $result->i18n_msg === 'user_design_update_id_not_found' ) {
+			$params['DefaultLanguage'] = 'en';
+			$result = $this->request( 'quick_config', $params );
+		}
+
+		if ( is_object( $result ) && isset( $result->status ) && $result->status === 200 ) {
+			// Pull confirmed state from portal — makes portal unambiguous SoT.
+			// Updates cookie_notice_app_blocking (GCM/GPC signal maps),
+			// fires cn_configuration_updated → clears page caches.
+			// Does NOT set cookie_notice_config_update transient (widget CDN cache).
+			$this->get_app_config( $app_id, true, true );
+
+			wp_send_json_success( [ 'status' => 200 ] );
+		} else {
+			$error = 'Design update failed.';
+
+			if ( is_array( $result ) && ! empty( $result['error'] ) )
+				$error = $result['error'];
+			elseif ( is_object( $result ) && ! empty( $result->message ) )
+				$error = $result->message;
+			elseif ( is_object( $result ) && ! empty( $result->error ) )
+				$error = $result->error;
+			elseif ( is_object( $result ) && ! empty( $result->i18n_msg ) )
+				$error = 'API error: ' . $result->i18n_msg;
+			elseif ( $result === null )
+				$error = 'No response from API — check connection.';
+
+			wp_send_json_error( [ 'error' => $error, 'apiSync' => false ] );
+		}
+	}
 
 
 /** Function api_request() called by wp_ajax hooks: {'cn_api_request'} **/
@@ -2087,913 +3202,192 @@ function api_request() {
 	}
 
 
-/** Function set_form_status() called by wp_ajax hooks: {'cn_privacy_consent_form_status'} **/
-/** Parameters found in function set_form_status(): {"post": ["source", "form_id", "status", "nonce"]} **/
-function set_form_status() {
-		if ( ! isset( $_POST['source'], $_POST['form_id'], $_POST['status'] ) || wp_verify_nonce( $_POST['nonce'], 'cn-privacy-consent-set-form-status' ) === false )
-			wp_send_json_error();
+/** Function get_rule_values() called by wp_ajax hooks: {'cn_react_rule_values'} **/
+/** Parameters found in function get_rule_values(): {"post": ["param"]} **/
+function get_rule_values() {
+		$this->verify_request();
 
-		if ( ! current_user_can( apply_filters( 'cn_manage_cookie_notice_cap', 'manage_options' ) ) )
-			wp_send_json_error();
+		$param = isset( $_POST['param'] ) ? sanitize_key( $_POST['param'] ) : '';
 
-		// sanitize source
-		$source = sanitize_key( $_POST['source'] );
-
-		// active source?
-		if ( array_key_exists( $source, $this->sources ) && $this->sources[$source]['availability'] ) {
-			// sanitize form id
-			if ( $this->sources[$source]['id_type'] === 'integer' )
-				$form_id = (int) $_POST['form_id'];
-			elseif ( $this->sources[$source]['id_type'] === 'string' )
-				$form_id = (string) sanitize_key( $_POST['form_id'] );
-
-			// valid form?
-			if ( $this->instances[$source]->form_exists( $form_id ) ) {
-				// inactive source?
-				if ( ! $this->sources[$source]['status'] ) {
-					// get privacy consent data
-					$data = get_option( 'cookie_notice_privacy_consent' );
-
-					// activate source
-					$data[$source . '_active'] = true;
-
-					// update privacy consent
-					update_option( 'cookie_notice_privacy_consent', $data );
-				}
-
-				// get source data
-				$data = get_option( 'cookie_notice_privacy_consent_' . $source );
-
-				// update status of specified form
-				$data[$form_id]['status'] = (bool) (int) $_POST['status'];
-
-				// update source
-				update_option( 'cookie_notice_privacy_consent_' . $source, $data );
-
-				wp_send_json_success();
-			}
+		if ( ! $param ) {
+			wp_send_json_error( [ 'message' => 'Missing param' ] );
 		}
 
-		wp_send_json_error();
+		$values = [];
+
+		switch ( $param ) {
+			case 'page_type':
+				$values = [
+					[ 'value' => 'front', 'label' => __( 'Front Page', 'cookie-notice' ) ],
+					[ 'value' => 'home', 'label' => __( 'Home Page', 'cookie-notice' ) ],
+				];
+				break;
+
+			case 'page':
+				$pages = get_pages( [ 'post_status' => [ 'publish', 'private', 'future' ] ] );
+				$front = (int) get_option( 'page_on_front' );
+				$blog  = (int) get_option( 'page_for_posts' );
+
+				foreach ( $pages as $page ) {
+					if ( $page->ID === $front || $page->ID === $blog ) {
+						continue;
+					}
+					$values[] = [ 'value' => (string) $page->ID, 'label' => $page->post_title ];
+				}
+				break;
+
+			case 'post_type':
+				$types = get_post_types( [ 'public' => true ], 'objects' );
+
+				foreach ( $types as $type ) {
+					$values[] = [ 'value' => $type->name, 'label' => $type->labels->singular_name ];
+				}
+				break;
+
+			case 'post_type_archive':
+				$types = get_post_types( [ 'public' => true, 'has_archive' => true ], 'objects' );
+
+				foreach ( $types as $type ) {
+					$values[] = [ 'value' => $type->name, 'label' => $type->labels->singular_name ];
+				}
+				break;
+
+			case 'user_type':
+				$values = [
+					[ 'value' => 'logged_in', 'label' => __( 'Logged in', 'cookie-notice' ) ],
+					[ 'value' => 'guest', 'label' => __( 'Guest', 'cookie-notice' ) ],
+				];
+				break;
+
+			case 'taxonomy_archive':
+				$taxonomies = get_taxonomies( [ 'public' => true ], 'objects' );
+
+				foreach ( $taxonomies as $taxonomy ) {
+					$terms = get_terms( [ 'taxonomy' => $taxonomy->name, 'hide_empty' => false ] );
+
+					if ( is_wp_error( $terms ) || empty( $terms ) ) {
+						continue;
+					}
+
+					$group = [
+						'group' => $taxonomy->labels->name,
+						'items' => [],
+					];
+
+					foreach ( $terms as $term ) {
+						$group['items'][] = [
+							'value' => $term->term_id . '|' . $taxonomy->name,
+							'label' => $term->name,
+						];
+					}
+
+					$values[] = $group;
+				}
+				break;
+		}
+
+		wp_send_json_success( [ 'values' => $values ] );
 	}
 
 
-/** Function export_consent_logs() called by wp_ajax hooks: {'cn_react_export_consent_logs'} **/
-/** Parameters found in function export_consent_logs(): {"post": ["start_date", "end_date"]} **/
-function export_consent_logs() {
+/** Function get_dashboard() called by wp_ajax hooks: {'cn_react_dashboard'} **/
+/** Parameters found in function get_dashboard(): {"post": ["cn_usage"]} **/
+function get_dashboard() {
 		$this->verify_request();
 
 		$cn = Cookie_Notice();
 
-		// Server-side Pro gate — TierGate in React is client-only.
-		if ( $cn->get_subscription() !== 'pro' ) {
-			wp_send_json_error( [ 'error' => 'CSV export requires a Pro subscription.' ] );
-			return;
+		// --- Read cached analytics option ---
+		// Single source: cookie_notice_app_analytics (refreshed hourly via welcome-api.php cron).
+		// ⚠️ Multisite pattern: use site_option ONLY when network-active with global_override.
+		// Do NOT simplify to is_multisite() alone — pattern matches welcome-api.php get_app_config().
+		$network       = $cn->is_network_options();
+		$analytics_raw = $network
+			? get_site_option( 'cookie_notice_app_analytics', [] )
+			: get_option( 'cookie_notice_app_analytics', [] );
+
+		// --- Cycle usage (visits vs threshold) ---
+		// Read from cached analytics option; CN_DEV_MODE overrides for UI testing.
+		$visits    = ! empty( $analytics_raw['cycleUsage']->visits ) ? (int) $analytics_raw['cycleUsage']->visits : 0;
+		$threshold = ! empty( $analytics_raw['cycleUsage']->threshold ) ? (int) $analytics_raw['cycleUsage']->threshold : 0;
+
+		// CN_DEV_MODE: honour cn_usage=0-100 (forwarded as POST field by fetchDashboard
+		// since admin-ajax.php is a POST endpoint and $_GET params from the page URL
+		// are not available here).
+		if ( defined( 'CN_DEV_MODE' ) && CN_DEV_MODE && isset( $_POST['cn_usage'] ) ) {
+			$pct       = max( 0, min( 100, (int) $_POST['cn_usage'] ) );
+			$threshold = $threshold > 0 ? $threshold : 1000;
+			$visits    = (int) round( $threshold * ( $pct / 100 ) );
 		}
 
-		$start_date = isset( $_POST['start_date'] ) ? sanitize_text_field( $_POST['start_date'] ) : date( 'Y-m-d' );
-		$end_date   = isset( $_POST['end_date'] ) ? sanitize_text_field( $_POST['end_date'] ) : $start_date;
+		// --- ConsentStats breakdown ---
 
-		// Validate date formats (Y-m-d).
-		$dt = DateTime::createFromFormat( 'Y-m-d', $start_date );
-		if ( ! $dt || $dt->format( 'Y-m-d' ) !== $start_date ) {
-			$start_date = date( 'Y-m-d' );
+		$level_totals = [ 1 => 0, 2 => 0, 3 => 0 ];
+
+		if ( ! empty( $analytics_raw['consentActivities'] ) && is_array( $analytics_raw['consentActivities'] ) ) {
+			foreach ( $analytics_raw['consentActivities'] as $entry ) {
+				$lvl = (int) $entry->consentlevel;
+				if ( isset( $level_totals[ $lvl ] ) ) {
+					$level_totals[ $lvl ] += (int) $entry->totalrecd;
+				}
+			}
 		}
 
-		$dt_end = DateTime::createFromFormat( 'Y-m-d', $end_date );
-		if ( ! $dt_end || $dt_end->format( 'Y-m-d' ) !== $end_date || $end_date < $start_date ) {
-			$end_date = $start_date;
-		}
+		$consent_breakdown = $this->compute_consent_breakdown( $level_totals );
 
-		// Server-side range cap — Pro = 90 days.
-		$range = (int) ( ( new DateTime( $end_date ) )->diff( new DateTime( $start_date ) )->days );
+		// Regulations saved locally by cn_api_request?configure action.
+		// Exposed here so Protection.jsx LAWS card can display them without a
+		// Designer API round-trip. (#1897)
+		$reg_keys     = $network
+			? get_site_option( 'cookie_notice_app_regulations', [] )
+			: get_option( 'cookie_notice_app_regulations', [] );
+		$regulations  = array_fill_keys( (array) $reg_keys, true );
 
-		if ( $range > 90 ) {
-			$end_date = ( new DateTime( $start_date ) )->modify( '+90 days' )->format( 'Y-m-d' );
-		}
+		// Language codes saved locally by react_apply_languages() on successful API write. (#1966)
+		// Always includes 'en' (default) + any additional codes the user configured.
+		$saved_languages = $network
+			? get_site_option( 'cookie_notice_app_languages', [] )
+			: get_option( 'cookie_notice_app_languages', [] );
+		$language = array_values( array_unique( array_merge( [ 'en' ], (array) $saved_languages ) ) );
 
-		// No app_id means not connected — return empty.
-		if ( empty( $cn->options['general']['app_id'] ) ) {
-			wp_send_json_success( [ 'csv' => '', 'count' => 0 ] );
-			return;
-		}
+		// Platform account email from login token (#2168).
+		// Stored in cookie_notice_app_token transient as ->email after successful login.
+		// Used in PortalBridgeModal to tell the user which email to sign in with.
+		// Returns empty string when not connected (token not set or expired).
+		$data_token    = $network
+			? get_site_transient( 'cookie_notice_app_token' )
+			: get_transient( 'cookie_notice_app_token' );
+		$account_email = ! empty( $data_token->email ) ? sanitize_email( $data_token->email ) : '';
 
-		$raw = $cn->welcome_api->get_cookie_consent_logs( $start_date, $end_date );
-
-		if ( ! is_array( $raw ) || empty( $raw ) ) {
-			wp_send_json_success( [ 'csv' => '', 'count' => 0 ] );
-			return;
-		}
-
-		$result = $this->transform_consent_logs( $raw, $cn );
-		$logs   = $result['logs'];
-
-		// Build CSV string.
-		$csv_lines   = [];
-		$csv_lines[] = 'Consent ID,Level,Date,IP,Categories';
-
-		foreach ( $logs as $log ) {
-			$csv_lines[] = sprintf(
-				'"%s","%s","%s","%s","%s"',
-				str_replace( '"', '""', $log['id'] ),
-				str_replace( '"', '""', $log['level'] ),
-				str_replace( '"', '""', $log['date'] ),
-				str_replace( '"', '""', $log['ip'] ),
-				str_replace( '"', '""', implode( '; ', $log['categories'] ) )
-			);
-		}
+		// Banner design fields cached by get_app_config() — React computes
+		// the active template on the fly by matching against PRESETS.
+		$design = $network
+			? get_site_option( 'cookie_notice_app_design', [] )
+			: get_option( 'cookie_notice_app_design', [] );
 
 		wp_send_json_success( [
-			'csv'   => implode( "\n", $csv_lines ),
-			'count' => count( $logs ),
+			'analytics'        => [
+				'cycleUsage' => [
+					'visits'    => $visits,
+					'threshold' => $threshold,
+				],
+			],
+			'consentBreakdown' => $consent_breakdown,
+			'domainUrl'        => home_url(),
+			'appId'            => $cn->options['general']['app_id'],
+			'activatedAt'      => isset( $cn->status_data['activation_datetime'] ) ? $cn->status_data['activation_datetime'] : 0,
+			'consentCount'     => $consent_breakdown['total'],
+			'accountEmail'     => $account_email,
+			'appConfig'        => [
+				'regulations' => $regulations,
+				'language'    => $language,
+				'design'      => $design,
+			],
 		] );
 	}
 
 
-/** Function complete_setup_wizard() called by wp_ajax hooks: {'cn_react_complete_setup_wizard'} **/
-/** No params detected :-/ **/
-
-
-/** Function ajax_dismiss_admin_notice() called by wp_ajax hooks: {'cn_dismiss_notice'} **/
-/** Parameters found in function ajax_dismiss_admin_notice(): {"post": ["nonce", "notice_action", "cn_network", "param"]} **/
-function ajax_dismiss_admin_notice() {
-		if ( ! current_user_can( 'install_plugins' ) )
-			exit;
-
-		if ( ! isset( $_POST['nonce'], $_POST['notice_action'] ) )
-			exit;
-
-		if ( wp_verify_nonce( $_POST['nonce'], 'cn_dismiss_notice' ) ) {
-			// get notice action
-			$notice_action = ! empty( $_POST['notice_action'] ) ? sanitize_key( $_POST['notice_action'] ) : 'dismiss';
-
-			$cn_network = isset( $_POST['cn_network'] ) ? (int) $_POST['cn_network'] : false;
-
-			// network?
-			$network = is_multisite() && $cn_network === 1;
-
-			switch ( $notice_action ) {
-				// threshold notice
-				case 'threshold':
-					// set delay period last cycle day
-					$delay = isset( $_POST['param'] ) ? (int) $_POST['param'] : 0;
-
-					$this->options['general']['update_threshold_date'] = $delay + DAY_IN_SECONDS;
-
-					// update options
-					if ( $network )
-						update_site_option( 'cookie_notice_options', $this->options['general'] );
-					else
-						update_option( 'cookie_notice_options', $this->options['general'] );
-					break;
-
-				// delay notice
-				case 'delay':
-					// set delay period to 2 weeks from now
-					$this->options['general']['update_delay_date'] = time() + 2 * WEEK_IN_SECONDS;
-
-					// update options
-					if ( $network )
-						update_site_option( 'cookie_notice_options', $this->options['general'] );
-					else
-						update_option( 'cookie_notice_options', $this->options['general'] );
-					break;
-
-				// hide notice
-				case 'approve':
-				default:
-					$this->options['general']['update_notice'] = false;
-					$this->options['general']['update_delay_date'] = 0;
-
-					// update options
-					if ( $network ) {
-						$this->options['general']['update_notice_diss'] = true;
-
-						update_site_option( 'cookie_notice_options', $this->options['general'] );
-					} else
-						update_option( 'cookie_notice_options', $this->options['general'] );
-			}
-		}
-
-		exit;
-	}
-
-
-/** Function deactivate_plugin() called by wp_ajax hooks: {'cn-deactivate-plugin'} **/
-/** Parameters found in function deactivate_plugin(): {"post": ["nonce", "option_id", "other"]} **/
-function deactivate_plugin() {
-		// check permissions
-		if ( ! current_user_can( 'install_plugins' ) || wp_verify_nonce( $_POST['nonce'], 'cn-deactivate-plugin' ) === false )
-			return;
-
-		if ( isset( $_POST['option_id'] ) ) {
-			$option_id = (int) $_POST['option_id'];
-
-			// avoid fake submissions
-			if ( $option_id === 8 ) {
-				$other = isset( $_POST['other'] ) ? sanitize_textarea_field( $_POST['other'] ) : '';
-
-				// no reason?
-				if ( $other === '' )
-					wp_send_json_success();
-			}
-
-			wp_remote_post(
-				'https://hu-manity.co/wp-json/api/v1/forms/',
-				[
-					'timeout'		=> 15,
-					'blocking'		=> true,
-					'headers'		=> [],
-					'body'			=> [
-						'id'		=> 1,
-						'option'	=> $option_id,
-						'other'		=> $other,
-						'referrer'	=> get_site_url()
-					]
-				]
-			);
-
-			wp_send_json_success();
-		}
-
-		wp_send_json_error();
-	}
-
-
-/** Function get_config() called by wp_ajax hooks: {'cn_react_config'} **/
-/** No params detected :-/ **/
-
-
-/** Function get_api_environment() called by wp_ajax hooks: {'cn_get_api_environment'} **/
-/** No params detected :-/ **/
-
-
-/** Function test_set_option() called by wp_ajax hooks: {'cn_react_test_set_option'} **/
-/** Parameters found in function test_set_option(): {"post": ["option_name", "option_value"]} **/
-function test_set_option() {
-		if ( ! defined( 'CN_DEV_MODE' ) || ! CN_DEV_MODE ) {
-			wp_send_json_error( [ 'error' => 'Not available outside CN_DEV_MODE.' ] );
-		}
-
-		$this->verify_request();
-
-		// Allowlist — only options the test suite legitimately needs to set.
-		$allowed = [
-			'cookie_notice_ui_mode',
-			'cookie_notice_status',
-			'cookie_notice_setup_wizard_complete',
-			'cookie_notice_welcome_dismissed',
-			'cookie_notice_options',
-		];
-
-		$option_name = isset( $_POST['option_name'] ) ? sanitize_key( $_POST['option_name'] ) : '';
-
-		if ( ! in_array( $option_name, $allowed, true ) ) {
-			wp_send_json_error( [ 'error' => 'Option not in allowlist: ' . $option_name ] );
-		}
-
-		// cookie_notice_options is stored as a PHP array — decode JSON input.
-		$raw_value = isset( $_POST['option_value'] ) ? wp_unslash( $_POST['option_value'] ) : '';
-
-		if ( $option_name === 'cookie_notice_options' ) {
-			$option_value = json_decode( $raw_value, true );
-			if ( ! is_array( $option_value ) ) {
-				wp_send_json_error( [ 'error' => 'cookie_notice_options must be valid JSON object.' ] );
-			}
-		} else {
-			$option_value = sanitize_text_field( $raw_value );
-		}
-
-		update_option( $option_name, $option_value );
-
-		wp_send_json_success( [ 'option' => $option_name, 'value' => $option_value ] );
-	}
-
-
-/** Function test_get_option() called by wp_ajax hooks: {'cn_react_test_get_option'} **/
-/** Parameters found in function test_get_option(): {"post": ["option_name"]} **/
-function test_get_option() {
-		if ( ! defined( 'CN_DEV_MODE' ) || ! CN_DEV_MODE ) {
-			wp_send_json_error( [ 'error' => 'Not available outside CN_DEV_MODE.' ] );
-		}
-
-		$this->verify_request();
-
-		// Allowlist — only options the test suite legitimately needs to read.
-		$allowed = [
-			'cookie_notice_options',
-			'cookie_notice_status',
-			'cookie_notice_ui_mode',
-			'cookie_notice_setup_wizard_complete',
-			'cookie_notice_welcome_dismissed',
-			'cookie_notice_app_blocking',
-			'cookie_notice_app_design',
-		];
-
-		$option_name = isset( $_POST['option_name'] ) ? sanitize_key( $_POST['option_name'] ) : '';
-
-		if ( ! in_array( $option_name, $allowed, true ) ) {
-			wp_send_json_error( [ 'error' => 'Option not in allowlist: ' . $option_name ] );
-		}
-
-		$value = get_option( $option_name );
-
-		// Serialize arrays/objects so the test can inspect them as a string.
-		if ( is_array( $value ) || is_object( $value ) ) {
-			$value = wp_json_encode( $value );
-		}
-
-		wp_send_json_success( [ 'option' => $option_name, 'value' => (string) $value ] );
-	}
-
-
-/** Function react_apply_languages() called by wp_ajax hooks: {'cn_react_apply_languages'} **/
-/** Parameters found in function react_apply_languages(): {"post": ["languages"]} **/
-function react_apply_languages() {
-		$this->verify_react_request();
-
-		$cn = Cookie_Notice();
-		$app_id = $cn->options['general']['app_id'];
-
-		if ( empty( $app_id ) ) {
-			wp_send_json_error( [ 'error' => 'No app connected.' ] );
-		}
-
-		$languages_raw = isset( $_POST['languages'] ) && is_array( $_POST['languages'] ) ? $_POST['languages'] : [];
-
-		// Sanitize and validate language codes (2-letter ISO 639-1)
-		$allowed_languages = [ 'fr', 'es', 'de', 'it', 'el', 'nl', 'pt', 'pl', 'sv' ];
-		$languages = [];
-
-		foreach ( $languages_raw as $lang ) {
-			$lang = sanitize_key( $lang );
-
-			if ( in_array( $lang, $allowed_languages, true ) )
-				$languages[] = $lang;
-		}
-
-		// Free plan: enforce 1-language limit
-		$subscription = $cn->get_subscription();
-		$status = $cn->get_status();
-		$is_free = ( $status === 'active' && $subscription === 'basic' );
-
-		if ( $is_free && count( $languages ) > 1 )
-			$languages = array_slice( $languages, 0, 1 );
-
-		$params = [
-			'AppID'           => $app_id,
-			'DefaultLanguage' => 'en',
-			'languages'       => $languages,
-		];
-
-		$write_type = $this->get_write_request_type( $app_id );
-
-		// PATCH /by-app endpoint does not accept DefaultLanguage -- strip it.
-		if ( $write_type === 'patch_by_app' ) {
-			unset( $params['DefaultLanguage'] );
-		}
-		// DevMode mock ID — return synthetic success so the UI can be tested without a real API.
-		if ( $write_type === 'devmode' ) {
-			wp_send_json_success( [ 'status' => 200, 'languages' => $languages, 'dev_mode' => true ] );
-			return;
-		}
-
-		$result = $this->request( $write_type, $params );
-
-		// Design record not yet created — fall back to quick_config to seed it.
-		// The API returns { i18n_msg: 'user_design_update_id_not_found', status: 400 } (HTTP 200)
-		// when no record exists, so check i18n_msg — not statusCode/404.
-		// Also restore DefaultLanguage which patch_by_app doesn't accept but quick_config requires.
-		if ( is_object( $result ) && isset( $result->i18n_msg ) && $result->i18n_msg === 'user_design_update_id_not_found' ) {
-			$params['DefaultLanguage'] = 'en';
-			$result = $this->request( 'quick_config', $params );
-		}
-
-		if ( is_object( $result ) && isset( $result->status ) && $result->status === 200 ) {
-			// Persist applied languages locally so the dashboard can reflect the real count.
-			$network = is_multisite() && $cn->is_plugin_network_active() && $cn->network_options['general']['global_override'];
-			if ( $network )
-				update_site_option( 'cookie_notice_app_languages', $languages );
-			else
-				update_option( 'cookie_notice_app_languages', $languages, false );
-
-			wp_send_json_success( [ 'status' => 200, 'languages' => $languages ] );
-		} else {
-			$error = 'Language update failed.';
-
-			if ( is_array( $result ) && ! empty( $result['error'] ) )
-				$error = $result['error'];
-			elseif ( is_object( $result ) && ! empty( $result->message ) )
-				$error = $result->message;
-
-			wp_send_json_error( [ 'error' => $error, 'apiSync' => false ] );
-		}
-	}
-
-
-/** Function get_privacy_consent_logs() called by wp_ajax hooks: {'cn_get_privacy_consent_logs'} **/
-/** Parameters found in function get_privacy_consent_logs(): {"post": ["action", "nonce"]} **/
-function get_privacy_consent_logs() {
-		// check data
-		if ( ! isset( $_POST['action'], $_POST['nonce'] ) )
-			wp_send_json_error();
-
-		// valid nonce?
-		if ( check_ajax_referer( 'cn-get-privacy-consent-logs', 'nonce' ) === false )
-			wp_send_json_error();
-
-		// check capability
-		if ( ! current_user_can( apply_filters( 'cn_manage_cookie_notice_cap', 'manage_options' ) ) )
-			wp_send_json_error();
-
-		$data = Cookie_Notice()->welcome_api->get_privacy_consent_logs();
-
-		if ( is_array( $data ) )
-			wp_send_json_success( $this->get_privacy_consent_logs_table( $data ) );
-		else
-			wp_send_json_error( $data );
-	}
-
-
-/** Function update_script() called by wp_ajax hooks: {'cn_react_script_update'} **/
-/** Parameters found in function update_script(): {"post": ["operation", "provider_id", "category_id", "provider_name", "provider_url", "description", "script_patterns", "iframe_patterns"]} **/
-function update_script() {
-		$this->verify_request();
-
-		$operation = isset( $_POST['operation'] ) ? sanitize_text_field( $_POST['operation'] ) : '';
-
-		if ( ! in_array( $operation, [ 'add', 'edit', 'remove' ], true ) ) {
-			wp_send_json_error( [ 'error' => 'Invalid operation.' ] );
-		}
-
-		if ( $operation === 'edit' ) {
-			$provider_id = isset( $_POST['provider_id'] ) ? sanitize_text_field( $_POST['provider_id'] ) : '';
-			$category_id = isset( $_POST['category_id'] ) ? absint( $_POST['category_id'] ) : 0;
-
-			if ( empty( $provider_id ) ) {
-				wp_send_json_error( [ 'error' => 'Missing provider_id.' ] );
-			}
-
-			if ( ! in_array( $category_id, [ 1, 2, 3, 4 ], true ) ) {
-				wp_send_json_error( [ 'error' => 'Invalid category_id.' ] );
-			}
-
-			$cn      = Cookie_Notice();
-			$network = $cn->is_network_options();
-
-			$blocking = $network
-				? get_site_option( 'cookie_notice_app_blocking', [] )
-				: get_option( 'cookie_notice_app_blocking', [] );
-
-			if ( empty( $blocking ) || ! isset( $blocking['providers'] ) ) {
-				wp_send_json_error( [ 'error' => 'No blocking configuration found.' ] );
-			}
-
-			// Update the provider's CategoryID.
-			$found = false;
-
-			foreach ( $blocking['providers'] as &$provider ) {
-				$pid = is_object( $provider ) ? $provider->ProviderID : ( isset( $provider['ProviderID'] ) ? $provider['ProviderID'] : '' );
-
-				if ( (string) $pid === (string) $provider_id ) {
-					if ( is_object( $provider ) ) {
-						$provider->CategoryID = $category_id;
-					} else {
-						$provider['CategoryID'] = $category_id;
-					}
-					$found = true;
-					break;
-				}
-			}
-			unset( $provider );
-
-			if ( ! $found ) {
-				wp_send_json_error( [ 'error' => 'Provider not found.' ] );
-			}
-
-			// Propagate CategoryID to all patterns belonging to this provider.
-			if ( isset( $blocking['patterns'] ) && is_array( $blocking['patterns'] ) ) {
-				foreach ( $blocking['patterns'] as &$pattern ) {
-					$pat_pid = is_object( $pattern ) ? $pattern->ProviderID : ( isset( $pattern['ProviderID'] ) ? $pattern['ProviderID'] : '' );
-
-					if ( (string) $pat_pid === (string) $provider_id ) {
-						if ( is_object( $pattern ) ) {
-							$pattern->CategoryID = $category_id;
-						} else {
-							$pattern['CategoryID'] = $category_id;
-						}
-					}
-				}
-				unset( $pattern );
-			}
-
-			// Save back.
-			if ( $network ) {
-				update_site_option( 'cookie_notice_app_blocking', $blocking );
-			} else {
-				update_option( 'cookie_notice_app_blocking', $blocking );
-			}
-		}
-
-		if ( $operation === 'add' ) {
-			$provider_name   = isset( $_POST['provider_name'] ) ? sanitize_text_field( $_POST['provider_name'] ) : '';
-			$provider_url    = isset( $_POST['provider_url'] )  ? esc_url_raw( $_POST['provider_url'] )           : '';
-			$category_id     = isset( $_POST['category_id'] )   ? absint( $_POST['category_id'] )                  : 0;
-			$description     = isset( $_POST['description'] )   ? sanitize_text_field( $_POST['description'] )     : '';
-			$script_patterns = isset( $_POST['script_patterns'] ) && is_array( $_POST['script_patterns'] ) ? $_POST['script_patterns'] : [];
-			$iframe_patterns = isset( $_POST['iframe_patterns'] ) && is_array( $_POST['iframe_patterns'] ) ? $_POST['iframe_patterns'] : [];
-
-			if ( empty( $provider_name ) ) {
-				wp_send_json_error( [ 'error' => 'Provider name is required.' ] );
-			}
-
-			if ( ! in_array( $category_id, [ 1, 2, 3, 4 ], true ) ) {
-				wp_send_json_error( [ 'error' => 'Invalid category_id.' ] );
-			}
-
-			$cn      = Cookie_Notice();
-			$network = $cn->is_network_options();
-
-			$blocking = $network
-				? get_site_option( 'cookie_notice_app_blocking', [] )
-				: get_option( 'cookie_notice_app_blocking', [] );
-
-			if ( ! is_array( $blocking ) ) {
-				$blocking = [];
-			}
-			if ( ! isset( $blocking['providers'] ) ) {
-				$blocking['providers'] = [];
-			}
-			if ( ! isset( $blocking['patterns'] ) ) {
-				$blocking['patterns'] = [];
-			}
-
-			// Generate a unique provider ID from the name + timestamp.
-			$provider_id = 'custom-' . sanitize_title( $provider_name ) . '-' . time();
-
-			// Append the new provider.
-			$blocking['providers'][] = (object) [
-				'ProviderID'   => $provider_id,
-				'ProviderName' => $provider_name,
-				'ProviderURL'  => $provider_url,
-				'CategoryID'   => $category_id,
-				'IsCustom'     => true,
-			];
-
-			// Find current max CookieID so new patterns get unique IDs.
-			$max_cookie_id = 0;
-			foreach ( $blocking['patterns'] as $p ) {
-				$cid = is_object( $p ) ? (int) $p->CookieID : (int) ( isset( $p['CookieID'] ) ? $p['CookieID'] : 0 );
-				if ( $cid > $max_cookie_id ) {
-					$max_cookie_id = $cid;
-				}
-			}
-
-			// Append script patterns.
-			foreach ( $script_patterns as $pattern_str ) {
-				$pattern_str = sanitize_text_field( stripslashes( $pattern_str ) );
-				if ( empty( $pattern_str ) ) {
-					continue;
-				}
-				$max_cookie_id++;
-				$blocking['patterns'][] = (object) [
-					'CookieID'      => $max_cookie_id,
-					'ProviderID'    => $provider_id,
-					'CategoryID'    => $category_id,
-					'PatternType'   => 'script',
-					'PatternFormat' => 'wildcard',
-					'Pattern'       => $pattern_str,
-				];
-			}
-
-			// Append iframe patterns.
-			foreach ( $iframe_patterns as $pattern_str ) {
-				$pattern_str = sanitize_text_field( stripslashes( $pattern_str ) );
-				if ( empty( $pattern_str ) ) {
-					continue;
-				}
-				$max_cookie_id++;
-				$blocking['patterns'][] = (object) [
-					'CookieID'      => $max_cookie_id,
-					'ProviderID'    => $provider_id,
-					'CategoryID'    => $category_id,
-					'PatternType'   => 'iframe',
-					'PatternFormat' => 'wildcard',
-					'Pattern'       => $pattern_str,
-				];
-			}
-
-			if ( $network ) {
-				update_site_option( 'cookie_notice_app_blocking', $blocking );
-			} else {
-				update_option( 'cookie_notice_app_blocking', $blocking );
-			}
-
-			wp_send_json_success( [
-				'message'     => 'Script provider added.',
-				'provider_id' => $provider_id,
-			] );
-		}
-
-		if ( $operation === 'remove' ) {
-			$provider_id = isset( $_POST['provider_id'] ) ? sanitize_text_field( $_POST['provider_id'] ) : '';
-
-			if ( empty( $provider_id ) ) {
-				wp_send_json_error( [ 'error' => 'Missing provider_id.' ] );
-			}
-
-			$cn      = Cookie_Notice();
-			$network = $cn->is_network_options();
-
-			$blocking = $network
-				? get_site_option( 'cookie_notice_app_blocking', [] )
-				: get_option( 'cookie_notice_app_blocking', [] );
-
-			if ( empty( $blocking ) || ! isset( $blocking['providers'] ) ) {
-				wp_send_json_error( [ 'error' => 'No blocking configuration found.' ] );
-			}
-
-			// Remove the provider entry.
-			$blocking['providers'] = array_values( array_filter( $blocking['providers'], function( $p ) use ( $provider_id ) {
-				$pid = is_object( $p ) ? $p->ProviderID : ( isset( $p['ProviderID'] ) ? $p['ProviderID'] : '' );
-				return (string) $pid !== (string) $provider_id;
-			} ) );
-
-			// Remove all patterns belonging to this provider.
-			if ( isset( $blocking['patterns'] ) && is_array( $blocking['patterns'] ) ) {
-				$blocking['patterns'] = array_values( array_filter( $blocking['patterns'], function( $p ) use ( $provider_id ) {
-					$pid = is_object( $p ) ? $p->ProviderID : ( isset( $p['ProviderID'] ) ? $p['ProviderID'] : '' );
-					return (string) $pid !== (string) $provider_id;
-				} ) );
-			}
-
-			if ( $network ) {
-				update_site_option( 'cookie_notice_app_blocking', $blocking );
-			} else {
-				update_option( 'cookie_notice_app_blocking', $blocking );
-			}
-
-			wp_send_json_success( [ 'message' => 'Script provider removed.' ] );
-		}
-
-		wp_send_json_success( [ 'message' => 'Script provider updated.' ] );
-	}
-
-
-/** Function get_cookie_consent_logs() called by wp_ajax hooks: {'cn_get_cookie_consent_logs'} **/
-/** Parameters found in function get_cookie_consent_logs(): {"post": ["action", "date", "nonce"]} **/
-function get_cookie_consent_logs() {
-		// check data
-		if ( ! isset( $_POST['action'], $_POST['date'], $_POST['nonce'] ) )
-			wp_send_json_error();
-
-		// valid nonce?
-		if ( ! check_ajax_referer( 'cn-get-cookie-consent-logs', 'nonce' ) )
-			wp_send_json_error();
-
-		// check capability
-		if ( ! current_user_can( apply_filters( 'cn_manage_cookie_notice_cap', 'manage_options' ) ) )
-			wp_send_json_error();
-
-		// sanitize date
-		$date = preg_replace( '[^\d-]', '', $_POST['date'] );
-
-		// get datetime
-		$dt = DateTime::createFromFormat( 'Y-m-d', $date );
-
-		// valid date?
-		if ( $dt && $dt->format( 'Y-m-d' ) === $date ) {
-			$data = Cookie_Notice()->welcome_api->get_cookie_consent_logs( $date );
-
-			if ( is_array( $data ) )
-				wp_send_json_success( $this->get_cookie_consent_logs_table( $data ) );
-			else
-				wp_send_json_error( $data );
-		}
-
-		wp_send_json_error();
-	}
-
-
-/** Function react_update_design() called by wp_ajax hooks: {'cn_react_update_design'} **/
-/** Parameters found in function react_update_design(): {"post": ["design", "config", "consentConfig"]} **/
-function react_update_design() {
-		$this->verify_react_request();
-
-		$cn = Cookie_Notice();
-		$app_id = $cn->options['general']['app_id'];
-
-		if ( empty( $app_id ) ) {
-			wp_send_json_error( [ 'error' => 'No app connected.' ] );
-		}
-
-		$design_raw  = isset( $_POST['design'] )        && is_array( $_POST['design'] )        ? $_POST['design']        : [];
-		$config_raw  = isset( $_POST['config'] )        && is_array( $_POST['config'] )        ? $_POST['config']        : [];
-		$consent_raw = isset( $_POST['consentConfig'] ) && is_array( $_POST['consentConfig'] ) ? $_POST['consentConfig'] : [];
-
-		if ( empty( $design_raw ) && empty( $config_raw ) && empty( $consent_raw ) ) {
-			wp_send_json_error( [ 'error' => 'No update data provided.' ] );
-		}
-
-		// Allowed design fields with sanitization
-		$allowed_fields = [
-			'position'             => 'sanitize_key',
-			'displayType'          => 'sanitize_key',
-			'bannerColor'          => 'sanitize_hex_color',
-			'primaryColor'         => 'sanitize_hex_color',
-			'textColor'            => 'sanitize_hex_color',
-			'headingColor'         => 'sanitize_hex_color',
-			'btnTextColor'         => 'sanitize_hex_color',
-			'btnBorderRadius'      => 'sanitize_text_field',
-			'animation'            => 'sanitize_key',
-			'bannerOpacity'        => 'sanitize_text_field',
-			'revokePosition'       => 'sanitize_key',
-			'showBulletPoints'     => null, // boolean
-		];
-		// Note: googleConsentMode / facebookConsentMode / microsoftConsentMode are NOT design fields.
-		// The PATCH /by-app endpoint rejects them in design{}. They belong in config{} as booleans.
-		// They are handled below alongside gpcSupportMode / doNotTrackMode.
-
-		$design = new stdClass();
-
-		foreach ( $allowed_fields as $field => $sanitizer ) {
-			if ( ! array_key_exists( $field, $design_raw ) )
-				continue;
-
-			if ( $field === 'showBulletPoints' ) {
-				$design->{$field} = filter_var( $design_raw[ $field ], FILTER_VALIDATE_BOOLEAN );
-			} elseif ( $sanitizer ) {
-				$design->{$field} = call_user_func( $sanitizer, $design_raw[ $field ] );
-			}
-		}
-
-		// Validate position — translate 'popup' → 'center' (portal label vs CSS class)
-		if ( isset( $design->position ) ) {
-			if ( $design->position === 'popup' ) {
-				$design->position = 'center';
-			} elseif ( ! in_array( $design->position, [ 'bottom', 'top', 'left', 'right', 'center' ], true ) ) {
-				$design->position = 'bottom';
-			}
-		}
-
-		// Validate displayType
-		if ( isset( $design->displayType ) && ! in_array( $design->displayType, [ 'floating', 'fixed' ], true ) )
-			$design->displayType = 'floating';
-
-		// Validate animation
-		if ( isset( $design->animation ) && ! in_array( $design->animation, [ 'fade', 'slide', 'none' ], true ) )
-			$design->animation = 'fade';
-
-		// Validate bannerOpacity
-		if ( isset( $design->bannerOpacity ) ) {
-			$opacity = (float) $design->bannerOpacity;
-			$design->bannerOpacity = max( 0.0, min( 1.0, $opacity ) );
-		}
-
-		// Build config object from allowed behavior fields
-		$config_allowed = [ 'revokeConsent', 'revokeMethod', 'onScroll', 'onScrollOffset', 'onClick', 'reloading' ];
-		$config = new stdClass();
-		foreach ( $config_allowed as $f ) {
-			if ( isset( $config_raw[ $f ] ) )
-				$config->$f = sanitize_text_field( $config_raw[ $f ] );
-		}
-
-		// Merge consent mode fields into config{} — the Designer API stores all of these
-		// under BannerConfigJSON, not a separate consentConfig key. The PATCH /by-app endpoint
-		// rejects a top-level consentConfig key entirely.
-		//
-		// Field name mapping (JS POST key → API config key):
-		//   gpcSupport  → gpcSupportMode  (boolean)
-		//   doNotTrack  → doNotTrackMode  (boolean)
-		//   All GCM/Facebook/Microsoft map fields keep their names, as integers.
-		// Map/level fields: must be integers (0–4).
-		$consent_int_fields = [
-			'googleConsentMapAdStorage', 'googleConsentMapAnalytics', 'googleConsentMapFunctionality',
-			'googleConsentMapPersonalization', 'googleConsentMapSecurity', 'googleConsentMapAdPersonalization',
-			'googleConsentMapAdUserData', 'facebookConsentMapConsent', 'microsoftConsentMapAdStorage',
-			'microsoftConsentMapAnalyticsStorage',
-		];
-		foreach ( $consent_int_fields as $f ) {
-			if ( isset( $consent_raw[ $f ] ) )
-				$config->$f = (int) $consent_raw[ $f ];
-		}
-		// IMPORTANT: Toggle fields MUST use (bool)(int) — NOT bare (int).
-		// wp_json_encode((int)1) = JSON 1 (integer) — API silently drops it.
-		// wp_json_encode((bool)true) = JSON true (boolean) — API persists it.
-		// See commit 8ff1432 for the original fix. Do NOT revert to (int).
-		$consent_bool_fields = [ 'microsoftConsentModePixie', 'microsoftConsentModeClarity' ];
-		foreach ( $consent_bool_fields as $f ) {
-			if ( isset( $consent_raw[ $f ] ) )
-				$config->$f = (bool) (int) $consent_raw[ $f ];
-		}
-		// gpcSupport → gpcSupportMode (bool). Pro-gated with grandfather:
-		// Free apps cannot set gpcSupportMode=true unless it's already true
-		// (grandfathered). Disabling is always allowed; once disabled on Free,
-		// the app loses its grandfather and cannot re-enable. See KnowledgeHub
-		// decisions.md (gpc-pro-gating-with-grandfather).
-		if ( isset( $consent_raw['gpcSupport'] ) ) {
-			$incoming_gpc = (bool) (int) $consent_raw['gpcSupport'];
-			$is_pro       = $cn->get_subscription() === 'pro';
-
-			if ( $is_pro || ! $incoming_gpc ) {
-				// Pro: anything goes. Free + setting to false: always allowed.
-				$config->gpcSupportMode = $incoming_gpc;
-			} else {
-				// Free + setting to true: only honor if already true (grandfather).
-				$existing_blocking = $cn->is_network_options()
-					? get_site_option( 'cookie_notice_app_blocking', [] )
-					: get_option( 'cookie_notice_app_blocking', [] );
-				if ( ! empty( $existing_blocking['banner_config']['gpcSupportMode'] ) )
-					$config->gpcSupportMode = true;
-				// else: silently strip — UI gate should have prevented this anyway.
-			}
-		}
-		// gpcBannerMode → gpcBannerMode (string enum). Not Pro-gated directly:
-		// it's only consulted when gpcSupportMode is true, so transitive gating
-		// via the parent toggle is sufficient. Validate the enum here and let
-		// stray values fall through to the persisted/default value.
-		if ( isset( $consent_raw['gpcBannerMode'] ) ) {
-			$mode = sanitize_key( $consent_raw['gpcBannerMode'] );
-			if ( in_array( $mode, [ 'banner', 'hidden', 'passive' ], true ) )
-				$config->gpcBannerMode = $mode;
-		}
-		// doNotTrack → doNotTrackMode (bool)
-		if ( isset( $consent_raw['doNotTrack'] ) )
-			$config->doNotTrackMode = (bool) (int) $consent_raw['doNotTrack'];
-		// Consent mode flags (google/facebook/microsoft) — sent in design_raw from the React POST
-		// but must be placed in config{} as booleans. The PATCH /by-app endpoint rejects them in design{}.
-		foreach ( [ 'googleConsentMode', 'facebookConsentMode', 'microsoftConsentMode' ] as $mode_field ) {
-			if ( isset( $design_raw[ $mode_field ] ) )
-				$config->$mode_field = (bool) (int) $design_raw[ $mode_field ];
-		}
-
-		// Build params — only include non-empty objects
-		$params = [
-			'AppID'           => $app_id,
-			'DefaultLanguage' => 'en',
-			'text'            => (object) [ 'privacyPolicyUrl' => get_privacy_policy_url() ],
-		];
-		if ( ! empty( (array) $design ) )
-			$params['design'] = $design;
-		if ( ! empty( (array) $config ) )
-			$params['config'] = $config;
-
-		$write_type = $this->get_write_request_type( $app_id );
-
-		// PATCH /by-app endpoint does not accept DefaultLanguage -- strip it.
-		if ( $write_type === 'patch_by_app' ) {
-			unset( $params['DefaultLanguage'] );
-		}
-		// DevMode mock ID — return synthetic success so the UI can be tested without a real API.
-		if ( $write_type === 'devmode' ) {
-			wp_send_json_success( [ 'status' => 200, 'dev_mode' => true ] );
-			return;
-		}
-
-		$result = $this->request( $write_type, $params );
-
-		// debug: log raw API response for consent mode debugging.
-		if ( $cn->options['general']['debug_mode'] ) {
-			error_log( 'react_update_design API result: ' . var_export( $result, true ) );
-		}
-
-		// Design record not yet created — fall back to quick_config to seed it.
-		// The API returns { i18n_msg: 'user_design_update_id_not_found', status: 400 } (HTTP 200)
-		// when no record exists, so check i18n_msg — not statusCode/404.
-		// Also restore DefaultLanguage which patch_by_app doesn't accept but quick_config requires.
-		if ( is_object( $result ) && isset( $result->i18n_msg ) && $result->i18n_msg === 'user_design_update_id_not_found' ) {
-			$params['DefaultLanguage'] = 'en';
-			$result = $this->request( 'quick_config', $params );
-		}
-
-		if ( is_object( $result ) && isset( $result->status ) && $result->status === 200 ) {
-			// Pull confirmed state from portal — makes portal unambiguous SoT.
-			// Updates cookie_notice_app_blocking (GCM/GPC signal maps),
-			// fires cn_configuration_updated → clears page caches.
-			// Does NOT set cookie_notice_config_update transient (widget CDN cache).
-			$this->get_app_config( $app_id, true, true );
-
-			wp_send_json_success( [ 'status' => 200 ] );
-		} else {
-			$error = 'Design update failed.';
-
-			if ( is_array( $result ) && ! empty( $result['error'] ) )
-				$error = $result['error'];
-			elseif ( is_object( $result ) && ! empty( $result->message ) )
-				$error = $result->message;
-			elseif ( is_object( $result ) && ! empty( $result->error ) )
-				$error = $result->error;
-			elseif ( is_object( $result ) && ! empty( $result->i18n_msg ) )
-				$error = 'API error: ' . $result->i18n_msg;
-			elseif ( $result === null )
-				$error = 'No response from API — check connection.';
-
-			wp_send_json_error( [ 'error' => $error, 'apiSync' => false ] );
-		}
-	}
-
-
-/** Function ajax_purge_cache() called by wp_ajax hooks: {'cn_purge_cache'} **/
+/** Function dev_reset() called by wp_ajax hooks: {'cn_react_dev_reset'} **/
 /** No params detected :-/ **/
 
 
@@ -3309,311 +3703,85 @@ function save_options() {
 	}
 
 
-/** Function get_dashboard() called by wp_ajax hooks: {'cn_react_dashboard'} **/
-/** Parameters found in function get_dashboard(): {"post": ["cn_usage"]} **/
-function get_dashboard() {
+/** Function export_consent_logs() called by wp_ajax hooks: {'cn_react_export_consent_logs'} **/
+/** Parameters found in function export_consent_logs(): {"post": ["start_date", "end_date"]} **/
+function export_consent_logs() {
 		$this->verify_request();
 
 		$cn = Cookie_Notice();
 
-		// --- Read cached analytics option ---
-		// Single source: cookie_notice_app_analytics (refreshed hourly via welcome-api.php cron).
-		// ⚠️ Multisite pattern: use site_option ONLY when network-active with global_override.
-		// Do NOT simplify to is_multisite() alone — pattern matches welcome-api.php get_app_config().
-		$network       = $cn->is_network_options();
-		$analytics_raw = $network
-			? get_site_option( 'cookie_notice_app_analytics', [] )
-			: get_option( 'cookie_notice_app_analytics', [] );
-
-		// --- Cycle usage (visits vs threshold) ---
-		// Read from cached analytics option; CN_DEV_MODE overrides for UI testing.
-		$visits    = ! empty( $analytics_raw['cycleUsage']->visits ) ? (int) $analytics_raw['cycleUsage']->visits : 0;
-		$threshold = ! empty( $analytics_raw['cycleUsage']->threshold ) ? (int) $analytics_raw['cycleUsage']->threshold : 0;
-
-		// CN_DEV_MODE: honour cn_usage=0-100 (forwarded as POST field by fetchDashboard
-		// since admin-ajax.php is a POST endpoint and $_GET params from the page URL
-		// are not available here).
-		if ( defined( 'CN_DEV_MODE' ) && CN_DEV_MODE && isset( $_POST['cn_usage'] ) ) {
-			$pct       = max( 0, min( 100, (int) $_POST['cn_usage'] ) );
-			$threshold = $threshold > 0 ? $threshold : 1000;
-			$visits    = (int) round( $threshold * ( $pct / 100 ) );
+		// Server-side Pro gate — TierGate in React is client-only.
+		if ( $cn->get_subscription() !== 'pro' ) {
+			wp_send_json_error( [ 'error' => 'CSV export requires a Pro subscription.' ] );
+			return;
 		}
 
-		// --- ConsentStats breakdown ---
+		$start_date = isset( $_POST['start_date'] ) ? sanitize_text_field( $_POST['start_date'] ) : date( 'Y-m-d' );
+		$end_date   = isset( $_POST['end_date'] ) ? sanitize_text_field( $_POST['end_date'] ) : $start_date;
 
-		$level_totals = [ 1 => 0, 2 => 0, 3 => 0 ];
-
-		if ( ! empty( $analytics_raw['consentActivities'] ) && is_array( $analytics_raw['consentActivities'] ) ) {
-			foreach ( $analytics_raw['consentActivities'] as $entry ) {
-				$lvl = (int) $entry->consentlevel;
-				if ( isset( $level_totals[ $lvl ] ) ) {
-					$level_totals[ $lvl ] += (int) $entry->totalrecd;
-				}
-			}
+		// Validate date formats (Y-m-d).
+		$dt = DateTime::createFromFormat( 'Y-m-d', $start_date );
+		if ( ! $dt || $dt->format( 'Y-m-d' ) !== $start_date ) {
+			$start_date = date( 'Y-m-d' );
 		}
 
-		$consent_breakdown = $this->compute_consent_breakdown( $level_totals );
+		$dt_end = DateTime::createFromFormat( 'Y-m-d', $end_date );
+		if ( ! $dt_end || $dt_end->format( 'Y-m-d' ) !== $end_date || $end_date < $start_date ) {
+			$end_date = $start_date;
+		}
 
-		// Regulations saved locally by cn_api_request?configure action.
-		// Exposed here so Protection.jsx LAWS card can display them without a
-		// Designer API round-trip. (#1897)
-		$reg_keys     = $network
-			? get_site_option( 'cookie_notice_app_regulations', [] )
-			: get_option( 'cookie_notice_app_regulations', [] );
-		$regulations  = array_fill_keys( (array) $reg_keys, true );
+		// Server-side range cap — Pro = 90 days.
+		$range = (int) ( ( new DateTime( $end_date ) )->diff( new DateTime( $start_date ) )->days );
 
-		// Language codes saved locally by react_apply_languages() on successful API write. (#1966)
-		// Always includes 'en' (default) + any additional codes the user configured.
-		$saved_languages = $network
-			? get_site_option( 'cookie_notice_app_languages', [] )
-			: get_option( 'cookie_notice_app_languages', [] );
-		$language = array_values( array_unique( array_merge( [ 'en' ], (array) $saved_languages ) ) );
+		if ( $range > 90 ) {
+			$end_date = ( new DateTime( $start_date ) )->modify( '+90 days' )->format( 'Y-m-d' );
+		}
 
-		// Platform account email from login token (#2168).
-		// Stored in cookie_notice_app_token transient as ->email after successful login.
-		// Used in PortalBridgeModal to tell the user which email to sign in with.
-		// Returns empty string when not connected (token not set or expired).
-		$data_token    = $network
-			? get_site_transient( 'cookie_notice_app_token' )
-			: get_transient( 'cookie_notice_app_token' );
-		$account_email = ! empty( $data_token->email ) ? sanitize_email( $data_token->email ) : '';
+		// No app_id means not connected — return empty.
+		if ( empty( $cn->options['general']['app_id'] ) ) {
+			wp_send_json_success( [ 'csv' => '', 'count' => 0 ] );
+			return;
+		}
 
-		// Banner design fields cached by get_app_config() — React computes
-		// the active template on the fly by matching against PRESETS.
-		$design = $network
-			? get_site_option( 'cookie_notice_app_design', [] )
-			: get_option( 'cookie_notice_app_design', [] );
+		$raw = $cn->welcome_api->get_cookie_consent_logs( $start_date, $end_date );
+
+		if ( ! is_array( $raw ) || empty( $raw ) ) {
+			wp_send_json_success( [ 'csv' => '', 'count' => 0 ] );
+			return;
+		}
+
+		$result = $this->transform_consent_logs( $raw, $cn );
+		$logs   = $result['logs'];
+
+		// Build CSV string.
+		$csv_lines   = [];
+		$csv_lines[] = 'Consent ID,Level,Date,IP,Categories';
+
+		foreach ( $logs as $log ) {
+			$csv_lines[] = sprintf(
+				'"%s","%s","%s","%s","%s"',
+				str_replace( '"', '""', $log['id'] ),
+				str_replace( '"', '""', $log['level'] ),
+				str_replace( '"', '""', $log['date'] ),
+				str_replace( '"', '""', $log['ip'] ),
+				str_replace( '"', '""', implode( '; ', $log['categories'] ) )
+			);
+		}
 
 		wp_send_json_success( [
-			'analytics'        => [
-				'cycleUsage' => [
-					'visits'    => $visits,
-					'threshold' => $threshold,
-				],
-			],
-			'consentBreakdown' => $consent_breakdown,
-			'domainUrl'        => home_url(),
-			'appId'            => $cn->options['general']['app_id'],
-			'activatedAt'      => isset( $cn->status_data['activation_datetime'] ) ? $cn->status_data['activation_datetime'] : 0,
-			'consentCount'     => $consent_breakdown['total'],
-			'accountEmail'     => $account_email,
-			'appConfig'        => [
-				'regulations' => $regulations,
-				'language'    => $language,
-				'design'      => $design,
-			],
+			'csv'   => implode( "\n", $csv_lines ),
+			'count' => count( $logs ),
 		] );
 	}
 
 
-/** Function get_rule_values() called by wp_ajax hooks: {'cn_react_rule_values'} **/
-/** Parameters found in function get_rule_values(): {"post": ["param"]} **/
-function get_rule_values() {
-		$this->verify_request();
-
-		$param = isset( $_POST['param'] ) ? sanitize_key( $_POST['param'] ) : '';
-
-		if ( ! $param ) {
-			wp_send_json_error( [ 'message' => 'Missing param' ] );
-		}
-
-		$values = [];
-
-		switch ( $param ) {
-			case 'page_type':
-				$values = [
-					[ 'value' => 'front', 'label' => __( 'Front Page', 'cookie-notice' ) ],
-					[ 'value' => 'home', 'label' => __( 'Home Page', 'cookie-notice' ) ],
-				];
-				break;
-
-			case 'page':
-				$pages = get_pages( [ 'post_status' => [ 'publish', 'private', 'future' ] ] );
-				$front = (int) get_option( 'page_on_front' );
-				$blog  = (int) get_option( 'page_for_posts' );
-
-				foreach ( $pages as $page ) {
-					if ( $page->ID === $front || $page->ID === $blog ) {
-						continue;
-					}
-					$values[] = [ 'value' => (string) $page->ID, 'label' => $page->post_title ];
-				}
-				break;
-
-			case 'post_type':
-				$types = get_post_types( [ 'public' => true ], 'objects' );
-
-				foreach ( $types as $type ) {
-					$values[] = [ 'value' => $type->name, 'label' => $type->labels->singular_name ];
-				}
-				break;
-
-			case 'post_type_archive':
-				$types = get_post_types( [ 'public' => true, 'has_archive' => true ], 'objects' );
-
-				foreach ( $types as $type ) {
-					$values[] = [ 'value' => $type->name, 'label' => $type->labels->singular_name ];
-				}
-				break;
-
-			case 'user_type':
-				$values = [
-					[ 'value' => 'logged_in', 'label' => __( 'Logged in', 'cookie-notice' ) ],
-					[ 'value' => 'guest', 'label' => __( 'Guest', 'cookie-notice' ) ],
-				];
-				break;
-
-			case 'taxonomy_archive':
-				$taxonomies = get_taxonomies( [ 'public' => true ], 'objects' );
-
-				foreach ( $taxonomies as $taxonomy ) {
-					$terms = get_terms( [ 'taxonomy' => $taxonomy->name, 'hide_empty' => false ] );
-
-					if ( is_wp_error( $terms ) || empty( $terms ) ) {
-						continue;
-					}
-
-					$group = [
-						'group' => $taxonomy->labels->name,
-						'items' => [],
-					];
-
-					foreach ( $terms as $term ) {
-						$group['items'][] = [
-							'value' => $term->term_id . '|' . $taxonomy->name,
-							'label' => $term->name,
-						];
-					}
-
-					$values[] = $group;
-				}
-				break;
-		}
-
-		wp_send_json_success( [ 'values' => $values ] );
-	}
-
-
-/** Function display_table() called by wp_ajax hooks: {'cn_privacy_consent_display_table'} **/
-/** Parameters found in function display_table(): {"request": ["action", "nonce", "source"], "get": ["orderby", "order"]} **/
-function display_table() {
-		// valid nonce?
-		if ( check_ajax_referer( 'cn-privacy-consent-list-table-nonce', 'nonce' ) === false )
-			wp_send_json_error();
-
-		// check data
-		if ( ! isset( $_REQUEST['action'], $_REQUEST['nonce'], $_REQUEST['source'] ) )
-			wp_send_json_error();
-
-		// check capability
-		if ( ! current_user_can( apply_filters( 'cn_manage_cookie_notice_cap', 'manage_options' ) ) )
-			wp_send_json_error();
-
-		// sanitize source
-		$source = sanitize_key( $_REQUEST['source'] );
-
-		if ( ! array_key_exists( $source, $this->sources ) || ! $this->sources[$source]['availability'] )
-			wp_send_json_error();
-
-		// make title column sorted
-		if ( empty( $_GET['orderby'] ) )
-			$_GET['orderby'] = 'title';
-
-		if ( empty( $_GET['order'] ) )
-			$_GET['order'] = 'asc';
-
-		// initialize list table
-		$list_table = new Cookie_Notice_Privacy_Consent_List_Table( [
-			'plural'	=> 'cn-source-' . esc_attr( $this->sources[$source]['name'] ) . '-forms',
-			'singular'	=> 'cn-source-' . esc_attr( $this->sources[$source]['name'] ) . '-form',
-			'ajax'		=> true
-		] );
-
-		// set source
-		$list_table->cn_set_source( $this->sources[$source] );
-
-		$args = [
-			'source'	=> $source,
-			'order'		=> 'asc',
-			'orderby'	=> 'title',
-			'page'		=> 1,
-			'search'	=> ''
-		];
-
-		// set source forms
-		$list_table->cn_set_forms( $this->instances[$source]->get_forms( $args ) );
-
-		// prepare items
-		$list_table->prepare_items();
-
-		ob_start();
-		// $list_table->search_box( __( 'Search', 'cookie-notice' ), $source );
-		$list_table->display();
-		$display = ob_get_clean();
-
-		wp_send_json_success( $display );
-	}
-
-
-/** Function dev_reset() called by wp_ajax hooks: {'cn_react_dev_reset'} **/
+/** Function rescan_scripts() called by wp_ajax hooks: {'cn_react_rescan_scripts'} **/
 /** No params detected :-/ **/
 
 
-/** Function ajax_review_notice() called by wp_ajax hooks: {'cn_review_notice'} **/
-/** Parameters found in function ajax_review_notice(): {"post": ["nonce", "notice_action", "cn_network"]} **/
-function ajax_review_notice() {
-		if ( ! current_user_can( 'install_plugins' ) )
-			exit;
-
-		if ( ! isset( $_POST['nonce'], $_POST['notice_action'] ) )
-			exit;
-
-		if ( wp_verify_nonce( $_POST['nonce'], 'cn_review_notice' ) ) {
-			// get notice action
-			$notice_action = ! empty( $_POST['notice_action'] ) ? sanitize_key( $_POST['notice_action'] ) : 'dismiss';
-
-			$cn_network = isset( $_POST['cn_network'] ) ? (int) $_POST['cn_network'] : false;
-
-			// network?
-			$network = is_multisite() && $cn_network === 1;
-
-			switch ( $notice_action ) {
-				// delay notice
-				case 'delay':
-					$this->options['general']['review_notice'] = true;
-					$this->options['general']['review_notice_delay'] = time() + 2 * WEEK_IN_SECONDS;
-
-					// update options
-					if ( $network )
-						update_site_option( 'cookie_notice_options', $this->options['general'] );
-					else
-						update_option( 'cookie_notice_options', $this->options['general'] );
-					break;
-
-				// hide notice
-				case 'dismiss':
-				case 'review':
-				default:
-					$this->options['general']['review_notice'] = false;
-					$this->options['general']['review_notice_delay'] = 0;
-
-					// update options
-					if ( $network ) {
-						$this->options['general']['update_notice_diss'] = true;
-
-						update_site_option( 'cookie_notice_options', $this->options['general'] );
-					} else
-						update_option( 'cookie_notice_options', $this->options['general'] );
-			}
-		}
-
-		exit;
-	}
-
-
-/** Function react_apply_template() called by wp_ajax hooks: {'cn_react_apply_template'} **/
-/** Parameters found in function react_apply_template(): {"post": ["template"]} **/
-function react_apply_template() {
+/** Function react_apply_languages() called by wp_ajax hooks: {'cn_react_apply_languages'} **/
+/** Parameters found in function react_apply_languages(): {"post": ["languages"]} **/
+function react_apply_languages() {
 		$this->verify_react_request();
 
 		$cn = Cookie_Notice();
@@ -3623,118 +3791,31 @@ function react_apply_template() {
 			wp_send_json_error( [ 'error' => 'No app connected.' ] );
 		}
 
-		$template = isset( $_POST['template'] ) ? sanitize_key( $_POST['template'] ) : '';
+		$languages_raw = isset( $_POST['languages'] ) && is_array( $_POST['languages'] ) ? $_POST['languages'] : [];
 
-		// Full design presets — position/color/typography synced to portal.
-		// Colors match TemplatePresets.jsx PRESETS array.
-		$presets = [
-			'minimal' => [
-				'position'         => 'left',
-				'displayType'      => 'floating',
-				'bannerColor'      => '#f0f0f0',
-				'primaryColor'     => '#20c19e',
-				'textColor'        => '#434f58',
-				'headingColor'     => '#434f58',
-				'btnTextColor'     => '#ffffff',
-				'btnBorderRadius'  => '25px',
-				'animation'        => 'fade',
-				'bannerOpacity'    => 0.97,
-				'revokePosition'   => 'bottom-left',
-				'showBulletPoints' => true,
-			],
-			'standard' => [
-				'position'         => 'bottom',
-				'displayType'      => 'floating',
-				'bannerColor'      => '#2d3436',
-				'primaryColor'     => '#20c19e',
-				'textColor'        => '#ffffff',
-				'headingColor'     => '#ffffff',
-				'btnTextColor'     => '#ffffff',
-				'btnBorderRadius'  => '25px',
-				'animation'        => 'fade',
-				'bannerOpacity'    => 0.97,
-				'revokePosition'   => 'bottom-left',
-				'showBulletPoints' => true,
-			],
-			'bold' => [
-				'position'         => 'top',
-				'displayType'      => 'fixed',
-				'bannerColor'      => '#1a1a2e',
-				'primaryColor'     => '#20c19e',
-				'textColor'        => '#ffffff',
-				'headingColor'     => '#ffffff',
-				'btnTextColor'     => '#ffffff',
-				'btnBorderRadius'  => '6px',
-				'animation'        => 'slide',
-				'bannerOpacity'    => 1.0,
-				'revokePosition'   => 'bottom-right',
-				'showBulletPoints' => false,
-			],
-			'popup' => [
-				'position'         => 'center',
-				'displayType'      => 'floating',
-				'bannerColor'      => '#2c3e50',
-				'primaryColor'     => '#20c19e',
-				'textColor'        => '#ffffff',
-				'headingColor'     => '#ffffff',
-				'btnTextColor'     => '#ffffff',
-				'btnBorderRadius'  => '25px',
-				'animation'        => 'fade',
-				'bannerOpacity'    => 0.97,
-				'revokePosition'   => 'bottom-left',
-				'showBulletPoints' => true,
-			],
-			'panel' => [
-				'position'         => 'right',
-				'displayType'      => 'floating',
-				'bannerColor'      => '#34495e',
-				'primaryColor'     => '#3498db',
-				'textColor'        => '#ffffff',
-				'headingColor'     => '#ffffff',
-				'btnTextColor'     => '#ffffff',
-				'btnBorderRadius'  => '25px',
-				'animation'        => 'fade',
-				'bannerOpacity'    => 0.97,
-				'revokePosition'   => 'bottom-left',
-				'showBulletPoints' => true,
-			],
-			'compact' => [
-				'position'         => 'top',
-				'displayType'      => 'floating',
-				'bannerColor'      => '#1a1a2e',
-				'primaryColor'     => '#e67e22',
-				'textColor'        => '#ffffff',
-				'headingColor'     => '#ffffff',
-				'btnTextColor'     => '#ffffff',
-				'btnBorderRadius'  => '6px',
-				'animation'        => 'slide',
-				'bannerOpacity'    => 1.0,
-				'revokePosition'   => 'bottom-right',
-				'showBulletPoints' => false,
-			],
-		];
+		// Sanitize and validate language codes (2-letter ISO 639-1)
+		$allowed_languages = [ 'fr', 'es', 'de', 'it', 'el', 'nl', 'pt', 'pl', 'sv' ];
+		$languages = [];
 
-		if ( ! isset( $presets[ $template ] ) ) {
-			wp_send_json_error( [ 'error' => 'Invalid template name.' ] );
+		foreach ( $languages_raw as $lang ) {
+			$lang = sanitize_key( $lang );
+
+			if ( in_array( $lang, $allowed_languages, true ) )
+				$languages[] = $lang;
 		}
 
-		$preset = $presets[ $template ];
+		// Free plan: enforce 1-language limit
+		$subscription = $cn->get_subscription();
+		$status = $cn->get_status();
+		$is_free = ( $status === 'active' && $subscription === 'basic' );
 
-		// Build design object for quick_config (exclude displayType — WP option, not portal field)
-		$design = new stdClass();
-
-		foreach ( $preset as $key => $value ) {
-			if ( $key === 'displayType' )
-				continue;
-
-			$design->{$key} = $value;
-		}
+		if ( $is_free && count( $languages ) > 1 )
+			$languages = array_slice( $languages, 0, 1 );
 
 		$params = [
 			'AppID'           => $app_id,
 			'DefaultLanguage' => 'en',
-			'text'            => (object) [ 'privacyPolicyUrl' => get_privacy_policy_url() ],
-			'design'          => $design,
+			'languages'       => $languages,
 		];
 
 		$write_type = $this->get_write_request_type( $app_id );
@@ -3745,28 +3826,7 @@ function react_apply_template() {
 		}
 		// DevMode mock ID — return synthetic success so the UI can be tested without a real API.
 		if ( $write_type === 'devmode' ) {
-			$network = $cn->is_network_admin();
-
-			// Merge visual design fields (position, displayType, colors) from preset.
-			// #2265: API-owned fields write to cookie_notice_app_design only — never cookie_notice_options.
-			$existing_design = $network
-				? get_site_option( 'cookie_notice_app_design', [] )
-				: get_option( 'cookie_notice_app_design', [] );
-
-			$updated_design = array_merge( $existing_design, [
-				'position'     => $preset['position'],
-				'displayType'  => $preset['displayType'],
-				'bannerColor'  => $preset['bannerColor'],
-				'primaryColor' => $preset['primaryColor'],
-			] );
-
-			if ( $network ) {
-				update_site_option( 'cookie_notice_app_design', $updated_design );
-			} else {
-				update_option( 'cookie_notice_app_design', $updated_design, false );
-			}
-
-			wp_send_json_success( [ 'status' => 200, 'template' => $template, 'dev_mode' => true ] );
+			wp_send_json_success( [ 'status' => 200, 'languages' => $languages, 'dev_mode' => true ] );
 			return;
 		}
 
@@ -3782,84 +3842,24 @@ function react_apply_template() {
 		}
 
 		if ( is_object( $result ) && isset( $result->status ) && $result->status === 200 ) {
-			// #2265: API-owned fields write to cookie_notice_app_design only — never cookie_notice_options.
-			$network = $cn->is_network_admin();
-
-			// Merge visual design fields (position, displayType, colors) from preset.
-			$existing_design = $network
-				? get_site_option( 'cookie_notice_app_design', [] )
-				: get_option( 'cookie_notice_app_design', [] );
-
-			$updated_design = array_merge( $existing_design, [
-				'position'     => $preset['position'],
-				'displayType'  => $preset['displayType'],
-				'bannerColor'  => $preset['bannerColor'],
-				'primaryColor' => $preset['primaryColor'],
-			] );
-
-			if ( $network ) {
-				update_site_option( 'cookie_notice_app_design', $updated_design );
-			} else {
-				update_option( 'cookie_notice_app_design', $updated_design, false );
-			}
-
-			// Pull confirmed state from portal — makes portal unambiguous SoT.
-			// Updates cookie_notice_app_blocking, cookie_notice_app_regulations,
-			// cookie_notice_app_design, cookie_notice_status.
-			// Fires cn_configuration_updated → clears page caches (WP Rocket etc).
-			// Does NOT set cookie_notice_config_update transient (widget CDN cache).
-			$this->get_app_config( $app_id, true, true );
-
-			// Re-assert preset design values after get_app_config() — the portal may return
-			// empty position/color fields (BannerConfigJSON cherry-picks) which would
-			// overwrite our just-saved preset and cause matchTemplate() to return null
-			// on the next page load ("No template" false negative — #2261).
-			// This write is authoritative: we know what template was just applied.
+			// Persist applied languages locally so the dashboard can reflect the real count.
+			$network = is_multisite() && $cn->is_plugin_network_active() && $cn->network_options['general']['global_override'];
 			if ( $network )
-				update_site_option( 'cookie_notice_app_design', $updated_design );
+				update_site_option( 'cookie_notice_app_languages', $languages );
 			else
-				update_option( 'cookie_notice_app_design', $updated_design, false );
+				update_option( 'cookie_notice_app_languages', $languages, false );
 
-			wp_send_json_success( [ 'status' => 200, 'template' => $template ] );
+			wp_send_json_success( [ 'status' => 200, 'languages' => $languages ] );
 		} else {
-			$error = 'Template apply failed.';
+			$error = 'Language update failed.';
 
 			if ( is_array( $result ) && ! empty( $result['error'] ) )
 				$error = $result['error'];
 			elseif ( is_object( $result ) && ! empty( $result->message ) )
 				$error = $result->message;
-			elseif ( is_object( $result ) && ! empty( $result->error ) )
-				$error = $result->error;
-			elseif ( is_object( $result ) && ! empty( $result->i18n_msg ) )
-				$error = 'API error: ' . $result->i18n_msg;
-			elseif ( $result === null )
-				$error = 'No response from API — check connection.';
 
 			wp_send_json_error( [ 'error' => $error, 'apiSync' => false ] );
 		}
-	}
-
-
-/** Function rescan_scripts() called by wp_ajax hooks: {'cn_react_rescan_scripts'} **/
-/** No params detected :-/ **/
-
-
-/** Function get_group_rule_values() called by wp_ajax hooks: {'cn-get-group-rules-values'} **/
-/** Parameters found in function get_group_rule_values(): {"post": ["action", "cn_param", "cn_nonce"]} **/
-function get_group_rule_values() {
-		if (
-			isset( $_POST['action'], $_POST['cn_param'], $_POST['cn_nonce'] )
-			&& wp_verify_nonce( $_POST['cn_nonce'], 'cn-get-group-values' ) !== false
-			&& current_user_can( apply_filters( 'cn_manage_cookie_notice_cap', 'manage_options' ) )
-		) {
-			echo wp_json_encode(
-				[
-					'select'	=> $this->prepare_values( sanitize_key( $_POST['cn_param'] ) )
-				]
-			);
-		}
-
-		exit;
 	}
 
 

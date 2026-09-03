@@ -1,0 +1,4292 @@
+[
+  {
+    "coverage_id": "1787210442-874f2b21-aef8-465c-9ce3-4bdf07bbdc12",
+    "priority": 5,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "cmp_mailchimp_list_ajax"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "params": "f<img src='x' onerror='alert(0xdeadbeef)'>uzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 8192,
+        "errstr": "Constant FILTER_SANITIZE_STRING is deprecated",
+        "errfile": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "errline": 2560
+      }
+    ],
+    "exceptions": [
+      {
+        "code": 0,
+        "file": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "message": "Cannot access offset of type string on string",
+        "line": 2567,
+        "previous": null,
+        "trace": [
+          {
+            "function": "cmp_mailchimp_list_ajax",
+            "class": "CMP_Coming_Soon_and_Maintenance",
+            "type": "->",
+            "args": [
+              ""
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/class-wp-hook.php",
+            "line": 308,
+            "function": "call_user_func_array",
+            "args": [
+              [
+                {
+                  "render_settings": {}
+                },
+                "cmp_mailchimp_list_ajax"
+              ],
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/class-wp-hook.php",
+            "line": 332,
+            "function": "apply_filters",
+            "class": "WP_Hook",
+            "type": "->",
+            "args": [
+              "",
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/plugin.php",
+            "line": 517,
+            "function": "do_action",
+            "class": "WP_Hook",
+            "type": "->",
+            "args": [
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-admin/admin-ajax.php",
+            "line": 188,
+            "function": "do_action",
+            "args": [
+              "wp_ajax_cmp_mailchimp_list_ajax"
+            ]
+          }
+        ],
+        "traceAsString": "#0 [internal function]: CMP_Coming_Soon_and_Maintenance->cmp_mailchimp_list_ajax('')\n#1 /var/www/html/wp-includes/class-wp-hook.php(308): call_user_func_array(Array, Array)\n#2 /var/www/html/wp-includes/class-wp-hook.php(332): WP_Hook->apply_filters('', Array)\n#3 /var/www/html/wp-includes/plugin.php(517): WP_Hook->do_action(Array)\n#4 /var/www/html/wp-admin/admin-ajax.php(188): do_action('wp_ajax_cmp_mai...')\n#5 {main}"
+      }
+    ],
+    "response_body": "\n",
+    "response.body.length": 1,
+    "response.headers": {
+      "Date": "Thu, 20 Aug 2026 07:20:44 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "1",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 115.453,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787210442-796c7567-68d8-49b4-9c33-71e44cd124c5",
+    "paths": [
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_settings.php::::11_2_21_47",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-feedback.php::::14_194_195_196_197_199_40_41_43_44_50_53_54_55",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_115_116_117_118_120_121_123_125_129_130_141_142_144_152_155_157_159_161_162_163_164_165_166_167_168_169_17_170_171_173_182_183_194_2022_2023_2024_2025_2026_2027_2028_2030_21_215_225_2551_2553_2555_2560_2563_2564_2567_259_3284_3287_3299_3303_3305_3312_476_56_57_58_59_60_63_636_641_644_646_69_70_71_72_73_74_75_757_758_76_768_77_79_80_87_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_html.php::::2_475",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/cmp-update-process.php::::10_13_3_372_6"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 5,
+    "is_interesting": false,
+    "fuzzer_id": "2",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "params"
+  },
+  {
+    "coverage_id": "1787210445-0b1b7128-c49d-4ca9-b3ed-d7bbf3d6c80c",
+    "priority": 5,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "cmp_mailchimp_list_ajax"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "params": "fzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 8192,
+        "errstr": "Constant FILTER_SANITIZE_STRING is deprecated",
+        "errfile": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "errline": 2560
+      }
+    ],
+    "exceptions": [
+      {
+        "code": 0,
+        "file": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "message": "Cannot access offset of type string on string",
+        "line": 2567,
+        "previous": null,
+        "trace": [
+          {
+            "function": "cmp_mailchimp_list_ajax",
+            "class": "CMP_Coming_Soon_and_Maintenance",
+            "type": "->",
+            "args": [
+              ""
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/class-wp-hook.php",
+            "line": 308,
+            "function": "call_user_func_array",
+            "args": [
+              [
+                {
+                  "render_settings": {}
+                },
+                "cmp_mailchimp_list_ajax"
+              ],
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/class-wp-hook.php",
+            "line": 332,
+            "function": "apply_filters",
+            "class": "WP_Hook",
+            "type": "->",
+            "args": [
+              "",
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/plugin.php",
+            "line": 517,
+            "function": "do_action",
+            "class": "WP_Hook",
+            "type": "->",
+            "args": [
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-admin/admin-ajax.php",
+            "line": 188,
+            "function": "do_action",
+            "args": [
+              "wp_ajax_cmp_mailchimp_list_ajax"
+            ]
+          }
+        ],
+        "traceAsString": "#0 [internal function]: CMP_Coming_Soon_and_Maintenance->cmp_mailchimp_list_ajax('')\n#1 /var/www/html/wp-includes/class-wp-hook.php(308): call_user_func_array(Array, Array)\n#2 /var/www/html/wp-includes/class-wp-hook.php(332): WP_Hook->apply_filters('', Array)\n#3 /var/www/html/wp-includes/plugin.php(517): WP_Hook->do_action(Array)\n#4 /var/www/html/wp-admin/admin-ajax.php(188): do_action('wp_ajax_cmp_mai...')\n#5 {main}"
+      }
+    ],
+    "response_body": "\n",
+    "response.body.length": 1,
+    "response.headers": {
+      "Date": "Thu, 20 Aug 2026 07:20:45 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "1",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 980.577,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787210442-796c7567-68d8-49b4-9c33-71e44cd124c5",
+    "paths": [
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_settings.php::::11_2_21_47",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-feedback.php::::14_194_195_196_197_199_40_41_43_44_50_53_54_55",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_115_116_117_118_120_121_123_125_129_130_141_142_144_152_155_157_159_161_162_163_164_165_166_167_168_169_17_170_171_173_182_183_194_2022_2023_2024_2025_2026_2027_2028_2030_21_215_225_2551_2553_2555_2560_2563_2564_2567_259_3284_3287_3299_3303_3305_3312_476_56_57_58_59_60_63_636_641_644_646_69_70_71_72_73_74_75_757_758_76_768_77_79_80_87_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_html.php::::2_475",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/cmp-update-process.php::::10_13_3_372_6"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 5,
+    "is_interesting": false,
+    "fuzzer_id": "2",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "params"
+  },
+  {
+    "coverage_id": "1787210446-f8e6133a-e4cd-4cc1-8322-5fae838c9103",
+    "priority": 5,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "cmp_mailchimp_list_ajax"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "params": "fuz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 8192,
+        "errstr": "Constant FILTER_SANITIZE_STRING is deprecated",
+        "errfile": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "errline": 2560
+      }
+    ],
+    "exceptions": [
+      {
+        "code": 0,
+        "file": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "message": "Cannot access offset of type string on string",
+        "line": 2567,
+        "previous": null,
+        "trace": [
+          {
+            "function": "cmp_mailchimp_list_ajax",
+            "class": "CMP_Coming_Soon_and_Maintenance",
+            "type": "->",
+            "args": [
+              ""
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/class-wp-hook.php",
+            "line": 308,
+            "function": "call_user_func_array",
+            "args": [
+              [
+                {
+                  "render_settings": {}
+                },
+                "cmp_mailchimp_list_ajax"
+              ],
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/class-wp-hook.php",
+            "line": 332,
+            "function": "apply_filters",
+            "class": "WP_Hook",
+            "type": "->",
+            "args": [
+              "",
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/plugin.php",
+            "line": 517,
+            "function": "do_action",
+            "class": "WP_Hook",
+            "type": "->",
+            "args": [
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-admin/admin-ajax.php",
+            "line": 188,
+            "function": "do_action",
+            "args": [
+              "wp_ajax_cmp_mailchimp_list_ajax"
+            ]
+          }
+        ],
+        "traceAsString": "#0 [internal function]: CMP_Coming_Soon_and_Maintenance->cmp_mailchimp_list_ajax('')\n#1 /var/www/html/wp-includes/class-wp-hook.php(308): call_user_func_array(Array, Array)\n#2 /var/www/html/wp-includes/class-wp-hook.php(332): WP_Hook->apply_filters('', Array)\n#3 /var/www/html/wp-includes/plugin.php(517): WP_Hook->do_action(Array)\n#4 /var/www/html/wp-admin/admin-ajax.php(188): do_action('wp_ajax_cmp_mai...')\n#5 {main}"
+      }
+    ],
+    "response_body": "\n",
+    "response.body.length": 1,
+    "response.headers": {
+      "Date": "Thu, 20 Aug 2026 07:20:46 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "1",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 251.281,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787210442-796c7567-68d8-49b4-9c33-71e44cd124c5",
+    "paths": [
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_settings.php::::11_2_21_47",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-feedback.php::::14_194_195_196_197_199_40_41_43_44_50_53_54_55",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_115_116_117_118_120_121_123_125_129_130_141_142_144_152_155_157_159_161_162_163_164_165_166_167_168_169_17_170_171_173_182_183_194_2022_2023_2024_2025_2026_2027_2028_2030_21_215_225_2551_2553_2555_2560_2563_2564_2567_259_3284_3287_3299_3303_3305_3312_476_56_57_58_59_60_63_636_641_644_646_69_70_71_72_73_74_75_757_758_76_768_77_79_80_87_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_html.php::::2_475",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/cmp-update-process.php::::10_13_3_372_6"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 5,
+    "is_interesting": false,
+    "fuzzer_id": "2",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "params"
+  },
+  {
+    "coverage_id": "1787210446-e4f3d7b5-5742-448b-a738-f242a8f59bf3",
+    "priority": 5,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "cmp_mailchimp_list_ajax"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "params": "fuQz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 8192,
+        "errstr": "Constant FILTER_SANITIZE_STRING is deprecated",
+        "errfile": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "errline": 2560
+      }
+    ],
+    "exceptions": [
+      {
+        "code": 0,
+        "file": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "message": "Cannot access offset of type string on string",
+        "line": 2567,
+        "previous": null,
+        "trace": [
+          {
+            "function": "cmp_mailchimp_list_ajax",
+            "class": "CMP_Coming_Soon_and_Maintenance",
+            "type": "->",
+            "args": [
+              ""
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/class-wp-hook.php",
+            "line": 308,
+            "function": "call_user_func_array",
+            "args": [
+              [
+                {
+                  "render_settings": {}
+                },
+                "cmp_mailchimp_list_ajax"
+              ],
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/class-wp-hook.php",
+            "line": 332,
+            "function": "apply_filters",
+            "class": "WP_Hook",
+            "type": "->",
+            "args": [
+              "",
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/plugin.php",
+            "line": 517,
+            "function": "do_action",
+            "class": "WP_Hook",
+            "type": "->",
+            "args": [
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-admin/admin-ajax.php",
+            "line": 188,
+            "function": "do_action",
+            "args": [
+              "wp_ajax_cmp_mailchimp_list_ajax"
+            ]
+          }
+        ],
+        "traceAsString": "#0 [internal function]: CMP_Coming_Soon_and_Maintenance->cmp_mailchimp_list_ajax('')\n#1 /var/www/html/wp-includes/class-wp-hook.php(308): call_user_func_array(Array, Array)\n#2 /var/www/html/wp-includes/class-wp-hook.php(332): WP_Hook->apply_filters('', Array)\n#3 /var/www/html/wp-includes/plugin.php(517): WP_Hook->do_action(Array)\n#4 /var/www/html/wp-admin/admin-ajax.php(188): do_action('wp_ajax_cmp_mai...')\n#5 {main}"
+      }
+    ],
+    "response_body": "\n",
+    "response.body.length": 1,
+    "response.headers": {
+      "Date": "Thu, 20 Aug 2026 07:20:46 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "1",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 725.05,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787210442-796c7567-68d8-49b4-9c33-71e44cd124c5",
+    "paths": [
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_settings.php::::11_2_21_47",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-feedback.php::::14_194_195_196_197_199_40_41_43_44_50_53_54_55",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_115_116_117_118_120_121_123_125_129_130_141_142_144_152_155_157_159_161_162_163_164_165_166_167_168_169_17_170_171_173_182_183_194_2022_2023_2024_2025_2026_2027_2028_2030_21_215_225_2551_2553_2555_2560_2563_2564_2567_259_3284_3287_3299_3303_3305_3312_476_56_57_58_59_60_63_636_641_644_646_69_70_71_72_73_74_75_757_758_76_768_77_79_80_87_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_html.php::::2_475",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/cmp-update-process.php::::10_13_3_372_6"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 5,
+    "is_interesting": false,
+    "fuzzer_id": "2",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "params"
+  },
+  {
+    "coverage_id": "1787210447-00410b0b-d0b7-404e-9524-e3456a7a6705",
+    "priority": 5,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "cmp_mailchimp_list_ajax"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "params": "fuz1"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 8192,
+        "errstr": "Constant FILTER_SANITIZE_STRING is deprecated",
+        "errfile": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "errline": 2560
+      }
+    ],
+    "exceptions": [
+      {
+        "code": 0,
+        "file": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "message": "Cannot access offset of type string on string",
+        "line": 2567,
+        "previous": null,
+        "trace": [
+          {
+            "function": "cmp_mailchimp_list_ajax",
+            "class": "CMP_Coming_Soon_and_Maintenance",
+            "type": "->",
+            "args": [
+              ""
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/class-wp-hook.php",
+            "line": 308,
+            "function": "call_user_func_array",
+            "args": [
+              [
+                {
+                  "render_settings": {}
+                },
+                "cmp_mailchimp_list_ajax"
+              ],
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/class-wp-hook.php",
+            "line": 332,
+            "function": "apply_filters",
+            "class": "WP_Hook",
+            "type": "->",
+            "args": [
+              "",
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/plugin.php",
+            "line": 517,
+            "function": "do_action",
+            "class": "WP_Hook",
+            "type": "->",
+            "args": [
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-admin/admin-ajax.php",
+            "line": 188,
+            "function": "do_action",
+            "args": [
+              "wp_ajax_cmp_mailchimp_list_ajax"
+            ]
+          }
+        ],
+        "traceAsString": "#0 [internal function]: CMP_Coming_Soon_and_Maintenance->cmp_mailchimp_list_ajax('')\n#1 /var/www/html/wp-includes/class-wp-hook.php(308): call_user_func_array(Array, Array)\n#2 /var/www/html/wp-includes/class-wp-hook.php(332): WP_Hook->apply_filters('', Array)\n#3 /var/www/html/wp-includes/plugin.php(517): WP_Hook->do_action(Array)\n#4 /var/www/html/wp-admin/admin-ajax.php(188): do_action('wp_ajax_cmp_mai...')\n#5 {main}"
+      }
+    ],
+    "response_body": "\n",
+    "response.body.length": 1,
+    "response.headers": {
+      "Date": "Thu, 20 Aug 2026 07:20:47 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "1",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 601.033,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787210442-796c7567-68d8-49b4-9c33-71e44cd124c5",
+    "paths": [
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_settings.php::::11_2_21_47",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-feedback.php::::14_194_195_196_197_199_40_41_43_44_50_53_54_55",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_115_116_117_118_120_121_123_125_129_130_141_142_144_152_155_157_159_161_162_163_164_165_166_167_168_169_17_170_171_173_182_183_194_2022_2023_2024_2025_2026_2027_2028_2030_21_215_225_2551_2553_2555_2560_2563_2564_2567_259_3284_3287_3299_3303_3305_3312_476_56_57_58_59_60_63_636_641_644_646_69_70_71_72_73_74_75_757_758_76_768_77_79_80_87_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_html.php::::2_475",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/cmp-update-process.php::::10_13_3_372_6"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 5,
+    "is_interesting": false,
+    "fuzzer_id": "2",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "params"
+  },
+  {
+    "coverage_id": "1787210448-8ef82206-3834-47c0-83e6-3c5865b57765",
+    "priority": 5,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "cmp_mailchimp_list_ajax"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "params": "fuzz2"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 8192,
+        "errstr": "Constant FILTER_SANITIZE_STRING is deprecated",
+        "errfile": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "errline": 2560
+      }
+    ],
+    "exceptions": [
+      {
+        "code": 0,
+        "file": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "message": "Cannot access offset of type string on string",
+        "line": 2567,
+        "previous": null,
+        "trace": [
+          {
+            "function": "cmp_mailchimp_list_ajax",
+            "class": "CMP_Coming_Soon_and_Maintenance",
+            "type": "->",
+            "args": [
+              ""
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/class-wp-hook.php",
+            "line": 308,
+            "function": "call_user_func_array",
+            "args": [
+              [
+                {
+                  "render_settings": {}
+                },
+                "cmp_mailchimp_list_ajax"
+              ],
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/class-wp-hook.php",
+            "line": 332,
+            "function": "apply_filters",
+            "class": "WP_Hook",
+            "type": "->",
+            "args": [
+              "",
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/plugin.php",
+            "line": 517,
+            "function": "do_action",
+            "class": "WP_Hook",
+            "type": "->",
+            "args": [
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-admin/admin-ajax.php",
+            "line": 188,
+            "function": "do_action",
+            "args": [
+              "wp_ajax_cmp_mailchimp_list_ajax"
+            ]
+          }
+        ],
+        "traceAsString": "#0 [internal function]: CMP_Coming_Soon_and_Maintenance->cmp_mailchimp_list_ajax('')\n#1 /var/www/html/wp-includes/class-wp-hook.php(308): call_user_func_array(Array, Array)\n#2 /var/www/html/wp-includes/class-wp-hook.php(332): WP_Hook->apply_filters('', Array)\n#3 /var/www/html/wp-includes/plugin.php(517): WP_Hook->do_action(Array)\n#4 /var/www/html/wp-admin/admin-ajax.php(188): do_action('wp_ajax_cmp_mai...')\n#5 {main}"
+      }
+    ],
+    "response_body": "\n",
+    "response.body.length": 1,
+    "response.headers": {
+      "Date": "Thu, 20 Aug 2026 07:20:48 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "1",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 419.201,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787210442-796c7567-68d8-49b4-9c33-71e44cd124c5",
+    "paths": [
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_settings.php::::11_2_21_47",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-feedback.php::::14_194_195_196_197_199_40_41_43_44_50_53_54_55",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_115_116_117_118_120_121_123_125_129_130_141_142_144_152_155_157_159_161_162_163_164_165_166_167_168_169_17_170_171_173_182_183_194_2022_2023_2024_2025_2026_2027_2028_2030_21_215_225_2551_2553_2555_2560_2563_2564_2567_259_3284_3287_3299_3303_3305_3312_476_56_57_58_59_60_63_636_641_644_646_69_70_71_72_73_74_75_757_758_76_768_77_79_80_87_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_html.php::::2_475",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/cmp-update-process.php::::10_13_3_372_6"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 5,
+    "is_interesting": false,
+    "fuzzer_id": "2",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "params"
+  },
+  {
+    "coverage_id": "1787210448-230f031b-9d5a-49a3-98e4-a03a21c16f22",
+    "priority": 5,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "cmp_mailchimp_list_ajax"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "params": "fuqz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 8192,
+        "errstr": "Constant FILTER_SANITIZE_STRING is deprecated",
+        "errfile": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "errline": 2560
+      }
+    ],
+    "exceptions": [
+      {
+        "code": 0,
+        "file": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "message": "Cannot access offset of type string on string",
+        "line": 2567,
+        "previous": null,
+        "trace": [
+          {
+            "function": "cmp_mailchimp_list_ajax",
+            "class": "CMP_Coming_Soon_and_Maintenance",
+            "type": "->",
+            "args": [
+              ""
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/class-wp-hook.php",
+            "line": 308,
+            "function": "call_user_func_array",
+            "args": [
+              [
+                {
+                  "render_settings": {}
+                },
+                "cmp_mailchimp_list_ajax"
+              ],
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/class-wp-hook.php",
+            "line": 332,
+            "function": "apply_filters",
+            "class": "WP_Hook",
+            "type": "->",
+            "args": [
+              "",
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/plugin.php",
+            "line": 517,
+            "function": "do_action",
+            "class": "WP_Hook",
+            "type": "->",
+            "args": [
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-admin/admin-ajax.php",
+            "line": 188,
+            "function": "do_action",
+            "args": [
+              "wp_ajax_cmp_mailchimp_list_ajax"
+            ]
+          }
+        ],
+        "traceAsString": "#0 [internal function]: CMP_Coming_Soon_and_Maintenance->cmp_mailchimp_list_ajax('')\n#1 /var/www/html/wp-includes/class-wp-hook.php(308): call_user_func_array(Array, Array)\n#2 /var/www/html/wp-includes/class-wp-hook.php(332): WP_Hook->apply_filters('', Array)\n#3 /var/www/html/wp-includes/plugin.php(517): WP_Hook->do_action(Array)\n#4 /var/www/html/wp-admin/admin-ajax.php(188): do_action('wp_ajax_cmp_mai...')\n#5 {main}"
+      }
+    ],
+    "response_body": "\n",
+    "response.body.length": 1,
+    "response.headers": {
+      "Date": "Thu, 20 Aug 2026 07:20:49 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "1",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 701.103,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787210442-796c7567-68d8-49b4-9c33-71e44cd124c5",
+    "paths": [
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_settings.php::::11_2_21_47",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-feedback.php::::14_194_195_196_197_199_40_41_43_44_50_53_54_55",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_115_116_117_118_120_121_123_125_129_130_141_142_144_152_155_157_159_161_162_163_164_165_166_167_168_169_17_170_171_173_182_183_194_2022_2023_2024_2025_2026_2027_2028_2030_21_215_225_2551_2553_2555_2560_2563_2564_2567_259_3284_3287_3299_3303_3305_3312_476_56_57_58_59_60_63_636_641_644_646_69_70_71_72_73_74_75_757_758_76_768_77_79_80_87_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_html.php::::2_475",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/cmp-update-process.php::::10_13_3_372_6"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 5,
+    "is_interesting": false,
+    "fuzzer_id": "2",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "params"
+  },
+  {
+    "coverage_id": "1787210449-05cccc02-35bf-417e-b353-c4f0cfbda199",
+    "priority": 5,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "cmp_mailchimp_list_ajax"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "params": "fuzzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 8192,
+        "errstr": "Constant FILTER_SANITIZE_STRING is deprecated",
+        "errfile": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "errline": 2560
+      }
+    ],
+    "exceptions": [
+      {
+        "code": 0,
+        "file": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "message": "Cannot access offset of type string on string",
+        "line": 2567,
+        "previous": null,
+        "trace": [
+          {
+            "function": "cmp_mailchimp_list_ajax",
+            "class": "CMP_Coming_Soon_and_Maintenance",
+            "type": "->",
+            "args": [
+              ""
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/class-wp-hook.php",
+            "line": 308,
+            "function": "call_user_func_array",
+            "args": [
+              [
+                {
+                  "render_settings": {}
+                },
+                "cmp_mailchimp_list_ajax"
+              ],
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/class-wp-hook.php",
+            "line": 332,
+            "function": "apply_filters",
+            "class": "WP_Hook",
+            "type": "->",
+            "args": [
+              "",
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/plugin.php",
+            "line": 517,
+            "function": "do_action",
+            "class": "WP_Hook",
+            "type": "->",
+            "args": [
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-admin/admin-ajax.php",
+            "line": 188,
+            "function": "do_action",
+            "args": [
+              "wp_ajax_cmp_mailchimp_list_ajax"
+            ]
+          }
+        ],
+        "traceAsString": "#0 [internal function]: CMP_Coming_Soon_and_Maintenance->cmp_mailchimp_list_ajax('')\n#1 /var/www/html/wp-includes/class-wp-hook.php(308): call_user_func_array(Array, Array)\n#2 /var/www/html/wp-includes/class-wp-hook.php(332): WP_Hook->apply_filters('', Array)\n#3 /var/www/html/wp-includes/plugin.php(517): WP_Hook->do_action(Array)\n#4 /var/www/html/wp-admin/admin-ajax.php(188): do_action('wp_ajax_cmp_mai...')\n#5 {main}"
+      }
+    ],
+    "response_body": "\n",
+    "response.body.length": 1,
+    "response.headers": {
+      "Date": "Thu, 20 Aug 2026 07:20:50 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "1",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 670.36,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787210442-796c7567-68d8-49b4-9c33-71e44cd124c5",
+    "paths": [
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_settings.php::::11_2_21_47",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-feedback.php::::14_194_195_196_197_199_40_41_43_44_50_53_54_55",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_115_116_117_118_120_121_123_125_129_130_141_142_144_152_155_157_159_161_162_163_164_165_166_167_168_169_17_170_171_173_182_183_194_2022_2023_2024_2025_2026_2027_2028_2030_21_215_225_2551_2553_2555_2560_2563_2564_2567_259_3284_3287_3299_3303_3305_3312_476_56_57_58_59_60_63_636_641_644_646_69_70_71_72_73_74_75_757_758_76_768_77_79_80_87_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_html.php::::2_475",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/cmp-update-process.php::::10_13_3_372_6"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 5,
+    "is_interesting": false,
+    "fuzzer_id": "2",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "params"
+  },
+  {
+    "coverage_id": "1787210451-ccca8d4f-b84d-442d-a7ca-30643598f4f6",
+    "priority": 5,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "cmp_mailchimp_list_ajax"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "params": "fuyz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 8192,
+        "errstr": "Constant FILTER_SANITIZE_STRING is deprecated",
+        "errfile": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "errline": 2560
+      }
+    ],
+    "exceptions": [
+      {
+        "code": 0,
+        "file": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "message": "Cannot access offset of type string on string",
+        "line": 2567,
+        "previous": null,
+        "trace": [
+          {
+            "function": "cmp_mailchimp_list_ajax",
+            "class": "CMP_Coming_Soon_and_Maintenance",
+            "type": "->",
+            "args": [
+              ""
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/class-wp-hook.php",
+            "line": 308,
+            "function": "call_user_func_array",
+            "args": [
+              [
+                {
+                  "render_settings": {}
+                },
+                "cmp_mailchimp_list_ajax"
+              ],
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/class-wp-hook.php",
+            "line": 332,
+            "function": "apply_filters",
+            "class": "WP_Hook",
+            "type": "->",
+            "args": [
+              "",
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/plugin.php",
+            "line": 517,
+            "function": "do_action",
+            "class": "WP_Hook",
+            "type": "->",
+            "args": [
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-admin/admin-ajax.php",
+            "line": 188,
+            "function": "do_action",
+            "args": [
+              "wp_ajax_cmp_mailchimp_list_ajax"
+            ]
+          }
+        ],
+        "traceAsString": "#0 [internal function]: CMP_Coming_Soon_and_Maintenance->cmp_mailchimp_list_ajax('')\n#1 /var/www/html/wp-includes/class-wp-hook.php(308): call_user_func_array(Array, Array)\n#2 /var/www/html/wp-includes/class-wp-hook.php(332): WP_Hook->apply_filters('', Array)\n#3 /var/www/html/wp-includes/plugin.php(517): WP_Hook->do_action(Array)\n#4 /var/www/html/wp-admin/admin-ajax.php(188): do_action('wp_ajax_cmp_mai...')\n#5 {main}"
+      }
+    ],
+    "response_body": "\n",
+    "response.body.length": 1,
+    "response.headers": {
+      "Date": "Thu, 20 Aug 2026 07:20:52 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "1",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 900.497,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787210442-796c7567-68d8-49b4-9c33-71e44cd124c5",
+    "paths": [
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_settings.php::::11_2_21_47",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-feedback.php::::14_194_195_196_197_199_40_41_43_44_50_53_54_55",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_115_116_117_118_120_121_123_125_129_130_141_142_144_152_155_157_159_161_162_163_164_165_166_167_168_169_17_170_171_173_182_183_194_2022_2023_2024_2025_2026_2027_2028_2030_21_215_225_2551_2553_2555_2560_2563_2564_2567_259_3284_3287_3299_3303_3305_3312_476_56_57_58_59_60_63_636_641_644_646_69_70_71_72_73_74_75_757_758_76_768_77_79_80_87_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_html.php::::2_475",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/cmp-update-process.php::::10_13_3_372_6"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 5,
+    "is_interesting": false,
+    "fuzzer_id": "2",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "params"
+  },
+  {
+    "coverage_id": "1787210452-7b776657-8af1-4b00-8b49-87e3224c20be",
+    "priority": 5,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "cmp_mailchimp_list_ajax"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "params": "fu0z"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 8192,
+        "errstr": "Constant FILTER_SANITIZE_STRING is deprecated",
+        "errfile": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "errline": 2560
+      }
+    ],
+    "exceptions": [
+      {
+        "code": 0,
+        "file": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "message": "Cannot access offset of type string on string",
+        "line": 2567,
+        "previous": null,
+        "trace": [
+          {
+            "function": "cmp_mailchimp_list_ajax",
+            "class": "CMP_Coming_Soon_and_Maintenance",
+            "type": "->",
+            "args": [
+              ""
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/class-wp-hook.php",
+            "line": 308,
+            "function": "call_user_func_array",
+            "args": [
+              [
+                {
+                  "render_settings": {}
+                },
+                "cmp_mailchimp_list_ajax"
+              ],
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/class-wp-hook.php",
+            "line": 332,
+            "function": "apply_filters",
+            "class": "WP_Hook",
+            "type": "->",
+            "args": [
+              "",
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/plugin.php",
+            "line": 517,
+            "function": "do_action",
+            "class": "WP_Hook",
+            "type": "->",
+            "args": [
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-admin/admin-ajax.php",
+            "line": 188,
+            "function": "do_action",
+            "args": [
+              "wp_ajax_cmp_mailchimp_list_ajax"
+            ]
+          }
+        ],
+        "traceAsString": "#0 [internal function]: CMP_Coming_Soon_and_Maintenance->cmp_mailchimp_list_ajax('')\n#1 /var/www/html/wp-includes/class-wp-hook.php(308): call_user_func_array(Array, Array)\n#2 /var/www/html/wp-includes/class-wp-hook.php(332): WP_Hook->apply_filters('', Array)\n#3 /var/www/html/wp-includes/plugin.php(517): WP_Hook->do_action(Array)\n#4 /var/www/html/wp-admin/admin-ajax.php(188): do_action('wp_ajax_cmp_mai...')\n#5 {main}"
+      }
+    ],
+    "response_body": "\n",
+    "response.body.length": 1,
+    "response.headers": {
+      "Date": "Thu, 20 Aug 2026 07:20:52 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "1",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 295.08,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787210442-796c7567-68d8-49b4-9c33-71e44cd124c5",
+    "paths": [
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_settings.php::::11_2_21_47",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-feedback.php::::14_194_195_196_197_199_40_41_43_44_50_53_54_55",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_115_116_117_118_120_121_123_125_129_130_141_142_144_152_155_157_159_161_162_163_164_165_166_167_168_169_17_170_171_173_182_183_194_2022_2023_2024_2025_2026_2027_2028_2030_21_215_225_2551_2553_2555_2560_2563_2564_2567_259_3284_3287_3299_3303_3305_3312_476_56_57_58_59_60_63_636_641_644_646_69_70_71_72_73_74_75_757_758_76_768_77_79_80_87_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_html.php::::2_475",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/cmp-update-process.php::::10_13_3_372_6"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 5,
+    "is_interesting": false,
+    "fuzzer_id": "2",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "params"
+  },
+  {
+    "coverage_id": "1787210452-cfc02ad4-e1ee-49ec-8940-fcca7ac5232a",
+    "priority": 5,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "cmp_mailchimp_list_ajax"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "params": "fuzz{"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 8192,
+        "errstr": "Constant FILTER_SANITIZE_STRING is deprecated",
+        "errfile": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "errline": 2560
+      }
+    ],
+    "exceptions": [
+      {
+        "code": 0,
+        "file": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "message": "Cannot access offset of type string on string",
+        "line": 2567,
+        "previous": null,
+        "trace": [
+          {
+            "function": "cmp_mailchimp_list_ajax",
+            "class": "CMP_Coming_Soon_and_Maintenance",
+            "type": "->",
+            "args": [
+              ""
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/class-wp-hook.php",
+            "line": 308,
+            "function": "call_user_func_array",
+            "args": [
+              [
+                {
+                  "render_settings": {}
+                },
+                "cmp_mailchimp_list_ajax"
+              ],
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/class-wp-hook.php",
+            "line": 332,
+            "function": "apply_filters",
+            "class": "WP_Hook",
+            "type": "->",
+            "args": [
+              "",
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/plugin.php",
+            "line": 517,
+            "function": "do_action",
+            "class": "WP_Hook",
+            "type": "->",
+            "args": [
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-admin/admin-ajax.php",
+            "line": 188,
+            "function": "do_action",
+            "args": [
+              "wp_ajax_cmp_mailchimp_list_ajax"
+            ]
+          }
+        ],
+        "traceAsString": "#0 [internal function]: CMP_Coming_Soon_and_Maintenance->cmp_mailchimp_list_ajax('')\n#1 /var/www/html/wp-includes/class-wp-hook.php(308): call_user_func_array(Array, Array)\n#2 /var/www/html/wp-includes/class-wp-hook.php(332): WP_Hook->apply_filters('', Array)\n#3 /var/www/html/wp-includes/plugin.php(517): WP_Hook->do_action(Array)\n#4 /var/www/html/wp-admin/admin-ajax.php(188): do_action('wp_ajax_cmp_mai...')\n#5 {main}"
+      }
+    ],
+    "response_body": "\n",
+    "response.body.length": 1,
+    "response.headers": {
+      "Date": "Thu, 20 Aug 2026 07:20:53 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "1",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 748.8,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787210442-796c7567-68d8-49b4-9c33-71e44cd124c5",
+    "paths": [
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_settings.php::::11_2_21_47",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-feedback.php::::14_194_195_196_197_199_40_41_43_44_50_53_54_55",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_115_116_117_118_120_121_123_125_129_130_141_142_144_152_155_157_159_161_162_163_164_165_166_167_168_169_17_170_171_173_182_183_194_2022_2023_2024_2025_2026_2027_2028_2030_21_215_225_2551_2553_2555_2560_2563_2564_2567_259_3284_3287_3299_3303_3305_3312_476_56_57_58_59_60_63_636_641_644_646_69_70_71_72_73_74_75_757_758_76_768_77_79_80_87_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_html.php::::2_475",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/cmp-update-process.php::::10_13_3_372_6"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 5,
+    "is_interesting": false,
+    "fuzzer_id": "2",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "params"
+  },
+  {
+    "coverage_id": "1787210453-48c58903-59fa-476a-ac37-50e21cf2af32",
+    "priority": 5,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "cmp_mailchimp_list_ajax"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "params": "fu/etc/passwdzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 8192,
+        "errstr": "Constant FILTER_SANITIZE_STRING is deprecated",
+        "errfile": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "errline": 2560
+      }
+    ],
+    "exceptions": [
+      {
+        "code": 0,
+        "file": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "message": "Cannot access offset of type string on string",
+        "line": 2567,
+        "previous": null,
+        "trace": [
+          {
+            "function": "cmp_mailchimp_list_ajax",
+            "class": "CMP_Coming_Soon_and_Maintenance",
+            "type": "->",
+            "args": [
+              ""
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/class-wp-hook.php",
+            "line": 308,
+            "function": "call_user_func_array",
+            "args": [
+              [
+                {
+                  "render_settings": {}
+                },
+                "cmp_mailchimp_list_ajax"
+              ],
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/class-wp-hook.php",
+            "line": 332,
+            "function": "apply_filters",
+            "class": "WP_Hook",
+            "type": "->",
+            "args": [
+              "",
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/plugin.php",
+            "line": 517,
+            "function": "do_action",
+            "class": "WP_Hook",
+            "type": "->",
+            "args": [
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-admin/admin-ajax.php",
+            "line": 188,
+            "function": "do_action",
+            "args": [
+              "wp_ajax_cmp_mailchimp_list_ajax"
+            ]
+          }
+        ],
+        "traceAsString": "#0 [internal function]: CMP_Coming_Soon_and_Maintenance->cmp_mailchimp_list_ajax('')\n#1 /var/www/html/wp-includes/class-wp-hook.php(308): call_user_func_array(Array, Array)\n#2 /var/www/html/wp-includes/class-wp-hook.php(332): WP_Hook->apply_filters('', Array)\n#3 /var/www/html/wp-includes/plugin.php(517): WP_Hook->do_action(Array)\n#4 /var/www/html/wp-admin/admin-ajax.php(188): do_action('wp_ajax_cmp_mai...')\n#5 {main}"
+      }
+    ],
+    "response_body": "\n",
+    "response.body.length": 1,
+    "response.headers": {
+      "Date": "Thu, 20 Aug 2026 07:20:53 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "1",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 465.308,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787210442-796c7567-68d8-49b4-9c33-71e44cd124c5",
+    "paths": [
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_settings.php::::11_2_21_47",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-feedback.php::::14_194_195_196_197_199_40_41_43_44_50_53_54_55",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_115_116_117_118_120_121_123_125_129_130_141_142_144_152_155_157_159_161_162_163_164_165_166_167_168_169_17_170_171_173_182_183_194_2022_2023_2024_2025_2026_2027_2028_2030_21_215_225_2551_2553_2555_2560_2563_2564_2567_259_3284_3287_3299_3303_3305_3312_476_56_57_58_59_60_63_636_641_644_646_69_70_71_72_73_74_75_757_758_76_768_77_79_80_87_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_html.php::::2_475",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/cmp-update-process.php::::10_13_3_372_6"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 5,
+    "is_interesting": false,
+    "fuzzer_id": "2",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "params"
+  },
+  {
+    "coverage_id": "1787210454-a3847797-0130-4364-9915-7c525187263e",
+    "priority": 5,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "cmp_mailchimp_list_ajax"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "params": "Zuzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 8192,
+        "errstr": "Constant FILTER_SANITIZE_STRING is deprecated",
+        "errfile": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "errline": 2560
+      }
+    ],
+    "exceptions": [
+      {
+        "code": 0,
+        "file": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "message": "Cannot access offset of type string on string",
+        "line": 2567,
+        "previous": null,
+        "trace": [
+          {
+            "function": "cmp_mailchimp_list_ajax",
+            "class": "CMP_Coming_Soon_and_Maintenance",
+            "type": "->",
+            "args": [
+              ""
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/class-wp-hook.php",
+            "line": 308,
+            "function": "call_user_func_array",
+            "args": [
+              [
+                {
+                  "render_settings": {}
+                },
+                "cmp_mailchimp_list_ajax"
+              ],
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/class-wp-hook.php",
+            "line": 332,
+            "function": "apply_filters",
+            "class": "WP_Hook",
+            "type": "->",
+            "args": [
+              "",
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/plugin.php",
+            "line": 517,
+            "function": "do_action",
+            "class": "WP_Hook",
+            "type": "->",
+            "args": [
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-admin/admin-ajax.php",
+            "line": 188,
+            "function": "do_action",
+            "args": [
+              "wp_ajax_cmp_mailchimp_list_ajax"
+            ]
+          }
+        ],
+        "traceAsString": "#0 [internal function]: CMP_Coming_Soon_and_Maintenance->cmp_mailchimp_list_ajax('')\n#1 /var/www/html/wp-includes/class-wp-hook.php(308): call_user_func_array(Array, Array)\n#2 /var/www/html/wp-includes/class-wp-hook.php(332): WP_Hook->apply_filters('', Array)\n#3 /var/www/html/wp-includes/plugin.php(517): WP_Hook->do_action(Array)\n#4 /var/www/html/wp-admin/admin-ajax.php(188): do_action('wp_ajax_cmp_mai...')\n#5 {main}"
+      }
+    ],
+    "response_body": "\n",
+    "response.body.length": 1,
+    "response.headers": {
+      "Date": "Thu, 20 Aug 2026 07:20:54 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "1",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 502.881,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787210442-796c7567-68d8-49b4-9c33-71e44cd124c5",
+    "paths": [
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_settings.php::::11_2_21_47",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-feedback.php::::14_194_195_196_197_199_40_41_43_44_50_53_54_55",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_115_116_117_118_120_121_123_125_129_130_141_142_144_152_155_157_159_161_162_163_164_165_166_167_168_169_17_170_171_173_182_183_194_2022_2023_2024_2025_2026_2027_2028_2030_21_215_225_2551_2553_2555_2560_2563_2564_2567_259_3284_3287_3299_3303_3305_3312_476_56_57_58_59_60_63_636_641_644_646_69_70_71_72_73_74_75_757_758_76_768_77_79_80_87_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_html.php::::2_475",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/cmp-update-process.php::::10_13_3_372_6"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 5,
+    "is_interesting": false,
+    "fuzzer_id": "2",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "params"
+  },
+  {
+    "coverage_id": "1787210454-2b62c606-9a30-4a23-9040-70b1dd99dc45",
+    "priority": 5,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "cmp_mailchimp_list_ajax"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "params": "f^zz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 8192,
+        "errstr": "Constant FILTER_SANITIZE_STRING is deprecated",
+        "errfile": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "errline": 2560
+      }
+    ],
+    "exceptions": [
+      {
+        "code": 0,
+        "file": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "message": "Cannot access offset of type string on string",
+        "line": 2567,
+        "previous": null,
+        "trace": [
+          {
+            "function": "cmp_mailchimp_list_ajax",
+            "class": "CMP_Coming_Soon_and_Maintenance",
+            "type": "->",
+            "args": [
+              ""
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/class-wp-hook.php",
+            "line": 308,
+            "function": "call_user_func_array",
+            "args": [
+              [
+                {
+                  "render_settings": {}
+                },
+                "cmp_mailchimp_list_ajax"
+              ],
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/class-wp-hook.php",
+            "line": 332,
+            "function": "apply_filters",
+            "class": "WP_Hook",
+            "type": "->",
+            "args": [
+              "",
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/plugin.php",
+            "line": 517,
+            "function": "do_action",
+            "class": "WP_Hook",
+            "type": "->",
+            "args": [
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-admin/admin-ajax.php",
+            "line": 188,
+            "function": "do_action",
+            "args": [
+              "wp_ajax_cmp_mailchimp_list_ajax"
+            ]
+          }
+        ],
+        "traceAsString": "#0 [internal function]: CMP_Coming_Soon_and_Maintenance->cmp_mailchimp_list_ajax('')\n#1 /var/www/html/wp-includes/class-wp-hook.php(308): call_user_func_array(Array, Array)\n#2 /var/www/html/wp-includes/class-wp-hook.php(332): WP_Hook->apply_filters('', Array)\n#3 /var/www/html/wp-includes/plugin.php(517): WP_Hook->do_action(Array)\n#4 /var/www/html/wp-admin/admin-ajax.php(188): do_action('wp_ajax_cmp_mai...')\n#5 {main}"
+      }
+    ],
+    "response_body": "\n",
+    "response.body.length": 1,
+    "response.headers": {
+      "Date": "Thu, 20 Aug 2026 07:20:54 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "1",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 632.721,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787210442-796c7567-68d8-49b4-9c33-71e44cd124c5",
+    "paths": [
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_settings.php::::11_2_21_47",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-feedback.php::::14_194_195_196_197_199_40_41_43_44_50_53_54_55",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_115_116_117_118_120_121_123_125_129_130_141_142_144_152_155_157_159_161_162_163_164_165_166_167_168_169_17_170_171_173_182_183_194_2022_2023_2024_2025_2026_2027_2028_2030_21_215_225_2551_2553_2555_2560_2563_2564_2567_259_3284_3287_3299_3303_3305_3312_476_56_57_58_59_60_63_636_641_644_646_69_70_71_72_73_74_75_757_758_76_768_77_79_80_87_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_html.php::::2_475",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/cmp-update-process.php::::10_13_3_372_6"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 5,
+    "is_interesting": false,
+    "fuzzer_id": "2",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "params"
+  },
+  {
+    "coverage_id": "1787210455-84967b6f-9574-4545-be04-8505bce4300b",
+    "priority": 5,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "cmp_mailchimp_list_ajax"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "params": "\u0001fuzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 8192,
+        "errstr": "Constant FILTER_SANITIZE_STRING is deprecated",
+        "errfile": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "errline": 2560
+      }
+    ],
+    "exceptions": [
+      {
+        "code": 0,
+        "file": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "message": "Cannot access offset of type string on string",
+        "line": 2567,
+        "previous": null,
+        "trace": [
+          {
+            "function": "cmp_mailchimp_list_ajax",
+            "class": "CMP_Coming_Soon_and_Maintenance",
+            "type": "->",
+            "args": [
+              ""
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/class-wp-hook.php",
+            "line": 308,
+            "function": "call_user_func_array",
+            "args": [
+              [
+                {
+                  "render_settings": {}
+                },
+                "cmp_mailchimp_list_ajax"
+              ],
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/class-wp-hook.php",
+            "line": 332,
+            "function": "apply_filters",
+            "class": "WP_Hook",
+            "type": "->",
+            "args": [
+              "",
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/plugin.php",
+            "line": 517,
+            "function": "do_action",
+            "class": "WP_Hook",
+            "type": "->",
+            "args": [
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-admin/admin-ajax.php",
+            "line": 188,
+            "function": "do_action",
+            "args": [
+              "wp_ajax_cmp_mailchimp_list_ajax"
+            ]
+          }
+        ],
+        "traceAsString": "#0 [internal function]: CMP_Coming_Soon_and_Maintenance->cmp_mailchimp_list_ajax('')\n#1 /var/www/html/wp-includes/class-wp-hook.php(308): call_user_func_array(Array, Array)\n#2 /var/www/html/wp-includes/class-wp-hook.php(332): WP_Hook->apply_filters('', Array)\n#3 /var/www/html/wp-includes/plugin.php(517): WP_Hook->do_action(Array)\n#4 /var/www/html/wp-admin/admin-ajax.php(188): do_action('wp_ajax_cmp_mai...')\n#5 {main}"
+      }
+    ],
+    "response_body": "\n",
+    "response.body.length": 1,
+    "response.headers": {
+      "Date": "Thu, 20 Aug 2026 07:20:55 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "1",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 443.348,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787210442-796c7567-68d8-49b4-9c33-71e44cd124c5",
+    "paths": [
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_settings.php::::11_2_21_47",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-feedback.php::::14_194_195_196_197_199_40_41_43_44_50_53_54_55",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_115_116_117_118_120_121_123_125_129_130_141_142_144_152_155_157_159_161_162_163_164_165_166_167_168_169_17_170_171_173_182_183_194_2022_2023_2024_2025_2026_2027_2028_2030_21_215_225_2551_2553_2555_2560_2563_2564_2567_259_3284_3287_3299_3303_3305_3312_476_56_57_58_59_60_63_636_641_644_646_69_70_71_72_73_74_75_757_758_76_768_77_79_80_87_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_html.php::::2_475",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/cmp-update-process.php::::10_13_3_372_6"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 5,
+    "is_interesting": false,
+    "fuzzer_id": "2",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "params"
+  },
+  {
+    "coverage_id": "1787210456-46773295-17dc-47bd-b58b-954daa245e57",
+    "priority": 5,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "cmp_mailchimp_list_ajax"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "params": "0uzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 8192,
+        "errstr": "Constant FILTER_SANITIZE_STRING is deprecated",
+        "errfile": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "errline": 2560
+      }
+    ],
+    "exceptions": [
+      {
+        "code": 0,
+        "file": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "message": "Cannot access offset of type string on string",
+        "line": 2567,
+        "previous": null,
+        "trace": [
+          {
+            "function": "cmp_mailchimp_list_ajax",
+            "class": "CMP_Coming_Soon_and_Maintenance",
+            "type": "->",
+            "args": [
+              ""
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/class-wp-hook.php",
+            "line": 308,
+            "function": "call_user_func_array",
+            "args": [
+              [
+                {
+                  "render_settings": {}
+                },
+                "cmp_mailchimp_list_ajax"
+              ],
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/class-wp-hook.php",
+            "line": 332,
+            "function": "apply_filters",
+            "class": "WP_Hook",
+            "type": "->",
+            "args": [
+              "",
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/plugin.php",
+            "line": 517,
+            "function": "do_action",
+            "class": "WP_Hook",
+            "type": "->",
+            "args": [
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-admin/admin-ajax.php",
+            "line": 188,
+            "function": "do_action",
+            "args": [
+              "wp_ajax_cmp_mailchimp_list_ajax"
+            ]
+          }
+        ],
+        "traceAsString": "#0 [internal function]: CMP_Coming_Soon_and_Maintenance->cmp_mailchimp_list_ajax('')\n#1 /var/www/html/wp-includes/class-wp-hook.php(308): call_user_func_array(Array, Array)\n#2 /var/www/html/wp-includes/class-wp-hook.php(332): WP_Hook->apply_filters('', Array)\n#3 /var/www/html/wp-includes/plugin.php(517): WP_Hook->do_action(Array)\n#4 /var/www/html/wp-admin/admin-ajax.php(188): do_action('wp_ajax_cmp_mai...')\n#5 {main}"
+      }
+    ],
+    "response_body": "\n",
+    "response.body.length": 1,
+    "response.headers": {
+      "Date": "Thu, 20 Aug 2026 07:20:56 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "1",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 481.604,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787210442-796c7567-68d8-49b4-9c33-71e44cd124c5",
+    "paths": [
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_settings.php::::11_2_21_47",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-feedback.php::::14_194_195_196_197_199_40_41_43_44_50_53_54_55",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_115_116_117_118_120_121_123_125_129_130_141_142_144_152_155_157_159_161_162_163_164_165_166_167_168_169_17_170_171_173_182_183_194_2022_2023_2024_2025_2026_2027_2028_2030_21_215_225_2551_2553_2555_2560_2563_2564_2567_259_3284_3287_3299_3303_3305_3312_476_56_57_58_59_60_63_636_641_644_646_69_70_71_72_73_74_75_757_758_76_768_77_79_80_87_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_html.php::::2_475",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/cmp-update-process.php::::10_13_3_372_6"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 5,
+    "is_interesting": false,
+    "fuzzer_id": "2",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "params"
+  },
+  {
+    "coverage_id": "1787210456-4b328ae4-7957-421c-84e0-8b374323f508",
+    "priority": 5,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "cmp_mailchimp_list_ajax"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "params": "*fuzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 8192,
+        "errstr": "Constant FILTER_SANITIZE_STRING is deprecated",
+        "errfile": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "errline": 2560
+      }
+    ],
+    "exceptions": [
+      {
+        "code": 0,
+        "file": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "message": "Cannot access offset of type string on string",
+        "line": 2567,
+        "previous": null,
+        "trace": [
+          {
+            "function": "cmp_mailchimp_list_ajax",
+            "class": "CMP_Coming_Soon_and_Maintenance",
+            "type": "->",
+            "args": [
+              ""
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/class-wp-hook.php",
+            "line": 308,
+            "function": "call_user_func_array",
+            "args": [
+              [
+                {
+                  "render_settings": {}
+                },
+                "cmp_mailchimp_list_ajax"
+              ],
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/class-wp-hook.php",
+            "line": 332,
+            "function": "apply_filters",
+            "class": "WP_Hook",
+            "type": "->",
+            "args": [
+              "",
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/plugin.php",
+            "line": 517,
+            "function": "do_action",
+            "class": "WP_Hook",
+            "type": "->",
+            "args": [
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-admin/admin-ajax.php",
+            "line": 188,
+            "function": "do_action",
+            "args": [
+              "wp_ajax_cmp_mailchimp_list_ajax"
+            ]
+          }
+        ],
+        "traceAsString": "#0 [internal function]: CMP_Coming_Soon_and_Maintenance->cmp_mailchimp_list_ajax('')\n#1 /var/www/html/wp-includes/class-wp-hook.php(308): call_user_func_array(Array, Array)\n#2 /var/www/html/wp-includes/class-wp-hook.php(332): WP_Hook->apply_filters('', Array)\n#3 /var/www/html/wp-includes/plugin.php(517): WP_Hook->do_action(Array)\n#4 /var/www/html/wp-admin/admin-ajax.php(188): do_action('wp_ajax_cmp_mai...')\n#5 {main}"
+      }
+    ],
+    "response_body": "\n",
+    "response.body.length": 1,
+    "response.headers": {
+      "Date": "Thu, 20 Aug 2026 07:20:56 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "1",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 410.89,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787210442-796c7567-68d8-49b4-9c33-71e44cd124c5",
+    "paths": [
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_settings.php::::11_2_21_47",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-feedback.php::::14_194_195_196_197_199_40_41_43_44_50_53_54_55",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_115_116_117_118_120_121_123_125_129_130_141_142_144_152_155_157_159_161_162_163_164_165_166_167_168_169_17_170_171_173_182_183_194_2022_2023_2024_2025_2026_2027_2028_2030_21_215_225_2551_2553_2555_2560_2563_2564_2567_259_3284_3287_3299_3303_3305_3312_476_56_57_58_59_60_63_636_641_644_646_69_70_71_72_73_74_75_757_758_76_768_77_79_80_87_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_html.php::::2_475",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/cmp-update-process.php::::10_13_3_372_6"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 5,
+    "is_interesting": false,
+    "fuzzer_id": "2",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "params"
+  },
+  {
+    "coverage_id": "1787210457-34c820b1-38d4-4a1d-81d4-28d7bb439a5c",
+    "priority": 5,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "cmp_mailchimp_list_ajax"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "params": "8uzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 8192,
+        "errstr": "Constant FILTER_SANITIZE_STRING is deprecated",
+        "errfile": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "errline": 2560
+      }
+    ],
+    "exceptions": [
+      {
+        "code": 0,
+        "file": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "message": "Cannot access offset of type string on string",
+        "line": 2567,
+        "previous": null,
+        "trace": [
+          {
+            "function": "cmp_mailchimp_list_ajax",
+            "class": "CMP_Coming_Soon_and_Maintenance",
+            "type": "->",
+            "args": [
+              ""
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/class-wp-hook.php",
+            "line": 308,
+            "function": "call_user_func_array",
+            "args": [
+              [
+                {
+                  "render_settings": {}
+                },
+                "cmp_mailchimp_list_ajax"
+              ],
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/class-wp-hook.php",
+            "line": 332,
+            "function": "apply_filters",
+            "class": "WP_Hook",
+            "type": "->",
+            "args": [
+              "",
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/plugin.php",
+            "line": 517,
+            "function": "do_action",
+            "class": "WP_Hook",
+            "type": "->",
+            "args": [
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-admin/admin-ajax.php",
+            "line": 188,
+            "function": "do_action",
+            "args": [
+              "wp_ajax_cmp_mailchimp_list_ajax"
+            ]
+          }
+        ],
+        "traceAsString": "#0 [internal function]: CMP_Coming_Soon_and_Maintenance->cmp_mailchimp_list_ajax('')\n#1 /var/www/html/wp-includes/class-wp-hook.php(308): call_user_func_array(Array, Array)\n#2 /var/www/html/wp-includes/class-wp-hook.php(332): WP_Hook->apply_filters('', Array)\n#3 /var/www/html/wp-includes/plugin.php(517): WP_Hook->do_action(Array)\n#4 /var/www/html/wp-admin/admin-ajax.php(188): do_action('wp_ajax_cmp_mai...')\n#5 {main}"
+      }
+    ],
+    "response_body": "\n",
+    "response.body.length": 1,
+    "response.headers": {
+      "Date": "Thu, 20 Aug 2026 07:20:57 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "1",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 279.285,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787210442-796c7567-68d8-49b4-9c33-71e44cd124c5",
+    "paths": [
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_settings.php::::11_2_21_47",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-feedback.php::::14_194_195_196_197_199_40_41_43_44_50_53_54_55",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_115_116_117_118_120_121_123_125_129_130_141_142_144_152_155_157_159_161_162_163_164_165_166_167_168_169_17_170_171_173_182_183_194_2022_2023_2024_2025_2026_2027_2028_2030_21_215_225_2551_2553_2555_2560_2563_2564_2567_259_3284_3287_3299_3303_3305_3312_476_56_57_58_59_60_63_636_641_644_646_69_70_71_72_73_74_75_757_758_76_768_77_79_80_87_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_html.php::::2_475",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/cmp-update-process.php::::10_13_3_372_6"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 5,
+    "is_interesting": false,
+    "fuzzer_id": "2",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "params"
+  },
+  {
+    "coverage_id": "1787210457-20eb3376-18fa-4950-903d-9039462df83c",
+    "priority": 5,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "cmp_mailchimp_list_ajax"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "params": "fuzzG"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 8192,
+        "errstr": "Constant FILTER_SANITIZE_STRING is deprecated",
+        "errfile": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "errline": 2560
+      }
+    ],
+    "exceptions": [
+      {
+        "code": 0,
+        "file": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "message": "Cannot access offset of type string on string",
+        "line": 2567,
+        "previous": null,
+        "trace": [
+          {
+            "function": "cmp_mailchimp_list_ajax",
+            "class": "CMP_Coming_Soon_and_Maintenance",
+            "type": "->",
+            "args": [
+              ""
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/class-wp-hook.php",
+            "line": 308,
+            "function": "call_user_func_array",
+            "args": [
+              [
+                {
+                  "render_settings": {}
+                },
+                "cmp_mailchimp_list_ajax"
+              ],
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/class-wp-hook.php",
+            "line": 332,
+            "function": "apply_filters",
+            "class": "WP_Hook",
+            "type": "->",
+            "args": [
+              "",
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/plugin.php",
+            "line": 517,
+            "function": "do_action",
+            "class": "WP_Hook",
+            "type": "->",
+            "args": [
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-admin/admin-ajax.php",
+            "line": 188,
+            "function": "do_action",
+            "args": [
+              "wp_ajax_cmp_mailchimp_list_ajax"
+            ]
+          }
+        ],
+        "traceAsString": "#0 [internal function]: CMP_Coming_Soon_and_Maintenance->cmp_mailchimp_list_ajax('')\n#1 /var/www/html/wp-includes/class-wp-hook.php(308): call_user_func_array(Array, Array)\n#2 /var/www/html/wp-includes/class-wp-hook.php(332): WP_Hook->apply_filters('', Array)\n#3 /var/www/html/wp-includes/plugin.php(517): WP_Hook->do_action(Array)\n#4 /var/www/html/wp-admin/admin-ajax.php(188): do_action('wp_ajax_cmp_mai...')\n#5 {main}"
+      }
+    ],
+    "response_body": "\n",
+    "response.body.length": 1,
+    "response.headers": {
+      "Date": "Thu, 20 Aug 2026 07:20:58 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "1",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 944.77,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787210442-796c7567-68d8-49b4-9c33-71e44cd124c5",
+    "paths": [
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_settings.php::::11_2_21_47",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-feedback.php::::14_194_195_196_197_199_40_41_43_44_50_53_54_55",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_115_116_117_118_120_121_123_125_129_130_141_142_144_152_155_157_159_161_162_163_164_165_166_167_168_169_17_170_171_173_182_183_194_2022_2023_2024_2025_2026_2027_2028_2030_21_215_225_2551_2553_2555_2560_2563_2564_2567_259_3284_3287_3299_3303_3305_3312_476_56_57_58_59_60_63_636_641_644_646_69_70_71_72_73_74_75_757_758_76_768_77_79_80_87_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_html.php::::2_475",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/cmp-update-process.php::::10_13_3_372_6"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 5,
+    "is_interesting": false,
+    "fuzzer_id": "2",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "params"
+  },
+  {
+    "coverage_id": "1787210458-bb6ac4af-92f9-45df-a851-7d5f393573f9",
+    "priority": 5,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "cmp_mailchimp_list_ajax"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "params": "fx<9uzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 8192,
+        "errstr": "Constant FILTER_SANITIZE_STRING is deprecated",
+        "errfile": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "errline": 2560
+      }
+    ],
+    "exceptions": [
+      {
+        "code": 0,
+        "file": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "message": "Cannot access offset of type string on string",
+        "line": 2567,
+        "previous": null,
+        "trace": [
+          {
+            "function": "cmp_mailchimp_list_ajax",
+            "class": "CMP_Coming_Soon_and_Maintenance",
+            "type": "->",
+            "args": [
+              ""
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/class-wp-hook.php",
+            "line": 308,
+            "function": "call_user_func_array",
+            "args": [
+              [
+                {
+                  "render_settings": {}
+                },
+                "cmp_mailchimp_list_ajax"
+              ],
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/class-wp-hook.php",
+            "line": 332,
+            "function": "apply_filters",
+            "class": "WP_Hook",
+            "type": "->",
+            "args": [
+              "",
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/plugin.php",
+            "line": 517,
+            "function": "do_action",
+            "class": "WP_Hook",
+            "type": "->",
+            "args": [
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-admin/admin-ajax.php",
+            "line": 188,
+            "function": "do_action",
+            "args": [
+              "wp_ajax_cmp_mailchimp_list_ajax"
+            ]
+          }
+        ],
+        "traceAsString": "#0 [internal function]: CMP_Coming_Soon_and_Maintenance->cmp_mailchimp_list_ajax('')\n#1 /var/www/html/wp-includes/class-wp-hook.php(308): call_user_func_array(Array, Array)\n#2 /var/www/html/wp-includes/class-wp-hook.php(332): WP_Hook->apply_filters('', Array)\n#3 /var/www/html/wp-includes/plugin.php(517): WP_Hook->do_action(Array)\n#4 /var/www/html/wp-admin/admin-ajax.php(188): do_action('wp_ajax_cmp_mai...')\n#5 {main}"
+      }
+    ],
+    "response_body": "\n",
+    "response.body.length": 1,
+    "response.headers": {
+      "Date": "Thu, 20 Aug 2026 07:20:59 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "1",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 9.954,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787210442-796c7567-68d8-49b4-9c33-71e44cd124c5",
+    "paths": [
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_settings.php::::11_2_21_47",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-feedback.php::::14_194_195_196_197_199_40_41_43_44_50_53_54_55",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_115_116_117_118_120_121_123_125_129_130_141_142_144_152_155_157_159_161_162_163_164_165_166_167_168_169_17_170_171_173_182_183_194_2022_2023_2024_2025_2026_2027_2028_2030_21_215_225_2551_2553_2555_2560_2563_2564_2567_259_3284_3287_3299_3303_3305_3312_476_56_57_58_59_60_63_636_641_644_646_69_70_71_72_73_74_75_757_758_76_768_77_79_80_87_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_html.php::::2_475",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/cmp-update-process.php::::10_13_3_372_6"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 5,
+    "is_interesting": false,
+    "fuzzer_id": "2",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "params"
+  },
+  {
+    "coverage_id": "1787210460-1bef6493-8eaa-4301-a6e6-2ebee3e1236b",
+    "priority": 5,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "cmp_mailchimp_list_ajax"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "params": "fuzHz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 8192,
+        "errstr": "Constant FILTER_SANITIZE_STRING is deprecated",
+        "errfile": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "errline": 2560
+      }
+    ],
+    "exceptions": [
+      {
+        "code": 0,
+        "file": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "message": "Cannot access offset of type string on string",
+        "line": 2567,
+        "previous": null,
+        "trace": [
+          {
+            "function": "cmp_mailchimp_list_ajax",
+            "class": "CMP_Coming_Soon_and_Maintenance",
+            "type": "->",
+            "args": [
+              ""
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/class-wp-hook.php",
+            "line": 308,
+            "function": "call_user_func_array",
+            "args": [
+              [
+                {
+                  "render_settings": {}
+                },
+                "cmp_mailchimp_list_ajax"
+              ],
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/class-wp-hook.php",
+            "line": 332,
+            "function": "apply_filters",
+            "class": "WP_Hook",
+            "type": "->",
+            "args": [
+              "",
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/plugin.php",
+            "line": 517,
+            "function": "do_action",
+            "class": "WP_Hook",
+            "type": "->",
+            "args": [
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-admin/admin-ajax.php",
+            "line": 188,
+            "function": "do_action",
+            "args": [
+              "wp_ajax_cmp_mailchimp_list_ajax"
+            ]
+          }
+        ],
+        "traceAsString": "#0 [internal function]: CMP_Coming_Soon_and_Maintenance->cmp_mailchimp_list_ajax('')\n#1 /var/www/html/wp-includes/class-wp-hook.php(308): call_user_func_array(Array, Array)\n#2 /var/www/html/wp-includes/class-wp-hook.php(332): WP_Hook->apply_filters('', Array)\n#3 /var/www/html/wp-includes/plugin.php(517): WP_Hook->do_action(Array)\n#4 /var/www/html/wp-admin/admin-ajax.php(188): do_action('wp_ajax_cmp_mai...')\n#5 {main}"
+      }
+    ],
+    "response_body": "\n",
+    "response.body.length": 1,
+    "response.headers": {
+      "Date": "Thu, 20 Aug 2026 07:21:00 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "1",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 460.165,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787210442-796c7567-68d8-49b4-9c33-71e44cd124c5",
+    "paths": [
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_settings.php::::11_2_21_47",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-feedback.php::::14_194_195_196_197_199_40_41_43_44_50_53_54_55",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_115_116_117_118_120_121_123_125_129_130_141_142_144_152_155_157_159_161_162_163_164_165_166_167_168_169_17_170_171_173_182_183_194_2022_2023_2024_2025_2026_2027_2028_2030_21_215_225_2551_2553_2555_2560_2563_2564_2567_259_3284_3287_3299_3303_3305_3312_476_56_57_58_59_60_63_636_641_644_646_69_70_71_72_73_74_75_757_758_76_768_77_79_80_87_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_html.php::::2_475",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/cmp-update-process.php::::10_13_3_372_6"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 5,
+    "is_interesting": false,
+    "fuzzer_id": "2",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "params"
+  },
+  {
+    "coverage_id": "1787210460-a89a084f-262f-4b6a-bdfd-128d40dc4361",
+    "priority": 5,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "cmp_mailchimp_list_ajax"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "params": "fujzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 8192,
+        "errstr": "Constant FILTER_SANITIZE_STRING is deprecated",
+        "errfile": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "errline": 2560
+      }
+    ],
+    "exceptions": [
+      {
+        "code": 0,
+        "file": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "message": "Cannot access offset of type string on string",
+        "line": 2567,
+        "previous": null,
+        "trace": [
+          {
+            "function": "cmp_mailchimp_list_ajax",
+            "class": "CMP_Coming_Soon_and_Maintenance",
+            "type": "->",
+            "args": [
+              ""
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/class-wp-hook.php",
+            "line": 308,
+            "function": "call_user_func_array",
+            "args": [
+              [
+                {
+                  "render_settings": {}
+                },
+                "cmp_mailchimp_list_ajax"
+              ],
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/class-wp-hook.php",
+            "line": 332,
+            "function": "apply_filters",
+            "class": "WP_Hook",
+            "type": "->",
+            "args": [
+              "",
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/plugin.php",
+            "line": 517,
+            "function": "do_action",
+            "class": "WP_Hook",
+            "type": "->",
+            "args": [
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-admin/admin-ajax.php",
+            "line": 188,
+            "function": "do_action",
+            "args": [
+              "wp_ajax_cmp_mailchimp_list_ajax"
+            ]
+          }
+        ],
+        "traceAsString": "#0 [internal function]: CMP_Coming_Soon_and_Maintenance->cmp_mailchimp_list_ajax('')\n#1 /var/www/html/wp-includes/class-wp-hook.php(308): call_user_func_array(Array, Array)\n#2 /var/www/html/wp-includes/class-wp-hook.php(332): WP_Hook->apply_filters('', Array)\n#3 /var/www/html/wp-includes/plugin.php(517): WP_Hook->do_action(Array)\n#4 /var/www/html/wp-admin/admin-ajax.php(188): do_action('wp_ajax_cmp_mai...')\n#5 {main}"
+      }
+    ],
+    "response_body": "\n",
+    "response.body.length": 1,
+    "response.headers": {
+      "Date": "Thu, 20 Aug 2026 07:21:00 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "1",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 309.199,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787210442-796c7567-68d8-49b4-9c33-71e44cd124c5",
+    "paths": [
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_settings.php::::11_2_21_47",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-feedback.php::::14_194_195_196_197_199_40_41_43_44_50_53_54_55",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_115_116_117_118_120_121_123_125_129_130_141_142_144_152_155_157_159_161_162_163_164_165_166_167_168_169_17_170_171_173_182_183_194_2022_2023_2024_2025_2026_2027_2028_2030_21_215_225_2551_2553_2555_2560_2563_2564_2567_259_3284_3287_3299_3303_3305_3312_476_56_57_58_59_60_63_636_641_644_646_69_70_71_72_73_74_75_757_758_76_768_77_79_80_87_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_html.php::::2_475",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/cmp-update-process.php::::10_13_3_372_6"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 5,
+    "is_interesting": false,
+    "fuzzer_id": "2",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "params"
+  },
+  {
+    "coverage_id": "1787210461-58f331a9-bd48-439b-bf16-c91105ba50d5",
+    "priority": 5,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "cmp_mailchimp_list_ajax"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "params": "f1uzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 8192,
+        "errstr": "Constant FILTER_SANITIZE_STRING is deprecated",
+        "errfile": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "errline": 2560
+      }
+    ],
+    "exceptions": [
+      {
+        "code": 0,
+        "file": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "message": "Cannot access offset of type string on string",
+        "line": 2567,
+        "previous": null,
+        "trace": [
+          {
+            "function": "cmp_mailchimp_list_ajax",
+            "class": "CMP_Coming_Soon_and_Maintenance",
+            "type": "->",
+            "args": [
+              ""
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/class-wp-hook.php",
+            "line": 308,
+            "function": "call_user_func_array",
+            "args": [
+              [
+                {
+                  "render_settings": {}
+                },
+                "cmp_mailchimp_list_ajax"
+              ],
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/class-wp-hook.php",
+            "line": 332,
+            "function": "apply_filters",
+            "class": "WP_Hook",
+            "type": "->",
+            "args": [
+              "",
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/plugin.php",
+            "line": 517,
+            "function": "do_action",
+            "class": "WP_Hook",
+            "type": "->",
+            "args": [
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-admin/admin-ajax.php",
+            "line": 188,
+            "function": "do_action",
+            "args": [
+              "wp_ajax_cmp_mailchimp_list_ajax"
+            ]
+          }
+        ],
+        "traceAsString": "#0 [internal function]: CMP_Coming_Soon_and_Maintenance->cmp_mailchimp_list_ajax('')\n#1 /var/www/html/wp-includes/class-wp-hook.php(308): call_user_func_array(Array, Array)\n#2 /var/www/html/wp-includes/class-wp-hook.php(332): WP_Hook->apply_filters('', Array)\n#3 /var/www/html/wp-includes/plugin.php(517): WP_Hook->do_action(Array)\n#4 /var/www/html/wp-admin/admin-ajax.php(188): do_action('wp_ajax_cmp_mai...')\n#5 {main}"
+      }
+    ],
+    "response_body": "\n",
+    "response.body.length": 1,
+    "response.headers": {
+      "Date": "Thu, 20 Aug 2026 07:21:01 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "1",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 431.292,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787210442-796c7567-68d8-49b4-9c33-71e44cd124c5",
+    "paths": [
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_settings.php::::11_2_21_47",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-feedback.php::::14_194_195_196_197_199_40_41_43_44_50_53_54_55",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_115_116_117_118_120_121_123_125_129_130_141_142_144_152_155_157_159_161_162_163_164_165_166_167_168_169_17_170_171_173_182_183_194_2022_2023_2024_2025_2026_2027_2028_2030_21_215_225_2551_2553_2555_2560_2563_2564_2567_259_3284_3287_3299_3303_3305_3312_476_56_57_58_59_60_63_636_641_644_646_69_70_71_72_73_74_75_757_758_76_768_77_79_80_87_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_html.php::::2_475",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/cmp-update-process.php::::10_13_3_372_6"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 5,
+    "is_interesting": false,
+    "fuzzer_id": "2",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "params"
+  },
+  {
+    "coverage_id": "1787210461-27155298-2c86-4fa4-983b-c12913d51614",
+    "priority": 5,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "cmp_mailchimp_list_ajax"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "params": "fu z"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 8192,
+        "errstr": "Constant FILTER_SANITIZE_STRING is deprecated",
+        "errfile": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "errline": 2560
+      }
+    ],
+    "exceptions": [
+      {
+        "code": 0,
+        "file": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "message": "Cannot access offset of type string on string",
+        "line": 2567,
+        "previous": null,
+        "trace": [
+          {
+            "function": "cmp_mailchimp_list_ajax",
+            "class": "CMP_Coming_Soon_and_Maintenance",
+            "type": "->",
+            "args": [
+              ""
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/class-wp-hook.php",
+            "line": 308,
+            "function": "call_user_func_array",
+            "args": [
+              [
+                {
+                  "render_settings": {}
+                },
+                "cmp_mailchimp_list_ajax"
+              ],
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/class-wp-hook.php",
+            "line": 332,
+            "function": "apply_filters",
+            "class": "WP_Hook",
+            "type": "->",
+            "args": [
+              "",
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/plugin.php",
+            "line": 517,
+            "function": "do_action",
+            "class": "WP_Hook",
+            "type": "->",
+            "args": [
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-admin/admin-ajax.php",
+            "line": 188,
+            "function": "do_action",
+            "args": [
+              "wp_ajax_cmp_mailchimp_list_ajax"
+            ]
+          }
+        ],
+        "traceAsString": "#0 [internal function]: CMP_Coming_Soon_and_Maintenance->cmp_mailchimp_list_ajax('')\n#1 /var/www/html/wp-includes/class-wp-hook.php(308): call_user_func_array(Array, Array)\n#2 /var/www/html/wp-includes/class-wp-hook.php(332): WP_Hook->apply_filters('', Array)\n#3 /var/www/html/wp-includes/plugin.php(517): WP_Hook->do_action(Array)\n#4 /var/www/html/wp-admin/admin-ajax.php(188): do_action('wp_ajax_cmp_mai...')\n#5 {main}"
+      }
+    ],
+    "response_body": "\n",
+    "response.body.length": 1,
+    "response.headers": {
+      "Date": "Thu, 20 Aug 2026 07:21:01 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "1",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 343.61,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787210442-796c7567-68d8-49b4-9c33-71e44cd124c5",
+    "paths": [
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_settings.php::::11_2_21_47",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-feedback.php::::14_194_195_196_197_199_40_41_43_44_50_53_54_55",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_115_116_117_118_120_121_123_125_129_130_141_142_144_152_155_157_159_161_162_163_164_165_166_167_168_169_17_170_171_173_182_183_194_2022_2023_2024_2025_2026_2027_2028_2030_21_215_225_2551_2553_2555_2560_2563_2564_2567_259_3284_3287_3299_3303_3305_3312_476_56_57_58_59_60_63_636_641_644_646_69_70_71_72_73_74_75_757_758_76_768_77_79_80_87_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_html.php::::2_475",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/cmp-update-process.php::::10_13_3_372_6"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 5,
+    "is_interesting": false,
+    "fuzzer_id": "2",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "params"
+  },
+  {
+    "coverage_id": "1787210462-fb072656-966a-46f1-b4a9-e2489ae3ea71",
+    "priority": 5,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "cmp_mailchimp_list_ajax"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "params": "+uzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 8192,
+        "errstr": "Constant FILTER_SANITIZE_STRING is deprecated",
+        "errfile": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "errline": 2560
+      }
+    ],
+    "exceptions": [
+      {
+        "code": 0,
+        "file": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "message": "Cannot access offset of type string on string",
+        "line": 2567,
+        "previous": null,
+        "trace": [
+          {
+            "function": "cmp_mailchimp_list_ajax",
+            "class": "CMP_Coming_Soon_and_Maintenance",
+            "type": "->",
+            "args": [
+              ""
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/class-wp-hook.php",
+            "line": 308,
+            "function": "call_user_func_array",
+            "args": [
+              [
+                {
+                  "render_settings": {}
+                },
+                "cmp_mailchimp_list_ajax"
+              ],
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/class-wp-hook.php",
+            "line": 332,
+            "function": "apply_filters",
+            "class": "WP_Hook",
+            "type": "->",
+            "args": [
+              "",
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/plugin.php",
+            "line": 517,
+            "function": "do_action",
+            "class": "WP_Hook",
+            "type": "->",
+            "args": [
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-admin/admin-ajax.php",
+            "line": 188,
+            "function": "do_action",
+            "args": [
+              "wp_ajax_cmp_mailchimp_list_ajax"
+            ]
+          }
+        ],
+        "traceAsString": "#0 [internal function]: CMP_Coming_Soon_and_Maintenance->cmp_mailchimp_list_ajax('')\n#1 /var/www/html/wp-includes/class-wp-hook.php(308): call_user_func_array(Array, Array)\n#2 /var/www/html/wp-includes/class-wp-hook.php(332): WP_Hook->apply_filters('', Array)\n#3 /var/www/html/wp-includes/plugin.php(517): WP_Hook->do_action(Array)\n#4 /var/www/html/wp-admin/admin-ajax.php(188): do_action('wp_ajax_cmp_mai...')\n#5 {main}"
+      }
+    ],
+    "response_body": "\n",
+    "response.body.length": 1,
+    "response.headers": {
+      "Date": "Thu, 20 Aug 2026 07:21:02 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "1",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 421.931,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787210442-796c7567-68d8-49b4-9c33-71e44cd124c5",
+    "paths": [
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_settings.php::::11_2_21_47",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-feedback.php::::14_194_195_196_197_199_40_41_43_44_50_53_54_55",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_115_116_117_118_120_121_123_125_129_130_141_142_144_152_155_157_159_161_162_163_164_165_166_167_168_169_17_170_171_173_182_183_194_2022_2023_2024_2025_2026_2027_2028_2030_21_215_225_2551_2553_2555_2560_2563_2564_2567_259_3284_3287_3299_3303_3305_3312_476_56_57_58_59_60_63_636_641_644_646_69_70_71_72_73_74_75_757_758_76_768_77_79_80_87_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_html.php::::2_475",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/cmp-update-process.php::::10_13_3_372_6"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 5,
+    "is_interesting": false,
+    "fuzzer_id": "2",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "params"
+  },
+  {
+    "coverage_id": "1787210462-79193c71-f96e-4703-9bb0-7f1760cadfa6",
+    "priority": 5,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "cmp_mailchimp_list_ajax"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "params": "fu8z"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 8192,
+        "errstr": "Constant FILTER_SANITIZE_STRING is deprecated",
+        "errfile": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "errline": 2560
+      }
+    ],
+    "exceptions": [
+      {
+        "code": 0,
+        "file": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "message": "Cannot access offset of type string on string",
+        "line": 2567,
+        "previous": null,
+        "trace": [
+          {
+            "function": "cmp_mailchimp_list_ajax",
+            "class": "CMP_Coming_Soon_and_Maintenance",
+            "type": "->",
+            "args": [
+              ""
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/class-wp-hook.php",
+            "line": 308,
+            "function": "call_user_func_array",
+            "args": [
+              [
+                {
+                  "render_settings": {}
+                },
+                "cmp_mailchimp_list_ajax"
+              ],
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/class-wp-hook.php",
+            "line": 332,
+            "function": "apply_filters",
+            "class": "WP_Hook",
+            "type": "->",
+            "args": [
+              "",
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/plugin.php",
+            "line": 517,
+            "function": "do_action",
+            "class": "WP_Hook",
+            "type": "->",
+            "args": [
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-admin/admin-ajax.php",
+            "line": 188,
+            "function": "do_action",
+            "args": [
+              "wp_ajax_cmp_mailchimp_list_ajax"
+            ]
+          }
+        ],
+        "traceAsString": "#0 [internal function]: CMP_Coming_Soon_and_Maintenance->cmp_mailchimp_list_ajax('')\n#1 /var/www/html/wp-includes/class-wp-hook.php(308): call_user_func_array(Array, Array)\n#2 /var/www/html/wp-includes/class-wp-hook.php(332): WP_Hook->apply_filters('', Array)\n#3 /var/www/html/wp-includes/plugin.php(517): WP_Hook->do_action(Array)\n#4 /var/www/html/wp-admin/admin-ajax.php(188): do_action('wp_ajax_cmp_mai...')\n#5 {main}"
+      }
+    ],
+    "response_body": "\n",
+    "response.body.length": 1,
+    "response.headers": {
+      "Date": "Thu, 20 Aug 2026 07:21:02 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "1",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 560.41,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787210442-796c7567-68d8-49b4-9c33-71e44cd124c5",
+    "paths": [
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_settings.php::::11_2_21_47",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-feedback.php::::14_194_195_196_197_199_40_41_43_44_50_53_54_55",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_115_116_117_118_120_121_123_125_129_130_141_142_144_152_155_157_159_161_162_163_164_165_166_167_168_169_17_170_171_173_182_183_194_2022_2023_2024_2025_2026_2027_2028_2030_21_215_225_2551_2553_2555_2560_2563_2564_2567_259_3284_3287_3299_3303_3305_3312_476_56_57_58_59_60_63_636_641_644_646_69_70_71_72_73_74_75_757_758_76_768_77_79_80_87_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_html.php::::2_475",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/cmp-update-process.php::::10_13_3_372_6"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 5,
+    "is_interesting": false,
+    "fuzzer_id": "2",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "params"
+  },
+  {
+    "coverage_id": "1787210463-93aad089-fb15-48f5-b995-32fdc76913d1",
+    "priority": 5,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "cmp_mailchimp_list_ajax"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "params": "fuzzp"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 8192,
+        "errstr": "Constant FILTER_SANITIZE_STRING is deprecated",
+        "errfile": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "errline": 2560
+      }
+    ],
+    "exceptions": [
+      {
+        "code": 0,
+        "file": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "message": "Cannot access offset of type string on string",
+        "line": 2567,
+        "previous": null,
+        "trace": [
+          {
+            "function": "cmp_mailchimp_list_ajax",
+            "class": "CMP_Coming_Soon_and_Maintenance",
+            "type": "->",
+            "args": [
+              ""
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/class-wp-hook.php",
+            "line": 308,
+            "function": "call_user_func_array",
+            "args": [
+              [
+                {
+                  "render_settings": {}
+                },
+                "cmp_mailchimp_list_ajax"
+              ],
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/class-wp-hook.php",
+            "line": 332,
+            "function": "apply_filters",
+            "class": "WP_Hook",
+            "type": "->",
+            "args": [
+              "",
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/plugin.php",
+            "line": 517,
+            "function": "do_action",
+            "class": "WP_Hook",
+            "type": "->",
+            "args": [
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-admin/admin-ajax.php",
+            "line": 188,
+            "function": "do_action",
+            "args": [
+              "wp_ajax_cmp_mailchimp_list_ajax"
+            ]
+          }
+        ],
+        "traceAsString": "#0 [internal function]: CMP_Coming_Soon_and_Maintenance->cmp_mailchimp_list_ajax('')\n#1 /var/www/html/wp-includes/class-wp-hook.php(308): call_user_func_array(Array, Array)\n#2 /var/www/html/wp-includes/class-wp-hook.php(332): WP_Hook->apply_filters('', Array)\n#3 /var/www/html/wp-includes/plugin.php(517): WP_Hook->do_action(Array)\n#4 /var/www/html/wp-admin/admin-ajax.php(188): do_action('wp_ajax_cmp_mai...')\n#5 {main}"
+      }
+    ],
+    "response_body": "\n",
+    "response.body.length": 1,
+    "response.headers": {
+      "Date": "Thu, 20 Aug 2026 07:21:03 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "1",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 501.602,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787210442-796c7567-68d8-49b4-9c33-71e44cd124c5",
+    "paths": [
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_settings.php::::11_2_21_47",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-feedback.php::::14_194_195_196_197_199_40_41_43_44_50_53_54_55",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_115_116_117_118_120_121_123_125_129_130_141_142_144_152_155_157_159_161_162_163_164_165_166_167_168_169_17_170_171_173_182_183_194_2022_2023_2024_2025_2026_2027_2028_2030_21_215_225_2551_2553_2555_2560_2563_2564_2567_259_3284_3287_3299_3303_3305_3312_476_56_57_58_59_60_63_636_641_644_646_69_70_71_72_73_74_75_757_758_76_768_77_79_80_87_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_html.php::::2_475",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/cmp-update-process.php::::10_13_3_372_6"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 5,
+    "is_interesting": false,
+    "fuzzer_id": "2",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "params"
+  },
+  {
+    "coverage_id": "1787210464-30360679-2255-40c3-8d6d-4de88ec97dd0",
+    "priority": 5,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "cmp_mailchimp_list_ajax"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "params": "fuz\\"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 8192,
+        "errstr": "Constant FILTER_SANITIZE_STRING is deprecated",
+        "errfile": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "errline": 2560
+      }
+    ],
+    "exceptions": [
+      {
+        "code": 0,
+        "file": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "message": "Cannot access offset of type string on string",
+        "line": 2567,
+        "previous": null,
+        "trace": [
+          {
+            "function": "cmp_mailchimp_list_ajax",
+            "class": "CMP_Coming_Soon_and_Maintenance",
+            "type": "->",
+            "args": [
+              ""
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/class-wp-hook.php",
+            "line": 308,
+            "function": "call_user_func_array",
+            "args": [
+              [
+                {
+                  "render_settings": {}
+                },
+                "cmp_mailchimp_list_ajax"
+              ],
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/class-wp-hook.php",
+            "line": 332,
+            "function": "apply_filters",
+            "class": "WP_Hook",
+            "type": "->",
+            "args": [
+              "",
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/plugin.php",
+            "line": 517,
+            "function": "do_action",
+            "class": "WP_Hook",
+            "type": "->",
+            "args": [
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-admin/admin-ajax.php",
+            "line": 188,
+            "function": "do_action",
+            "args": [
+              "wp_ajax_cmp_mailchimp_list_ajax"
+            ]
+          }
+        ],
+        "traceAsString": "#0 [internal function]: CMP_Coming_Soon_and_Maintenance->cmp_mailchimp_list_ajax('')\n#1 /var/www/html/wp-includes/class-wp-hook.php(308): call_user_func_array(Array, Array)\n#2 /var/www/html/wp-includes/class-wp-hook.php(332): WP_Hook->apply_filters('', Array)\n#3 /var/www/html/wp-includes/plugin.php(517): WP_Hook->do_action(Array)\n#4 /var/www/html/wp-admin/admin-ajax.php(188): do_action('wp_ajax_cmp_mai...')\n#5 {main}"
+      }
+    ],
+    "response_body": "\n",
+    "response.body.length": 1,
+    "response.headers": {
+      "Date": "Thu, 20 Aug 2026 07:21:04 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "1",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 679.903,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787210442-796c7567-68d8-49b4-9c33-71e44cd124c5",
+    "paths": [
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_settings.php::::11_2_21_47",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-feedback.php::::14_194_195_196_197_199_40_41_43_44_50_53_54_55",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_115_116_117_118_120_121_123_125_129_130_141_142_144_152_155_157_159_161_162_163_164_165_166_167_168_169_17_170_171_173_182_183_194_2022_2023_2024_2025_2026_2027_2028_2030_21_215_225_2551_2553_2555_2560_2563_2564_2567_259_3284_3287_3299_3303_3305_3312_476_56_57_58_59_60_63_636_641_644_646_69_70_71_72_73_74_75_757_758_76_768_77_79_80_87_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_html.php::::2_475",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/cmp-update-process.php::::10_13_3_372_6"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 5,
+    "is_interesting": false,
+    "fuzzer_id": "2",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "params"
+  },
+  {
+    "coverage_id": "1787210464-f070eecc-c2a5-4037-8a25-3b32c2e55f99",
+    "priority": 5,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "cmp_mailchimp_list_ajax"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "params": "fu\tzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 8192,
+        "errstr": "Constant FILTER_SANITIZE_STRING is deprecated",
+        "errfile": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "errline": 2560
+      }
+    ],
+    "exceptions": [
+      {
+        "code": 0,
+        "file": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "message": "Cannot access offset of type string on string",
+        "line": 2567,
+        "previous": null,
+        "trace": [
+          {
+            "function": "cmp_mailchimp_list_ajax",
+            "class": "CMP_Coming_Soon_and_Maintenance",
+            "type": "->",
+            "args": [
+              ""
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/class-wp-hook.php",
+            "line": 308,
+            "function": "call_user_func_array",
+            "args": [
+              [
+                {
+                  "render_settings": {}
+                },
+                "cmp_mailchimp_list_ajax"
+              ],
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/class-wp-hook.php",
+            "line": 332,
+            "function": "apply_filters",
+            "class": "WP_Hook",
+            "type": "->",
+            "args": [
+              "",
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/plugin.php",
+            "line": 517,
+            "function": "do_action",
+            "class": "WP_Hook",
+            "type": "->",
+            "args": [
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-admin/admin-ajax.php",
+            "line": 188,
+            "function": "do_action",
+            "args": [
+              "wp_ajax_cmp_mailchimp_list_ajax"
+            ]
+          }
+        ],
+        "traceAsString": "#0 [internal function]: CMP_Coming_Soon_and_Maintenance->cmp_mailchimp_list_ajax('')\n#1 /var/www/html/wp-includes/class-wp-hook.php(308): call_user_func_array(Array, Array)\n#2 /var/www/html/wp-includes/class-wp-hook.php(332): WP_Hook->apply_filters('', Array)\n#3 /var/www/html/wp-includes/plugin.php(517): WP_Hook->do_action(Array)\n#4 /var/www/html/wp-admin/admin-ajax.php(188): do_action('wp_ajax_cmp_mai...')\n#5 {main}"
+      }
+    ],
+    "response_body": "\n",
+    "response.body.length": 1,
+    "response.headers": {
+      "Date": "Thu, 20 Aug 2026 07:21:04 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "1",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 497.857,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787210442-796c7567-68d8-49b4-9c33-71e44cd124c5",
+    "paths": [
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_settings.php::::11_2_21_47",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-feedback.php::::14_194_195_196_197_199_40_41_43_44_50_53_54_55",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_115_116_117_118_120_121_123_125_129_130_141_142_144_152_155_157_159_161_162_163_164_165_166_167_168_169_17_170_171_173_182_183_194_2022_2023_2024_2025_2026_2027_2028_2030_21_215_225_2551_2553_2555_2560_2563_2564_2567_259_3284_3287_3299_3303_3305_3312_476_56_57_58_59_60_63_636_641_644_646_69_70_71_72_73_74_75_757_758_76_768_77_79_80_87_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_html.php::::2_475",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/cmp-update-process.php::::10_13_3_372_6"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 5,
+    "is_interesting": false,
+    "fuzzer_id": "2",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "params"
+  },
+  {
+    "coverage_id": "1787210465-ed22ae3b-1c78-4646-89eb-643d33b533ab",
+    "priority": 5,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "cmp_mailchimp_list_ajax"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "params": "fu4zz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 8192,
+        "errstr": "Constant FILTER_SANITIZE_STRING is deprecated",
+        "errfile": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "errline": 2560
+      }
+    ],
+    "exceptions": [
+      {
+        "code": 0,
+        "file": "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php",
+        "message": "Cannot access offset of type string on string",
+        "line": 2567,
+        "previous": null,
+        "trace": [
+          {
+            "function": "cmp_mailchimp_list_ajax",
+            "class": "CMP_Coming_Soon_and_Maintenance",
+            "type": "->",
+            "args": [
+              ""
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/class-wp-hook.php",
+            "line": 308,
+            "function": "call_user_func_array",
+            "args": [
+              [
+                {
+                  "render_settings": {}
+                },
+                "cmp_mailchimp_list_ajax"
+              ],
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/class-wp-hook.php",
+            "line": 332,
+            "function": "apply_filters",
+            "class": "WP_Hook",
+            "type": "->",
+            "args": [
+              "",
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-includes/plugin.php",
+            "line": 517,
+            "function": "do_action",
+            "class": "WP_Hook",
+            "type": "->",
+            "args": [
+              [
+                ""
+              ]
+            ]
+          },
+          {
+            "file": "/var/www/html/wp-admin/admin-ajax.php",
+            "line": 188,
+            "function": "do_action",
+            "args": [
+              "wp_ajax_cmp_mailchimp_list_ajax"
+            ]
+          }
+        ],
+        "traceAsString": "#0 [internal function]: CMP_Coming_Soon_and_Maintenance->cmp_mailchimp_list_ajax('')\n#1 /var/www/html/wp-includes/class-wp-hook.php(308): call_user_func_array(Array, Array)\n#2 /var/www/html/wp-includes/class-wp-hook.php(332): WP_Hook->apply_filters('', Array)\n#3 /var/www/html/wp-includes/plugin.php(517): WP_Hook->do_action(Array)\n#4 /var/www/html/wp-admin/admin-ajax.php(188): do_action('wp_ajax_cmp_mai...')\n#5 {main}"
+      }
+    ],
+    "response_body": "\n",
+    "response.body.length": 1,
+    "response.headers": {
+      "Date": "Thu, 20 Aug 2026 07:21:05 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "1",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 602.718,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787210442-796c7567-68d8-49b4-9c33-71e44cd124c5",
+    "paths": [
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_settings.php::::11_2_21_47",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-feedback.php::::14_194_195_196_197_199_40_41_43_44_50_53_54_55",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/niteo-cmp.php::::100_101_102_103_104_105_106_107_108_109_110_111_112_113_114_115_116_117_118_120_121_123_125_129_130_141_142_144_152_155_157_159_161_162_163_164_165_166_167_168_169_17_170_171_173_182_183_194_2022_2023_2024_2025_2026_2027_2028_2030_21_215_225_2551_2553_2555_2560_2563_2564_2567_259_3284_3287_3299_3303_3305_3312_476_56_57_58_59_60_63_636_641_644_646_69_70_71_72_73_74_75_757_758_76_768_77_79_80_87_88_89_90_91_92_93_94_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/class-cmp-render_html.php::::2_475",
+      "/var/www/html/wp-content/plugins/cmp-coming-soon-maintenance/inc/cmp-update-process.php::::10_13_3_372_6"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 5,
+    "is_interesting": false,
+    "fuzzer_id": "2",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "params"
+  }
+]

@@ -1,0 +1,32 @@
+{
+  "target": "http://web/wp-admin/admin-ajax.php",
+  "methods": [
+    "POST"
+  ],
+  "body_params": {
+    "weight": 1,
+    "fixed": [],
+    "fuzz": [
+      "update_all_subscription_payment_methods"
+    ],
+    "data": [
+      {
+        "name": "update_all_subscription_payment_methods",
+        "value": "fuzz"
+      }
+    ]
+  },
+  "query_params": {
+    "weight": 1,
+    "fixed": [
+      "action"
+    ],
+    "fuzz": [],
+    "data": [
+      {
+        "name": "action",
+        "value": "wc_stripe_create_and_confirm_setup_intent"
+      }
+    ]
+  }
+}

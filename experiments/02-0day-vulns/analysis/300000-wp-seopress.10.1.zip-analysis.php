@@ -5,9 +5,586 @@
 *Found functions:22
 *Extracted functions:22
 *Total parameter names extracted: 18
-*Overview: {'seopress_dismiss_promotion': {'seopress_dismiss_promotion'}, 'seopress_cookies_user_consent_close': {'nopriv_seopress_cookies_user_consent_close', 'seopress_cookies_user_consent_close'}, 'seopress_seo_ultimate_migration': {'seopress_seo_ultimate_migration'}, 'seopress_after_update_cart': {'seopress_after_update_cart', 'nopriv_seopress_after_update_cart'}, 'proxy': {'seopress_metabox_proxy'}, 'seopress_yoast_migration': {'seopress_yoast_migration'}, 'seopress_toggle_features': {'seopress_toggle_features'}, 'process': {'seopress_aio_migration', 'seopress_siteseo_migration', 'seopress_rk_migration', 'seopress_surerank_migration'}, 'seopress_instant_indexing_generate_api_key': {'seopress_instant_indexing_generate_api_key'}, 'seopress_squirrly_migration': {'seopress_squirrly_migration'}, 'seopress_premium_seo_pack_migration': {'seopress_premium_seo_pack_migration'}, 'seopress_smart_crawl_migration': {'seopress_smart_crawl_migration'}, 'seopress_toggle_promotions': {'seopress_toggle_promotions'}, 'seopress_switch_view': {'seopress_switch_view'}, 'get': {'get_preview_meta_title', 'get_preview_meta_description'}, 'seopress_slim_seo_migration': {'seopress_slim_seo_migration'}, 'seopress_seo_framework_migration': {'seopress_seo_framework_migration'}, 'seopress_hide_notices': {'seopress_hide_notices'}, 'seopress_cookies_user_consent': {'nopriv_seopress_cookies_user_consent', 'seopress_cookies_user_consent'}, 'seopress_instant_indexing_post': {'seopress_instant_indexing_post'}, 'seopress_wp_meta_seo_migration': {'seopress_wp_meta_seo_migration'}, 'seopress_do_real_preview': {'seopress_do_real_preview'}}
+*Overview: {'seopress_switch_view': {'seopress_switch_view'}, 'seopress_do_real_preview': {'seopress_do_real_preview'}, 'seopress_toggle_features': {'seopress_toggle_features'}, 'process': {'seopress_aio_migration', 'seopress_rk_migration', 'seopress_siteseo_migration', 'seopress_surerank_migration'}, 'seopress_slim_seo_migration': {'seopress_slim_seo_migration'}, 'seopress_squirrly_migration': {'seopress_squirrly_migration'}, 'seopress_seo_framework_migration': {'seopress_seo_framework_migration'}, 'seopress_cookies_user_consent': {'seopress_cookies_user_consent', 'nopriv_seopress_cookies_user_consent'}, 'seopress_instant_indexing_generate_api_key': {'seopress_instant_indexing_generate_api_key'}, 'seopress_dismiss_promotion': {'seopress_dismiss_promotion'}, 'seopress_yoast_migration': {'seopress_yoast_migration'}, 'seopress_instant_indexing_post': {'seopress_instant_indexing_post'}, 'seopress_cookies_user_consent_close': {'nopriv_seopress_cookies_user_consent_close', 'seopress_cookies_user_consent_close'}, 'seopress_toggle_promotions': {'seopress_toggle_promotions'}, 'seopress_hide_notices': {'seopress_hide_notices'}, 'seopress_smart_crawl_migration': {'seopress_smart_crawl_migration'}, 'seopress_wp_meta_seo_migration': {'seopress_wp_meta_seo_migration'}, 'seopress_after_update_cart': {'seopress_after_update_cart', 'nopriv_seopress_after_update_cart'}, 'seopress_seo_ultimate_migration': {'seopress_seo_ultimate_migration'}, 'proxy': {'seopress_metabox_proxy'}, 'get': {'get_preview_meta_description', 'get_preview_meta_title'}, 'seopress_premium_seo_pack_migration': {'seopress_premium_seo_pack_migration'}}
 *
 ***/
+
+/** Function seopress_switch_view() called by wp_ajax hooks: {'seopress_switch_view'} **/
+/** Parameters found in function seopress_switch_view(): {"post": ["view"]} **/
+function seopress_switch_view() {
+	check_ajax_referer( 'seopress_switch_view_nonce', '_ajax_nonce', true );
+
+	if ( current_user_can( seopress_capability( 'manage_options', 'dashboard' ) ) && is_admin() ) {
+		if ( isset( $_POST['view'] ) ) {
+			$seopress_dashboard_options = get_option( 'seopress_dashboard', array() );
+
+			$view = sanitize_text_field( wp_unslash( $_POST['view'] ) );
+
+			if ( false !== $view ) {
+				$seopress_dashboard_options['view'] = $view;
+			}
+			update_option( 'seopress_dashboard', $seopress_dashboard_options, false );
+		}
+		exit();
+	}
+}
+
+
+/** Function seopress_do_real_preview() called by wp_ajax hooks: {'seopress_do_real_preview'} **/
+/** Parameters found in function seopress_do_real_preview(): {"get": ["post_id", "tax_name"]} **/
+function seopress_do_real_preview() {
+	check_ajax_referer( 'seopress_real_preview_nonce', '_ajax_nonce', true );
+
+	if ( ! is_admin() || ! isset( $_GET['post_id'] ) ) {
+		return;
+	}
+
+	$id      = absint( $_GET['post_id'] );
+	$taxname = isset( $_GET['tax_name'] ) ? sanitize_key( $_GET['tax_name'] ) : null;
+
+	if ( ! $id ) {
+		return;
+	}
+
+	// Object-level capability check. The generic edit_posts cap is not enough:
+	// the caller must be allowed to edit the specific object being analysed,
+	// otherwise a low-privileged user could mutate analysis metadata for posts
+	// or terms they do not own. For a taxonomy preview, $id is a term ID, so we
+	// gate on the taxonomy's own edit_terms capability instead.
+	if ( ! empty( $taxname ) ) {
+		$taxonomy = get_taxonomy( $taxname );
+		if ( ! $taxonomy || ! current_user_can( $taxonomy->cap->edit_terms ) ) {
+			return;
+		}
+	} elseif ( ! current_user_can( 'edit_post', $id ) ) {
+		return;
+	}
+
+	if ( 'yes' === get_post_meta( $id, '_seopress_redirections_enabled', true ) ) {
+		$data['title'] = __( 'A redirect is active for this URL. Turn it off to get the Google preview and content analysis.', 'wp-seopress' );
+		wp_send_json_error( $data );
+		return;
+	}
+
+	$dom_result = seopress_get_service( 'RequestPreview' )->getDomById( $id, $taxname );
+
+	if ( ! $dom_result['success'] ) {
+		$default_response = array(
+			'title'     => '...',
+			'meta_desc' => '...',
+		);
+
+		switch ( $dom_result['code'] ) {
+			case 404:
+				$default_response['title'] = __( 'To get your Google snippet preview, publish your post!', 'wp-seopress' );
+				break;
+			case 401:
+				$default_response['title'] = __( 'Your site is protected by an authentication.', 'wp-seopress' );
+				break;
+			case 'blocked':
+				$default_response['title'] = __( 'Content analysis was blocked (HTTP 403/503). A CDN, firewall or security plugin is preventing your server from loading the preview.', 'wp-seopress' );
+				break;
+			case 'unreachable':
+				$default_response['title'] = __( 'Your site could not be reached for content analysis. Please check your server, DNS or firewall configuration.', 'wp-seopress' );
+				break;
+		}
+
+		wp_send_json_success( $default_response );
+		return;
+	}
+
+	$str = $dom_result['body'];
+
+	$data = seopress_get_service( 'DomFilterContent' )->getData( $str, $id );
+
+	if ( ! empty( $taxname ) ) {
+		wp_send_json_success( $data );
+	}
+
+	$data = seopress_get_service( 'DomAnalysis' )->getDataAnalyze(
+		$data,
+		array(
+			'id' => $id,
+		)
+	);
+
+	$keywords = seopress_get_service( 'DomAnalysis' )->getKeywords(
+		array(
+			'id' => $id,
+		)
+	);
+
+	// Save analysis data first so getScore() reads fresh values from the database.
+	seopress_get_service( 'ContentAnalysisDatabase' )->saveData( $id, $data, $keywords );
+
+	$post          = get_post( $id );
+	$score         = seopress_get_service( 'DomAnalysis' )->getScore( $post );
+	$data['score'] = $score;
+	seopress_get_service( 'ContentAnalysisDatabase' )->saveData( $id, $data, $keywords );
+
+	/**
+	 * We delete old values because we have a new structure
+	 *
+	 * @deprecated
+	 * @since 7.3.0
+	 */
+	delete_post_meta( $id, '_seopress_content_analysis_api' );
+	delete_post_meta( $id, '_seopress_analysis_data' );
+
+	// Re-enable QM.
+	remove_filter( 'user_has_cap', 'seopress_disable_qm', 10, 3 );
+
+	wp_send_json_success( $data );
+}
+
+
+/** Function seopress_toggle_features() called by wp_ajax hooks: {'seopress_toggle_features'} **/
+/** Parameters found in function seopress_toggle_features(): {"post": ["feature", "feature_value"]} **/
+function seopress_toggle_features() {
+	check_ajax_referer( 'seopress_toggle_features_nonce', '_ajax_nonce', true );
+
+	if ( current_user_can( seopress_capability( 'manage_options', 'dashboard' ) ) && is_admin() ) {
+		if ( isset( $_POST['feature'] ) && isset( $_POST['feature_value'] ) ) {
+			$feature       = sanitize_text_field( wp_unslash( $_POST['feature'] ) );
+			$feature_value = sanitize_text_field( wp_unslash( $_POST['feature_value'] ) );
+
+			if ( 'toggle-universal-metabox' === $feature ) {
+				// Since 9.8.0 the universal metabox is always-on; the only related
+				// surface that can still be toggled is the frontend SEO beacon.
+				// Tile ON ($feature_value === '1') = beacon visible on frontend
+				// (..._disable_frontend = '0'); tile OFF = beacon hidden ('1').
+				$seopress_advanced_option_name = get_option( 'seopress_advanced_option_name' );
+				if ( ! is_array( $seopress_advanced_option_name ) ) {
+					$seopress_advanced_option_name = array();
+				}
+				$seopress_advanced_option_name['seopress_advanced_appearance_universal_metabox_disable_frontend'] = ( '1' === $feature_value ) ? '0' : '1';
+				update_option( 'seopress_advanced_option_name', $seopress_advanced_option_name, false );
+			} else {
+				$seopress_toggle_options = get_option( 'seopress_toggle', array() );
+				if ( ! is_array( $seopress_toggle_options ) ) {
+					$seopress_toggle_options = array();
+				}
+				$seopress_toggle_options[ $feature ] = $feature_value;
+
+				update_option( 'seopress_toggle', $seopress_toggle_options, false );
+
+				// Flush permalinks when toggling features that register rewrite rules.
+				// flush_rewrite_rules() rebuilds the rules from $wp_rewrite->extra_rules_top,
+				// which was populated at init() based on the OLD toggle value. We must purge
+				// the stale rules and re-register them with the NEW value before flushing,
+				// otherwise the toggle has no effect until the next request triggers another flush.
+				if ( 'toggle-xml-sitemap' === $feature || 'toggle-news' === $feature ) {
+					global $wp_rewrite;
+
+					if ( ! empty( $wp_rewrite->extra_rules_top ) ) {
+						foreach ( $wp_rewrite->extra_rules_top as $pattern => $query ) {
+							if ( false !== strpos( $query, 'seopress_' ) ) {
+								unset( $wp_rewrite->extra_rules_top[ $pattern ] );
+							}
+						}
+					}
+
+					$sitemap_options = get_option( 'seopress_xml_sitemap_option_name' );
+					\SEOPress\Actions\Sitemap\Router::registerRewriteRules( $sitemap_options, $seopress_toggle_options );
+
+					// Let PRO and extensions re-register their sitemap rewrite rules (news, video, ...).
+					do_action( 'seopress_re_register_sitemap_rules', $sitemap_options, $seopress_toggle_options );
+
+					delete_option( 'rewrite_rules' );
+					flush_rewrite_rules( false );
+				}
+			}
+		}
+		exit();
+	}
+}
+
+
+/** Function process() called by wp_ajax hooks: {'seopress_aio_migration', 'seopress_rk_migration', 'seopress_siteseo_migration', 'seopress_surerank_migration'} **/
+/** Parameters found in function process(): {"post": ["offset"]} **/
+function process() {
+		check_ajax_referer( 'seopress_aio_migrate_nonce', '_ajax_nonce', true );
+		if ( ! is_admin() ) {
+			wp_send_json_error();
+
+			return;
+		}
+
+		if ( ! current_user_can( seopress_capability( 'manage_options', 'migration' ) ) ) { // phpcs:ignore
+			wp_send_json_error();
+
+			return;
+		}
+
+		$this->migrateSettings();
+
+		if ( isset( $_POST['offset'] ) ) {
+			$offset = absint( $_POST['offset'] );
+		}
+
+		global $wpdb;
+		$total_count_posts = (int) $wpdb->get_var( "SELECT count(*) FROM {$wpdb->posts}" ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+
+		$increment = 200;
+		global $post;
+
+		if ( $offset > $total_count_posts ) {
+			$offset = 'done';
+		} else {
+			$offset = $this->migratePostQuery( $offset, $increment );
+		}
+
+		$data          = array();
+		$data['total'] = $total_count_posts;
+
+		if ( $offset >= $total_count_posts ) {
+			$data['count'] = $total_count_posts;
+		} else {
+			$data['count'] = $offset;
+		}
+		$data['offset'] = $offset;
+
+		do_action( 'seopress_third_importer_aio', $offset, $increment );
+
+		wp_send_json_success( $data );
+		exit();
+	}
+
+
+/** Function seopress_slim_seo_migration() called by wp_ajax hooks: {'seopress_slim_seo_migration'} **/
+/** Parameters found in function seopress_slim_seo_migration(): {"post": ["offset"]} **/
+function seopress_slim_seo_migration() {
+	check_ajax_referer( 'seopress_slim_seo_migrate_nonce', '_ajax_nonce', true );
+
+	if ( current_user_can( seopress_capability( 'manage_options', 'migration' ) ) && is_admin() ) {
+		if ( isset( $_POST['offset'] ) && isset( $_POST['offset'] ) ) {
+			$offset = absint( $_POST['offset'] );
+		}
+
+		global $wpdb;
+		// phpcs:ignore
+		$total_count_posts = (int) $wpdb->get_var( "SELECT count(*) FROM {$wpdb->posts}" );
+		// phpcs:ignore
+		$total_count_terms = (int) $wpdb->get_var( "SELECT count(*) FROM {$wpdb->terms}" );
+
+		$increment = 200;
+		global $post;
+
+		if ( $offset > $total_count_posts ) {
+			wp_reset_postdata();
+			$count_items = $total_count_posts;
+
+			$args                 = array(
+				// 'number' => $increment,
+				'hide_empty' => false,
+				// 'offset' => $offset,
+				'fields'     => 'ids',
+			);
+			$slim_seo_query_terms = get_terms( $args );
+
+			if ( $slim_seo_query_terms ) {
+				foreach ( $slim_seo_query_terms as $term_id ) {
+					if ( '' !== get_term_meta( $term_id, 'slim_seo', true ) ) {
+						$term_settings = get_term_meta( $term_id, 'slim_seo', true );
+
+						if ( ! empty( $term_settings['title'] ) ) { // Import title tag.
+							update_term_meta( $term_id, '_seopress_titles_title', esc_html( $term_settings['title'] ) );
+						}
+						if ( ! empty( $term_settings['description'] ) ) { // Import meta desc.
+							update_term_meta( $term_id, '_seopress_titles_desc', esc_html( $term_settings['description'] ) );
+						}
+						if ( ! empty( $term_settings['noindex'] ) ) { // Import Robots NoIndex.
+							update_term_meta( $term_id, '_seopress_robots_index', 'yes' );
+						}
+						if ( ! empty( $term_settings['facebook_image'] ) ) { // Import FB image.
+							update_term_meta( $term_id, '_seopress_social_fb_img', esc_url( $term_settings['facebook_image'] ) );
+						}
+						if ( ! empty( $term_settings['twitter_image'] ) ) { // Import Tw image.
+							update_term_meta( $term_id, '_seopress_social_twitter_img', esc_url( $term_settings['twitter_image'] ) );
+						}
+					}
+				}
+			}
+			$offset = 'done';
+			wp_reset_postdata();
+		} else {
+			$args = array(
+				'posts_per_page' => $increment,
+				'post_type'      => 'any',
+				'post_status'    => 'any',
+				'offset'         => $offset,
+			);
+
+			$slim_seo_query = get_posts( $args );
+
+			if ( $slim_seo_query ) {
+				foreach ( $slim_seo_query as $post ) {
+					if ( '' !== get_post_meta( $post->ID, 'slim_seo', true ) ) {
+						$post_settings = get_post_meta( $post->ID, 'slim_seo', true );
+
+						if ( ! empty( $post_settings['title'] ) ) { // Import title tag.
+							update_post_meta( $post->ID, '_seopress_titles_title', esc_html( $post_settings['title'] ) );
+						}
+						if ( ! empty( $post_settings['description'] ) ) { // Import meta desc.
+							update_post_meta( $post->ID, '_seopress_titles_desc', esc_html( $post_settings['description'] ) );
+						}
+						if ( ! empty( $post_settings['noindex'] ) ) { // Import Robots NoIndex.
+							update_post_meta( $post->ID, '_seopress_robots_index', 'yes' );
+						}
+						if ( ! empty( $post_settings['facebook_image'] ) ) { // Import FB image.
+							update_post_meta( $post->ID, '_seopress_social_fb_img', esc_url( $post_settings['facebook_image'] ) );
+						}
+						if ( ! empty( $post_settings['twitter_image'] ) ) { // Import Tw image.
+							update_post_meta( $post->ID, '_seopress_social_twitter_img', esc_url( $post_settings['twitter_image'] ) );
+						}
+					}
+				}
+			}
+			$offset += $increment;
+
+			if ( $offset >= $total_count_posts ) {
+				$count_items = $total_count_posts;
+			} else {
+				$count_items = $offset;
+			}
+		}
+		$data = array();
+
+		$data['count'] = $count_items;
+		$data['total'] = $total_count_posts + $total_count_terms;
+
+		$data['offset'] = $offset;
+		wp_send_json_success( $data );
+		exit();
+	}
+}
+
+
+/** Function seopress_squirrly_migration() called by wp_ajax hooks: {'seopress_squirrly_migration'} **/
+/** Parameters found in function seopress_squirrly_migration(): {"post": ["offset"]} **/
+function seopress_squirrly_migration() {
+	check_ajax_referer( 'seopress_squirrly_migrate_nonce', '_ajax_nonce', true );
+
+	if ( current_user_can( seopress_capability( 'manage_options', 'migration' ) ) && is_admin() ) {
+		if ( isset( $_POST['offset'] ) && isset( $_POST['offset'] ) ) {
+			$offset = absint( $_POST['offset'] );
+		}
+
+		global $wpdb;
+		$table_name = $wpdb->prefix . 'qss';
+
+		$blog_id = get_current_blog_id();
+
+		$count_query = $wpdb->get_results( "SELECT * FROM $table_name WHERE blog_id = $blog_id", ARRAY_A );
+
+		if ( ! empty( $count_query ) ) {
+			foreach ( $count_query as $value ) {
+				$post_id = url_to_postid( $value['URL'] );
+
+				if ( 0 != $post_id && ! empty( $value['seo'] ) ) {
+					$seo = maybe_unserialize( $value['seo'] );
+
+					if ( '' !== $seo['title'] ) { // Import title tag.
+						update_post_meta( $post_id, '_seopress_titles_title', esc_html( $seo['title'] ) );
+					}
+					if ( '' !== $seo['description'] ) { // Import description tag.
+						update_post_meta( $post_id, '_seopress_titles_desc', esc_html( $seo['description'] ) );
+					}
+					if ( '' !== $seo['og_title'] ) { // Import Facebook Title.
+						update_post_meta( $post_id, '_seopress_social_fb_title', esc_html( $seo['og_title'] ) );
+					}
+					if ( '' !== $seo['og_description'] ) { // Import Facebook Desc.
+						update_post_meta( $post_id, '_seopress_social_fb_desc', esc_html( $seo['og_description'] ) );
+					}
+					if ( '' !== $seo['og_media'] ) { // Import Facebook Image.
+						update_post_meta( $post_id, '_seopress_social_fb_img', esc_url( $seo['og_media'] ) );
+					}
+					if ( '' !== $seo['tw_title'] ) { // Import Twitter Title.
+						update_post_meta( $post_id, '_seopress_social_twitter_title', esc_html( $seo['tw_title'] ) );
+					}
+					if ( '' !== $seo['tw_description'] ) { // Import Twitter Desc.
+						update_post_meta( $post_id, '_seopress_social_twitter_desc', esc_html( $seo['tw_description'] ) );
+					}
+					if ( '' !== $seo['tw_media'] ) { // Import Twitter Image.
+						update_post_meta( $post_id, '_seopress_social_twitter_img', esc_url( $seo['tw_media'] ) );
+					}
+					if ( 1 === $seo['noindex'] ) { // Import noindex.
+						update_post_meta( $post_id, '_seopress_robots_index', 'yes' );
+					}
+					if ( 1 === $seo['nofollow'] ) { // Import nofollow.
+						update_post_meta( $post_id, '_seopress_robots_follow', 'yes' );
+					}
+					if ( '' !== $seo['canonical'] ) { // Import canonical.
+						update_post_meta( $post_id, '_seopress_robots_canonical', esc_url( $seo['canonical'] ) );
+					}
+				}
+			}
+			$offset = 'done';
+		}
+		$data = array();
+
+		$data['offset'] = $offset;
+
+		$data['total'] = count( $count_query );
+
+		if ( $offset >= $data['total'] ) {
+			$data['count'] = $data['total'];
+		} else {
+			$data['count'] = $offset;
+		}
+
+		wp_send_json_success( $data );
+		exit();
+	}
+}
+
+
+/** Function seopress_seo_framework_migration() called by wp_ajax hooks: {'seopress_seo_framework_migration'} **/
+/** Parameters found in function seopress_seo_framework_migration(): {"post": ["offset"]} **/
+function seopress_seo_framework_migration() {
+	check_ajax_referer( 'seopress_seo_framework_migrate_nonce', '_ajax_nonce', true );
+
+	if ( current_user_can( seopress_capability( 'manage_options', 'migration' ) ) && is_admin() ) {
+		if ( isset( $_POST['offset'] ) && isset( $_POST['offset'] ) ) {
+			$offset = absint( $_POST['offset'] );
+		}
+
+		global $wpdb;
+		// phpcs:ignore
+		$total_count_posts = (int) $wpdb->get_var( "SELECT count(*) FROM {$wpdb->posts}" );
+		// phpcs:ignore
+		$total_count_terms = (int) $wpdb->get_var( "SELECT count(*) FROM {$wpdb->terms}" );
+
+		$increment = 200;
+		global $post;
+
+		if ( $offset > $total_count_posts ) {
+			wp_reset_postdata();
+			$count_items = $total_count_posts;
+
+			$args                      = array(
+				// 'number' => $increment,
+				'hide_empty' => false,
+				// 'offset' => $offset,
+				'fields'     => 'ids',
+			);
+			$seo_framework_query_terms = get_terms( $args );
+
+			if ( $seo_framework_query_terms ) {
+				foreach ( $seo_framework_query_terms as $term_id ) {
+					if ( '' !== get_term_meta( $term_id, 'autodescription-term-settings', true ) ) {
+						$term_settings = get_term_meta( $term_id, 'autodescription-term-settings', true );
+
+						if ( ! empty( $term_settings['doctitle'] ) ) { // Import title tag.
+							update_term_meta( $term_id, '_seopress_titles_title', $term_settings['doctitle'] );
+						}
+						if ( ! empty( $term_settings['description'] ) ) { // Import meta desc.
+							update_term_meta( $term_id, '_seopress_titles_desc', $term_settings['description'] );
+						}
+						if ( ! empty( $term_settings['noindex'] ) ) { // Import Robots NoIndex.
+							update_term_meta( $term_id, '_seopress_robots_index', 'yes' );
+						}
+						if ( ! empty( $term_settings['nofollow'] ) ) { // Import Robots NoFollow.
+							update_term_meta( $term_id, '_seopress_robots_follow', 'yes' );
+						}
+					}
+				}
+			}
+			$offset = 'done';
+			wp_reset_postdata();
+		} else {
+			$args = array(
+				'posts_per_page' => $increment,
+				'post_type'      => 'any',
+				'post_status'    => 'any',
+				'offset'         => $offset,
+			);
+
+			$seo_framework_query = get_posts( $args );
+
+			if ( $seo_framework_query ) {
+				foreach ( $seo_framework_query as $post ) {
+					if ( '' !== get_post_meta( $post->ID, '_genesis_title', true ) ) { // Import title tag.
+						update_post_meta( $post->ID, '_seopress_titles_title', esc_html( get_post_meta( $post->ID, '_genesis_title', true ) ) );
+					}
+					if ( '' !== get_post_meta( $post->ID, '_genesis_description', true ) ) { // Import meta desc.
+						update_post_meta( $post->ID, '_seopress_titles_desc', esc_html( get_post_meta( $post->ID, '_genesis_description', true ) ) );
+					}
+					if ( '' !== get_post_meta( $post->ID, '_open_graph_title', true ) ) { // Import Facebook Title.
+						update_post_meta( $post->ID, '_seopress_social_fb_title', esc_html( get_post_meta( $post->ID, '_open_graph_title', true ) ) );
+					}
+					if ( '' !== get_post_meta( $post->ID, '_open_graph_description', true ) ) { // Import Facebook Desc.
+						update_post_meta( $post->ID, '_seopress_social_fb_desc', esc_html( get_post_meta( $post->ID, '_open_graph_description', true ) ) );
+					}
+					if ( '' !== get_post_meta( $post->ID, '_social_image_url', true ) ) { // Import Facebook Image.
+						update_post_meta( $post->ID, '_seopress_social_fb_img', esc_url( get_post_meta( $post->ID, '_social_image_url', true ) ) );
+					}
+					if ( '' !== get_post_meta( $post->ID, '_twitter_title', true ) ) { // Import Twitter Title.
+						update_post_meta( $post->ID, '_seopress_social_twitter_title', esc_html( get_post_meta( $post->ID, '_twitter_title', true ) ) );
+					}
+					if ( '' !== get_post_meta( $post->ID, '_twitter_description', true ) ) { // Import Twitter Desc.
+						update_post_meta( $post->ID, '_seopress_social_twitter_desc', esc_html( get_post_meta( $post->ID, '_twitter_description', true ) ) );
+					}
+					if ( '' !== get_post_meta( $post->ID, '_social_image_url', true ) ) { // Import Twitter Image.
+						update_post_meta( $post->ID, '_seopress_social_twitter_img', esc_url( get_post_meta( $post->ID, '_social_image_url', true ) ) );
+					}
+					if ( '1' === get_post_meta( $post->ID, '_genesis_noindex', true ) ) { // Import Robots NoIndex.
+						update_post_meta( $post->ID, '_seopress_robots_index', 'yes' );
+					}
+					if ( '1' === get_post_meta( $post->ID, '_genesis_nofollow', true ) ) { // Import Robots NoFollow.
+						update_post_meta( $post->ID, '_seopress_robots_follow', 'yes' );
+					}
+					if ( '' !== get_post_meta( $post->ID, '_genesis_canonical_uri', true ) ) { // Import Canonical URL.
+						update_post_meta( $post->ID, '_seopress_robots_canonical', esc_url( get_post_meta( $post->ID, '_genesis_canonical_uri', true ) ) );
+					}
+					if ( '' !== get_post_meta( $post->ID, 'redirect', true ) ) { // Import Redirect URL.
+						update_post_meta( $post->ID, '_seopress_redirections_enabled', 'yes' );
+						update_post_meta( $post->ID, '_seopress_redirections_type', '301' );
+						update_post_meta( $post->ID, '_seopress_redirections_value', esc_url( get_post_meta( $post->ID, 'redirect', true ) ) );
+					}
+
+					// Primary category.
+					if ( 'post' === get_post_type( $post->ID ) ) {
+						$tax = 'category';
+					} elseif ( 'product' === get_post_type( $post->ID ) ) {
+						$tax = 'product_cat';
+					}
+					if ( isset( $tax ) ) {
+						$primary_term = get_post_meta( $post->ID, '_primary_term_' . $tax, true );
+
+						if ( '' !== $primary_term ) {
+							update_post_meta( $post->ID, '_seopress_robots_primary_cat', absint( $primary_term ) );
+						}
+					}
+				}
+			}
+			$offset += $increment;
+
+			if ( $offset >= $total_count_posts ) {
+				$count_items = $total_count_posts;
+			} else {
+				$count_items = $offset;
+			}
+		}
+		$data = array();
+
+		$data['count'] = $count_items;
+		$data['total'] = $total_count_posts + $total_count_terms;
+
+		$data['offset'] = $offset;
+		wp_send_json_success( $data );
+		exit();
+	}
+}
+
+
+/** Function seopress_cookies_user_consent() called by wp_ajax hooks: {'seopress_cookies_user_consent', 'nopriv_seopress_cookies_user_consent'} **/
+/** No params detected :-/ **/
+
+
+/** Function seopress_instant_indexing_generate_api_key() called by wp_ajax hooks: {'seopress_instant_indexing_generate_api_key'} **/
+/** No params detected :-/ **/
+
 
 /** Function seopress_dismiss_promotion() called by wp_ajax hooks: {'seopress_dismiss_promotion'} **/
 /** Parameters found in function seopress_dismiss_promotion(): {"post": ["promo_id", "duration"]} **/
@@ -34,147 +611,6 @@ function seopress_dismiss_promotion() {
 		wp_send_json_error( array( 'message' => __( 'Failed to dismiss promotion.', 'wp-seopress' ) ) );
 	}
 }
-
-
-/** Function seopress_cookies_user_consent_close() called by wp_ajax hooks: {'nopriv_seopress_cookies_user_consent_close', 'seopress_cookies_user_consent_close'} **/
-/** No params detected :-/ **/
-
-
-/** Function seopress_seo_ultimate_migration() called by wp_ajax hooks: {'seopress_seo_ultimate_migration'} **/
-/** Parameters found in function seopress_seo_ultimate_migration(): {"post": ["offset"]} **/
-function seopress_seo_ultimate_migration() {
-	check_ajax_referer( 'seopress_seo_ultimate_migrate_nonce', '_ajax_nonce', true );
-
-	if ( current_user_can( seopress_capability( 'manage_options', 'migration' ) ) && is_admin() ) {
-		if ( isset( $_POST['offset'] ) && isset( $_POST['offset'] ) ) {
-			$offset = absint( $_POST['offset'] );
-		}
-
-		global $wpdb;
-
-		// phpcs:ignore
-		$total_count_posts = (int) $wpdb->get_var( "SELECT count(*) FROM {$wpdb->posts}" );
-
-		$increment = 200;
-		global $post;
-
-		if ( $offset > $total_count_posts ) {
-			$offset = 'done';
-			wp_reset_postdata();
-		} else {
-			$args = array(
-				'posts_per_page' => $increment,
-				'post_type'      => 'any',
-				'post_status'    => 'any',
-				'offset'         => $offset,
-			);
-
-			$su_query = get_posts( $args );
-
-			if ( $su_query ) {
-				foreach ( $su_query as $post ) {
-					if ( '' !== get_post_meta( $post->ID, '_su_title', true ) ) { // Import title tag.
-						update_post_meta( $post->ID, '_seopress_titles_title', esc_html( get_post_meta( $post->ID, '_su_title', true ) ) );
-					}
-					if ( '' !== get_post_meta( $post->ID, '_su_description', true ) ) { // Import meta desc.
-						update_post_meta( $post->ID, '_seopress_titles_desc', esc_html( get_post_meta( $post->ID, '_su_description', true ) ) );
-					}
-					if ( '' !== get_post_meta( $post->ID, '_su_og_title', true ) ) { // Import Facebook Title.
-						update_post_meta( $post->ID, '_seopress_social_fb_title', esc_html( get_post_meta( $post->ID, '_su_og_title', true ) ) );
-					}
-					if ( '' !== get_post_meta( $post->ID, '_su_og_description', true ) ) { // Import Facebook Desc.
-						update_post_meta( $post->ID, '_seopress_social_fb_desc', esc_html( get_post_meta( $post->ID, '_su_og_description', true ) ) );
-					}
-					if ( '' !== get_post_meta( $post->ID, '_su_og_image', true ) ) { // Import Facebook Image.
-						update_post_meta( $post->ID, '_seopress_social_fb_img', esc_url( get_post_meta( $post->ID, '_su_og_image', true ) ) );
-					}
-					if ( '1' === get_post_meta( $post->ID, '_su_meta_robots_noindex', true ) ) { // Import Robots NoIndex.
-						update_post_meta( $post->ID, '_seopress_robots_index', 'yes' );
-					}
-					if ( '1' === get_post_meta( $post->ID, '_su_meta_robots_nofollow', true ) ) { // Import Robots NoFollow.
-						update_post_meta( $post->ID, '_seopress_robots_follow', 'yes' );
-					}
-				}
-			}
-			$offset += $increment;
-		}
-		$data           = array();
-		$data['offset'] = $offset;
-
-		$data['total'] = $total_count_posts;
-
-		if ( $offset >= $total_count_posts ) {
-			$data['count'] = $total_count_posts;
-		} else {
-			$data['count'] = $offset;
-		}
-
-		wp_send_json_success( $data );
-		exit();
-	}
-}
-
-
-/** Function seopress_after_update_cart() called by wp_ajax hooks: {'seopress_after_update_cart', 'nopriv_seopress_after_update_cart'} **/
-/** No params detected :-/ **/
-
-
-/** Function proxy() called by wp_ajax hooks: {'seopress_metabox_proxy'} **/
-/** Parameters found in function proxy(): {"request": ["route"], "server": ["REQUEST_METHOD"]} **/
-function proxy() {
-		check_ajax_referer( 'seopress_metabox_proxy', '_ajax_nonce' );
-
-		// Baseline gate; each route still enforces its own permission_callback
-		// (e.g. edit_post on the specific id) through rest_do_request().
-		if ( ! current_user_can( 'edit_posts' ) ) {
-			wp_send_json_error( array( 'message' => 'forbidden' ), 403 );
-		}
-
-		$route = isset( $_REQUEST['route'] ) ? (string) wp_unslash( $_REQUEST['route'] ) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- validated below against a strict allow-list.
-
-		$parts = explode( '?', $route, 2 );
-		$path  = '/' . ltrim( $parts[0], '/' );
-
-		// Hard allow-list: only this plugin's own namespace, only safe path
-		// characters. Never proxy an arbitrary route.
-		if ( ! preg_match( '#^/seopress/v[0-9]+/[A-Za-z0-9/_-]+$#', $path ) ) {
-			wp_send_json_error( array( 'message' => 'invalid_route' ), 400 );
-		}
-
-		$method = isset( $_SERVER['REQUEST_METHOD'] ) ? strtoupper( sanitize_text_field( wp_unslash( $_SERVER['REQUEST_METHOD'] ) ) ) : 'GET';
-		if ( ! in_array( $method, array( 'GET', 'POST' ), true ) ) {
-			$method = 'GET';
-		}
-
-		$request = new \WP_REST_Request( $method, $path );
-
-		// Query string travels in the route tail (e.g. ?target_keywords=...).
-		if ( isset( $parts[1] ) && '' !== $parts[1] ) {
-			$query = array();
-			wp_parse_str( $parts[1], $query );
-			$request->set_query_params( $query );
-		}
-
-		// Forward the JSON body for writes (score save, ignore toggle...).
-		if ( 'POST' === $method ) {
-			// php://input is the request body, not a filesystem path, so
-			// WP_Filesystem does not apply here.
-			$body = file_get_contents( 'php://input' ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
-			if ( ! empty( $body ) ) {
-				$decoded = json_decode( $body, true );
-				if ( is_array( $decoded ) ) {
-					$request->set_header( 'Content-Type', 'application/json' );
-					$request->set_body_params( $decoded );
-				}
-			}
-		}
-
-		$response = rest_do_request( $request );
-		$server   = rest_get_server();
-		$data     = $server->response_to_data( $response, false );
-
-		wp_send_json( $data, $response->get_status() );
-	}
 
 
 /** Function seopress_yoast_migration() called by wp_ajax hooks: {'seopress_yoast_migration'} **/
@@ -689,322 +1125,53 @@ function seopress_yoast_migration() {
 }
 
 
-/** Function seopress_toggle_features() called by wp_ajax hooks: {'seopress_toggle_features'} **/
-/** Parameters found in function seopress_toggle_features(): {"post": ["feature", "feature_value"]} **/
-function seopress_toggle_features() {
-	check_ajax_referer( 'seopress_toggle_features_nonce', '_ajax_nonce', true );
-
-	if ( current_user_can( seopress_capability( 'manage_options', 'dashboard' ) ) && is_admin() ) {
-		if ( isset( $_POST['feature'] ) && isset( $_POST['feature_value'] ) ) {
-			$feature       = sanitize_text_field( wp_unslash( $_POST['feature'] ) );
-			$feature_value = sanitize_text_field( wp_unslash( $_POST['feature_value'] ) );
-
-			if ( 'toggle-universal-metabox' === $feature ) {
-				// Since 9.8.0 the universal metabox is always-on; the only related
-				// surface that can still be toggled is the frontend SEO beacon.
-				// Tile ON ($feature_value === '1') = beacon visible on frontend
-				// (..._disable_frontend = '0'); tile OFF = beacon hidden ('1').
-				$seopress_advanced_option_name = get_option( 'seopress_advanced_option_name' );
-				if ( ! is_array( $seopress_advanced_option_name ) ) {
-					$seopress_advanced_option_name = array();
-				}
-				$seopress_advanced_option_name['seopress_advanced_appearance_universal_metabox_disable_frontend'] = ( '1' === $feature_value ) ? '0' : '1';
-				update_option( 'seopress_advanced_option_name', $seopress_advanced_option_name, false );
-			} else {
-				$seopress_toggle_options = get_option( 'seopress_toggle', array() );
-				if ( ! is_array( $seopress_toggle_options ) ) {
-					$seopress_toggle_options = array();
-				}
-				$seopress_toggle_options[ $feature ] = $feature_value;
-
-				update_option( 'seopress_toggle', $seopress_toggle_options, false );
-
-				// Flush permalinks when toggling features that register rewrite rules.
-				// flush_rewrite_rules() rebuilds the rules from $wp_rewrite->extra_rules_top,
-				// which was populated at init() based on the OLD toggle value. We must purge
-				// the stale rules and re-register them with the NEW value before flushing,
-				// otherwise the toggle has no effect until the next request triggers another flush.
-				if ( 'toggle-xml-sitemap' === $feature || 'toggle-news' === $feature ) {
-					global $wp_rewrite;
-
-					if ( ! empty( $wp_rewrite->extra_rules_top ) ) {
-						foreach ( $wp_rewrite->extra_rules_top as $pattern => $query ) {
-							if ( false !== strpos( $query, 'seopress_' ) ) {
-								unset( $wp_rewrite->extra_rules_top[ $pattern ] );
-							}
-						}
-					}
-
-					$sitemap_options = get_option( 'seopress_xml_sitemap_option_name' );
-					\SEOPress\Actions\Sitemap\Router::registerRewriteRules( $sitemap_options, $seopress_toggle_options );
-
-					// Let PRO and extensions re-register their sitemap rewrite rules (news, video, ...).
-					do_action( 'seopress_re_register_sitemap_rules', $sitemap_options, $seopress_toggle_options );
-
-					delete_option( 'rewrite_rules' );
-					flush_rewrite_rules( false );
-				}
-			}
-		}
-		exit();
-	}
-}
-
-
-/** Function process() called by wp_ajax hooks: {'seopress_aio_migration', 'seopress_siteseo_migration', 'seopress_rk_migration', 'seopress_surerank_migration'} **/
-/** Parameters found in function process(): {"post": ["offset"]} **/
-function process() {
-		check_ajax_referer( 'seopress_aio_migrate_nonce', '_ajax_nonce', true );
-		if ( ! is_admin() ) {
-			wp_send_json_error();
-
-			return;
-		}
-
-		if ( ! current_user_can( seopress_capability( 'manage_options', 'migration' ) ) ) { // phpcs:ignore
-			wp_send_json_error();
-
-			return;
-		}
-
-		$this->migrateSettings();
-
-		if ( isset( $_POST['offset'] ) ) {
-			$offset = absint( $_POST['offset'] );
-		}
-
-		global $wpdb;
-		$total_count_posts = (int) $wpdb->get_var( "SELECT count(*) FROM {$wpdb->posts}" ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
-
-		$increment = 200;
-		global $post;
-
-		if ( $offset > $total_count_posts ) {
-			$offset = 'done';
-		} else {
-			$offset = $this->migratePostQuery( $offset, $increment );
-		}
-
-		$data          = array();
-		$data['total'] = $total_count_posts;
-
-		if ( $offset >= $total_count_posts ) {
-			$data['count'] = $total_count_posts;
-		} else {
-			$data['count'] = $offset;
-		}
-		$data['offset'] = $offset;
-
-		do_action( 'seopress_third_importer_aio', $offset, $increment );
-
-		wp_send_json_success( $data );
-		exit();
-	}
-
-
-/** Function seopress_instant_indexing_generate_api_key() called by wp_ajax hooks: {'seopress_instant_indexing_generate_api_key'} **/
+/** Function seopress_instant_indexing_post() called by wp_ajax hooks: {'seopress_instant_indexing_post'} **/
 /** No params detected :-/ **/
 
 
-/** Function seopress_squirrly_migration() called by wp_ajax hooks: {'seopress_squirrly_migration'} **/
-/** Parameters found in function seopress_squirrly_migration(): {"post": ["offset"]} **/
-function seopress_squirrly_migration() {
-	check_ajax_referer( 'seopress_squirrly_migrate_nonce', '_ajax_nonce', true );
+/** Function seopress_cookies_user_consent_close() called by wp_ajax hooks: {'nopriv_seopress_cookies_user_consent_close', 'seopress_cookies_user_consent_close'} **/
+/** No params detected :-/ **/
 
-	if ( current_user_can( seopress_capability( 'manage_options', 'migration' ) ) && is_admin() ) {
-		if ( isset( $_POST['offset'] ) && isset( $_POST['offset'] ) ) {
-			$offset = absint( $_POST['offset'] );
-		}
 
-		global $wpdb;
-		$table_name = $wpdb->prefix . 'qss';
+/** Function seopress_toggle_promotions() called by wp_ajax hooks: {'seopress_toggle_promotions'} **/
+/** Parameters found in function seopress_toggle_promotions(): {"post": ["disable_all"]} **/
+function seopress_toggle_promotions() {
+	check_ajax_referer( 'seopress_toggle_promotions_nonce', '_ajax_nonce', true );
 
-		$blog_id = get_current_blog_id();
+	if ( ! current_user_can( seopress_capability( 'manage_options', 'dashboard' ) ) || ! is_admin() ) {
+		wp_send_json_error( array( 'message' => __( 'Permission denied.', 'wp-seopress' ) ) );
+	}
 
-		$count_query = $wpdb->get_results( "SELECT * FROM $table_name WHERE blog_id = $blog_id", ARRAY_A );
+	$disable_all = isset( $_POST['disable_all'] ) && '1' === $_POST['disable_all'];
 
-		if ( ! empty( $count_query ) ) {
-			foreach ( $count_query as $value ) {
-				$post_id = url_to_postid( $value['URL'] );
+	// Use the PromotionService to set the preference.
+	$result = seopress_get_service( 'PromotionService' )->setPreference( 'disable_all', $disable_all );
 
-				if ( 0 != $post_id && ! empty( $value['seo'] ) ) {
-					$seo = maybe_unserialize( $value['seo'] );
-
-					if ( '' !== $seo['title'] ) { // Import title tag.
-						update_post_meta( $post_id, '_seopress_titles_title', esc_html( $seo['title'] ) );
-					}
-					if ( '' !== $seo['description'] ) { // Import description tag.
-						update_post_meta( $post_id, '_seopress_titles_desc', esc_html( $seo['description'] ) );
-					}
-					if ( '' !== $seo['og_title'] ) { // Import Facebook Title.
-						update_post_meta( $post_id, '_seopress_social_fb_title', esc_html( $seo['og_title'] ) );
-					}
-					if ( '' !== $seo['og_description'] ) { // Import Facebook Desc.
-						update_post_meta( $post_id, '_seopress_social_fb_desc', esc_html( $seo['og_description'] ) );
-					}
-					if ( '' !== $seo['og_media'] ) { // Import Facebook Image.
-						update_post_meta( $post_id, '_seopress_social_fb_img', esc_url( $seo['og_media'] ) );
-					}
-					if ( '' !== $seo['tw_title'] ) { // Import Twitter Title.
-						update_post_meta( $post_id, '_seopress_social_twitter_title', esc_html( $seo['tw_title'] ) );
-					}
-					if ( '' !== $seo['tw_description'] ) { // Import Twitter Desc.
-						update_post_meta( $post_id, '_seopress_social_twitter_desc', esc_html( $seo['tw_description'] ) );
-					}
-					if ( '' !== $seo['tw_media'] ) { // Import Twitter Image.
-						update_post_meta( $post_id, '_seopress_social_twitter_img', esc_url( $seo['tw_media'] ) );
-					}
-					if ( 1 === $seo['noindex'] ) { // Import noindex.
-						update_post_meta( $post_id, '_seopress_robots_index', 'yes' );
-					}
-					if ( 1 === $seo['nofollow'] ) { // Import nofollow.
-						update_post_meta( $post_id, '_seopress_robots_follow', 'yes' );
-					}
-					if ( '' !== $seo['canonical'] ) { // Import canonical.
-						update_post_meta( $post_id, '_seopress_robots_canonical', esc_url( $seo['canonical'] ) );
-					}
-				}
-			}
-			$offset = 'done';
-		}
-		$data = array();
-
-		$data['offset'] = $offset;
-
-		$data['total'] = count( $count_query );
-
-		if ( $offset >= $data['total'] ) {
-			$data['count'] = $data['total'];
-		} else {
-			$data['count'] = $offset;
-		}
-
-		wp_send_json_success( $data );
-		exit();
+	if ( $result ) {
+		wp_send_json_success();
+	} else {
+		wp_send_json_error();
 	}
 }
 
 
-/** Function seopress_premium_seo_pack_migration() called by wp_ajax hooks: {'seopress_premium_seo_pack_migration'} **/
-/** Parameters found in function seopress_premium_seo_pack_migration(): {"post": ["offset"]} **/
-function seopress_premium_seo_pack_migration() {
-	check_ajax_referer( 'seopress_premium_seo_pack_migrate_nonce', '_ajax_nonce', true );
+/** Function seopress_hide_notices() called by wp_ajax hooks: {'seopress_hide_notices'} **/
+/** Parameters found in function seopress_hide_notices(): {"post": ["notice", "notice_value"]} **/
+function seopress_hide_notices() {
+	check_ajax_referer( 'seopress_hide_notices_nonce', '_ajax_nonce', true );
 
-	if ( current_user_can( seopress_capability( 'manage_options', 'migration' ) ) && is_admin() ) {
-		if ( isset( $_POST['offset'] ) && isset( $_POST['offset'] ) ) {
-			$offset = absint( $_POST['offset'] );
+	if ( current_user_can( seopress_capability( 'manage_options', 'dashboard' ) ) && is_admin() ) {
+		if ( isset( $_POST['notice'] ) && isset( $_POST['notice_value'] ) ) {
+			$seopress_notices_options = get_option( 'seopress_notices', array() );
+
+			$notice       = sanitize_text_field( wp_unslash( $_POST['notice'] ) );
+			$notice_value = sanitize_text_field( wp_unslash( $_POST['notice_value'] ) );
+
+			if ( false !== $notice && false !== $notice_value ) {
+				$seopress_notices_options[ $notice ] = $notice_value;
+			}
+			update_option( 'seopress_notices', $seopress_notices_options, false );
 		}
-
-		global $wpdb;
-
-		// phpcs:ignore
-		$total_count_posts = (int) $wpdb->get_var( "SELECT count(*) FROM {$wpdb->posts}" );
-		// phpcs:ignore
-		$total_count_terms = (int) $wpdb->get_var( "SELECT count(*) FROM {$wpdb->terms}" );
-
-		$increment = 200;
-		global $post;
-
-		if ( $offset > $total_count_posts ) {
-			$count_items = $total_count_posts;
-			wp_reset_postdata();
-
-			$premium_query_terms = get_option( 'psp_taxonomy_seo' );
-
-			if ( $premium_query_terms ) {
-				foreach ( $premium_query_terms as $taxonomies => $taxonomie ) {
-					foreach ( $taxonomie as $term_id => $term_value ) {
-						if ( ! empty( $term_value['psp_meta']['title'] ) ) { // Import title tag.
-							update_term_meta( $term_id, '_seopress_titles_title', esc_html( $term_value['psp_meta']['title'] ) );
-						}
-						if ( ! empty( $term_value['psp_meta']['description'] ) ) { // Import meta desc.
-							update_term_meta( $term_id, '_seopress_titles_desc', esc_html( $term_value['psp_meta']['description'] ) );
-						}
-						if ( ! empty( $term_value['psp_meta']['facebook_titlu'] ) ) { // Import Facebook Title.
-							update_term_meta( $term_id, '_seopress_social_fb_title', esc_html( $term_value['psp_meta']['facebook_titlu'] ) );
-						}
-						if ( ! empty( $term_value['psp_meta']['facebook_desc'] ) ) { // Import Facebook Desc.
-							update_term_meta( $term_id, '_seopress_social_fb_desc', esc_html( $term_value['psp_meta']['facebook_desc'] ) );
-						}
-						if ( ! empty( $term_value['psp_meta']['facebook_image'] ) ) { // Import Facebook Image.
-							update_term_meta( $term_id, '_seopress_social_fb_img', esc_url( $term_value['psp_meta']['facebook_image'] ) );
-						}
-						if ( isset( $term_value['psp_meta']['robots_index'] ) && 'noindex' === $term_value['psp_meta']['robots_index'] ) { // Import Robots NoIndex.
-							update_term_meta( $term_id, '_seopress_robots_index', 'yes' );
-						}
-						if ( isset( $term_value['psp_meta']['robots_follow'] ) && 'nofollow' === $term_value['psp_meta']['robots_follow'] ) { // Import Robots NoFollow.
-							update_term_meta( $term_id, '_seopress_robots_follow', 'yes' );
-						}
-						if ( ! empty( $term_value['psp_meta']['canonical'] ) ) { // Import Canonical URL.
-							update_term_meta( $term_id, '_seopress_robots_canonical', esc_url( $term_value['psp_meta']['canonical'] ) );
-						}
-					}
-				}
-			}
-			$offset = 'done';
-			wp_reset_postdata();
-		} else {
-			$args = array(
-				'posts_per_page' => $increment,
-				'post_type'      => 'any',
-				'post_status'    => 'any',
-				'offset'         => $offset,
-			);
-
-			$premium_query = get_posts( $args );
-
-			if ( $premium_query ) {
-				foreach ( $premium_query as $post ) {
-					$psp_meta = get_post_meta( $post->ID, 'psp_meta', true );
-
-					if ( ! empty( $psp_meta ) ) {
-						if ( ! empty( $psp_meta['title'] ) ) { // Import title tag.
-							update_post_meta( $post->ID, '_seopress_titles_title', esc_html( $psp_meta['title'] ) );
-						}
-						if ( ! empty( $psp_meta['description'] ) ) { // Import meta desc.
-							update_post_meta( $post->ID, '_seopress_titles_desc', esc_html( $psp_meta['description'] ) );
-						}
-						if ( ! empty( $psp_meta['facebook_titlu'] ) ) { // Import Facebook Title.
-							update_post_meta( $post->ID, '_seopress_social_fb_title', esc_html( $psp_meta['facebook_titlu'] ) );
-						}
-						if ( ! empty( $psp_meta['facebook_desc'] ) ) { // Import Facebook Desc.
-							update_post_meta( $post->ID, '_seopress_social_fb_desc', esc_html( $psp_meta['facebook_desc'] ) );
-						}
-						if ( ! empty( $psp_meta['facebook_image'] ) ) { // Import Facebook Image.
-							update_post_meta( $post->ID, '_seopress_social_fb_img', esc_url( $psp_meta['facebook_image'] ) );
-						}
-						if ( 'noindex' === $psp_meta['robots_index'] ) { // Import Robots NoIndex.
-							update_post_meta( $post->ID, '_seopress_robots_index', 'yes' );
-						}
-						if ( 'nofollow' === $psp_meta['robots_follow'] ) { // Import Robots NoIndex.
-							update_post_meta( $post->ID, '_seopress_robots_follow', 'yes' );
-						}
-						if ( ! empty( $psp_meta['canonical'] ) ) { // Import Canonical URL.
-							update_post_meta( $post->ID, '_seopress_robots_canonical', esc_url( $psp_meta['canonical'] ) );
-						}
-						if ( ! empty( $psp_meta['mfocus_keyword'] ) ) { // Import Focus Keywords.
-							$target_kw = preg_split( '/\r\n|\r|\n/', $psp_meta['mfocus_keyword'] );
-
-							update_post_meta( $post->ID, '_seopress_analysis_target_kw', implode( ',', esc_html( $target_kw ) ) );
-						}
-					}
-				}
-			}
-			$offset += $increment;
-
-			if ( $offset >= $total_count_posts ) {
-				$count_items = $total_count_posts;
-			} else {
-				$count_items = $offset;
-			}
-		}
-		$data = array();
-
-		$data['count'] = $count_items;
-		$data['total'] = $total_count_posts + $total_count_terms;
-
-		$data['offset'] = $offset;
-		wp_send_json_success( $data );
 		exit();
 	}
 }
@@ -1911,378 +2078,6 @@ function seopress_smart_crawl_migration() {
 }
 
 
-/** Function seopress_toggle_promotions() called by wp_ajax hooks: {'seopress_toggle_promotions'} **/
-/** Parameters found in function seopress_toggle_promotions(): {"post": ["disable_all"]} **/
-function seopress_toggle_promotions() {
-	check_ajax_referer( 'seopress_toggle_promotions_nonce', '_ajax_nonce', true );
-
-	if ( ! current_user_can( seopress_capability( 'manage_options', 'dashboard' ) ) || ! is_admin() ) {
-		wp_send_json_error( array( 'message' => __( 'Permission denied.', 'wp-seopress' ) ) );
-	}
-
-	$disable_all = isset( $_POST['disable_all'] ) && '1' === $_POST['disable_all'];
-
-	// Use the PromotionService to set the preference.
-	$result = seopress_get_service( 'PromotionService' )->setPreference( 'disable_all', $disable_all );
-
-	if ( $result ) {
-		wp_send_json_success();
-	} else {
-		wp_send_json_error();
-	}
-}
-
-
-/** Function seopress_switch_view() called by wp_ajax hooks: {'seopress_switch_view'} **/
-/** Parameters found in function seopress_switch_view(): {"post": ["view"]} **/
-function seopress_switch_view() {
-	check_ajax_referer( 'seopress_switch_view_nonce', '_ajax_nonce', true );
-
-	if ( current_user_can( seopress_capability( 'manage_options', 'dashboard' ) ) && is_admin() ) {
-		if ( isset( $_POST['view'] ) ) {
-			$seopress_dashboard_options = get_option( 'seopress_dashboard', array() );
-
-			$view = sanitize_text_field( wp_unslash( $_POST['view'] ) );
-
-			if ( false !== $view ) {
-				$seopress_dashboard_options['view'] = $view;
-			}
-			update_option( 'seopress_dashboard', $seopress_dashboard_options, false );
-		}
-		exit();
-	}
-}
-
-
-/** Function get() called by wp_ajax hooks: {'get_preview_meta_title', 'get_preview_meta_description'} **/
-/** Parameters found in function get(): {"get": ["template", "post_id", "home_id", "term_id"]} **/
-function get() {
-        if ( ! isset($_GET['template'])) { //phpcs:ignore
-			wp_send_json_error();
-			return;
-		}
-
-		check_ajax_referer( 'get_preview_meta_description', 'nonce' );
-
-		$template = stripcslashes( $_GET['template'] ); // phpcs:ignore
-		$post_id  = isset( $_GET['post_id'] ) ? (int) $_GET['post_id'] : null;
-		$home_id  = isset( $_GET['home_id'] ) ? (int) $_GET['home_id'] : null;
-		$term_id  = isset( $_GET['term_id'] ) ? (int) $_GET['term_id'] : null;
-
-		if ( ! current_user_can( 'edit_post', $post_id ) ) {
-			return;
-		}
-
-		$context_page = seopress_get_service( 'ContextPage' )->buildContextWithCurrentId( (int) $_GET['post_id'] );
-		if ( $post_id ) {
-			$context_page->setPostById( (int) $_GET['post_id'] );
-			$context_page->setIsSingle( true );
-
-			$terms = get_the_terms( $post_id, 'post_tag' );
-
-			if ( ! empty( $terms ) ) {
-				$context_page->setHasTag( true );
-			}
-
-			$categories = get_the_terms( $post_id, 'category' );
-			if ( ! empty( $categories ) ) {
-				$context_page->setHasCategory( true );
-			}
-		}
-
-		if ( $post_id === $home_id && null !== $home_id ) {
-			$context_page->setIsHome( true );
-		}
-
-		if ( $post_id === $term_id && null !== $term_id ) {
-			$context_page->setIsCategory( true );
-			$context_page->setTermId( $term_id );
-		}
-
-		$value = seopress_get_service( 'TagsToString' )->replace( $template, $context_page->getContext() );
-
-		wp_send_json_success( $value );
-	}
-
-
-/** Function seopress_slim_seo_migration() called by wp_ajax hooks: {'seopress_slim_seo_migration'} **/
-/** Parameters found in function seopress_slim_seo_migration(): {"post": ["offset"]} **/
-function seopress_slim_seo_migration() {
-	check_ajax_referer( 'seopress_slim_seo_migrate_nonce', '_ajax_nonce', true );
-
-	if ( current_user_can( seopress_capability( 'manage_options', 'migration' ) ) && is_admin() ) {
-		if ( isset( $_POST['offset'] ) && isset( $_POST['offset'] ) ) {
-			$offset = absint( $_POST['offset'] );
-		}
-
-		global $wpdb;
-		// phpcs:ignore
-		$total_count_posts = (int) $wpdb->get_var( "SELECT count(*) FROM {$wpdb->posts}" );
-		// phpcs:ignore
-		$total_count_terms = (int) $wpdb->get_var( "SELECT count(*) FROM {$wpdb->terms}" );
-
-		$increment = 200;
-		global $post;
-
-		if ( $offset > $total_count_posts ) {
-			wp_reset_postdata();
-			$count_items = $total_count_posts;
-
-			$args                 = array(
-				// 'number' => $increment,
-				'hide_empty' => false,
-				// 'offset' => $offset,
-				'fields'     => 'ids',
-			);
-			$slim_seo_query_terms = get_terms( $args );
-
-			if ( $slim_seo_query_terms ) {
-				foreach ( $slim_seo_query_terms as $term_id ) {
-					if ( '' !== get_term_meta( $term_id, 'slim_seo', true ) ) {
-						$term_settings = get_term_meta( $term_id, 'slim_seo', true );
-
-						if ( ! empty( $term_settings['title'] ) ) { // Import title tag.
-							update_term_meta( $term_id, '_seopress_titles_title', esc_html( $term_settings['title'] ) );
-						}
-						if ( ! empty( $term_settings['description'] ) ) { // Import meta desc.
-							update_term_meta( $term_id, '_seopress_titles_desc', esc_html( $term_settings['description'] ) );
-						}
-						if ( ! empty( $term_settings['noindex'] ) ) { // Import Robots NoIndex.
-							update_term_meta( $term_id, '_seopress_robots_index', 'yes' );
-						}
-						if ( ! empty( $term_settings['facebook_image'] ) ) { // Import FB image.
-							update_term_meta( $term_id, '_seopress_social_fb_img', esc_url( $term_settings['facebook_image'] ) );
-						}
-						if ( ! empty( $term_settings['twitter_image'] ) ) { // Import Tw image.
-							update_term_meta( $term_id, '_seopress_social_twitter_img', esc_url( $term_settings['twitter_image'] ) );
-						}
-					}
-				}
-			}
-			$offset = 'done';
-			wp_reset_postdata();
-		} else {
-			$args = array(
-				'posts_per_page' => $increment,
-				'post_type'      => 'any',
-				'post_status'    => 'any',
-				'offset'         => $offset,
-			);
-
-			$slim_seo_query = get_posts( $args );
-
-			if ( $slim_seo_query ) {
-				foreach ( $slim_seo_query as $post ) {
-					if ( '' !== get_post_meta( $post->ID, 'slim_seo', true ) ) {
-						$post_settings = get_post_meta( $post->ID, 'slim_seo', true );
-
-						if ( ! empty( $post_settings['title'] ) ) { // Import title tag.
-							update_post_meta( $post->ID, '_seopress_titles_title', esc_html( $post_settings['title'] ) );
-						}
-						if ( ! empty( $post_settings['description'] ) ) { // Import meta desc.
-							update_post_meta( $post->ID, '_seopress_titles_desc', esc_html( $post_settings['description'] ) );
-						}
-						if ( ! empty( $post_settings['noindex'] ) ) { // Import Robots NoIndex.
-							update_post_meta( $post->ID, '_seopress_robots_index', 'yes' );
-						}
-						if ( ! empty( $post_settings['facebook_image'] ) ) { // Import FB image.
-							update_post_meta( $post->ID, '_seopress_social_fb_img', esc_url( $post_settings['facebook_image'] ) );
-						}
-						if ( ! empty( $post_settings['twitter_image'] ) ) { // Import Tw image.
-							update_post_meta( $post->ID, '_seopress_social_twitter_img', esc_url( $post_settings['twitter_image'] ) );
-						}
-					}
-				}
-			}
-			$offset += $increment;
-
-			if ( $offset >= $total_count_posts ) {
-				$count_items = $total_count_posts;
-			} else {
-				$count_items = $offset;
-			}
-		}
-		$data = array();
-
-		$data['count'] = $count_items;
-		$data['total'] = $total_count_posts + $total_count_terms;
-
-		$data['offset'] = $offset;
-		wp_send_json_success( $data );
-		exit();
-	}
-}
-
-
-/** Function seopress_seo_framework_migration() called by wp_ajax hooks: {'seopress_seo_framework_migration'} **/
-/** Parameters found in function seopress_seo_framework_migration(): {"post": ["offset"]} **/
-function seopress_seo_framework_migration() {
-	check_ajax_referer( 'seopress_seo_framework_migrate_nonce', '_ajax_nonce', true );
-
-	if ( current_user_can( seopress_capability( 'manage_options', 'migration' ) ) && is_admin() ) {
-		if ( isset( $_POST['offset'] ) && isset( $_POST['offset'] ) ) {
-			$offset = absint( $_POST['offset'] );
-		}
-
-		global $wpdb;
-		// phpcs:ignore
-		$total_count_posts = (int) $wpdb->get_var( "SELECT count(*) FROM {$wpdb->posts}" );
-		// phpcs:ignore
-		$total_count_terms = (int) $wpdb->get_var( "SELECT count(*) FROM {$wpdb->terms}" );
-
-		$increment = 200;
-		global $post;
-
-		if ( $offset > $total_count_posts ) {
-			wp_reset_postdata();
-			$count_items = $total_count_posts;
-
-			$args                      = array(
-				// 'number' => $increment,
-				'hide_empty' => false,
-				// 'offset' => $offset,
-				'fields'     => 'ids',
-			);
-			$seo_framework_query_terms = get_terms( $args );
-
-			if ( $seo_framework_query_terms ) {
-				foreach ( $seo_framework_query_terms as $term_id ) {
-					if ( '' !== get_term_meta( $term_id, 'autodescription-term-settings', true ) ) {
-						$term_settings = get_term_meta( $term_id, 'autodescription-term-settings', true );
-
-						if ( ! empty( $term_settings['doctitle'] ) ) { // Import title tag.
-							update_term_meta( $term_id, '_seopress_titles_title', $term_settings['doctitle'] );
-						}
-						if ( ! empty( $term_settings['description'] ) ) { // Import meta desc.
-							update_term_meta( $term_id, '_seopress_titles_desc', $term_settings['description'] );
-						}
-						if ( ! empty( $term_settings['noindex'] ) ) { // Import Robots NoIndex.
-							update_term_meta( $term_id, '_seopress_robots_index', 'yes' );
-						}
-						if ( ! empty( $term_settings['nofollow'] ) ) { // Import Robots NoFollow.
-							update_term_meta( $term_id, '_seopress_robots_follow', 'yes' );
-						}
-					}
-				}
-			}
-			$offset = 'done';
-			wp_reset_postdata();
-		} else {
-			$args = array(
-				'posts_per_page' => $increment,
-				'post_type'      => 'any',
-				'post_status'    => 'any',
-				'offset'         => $offset,
-			);
-
-			$seo_framework_query = get_posts( $args );
-
-			if ( $seo_framework_query ) {
-				foreach ( $seo_framework_query as $post ) {
-					if ( '' !== get_post_meta( $post->ID, '_genesis_title', true ) ) { // Import title tag.
-						update_post_meta( $post->ID, '_seopress_titles_title', esc_html( get_post_meta( $post->ID, '_genesis_title', true ) ) );
-					}
-					if ( '' !== get_post_meta( $post->ID, '_genesis_description', true ) ) { // Import meta desc.
-						update_post_meta( $post->ID, '_seopress_titles_desc', esc_html( get_post_meta( $post->ID, '_genesis_description', true ) ) );
-					}
-					if ( '' !== get_post_meta( $post->ID, '_open_graph_title', true ) ) { // Import Facebook Title.
-						update_post_meta( $post->ID, '_seopress_social_fb_title', esc_html( get_post_meta( $post->ID, '_open_graph_title', true ) ) );
-					}
-					if ( '' !== get_post_meta( $post->ID, '_open_graph_description', true ) ) { // Import Facebook Desc.
-						update_post_meta( $post->ID, '_seopress_social_fb_desc', esc_html( get_post_meta( $post->ID, '_open_graph_description', true ) ) );
-					}
-					if ( '' !== get_post_meta( $post->ID, '_social_image_url', true ) ) { // Import Facebook Image.
-						update_post_meta( $post->ID, '_seopress_social_fb_img', esc_url( get_post_meta( $post->ID, '_social_image_url', true ) ) );
-					}
-					if ( '' !== get_post_meta( $post->ID, '_twitter_title', true ) ) { // Import Twitter Title.
-						update_post_meta( $post->ID, '_seopress_social_twitter_title', esc_html( get_post_meta( $post->ID, '_twitter_title', true ) ) );
-					}
-					if ( '' !== get_post_meta( $post->ID, '_twitter_description', true ) ) { // Import Twitter Desc.
-						update_post_meta( $post->ID, '_seopress_social_twitter_desc', esc_html( get_post_meta( $post->ID, '_twitter_description', true ) ) );
-					}
-					if ( '' !== get_post_meta( $post->ID, '_social_image_url', true ) ) { // Import Twitter Image.
-						update_post_meta( $post->ID, '_seopress_social_twitter_img', esc_url( get_post_meta( $post->ID, '_social_image_url', true ) ) );
-					}
-					if ( '1' === get_post_meta( $post->ID, '_genesis_noindex', true ) ) { // Import Robots NoIndex.
-						update_post_meta( $post->ID, '_seopress_robots_index', 'yes' );
-					}
-					if ( '1' === get_post_meta( $post->ID, '_genesis_nofollow', true ) ) { // Import Robots NoFollow.
-						update_post_meta( $post->ID, '_seopress_robots_follow', 'yes' );
-					}
-					if ( '' !== get_post_meta( $post->ID, '_genesis_canonical_uri', true ) ) { // Import Canonical URL.
-						update_post_meta( $post->ID, '_seopress_robots_canonical', esc_url( get_post_meta( $post->ID, '_genesis_canonical_uri', true ) ) );
-					}
-					if ( '' !== get_post_meta( $post->ID, 'redirect', true ) ) { // Import Redirect URL.
-						update_post_meta( $post->ID, '_seopress_redirections_enabled', 'yes' );
-						update_post_meta( $post->ID, '_seopress_redirections_type', '301' );
-						update_post_meta( $post->ID, '_seopress_redirections_value', esc_url( get_post_meta( $post->ID, 'redirect', true ) ) );
-					}
-
-					// Primary category.
-					if ( 'post' === get_post_type( $post->ID ) ) {
-						$tax = 'category';
-					} elseif ( 'product' === get_post_type( $post->ID ) ) {
-						$tax = 'product_cat';
-					}
-					if ( isset( $tax ) ) {
-						$primary_term = get_post_meta( $post->ID, '_primary_term_' . $tax, true );
-
-						if ( '' !== $primary_term ) {
-							update_post_meta( $post->ID, '_seopress_robots_primary_cat', absint( $primary_term ) );
-						}
-					}
-				}
-			}
-			$offset += $increment;
-
-			if ( $offset >= $total_count_posts ) {
-				$count_items = $total_count_posts;
-			} else {
-				$count_items = $offset;
-			}
-		}
-		$data = array();
-
-		$data['count'] = $count_items;
-		$data['total'] = $total_count_posts + $total_count_terms;
-
-		$data['offset'] = $offset;
-		wp_send_json_success( $data );
-		exit();
-	}
-}
-
-
-/** Function seopress_hide_notices() called by wp_ajax hooks: {'seopress_hide_notices'} **/
-/** Parameters found in function seopress_hide_notices(): {"post": ["notice", "notice_value"]} **/
-function seopress_hide_notices() {
-	check_ajax_referer( 'seopress_hide_notices_nonce', '_ajax_nonce', true );
-
-	if ( current_user_can( seopress_capability( 'manage_options', 'dashboard' ) ) && is_admin() ) {
-		if ( isset( $_POST['notice'] ) && isset( $_POST['notice_value'] ) ) {
-			$seopress_notices_options = get_option( 'seopress_notices', array() );
-
-			$notice       = sanitize_text_field( wp_unslash( $_POST['notice'] ) );
-			$notice_value = sanitize_text_field( wp_unslash( $_POST['notice_value'] ) );
-
-			if ( false !== $notice && false !== $notice_value ) {
-				$seopress_notices_options[ $notice ] = $notice_value;
-			}
-			update_option( 'seopress_notices', $seopress_notices_options, false );
-		}
-		exit();
-	}
-}
-
-
-/** Function seopress_cookies_user_consent() called by wp_ajax hooks: {'nopriv_seopress_cookies_user_consent', 'seopress_cookies_user_consent'} **/
-/** No params detected :-/ **/
-
-
-/** Function seopress_instant_indexing_post() called by wp_ajax hooks: {'seopress_instant_indexing_post'} **/
-/** No params detected :-/ **/
-
-
 /** Function seopress_wp_meta_seo_migration() called by wp_ajax hooks: {'seopress_wp_meta_seo_migration'} **/
 /** Parameters found in function seopress_wp_meta_seo_migration(): {"post": ["offset"]} **/
 function seopress_wp_meta_seo_migration() {
@@ -2382,111 +2177,316 @@ function seopress_wp_meta_seo_migration() {
 }
 
 
-/** Function seopress_do_real_preview() called by wp_ajax hooks: {'seopress_do_real_preview'} **/
-/** Parameters found in function seopress_do_real_preview(): {"get": ["post_id", "tax_name"]} **/
-function seopress_do_real_preview() {
-	check_ajax_referer( 'seopress_real_preview_nonce', '_ajax_nonce', true );
+/** Function seopress_after_update_cart() called by wp_ajax hooks: {'seopress_after_update_cart', 'nopriv_seopress_after_update_cart'} **/
+/** No params detected :-/ **/
 
-	if ( ! is_admin() || ! isset( $_GET['post_id'] ) ) {
-		return;
+
+/** Function seopress_seo_ultimate_migration() called by wp_ajax hooks: {'seopress_seo_ultimate_migration'} **/
+/** Parameters found in function seopress_seo_ultimate_migration(): {"post": ["offset"]} **/
+function seopress_seo_ultimate_migration() {
+	check_ajax_referer( 'seopress_seo_ultimate_migrate_nonce', '_ajax_nonce', true );
+
+	if ( current_user_can( seopress_capability( 'manage_options', 'migration' ) ) && is_admin() ) {
+		if ( isset( $_POST['offset'] ) && isset( $_POST['offset'] ) ) {
+			$offset = absint( $_POST['offset'] );
+		}
+
+		global $wpdb;
+
+		// phpcs:ignore
+		$total_count_posts = (int) $wpdb->get_var( "SELECT count(*) FROM {$wpdb->posts}" );
+
+		$increment = 200;
+		global $post;
+
+		if ( $offset > $total_count_posts ) {
+			$offset = 'done';
+			wp_reset_postdata();
+		} else {
+			$args = array(
+				'posts_per_page' => $increment,
+				'post_type'      => 'any',
+				'post_status'    => 'any',
+				'offset'         => $offset,
+			);
+
+			$su_query = get_posts( $args );
+
+			if ( $su_query ) {
+				foreach ( $su_query as $post ) {
+					if ( '' !== get_post_meta( $post->ID, '_su_title', true ) ) { // Import title tag.
+						update_post_meta( $post->ID, '_seopress_titles_title', esc_html( get_post_meta( $post->ID, '_su_title', true ) ) );
+					}
+					if ( '' !== get_post_meta( $post->ID, '_su_description', true ) ) { // Import meta desc.
+						update_post_meta( $post->ID, '_seopress_titles_desc', esc_html( get_post_meta( $post->ID, '_su_description', true ) ) );
+					}
+					if ( '' !== get_post_meta( $post->ID, '_su_og_title', true ) ) { // Import Facebook Title.
+						update_post_meta( $post->ID, '_seopress_social_fb_title', esc_html( get_post_meta( $post->ID, '_su_og_title', true ) ) );
+					}
+					if ( '' !== get_post_meta( $post->ID, '_su_og_description', true ) ) { // Import Facebook Desc.
+						update_post_meta( $post->ID, '_seopress_social_fb_desc', esc_html( get_post_meta( $post->ID, '_su_og_description', true ) ) );
+					}
+					if ( '' !== get_post_meta( $post->ID, '_su_og_image', true ) ) { // Import Facebook Image.
+						update_post_meta( $post->ID, '_seopress_social_fb_img', esc_url( get_post_meta( $post->ID, '_su_og_image', true ) ) );
+					}
+					if ( '1' === get_post_meta( $post->ID, '_su_meta_robots_noindex', true ) ) { // Import Robots NoIndex.
+						update_post_meta( $post->ID, '_seopress_robots_index', 'yes' );
+					}
+					if ( '1' === get_post_meta( $post->ID, '_su_meta_robots_nofollow', true ) ) { // Import Robots NoFollow.
+						update_post_meta( $post->ID, '_seopress_robots_follow', 'yes' );
+					}
+				}
+			}
+			$offset += $increment;
+		}
+		$data           = array();
+		$data['offset'] = $offset;
+
+		$data['total'] = $total_count_posts;
+
+		if ( $offset >= $total_count_posts ) {
+			$data['count'] = $total_count_posts;
+		} else {
+			$data['count'] = $offset;
+		}
+
+		wp_send_json_success( $data );
+		exit();
+	}
+}
+
+
+/** Function proxy() called by wp_ajax hooks: {'seopress_metabox_proxy'} **/
+/** Parameters found in function proxy(): {"request": ["route"], "server": ["REQUEST_METHOD"]} **/
+function proxy() {
+		check_ajax_referer( 'seopress_metabox_proxy', '_ajax_nonce' );
+
+		// Baseline gate; each route still enforces its own permission_callback
+		// (e.g. edit_post on the specific id) through rest_do_request().
+		if ( ! current_user_can( 'edit_posts' ) ) {
+			wp_send_json_error( array( 'message' => 'forbidden' ), 403 );
+		}
+
+		$route = isset( $_REQUEST['route'] ) ? (string) wp_unslash( $_REQUEST['route'] ) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- validated below against a strict allow-list.
+
+		$parts = explode( '?', $route, 2 );
+		$path  = '/' . ltrim( $parts[0], '/' );
+
+		// Hard allow-list: only this plugin's own namespace, only safe path
+		// characters. Never proxy an arbitrary route.
+		if ( ! preg_match( '#^/seopress/v[0-9]+/[A-Za-z0-9/_-]+$#', $path ) ) {
+			wp_send_json_error( array( 'message' => 'invalid_route' ), 400 );
+		}
+
+		$method = isset( $_SERVER['REQUEST_METHOD'] ) ? strtoupper( sanitize_text_field( wp_unslash( $_SERVER['REQUEST_METHOD'] ) ) ) : 'GET';
+		if ( ! in_array( $method, array( 'GET', 'POST' ), true ) ) {
+			$method = 'GET';
+		}
+
+		$request = new \WP_REST_Request( $method, $path );
+
+		// Query string travels in the route tail (e.g. ?target_keywords=...).
+		if ( isset( $parts[1] ) && '' !== $parts[1] ) {
+			$query = array();
+			wp_parse_str( $parts[1], $query );
+			$request->set_query_params( $query );
+		}
+
+		// Forward the JSON body for writes (score save, ignore toggle...).
+		if ( 'POST' === $method ) {
+			// php://input is the request body, not a filesystem path, so
+			// WP_Filesystem does not apply here.
+			$body = file_get_contents( 'php://input' ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
+			if ( ! empty( $body ) ) {
+				$decoded = json_decode( $body, true );
+				if ( is_array( $decoded ) ) {
+					$request->set_header( 'Content-Type', 'application/json' );
+					$request->set_body_params( $decoded );
+				}
+			}
+		}
+
+		$response = rest_do_request( $request );
+		$server   = rest_get_server();
+		$data     = $server->response_to_data( $response, false );
+
+		wp_send_json( $data, $response->get_status() );
 	}
 
-	$id      = absint( $_GET['post_id'] );
-	$taxname = isset( $_GET['tax_name'] ) ? sanitize_key( $_GET['tax_name'] ) : null;
 
-	if ( ! $id ) {
-		return;
-	}
-
-	// Object-level capability check. The generic edit_posts cap is not enough:
-	// the caller must be allowed to edit the specific object being analysed,
-	// otherwise a low-privileged user could mutate analysis metadata for posts
-	// or terms they do not own. For a taxonomy preview, $id is a term ID, so we
-	// gate on the taxonomy's own edit_terms capability instead.
-	if ( ! empty( $taxname ) ) {
-		$taxonomy = get_taxonomy( $taxname );
-		if ( ! $taxonomy || ! current_user_can( $taxonomy->cap->edit_terms ) ) {
+/** Function get() called by wp_ajax hooks: {'get_preview_meta_description', 'get_preview_meta_title'} **/
+/** Parameters found in function get(): {"get": ["template", "post_id", "home_id", "term_id"]} **/
+function get() {
+        if ( ! isset($_GET['template'])) { //phpcs:ignore
+			wp_send_json_error();
 			return;
 		}
-	} elseif ( ! current_user_can( 'edit_post', $id ) ) {
-		return;
-	}
 
-	if ( 'yes' === get_post_meta( $id, '_seopress_redirections_enabled', true ) ) {
-		$data['title'] = __( 'A redirect is active for this URL. Turn it off to get the Google preview and content analysis.', 'wp-seopress' );
-		wp_send_json_error( $data );
-		return;
-	}
+		check_ajax_referer( 'get_preview_meta_description', 'nonce' );
 
-	$dom_result = seopress_get_service( 'RequestPreview' )->getDomById( $id, $taxname );
+		$template = stripcslashes( $_GET['template'] ); // phpcs:ignore
+		$post_id  = isset( $_GET['post_id'] ) ? (int) $_GET['post_id'] : null;
+		$home_id  = isset( $_GET['home_id'] ) ? (int) $_GET['home_id'] : null;
+		$term_id  = isset( $_GET['term_id'] ) ? (int) $_GET['term_id'] : null;
 
-	if ( ! $dom_result['success'] ) {
-		$default_response = array(
-			'title'     => '...',
-			'meta_desc' => '...',
-		);
-
-		switch ( $dom_result['code'] ) {
-			case 404:
-				$default_response['title'] = __( 'To get your Google snippet preview, publish your post!', 'wp-seopress' );
-				break;
-			case 401:
-				$default_response['title'] = __( 'Your site is protected by an authentication.', 'wp-seopress' );
-				break;
-			case 'blocked':
-				$default_response['title'] = __( 'Content analysis was blocked (HTTP 403/503). A CDN, firewall or security plugin is preventing your server from loading the preview.', 'wp-seopress' );
-				break;
-			case 'unreachable':
-				$default_response['title'] = __( 'Your site could not be reached for content analysis. Please check your server, DNS or firewall configuration.', 'wp-seopress' );
-				break;
+		if ( ! current_user_can( 'edit_post', $post_id ) ) {
+			return;
 		}
 
-		wp_send_json_success( $default_response );
-		return;
+		$context_page = seopress_get_service( 'ContextPage' )->buildContextWithCurrentId( (int) $_GET['post_id'] );
+		if ( $post_id ) {
+			$context_page->setPostById( (int) $_GET['post_id'] );
+			$context_page->setIsSingle( true );
+
+			$terms = get_the_terms( $post_id, 'post_tag' );
+
+			if ( ! empty( $terms ) ) {
+				$context_page->setHasTag( true );
+			}
+
+			$categories = get_the_terms( $post_id, 'category' );
+			if ( ! empty( $categories ) ) {
+				$context_page->setHasCategory( true );
+			}
+		}
+
+		if ( $post_id === $home_id && null !== $home_id ) {
+			$context_page->setIsHome( true );
+		}
+
+		if ( $post_id === $term_id && null !== $term_id ) {
+			$context_page->setIsCategory( true );
+			$context_page->setTermId( $term_id );
+		}
+
+		$value = seopress_get_service( 'TagsToString' )->replace( $template, $context_page->getContext() );
+
+		wp_send_json_success( $value );
 	}
 
-	$str = $dom_result['body'];
 
-	$data = seopress_get_service( 'DomFilterContent' )->getData( $str, $id );
+/** Function seopress_premium_seo_pack_migration() called by wp_ajax hooks: {'seopress_premium_seo_pack_migration'} **/
+/** Parameters found in function seopress_premium_seo_pack_migration(): {"post": ["offset"]} **/
+function seopress_premium_seo_pack_migration() {
+	check_ajax_referer( 'seopress_premium_seo_pack_migrate_nonce', '_ajax_nonce', true );
 
-	if ( ! empty( $taxname ) ) {
+	if ( current_user_can( seopress_capability( 'manage_options', 'migration' ) ) && is_admin() ) {
+		if ( isset( $_POST['offset'] ) && isset( $_POST['offset'] ) ) {
+			$offset = absint( $_POST['offset'] );
+		}
+
+		global $wpdb;
+
+		// phpcs:ignore
+		$total_count_posts = (int) $wpdb->get_var( "SELECT count(*) FROM {$wpdb->posts}" );
+		// phpcs:ignore
+		$total_count_terms = (int) $wpdb->get_var( "SELECT count(*) FROM {$wpdb->terms}" );
+
+		$increment = 200;
+		global $post;
+
+		if ( $offset > $total_count_posts ) {
+			$count_items = $total_count_posts;
+			wp_reset_postdata();
+
+			$premium_query_terms = get_option( 'psp_taxonomy_seo' );
+
+			if ( $premium_query_terms ) {
+				foreach ( $premium_query_terms as $taxonomies => $taxonomie ) {
+					foreach ( $taxonomie as $term_id => $term_value ) {
+						if ( ! empty( $term_value['psp_meta']['title'] ) ) { // Import title tag.
+							update_term_meta( $term_id, '_seopress_titles_title', esc_html( $term_value['psp_meta']['title'] ) );
+						}
+						if ( ! empty( $term_value['psp_meta']['description'] ) ) { // Import meta desc.
+							update_term_meta( $term_id, '_seopress_titles_desc', esc_html( $term_value['psp_meta']['description'] ) );
+						}
+						if ( ! empty( $term_value['psp_meta']['facebook_titlu'] ) ) { // Import Facebook Title.
+							update_term_meta( $term_id, '_seopress_social_fb_title', esc_html( $term_value['psp_meta']['facebook_titlu'] ) );
+						}
+						if ( ! empty( $term_value['psp_meta']['facebook_desc'] ) ) { // Import Facebook Desc.
+							update_term_meta( $term_id, '_seopress_social_fb_desc', esc_html( $term_value['psp_meta']['facebook_desc'] ) );
+						}
+						if ( ! empty( $term_value['psp_meta']['facebook_image'] ) ) { // Import Facebook Image.
+							update_term_meta( $term_id, '_seopress_social_fb_img', esc_url( $term_value['psp_meta']['facebook_image'] ) );
+						}
+						if ( isset( $term_value['psp_meta']['robots_index'] ) && 'noindex' === $term_value['psp_meta']['robots_index'] ) { // Import Robots NoIndex.
+							update_term_meta( $term_id, '_seopress_robots_index', 'yes' );
+						}
+						if ( isset( $term_value['psp_meta']['robots_follow'] ) && 'nofollow' === $term_value['psp_meta']['robots_follow'] ) { // Import Robots NoFollow.
+							update_term_meta( $term_id, '_seopress_robots_follow', 'yes' );
+						}
+						if ( ! empty( $term_value['psp_meta']['canonical'] ) ) { // Import Canonical URL.
+							update_term_meta( $term_id, '_seopress_robots_canonical', esc_url( $term_value['psp_meta']['canonical'] ) );
+						}
+					}
+				}
+			}
+			$offset = 'done';
+			wp_reset_postdata();
+		} else {
+			$args = array(
+				'posts_per_page' => $increment,
+				'post_type'      => 'any',
+				'post_status'    => 'any',
+				'offset'         => $offset,
+			);
+
+			$premium_query = get_posts( $args );
+
+			if ( $premium_query ) {
+				foreach ( $premium_query as $post ) {
+					$psp_meta = get_post_meta( $post->ID, 'psp_meta', true );
+
+					if ( ! empty( $psp_meta ) ) {
+						if ( ! empty( $psp_meta['title'] ) ) { // Import title tag.
+							update_post_meta( $post->ID, '_seopress_titles_title', esc_html( $psp_meta['title'] ) );
+						}
+						if ( ! empty( $psp_meta['description'] ) ) { // Import meta desc.
+							update_post_meta( $post->ID, '_seopress_titles_desc', esc_html( $psp_meta['description'] ) );
+						}
+						if ( ! empty( $psp_meta['facebook_titlu'] ) ) { // Import Facebook Title.
+							update_post_meta( $post->ID, '_seopress_social_fb_title', esc_html( $psp_meta['facebook_titlu'] ) );
+						}
+						if ( ! empty( $psp_meta['facebook_desc'] ) ) { // Import Facebook Desc.
+							update_post_meta( $post->ID, '_seopress_social_fb_desc', esc_html( $psp_meta['facebook_desc'] ) );
+						}
+						if ( ! empty( $psp_meta['facebook_image'] ) ) { // Import Facebook Image.
+							update_post_meta( $post->ID, '_seopress_social_fb_img', esc_url( $psp_meta['facebook_image'] ) );
+						}
+						if ( 'noindex' === $psp_meta['robots_index'] ) { // Import Robots NoIndex.
+							update_post_meta( $post->ID, '_seopress_robots_index', 'yes' );
+						}
+						if ( 'nofollow' === $psp_meta['robots_follow'] ) { // Import Robots NoIndex.
+							update_post_meta( $post->ID, '_seopress_robots_follow', 'yes' );
+						}
+						if ( ! empty( $psp_meta['canonical'] ) ) { // Import Canonical URL.
+							update_post_meta( $post->ID, '_seopress_robots_canonical', esc_url( $psp_meta['canonical'] ) );
+						}
+						if ( ! empty( $psp_meta['mfocus_keyword'] ) ) { // Import Focus Keywords.
+							$target_kw = preg_split( '/\r\n|\r|\n/', $psp_meta['mfocus_keyword'] );
+
+							update_post_meta( $post->ID, '_seopress_analysis_target_kw', implode( ',', esc_html( $target_kw ) ) );
+						}
+					}
+				}
+			}
+			$offset += $increment;
+
+			if ( $offset >= $total_count_posts ) {
+				$count_items = $total_count_posts;
+			} else {
+				$count_items = $offset;
+			}
+		}
+		$data = array();
+
+		$data['count'] = $count_items;
+		$data['total'] = $total_count_posts + $total_count_terms;
+
+		$data['offset'] = $offset;
 		wp_send_json_success( $data );
+		exit();
 	}
-
-	$data = seopress_get_service( 'DomAnalysis' )->getDataAnalyze(
-		$data,
-		array(
-			'id' => $id,
-		)
-	);
-
-	$keywords = seopress_get_service( 'DomAnalysis' )->getKeywords(
-		array(
-			'id' => $id,
-		)
-	);
-
-	// Save analysis data first so getScore() reads fresh values from the database.
-	seopress_get_service( 'ContentAnalysisDatabase' )->saveData( $id, $data, $keywords );
-
-	$post          = get_post( $id );
-	$score         = seopress_get_service( 'DomAnalysis' )->getScore( $post );
-	$data['score'] = $score;
-	seopress_get_service( 'ContentAnalysisDatabase' )->saveData( $id, $data, $keywords );
-
-	/**
-	 * We delete old values because we have a new structure
-	 *
-	 * @deprecated
-	 * @since 7.3.0
-	 */
-	delete_post_meta( $id, '_seopress_content_analysis_api' );
-	delete_post_meta( $id, '_seopress_analysis_data' );
-
-	// Re-enable QM.
-	remove_filter( 'user_has_cap', 'seopress_disable_qm', 10, 3 );
-
-	wp_send_json_success( $data );
 }
 
 

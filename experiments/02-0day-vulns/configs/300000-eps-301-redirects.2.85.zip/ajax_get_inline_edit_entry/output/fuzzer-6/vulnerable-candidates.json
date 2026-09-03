@@ -1,0 +1,1399 @@
+{
+  "WebFuzzXSSVulnCheck": [
+    {
+      "coverage_id": "1787096886-8a7a0d19-c284-43b2-a95b-db8cda6e6f1c",
+      "priority": 11,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "GET",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "eps_redirect_get_inline_edit_entry"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "redirect_id": "fucP<script>alert(0xdeadbeef)</script>~zz"
+        },
+        "body_params": {}
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 0.25
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n{\"html\":\"<tr id=\\\"eps-redirect-edit\\\">\\r\\n    <td colspan=\\\"5\\\">\\r\\n        <form id=\\\"eps-redirect-save\\\" method=\\\"post\\\" action=\\\"\\\">\\r\\n            <table class=\\\"eps-table\\\">\\r\\n                <tr class=\\\"id-new\\\">\\r\\n                    <td>\\r\\n    <input type=\\\"hidden\\\" type=\\\"text\\\" name=\\\"redirect[id][]\\\" value=\\\"\\\">\\r\\n\\r\\n    <select name=\\\"redirect[status][]\\\" class=\\\"eps-small-select\\\">\\r\\n        <option default value=\\\"301\\\" >301<\\/option>\\r\\n        <option value=\\\"302\\\" >302<\\/option>\\r\\n        <option value=\\\"307\\\" >307<\\/option>\\r\\n        <option value=\\\"inactive\\\" >Off<\\/option>\\r\\n    <\\/select>\\r\\n\\r\\n    <div class=\\\"eps-url\\\"><span class=\\\"eps-url-root\\\">http:\\/\\/web\\/&nbsp;<\\/span><\\/div>\\r\\n    <input class=\\\"eps-url-input\\\" type=\\\"text\\\" name=\\\"redirect[url_from][]\\\" value=\\\"\\\"><br><small>Need wildcard support for matching multiple URLs? Check out the <a href=\\\"#\\\" class=\\\"open-301-pro-dialog\\\" data-pro-feature=\\\"new-rule-wildcard\\\">PRO version.<\\/small>\\r\\n<\\/td>\\r\\n<td>\\r\\n    <select class=\\\"type-select eps-small-select\\\"><option value=\\\"eps-url-input\\\">Custom<\\/option><option value=\\\"post\\\">Post<\\/option><option value=\\\"page\\\">Page<\\/option><option value=\\\"attachment\\\">Media<\\/option><option value=\\\"term\\\">Term Archive<\\/option><\\/select><select class=\\\"select-post url-selector eps-small-select\\\" style=\\\"display:none\\\"><option value=\\\"\\\">...<\\/option><\\/select><select class=\\\"select-page url-selector eps-small-select\\\" style=\\\"display:none\\\"><option value=\\\"\\\">...<\\/option><option value=\\\"4135\\\">Ev6l_bee.png - Copy<\\/option><\\/select><select class=\\\"select-attachment url-selector eps-small-select\\\" style=\\\"display:none\\\"><option value=\\\"\\\">...<\\/option><\\/select><select class=\\\"select-term url-selector eps-small-select\\\" style=\\\"display:none\\\"><option value=\\\"\\\" selected>...<\\/option><option value=\\\"category\\\" disabled>Category<\\/option><option value=\\\"http:\\/\\/web\\/?cat=1\\\">&nbsp;&nbsp;- Uncategorized<\\/option><option value=\\\"post_tag\\\" disabled>Tag<\\/option><option value=\\\"nav_menu\\\" disabled>Navigation Menu<\\/option><option value=\\\"link_category\\\" disabled>Link Category<\\/option><option value=\\\"post_format\\\" disabled>Format<\\/option><option value=\\\"wp_theme\\\" disabled>Theme<\\/option><option value=\\\"wp_template_part_area\\\" disabled>Template Part Area<\\/option><\\/select><input class=\\\"eps-url-input select-eps-url-input\\\" type=\\\"text\\\" name=\\\"redirect[url_to][]\\\" value=\\\"\\\" placeholder=\\\"http:\\/\\/web\\\" \\/><br><small>Remember: all external URLs have to start with <code>https:\\/\\/<\\/code><\\/small><\\/td>\\r\\n                    <td class=\\\"redirect-actions\\\">\\r\\n                                                <input type=\\\"hidden\\\" id=\\\"eps_redirect_nonce_submit\\\" name=\\\"eps_redirect_nonce_submit\\\" value=\\\"1441d4e40f\\\" \\/><input type=\\\"hidden\\\" name=\\\"_wp_http_referer\\\" value=\\\"\\/wp-admin\\/admin-ajax.php?redirect_id=fucP%3Cscript%3Ealert%280xdeadbeef%29%3C%2Fscript%3E%7Ezz&#038;action=eps_redirect_get_inline_edit_entry\\\" \\/>                        <input type=\\\"submit\\\" name=\\\"eps_redirect_submit\\\" class=\\\"button button-primary eps-redirect-edit\\\" value=\\\"Save\\\">\\r\\n                    <\\/td>\\r\\n                <\\/tr>\\r\\n            <\\/table>\\r\\n        <\\/form>\\r\\n    <\\/td>\\r\\n<\\/tr> \\r\\n\",\"redirect_id\":0}",
+      "response.body.length": 3297,
+      "response.headers": {
+        "Date": "Tue, 18 Aug 2026 23:48:06 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Vary": "Accept-Encoding",
+        "Content-Length": "3297",
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 401.044,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787096869-607fa745-a037-4431-839c-e263a5ccb66e",
+      "paths": [
+        "/var/www/html/wp-content/plugins/eps-301-redirects/templates/template.redirect-entry-edit.php::::10_14_16_17_20_21_22_23_26_27_30_31_32",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/templates/template.redirect-entry-edit-inline.php::::14_18_22_23_24_25_29_30_37",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/plugin.php::::11_356_359_367_389_390_394_396_400_424_473_50_51_53_54_56_57_59_60_63_64_65_66_67_68_69_70_71_72_75_76_796_802_806_825_826_827_858_859_861_904_905",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/eps-form-elements.php::::125_126_128_129_131_132_133_151_152_154_159_160_162_164_179_181_184_185_188_189_190_193_194_196_197_20_224_37_39_40_41_43_46_47_51_57_58_59_61",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/wf-flyout/wf-flyout.php::::168_20_21_22_24_27_29_34_35_37_50_51_52_55_56_73_74_75_76_9",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/eps-form-elements.php::::125_126_128_129_131_132_133_151_152_154_155_156_159_160_162_164_179_181_184_185_188_189_190_193_194_196_197_20_224_37_39_40_41_43_46_47_51_57_58_59_61",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/eps-301-redirects.php::::1008_137_138_197_198_200_201_203_204_220_237_253_267_283_297_309_32_321_329_338_347_356_36_365_367_38_39_40_42_43_433_434_45_46_47_48_50_51_53_54_55_70_73_77_78_79_795_796_80_81_82_83_84_909_910_915_917_92_921_923_924_925_926_927_928_929_931_987_995",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/class.drop-down-pages.php::::14_18_83",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/libs/eps-plugin-options.php::::104_116_128_130_132_133_134_135_136_139_14_151_174_176_178_179_18_180_184_187_46_47_48_49_50_51_521_58",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/wf-flyout/config.php::::10_11_12_14_2_22_4_5_6_7_8_9",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/class.drop-down-pages.php::::14_18_21_36_37_39_41_43_55_56_57_74_75_78_79_80_83"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "WebFuzzXSSVulnCheck"
+      ],
+      "score": 11,
+      "is_interesting": false,
+      "fuzzer_id": "6",
+      "is_initial_candidate": false,
+      "mutated_param_type": "query_params",
+      "mutated_param_name": "redirect_id"
+    },
+    {
+      "coverage_id": "1787096887-8f7d35c0-dda8-4a35-bfc1-1f0ffcae7e57",
+      "priority": 9,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "GET",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "eps_redirect_get_inline_edit_entry"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "redirect_id": "<img src='x' onerror='alert(0xdeadbeef)'>fuzz"
+        },
+        "body_params": {}
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 0.25
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n{\"html\":\"<tr id=\\\"eps-redirect-edit\\\">\\r\\n    <td colspan=\\\"5\\\">\\r\\n        <form id=\\\"eps-redirect-save\\\" method=\\\"post\\\" action=\\\"\\\">\\r\\n            <table class=\\\"eps-table\\\">\\r\\n                <tr class=\\\"id-new\\\">\\r\\n                    <td>\\r\\n    <input type=\\\"hidden\\\" type=\\\"text\\\" name=\\\"redirect[id][]\\\" value=\\\"\\\">\\r\\n\\r\\n    <select name=\\\"redirect[status][]\\\" class=\\\"eps-small-select\\\">\\r\\n        <option default value=\\\"301\\\" >301<\\/option>\\r\\n        <option value=\\\"302\\\" >302<\\/option>\\r\\n        <option value=\\\"307\\\" >307<\\/option>\\r\\n        <option value=\\\"inactive\\\" >Off<\\/option>\\r\\n    <\\/select>\\r\\n\\r\\n    <div class=\\\"eps-url\\\"><span class=\\\"eps-url-root\\\">http:\\/\\/web\\/&nbsp;<\\/span><\\/div>\\r\\n    <input class=\\\"eps-url-input\\\" type=\\\"text\\\" name=\\\"redirect[url_from][]\\\" value=\\\"\\\"><br><small>Need wildcard support for matching multiple URLs? Check out the <a href=\\\"#\\\" class=\\\"open-301-pro-dialog\\\" data-pro-feature=\\\"new-rule-wildcard\\\">PRO version.<\\/small>\\r\\n<\\/td>\\r\\n<td>\\r\\n    <select class=\\\"type-select eps-small-select\\\"><option value=\\\"eps-url-input\\\">Custom<\\/option><option value=\\\"post\\\">Post<\\/option><option value=\\\"page\\\">Page<\\/option><option value=\\\"attachment\\\">Media<\\/option><option value=\\\"term\\\">Term Archive<\\/option><\\/select><select class=\\\"select-post url-selector eps-small-select\\\" style=\\\"display:none\\\"><option value=\\\"\\\">...<\\/option><\\/select><select class=\\\"select-page url-selector eps-small-select\\\" style=\\\"display:none\\\"><option value=\\\"\\\">...<\\/option><option value=\\\"4135\\\">Ev6l_bee.png - Copy<\\/option><\\/select><select class=\\\"select-attachment url-selector eps-small-select\\\" style=\\\"display:none\\\"><option value=\\\"\\\">...<\\/option><\\/select><select class=\\\"select-term url-selector eps-small-select\\\" style=\\\"display:none\\\"><option value=\\\"\\\" selected>...<\\/option><option value=\\\"category\\\" disabled>Category<\\/option><option value=\\\"http:\\/\\/web\\/?cat=1\\\">&nbsp;&nbsp;- Uncategorized<\\/option><option value=\\\"post_tag\\\" disabled>Tag<\\/option><option value=\\\"nav_menu\\\" disabled>Navigation Menu<\\/option><option value=\\\"link_category\\\" disabled>Link Category<\\/option><option value=\\\"post_format\\\" disabled>Format<\\/option><option value=\\\"wp_theme\\\" disabled>Theme<\\/option><option value=\\\"wp_template_part_area\\\" disabled>Template Part Area<\\/option><\\/select><input class=\\\"eps-url-input select-eps-url-input\\\" type=\\\"text\\\" name=\\\"redirect[url_to][]\\\" value=\\\"\\\" placeholder=\\\"http:\\/\\/web\\\" \\/><br><small>Remember: all external URLs have to start with <code>https:\\/\\/<\\/code><\\/small><\\/td>\\r\\n                    <td class=\\\"redirect-actions\\\">\\r\\n                                                <input type=\\\"hidden\\\" id=\\\"eps_redirect_nonce_submit\\\" name=\\\"eps_redirect_nonce_submit\\\" value=\\\"1441d4e40f\\\" \\/><input type=\\\"hidden\\\" name=\\\"_wp_http_referer\\\" value=\\\"\\/wp-admin\\/admin-ajax.php?redirect_id=%3Cimg+src%3D%27x%27+onerror%3D%27alert%280xdeadbeef%29%27%3Efuzz&#038;action=eps_redirect_get_inline_edit_entry\\\" \\/>                        <input type=\\\"submit\\\" name=\\\"eps_redirect_submit\\\" class=\\\"button button-primary eps-redirect-edit\\\" value=\\\"Save\\\">\\r\\n                    <\\/td>\\r\\n                <\\/tr>\\r\\n            <\\/table>\\r\\n        <\\/form>\\r\\n    <\\/td>\\r\\n<\\/tr> \\r\\n\",\"redirect_id\":0}",
+      "response.body.length": 3305,
+      "response.headers": {
+        "Date": "Tue, 18 Aug 2026 23:48:07 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Vary": "Accept-Encoding",
+        "Content-Length": "3305",
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 378.44,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787096869-dd724145-f008-435b-9717-8e27f62c6ba9",
+      "paths": [
+        "/var/www/html/wp-content/plugins/eps-301-redirects/templates/template.redirect-entry-edit.php::::10_14_16_17_20_21_22_23_26_27_30_31_32",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/templates/template.redirect-entry-edit-inline.php::::14_18_22_23_24_25_29_30_37",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/plugin.php::::11_356_359_367_389_390_394_396_400_424_473_50_51_53_54_56_57_59_60_63_64_65_66_67_68_69_70_71_72_75_76_796_802_806_825_826_827_858_859_861_904_905",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/class.drop-down-pages.php::::14_18_83",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/eps-form-elements.php::::125_126_128_129_131_132_133_151_152_154_159_160_162_164_179_181_184_185_188_189_190_193_194_196_197_20_224_37_39_40_41_43_46_47_51_57_58_59_61",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/wf-flyout/wf-flyout.php::::168_20_21_22_24_27_29_34_35_37_50_51_52_55_56_73_74_75_76_9",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/libs/eps-plugin-options.php::::104_116_128_130_132_133_134_135_136_139_14_151_174_176_178_179_18_180_184_187_46_47_48_49_50_51_521_58",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/wf-flyout/config.php::::10_11_12_14_2_22_4_5_6_7_8_9",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/eps-301-redirects.php::::1008_137_138_197_198_200_201_203_204_220_237_253_267_283_297_309_32_321_329_338_347_356_36_365_367_38_39_40_42_43_433_434_45_46_47_48_50_51_53_54_55_70_73_77_78_79_795_796_80_81_82_83_84_909_910_915_917_92_921_923_924_925_926_927_928_929_931_987_995"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "WebFuzzXSSVulnCheck"
+      ],
+      "score": 9,
+      "is_interesting": false,
+      "fuzzer_id": "6",
+      "is_initial_candidate": false,
+      "mutated_param_type": "query_params",
+      "mutated_param_name": "redirect_id"
+    },
+    {
+      "coverage_id": "1787096892-8142e83c-14f7-4e90-aac0-516bccd9d6a4",
+      "priority": 12,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "GET",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "eps_redirect_get_inline_edit_entry"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "redirect_id": "2uzz<script>alert(0xdeadbeef)</script>"
+        },
+        "body_params": {}
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 0.25
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n{\"html\":\"<tr id=\\\"eps-redirect-edit\\\">\\r\\n    <td colspan=\\\"5\\\">\\r\\n        <form id=\\\"eps-redirect-save\\\" method=\\\"post\\\" action=\\\"\\\">\\r\\n            <table class=\\\"eps-table\\\">\\r\\n                <tr class=\\\"id-2\\\">\\r\\n                    <td>\\r\\n    <input type=\\\"hidden\\\" type=\\\"text\\\" name=\\\"redirect[id][]\\\" value=\\\"2\\\">\\r\\n\\r\\n    <select name=\\\"redirect[status][]\\\" class=\\\"eps-small-select\\\">\\r\\n        <option default value=\\\"301\\\" >301<\\/option>\\r\\n        <option value=\\\"302\\\" >302<\\/option>\\r\\n        <option value=\\\"307\\\" >307<\\/option>\\r\\n        <option value=\\\"inactive\\\" >Off<\\/option>\\r\\n    <\\/select>\\r\\n\\r\\n    <div class=\\\"eps-url\\\"><span class=\\\"eps-url-root\\\">http:\\/\\/web\\/&nbsp;<\\/span><\\/div>\\r\\n    <input class=\\\"eps-url-input\\\" type=\\\"text\\\" name=\\\"redirect[url_from][]\\\" value=\\\"\\\"><br><small>Need wildcard support for matching multiple URLs? Check out the <a href=\\\"#\\\" class=\\\"open-301-pro-dialog\\\" data-pro-feature=\\\"new-rule-wildcard\\\">PRO version.<\\/small>\\r\\n<\\/td>\\r\\n<td>\\r\\n    <select class=\\\"type-select eps-small-select\\\"><option value=\\\"eps-url-input\\\">Custom<\\/option><option value=\\\"post\\\">Post<\\/option><option value=\\\"page\\\">Page<\\/option><option value=\\\"attachment\\\">Media<\\/option><option value=\\\"term\\\">Term Archive<\\/option><\\/select><select class=\\\"select-post url-selector eps-small-select\\\" style=\\\"display:none\\\"><option value=\\\"\\\">...<\\/option><\\/select><select class=\\\"select-page url-selector eps-small-select\\\" style=\\\"display:none\\\"><option value=\\\"\\\">...<\\/option><option value=\\\"4135\\\">Ev6l_bee.png - Copy<\\/option><\\/select><select class=\\\"select-attachment url-selector eps-small-select\\\" style=\\\"display:none\\\"><option value=\\\"\\\">...<\\/option><\\/select><select class=\\\"select-term url-selector eps-small-select\\\" style=\\\"display:none\\\"><option value=\\\"\\\" selected>...<\\/option><option value=\\\"category\\\" disabled>Category<\\/option><option value=\\\"http:\\/\\/web\\/?cat=1\\\">&nbsp;&nbsp;- Uncategorized<\\/option><option value=\\\"post_tag\\\" disabled>Tag<\\/option><option value=\\\"nav_menu\\\" disabled>Navigation Menu<\\/option><option value=\\\"link_category\\\" disabled>Link Category<\\/option><option value=\\\"post_format\\\" disabled>Format<\\/option><option value=\\\"wp_theme\\\" disabled>Theme<\\/option><option value=\\\"wp_template_part_area\\\" disabled>Template Part Area<\\/option><\\/select><input class=\\\"eps-url-input select-eps-url-input\\\" type=\\\"text\\\" name=\\\"redirect[url_to][]\\\" value=\\\"\\\" placeholder=\\\"http:\\/\\/web\\\" \\/><br><small>Remember: all external URLs have to start with <code>https:\\/\\/<\\/code><\\/small><\\/td>\\r\\n                    <td class=\\\"redirect-actions\\\">\\r\\n                                                <a class=\\\"button eps-redirect-cancel\\\">Close<\\/a>\\r\\n                                                <input type=\\\"hidden\\\" id=\\\"eps_redirect_nonce_submit\\\" name=\\\"eps_redirect_nonce_submit\\\" value=\\\"1441d4e40f\\\" \\/><input type=\\\"hidden\\\" name=\\\"_wp_http_referer\\\" value=\\\"\\/wp-admin\\/admin-ajax.php?redirect_id=2uzz%3Cscript%3Ealert%280xdeadbeef%29%3C%2Fscript%3E&#038;action=eps_redirect_get_inline_edit_entry\\\" \\/>                        <input type=\\\"submit\\\" name=\\\"eps_redirect_submit\\\" class=\\\"button button-primary eps-redirect-edit\\\" value=\\\"Save\\\">\\r\\n                    <\\/td>\\r\\n                <\\/tr>\\r\\n            <\\/table>\\r\\n        <\\/form>\\r\\n    <\\/td>\\r\\n<\\/tr> \\r\\n\",\"redirect_id\":2}",
+      "response.body.length": 3393,
+      "response.headers": {
+        "Date": "Tue, 18 Aug 2026 23:48:12 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Vary": "Accept-Encoding",
+        "Content-Length": "3393",
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 456.921,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787096876-1cdebc6a-a85e-49c8-aa6c-0a866daf98b0",
+      "paths": [
+        "/var/www/html/wp-content/plugins/eps-301-redirects/templates/template.redirect-entry-edit.php::::10_14_16_17_20_21_22_23_26_27_30_31_32",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/templates/template.redirect-entry-edit-inline.php::::14_18_22_23_24_25_26_29_30_37",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/templates/template.redirect-entry-edit-inline.php::::14_18_22_23_24_25_29_30_37",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/plugin.php::::11_356_359_367_389_390_394_396_400_424_473_50_51_53_54_56_57_59_60_63_64_65_66_67_68_69_70_71_72_75_76_796_802_806_825_826_827_858_859_861_904_905",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/eps-form-elements.php::::125_126_128_129_131_132_133_151_152_154_159_160_162_164_179_181_184_185_188_189_190_193_194_196_197_20_224_37_39_40_41_43_46_47_51_57_58_59_61",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/wf-flyout/wf-flyout.php::::168_20_21_22_24_27_29_34_35_37_50_51_52_55_56_73_74_75_76_9",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/eps-form-elements.php::::125_126_128_129_131_132_133_151_152_154_155_156_159_160_162_164_179_181_184_185_188_189_190_193_194_196_197_20_224_37_39_40_41_43_46_47_51_57_58_59_61",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/eps-301-redirects.php::::1008_137_138_197_198_200_201_203_204_220_237_253_267_283_297_309_32_321_329_338_347_356_36_365_367_38_39_40_42_43_433_434_45_46_47_48_50_51_53_54_55_70_73_77_78_79_795_796_80_81_82_83_84_909_910_915_917_92_921_923_924_925_926_927_928_929_931_987_995",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/class.drop-down-pages.php::::14_18_83",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/libs/eps-plugin-options.php::::104_116_128_130_132_133_134_135_136_139_14_151_174_176_178_179_18_180_184_187_46_47_48_49_50_51_521_58",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/wf-flyout/config.php::::10_11_12_14_2_22_4_5_6_7_8_9",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/class.drop-down-pages.php::::14_18_21_36_37_39_41_43_55_56_57_74_75_78_79_80_83"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "WebFuzzXSSVulnCheck"
+      ],
+      "score": 12,
+      "is_interesting": false,
+      "fuzzer_id": "6",
+      "is_initial_candidate": false,
+      "mutated_param_type": "query_params",
+      "mutated_param_name": "redirect_id"
+    },
+    {
+      "coverage_id": "1787096911-b6267656-9ce3-4256-a5d8-8667bbb0364b",
+      "priority": 12,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "GET",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "eps_redirect_get_inline_edit_entry"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "redirect_id": "9uz<script>alert(0xdeadbeef)</script>z"
+        },
+        "body_params": {}
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 0.25
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n{\"html\":\"<tr id=\\\"eps-redirect-edit\\\">\\r\\n    <td colspan=\\\"5\\\">\\r\\n        <form id=\\\"eps-redirect-save\\\" method=\\\"post\\\" action=\\\"\\\">\\r\\n            <table class=\\\"eps-table\\\">\\r\\n                <tr class=\\\"id-9\\\">\\r\\n                    <td>\\r\\n    <input type=\\\"hidden\\\" type=\\\"text\\\" name=\\\"redirect[id][]\\\" value=\\\"9\\\">\\r\\n\\r\\n    <select name=\\\"redirect[status][]\\\" class=\\\"eps-small-select\\\">\\r\\n        <option default value=\\\"301\\\" >301<\\/option>\\r\\n        <option value=\\\"302\\\" >302<\\/option>\\r\\n        <option value=\\\"307\\\" >307<\\/option>\\r\\n        <option value=\\\"inactive\\\" >Off<\\/option>\\r\\n    <\\/select>\\r\\n\\r\\n    <div class=\\\"eps-url\\\"><span class=\\\"eps-url-root\\\">http:\\/\\/web\\/&nbsp;<\\/span><\\/div>\\r\\n    <input class=\\\"eps-url-input\\\" type=\\\"text\\\" name=\\\"redirect[url_from][]\\\" value=\\\"\\\"><br><small>Need wildcard support for matching multiple URLs? Check out the <a href=\\\"#\\\" class=\\\"open-301-pro-dialog\\\" data-pro-feature=\\\"new-rule-wildcard\\\">PRO version.<\\/small>\\r\\n<\\/td>\\r\\n<td>\\r\\n    <select class=\\\"type-select eps-small-select\\\"><option value=\\\"eps-url-input\\\">Custom<\\/option><option value=\\\"post\\\">Post<\\/option><option value=\\\"page\\\">Page<\\/option><option value=\\\"attachment\\\">Media<\\/option><option value=\\\"term\\\">Term Archive<\\/option><\\/select><select class=\\\"select-post url-selector eps-small-select\\\" style=\\\"display:none\\\"><option value=\\\"\\\">...<\\/option><\\/select><select class=\\\"select-page url-selector eps-small-select\\\" style=\\\"display:none\\\"><option value=\\\"\\\">...<\\/option><option value=\\\"4135\\\">Ev6l_bee.png - Copy<\\/option><\\/select><select class=\\\"select-attachment url-selector eps-small-select\\\" style=\\\"display:none\\\"><option value=\\\"\\\">...<\\/option><\\/select><select class=\\\"select-term url-selector eps-small-select\\\" style=\\\"display:none\\\"><option value=\\\"\\\" selected>...<\\/option><option value=\\\"category\\\" disabled>Category<\\/option><option value=\\\"http:\\/\\/web\\/?cat=1\\\">&nbsp;&nbsp;- Uncategorized<\\/option><option value=\\\"post_tag\\\" disabled>Tag<\\/option><option value=\\\"nav_menu\\\" disabled>Navigation Menu<\\/option><option value=\\\"link_category\\\" disabled>Link Category<\\/option><option value=\\\"post_format\\\" disabled>Format<\\/option><option value=\\\"wp_theme\\\" disabled>Theme<\\/option><option value=\\\"wp_template_part_area\\\" disabled>Template Part Area<\\/option><\\/select><input class=\\\"eps-url-input select-eps-url-input\\\" type=\\\"text\\\" name=\\\"redirect[url_to][]\\\" value=\\\"\\\" placeholder=\\\"http:\\/\\/web\\\" \\/><br><small>Remember: all external URLs have to start with <code>https:\\/\\/<\\/code><\\/small><\\/td>\\r\\n                    <td class=\\\"redirect-actions\\\">\\r\\n                                                <a class=\\\"button eps-redirect-cancel\\\">Close<\\/a>\\r\\n                                                <input type=\\\"hidden\\\" id=\\\"eps_redirect_nonce_submit\\\" name=\\\"eps_redirect_nonce_submit\\\" value=\\\"1441d4e40f\\\" \\/><input type=\\\"hidden\\\" name=\\\"_wp_http_referer\\\" value=\\\"\\/wp-admin\\/admin-ajax.php?redirect_id=9uz%3Cscript%3Ealert%280xdeadbeef%29%3C%2Fscript%3Ez&#038;action=eps_redirect_get_inline_edit_entry\\\" \\/>                        <input type=\\\"submit\\\" name=\\\"eps_redirect_submit\\\" class=\\\"button button-primary eps-redirect-edit\\\" value=\\\"Save\\\">\\r\\n                    <\\/td>\\r\\n                <\\/tr>\\r\\n            <\\/table>\\r\\n        <\\/form>\\r\\n    <\\/td>\\r\\n<\\/tr> \\r\\n\",\"redirect_id\":9}",
+      "response.body.length": 3393,
+      "response.headers": {
+        "Date": "Tue, 18 Aug 2026 23:48:31 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Vary": "Accept-Encoding",
+        "Content-Length": "3393",
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 274.286,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787096872-0a942b84-32cd-4ea7-a293-37f8f6395afd",
+      "paths": [
+        "/var/www/html/wp-content/plugins/eps-301-redirects/templates/template.redirect-entry-edit.php::::10_14_16_17_20_21_22_23_26_27_30_31_32",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/templates/template.redirect-entry-edit-inline.php::::14_18_22_23_24_25_26_29_30_37",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/templates/template.redirect-entry-edit-inline.php::::14_18_22_23_24_25_29_30_37",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/plugin.php::::11_356_359_367_389_390_394_396_400_424_473_50_51_53_54_56_57_59_60_63_64_65_66_67_68_69_70_71_72_75_76_796_802_806_825_826_827_858_859_861_904_905",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/eps-form-elements.php::::125_126_128_129_131_132_133_151_152_154_159_160_162_164_179_181_184_185_188_189_190_193_194_196_197_20_224_37_39_40_41_43_46_47_51_57_58_59_61",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/wf-flyout/wf-flyout.php::::168_20_21_22_24_27_29_34_35_37_50_51_52_55_56_73_74_75_76_9",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/eps-form-elements.php::::125_126_128_129_131_132_133_151_152_154_155_156_159_160_162_164_179_181_184_185_188_189_190_193_194_196_197_20_224_37_39_40_41_43_46_47_51_57_58_59_61",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/eps-301-redirects.php::::1008_137_138_197_198_200_201_203_204_220_237_253_267_283_297_309_32_321_329_338_347_356_36_365_367_38_39_40_42_43_433_434_45_46_47_48_50_51_53_54_55_70_73_77_78_79_795_796_80_81_82_83_84_909_910_915_917_92_921_923_924_925_926_927_928_929_931_987_995",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/class.drop-down-pages.php::::14_18_83",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/libs/eps-plugin-options.php::::104_116_128_130_132_133_134_135_136_139_14_151_174_176_178_179_18_180_184_187_46_47_48_49_50_51_521_58",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/wf-flyout/config.php::::10_11_12_14_2_22_4_5_6_7_8_9",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/class.drop-down-pages.php::::14_18_21_36_37_39_41_43_55_56_57_74_75_78_79_80_83"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "WebFuzzXSSVulnCheck"
+      ],
+      "score": 12,
+      "is_interesting": false,
+      "fuzzer_id": "6",
+      "is_initial_candidate": false,
+      "mutated_param_type": "query_params",
+      "mutated_param_name": "redirect_id"
+    },
+    {
+      "coverage_id": "1787096911-30bb58eb-0c09-4514-a40b-22bedd23651f",
+      "priority": 11,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "GET",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "eps_redirect_get_inline_edit_entry"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "redirect_id": "fucP~z<img src='x' onerror='alert(0xdeadbeef)'>z"
+        },
+        "body_params": {}
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 0.25
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n{\"html\":\"<tr id=\\\"eps-redirect-edit\\\">\\r\\n    <td colspan=\\\"5\\\">\\r\\n        <form id=\\\"eps-redirect-save\\\" method=\\\"post\\\" action=\\\"\\\">\\r\\n            <table class=\\\"eps-table\\\">\\r\\n                <tr class=\\\"id-new\\\">\\r\\n                    <td>\\r\\n    <input type=\\\"hidden\\\" type=\\\"text\\\" name=\\\"redirect[id][]\\\" value=\\\"\\\">\\r\\n\\r\\n    <select name=\\\"redirect[status][]\\\" class=\\\"eps-small-select\\\">\\r\\n        <option default value=\\\"301\\\" >301<\\/option>\\r\\n        <option value=\\\"302\\\" >302<\\/option>\\r\\n        <option value=\\\"307\\\" >307<\\/option>\\r\\n        <option value=\\\"inactive\\\" >Off<\\/option>\\r\\n    <\\/select>\\r\\n\\r\\n    <div class=\\\"eps-url\\\"><span class=\\\"eps-url-root\\\">http:\\/\\/web\\/&nbsp;<\\/span><\\/div>\\r\\n    <input class=\\\"eps-url-input\\\" type=\\\"text\\\" name=\\\"redirect[url_from][]\\\" value=\\\"\\\"><br><small>Need wildcard support for matching multiple URLs? Check out the <a href=\\\"#\\\" class=\\\"open-301-pro-dialog\\\" data-pro-feature=\\\"new-rule-wildcard\\\">PRO version.<\\/small>\\r\\n<\\/td>\\r\\n<td>\\r\\n    <select class=\\\"type-select eps-small-select\\\"><option value=\\\"eps-url-input\\\">Custom<\\/option><option value=\\\"post\\\">Post<\\/option><option value=\\\"page\\\">Page<\\/option><option value=\\\"attachment\\\">Media<\\/option><option value=\\\"term\\\">Term Archive<\\/option><\\/select><select class=\\\"select-post url-selector eps-small-select\\\" style=\\\"display:none\\\"><option value=\\\"\\\">...<\\/option><\\/select><select class=\\\"select-page url-selector eps-small-select\\\" style=\\\"display:none\\\"><option value=\\\"\\\">...<\\/option><option value=\\\"4135\\\">Ev6l_bee.png - Copy<\\/option><\\/select><select class=\\\"select-attachment url-selector eps-small-select\\\" style=\\\"display:none\\\"><option value=\\\"\\\">...<\\/option><\\/select><select class=\\\"select-term url-selector eps-small-select\\\" style=\\\"display:none\\\"><option value=\\\"\\\" selected>...<\\/option><option value=\\\"category\\\" disabled>Category<\\/option><option value=\\\"http:\\/\\/web\\/?cat=1\\\">&nbsp;&nbsp;- Uncategorized<\\/option><option value=\\\"post_tag\\\" disabled>Tag<\\/option><option value=\\\"nav_menu\\\" disabled>Navigation Menu<\\/option><option value=\\\"link_category\\\" disabled>Link Category<\\/option><option value=\\\"post_format\\\" disabled>Format<\\/option><option value=\\\"wp_theme\\\" disabled>Theme<\\/option><option value=\\\"wp_template_part_area\\\" disabled>Template Part Area<\\/option><\\/select><input class=\\\"eps-url-input select-eps-url-input\\\" type=\\\"text\\\" name=\\\"redirect[url_to][]\\\" value=\\\"\\\" placeholder=\\\"http:\\/\\/web\\\" \\/><br><small>Remember: all external URLs have to start with <code>https:\\/\\/<\\/code><\\/small><\\/td>\\r\\n                    <td class=\\\"redirect-actions\\\">\\r\\n                                                <input type=\\\"hidden\\\" id=\\\"eps_redirect_nonce_submit\\\" name=\\\"eps_redirect_nonce_submit\\\" value=\\\"1441d4e40f\\\" \\/><input type=\\\"hidden\\\" name=\\\"_wp_http_referer\\\" value=\\\"\\/wp-admin\\/admin-ajax.php?redirect_id=fucP%7Ez%3Cimg+src%3D%27x%27+onerror%3D%27alert%280xdeadbeef%29%27%3Ez&#038;action=eps_redirect_get_inline_edit_entry\\\" \\/>                        <input type=\\\"submit\\\" name=\\\"eps_redirect_submit\\\" class=\\\"button button-primary eps-redirect-edit\\\" value=\\\"Save\\\">\\r\\n                    <\\/td>\\r\\n                <\\/tr>\\r\\n            <\\/table>\\r\\n        <\\/form>\\r\\n    <\\/td>\\r\\n<\\/tr> \\r\\n\",\"redirect_id\":0}",
+      "response.body.length": 3310,
+      "response.headers": {
+        "Date": "Tue, 18 Aug 2026 23:48:31 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Vary": "Accept-Encoding",
+        "Content-Length": "3310",
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 437.391,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787096869-607fa745-a037-4431-839c-e263a5ccb66e",
+      "paths": [
+        "/var/www/html/wp-content/plugins/eps-301-redirects/templates/template.redirect-entry-edit.php::::10_14_16_17_20_21_22_23_26_27_30_31_32",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/templates/template.redirect-entry-edit-inline.php::::14_18_22_23_24_25_29_30_37",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/plugin.php::::11_356_359_367_389_390_394_396_400_424_473_50_51_53_54_56_57_59_60_63_64_65_66_67_68_69_70_71_72_75_76_796_802_806_825_826_827_858_859_861_904_905",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/eps-form-elements.php::::125_126_128_129_131_132_133_151_152_154_159_160_162_164_179_181_184_185_188_189_190_193_194_196_197_20_224_37_39_40_41_43_46_47_51_57_58_59_61",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/wf-flyout/wf-flyout.php::::168_20_21_22_24_27_29_34_35_37_50_51_52_55_56_73_74_75_76_9",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/eps-form-elements.php::::125_126_128_129_131_132_133_151_152_154_155_156_159_160_162_164_179_181_184_185_188_189_190_193_194_196_197_20_224_37_39_40_41_43_46_47_51_57_58_59_61",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/eps-301-redirects.php::::1008_137_138_197_198_200_201_203_204_220_237_253_267_283_297_309_32_321_329_338_347_356_36_365_367_38_39_40_42_43_433_434_45_46_47_48_50_51_53_54_55_70_73_77_78_79_795_796_80_81_82_83_84_909_910_915_917_92_921_923_924_925_926_927_928_929_931_987_995",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/class.drop-down-pages.php::::14_18_83",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/libs/eps-plugin-options.php::::104_116_128_130_132_133_134_135_136_139_14_151_174_176_178_179_18_180_184_187_46_47_48_49_50_51_521_58",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/wf-flyout/config.php::::10_11_12_14_2_22_4_5_6_7_8_9",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/class.drop-down-pages.php::::14_18_21_36_37_39_41_43_55_56_57_74_75_78_79_80_83"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "WebFuzzXSSVulnCheck"
+      ],
+      "score": 11,
+      "is_interesting": false,
+      "fuzzer_id": "6",
+      "is_initial_candidate": false,
+      "mutated_param_type": "query_params",
+      "mutated_param_name": "redirect_id"
+    },
+    {
+      "coverage_id": "1787096919-92d8a177-291f-4a18-837d-59938f698607",
+      "priority": 12,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "GET",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "eps_redirect_get_inline_edit_entry"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "redirect_id": "4uz1<img src='x' onerror='alert(0xdeadbeef)'>"
+        },
+        "body_params": {}
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 0.25
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n{\"html\":\"<tr id=\\\"eps-redirect-edit\\\">\\r\\n    <td colspan=\\\"5\\\">\\r\\n        <form id=\\\"eps-redirect-save\\\" method=\\\"post\\\" action=\\\"\\\">\\r\\n            <table class=\\\"eps-table\\\">\\r\\n                <tr class=\\\"id-4\\\">\\r\\n                    <td>\\r\\n    <input type=\\\"hidden\\\" type=\\\"text\\\" name=\\\"redirect[id][]\\\" value=\\\"4\\\">\\r\\n\\r\\n    <select name=\\\"redirect[status][]\\\" class=\\\"eps-small-select\\\">\\r\\n        <option default value=\\\"301\\\" >301<\\/option>\\r\\n        <option value=\\\"302\\\" >302<\\/option>\\r\\n        <option value=\\\"307\\\" >307<\\/option>\\r\\n        <option value=\\\"inactive\\\" >Off<\\/option>\\r\\n    <\\/select>\\r\\n\\r\\n    <div class=\\\"eps-url\\\"><span class=\\\"eps-url-root\\\">http:\\/\\/web\\/&nbsp;<\\/span><\\/div>\\r\\n    <input class=\\\"eps-url-input\\\" type=\\\"text\\\" name=\\\"redirect[url_from][]\\\" value=\\\"\\\"><br><small>Need wildcard support for matching multiple URLs? Check out the <a href=\\\"#\\\" class=\\\"open-301-pro-dialog\\\" data-pro-feature=\\\"new-rule-wildcard\\\">PRO version.<\\/small>\\r\\n<\\/td>\\r\\n<td>\\r\\n    <select class=\\\"type-select eps-small-select\\\"><option value=\\\"eps-url-input\\\">Custom<\\/option><option value=\\\"post\\\">Post<\\/option><option value=\\\"page\\\">Page<\\/option><option value=\\\"attachment\\\">Media<\\/option><option value=\\\"term\\\">Term Archive<\\/option><\\/select><select class=\\\"select-post url-selector eps-small-select\\\" style=\\\"display:none\\\"><option value=\\\"\\\">...<\\/option><\\/select><select class=\\\"select-page url-selector eps-small-select\\\" style=\\\"display:none\\\"><option value=\\\"\\\">...<\\/option><option value=\\\"4135\\\">Ev6l_bee.png - Copy<\\/option><\\/select><select class=\\\"select-attachment url-selector eps-small-select\\\" style=\\\"display:none\\\"><option value=\\\"\\\">...<\\/option><\\/select><select class=\\\"select-term url-selector eps-small-select\\\" style=\\\"display:none\\\"><option value=\\\"\\\" selected>...<\\/option><option value=\\\"category\\\" disabled>Category<\\/option><option value=\\\"http:\\/\\/web\\/?cat=1\\\">&nbsp;&nbsp;- Uncategorized<\\/option><option value=\\\"post_tag\\\" disabled>Tag<\\/option><option value=\\\"nav_menu\\\" disabled>Navigation Menu<\\/option><option value=\\\"link_category\\\" disabled>Link Category<\\/option><option value=\\\"post_format\\\" disabled>Format<\\/option><option value=\\\"wp_theme\\\" disabled>Theme<\\/option><option value=\\\"wp_template_part_area\\\" disabled>Template Part Area<\\/option><\\/select><input class=\\\"eps-url-input select-eps-url-input\\\" type=\\\"text\\\" name=\\\"redirect[url_to][]\\\" value=\\\"\\\" placeholder=\\\"http:\\/\\/web\\\" \\/><br><small>Remember: all external URLs have to start with <code>https:\\/\\/<\\/code><\\/small><\\/td>\\r\\n                    <td class=\\\"redirect-actions\\\">\\r\\n                                                <a class=\\\"button eps-redirect-cancel\\\">Close<\\/a>\\r\\n                                                <input type=\\\"hidden\\\" id=\\\"eps_redirect_nonce_submit\\\" name=\\\"eps_redirect_nonce_submit\\\" value=\\\"1441d4e40f\\\" \\/><input type=\\\"hidden\\\" name=\\\"_wp_http_referer\\\" value=\\\"\\/wp-admin\\/admin-ajax.php?redirect_id=4uz1%3Cimg+src%3D%27x%27+onerror%3D%27alert%280xdeadbeef%29%27%3E&#038;action=eps_redirect_get_inline_edit_entry\\\" \\/>                        <input type=\\\"submit\\\" name=\\\"eps_redirect_submit\\\" class=\\\"button button-primary eps-redirect-edit\\\" value=\\\"Save\\\">\\r\\n                    <\\/td>\\r\\n                <\\/tr>\\r\\n            <\\/table>\\r\\n        <\\/form>\\r\\n    <\\/td>\\r\\n<\\/tr> \\r\\n\",\"redirect_id\":4}",
+      "response.body.length": 3406,
+      "response.headers": {
+        "Date": "Tue, 18 Aug 2026 23:48:39 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Vary": "Accept-Encoding",
+        "Content-Length": "3406",
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 530.523,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787096912-92b849b0-116b-4b1c-be22-e0efacea35e0",
+      "paths": [
+        "/var/www/html/wp-content/plugins/eps-301-redirects/templates/template.redirect-entry-edit.php::::10_14_16_17_20_21_22_23_26_27_30_31_32",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/templates/template.redirect-entry-edit-inline.php::::14_18_22_23_24_25_26_29_30_37",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/templates/template.redirect-entry-edit-inline.php::::14_18_22_23_24_25_29_30_37",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/plugin.php::::11_356_359_367_389_390_394_396_400_424_473_50_51_53_54_56_57_59_60_63_64_65_66_67_68_69_70_71_72_75_76_796_802_806_825_826_827_858_859_861_904_905",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/eps-form-elements.php::::125_126_128_129_131_132_133_151_152_154_159_160_162_164_179_181_184_185_188_189_190_193_194_196_197_20_224_37_39_40_41_43_46_47_51_57_58_59_61",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/wf-flyout/wf-flyout.php::::168_20_21_22_24_27_29_34_35_37_50_51_52_55_56_73_74_75_76_9",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/eps-form-elements.php::::125_126_128_129_131_132_133_151_152_154_155_156_159_160_162_164_179_181_184_185_188_189_190_193_194_196_197_20_224_37_39_40_41_43_46_47_51_57_58_59_61",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/eps-301-redirects.php::::1008_137_138_197_198_200_201_203_204_220_237_253_267_283_297_309_32_321_329_338_347_356_36_365_367_38_39_40_42_43_433_434_45_46_47_48_50_51_53_54_55_70_73_77_78_79_795_796_80_81_82_83_84_909_910_915_917_92_921_923_924_925_926_927_928_929_931_987_995",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/class.drop-down-pages.php::::14_18_83",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/libs/eps-plugin-options.php::::104_116_128_130_132_133_134_135_136_139_14_151_174_176_178_179_18_180_184_187_46_47_48_49_50_51_521_58",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/wf-flyout/config.php::::10_11_12_14_2_22_4_5_6_7_8_9",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/class.drop-down-pages.php::::14_18_21_36_37_39_41_43_55_56_57_74_75_78_79_80_83"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "WebFuzzXSSVulnCheck"
+      ],
+      "score": 12,
+      "is_interesting": false,
+      "fuzzer_id": "6",
+      "is_initial_candidate": false,
+      "mutated_param_type": "query_params",
+      "mutated_param_name": "redirect_id"
+    },
+    {
+      "coverage_id": "1787096925-a9a1b09b-f5e8-4d67-825e-1c27b089ec06",
+      "priority": 12,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "GET",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "eps_redirect_get_inline_edit_entry"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "redirect_id": "4u<script>alert(0xdeadbeef)</script>z1"
+        },
+        "body_params": {}
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 0.25
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n{\"html\":\"<tr id=\\\"eps-redirect-edit\\\">\\r\\n    <td colspan=\\\"5\\\">\\r\\n        <form id=\\\"eps-redirect-save\\\" method=\\\"post\\\" action=\\\"\\\">\\r\\n            <table class=\\\"eps-table\\\">\\r\\n                <tr class=\\\"id-4\\\">\\r\\n                    <td>\\r\\n    <input type=\\\"hidden\\\" type=\\\"text\\\" name=\\\"redirect[id][]\\\" value=\\\"4\\\">\\r\\n\\r\\n    <select name=\\\"redirect[status][]\\\" class=\\\"eps-small-select\\\">\\r\\n        <option default value=\\\"301\\\" >301<\\/option>\\r\\n        <option value=\\\"302\\\" >302<\\/option>\\r\\n        <option value=\\\"307\\\" >307<\\/option>\\r\\n        <option value=\\\"inactive\\\" >Off<\\/option>\\r\\n    <\\/select>\\r\\n\\r\\n    <div class=\\\"eps-url\\\"><span class=\\\"eps-url-root\\\">http:\\/\\/web\\/&nbsp;<\\/span><\\/div>\\r\\n    <input class=\\\"eps-url-input\\\" type=\\\"text\\\" name=\\\"redirect[url_from][]\\\" value=\\\"\\\"><br><small>Need wildcard support for matching multiple URLs? Check out the <a href=\\\"#\\\" class=\\\"open-301-pro-dialog\\\" data-pro-feature=\\\"new-rule-wildcard\\\">PRO version.<\\/small>\\r\\n<\\/td>\\r\\n<td>\\r\\n    <select class=\\\"type-select eps-small-select\\\"><option value=\\\"eps-url-input\\\">Custom<\\/option><option value=\\\"post\\\">Post<\\/option><option value=\\\"page\\\">Page<\\/option><option value=\\\"attachment\\\">Media<\\/option><option value=\\\"term\\\">Term Archive<\\/option><\\/select><select class=\\\"select-post url-selector eps-small-select\\\" style=\\\"display:none\\\"><option value=\\\"\\\">...<\\/option><\\/select><select class=\\\"select-page url-selector eps-small-select\\\" style=\\\"display:none\\\"><option value=\\\"\\\">...<\\/option><option value=\\\"4135\\\">Ev6l_bee.png - Copy<\\/option><\\/select><select class=\\\"select-attachment url-selector eps-small-select\\\" style=\\\"display:none\\\"><option value=\\\"\\\">...<\\/option><\\/select><select class=\\\"select-term url-selector eps-small-select\\\" style=\\\"display:none\\\"><option value=\\\"\\\" selected>...<\\/option><option value=\\\"category\\\" disabled>Category<\\/option><option value=\\\"http:\\/\\/web\\/?cat=1\\\">&nbsp;&nbsp;- Uncategorized<\\/option><option value=\\\"post_tag\\\" disabled>Tag<\\/option><option value=\\\"nav_menu\\\" disabled>Navigation Menu<\\/option><option value=\\\"link_category\\\" disabled>Link Category<\\/option><option value=\\\"post_format\\\" disabled>Format<\\/option><option value=\\\"wp_theme\\\" disabled>Theme<\\/option><option value=\\\"wp_template_part_area\\\" disabled>Template Part Area<\\/option><\\/select><input class=\\\"eps-url-input select-eps-url-input\\\" type=\\\"text\\\" name=\\\"redirect[url_to][]\\\" value=\\\"\\\" placeholder=\\\"http:\\/\\/web\\\" \\/><br><small>Remember: all external URLs have to start with <code>https:\\/\\/<\\/code><\\/small><\\/td>\\r\\n                    <td class=\\\"redirect-actions\\\">\\r\\n                                                <a class=\\\"button eps-redirect-cancel\\\">Close<\\/a>\\r\\n                                                <input type=\\\"hidden\\\" id=\\\"eps_redirect_nonce_submit\\\" name=\\\"eps_redirect_nonce_submit\\\" value=\\\"1441d4e40f\\\" \\/><input type=\\\"hidden\\\" name=\\\"_wp_http_referer\\\" value=\\\"\\/wp-admin\\/admin-ajax.php?redirect_id=4u%3Cscript%3Ealert%280xdeadbeef%29%3C%2Fscript%3Ez1&#038;action=eps_redirect_get_inline_edit_entry\\\" \\/>                        <input type=\\\"submit\\\" name=\\\"eps_redirect_submit\\\" class=\\\"button button-primary eps-redirect-edit\\\" value=\\\"Save\\\">\\r\\n                    <\\/td>\\r\\n                <\\/tr>\\r\\n            <\\/table>\\r\\n        <\\/form>\\r\\n    <\\/td>\\r\\n<\\/tr> \\r\\n\",\"redirect_id\":4}",
+      "response.body.length": 3393,
+      "response.headers": {
+        "Date": "Tue, 18 Aug 2026 23:48:45 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Vary": "Accept-Encoding",
+        "Content-Length": "3393",
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 348.838,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787096912-92b849b0-116b-4b1c-be22-e0efacea35e0",
+      "paths": [
+        "/var/www/html/wp-content/plugins/eps-301-redirects/templates/template.redirect-entry-edit.php::::10_14_16_17_20_21_22_23_26_27_30_31_32",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/templates/template.redirect-entry-edit-inline.php::::14_18_22_23_24_25_26_29_30_37",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/templates/template.redirect-entry-edit-inline.php::::14_18_22_23_24_25_29_30_37",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/plugin.php::::11_356_359_367_389_390_394_396_400_424_473_50_51_53_54_56_57_59_60_63_64_65_66_67_68_69_70_71_72_75_76_796_802_806_825_826_827_858_859_861_904_905",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/eps-form-elements.php::::125_126_128_129_131_132_133_151_152_154_159_160_162_164_179_181_184_185_188_189_190_193_194_196_197_20_224_37_39_40_41_43_46_47_51_57_58_59_61",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/wf-flyout/wf-flyout.php::::168_20_21_22_24_27_29_34_35_37_50_51_52_55_56_73_74_75_76_9",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/eps-form-elements.php::::125_126_128_129_131_132_133_151_152_154_155_156_159_160_162_164_179_181_184_185_188_189_190_193_194_196_197_20_224_37_39_40_41_43_46_47_51_57_58_59_61",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/eps-301-redirects.php::::1008_137_138_197_198_200_201_203_204_220_237_253_267_283_297_309_32_321_329_338_347_356_36_365_367_38_39_40_42_43_433_434_45_46_47_48_50_51_53_54_55_70_73_77_78_79_795_796_80_81_82_83_84_909_910_915_917_92_921_923_924_925_926_927_928_929_931_987_995",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/class.drop-down-pages.php::::14_18_83",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/libs/eps-plugin-options.php::::104_116_128_130_132_133_134_135_136_139_14_151_174_176_178_179_18_180_184_187_46_47_48_49_50_51_521_58",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/wf-flyout/config.php::::10_11_12_14_2_22_4_5_6_7_8_9",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/class.drop-down-pages.php::::14_18_21_36_37_39_41_43_55_56_57_74_75_78_79_80_83"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "WebFuzzXSSVulnCheck"
+      ],
+      "score": 12,
+      "is_interesting": false,
+      "fuzzer_id": "6",
+      "is_initial_candidate": false,
+      "mutated_param_type": "query_params",
+      "mutated_param_name": "redirect_id"
+    },
+    {
+      "coverage_id": "1787096932-b80cc7ee-2759-4b81-b53b-86ba4dbf191e",
+      "priority": 12,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "GET",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "eps_redirect_get_inline_edit_entry"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "redirect_id": "4<img src='x' onerror='alert(0xdeadbeef)'>uz1"
+        },
+        "body_params": {}
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 0.25
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n{\"html\":\"<tr id=\\\"eps-redirect-edit\\\">\\r\\n    <td colspan=\\\"5\\\">\\r\\n        <form id=\\\"eps-redirect-save\\\" method=\\\"post\\\" action=\\\"\\\">\\r\\n            <table class=\\\"eps-table\\\">\\r\\n                <tr class=\\\"id-4\\\">\\r\\n                    <td>\\r\\n    <input type=\\\"hidden\\\" type=\\\"text\\\" name=\\\"redirect[id][]\\\" value=\\\"4\\\">\\r\\n\\r\\n    <select name=\\\"redirect[status][]\\\" class=\\\"eps-small-select\\\">\\r\\n        <option default value=\\\"301\\\" >301<\\/option>\\r\\n        <option value=\\\"302\\\" >302<\\/option>\\r\\n        <option value=\\\"307\\\" >307<\\/option>\\r\\n        <option value=\\\"inactive\\\" >Off<\\/option>\\r\\n    <\\/select>\\r\\n\\r\\n    <div class=\\\"eps-url\\\"><span class=\\\"eps-url-root\\\">http:\\/\\/web\\/&nbsp;<\\/span><\\/div>\\r\\n    <input class=\\\"eps-url-input\\\" type=\\\"text\\\" name=\\\"redirect[url_from][]\\\" value=\\\"\\\"><br><small>Need wildcard support for matching multiple URLs? Check out the <a href=\\\"#\\\" class=\\\"open-301-pro-dialog\\\" data-pro-feature=\\\"new-rule-wildcard\\\">PRO version.<\\/small>\\r\\n<\\/td>\\r\\n<td>\\r\\n    <select class=\\\"type-select eps-small-select\\\"><option value=\\\"eps-url-input\\\">Custom<\\/option><option value=\\\"post\\\">Post<\\/option><option value=\\\"page\\\">Page<\\/option><option value=\\\"attachment\\\">Media<\\/option><option value=\\\"term\\\">Term Archive<\\/option><\\/select><select class=\\\"select-post url-selector eps-small-select\\\" style=\\\"display:none\\\"><option value=\\\"\\\">...<\\/option><\\/select><select class=\\\"select-page url-selector eps-small-select\\\" style=\\\"display:none\\\"><option value=\\\"\\\">...<\\/option><option value=\\\"4135\\\">Ev6l_bee.png - Copy<\\/option><\\/select><select class=\\\"select-attachment url-selector eps-small-select\\\" style=\\\"display:none\\\"><option value=\\\"\\\">...<\\/option><\\/select><select class=\\\"select-term url-selector eps-small-select\\\" style=\\\"display:none\\\"><option value=\\\"\\\" selected>...<\\/option><option value=\\\"category\\\" disabled>Category<\\/option><option value=\\\"http:\\/\\/web\\/?cat=1\\\">&nbsp;&nbsp;- Uncategorized<\\/option><option value=\\\"post_tag\\\" disabled>Tag<\\/option><option value=\\\"nav_menu\\\" disabled>Navigation Menu<\\/option><option value=\\\"link_category\\\" disabled>Link Category<\\/option><option value=\\\"post_format\\\" disabled>Format<\\/option><option value=\\\"wp_theme\\\" disabled>Theme<\\/option><option value=\\\"wp_template_part_area\\\" disabled>Template Part Area<\\/option><\\/select><input class=\\\"eps-url-input select-eps-url-input\\\" type=\\\"text\\\" name=\\\"redirect[url_to][]\\\" value=\\\"\\\" placeholder=\\\"http:\\/\\/web\\\" \\/><br><small>Remember: all external URLs have to start with <code>https:\\/\\/<\\/code><\\/small><\\/td>\\r\\n                    <td class=\\\"redirect-actions\\\">\\r\\n                                                <a class=\\\"button eps-redirect-cancel\\\">Close<\\/a>\\r\\n                                                <input type=\\\"hidden\\\" id=\\\"eps_redirect_nonce_submit\\\" name=\\\"eps_redirect_nonce_submit\\\" value=\\\"1441d4e40f\\\" \\/><input type=\\\"hidden\\\" name=\\\"_wp_http_referer\\\" value=\\\"\\/wp-admin\\/admin-ajax.php?redirect_id=4%3Cimg+src%3D%27x%27+onerror%3D%27alert%280xdeadbeef%29%27%3Euz1&#038;action=eps_redirect_get_inline_edit_entry\\\" \\/>                        <input type=\\\"submit\\\" name=\\\"eps_redirect_submit\\\" class=\\\"button button-primary eps-redirect-edit\\\" value=\\\"Save\\\">\\r\\n                    <\\/td>\\r\\n                <\\/tr>\\r\\n            <\\/table>\\r\\n        <\\/form>\\r\\n    <\\/td>\\r\\n<\\/tr> \\r\\n\",\"redirect_id\":4}",
+      "response.body.length": 3406,
+      "response.headers": {
+        "Date": "Tue, 18 Aug 2026 23:48:52 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Vary": "Accept-Encoding",
+        "Content-Length": "3406",
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 495.307,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787096912-92b849b0-116b-4b1c-be22-e0efacea35e0",
+      "paths": [
+        "/var/www/html/wp-content/plugins/eps-301-redirects/templates/template.redirect-entry-edit.php::::10_14_16_17_20_21_22_23_26_27_30_31_32",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/templates/template.redirect-entry-edit-inline.php::::14_18_22_23_24_25_26_29_30_37",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/templates/template.redirect-entry-edit-inline.php::::14_18_22_23_24_25_29_30_37",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/plugin.php::::11_356_359_367_389_390_394_396_400_424_473_50_51_53_54_56_57_59_60_63_64_65_66_67_68_69_70_71_72_75_76_796_802_806_825_826_827_858_859_861_904_905",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/eps-form-elements.php::::125_126_128_129_131_132_133_151_152_154_159_160_162_164_179_181_184_185_188_189_190_193_194_196_197_20_224_37_39_40_41_43_46_47_51_57_58_59_61",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/wf-flyout/wf-flyout.php::::168_20_21_22_24_27_29_34_35_37_50_51_52_55_56_73_74_75_76_9",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/eps-form-elements.php::::125_126_128_129_131_132_133_151_152_154_155_156_159_160_162_164_179_181_184_185_188_189_190_193_194_196_197_20_224_37_39_40_41_43_46_47_51_57_58_59_61",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/eps-301-redirects.php::::1008_137_138_197_198_200_201_203_204_220_237_253_267_283_297_309_32_321_329_338_347_356_36_365_367_38_39_40_42_43_433_434_45_46_47_48_50_51_53_54_55_70_73_77_78_79_795_796_80_81_82_83_84_909_910_915_917_92_921_923_924_925_926_927_928_929_931_987_995",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/class.drop-down-pages.php::::14_18_83",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/libs/eps-plugin-options.php::::104_116_128_130_132_133_134_135_136_139_14_151_174_176_178_179_18_180_184_187_46_47_48_49_50_51_521_58",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/wf-flyout/config.php::::10_11_12_14_2_22_4_5_6_7_8_9",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/class.drop-down-pages.php::::14_18_21_36_37_39_41_43_55_56_57_74_75_78_79_80_83"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "WebFuzzXSSVulnCheck"
+      ],
+      "score": 12,
+      "is_interesting": false,
+      "fuzzer_id": "6",
+      "is_initial_candidate": false,
+      "mutated_param_type": "query_params",
+      "mutated_param_name": "redirect_id"
+    },
+    {
+      "coverage_id": "1787096934-812f6176-1405-43bd-9af6-23ac281b5839",
+      "priority": 12,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "GET",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "eps_redirect_get_inline_edit_entry"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "redirect_id": "4u<a href='javascript:alert(0xdeadbeef)'z1"
+        },
+        "body_params": {}
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 0.25
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n{\"html\":\"<tr id=\\\"eps-redirect-edit\\\">\\r\\n    <td colspan=\\\"5\\\">\\r\\n        <form id=\\\"eps-redirect-save\\\" method=\\\"post\\\" action=\\\"\\\">\\r\\n            <table class=\\\"eps-table\\\">\\r\\n                <tr class=\\\"id-4\\\">\\r\\n                    <td>\\r\\n    <input type=\\\"hidden\\\" type=\\\"text\\\" name=\\\"redirect[id][]\\\" value=\\\"4\\\">\\r\\n\\r\\n    <select name=\\\"redirect[status][]\\\" class=\\\"eps-small-select\\\">\\r\\n        <option default value=\\\"301\\\" >301<\\/option>\\r\\n        <option value=\\\"302\\\" >302<\\/option>\\r\\n        <option value=\\\"307\\\" >307<\\/option>\\r\\n        <option value=\\\"inactive\\\" >Off<\\/option>\\r\\n    <\\/select>\\r\\n\\r\\n    <div class=\\\"eps-url\\\"><span class=\\\"eps-url-root\\\">http:\\/\\/web\\/&nbsp;<\\/span><\\/div>\\r\\n    <input class=\\\"eps-url-input\\\" type=\\\"text\\\" name=\\\"redirect[url_from][]\\\" value=\\\"\\\"><br><small>Need wildcard support for matching multiple URLs? Check out the <a href=\\\"#\\\" class=\\\"open-301-pro-dialog\\\" data-pro-feature=\\\"new-rule-wildcard\\\">PRO version.<\\/small>\\r\\n<\\/td>\\r\\n<td>\\r\\n    <select class=\\\"type-select eps-small-select\\\"><option value=\\\"eps-url-input\\\">Custom<\\/option><option value=\\\"post\\\">Post<\\/option><option value=\\\"page\\\">Page<\\/option><option value=\\\"attachment\\\">Media<\\/option><option value=\\\"term\\\">Term Archive<\\/option><\\/select><select class=\\\"select-post url-selector eps-small-select\\\" style=\\\"display:none\\\"><option value=\\\"\\\">...<\\/option><\\/select><select class=\\\"select-page url-selector eps-small-select\\\" style=\\\"display:none\\\"><option value=\\\"\\\">...<\\/option><option value=\\\"4135\\\">Ev6l_bee.png - Copy<\\/option><\\/select><select class=\\\"select-attachment url-selector eps-small-select\\\" style=\\\"display:none\\\"><option value=\\\"\\\">...<\\/option><\\/select><select class=\\\"select-term url-selector eps-small-select\\\" style=\\\"display:none\\\"><option value=\\\"\\\" selected>...<\\/option><option value=\\\"category\\\" disabled>Category<\\/option><option value=\\\"http:\\/\\/web\\/?cat=1\\\">&nbsp;&nbsp;- Uncategorized<\\/option><option value=\\\"post_tag\\\" disabled>Tag<\\/option><option value=\\\"nav_menu\\\" disabled>Navigation Menu<\\/option><option value=\\\"link_category\\\" disabled>Link Category<\\/option><option value=\\\"post_format\\\" disabled>Format<\\/option><option value=\\\"wp_theme\\\" disabled>Theme<\\/option><option value=\\\"wp_template_part_area\\\" disabled>Template Part Area<\\/option><\\/select><input class=\\\"eps-url-input select-eps-url-input\\\" type=\\\"text\\\" name=\\\"redirect[url_to][]\\\" value=\\\"\\\" placeholder=\\\"http:\\/\\/web\\\" \\/><br><small>Remember: all external URLs have to start with <code>https:\\/\\/<\\/code><\\/small><\\/td>\\r\\n                    <td class=\\\"redirect-actions\\\">\\r\\n                                                <a class=\\\"button eps-redirect-cancel\\\">Close<\\/a>\\r\\n                                                <input type=\\\"hidden\\\" id=\\\"eps_redirect_nonce_submit\\\" name=\\\"eps_redirect_nonce_submit\\\" value=\\\"1441d4e40f\\\" \\/><input type=\\\"hidden\\\" name=\\\"_wp_http_referer\\\" value=\\\"\\/wp-admin\\/admin-ajax.php?redirect_id=4u%3Ca+href%3D%27javascript%3Aalert%280xdeadbeef%29%27z1&#038;action=eps_redirect_get_inline_edit_entry\\\" \\/>                        <input type=\\\"submit\\\" name=\\\"eps_redirect_submit\\\" class=\\\"button button-primary eps-redirect-edit\\\" value=\\\"Save\\\">\\r\\n                    <\\/td>\\r\\n                <\\/tr>\\r\\n            <\\/table>\\r\\n        <\\/form>\\r\\n    <\\/td>\\r\\n<\\/tr> \\r\\n\",\"redirect_id\":4}",
+      "response.body.length": 3397,
+      "response.headers": {
+        "Date": "Tue, 18 Aug 2026 23:48:54 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Vary": "Accept-Encoding",
+        "Content-Length": "3397",
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 396.108,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787096912-92b849b0-116b-4b1c-be22-e0efacea35e0",
+      "paths": [
+        "/var/www/html/wp-content/plugins/eps-301-redirects/templates/template.redirect-entry-edit.php::::10_14_16_17_20_21_22_23_26_27_30_31_32",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/templates/template.redirect-entry-edit-inline.php::::14_18_22_23_24_25_26_29_30_37",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/templates/template.redirect-entry-edit-inline.php::::14_18_22_23_24_25_29_30_37",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/plugin.php::::11_356_359_367_389_390_394_396_400_424_473_50_51_53_54_56_57_59_60_63_64_65_66_67_68_69_70_71_72_75_76_796_802_806_825_826_827_858_859_861_904_905",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/eps-form-elements.php::::125_126_128_129_131_132_133_151_152_154_159_160_162_164_179_181_184_185_188_189_190_193_194_196_197_20_224_37_39_40_41_43_46_47_51_57_58_59_61",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/wf-flyout/wf-flyout.php::::168_20_21_22_24_27_29_34_35_37_50_51_52_55_56_73_74_75_76_9",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/eps-form-elements.php::::125_126_128_129_131_132_133_151_152_154_155_156_159_160_162_164_179_181_184_185_188_189_190_193_194_196_197_20_224_37_39_40_41_43_46_47_51_57_58_59_61",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/eps-301-redirects.php::::1008_137_138_197_198_200_201_203_204_220_237_253_267_283_297_309_32_321_329_338_347_356_36_365_367_38_39_40_42_43_433_434_45_46_47_48_50_51_53_54_55_70_73_77_78_79_795_796_80_81_82_83_84_909_910_915_917_92_921_923_924_925_926_927_928_929_931_987_995",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/class.drop-down-pages.php::::14_18_83",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/libs/eps-plugin-options.php::::104_116_128_130_132_133_134_135_136_139_14_151_174_176_178_179_18_180_184_187_46_47_48_49_50_51_521_58",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/wf-flyout/config.php::::10_11_12_14_2_22_4_5_6_7_8_9",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/class.drop-down-pages.php::::14_18_21_36_37_39_41_43_55_56_57_74_75_78_79_80_83"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "WebFuzzXSSVulnCheck"
+      ],
+      "score": 12,
+      "is_interesting": false,
+      "fuzzer_id": "6",
+      "is_initial_candidate": false,
+      "mutated_param_type": "query_params",
+      "mutated_param_name": "redirect_id"
+    },
+    {
+      "coverage_id": "1787096941-3914ea3f-9ba5-466d-b1b9-1bbbf76538de",
+      "priority": 11,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "GET",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "eps_redirect_get_inline_edit_entry"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "redirect_id": "<img src='x' onerror='alert(0xdeadbeef)'>fuz1"
+        },
+        "body_params": {}
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 0.25
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n{\"html\":\"<tr id=\\\"eps-redirect-edit\\\">\\r\\n    <td colspan=\\\"5\\\">\\r\\n        <form id=\\\"eps-redirect-save\\\" method=\\\"post\\\" action=\\\"\\\">\\r\\n            <table class=\\\"eps-table\\\">\\r\\n                <tr class=\\\"id-new\\\">\\r\\n                    <td>\\r\\n    <input type=\\\"hidden\\\" type=\\\"text\\\" name=\\\"redirect[id][]\\\" value=\\\"\\\">\\r\\n\\r\\n    <select name=\\\"redirect[status][]\\\" class=\\\"eps-small-select\\\">\\r\\n        <option default value=\\\"301\\\" >301<\\/option>\\r\\n        <option value=\\\"302\\\" >302<\\/option>\\r\\n        <option value=\\\"307\\\" >307<\\/option>\\r\\n        <option value=\\\"inactive\\\" >Off<\\/option>\\r\\n    <\\/select>\\r\\n\\r\\n    <div class=\\\"eps-url\\\"><span class=\\\"eps-url-root\\\">http:\\/\\/web\\/&nbsp;<\\/span><\\/div>\\r\\n    <input class=\\\"eps-url-input\\\" type=\\\"text\\\" name=\\\"redirect[url_from][]\\\" value=\\\"\\\"><br><small>Need wildcard support for matching multiple URLs? Check out the <a href=\\\"#\\\" class=\\\"open-301-pro-dialog\\\" data-pro-feature=\\\"new-rule-wildcard\\\">PRO version.<\\/small>\\r\\n<\\/td>\\r\\n<td>\\r\\n    <select class=\\\"type-select eps-small-select\\\"><option value=\\\"eps-url-input\\\">Custom<\\/option><option value=\\\"post\\\">Post<\\/option><option value=\\\"page\\\">Page<\\/option><option value=\\\"attachment\\\">Media<\\/option><option value=\\\"term\\\">Term Archive<\\/option><\\/select><select class=\\\"select-post url-selector eps-small-select\\\" style=\\\"display:none\\\"><option value=\\\"\\\">...<\\/option><\\/select><select class=\\\"select-page url-selector eps-small-select\\\" style=\\\"display:none\\\"><option value=\\\"\\\">...<\\/option><option value=\\\"4135\\\">Ev6l_bee.png - Copy<\\/option><\\/select><select class=\\\"select-attachment url-selector eps-small-select\\\" style=\\\"display:none\\\"><option value=\\\"\\\">...<\\/option><\\/select><select class=\\\"select-term url-selector eps-small-select\\\" style=\\\"display:none\\\"><option value=\\\"\\\" selected>...<\\/option><option value=\\\"category\\\" disabled>Category<\\/option><option value=\\\"http:\\/\\/web\\/?cat=1\\\">&nbsp;&nbsp;- Uncategorized<\\/option><option value=\\\"post_tag\\\" disabled>Tag<\\/option><option value=\\\"nav_menu\\\" disabled>Navigation Menu<\\/option><option value=\\\"link_category\\\" disabled>Link Category<\\/option><option value=\\\"post_format\\\" disabled>Format<\\/option><option value=\\\"wp_theme\\\" disabled>Theme<\\/option><option value=\\\"wp_template_part_area\\\" disabled>Template Part Area<\\/option><\\/select><input class=\\\"eps-url-input select-eps-url-input\\\" type=\\\"text\\\" name=\\\"redirect[url_to][]\\\" value=\\\"\\\" placeholder=\\\"http:\\/\\/web\\\" \\/><br><small>Remember: all external URLs have to start with <code>https:\\/\\/<\\/code><\\/small><\\/td>\\r\\n                    <td class=\\\"redirect-actions\\\">\\r\\n                                                <input type=\\\"hidden\\\" id=\\\"eps_redirect_nonce_submit\\\" name=\\\"eps_redirect_nonce_submit\\\" value=\\\"1441d4e40f\\\" \\/><input type=\\\"hidden\\\" name=\\\"_wp_http_referer\\\" value=\\\"\\/wp-admin\\/admin-ajax.php?redirect_id=%3Cimg+src%3D%27x%27+onerror%3D%27alert%280xdeadbeef%29%27%3Efuz1&#038;action=eps_redirect_get_inline_edit_entry\\\" \\/>                        <input type=\\\"submit\\\" name=\\\"eps_redirect_submit\\\" class=\\\"button button-primary eps-redirect-edit\\\" value=\\\"Save\\\">\\r\\n                    <\\/td>\\r\\n                <\\/tr>\\r\\n            <\\/table>\\r\\n        <\\/form>\\r\\n    <\\/td>\\r\\n<\\/tr> \\r\\n\",\"redirect_id\":0}",
+      "response.body.length": 3305,
+      "response.headers": {
+        "Date": "Tue, 18 Aug 2026 23:49:01 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Vary": "Accept-Encoding",
+        "Content-Length": "3305",
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 332.187,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787096869-fd0ad20c-7e8f-406f-b157-10bc681db09a",
+      "paths": [
+        "/var/www/html/wp-content/plugins/eps-301-redirects/templates/template.redirect-entry-edit.php::::10_14_16_17_20_21_22_23_26_27_30_31_32",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/templates/template.redirect-entry-edit-inline.php::::14_18_22_23_24_25_29_30_37",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/plugin.php::::11_356_359_367_389_390_394_396_400_424_473_50_51_53_54_56_57_59_60_63_64_65_66_67_68_69_70_71_72_75_76_796_802_806_825_826_827_858_859_861_904_905",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/eps-form-elements.php::::125_126_128_129_131_132_133_151_152_154_159_160_162_164_179_181_184_185_188_189_190_193_194_196_197_20_224_37_39_40_41_43_46_47_51_57_58_59_61",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/wf-flyout/wf-flyout.php::::168_20_21_22_24_27_29_34_35_37_50_51_52_55_56_73_74_75_76_9",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/eps-form-elements.php::::125_126_128_129_131_132_133_151_152_154_155_156_159_160_162_164_179_181_184_185_188_189_190_193_194_196_197_20_224_37_39_40_41_43_46_47_51_57_58_59_61",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/eps-301-redirects.php::::1008_137_138_197_198_200_201_203_204_220_237_253_267_283_297_309_32_321_329_338_347_356_36_365_367_38_39_40_42_43_433_434_45_46_47_48_50_51_53_54_55_70_73_77_78_79_795_796_80_81_82_83_84_909_910_915_917_92_921_923_924_925_926_927_928_929_931_987_995",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/class.drop-down-pages.php::::14_18_83",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/libs/eps-plugin-options.php::::104_116_128_130_132_133_134_135_136_139_14_151_174_176_178_179_18_180_184_187_46_47_48_49_50_51_521_58",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/wf-flyout/config.php::::10_11_12_14_2_22_4_5_6_7_8_9",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/class.drop-down-pages.php::::14_18_21_36_37_39_41_43_55_56_57_74_75_78_79_80_83"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "WebFuzzXSSVulnCheck"
+      ],
+      "score": 11,
+      "is_interesting": false,
+      "fuzzer_id": "6",
+      "is_initial_candidate": false,
+      "mutated_param_type": "query_params",
+      "mutated_param_name": "redirect_id"
+    },
+    {
+      "coverage_id": "1787096951-1e4504d0-6c10-40a4-90de-6c3f064b9272",
+      "priority": 12,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "GET",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "eps_redirect_get_inline_edit_entry"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "redirect_id": "<script>alert(0xdeadbeef)</script>5uz1"
+        },
+        "body_params": {}
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 0.25
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n{\"html\":\"<tr id=\\\"eps-redirect-edit\\\">\\r\\n    <td colspan=\\\"5\\\">\\r\\n        <form id=\\\"eps-redirect-save\\\" method=\\\"post\\\" action=\\\"\\\">\\r\\n            <table class=\\\"eps-table\\\">\\r\\n                <tr class=\\\"id-new\\\">\\r\\n                    <td>\\r\\n    <input type=\\\"hidden\\\" type=\\\"text\\\" name=\\\"redirect[id][]\\\" value=\\\"\\\">\\r\\n\\r\\n    <select name=\\\"redirect[status][]\\\" class=\\\"eps-small-select\\\">\\r\\n        <option default value=\\\"301\\\" >301<\\/option>\\r\\n        <option value=\\\"302\\\" >302<\\/option>\\r\\n        <option value=\\\"307\\\" >307<\\/option>\\r\\n        <option value=\\\"inactive\\\" >Off<\\/option>\\r\\n    <\\/select>\\r\\n\\r\\n    <div class=\\\"eps-url\\\"><span class=\\\"eps-url-root\\\">http:\\/\\/web\\/&nbsp;<\\/span><\\/div>\\r\\n    <input class=\\\"eps-url-input\\\" type=\\\"text\\\" name=\\\"redirect[url_from][]\\\" value=\\\"\\\"><br><small>Need wildcard support for matching multiple URLs? Check out the <a href=\\\"#\\\" class=\\\"open-301-pro-dialog\\\" data-pro-feature=\\\"new-rule-wildcard\\\">PRO version.<\\/small>\\r\\n<\\/td>\\r\\n<td>\\r\\n    <select class=\\\"type-select eps-small-select\\\"><option value=\\\"eps-url-input\\\">Custom<\\/option><option value=\\\"post\\\">Post<\\/option><option value=\\\"page\\\">Page<\\/option><option value=\\\"attachment\\\">Media<\\/option><option value=\\\"term\\\">Term Archive<\\/option><\\/select><select class=\\\"select-post url-selector eps-small-select\\\" style=\\\"display:none\\\"><option value=\\\"\\\">...<\\/option><\\/select><select class=\\\"select-page url-selector eps-small-select\\\" style=\\\"display:none\\\"><option value=\\\"\\\">...<\\/option><option value=\\\"4135\\\">Ev6l_bee.png - Copy<\\/option><\\/select><select class=\\\"select-attachment url-selector eps-small-select\\\" style=\\\"display:none\\\"><option value=\\\"\\\">...<\\/option><\\/select><select class=\\\"select-term url-selector eps-small-select\\\" style=\\\"display:none\\\"><option value=\\\"\\\" selected>...<\\/option><option value=\\\"category\\\" disabled>Category<\\/option><option value=\\\"http:\\/\\/web\\/?cat=1\\\">&nbsp;&nbsp;- Uncategorized<\\/option><option value=\\\"post_tag\\\" disabled>Tag<\\/option><option value=\\\"nav_menu\\\" disabled>Navigation Menu<\\/option><option value=\\\"link_category\\\" disabled>Link Category<\\/option><option value=\\\"post_format\\\" disabled>Format<\\/option><option value=\\\"wp_theme\\\" disabled>Theme<\\/option><option value=\\\"wp_template_part_area\\\" disabled>Template Part Area<\\/option><\\/select><input class=\\\"eps-url-input select-eps-url-input\\\" type=\\\"text\\\" name=\\\"redirect[url_to][]\\\" value=\\\"\\\" placeholder=\\\"http:\\/\\/web\\\" \\/><br><small>Remember: all external URLs have to start with <code>https:\\/\\/<\\/code><\\/small><\\/td>\\r\\n                    <td class=\\\"redirect-actions\\\">\\r\\n                                                <input type=\\\"hidden\\\" id=\\\"eps_redirect_nonce_submit\\\" name=\\\"eps_redirect_nonce_submit\\\" value=\\\"1441d4e40f\\\" \\/><input type=\\\"hidden\\\" name=\\\"_wp_http_referer\\\" value=\\\"\\/wp-admin\\/admin-ajax.php?redirect_id=%3Cscript%3Ealert%280xdeadbeef%29%3C%2Fscript%3E5uz1&#038;action=eps_redirect_get_inline_edit_entry\\\" \\/>                        <input type=\\\"submit\\\" name=\\\"eps_redirect_submit\\\" class=\\\"button button-primary eps-redirect-edit\\\" value=\\\"Save\\\">\\r\\n                    <\\/td>\\r\\n                <\\/tr>\\r\\n            <\\/table>\\r\\n        <\\/form>\\r\\n    <\\/td>\\r\\n<\\/tr> \\r\\n\",\"redirect_id\":0}",
+      "response.body.length": 3292,
+      "response.headers": {
+        "Date": "Tue, 18 Aug 2026 23:49:11 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Vary": "Accept-Encoding",
+        "Content-Length": "3292",
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 429.311,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787096921-98d04cc7-5f56-4942-90cc-d1232dae90b6",
+      "paths": [
+        "/var/www/html/wp-content/plugins/eps-301-redirects/templates/template.redirect-entry-edit.php::::10_14_16_17_20_21_22_23_26_27_30_31_32",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/templates/template.redirect-entry-edit-inline.php::::14_18_22_23_24_25_26_29_30_37",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/templates/template.redirect-entry-edit-inline.php::::14_18_22_23_24_25_29_30_37",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/plugin.php::::11_356_359_367_389_390_394_396_400_424_473_50_51_53_54_56_57_59_60_63_64_65_66_67_68_69_70_71_72_75_76_796_802_806_825_826_827_858_859_861_904_905",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/eps-form-elements.php::::125_126_128_129_131_132_133_151_152_154_159_160_162_164_179_181_184_185_188_189_190_193_194_196_197_20_224_37_39_40_41_43_46_47_51_57_58_59_61",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/wf-flyout/wf-flyout.php::::168_20_21_22_24_27_29_34_35_37_50_51_52_55_56_73_74_75_76_9",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/eps-form-elements.php::::125_126_128_129_131_132_133_151_152_154_155_156_159_160_162_164_179_181_184_185_188_189_190_193_194_196_197_20_224_37_39_40_41_43_46_47_51_57_58_59_61",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/eps-301-redirects.php::::1008_137_138_197_198_200_201_203_204_220_237_253_267_283_297_309_32_321_329_338_347_356_36_365_367_38_39_40_42_43_433_434_45_46_47_48_50_51_53_54_55_70_73_77_78_79_795_796_80_81_82_83_84_909_910_915_917_92_921_923_924_925_926_927_928_929_931_987_995",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/class.drop-down-pages.php::::14_18_83",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/libs/eps-plugin-options.php::::104_116_128_130_132_133_134_135_136_139_14_151_174_176_178_179_18_180_184_187_46_47_48_49_50_51_521_58",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/wf-flyout/config.php::::10_11_12_14_2_22_4_5_6_7_8_9",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/class.drop-down-pages.php::::14_18_21_36_37_39_41_43_55_56_57_74_75_78_79_80_83"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "WebFuzzXSSVulnCheck"
+      ],
+      "score": 12,
+      "is_interesting": false,
+      "fuzzer_id": "6",
+      "is_initial_candidate": false,
+      "mutated_param_type": "query_params",
+      "mutated_param_name": "redirect_id"
+    },
+    {
+      "coverage_id": "1787096969-0f94a012-3b08-4625-a93c-e751c59c6207",
+      "priority": 12,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "GET",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "eps_redirect_get_inline_edit_entry"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "redirect_id": "4uz<script>alert(0xdeadbeef)</script>1"
+        },
+        "body_params": {}
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 0.25
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n{\"html\":\"<tr id=\\\"eps-redirect-edit\\\">\\r\\n    <td colspan=\\\"5\\\">\\r\\n        <form id=\\\"eps-redirect-save\\\" method=\\\"post\\\" action=\\\"\\\">\\r\\n            <table class=\\\"eps-table\\\">\\r\\n                <tr class=\\\"id-4\\\">\\r\\n                    <td>\\r\\n    <input type=\\\"hidden\\\" type=\\\"text\\\" name=\\\"redirect[id][]\\\" value=\\\"4\\\">\\r\\n\\r\\n    <select name=\\\"redirect[status][]\\\" class=\\\"eps-small-select\\\">\\r\\n        <option default value=\\\"301\\\" >301<\\/option>\\r\\n        <option value=\\\"302\\\" >302<\\/option>\\r\\n        <option value=\\\"307\\\" >307<\\/option>\\r\\n        <option value=\\\"inactive\\\" >Off<\\/option>\\r\\n    <\\/select>\\r\\n\\r\\n    <div class=\\\"eps-url\\\"><span class=\\\"eps-url-root\\\">http:\\/\\/web\\/&nbsp;<\\/span><\\/div>\\r\\n    <input class=\\\"eps-url-input\\\" type=\\\"text\\\" name=\\\"redirect[url_from][]\\\" value=\\\"\\\"><br><small>Need wildcard support for matching multiple URLs? Check out the <a href=\\\"#\\\" class=\\\"open-301-pro-dialog\\\" data-pro-feature=\\\"new-rule-wildcard\\\">PRO version.<\\/small>\\r\\n<\\/td>\\r\\n<td>\\r\\n    <select class=\\\"type-select eps-small-select\\\"><option value=\\\"eps-url-input\\\">Custom<\\/option><option value=\\\"post\\\">Post<\\/option><option value=\\\"page\\\">Page<\\/option><option value=\\\"attachment\\\">Media<\\/option><option value=\\\"term\\\">Term Archive<\\/option><\\/select><select class=\\\"select-post url-selector eps-small-select\\\" style=\\\"display:none\\\"><option value=\\\"\\\">...<\\/option><\\/select><select class=\\\"select-page url-selector eps-small-select\\\" style=\\\"display:none\\\"><option value=\\\"\\\">...<\\/option><option value=\\\"4135\\\">Ev6l_bee.png - Copy<\\/option><\\/select><select class=\\\"select-attachment url-selector eps-small-select\\\" style=\\\"display:none\\\"><option value=\\\"\\\">...<\\/option><\\/select><select class=\\\"select-term url-selector eps-small-select\\\" style=\\\"display:none\\\"><option value=\\\"\\\" selected>...<\\/option><option value=\\\"category\\\" disabled>Category<\\/option><option value=\\\"http:\\/\\/web\\/?cat=1\\\">&nbsp;&nbsp;- Uncategorized<\\/option><option value=\\\"post_tag\\\" disabled>Tag<\\/option><option value=\\\"nav_menu\\\" disabled>Navigation Menu<\\/option><option value=\\\"link_category\\\" disabled>Link Category<\\/option><option value=\\\"post_format\\\" disabled>Format<\\/option><option value=\\\"wp_theme\\\" disabled>Theme<\\/option><option value=\\\"wp_template_part_area\\\" disabled>Template Part Area<\\/option><\\/select><input class=\\\"eps-url-input select-eps-url-input\\\" type=\\\"text\\\" name=\\\"redirect[url_to][]\\\" value=\\\"\\\" placeholder=\\\"http:\\/\\/web\\\" \\/><br><small>Remember: all external URLs have to start with <code>https:\\/\\/<\\/code><\\/small><\\/td>\\r\\n                    <td class=\\\"redirect-actions\\\">\\r\\n                                                <a class=\\\"button eps-redirect-cancel\\\">Close<\\/a>\\r\\n                                                <input type=\\\"hidden\\\" id=\\\"eps_redirect_nonce_submit\\\" name=\\\"eps_redirect_nonce_submit\\\" value=\\\"1441d4e40f\\\" \\/><input type=\\\"hidden\\\" name=\\\"_wp_http_referer\\\" value=\\\"\\/wp-admin\\/admin-ajax.php?redirect_id=4uz%3Cscript%3Ealert%280xdeadbeef%29%3C%2Fscript%3E1&#038;action=eps_redirect_get_inline_edit_entry\\\" \\/>                        <input type=\\\"submit\\\" name=\\\"eps_redirect_submit\\\" class=\\\"button button-primary eps-redirect-edit\\\" value=\\\"Save\\\">\\r\\n                    <\\/td>\\r\\n                <\\/tr>\\r\\n            <\\/table>\\r\\n        <\\/form>\\r\\n    <\\/td>\\r\\n<\\/tr> \\r\\n\",\"redirect_id\":4}",
+      "response.body.length": 3393,
+      "response.headers": {
+        "Date": "Tue, 18 Aug 2026 23:49:29 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Vary": "Accept-Encoding",
+        "Content-Length": "3393",
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 366.873,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787096912-92b849b0-116b-4b1c-be22-e0efacea35e0",
+      "paths": [
+        "/var/www/html/wp-content/plugins/eps-301-redirects/templates/template.redirect-entry-edit.php::::10_14_16_17_20_21_22_23_26_27_30_31_32",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/templates/template.redirect-entry-edit-inline.php::::14_18_22_23_24_25_26_29_30_37",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/templates/template.redirect-entry-edit-inline.php::::14_18_22_23_24_25_29_30_37",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/plugin.php::::11_356_359_367_389_390_394_396_400_424_473_50_51_53_54_56_57_59_60_63_64_65_66_67_68_69_70_71_72_75_76_796_802_806_825_826_827_858_859_861_904_905",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/eps-form-elements.php::::125_126_128_129_131_132_133_151_152_154_159_160_162_164_179_181_184_185_188_189_190_193_194_196_197_20_224_37_39_40_41_43_46_47_51_57_58_59_61",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/wf-flyout/wf-flyout.php::::168_20_21_22_24_27_29_34_35_37_50_51_52_55_56_73_74_75_76_9",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/eps-form-elements.php::::125_126_128_129_131_132_133_151_152_154_155_156_159_160_162_164_179_181_184_185_188_189_190_193_194_196_197_20_224_37_39_40_41_43_46_47_51_57_58_59_61",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/eps-301-redirects.php::::1008_137_138_197_198_200_201_203_204_220_237_253_267_283_297_309_32_321_329_338_347_356_36_365_367_38_39_40_42_43_433_434_45_46_47_48_50_51_53_54_55_70_73_77_78_79_795_796_80_81_82_83_84_909_910_915_917_92_921_923_924_925_926_927_928_929_931_987_995",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/class.drop-down-pages.php::::14_18_83",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/libs/eps-plugin-options.php::::104_116_128_130_132_133_134_135_136_139_14_151_174_176_178_179_18_180_184_187_46_47_48_49_50_51_521_58",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/wf-flyout/config.php::::10_11_12_14_2_22_4_5_6_7_8_9",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/class.drop-down-pages.php::::14_18_21_36_37_39_41_43_55_56_57_74_75_78_79_80_83"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "WebFuzzXSSVulnCheck"
+      ],
+      "score": 12,
+      "is_interesting": false,
+      "fuzzer_id": "6",
+      "is_initial_candidate": false,
+      "mutated_param_type": "query_params",
+      "mutated_param_name": "redirect_id"
+    },
+    {
+      "coverage_id": "1787096972-706a22ad-3578-46d6-ad21-c3f2ea44e935",
+      "priority": 12,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "GET",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "eps_redirect_get_inline_edit_entry"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "redirect_id": "4u<img src='x' onerror='alert(0xdeadbeef)'>z1"
+        },
+        "body_params": {}
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 0.25
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n{\"html\":\"<tr id=\\\"eps-redirect-edit\\\">\\r\\n    <td colspan=\\\"5\\\">\\r\\n        <form id=\\\"eps-redirect-save\\\" method=\\\"post\\\" action=\\\"\\\">\\r\\n            <table class=\\\"eps-table\\\">\\r\\n                <tr class=\\\"id-4\\\">\\r\\n                    <td>\\r\\n    <input type=\\\"hidden\\\" type=\\\"text\\\" name=\\\"redirect[id][]\\\" value=\\\"4\\\">\\r\\n\\r\\n    <select name=\\\"redirect[status][]\\\" class=\\\"eps-small-select\\\">\\r\\n        <option default value=\\\"301\\\" >301<\\/option>\\r\\n        <option value=\\\"302\\\" >302<\\/option>\\r\\n        <option value=\\\"307\\\" >307<\\/option>\\r\\n        <option value=\\\"inactive\\\" >Off<\\/option>\\r\\n    <\\/select>\\r\\n\\r\\n    <div class=\\\"eps-url\\\"><span class=\\\"eps-url-root\\\">http:\\/\\/web\\/&nbsp;<\\/span><\\/div>\\r\\n    <input class=\\\"eps-url-input\\\" type=\\\"text\\\" name=\\\"redirect[url_from][]\\\" value=\\\"\\\"><br><small>Need wildcard support for matching multiple URLs? Check out the <a href=\\\"#\\\" class=\\\"open-301-pro-dialog\\\" data-pro-feature=\\\"new-rule-wildcard\\\">PRO version.<\\/small>\\r\\n<\\/td>\\r\\n<td>\\r\\n    <select class=\\\"type-select eps-small-select\\\"><option value=\\\"eps-url-input\\\">Custom<\\/option><option value=\\\"post\\\">Post<\\/option><option value=\\\"page\\\">Page<\\/option><option value=\\\"attachment\\\">Media<\\/option><option value=\\\"term\\\">Term Archive<\\/option><\\/select><select class=\\\"select-post url-selector eps-small-select\\\" style=\\\"display:none\\\"><option value=\\\"\\\">...<\\/option><\\/select><select class=\\\"select-page url-selector eps-small-select\\\" style=\\\"display:none\\\"><option value=\\\"\\\">...<\\/option><option value=\\\"4135\\\">Ev6l_bee.png - Copy<\\/option><\\/select><select class=\\\"select-attachment url-selector eps-small-select\\\" style=\\\"display:none\\\"><option value=\\\"\\\">...<\\/option><\\/select><select class=\\\"select-term url-selector eps-small-select\\\" style=\\\"display:none\\\"><option value=\\\"\\\" selected>...<\\/option><option value=\\\"category\\\" disabled>Category<\\/option><option value=\\\"http:\\/\\/web\\/?cat=1\\\">&nbsp;&nbsp;- Uncategorized<\\/option><option value=\\\"post_tag\\\" disabled>Tag<\\/option><option value=\\\"nav_menu\\\" disabled>Navigation Menu<\\/option><option value=\\\"link_category\\\" disabled>Link Category<\\/option><option value=\\\"post_format\\\" disabled>Format<\\/option><option value=\\\"wp_theme\\\" disabled>Theme<\\/option><option value=\\\"wp_template_part_area\\\" disabled>Template Part Area<\\/option><\\/select><input class=\\\"eps-url-input select-eps-url-input\\\" type=\\\"text\\\" name=\\\"redirect[url_to][]\\\" value=\\\"\\\" placeholder=\\\"http:\\/\\/web\\\" \\/><br><small>Remember: all external URLs have to start with <code>https:\\/\\/<\\/code><\\/small><\\/td>\\r\\n                    <td class=\\\"redirect-actions\\\">\\r\\n                                                <a class=\\\"button eps-redirect-cancel\\\">Close<\\/a>\\r\\n                                                <input type=\\\"hidden\\\" id=\\\"eps_redirect_nonce_submit\\\" name=\\\"eps_redirect_nonce_submit\\\" value=\\\"1441d4e40f\\\" \\/><input type=\\\"hidden\\\" name=\\\"_wp_http_referer\\\" value=\\\"\\/wp-admin\\/admin-ajax.php?redirect_id=4u%3Cimg+src%3D%27x%27+onerror%3D%27alert%280xdeadbeef%29%27%3Ez1&#038;action=eps_redirect_get_inline_edit_entry\\\" \\/>                        <input type=\\\"submit\\\" name=\\\"eps_redirect_submit\\\" class=\\\"button button-primary eps-redirect-edit\\\" value=\\\"Save\\\">\\r\\n                    <\\/td>\\r\\n                <\\/tr>\\r\\n            <\\/table>\\r\\n        <\\/form>\\r\\n    <\\/td>\\r\\n<\\/tr> \\r\\n\",\"redirect_id\":4}",
+      "response.body.length": 3406,
+      "response.headers": {
+        "Date": "Tue, 18 Aug 2026 23:49:32 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Vary": "Accept-Encoding",
+        "Content-Length": "3406",
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 366.912,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787096912-92b849b0-116b-4b1c-be22-e0efacea35e0",
+      "paths": [
+        "/var/www/html/wp-content/plugins/eps-301-redirects/templates/template.redirect-entry-edit.php::::10_14_16_17_20_21_22_23_26_27_30_31_32",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/templates/template.redirect-entry-edit-inline.php::::14_18_22_23_24_25_26_29_30_37",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/templates/template.redirect-entry-edit-inline.php::::14_18_22_23_24_25_29_30_37",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/plugin.php::::11_356_359_367_389_390_394_396_400_424_473_50_51_53_54_56_57_59_60_63_64_65_66_67_68_69_70_71_72_75_76_796_802_806_825_826_827_858_859_861_904_905",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/eps-form-elements.php::::125_126_128_129_131_132_133_151_152_154_159_160_162_164_179_181_184_185_188_189_190_193_194_196_197_20_224_37_39_40_41_43_46_47_51_57_58_59_61",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/wf-flyout/wf-flyout.php::::168_20_21_22_24_27_29_34_35_37_50_51_52_55_56_73_74_75_76_9",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/eps-form-elements.php::::125_126_128_129_131_132_133_151_152_154_155_156_159_160_162_164_179_181_184_185_188_189_190_193_194_196_197_20_224_37_39_40_41_43_46_47_51_57_58_59_61",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/eps-301-redirects.php::::1008_137_138_197_198_200_201_203_204_220_237_253_267_283_297_309_32_321_329_338_347_356_36_365_367_38_39_40_42_43_433_434_45_46_47_48_50_51_53_54_55_70_73_77_78_79_795_796_80_81_82_83_84_909_910_915_917_92_921_923_924_925_926_927_928_929_931_987_995",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/class.drop-down-pages.php::::14_18_83",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/libs/eps-plugin-options.php::::104_116_128_130_132_133_134_135_136_139_14_151_174_176_178_179_18_180_184_187_46_47_48_49_50_51_521_58",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/wf-flyout/config.php::::10_11_12_14_2_22_4_5_6_7_8_9",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/class.drop-down-pages.php::::14_18_21_36_37_39_41_43_55_56_57_74_75_78_79_80_83"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "WebFuzzXSSVulnCheck"
+      ],
+      "score": 12,
+      "is_interesting": false,
+      "fuzzer_id": "6",
+      "is_initial_candidate": false,
+      "mutated_param_type": "query_params",
+      "mutated_param_name": "redirect_id"
+    },
+    {
+      "coverage_id": "1787096999-de2b3bb7-4f5b-4915-856c-cffb8891b354",
+      "priority": 9,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "GET",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "eps_redirect_get_inline_edit_entry"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "redirect_id": "fuzz<a href='javascript:alert(0xdeadbeef)'"
+        },
+        "body_params": {}
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 0.25
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n{\"html\":\"<tr id=\\\"eps-redirect-edit\\\">\\r\\n    <td colspan=\\\"5\\\">\\r\\n        <form id=\\\"eps-redirect-save\\\" method=\\\"post\\\" action=\\\"\\\">\\r\\n            <table class=\\\"eps-table\\\">\\r\\n                <tr class=\\\"id-new\\\">\\r\\n                    <td>\\r\\n    <input type=\\\"hidden\\\" type=\\\"text\\\" name=\\\"redirect[id][]\\\" value=\\\"\\\">\\r\\n\\r\\n    <select name=\\\"redirect[status][]\\\" class=\\\"eps-small-select\\\">\\r\\n        <option default value=\\\"301\\\" >301<\\/option>\\r\\n        <option value=\\\"302\\\" >302<\\/option>\\r\\n        <option value=\\\"307\\\" >307<\\/option>\\r\\n        <option value=\\\"inactive\\\" >Off<\\/option>\\r\\n    <\\/select>\\r\\n\\r\\n    <div class=\\\"eps-url\\\"><span class=\\\"eps-url-root\\\">http:\\/\\/web\\/&nbsp;<\\/span><\\/div>\\r\\n    <input class=\\\"eps-url-input\\\" type=\\\"text\\\" name=\\\"redirect[url_from][]\\\" value=\\\"\\\"><br><small>Need wildcard support for matching multiple URLs? Check out the <a href=\\\"#\\\" class=\\\"open-301-pro-dialog\\\" data-pro-feature=\\\"new-rule-wildcard\\\">PRO version.<\\/small>\\r\\n<\\/td>\\r\\n<td>\\r\\n    <select class=\\\"type-select eps-small-select\\\"><option value=\\\"eps-url-input\\\">Custom<\\/option><option value=\\\"post\\\">Post<\\/option><option value=\\\"page\\\">Page<\\/option><option value=\\\"attachment\\\">Media<\\/option><option value=\\\"term\\\">Term Archive<\\/option><\\/select><select class=\\\"select-post url-selector eps-small-select\\\" style=\\\"display:none\\\"><option value=\\\"\\\">...<\\/option><\\/select><select class=\\\"select-page url-selector eps-small-select\\\" style=\\\"display:none\\\"><option value=\\\"\\\">...<\\/option><option value=\\\"4135\\\">Ev6l_bee.png - Copy<\\/option><\\/select><select class=\\\"select-attachment url-selector eps-small-select\\\" style=\\\"display:none\\\"><option value=\\\"\\\">...<\\/option><\\/select><select class=\\\"select-term url-selector eps-small-select\\\" style=\\\"display:none\\\"><option value=\\\"\\\" selected>...<\\/option><option value=\\\"category\\\" disabled>Category<\\/option><option value=\\\"http:\\/\\/web\\/?cat=1\\\">&nbsp;&nbsp;- Uncategorized<\\/option><option value=\\\"post_tag\\\" disabled>Tag<\\/option><option value=\\\"nav_menu\\\" disabled>Navigation Menu<\\/option><option value=\\\"link_category\\\" disabled>Link Category<\\/option><option value=\\\"post_format\\\" disabled>Format<\\/option><option value=\\\"wp_theme\\\" disabled>Theme<\\/option><option value=\\\"wp_template_part_area\\\" disabled>Template Part Area<\\/option><\\/select><input class=\\\"eps-url-input select-eps-url-input\\\" type=\\\"text\\\" name=\\\"redirect[url_to][]\\\" value=\\\"\\\" placeholder=\\\"http:\\/\\/web\\\" \\/><br><small>Remember: all external URLs have to start with <code>https:\\/\\/<\\/code><\\/small><\\/td>\\r\\n                    <td class=\\\"redirect-actions\\\">\\r\\n                                                <input type=\\\"hidden\\\" id=\\\"eps_redirect_nonce_submit\\\" name=\\\"eps_redirect_nonce_submit\\\" value=\\\"1441d4e40f\\\" \\/><input type=\\\"hidden\\\" name=\\\"_wp_http_referer\\\" value=\\\"\\/wp-admin\\/admin-ajax.php?redirect_id=fuzz%3Ca+href%3D%27javascript%3Aalert%280xdeadbeef%29%27&#038;action=eps_redirect_get_inline_edit_entry\\\" \\/>                        <input type=\\\"submit\\\" name=\\\"eps_redirect_submit\\\" class=\\\"button button-primary eps-redirect-edit\\\" value=\\\"Save\\\">\\r\\n                    <\\/td>\\r\\n                <\\/tr>\\r\\n            <\\/table>\\r\\n        <\\/form>\\r\\n    <\\/td>\\r\\n<\\/tr> \\r\\n\",\"redirect_id\":0}",
+      "response.body.length": 3296,
+      "response.headers": {
+        "Date": "Tue, 18 Aug 2026 23:49:59 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Vary": "Accept-Encoding",
+        "Content-Length": "3296",
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 206.885,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787096869-dd724145-f008-435b-9717-8e27f62c6ba9",
+      "paths": [
+        "/var/www/html/wp-content/plugins/eps-301-redirects/templates/template.redirect-entry-edit.php::::10_14_16_17_20_21_22_23_26_27_30_31_32",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/templates/template.redirect-entry-edit-inline.php::::14_18_22_23_24_25_29_30_37",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/plugin.php::::11_356_359_367_389_390_394_396_400_424_473_50_51_53_54_56_57_59_60_63_64_65_66_67_68_69_70_71_72_75_76_796_802_806_825_826_827_858_859_861_904_905",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/class.drop-down-pages.php::::14_18_83",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/eps-form-elements.php::::125_126_128_129_131_132_133_151_152_154_159_160_162_164_179_181_184_185_188_189_190_193_194_196_197_20_224_37_39_40_41_43_46_47_51_57_58_59_61",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/wf-flyout/wf-flyout.php::::168_20_21_22_24_27_29_34_35_37_50_51_52_55_56_73_74_75_76_9",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/libs/eps-plugin-options.php::::104_116_128_130_132_133_134_135_136_139_14_151_174_176_178_179_18_180_184_187_46_47_48_49_50_51_521_58",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/wf-flyout/config.php::::10_11_12_14_2_22_4_5_6_7_8_9",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/eps-301-redirects.php::::1008_137_138_197_198_200_201_203_204_220_237_253_267_283_297_309_32_321_329_338_347_356_36_365_367_38_39_40_42_43_433_434_45_46_47_48_50_51_53_54_55_70_73_77_78_79_795_796_80_81_82_83_84_909_910_915_917_92_921_923_924_925_926_927_928_929_931_987_995"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "WebFuzzXSSVulnCheck"
+      ],
+      "score": 9,
+      "is_interesting": false,
+      "fuzzer_id": "6",
+      "is_initial_candidate": false,
+      "mutated_param_type": "query_params",
+      "mutated_param_name": "redirect_id"
+    },
+    {
+      "coverage_id": "1787097016-914c9ebf-a867-4f9d-a09f-80ce9cd2ebc3",
+      "priority": 12,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "GET",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "eps_redirect_get_inline_edit_entry"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "redirect_id": "4<script>alert(0xdeadbeef)</script>uz1"
+        },
+        "body_params": {}
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 0.25
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n{\"html\":\"<tr id=\\\"eps-redirect-edit\\\">\\r\\n    <td colspan=\\\"5\\\">\\r\\n        <form id=\\\"eps-redirect-save\\\" method=\\\"post\\\" action=\\\"\\\">\\r\\n            <table class=\\\"eps-table\\\">\\r\\n                <tr class=\\\"id-4\\\">\\r\\n                    <td>\\r\\n    <input type=\\\"hidden\\\" type=\\\"text\\\" name=\\\"redirect[id][]\\\" value=\\\"4\\\">\\r\\n\\r\\n    <select name=\\\"redirect[status][]\\\" class=\\\"eps-small-select\\\">\\r\\n        <option default value=\\\"301\\\" >301<\\/option>\\r\\n        <option value=\\\"302\\\" >302<\\/option>\\r\\n        <option value=\\\"307\\\" >307<\\/option>\\r\\n        <option value=\\\"inactive\\\" >Off<\\/option>\\r\\n    <\\/select>\\r\\n\\r\\n    <div class=\\\"eps-url\\\"><span class=\\\"eps-url-root\\\">http:\\/\\/web\\/&nbsp;<\\/span><\\/div>\\r\\n    <input class=\\\"eps-url-input\\\" type=\\\"text\\\" name=\\\"redirect[url_from][]\\\" value=\\\"\\\"><br><small>Need wildcard support for matching multiple URLs? Check out the <a href=\\\"#\\\" class=\\\"open-301-pro-dialog\\\" data-pro-feature=\\\"new-rule-wildcard\\\">PRO version.<\\/small>\\r\\n<\\/td>\\r\\n<td>\\r\\n    <select class=\\\"type-select eps-small-select\\\"><option value=\\\"eps-url-input\\\">Custom<\\/option><option value=\\\"post\\\">Post<\\/option><option value=\\\"page\\\">Page<\\/option><option value=\\\"attachment\\\">Media<\\/option><option value=\\\"term\\\">Term Archive<\\/option><\\/select><select class=\\\"select-post url-selector eps-small-select\\\" style=\\\"display:none\\\"><option value=\\\"\\\">...<\\/option><\\/select><select class=\\\"select-page url-selector eps-small-select\\\" style=\\\"display:none\\\"><option value=\\\"\\\">...<\\/option><option value=\\\"4135\\\">Ev6l_bee.png - Copy<\\/option><\\/select><select class=\\\"select-attachment url-selector eps-small-select\\\" style=\\\"display:none\\\"><option value=\\\"\\\">...<\\/option><\\/select><select class=\\\"select-term url-selector eps-small-select\\\" style=\\\"display:none\\\"><option value=\\\"\\\" selected>...<\\/option><option value=\\\"category\\\" disabled>Category<\\/option><option value=\\\"http:\\/\\/web\\/?cat=1\\\">&nbsp;&nbsp;- Uncategorized<\\/option><option value=\\\"post_tag\\\" disabled>Tag<\\/option><option value=\\\"nav_menu\\\" disabled>Navigation Menu<\\/option><option value=\\\"link_category\\\" disabled>Link Category<\\/option><option value=\\\"post_format\\\" disabled>Format<\\/option><option value=\\\"wp_theme\\\" disabled>Theme<\\/option><option value=\\\"wp_template_part_area\\\" disabled>Template Part Area<\\/option><\\/select><input class=\\\"eps-url-input select-eps-url-input\\\" type=\\\"text\\\" name=\\\"redirect[url_to][]\\\" value=\\\"\\\" placeholder=\\\"http:\\/\\/web\\\" \\/><br><small>Remember: all external URLs have to start with <code>https:\\/\\/<\\/code><\\/small><\\/td>\\r\\n                    <td class=\\\"redirect-actions\\\">\\r\\n                                                <a class=\\\"button eps-redirect-cancel\\\">Close<\\/a>\\r\\n                                                <input type=\\\"hidden\\\" id=\\\"eps_redirect_nonce_submit\\\" name=\\\"eps_redirect_nonce_submit\\\" value=\\\"1441d4e40f\\\" \\/><input type=\\\"hidden\\\" name=\\\"_wp_http_referer\\\" value=\\\"\\/wp-admin\\/admin-ajax.php?redirect_id=4%3Cscript%3Ealert%280xdeadbeef%29%3C%2Fscript%3Euz1&#038;action=eps_redirect_get_inline_edit_entry\\\" \\/>                        <input type=\\\"submit\\\" name=\\\"eps_redirect_submit\\\" class=\\\"button button-primary eps-redirect-edit\\\" value=\\\"Save\\\">\\r\\n                    <\\/td>\\r\\n                <\\/tr>\\r\\n            <\\/table>\\r\\n        <\\/form>\\r\\n    <\\/td>\\r\\n<\\/tr> \\r\\n\",\"redirect_id\":4}",
+      "response.body.length": 3393,
+      "response.headers": {
+        "Date": "Tue, 18 Aug 2026 23:50:16 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Vary": "Accept-Encoding",
+        "Content-Length": "3393",
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 491.181,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787096912-92b849b0-116b-4b1c-be22-e0efacea35e0",
+      "paths": [
+        "/var/www/html/wp-content/plugins/eps-301-redirects/templates/template.redirect-entry-edit.php::::10_14_16_17_20_21_22_23_26_27_30_31_32",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/templates/template.redirect-entry-edit-inline.php::::14_18_22_23_24_25_26_29_30_37",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/templates/template.redirect-entry-edit-inline.php::::14_18_22_23_24_25_29_30_37",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/plugin.php::::11_356_359_367_389_390_394_396_400_424_473_50_51_53_54_56_57_59_60_63_64_65_66_67_68_69_70_71_72_75_76_796_802_806_825_826_827_858_859_861_904_905",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/eps-form-elements.php::::125_126_128_129_131_132_133_151_152_154_159_160_162_164_179_181_184_185_188_189_190_193_194_196_197_20_224_37_39_40_41_43_46_47_51_57_58_59_61",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/wf-flyout/wf-flyout.php::::168_20_21_22_24_27_29_34_35_37_50_51_52_55_56_73_74_75_76_9",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/eps-form-elements.php::::125_126_128_129_131_132_133_151_152_154_155_156_159_160_162_164_179_181_184_185_188_189_190_193_194_196_197_20_224_37_39_40_41_43_46_47_51_57_58_59_61",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/eps-301-redirects.php::::1008_137_138_197_198_200_201_203_204_220_237_253_267_283_297_309_32_321_329_338_347_356_36_365_367_38_39_40_42_43_433_434_45_46_47_48_50_51_53_54_55_70_73_77_78_79_795_796_80_81_82_83_84_909_910_915_917_92_921_923_924_925_926_927_928_929_931_987_995",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/class.drop-down-pages.php::::14_18_83",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/libs/eps-plugin-options.php::::104_116_128_130_132_133_134_135_136_139_14_151_174_176_178_179_18_180_184_187_46_47_48_49_50_51_521_58",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/wf-flyout/config.php::::10_11_12_14_2_22_4_5_6_7_8_9",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/class.drop-down-pages.php::::14_18_21_36_37_39_41_43_55_56_57_74_75_78_79_80_83"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "WebFuzzXSSVulnCheck"
+      ],
+      "score": 12,
+      "is_interesting": false,
+      "fuzzer_id": "6",
+      "is_initial_candidate": false,
+      "mutated_param_type": "query_params",
+      "mutated_param_name": "redirect_id"
+    },
+    {
+      "coverage_id": "1787097016-b2251753-f3e8-4d08-9449-5ff462add770",
+      "priority": 12,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "GET",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "eps_redirect_get_inline_edit_entry"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "redirect_id": "<a href='javascript:alert(0xdeadbeef)'4uz1"
+        },
+        "body_params": {}
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 0.25
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n{\"html\":\"<tr id=\\\"eps-redirect-edit\\\">\\r\\n    <td colspan=\\\"5\\\">\\r\\n        <form id=\\\"eps-redirect-save\\\" method=\\\"post\\\" action=\\\"\\\">\\r\\n            <table class=\\\"eps-table\\\">\\r\\n                <tr class=\\\"id-new\\\">\\r\\n                    <td>\\r\\n    <input type=\\\"hidden\\\" type=\\\"text\\\" name=\\\"redirect[id][]\\\" value=\\\"\\\">\\r\\n\\r\\n    <select name=\\\"redirect[status][]\\\" class=\\\"eps-small-select\\\">\\r\\n        <option default value=\\\"301\\\" >301<\\/option>\\r\\n        <option value=\\\"302\\\" >302<\\/option>\\r\\n        <option value=\\\"307\\\" >307<\\/option>\\r\\n        <option value=\\\"inactive\\\" >Off<\\/option>\\r\\n    <\\/select>\\r\\n\\r\\n    <div class=\\\"eps-url\\\"><span class=\\\"eps-url-root\\\">http:\\/\\/web\\/&nbsp;<\\/span><\\/div>\\r\\n    <input class=\\\"eps-url-input\\\" type=\\\"text\\\" name=\\\"redirect[url_from][]\\\" value=\\\"\\\"><br><small>Need wildcard support for matching multiple URLs? Check out the <a href=\\\"#\\\" class=\\\"open-301-pro-dialog\\\" data-pro-feature=\\\"new-rule-wildcard\\\">PRO version.<\\/small>\\r\\n<\\/td>\\r\\n<td>\\r\\n    <select class=\\\"type-select eps-small-select\\\"><option value=\\\"eps-url-input\\\">Custom<\\/option><option value=\\\"post\\\">Post<\\/option><option value=\\\"page\\\">Page<\\/option><option value=\\\"attachment\\\">Media<\\/option><option value=\\\"term\\\">Term Archive<\\/option><\\/select><select class=\\\"select-post url-selector eps-small-select\\\" style=\\\"display:none\\\"><option value=\\\"\\\">...<\\/option><\\/select><select class=\\\"select-page url-selector eps-small-select\\\" style=\\\"display:none\\\"><option value=\\\"\\\">...<\\/option><option value=\\\"4135\\\">Ev6l_bee.png - Copy<\\/option><\\/select><select class=\\\"select-attachment url-selector eps-small-select\\\" style=\\\"display:none\\\"><option value=\\\"\\\">...<\\/option><\\/select><select class=\\\"select-term url-selector eps-small-select\\\" style=\\\"display:none\\\"><option value=\\\"\\\" selected>...<\\/option><option value=\\\"category\\\" disabled>Category<\\/option><option value=\\\"http:\\/\\/web\\/?cat=1\\\">&nbsp;&nbsp;- Uncategorized<\\/option><option value=\\\"post_tag\\\" disabled>Tag<\\/option><option value=\\\"nav_menu\\\" disabled>Navigation Menu<\\/option><option value=\\\"link_category\\\" disabled>Link Category<\\/option><option value=\\\"post_format\\\" disabled>Format<\\/option><option value=\\\"wp_theme\\\" disabled>Theme<\\/option><option value=\\\"wp_template_part_area\\\" disabled>Template Part Area<\\/option><\\/select><input class=\\\"eps-url-input select-eps-url-input\\\" type=\\\"text\\\" name=\\\"redirect[url_to][]\\\" value=\\\"\\\" placeholder=\\\"http:\\/\\/web\\\" \\/><br><small>Remember: all external URLs have to start with <code>https:\\/\\/<\\/code><\\/small><\\/td>\\r\\n                    <td class=\\\"redirect-actions\\\">\\r\\n                                                <input type=\\\"hidden\\\" id=\\\"eps_redirect_nonce_submit\\\" name=\\\"eps_redirect_nonce_submit\\\" value=\\\"1441d4e40f\\\" \\/><input type=\\\"hidden\\\" name=\\\"_wp_http_referer\\\" value=\\\"\\/wp-admin\\/admin-ajax.php?redirect_id=%3Ca+href%3D%27javascript%3Aalert%280xdeadbeef%29%274uz1&#038;action=eps_redirect_get_inline_edit_entry\\\" \\/>                        <input type=\\\"submit\\\" name=\\\"eps_redirect_submit\\\" class=\\\"button button-primary eps-redirect-edit\\\" value=\\\"Save\\\">\\r\\n                    <\\/td>\\r\\n                <\\/tr>\\r\\n            <\\/table>\\r\\n        <\\/form>\\r\\n    <\\/td>\\r\\n<\\/tr> \\r\\n\",\"redirect_id\":0}",
+      "response.body.length": 3296,
+      "response.headers": {
+        "Date": "Tue, 18 Aug 2026 23:50:16 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Vary": "Accept-Encoding",
+        "Content-Length": "3296",
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 553.879,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787096912-92b849b0-116b-4b1c-be22-e0efacea35e0",
+      "paths": [
+        "/var/www/html/wp-content/plugins/eps-301-redirects/templates/template.redirect-entry-edit.php::::10_14_16_17_20_21_22_23_26_27_30_31_32",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/templates/template.redirect-entry-edit-inline.php::::14_18_22_23_24_25_26_29_30_37",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/templates/template.redirect-entry-edit-inline.php::::14_18_22_23_24_25_29_30_37",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/plugin.php::::11_356_359_367_389_390_394_396_400_424_473_50_51_53_54_56_57_59_60_63_64_65_66_67_68_69_70_71_72_75_76_796_802_806_825_826_827_858_859_861_904_905",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/eps-form-elements.php::::125_126_128_129_131_132_133_151_152_154_159_160_162_164_179_181_184_185_188_189_190_193_194_196_197_20_224_37_39_40_41_43_46_47_51_57_58_59_61",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/wf-flyout/wf-flyout.php::::168_20_21_22_24_27_29_34_35_37_50_51_52_55_56_73_74_75_76_9",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/eps-form-elements.php::::125_126_128_129_131_132_133_151_152_154_155_156_159_160_162_164_179_181_184_185_188_189_190_193_194_196_197_20_224_37_39_40_41_43_46_47_51_57_58_59_61",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/eps-301-redirects.php::::1008_137_138_197_198_200_201_203_204_220_237_253_267_283_297_309_32_321_329_338_347_356_36_365_367_38_39_40_42_43_433_434_45_46_47_48_50_51_53_54_55_70_73_77_78_79_795_796_80_81_82_83_84_909_910_915_917_92_921_923_924_925_926_927_928_929_931_987_995",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/class.drop-down-pages.php::::14_18_83",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/libs/eps-plugin-options.php::::104_116_128_130_132_133_134_135_136_139_14_151_174_176_178_179_18_180_184_187_46_47_48_49_50_51_521_58",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/wf-flyout/config.php::::10_11_12_14_2_22_4_5_6_7_8_9",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/class.drop-down-pages.php::::14_18_21_36_37_39_41_43_55_56_57_74_75_78_79_80_83"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "WebFuzzXSSVulnCheck"
+      ],
+      "score": 12,
+      "is_interesting": false,
+      "fuzzer_id": "6",
+      "is_initial_candidate": false,
+      "mutated_param_type": "query_params",
+      "mutated_param_name": "redirect_id"
+    },
+    {
+      "coverage_id": "1787097023-920ac0c9-b3bf-43d7-9a1e-055a93b660ac",
+      "priority": 12,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "GET",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "eps_redirect_get_inline_edit_entry"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "redirect_id": "4uz1<script>alert(0xdeadbeef)</script>"
+        },
+        "body_params": {}
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 0.25
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n{\"html\":\"<tr id=\\\"eps-redirect-edit\\\">\\r\\n    <td colspan=\\\"5\\\">\\r\\n        <form id=\\\"eps-redirect-save\\\" method=\\\"post\\\" action=\\\"\\\">\\r\\n            <table class=\\\"eps-table\\\">\\r\\n                <tr class=\\\"id-4\\\">\\r\\n                    <td>\\r\\n    <input type=\\\"hidden\\\" type=\\\"text\\\" name=\\\"redirect[id][]\\\" value=\\\"4\\\">\\r\\n\\r\\n    <select name=\\\"redirect[status][]\\\" class=\\\"eps-small-select\\\">\\r\\n        <option default value=\\\"301\\\" >301<\\/option>\\r\\n        <option value=\\\"302\\\" >302<\\/option>\\r\\n        <option value=\\\"307\\\" >307<\\/option>\\r\\n        <option value=\\\"inactive\\\" >Off<\\/option>\\r\\n    <\\/select>\\r\\n\\r\\n    <div class=\\\"eps-url\\\"><span class=\\\"eps-url-root\\\">http:\\/\\/web\\/&nbsp;<\\/span><\\/div>\\r\\n    <input class=\\\"eps-url-input\\\" type=\\\"text\\\" name=\\\"redirect[url_from][]\\\" value=\\\"\\\"><br><small>Need wildcard support for matching multiple URLs? Check out the <a href=\\\"#\\\" class=\\\"open-301-pro-dialog\\\" data-pro-feature=\\\"new-rule-wildcard\\\">PRO version.<\\/small>\\r\\n<\\/td>\\r\\n<td>\\r\\n    <select class=\\\"type-select eps-small-select\\\"><option value=\\\"eps-url-input\\\">Custom<\\/option><option value=\\\"post\\\">Post<\\/option><option value=\\\"page\\\">Page<\\/option><option value=\\\"attachment\\\">Media<\\/option><option value=\\\"term\\\">Term Archive<\\/option><\\/select><select class=\\\"select-post url-selector eps-small-select\\\" style=\\\"display:none\\\"><option value=\\\"\\\">...<\\/option><\\/select><select class=\\\"select-page url-selector eps-small-select\\\" style=\\\"display:none\\\"><option value=\\\"\\\">...<\\/option><option value=\\\"4135\\\">Ev6l_bee.png - Copy<\\/option><\\/select><select class=\\\"select-attachment url-selector eps-small-select\\\" style=\\\"display:none\\\"><option value=\\\"\\\">...<\\/option><\\/select><select class=\\\"select-term url-selector eps-small-select\\\" style=\\\"display:none\\\"><option value=\\\"\\\" selected>...<\\/option><option value=\\\"category\\\" disabled>Category<\\/option><option value=\\\"http:\\/\\/web\\/?cat=1\\\">&nbsp;&nbsp;- Uncategorized<\\/option><option value=\\\"post_tag\\\" disabled>Tag<\\/option><option value=\\\"nav_menu\\\" disabled>Navigation Menu<\\/option><option value=\\\"link_category\\\" disabled>Link Category<\\/option><option value=\\\"post_format\\\" disabled>Format<\\/option><option value=\\\"wp_theme\\\" disabled>Theme<\\/option><option value=\\\"wp_template_part_area\\\" disabled>Template Part Area<\\/option><\\/select><input class=\\\"eps-url-input select-eps-url-input\\\" type=\\\"text\\\" name=\\\"redirect[url_to][]\\\" value=\\\"\\\" placeholder=\\\"http:\\/\\/web\\\" \\/><br><small>Remember: all external URLs have to start with <code>https:\\/\\/<\\/code><\\/small><\\/td>\\r\\n                    <td class=\\\"redirect-actions\\\">\\r\\n                                                <a class=\\\"button eps-redirect-cancel\\\">Close<\\/a>\\r\\n                                                <input type=\\\"hidden\\\" id=\\\"eps_redirect_nonce_submit\\\" name=\\\"eps_redirect_nonce_submit\\\" value=\\\"1441d4e40f\\\" \\/><input type=\\\"hidden\\\" name=\\\"_wp_http_referer\\\" value=\\\"\\/wp-admin\\/admin-ajax.php?redirect_id=4uz1%3Cscript%3Ealert%280xdeadbeef%29%3C%2Fscript%3E&#038;action=eps_redirect_get_inline_edit_entry\\\" \\/>                        <input type=\\\"submit\\\" name=\\\"eps_redirect_submit\\\" class=\\\"button button-primary eps-redirect-edit\\\" value=\\\"Save\\\">\\r\\n                    <\\/td>\\r\\n                <\\/tr>\\r\\n            <\\/table>\\r\\n        <\\/form>\\r\\n    <\\/td>\\r\\n<\\/tr> \\r\\n\",\"redirect_id\":4}",
+      "response.body.length": 3393,
+      "response.headers": {
+        "Date": "Tue, 18 Aug 2026 23:50:23 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Vary": "Accept-Encoding",
+        "Content-Length": "3393",
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 452.938,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787096912-92b849b0-116b-4b1c-be22-e0efacea35e0",
+      "paths": [
+        "/var/www/html/wp-content/plugins/eps-301-redirects/templates/template.redirect-entry-edit.php::::10_14_16_17_20_21_22_23_26_27_30_31_32",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/templates/template.redirect-entry-edit-inline.php::::14_18_22_23_24_25_26_29_30_37",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/templates/template.redirect-entry-edit-inline.php::::14_18_22_23_24_25_29_30_37",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/plugin.php::::11_356_359_367_389_390_394_396_400_424_473_50_51_53_54_56_57_59_60_63_64_65_66_67_68_69_70_71_72_75_76_796_802_806_825_826_827_858_859_861_904_905",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/eps-form-elements.php::::125_126_128_129_131_132_133_151_152_154_159_160_162_164_179_181_184_185_188_189_190_193_194_196_197_20_224_37_39_40_41_43_46_47_51_57_58_59_61",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/wf-flyout/wf-flyout.php::::168_20_21_22_24_27_29_34_35_37_50_51_52_55_56_73_74_75_76_9",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/eps-form-elements.php::::125_126_128_129_131_132_133_151_152_154_155_156_159_160_162_164_179_181_184_185_188_189_190_193_194_196_197_20_224_37_39_40_41_43_46_47_51_57_58_59_61",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/eps-301-redirects.php::::1008_137_138_197_198_200_201_203_204_220_237_253_267_283_297_309_32_321_329_338_347_356_36_365_367_38_39_40_42_43_433_434_45_46_47_48_50_51_53_54_55_70_73_77_78_79_795_796_80_81_82_83_84_909_910_915_917_92_921_923_924_925_926_927_928_929_931_987_995",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/class.drop-down-pages.php::::14_18_83",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/libs/eps-plugin-options.php::::104_116_128_130_132_133_134_135_136_139_14_151_174_176_178_179_18_180_184_187_46_47_48_49_50_51_521_58",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/wf-flyout/config.php::::10_11_12_14_2_22_4_5_6_7_8_9",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/class.drop-down-pages.php::::14_18_21_36_37_39_41_43_55_56_57_74_75_78_79_80_83"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "WebFuzzXSSVulnCheck"
+      ],
+      "score": 12,
+      "is_interesting": false,
+      "fuzzer_id": "6",
+      "is_initial_candidate": false,
+      "mutated_param_type": "query_params",
+      "mutated_param_name": "redirect_id"
+    },
+    {
+      "coverage_id": "1787097028-89adc328-5888-4c0a-b77a-e5b1fb2f500e",
+      "priority": 12,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "GET",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "eps_redirect_get_inline_edit_entry"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "redirect_id": "9ucP~<script>alert(0xdeadbeef)</script>zz"
+        },
+        "body_params": {}
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 0.25
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n{\"html\":\"<tr id=\\\"eps-redirect-edit\\\">\\r\\n    <td colspan=\\\"5\\\">\\r\\n        <form id=\\\"eps-redirect-save\\\" method=\\\"post\\\" action=\\\"\\\">\\r\\n            <table class=\\\"eps-table\\\">\\r\\n                <tr class=\\\"id-9\\\">\\r\\n                    <td>\\r\\n    <input type=\\\"hidden\\\" type=\\\"text\\\" name=\\\"redirect[id][]\\\" value=\\\"9\\\">\\r\\n\\r\\n    <select name=\\\"redirect[status][]\\\" class=\\\"eps-small-select\\\">\\r\\n        <option default value=\\\"301\\\" >301<\\/option>\\r\\n        <option value=\\\"302\\\" >302<\\/option>\\r\\n        <option value=\\\"307\\\" >307<\\/option>\\r\\n        <option value=\\\"inactive\\\" >Off<\\/option>\\r\\n    <\\/select>\\r\\n\\r\\n    <div class=\\\"eps-url\\\"><span class=\\\"eps-url-root\\\">http:\\/\\/web\\/&nbsp;<\\/span><\\/div>\\r\\n    <input class=\\\"eps-url-input\\\" type=\\\"text\\\" name=\\\"redirect[url_from][]\\\" value=\\\"\\\"><br><small>Need wildcard support for matching multiple URLs? Check out the <a href=\\\"#\\\" class=\\\"open-301-pro-dialog\\\" data-pro-feature=\\\"new-rule-wildcard\\\">PRO version.<\\/small>\\r\\n<\\/td>\\r\\n<td>\\r\\n    <select class=\\\"type-select eps-small-select\\\"><option value=\\\"eps-url-input\\\">Custom<\\/option><option value=\\\"post\\\">Post<\\/option><option value=\\\"page\\\">Page<\\/option><option value=\\\"attachment\\\">Media<\\/option><option value=\\\"term\\\">Term Archive<\\/option><\\/select><select class=\\\"select-post url-selector eps-small-select\\\" style=\\\"display:none\\\"><option value=\\\"\\\">...<\\/option><\\/select><select class=\\\"select-page url-selector eps-small-select\\\" style=\\\"display:none\\\"><option value=\\\"\\\">...<\\/option><option value=\\\"4135\\\">Ev6l_bee.png - Copy<\\/option><\\/select><select class=\\\"select-attachment url-selector eps-small-select\\\" style=\\\"display:none\\\"><option value=\\\"\\\">...<\\/option><\\/select><select class=\\\"select-term url-selector eps-small-select\\\" style=\\\"display:none\\\"><option value=\\\"\\\" selected>...<\\/option><option value=\\\"category\\\" disabled>Category<\\/option><option value=\\\"http:\\/\\/web\\/?cat=1\\\">&nbsp;&nbsp;- Uncategorized<\\/option><option value=\\\"post_tag\\\" disabled>Tag<\\/option><option value=\\\"nav_menu\\\" disabled>Navigation Menu<\\/option><option value=\\\"link_category\\\" disabled>Link Category<\\/option><option value=\\\"post_format\\\" disabled>Format<\\/option><option value=\\\"wp_theme\\\" disabled>Theme<\\/option><option value=\\\"wp_template_part_area\\\" disabled>Template Part Area<\\/option><\\/select><input class=\\\"eps-url-input select-eps-url-input\\\" type=\\\"text\\\" name=\\\"redirect[url_to][]\\\" value=\\\"\\\" placeholder=\\\"http:\\/\\/web\\\" \\/><br><small>Remember: all external URLs have to start with <code>https:\\/\\/<\\/code><\\/small><\\/td>\\r\\n                    <td class=\\\"redirect-actions\\\">\\r\\n                                                <a class=\\\"button eps-redirect-cancel\\\">Close<\\/a>\\r\\n                                                <input type=\\\"hidden\\\" id=\\\"eps_redirect_nonce_submit\\\" name=\\\"eps_redirect_nonce_submit\\\" value=\\\"1441d4e40f\\\" \\/><input type=\\\"hidden\\\" name=\\\"_wp_http_referer\\\" value=\\\"\\/wp-admin\\/admin-ajax.php?redirect_id=9ucP%7E%3Cscript%3Ealert%280xdeadbeef%29%3C%2Fscript%3Ezz&#038;action=eps_redirect_get_inline_edit_entry\\\" \\/>                        <input type=\\\"submit\\\" name=\\\"eps_redirect_submit\\\" class=\\\"button button-primary eps-redirect-edit\\\" value=\\\"Save\\\">\\r\\n                    <\\/td>\\r\\n                <\\/tr>\\r\\n            <\\/table>\\r\\n        <\\/form>\\r\\n    <\\/td>\\r\\n<\\/tr> \\r\\n\",\"redirect_id\":9}",
+      "response.body.length": 3398,
+      "response.headers": {
+        "Date": "Tue, 18 Aug 2026 23:50:28 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Vary": "Accept-Encoding",
+        "Content-Length": "3398",
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 503.004,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787096903-299c2ece-6e83-47ad-a171-04cfb2c83f8c",
+      "paths": [
+        "/var/www/html/wp-content/plugins/eps-301-redirects/templates/template.redirect-entry-edit.php::::10_14_16_17_20_21_22_23_26_27_30_31_32",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/templates/template.redirect-entry-edit-inline.php::::14_18_22_23_24_25_26_29_30_37",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/templates/template.redirect-entry-edit-inline.php::::14_18_22_23_24_25_29_30_37",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/plugin.php::::11_356_359_367_389_390_394_396_400_424_473_50_51_53_54_56_57_59_60_63_64_65_66_67_68_69_70_71_72_75_76_796_802_806_825_826_827_858_859_861_904_905",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/eps-form-elements.php::::125_126_128_129_131_132_133_151_152_154_159_160_162_164_179_181_184_185_188_189_190_193_194_196_197_20_224_37_39_40_41_43_46_47_51_57_58_59_61",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/wf-flyout/wf-flyout.php::::168_20_21_22_24_27_29_34_35_37_50_51_52_55_56_73_74_75_76_9",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/eps-form-elements.php::::125_126_128_129_131_132_133_151_152_154_155_156_159_160_162_164_179_181_184_185_188_189_190_193_194_196_197_20_224_37_39_40_41_43_46_47_51_57_58_59_61",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/eps-301-redirects.php::::1008_137_138_197_198_200_201_203_204_220_237_253_267_283_297_309_32_321_329_338_347_356_36_365_367_38_39_40_42_43_433_434_45_46_47_48_50_51_53_54_55_70_73_77_78_79_795_796_80_81_82_83_84_909_910_915_917_92_921_923_924_925_926_927_928_929_931_987_995",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/class.drop-down-pages.php::::14_18_83",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/libs/eps-plugin-options.php::::104_116_128_130_132_133_134_135_136_139_14_151_174_176_178_179_18_180_184_187_46_47_48_49_50_51_521_58",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/wf-flyout/config.php::::10_11_12_14_2_22_4_5_6_7_8_9",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/class.drop-down-pages.php::::14_18_21_36_37_39_41_43_55_56_57_74_75_78_79_80_83"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "WebFuzzXSSVulnCheck"
+      ],
+      "score": 12,
+      "is_interesting": false,
+      "fuzzer_id": "6",
+      "is_initial_candidate": false,
+      "mutated_param_type": "query_params",
+      "mutated_param_name": "redirect_id"
+    }
+  ]
+}

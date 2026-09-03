@@ -5,11 +5,11 @@
 *Found functions:4
 *Extracted functions:1
 *Total parameter names extracted: 1
-*Overview: {'Moove_GDPR_Controller': {'nopriv_moove_gdpr_remove_php_cookies', 'moove_gdpr_remove_php_cookies', 'moove_gdpr_localize_scripts', 'nopriv_moove_gdpr_localize_scripts', 'nopriv_moove_gdpr_get_scripts', 'moove_hide_language_notice', 'moove_gdpr_get_scripts'}, 'Moove_GDPR_License_Manager': {'gdpr_msba_bulk_activate'}, 'gdpr_cc_dismiss_review_notice': {'gdpr_cc_dismiss_review_notice'}, 'Moove_GDPR_Updater': {'moove_hide_update_notice'}}
+*Overview: {'Moove_GDPR_Controller': {'moove_gdpr_localize_scripts', 'moove_gdpr_get_scripts', 'moove_gdpr_remove_php_cookies', 'moove_hide_language_notice', 'nopriv_moove_gdpr_remove_php_cookies', 'nopriv_moove_gdpr_localize_scripts', 'nopriv_moove_gdpr_get_scripts'}, 'Moove_GDPR_License_Manager': {'gdpr_msba_bulk_activate'}, 'gdpr_cc_dismiss_review_notice': {'gdpr_cc_dismiss_review_notice'}, 'Moove_GDPR_Updater': {'moove_hide_update_notice'}}
 *
 ***/
 
-/** Function Moove_GDPR_Controller() called by wp_ajax hooks: {'nopriv_moove_gdpr_remove_php_cookies', 'moove_gdpr_remove_php_cookies', 'moove_gdpr_localize_scripts', 'nopriv_moove_gdpr_localize_scripts', 'nopriv_moove_gdpr_get_scripts', 'moove_hide_language_notice', 'moove_gdpr_get_scripts'} **/
+/** Function Moove_GDPR_Controller() called by wp_ajax hooks: {'moove_gdpr_localize_scripts', 'moove_gdpr_get_scripts', 'moove_gdpr_remove_php_cookies', 'moove_hide_language_notice', 'nopriv_moove_gdpr_remove_php_cookies', 'nopriv_moove_gdpr_localize_scripts', 'nopriv_moove_gdpr_get_scripts'} **/
 /** No function found :-/ **/
 
 

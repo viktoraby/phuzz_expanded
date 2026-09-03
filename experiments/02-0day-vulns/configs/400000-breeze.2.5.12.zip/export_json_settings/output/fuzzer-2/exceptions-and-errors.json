@@ -1,0 +1,203 @@
+[
+  {
+    "coverage_id": "1787087442-9759cd1d-f3d6-470e-8968-b127c91c355d",
+    "priority": 75,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "GET",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "breeze_export_json"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "network_level": "fb\\zz"
+      },
+      "body_params": {}
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 0.25
+    },
+    "errors": [
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Cookie_Jar::offsetExists($key) should either be compatible with ArrayAccess::offsetExists(mixed $offset): bool, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Cookie/Jar.php",
+        "errline": 63
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Cookie_Jar::offsetGet($key) should either be compatible with ArrayAccess::offsetGet(mixed $offset): mixed, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Cookie/Jar.php",
+        "errline": 73
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Cookie_Jar::offsetSet($key, $value) should either be compatible with ArrayAccess::offsetSet(mixed $offset, mixed $value): void, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Cookie/Jar.php",
+        "errline": 89
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Cookie_Jar::offsetUnset($key) should either be compatible with ArrayAccess::offsetUnset(mixed $offset): void, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Cookie/Jar.php",
+        "errline": 102
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Cookie_Jar::getIterator() should either be compatible with IteratorAggregate::getIterator(): Traversable, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Cookie/Jar.php",
+        "errline": 111
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Utility_CaseInsensitiveDictionary::offsetExists($key) should either be compatible with ArrayAccess::offsetExists(mixed $offset): bool, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Utility/CaseInsensitiveDictionary.php",
+        "errline": 40
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Utility_CaseInsensitiveDictionary::offsetGet($key) should either be compatible with ArrayAccess::offsetGet(mixed $offset): mixed, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Utility/CaseInsensitiveDictionary.php",
+        "errline": 51
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Utility_CaseInsensitiveDictionary::offsetSet($key, $value) should either be compatible with ArrayAccess::offsetSet(mixed $offset, mixed $value): void, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Utility/CaseInsensitiveDictionary.php",
+        "errline": 68
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Utility_CaseInsensitiveDictionary::offsetUnset($key) should either be compatible with ArrayAccess::offsetUnset(mixed $offset): void, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Utility/CaseInsensitiveDictionary.php",
+        "errline": 82
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Utility_CaseInsensitiveDictionary::getIterator() should either be compatible with IteratorAggregate::getIterator(): Traversable, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Utility/CaseInsensitiveDictionary.php",
+        "errline": 91
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n{\"breeze_basic_settings\":{\"breeze-active\":\"1\",\"breeze-mobile-separate\":\"1\",\"breeze-cross-origin\":\"0\",\"breeze-disable-admin\":{\"administrator\":0,\"editor\":0,\"author\":0,\"contributor\":0,\"subscriber\":0},\"breeze-gzip-compression\":\"1\",\"breeze-desktop-cache\":\"1\",\"breeze-mobile-cache\":\"1\",\"breeze-b-ttl\":1440,\"breeze-browser-cache\":\"1\",\"breeze-lazy-load\":\"0\",\"breeze-lazy-load-native\":\"0\",\"breeze-lazy-load-iframes\":\"0\",\"breeze-lazy-load-videos\":\"0\",\"breeze-display-clean\":\"1\"},\"breeze_advanced_settings\":{\"breeze-exclude-urls\":[],\"cached-query-strings\":[],\"breeze-wp-emoji\":\"0\",\"breeze-store-googlefonts-locally\":\"0\",\"breeze-store-googleanalytics-locally\":\"0\",\"breeze-store-facebookpixel-locally\":\"0\",\"breeze-store-gravatars-locally\":\"0\",\"breeze-enable-api\":\"0\",\"breeze-api-token\":\"PCNU8PfsNW4iqvqtJR6cJCqxTpW2aOkm\"},\"breeze_heartbeat_settings\":{\"breeze-control-heartbeat\":\"0\",\"breeze-heartbeat-front\":\"\",\"breeze-heartbeat-postedit\":\"\",\"breeze-heartbeat-backend\":\"\"},\"breeze_cdn_integration\":{\"cdn-active\":\"0\",\"cdn-url\":\"\",\"cdn-content\":[\"wp-includes\",\"wp-content\"],\"cdn-exclude-content\":[\".php\"],\"cdn-relative-path\":\"1\"},\"breeze_varnish_cache\":{\"auto-purge-varnish\":\"1\",\"breeze-varnish-server-ip\":\"127.0.0.1\",\"breeze-ttl\":1440},\"breeze_first_install\":\"yes\",\"breeze_preload_settings\":{\"breeze-preload-fonts\":[],\"breeze-preload-links\":\"1\",\"breeze-prefetch-urls\":[],\"breeze-cache-warmup-enabled\":\"0\"},\"breeze_file_settings\":{\"breeze-minify-html\":\"0\",\"breeze-minify-css\":\"0\",\"breeze-font-display-swap\":\"0\",\"breeze-group-css\":\"0\",\"breeze-exclude-css\":[],\"breeze-minify-js\":\"0\",\"breeze-group-js\":\"0\",\"breeze-include-inline-js\":\"0\",\"breeze-exclude-js\":[],\"breeze-move-to-footer-js\":[],\"breeze-defer-js\":[],\"breeze-enable-js-delay\":\"0\",\"no-breeze-no-delay-js\":[],\"breeze-delay-all-js\":\"0\",\"breeze-delay-js-scripts\":[\"gtag\",\"document.write\",\"html5.js\",\"show_ads.js\",\"google_ad\",\"blogcatalog.com\\/w\",\"tweetmeme.com\\/i\",\"mybloglog.com\\/\",\"histats.com\\/js\",\"ads.smowtion.com\\/ad.js\",\"statcounter.com\\/counter\\/counter.js\",\"widgets.amung.us\",\"ws.amazon.com\\/widgets\",\"media.fastclick.net\",\"\\/ads\\/\",\"comment-form-quicktags\\/quicktags.php\",\"edToolbar\",\"intensedebate.com\",\"scripts.chitika.net\\/\",\"_gaq.push\",\"jotform.com\\/\",\"admin-bar.min.js\",\"GoogleAnalyticsObject\",\"plupload.full.min.js\",\"syntaxhighlighter\",\"adsbygoogle\",\"gist.github.com\",\"_stq\",\"nonce\",\"post_id\",\"data-noptimize\",\"googletagmanager\"]},\"breeze_ecommerce_detect\":false,\"breeze_advanced_settings_120\":false}",
+    "response.body.length": 2454,
+    "response.headers": {
+      "Date": "Tue, 18 Aug 2026 21:10:42 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "Set-Cookie": "breeze_folder_name=d2918c01d7a91dee7f4984b1d4ec4e1a200a88cb; expires=Wed, 02 Sep 2026 09:10:42 GMT; Max-Age=1252800; path=/; HttpOnly",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-disposition": "attachment; filename=breeze-export-settings-18-08-2026.json",
+      "Content-Length": "2454",
+      "Content-Type": "application/json; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 880.554,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787087383-30249ed8-9ae5-4151-8433-3643b21c72e8",
+    "paths": [
+      "/var/www/html/wp-content/plugins/breeze/vendor/woocommerce/action-scheduler/deprecated/ActionScheduler_Abstract_QueueRunner_Deprecated.php::::28",
+      "/var/www/html/wp-content/plugins/breeze/inc/class-breeze-cache-cronjobs.php::::18_20_248_32_36_7",
+      "/var/www/html/wp-content/plugins/breeze/inc/compatibility/class-breeze-avada-cache.php::::14_15_39_40_43_47_48_5",
+      "/var/www/html/wp-content/plugins/breeze/inc/class-breeze-api.php::::185_2",
+      "/var/www/html/wp-content/plugins/breeze/vendor/woocommerce/action-scheduler/deprecated/functions.php::::130",
+      "/var/www/html/wp-content/plugins/breeze/vendor/woocommerce/action-scheduler/classes/abstracts/ActionScheduler_Abstract_QueueRunner.php::::385_48_50_51_52_53",
+      "/var/www/html/wp-content/plugins/breeze/views/option-tabs-loader.php::::11_12_46_47_5",
+      "/var/www/html/wp-content/plugins/breeze/inc/cache/ecommerce-cache.php::::10_11_12_2_30_31_35_40_779_9",
+      "/var/www/html/wp-content/plugins/breeze/inc/class-breeze-dns-prefetch.php::::11_12_2_64_65",
+      "/var/www/html/wp-content/plugins/breeze/vendor/woocommerce/action-scheduler/classes/abstracts/ActionScheduler_Store.php::::500_501_502_504_507",
+      "/var/www/html/wp-content/plugins/breeze/vendor/woocommerce/action-scheduler/deprecated/ActionScheduler_Store_Deprecated.php::::51",
+      "/var/www/html/wp-content/plugins/breeze/inc/functions.php::::1184_19_21_22_233_234_238_240_265_276_280_282_286_287_289_290_291_293_294_297_298_299_300_302_304_322_339_349_352_49_959_961_962_966_969",
+      "/var/www/html/wp-content/plugins/breeze/vendor/woocommerce/action-scheduler/classes/schema/ActionScheduler_StoreSchema.php::::146_29_30_31_32_34_40_41",
+      "/var/www/html/wp-content/plugins/breeze/inc/cache/purge-per-time.php::::100_101_104_138_144_145_146_147_150_151_153_21_29_30_31_34_35_38_39_43_44_45_47_67_70_77_84_87_93_94_99",
+      "/var/www/html/wp-content/plugins/breeze/inc/compatibility/class-breeze-elementor-template.php::::3_69_73_75_76",
+      "/var/www/html/wp-content/plugins/breeze/inc/minification/breeze-minify-main.php::::21_27_29_30_33_489_71",
+      "/var/www/html/wp-content/plugins/breeze/inc/cdn-integration/breeze-cdn-integration.php::::21_26_27_64",
+      "/var/www/html/wp-content/plugins/breeze/vendor/woocommerce/action-scheduler/classes/ActionScheduler_QueueRunner.php::::247_248_249_252_255_39_40_41_44_56_58_59_62_63_72_75_76_80_82_87_88_89_95_96",
+      "/var/www/html/wp-content/plugins/breeze/vendor/woocommerce/action-scheduler/lib/WP_Async_Request.php::::16_189_63_65_66_67",
+      "/var/www/html/wp-content/plugins/breeze/vendor/woocommerce/action-scheduler/deprecated/ActionScheduler_AdminView_Deprecated.php::::154",
+      "/var/www/html/wp-content/plugins/breeze/vendor/woocommerce/action-scheduler/classes/abstracts/ActionScheduler_Logger.php::::23_24_25_259_27_66_67_68_69_70_71_72_73_74_75_76_77_78_84_85",
+      "/var/www/html/wp-content/plugins/breeze/vendor/woocommerce/action-scheduler/classes/ActionScheduler_QueueRunner.php::::255_39_40_41_44_56_58_59_62_63_72_75_76_80_82_87_88_89_95_96",
+      "/var/www/html/wp-content/plugins/breeze/vendor/woocommerce/action-scheduler/classes/data-stores/ActionScheduler_DBLogger.php::::106_107_108_110_112_113_155",
+      "/var/www/html/wp-content/plugins/breeze/inc/wp-cli/class-breeze-cli-helpers.php::::82",
+      "/var/www/html/wp-content/plugins/breeze/inc/compatibility/class-breeze-translatepress-compatibility.php::::13_14_65_66_69_74_75",
+      "/var/www/html/wp-content/plugins/breeze/inc/wp-cli/class-breeze-settings-import-export.php::::124_125_126_127_15_156_158_159_16_161_17_175_177_208_209_210_211_212_213_214_217_218_219_222_223_224_225_226_229_230_232_235_236_238_239_241_242_244_245_248_7_975_976",
+      "/var/www/html/wp-content/plugins/breeze/inc/class-breeze-htaccess-settings.php::::2_570",
+      "/var/www/html/wp-content/plugins/breeze/inc/compatibility/class-breeze-the-events-calendar.php::::15_16_28_29_3_32_36_37",
+      "/var/www/html/wp-content/plugins/breeze/inc/cdn-integration/breeze-cdn-rewrite.php::::146_21",
+      "/var/www/html/wp-content/plugins/breeze/inc/class-breeze-prefetch.php::::19_20_3_80_82_9",
+      "/var/www/html/wp-content/plugins/breeze/inc/class-breeze-protected-urls-index.php::::11_24_25_26_27_28_29_320_321_323_330_333_37_38",
+      "/var/www/html/wp-content/plugins/breeze/inc/class-breeze-file-permissions.php::::2_21_22_25_26_28_31_32_379_380_381_382_383_385",
+      "/var/www/html/wp-content/plugins/breeze/inc/breeze-admin.php::::100_101_104_107_108_109_111_120_121_124_125_126_130_131_132_134_1434_1435_1436_1437_1438_1439_1441_21_30_31_32_33_34_38_400_409_41_42_45_47_52_53_54_55_56_57_61_65_66_67_71_72_75_755_756_757_759_76_762_763_764_765_766_769_770_771_772_773_79_80_83_85_87_90_92_93_96_97_98",
+      "/var/www/html/wp-content/plugins/breeze/inc/class-breeze-preload-fonts.php::::19_20_3_60_62_9",
+      "/var/www/html/wp-content/plugins/breeze/breeze.php::::100_103_104_105_106_109_110_113_115_117_120_122_124_125_126_127_131_132_135_140_141_142_145_146_148_150_152_155_156_157_158_159_160_161_162_179_180_181_193_194_195_196_197_198_202_203_204_205_206_207_210_264_267_268_269_270_271_272_273_274_277_278_279_280_281_282_283_284_285_290_292_296_297_34_36_37_39_40_42_43_45_46_48_49_51_52_54_55_57_58_60_61_64_66_69_70_71_77_78_82_83_84_87_88_90_92_95_96",
+      "/var/www/html/wp-content/plugins/breeze/inc/class-breeze-store-files-locally.php::::3_536",
+      "/var/www/html/wp-content/plugins/breeze/inc/class-breeze-cloudflare-helper.php::::104_105_2_21_22_23_386_389_390_392_396_399_401_402_405_416_419_420_421_422_427_738_739_744_748_749",
+      "/var/www/html/wp-content/plugins/breeze/vendor/woocommerce/action-scheduler/functions.php::::514",
+      "/var/www/html/wp-content/plugins/breeze/vendor/woocommerce/action-scheduler/classes/schema/ActionScheduler_LoggerSchema.php::::102_26_27_29_35_36",
+      "/var/www/html/wp-content/plugins/breeze/inc/class-breeze-bulk-update.php::::112_113_13_14_15_16_17_18_3",
+      "/var/www/html/wp-content/plugins/breeze/inc/class-breeze-woocommerce-product-cache.php::::177_178_179_181_185_187_2",
+      "/var/www/html/wp-content/plugins/breeze/inc/class-breeze-one-click-optimization.php::::3_566",
+      "/var/www/html/wp-content/plugins/breeze/inc/helpers.php::::1145_180_181_20_913",
+      "/var/www/html/wp-content/plugins/breeze/vendor/woocommerce/action-scheduler/classes/abstracts/ActionScheduler.php::::112_113_114_115_122_123_124_125_126_128_130_132_133_134_135_136_139_142_143_144_145_146_147_148_150_151_153_155_157_158_160_163_164_165_176_177_182_184_185_187_188_189_190_191_194_196_197_198_199_200_202_203_211_212_219_220_221_239_240_243_257_261_262_293_307_320_332_333_335_348_356_357_359_404_48_62_69_76_87_88_89",
+      "/var/www/html/wp-content/plugins/breeze/vendor/woocommerce/action-scheduler/classes/abstracts/ActionScheduler_Abstract_Schema.php::::114_161_188_53_54_55_56_60_73_92_93_96",
+      "/var/www/html/wp-content/plugins/breeze/vendor/woocommerce/action-scheduler/classes/ActionScheduler_WPCommentCleaner.php::::134_61",
+      "/var/www/html/wp-content/plugins/breeze/inc/plugin-incompatibility/class-breeze-incompatibility-plugins.php::::15_2_378_380_40_41_43_44",
+      "/var/www/html/wp-content/plugins/breeze/vendor/woocommerce/action-scheduler/classes/data-stores/ActionScheduler_DBStore.php::::1343_53_54_55_56",
+      "/var/www/html/wp-content/plugins/breeze/inc/class-breeze-options-reader.php::::103_105_106_109_110_115_116_119_134_2_39_47_48_51_62_63_65_66_67_68_69_78_82_83_99",
+      "/var/www/html/wp-content/plugins/breeze/vendor/woocommerce/action-scheduler/classes/ActionScheduler_AsyncRequest_QueueRunner.php::::3_37_38_39_94",
+      "/var/www/html/wp-content/plugins/breeze/inc/class-breeze-query-strings-rules.php::::109_119_122_2_417_418_92_93",
+      "/var/www/html/wp-content/plugins/breeze/inc/class-breeze-disable-emoji-option.php::::115_117_2_21_22_24_28_8",
+      "/var/www/html/wp-content/plugins/breeze/inc/class-breeze-heartbeat-settings.php::::100_101_207_219_222_223_224_225_227_231_232_47_49_50_51_52_55_57_59_61_62_7",
+      "/var/www/html/wp-content/plugins/breeze/vendor/woocommerce/action-scheduler/classes/ActionScheduler_Versions.php::::102_103_105_114_115_116_152_35_40_41_43_44_45_74_75_78_79_86_88_92",
+      "/var/www/html/wp-content/plugins/breeze/inc/breeze-configuration.php::::21_2296_2297_26_29_30_31_32_33_34_35_36_37_38_39_41_42",
+      "/var/www/html/wp-content/plugins/breeze/vendor/woocommerce/action-scheduler/classes/ActionScheduler_DataController.php::::107_189_190_191_192_197_198_211_69_96",
+      "/var/www/html/wp-content/plugins/breeze/inc/minification/breeze-minification-cache.php::::2_368",
+      "/var/www/html/wp-content/plugins/breeze/vendor/woocommerce/action-scheduler/classes/ActionScheduler_QueueCleaner.php::::255_46_47_48",
+      "/var/www/html/wp-content/plugins/breeze/inc/class-exclude-pages-by-shortcode.php::::116_117_17_18_2",
+      "/var/www/html/wp-content/plugins/breeze/inc/wp-cli/class-breeze-wp-cli-core.php::::10_11_2_6_7",
+      "/var/www/html/wp-content/plugins/breeze/inc/plugin-incompatibility/class-breeze-woocs-compatibility.php::::15_16_19_20_8_88_89",
+      "/var/www/html/wp-content/plugins/breeze/inc/plugin-incompatibility/breeze-amp-compatibility.php::::27_28_5",
+      "/var/www/html/wp-content/plugins/breeze/inc/cache/purge-varnish.php::::21_38_41_42_43_453_454_50_51_54_55_57_58_59_61_63_66_71_72_75_76",
+      "/var/www/html/wp-content/plugins/breeze/inc/compatibility/class-breeze-shortpixel-compatibility.php::::13_15_17_18_2_22_23_28_50_52_8",
+      "/var/www/html/wp-content/plugins/breeze/inc/cache/class-breeze-cache-preloader.php::::139_142_143_148_149_15_1601",
+      "/var/www/html/wp-content/plugins/breeze/inc/compatibility/class-breeze-wcml-compatibility.php::::21_22_24_31_32_40_41_49_50",
+      "/var/www/html/wp-content/plugins/breeze/vendor/woocommerce/action-scheduler/classes/ActionScheduler_RecurringActionScheduler.php::::26_27_30_82",
+      "/var/www/html/wp-content/plugins/breeze/vendor/woocommerce/action-scheduler/classes/ActionScheduler_FatalErrorMonitor.php::::35_36_99",
+      "/var/www/html/wp-content/plugins/breeze/inc/cache/purge-cache.php::::21_37_38_39_41_42_43_44_45_46_47_48_49_51_52_53_57_58_59_60_836_838_839_840_843_967_969_970_972",
+      "/var/www/html/wp-content/plugins/breeze/inc/cache/class-purge-post-cache.php::::15_16_173_174_19_20_21_22_23_24_25_30_32_6",
+      "/var/www/html/wp-content/plugins/breeze/inc/upgrade.php::::19_22_24_269_270_271_3_32",
+      "/var/www/html/wp-content/plugins/breeze/vendor/woocommerce/action-scheduler/action-scheduler.php::::32_34_35_36_39_46_47_48_58_59_60_62_65_71",
+      "/var/www/html/wp-content/plugins/breeze/inc/cache/purge-per-time.php::::138_144_145_146_147_150_151_153_21_29_30_31_34_35_38_39_43_44_45_47_67_70_77_84_87",
+      "/var/www/html/wp-content/plugins/breeze/vendor/woocommerce/action-scheduler/classes/ActionScheduler_AdminView.php::::312_39_40_41_44_53_65",
+      "/var/www/html/wp-content/plugins/breeze/inc/cache/config-cache.php::::22_777"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 75,
+    "is_interesting": false,
+    "fuzzer_id": "2",
+    "is_initial_candidate": false,
+    "mutated_param_type": "query_params",
+    "mutated_param_name": "network_level"
+  }
+]

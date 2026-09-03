@@ -1,0 +1,412 @@
+{
+  "PathTraversal": [
+    {
+      "coverage_id": "1786958219-9fa2c81a-bb28-4b32-9b12-ef934594e259",
+      "priority": 0,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "replyto-comment"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "mode": "f6\u000046\u0000"
+        },
+        "body_params": {
+          "position": "fu",
+          "approve_parent": "fuzz",
+          "comment_ID": "fmzz",
+          "_wp_unfiltered_html_comment": "fzz",
+          "comment_type": "fuz",
+          "content": "fuz\u0000z\u0000",
+          "comment_post_ID": "muzz",
+          "mode": "fuzz"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": [
+        {
+          "errno": 2,
+          "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+          "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+          "errline": 13
+        }
+      ],
+      "exceptions": null,
+      "response_body": "",
+      "response.body.length": 0,
+      "response.headers": {},
+      "response.status.code": 0,
+      "response.time": 0,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1786958214-ae30eb12-226a-4a56-8367-db5a4a64bb0e",
+      "paths": [],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 0,
+      "is_interesting": false,
+      "fuzzer_id": "5",
+      "is_initial_candidate": false,
+      "mutated_param_type": "query_params",
+      "mutated_param_name": "mode"
+    },
+    {
+      "coverage_id": "1786958219-9fa2c81a-bb28-4b32-9b12-ef934594e259",
+      "priority": 0,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "replyto-comment"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "mode": "f6\u000046\u0000"
+        },
+        "body_params": {
+          "position": "fu",
+          "approve_parent": "fuzz",
+          "comment_ID": "fmzz",
+          "_wp_unfiltered_html_comment": "fzz",
+          "comment_type": "fuz",
+          "content": "fuz\u0000z\u0000",
+          "comment_post_ID": "muzz",
+          "mode": "fuzz"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": [
+        {
+          "errno": 2,
+          "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+          "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+          "errline": 13
+        }
+      ],
+      "exceptions": null,
+      "response_body": "",
+      "response.body.length": 0,
+      "response.headers": {},
+      "response.status.code": 0,
+      "response.time": 0,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1786958214-ae30eb12-226a-4a56-8367-db5a4a64bb0e",
+      "paths": [],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 0,
+      "is_interesting": false,
+      "fuzzer_id": "5",
+      "is_initial_candidate": false,
+      "mutated_param_type": "query_params",
+      "mutated_param_name": "mode"
+    },
+    {
+      "coverage_id": "1786958289-00912f33-aad3-4971-be66-c48f6e1ff0b4",
+      "priority": 0,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "replyto-comment"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "mode": "[\u0004\u0005z'P"
+        },
+        "body_params": {
+          "position": "fuz\u0004z",
+          "approve_parent": "fuzz",
+          "comment_ID": "fuzz",
+          "_wp_unfiltered_html_comment": "z",
+          "comment_type": "fuz{",
+          "content": "{{dump(app)}S}",
+          "comment_post_ID": "\\zz\t",
+          "mode": "f5zGz\u0000"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": [
+        {
+          "errno": 2,
+          "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+          "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+          "errline": 13
+        }
+      ],
+      "exceptions": null,
+      "response_body": "",
+      "response.body.length": 0,
+      "response.headers": {},
+      "response.status.code": 0,
+      "response.time": 0,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1786958273-4e875287-641f-4b6b-b266-1c0479fffe70",
+      "paths": [],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 0,
+      "is_interesting": false,
+      "fuzzer_id": "5",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "_wp_unfiltered_html_comment"
+    },
+    {
+      "coverage_id": "1786958289-00912f33-aad3-4971-be66-c48f6e1ff0b4",
+      "priority": 0,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "replyto-comment"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "mode": "[\u0004\u0005z'P"
+        },
+        "body_params": {
+          "position": "fuz\u0004z",
+          "approve_parent": "fuzz",
+          "comment_ID": "fuzz",
+          "_wp_unfiltered_html_comment": "z",
+          "comment_type": "fuz{",
+          "content": "{{dump(app)}S}",
+          "comment_post_ID": "\\zz\t",
+          "mode": "f5zGz\u0000"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": [
+        {
+          "errno": 2,
+          "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+          "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+          "errline": 13
+        }
+      ],
+      "exceptions": null,
+      "response_body": "",
+      "response.body.length": 0,
+      "response.headers": {},
+      "response.status.code": 0,
+      "response.time": 0,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1786958273-4e875287-641f-4b6b-b266-1c0479fffe70",
+      "paths": [],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 0,
+      "is_interesting": false,
+      "fuzzer_id": "5",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "_wp_unfiltered_html_comment"
+    },
+    {
+      "coverage_id": "1786958363-785aebd2-9eb0-4a88-8d80-60ed716f7d7d",
+      "priority": 0,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "replyto-comment"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "mode": "https://testytesttestestestest.com/hahahaha.jpg"
+        },
+        "body_params": {
+          "position": "fu",
+          "approve_parent": "fu8zz",
+          "comment_ID": "fvzz",
+          "_wp_unfiltered_html_comment": "fuzz\u0000",
+          "comment_type": "4gnfuzz\b",
+          "content": "fBzz",
+          "comment_post_ID": "f6z",
+          "mode": "fvzz5"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": [
+        {
+          "errno": 2,
+          "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+          "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+          "errline": 13
+        }
+      ],
+      "exceptions": null,
+      "response_body": "",
+      "response.body.length": 0,
+      "response.headers": {},
+      "response.status.code": 0,
+      "response.time": 0,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1786958335-eb3cc169-8cdd-40b2-ab8f-c697901c3aae",
+      "paths": [],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 0,
+      "is_interesting": false,
+      "fuzzer_id": "5",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "approve_parent"
+    },
+    {
+      "coverage_id": "1786958363-785aebd2-9eb0-4a88-8d80-60ed716f7d7d",
+      "priority": 0,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "replyto-comment"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "mode": "https://testytesttestestestest.com/hahahaha.jpg"
+        },
+        "body_params": {
+          "position": "fu",
+          "approve_parent": "fu8zz",
+          "comment_ID": "fvzz",
+          "_wp_unfiltered_html_comment": "fuzz\u0000",
+          "comment_type": "4gnfuzz\b",
+          "content": "fBzz",
+          "comment_post_ID": "f6z",
+          "mode": "fvzz5"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": [
+        {
+          "errno": 2,
+          "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+          "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+          "errline": 13
+        }
+      ],
+      "exceptions": null,
+      "response_body": "",
+      "response.body.length": 0,
+      "response.headers": {},
+      "response.status.code": 0,
+      "response.time": 0,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1786958335-eb3cc169-8cdd-40b2-ab8f-c697901c3aae",
+      "paths": [],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 0,
+      "is_interesting": false,
+      "fuzzer_id": "5",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "approve_parent"
+    }
+  ]
+}

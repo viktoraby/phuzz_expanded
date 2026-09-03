@@ -1,0 +1,433 @@
+{
+  "WebFuzzXSSVulnCheck": [
+    {
+      "coverage_id": "1787097303-41d73b22-bcbe-4564-8179-fccb85251550",
+      "priority": 8,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "eps_redirect_save"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "status": "fuzz",
+          "url_to": "fu<a href='javascript:alert(0xdeadbeef)'zz",
+          "url_from": "fuzz",
+          "id": "fuzz"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n{\"html\":\"<tr class=\\\"redirect-entry fuzz id-218\\\"\\r\\n  data-id=\\\"218\\\" data-status=\\\"fuzz\\\">\\r\\n  <td>\\r\\n    <p class=\\\"eps-grey-text eps-text-center eps-small\\\">218<\\/p>\\r\\n  <\\/td>\\r\\n  <td>\\r\\n    <a target=\\\"_blank\\\" class=\\\"eps-url\\\" href=\\\"http:\\/\\/web\\/fuzz\\\"\\r\\n      title=\\\"http:\\/\\/web\\/fuzz\\\">\\r\\n      <span class=\\\"eps-url-root eps-url-startcap\\\">\\r\\n        fuzz<\\/span><span\\r\\n        class=\\\"eps-url-root\\\">http:\\/\\/web\\/<\\/span><span class=\\\"eps-url-fragment eps-url-endcap\\\">fuzz<\\/span>\\r\\n    <\\/a>\\r\\n  <\\/td>\\r\\n  <td>\\r\\n                <a target=\\\"_blank\\\" class=\\\"eps-url\\\" href=\\\"\\\" title=\\\"fu&lt;a href=&#039;javascript:alert(0xdeadbeef)&#039;zz\\\">\\r\\n                <span class=\\\"eps-url-root eps-url-startcap\\\">URL:<\\/span><span\\r\\n                    class=\\\"eps-url-fragment eps-url-endcap \\\">fu&lt;a href=&#039;javascript:alert(0xdeadbeef)&#039;zz<\\/span>\\r\\n            <\\/a>\\r\\n              <\\/td>\\r\\n  <td class=\\\"redirect-hits\\\" nowrap><strong>0<\\/strong> <a class=\\\"open-301-pro-dialog pro-feature\\\" data-pro-feature=\\\"redirect-rules-chart-icon-0\\\" href=\\\"#\\\"><span class=\\\"dashicons dashicons-chart-area\\\"><\\/span><\\/a><\\/td>\\r\\n  <td class=\\\"redirect-actions\\\">\\r\\n    <a class=\\\"button eps-redirect-edit\\\" href=\\\"#eps-redirect-edit\\\" data-id=\\\"218\\\">Edit<\\/a>\\r\\n    <a class=\\\"button eps-redirect-remove\\\" href=\\\"http:\\/\\/web\\/wp-admin\\/options-general.php?page=eps_redirects&amp;delete_redirect=218\\\"\\r\\n      data-id=\\\"218\\\">Delete<\\/a>\\r\\n  <\\/td>\\r\\n<\\/tr>\\r\\n\",\"redirect_id\":218}",
+      "response.body.length": 1531,
+      "response.headers": {
+        "Date": "Tue, 18 Aug 2026 23:55:03 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Vary": "Accept-Encoding",
+        "Content-Length": "1531",
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 334.852,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787097257-4b5bc79f-6aec-4c81-951b-f868644f0160",
+      "paths": [
+        "/var/www/html/wp-content/plugins/eps-301-redirects/libs/eps-plugin-options.php::::104_116_128_130_132_133_134_135_136_139_14_151_174_176_178_179_18_180_184_187_46_47_48_49_50_51_521_58",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/class.drop-down-pages.php::::14_18_83",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/eps-form-elements.php::::100_102_109_20_224_77_78",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/wf-flyout/wf-flyout.php::::168_20_21_22_24_27_29_34_35_37_50_51_52_55_56_73_74_75_76_9",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/plugin.php::::11_356_359_367_389_390_394_396_400_424_473_50_51_53_54_56_57_59_60_63_64_65_66_67_68_69_70_71_72_75_76_796_802_806_825_826_827_858_859_861_904_905",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/eps-301-redirects.php::::1008_32_36_38_39_40_42_43_45_46_47_48_50_51_53_54_55_637_639_643_644_645_646_647_648_651_653_656_657_659_660_661_662_663_664_665_666_667_668_671_70_704_706_707_708_711_713_716_721_722_723_724_725_728_73_731_732_750_77_78_79_795_796_80_81_82_83_84_92_987_995",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/templates/template.redirect-entry.php::::12_17_20_21_23_26_27_30_31_32_33_37_38_39_41_42_43_47_52_57",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/wf-flyout/config.php::::10_11_12_14_2_22_4_5_6_7_8_9"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "WebFuzzXSSVulnCheck"
+      ],
+      "score": 8,
+      "is_interesting": false,
+      "fuzzer_id": "1",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "url_to"
+    }
+  ],
+  "PathTraversal": [
+    {
+      "coverage_id": "1787097326-eb250b08-5b05-4de5-abb7-524506b1be3b",
+      "priority": 8,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "eps_redirect_save"
+        },
+        "body_params": {
+          "status": "fuzz<a href='javascript:alert(0xdeadbeef)'"
+        }
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "url_to": "4",
+          "url_from": "fuzz",
+          "id": "fuzz"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": [
+        {
+          "errno": 2,
+          "errstr": "Attempt to read property \"url_from\" on null",
+          "errfile": "/var/www/html/wp-content/plugins/eps-301-redirects/eps-301-redirects.php",
+          "errline": 660
+        },
+        {
+          "errno": 8192,
+          "errstr": "urldecode(): Passing null to parameter #1 ($string) of type string is deprecated",
+          "errfile": "/var/www/html/wp-content/plugins/eps-301-redirects/eps-301-redirects.php",
+          "errline": 660
+        },
+        {
+          "errno": 2,
+          "errstr": "Attempt to read property \"url_to\" on null",
+          "errfile": "/var/www/html/wp-content/plugins/eps-301-redirects/eps-301-redirects.php",
+          "errline": 661
+        },
+        {
+          "errno": 8192,
+          "errstr": "urldecode(): Passing null to parameter #1 ($string) of type string is deprecated",
+          "errfile": "/var/www/html/wp-content/plugins/eps-301-redirects/eps-301-redirects.php",
+          "errline": 661
+        },
+        {
+          "errno": 2,
+          "errstr": "Attempt to read property \"id\" on null",
+          "errfile": "/var/www/html/wp-content/plugins/eps-301-redirects/templates/template.redirect-entry.php",
+          "errline": 17
+        },
+        {
+          "errno": 2,
+          "errstr": "Attempt to read property \"status\" on null",
+          "errfile": "/var/www/html/wp-content/plugins/eps-301-redirects/templates/template.redirect-entry.php",
+          "errline": 20
+        },
+        {
+          "errno": 2,
+          "errstr": "Attempt to read property \"id\" on null",
+          "errfile": "/var/www/html/wp-content/plugins/eps-301-redirects/templates/template.redirect-entry.php",
+          "errline": 20
+        },
+        {
+          "errno": 2,
+          "errstr": "Attempt to read property \"id\" on null",
+          "errfile": "/var/www/html/wp-content/plugins/eps-301-redirects/templates/template.redirect-entry.php",
+          "errline": 21
+        },
+        {
+          "errno": 2,
+          "errstr": "Attempt to read property \"status\" on null",
+          "errfile": "/var/www/html/wp-content/plugins/eps-301-redirects/templates/template.redirect-entry.php",
+          "errline": 21
+        },
+        {
+          "errno": 2,
+          "errstr": "Attempt to read property \"id\" on null",
+          "errfile": "/var/www/html/wp-content/plugins/eps-301-redirects/templates/template.redirect-entry.php",
+          "errline": 23
+        },
+        {
+          "errno": 2,
+          "errstr": "Attempt to read property \"status\" on null",
+          "errfile": "/var/www/html/wp-content/plugins/eps-301-redirects/templates/template.redirect-entry.php",
+          "errline": 30
+        },
+        {
+          "errno": 2,
+          "errstr": "Attempt to read property \"status\" on null",
+          "errfile": "/var/www/html/wp-content/plugins/eps-301-redirects/templates/template.redirect-entry.php",
+          "errline": 30
+        },
+        {
+          "errno": 2,
+          "errstr": "Attempt to read property \"count\" on null",
+          "errfile": "/var/www/html/wp-content/plugins/eps-301-redirects/templates/template.redirect-entry.php",
+          "errline": 39
+        },
+        {
+          "errno": 8192,
+          "errstr": "number_format(): Passing null to parameter #1 ($num) of type float is deprecated",
+          "errfile": "/var/www/html/wp-content/plugins/eps-301-redirects/templates/template.redirect-entry.php",
+          "errline": 39
+        },
+        {
+          "errno": 2,
+          "errstr": "Attempt to read property \"id\" on null",
+          "errfile": "/var/www/html/wp-content/plugins/eps-301-redirects/templates/template.redirect-entry.php",
+          "errline": 41
+        },
+        {
+          "errno": 2,
+          "errstr": "Attempt to read property \"id\" on null",
+          "errfile": "/var/www/html/wp-content/plugins/eps-301-redirects/templates/template.redirect-entry.php",
+          "errline": 43
+        }
+      ],
+      "exceptions": null,
+      "response_body": "\n{\"html\":\"<tr class=\\\"redirect-entry  id-\\\"\\r\\n  data-id=\\\"\\\" data-status=\\\"\\\">\\r\\n  <td>\\r\\n    <p class=\\\"eps-grey-text eps-text-center eps-small\\\"><\\/p>\\r\\n  <\\/td>\\r\\n  <td>\\r\\n    <a target=\\\"_blank\\\" class=\\\"eps-url\\\" href=\\\"http:\\/\\/web\\/\\\"\\r\\n      title=\\\"http:\\/\\/web\\/\\\">\\r\\n      <span class=\\\"eps-url-root eps-url-startcap\\\">\\r\\n        <\\/span><span\\r\\n        class=\\\"eps-url-root\\\">http:\\/\\/web\\/<\\/span><span class=\\\"eps-url-fragment eps-url-endcap\\\"><\\/span>\\r\\n    <\\/a>\\r\\n  <\\/td>\\r\\n  <td>\\r\\n    <span class=\\\"eps-warning\\\">Invalid Destination URL<\\/span>  <\\/td>\\r\\n  <td class=\\\"redirect-hits\\\" nowrap><strong>0<\\/strong> <a class=\\\"open-301-pro-dialog pro-feature\\\" data-pro-feature=\\\"redirect-rules-chart-icon-0\\\" href=\\\"#\\\"><span class=\\\"dashicons dashicons-chart-area\\\"><\\/span><\\/a><\\/td>\\r\\n  <td class=\\\"redirect-actions\\\">\\r\\n    <a class=\\\"button eps-redirect-edit\\\" href=\\\"#eps-redirect-edit\\\" data-id=\\\"\\\">Edit<\\/a>\\r\\n    <a class=\\\"button eps-redirect-remove\\\" href=\\\"http:\\/\\/web\\/wp-admin\\/options-general.php?page=eps_redirects&amp;delete_redirect\\\"\\r\\n      data-id=\\\"\\\">Delete<\\/a>\\r\\n  <\\/td>\\r\\n<\\/tr>\\r\\n\",\"redirect_id\":0}",
+      "response.body.length": 1168,
+      "response.headers": {
+        "Date": "Tue, 18 Aug 2026 23:55:26 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Vary": "Accept-Encoding",
+        "Content-Length": "1168",
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 506.686,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787097299-cdce0f6c-9c90-4e22-840f-b86b1055d73d",
+      "paths": [
+        "/var/www/html/wp-content/plugins/eps-301-redirects/libs/eps-plugin-options.php::::104_116_128_130_132_133_134_135_136_139_14_151_174_176_178_179_18_180_184_187_46_47_48_49_50_51_521_58",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/class.drop-down-pages.php::::14_18_83",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/eps-form-elements.php::::107_109_20_224_77",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/plugin.php::::11_356_359_367_389_390_394_396_400_424_473_50_51_53_54_56_57_59_60_63_64_65_66_67_68_69_70_71_72_75_76_796_802_806_825_826_827_858_859_861_904_905",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/wf-flyout/wf-flyout.php::::168_20_21_22_24_27_29_34_35_37_50_51_52_55_56_73_74_75_76_9",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/eps-301-redirects.php::::1008_32_36_38_39_40_42_43_45_46_47_48_50_51_53_54_55_637_639_643_644_645_646_647_648_651_653_656_657_659_660_661_662_663_664_665_666_667_668_671_70_704_706_707_708_711_713_716_721_722_723_724_725_728_73_731_732_750_77_78_79_795_796_80_81_82_83_84_92_987_995",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/templates/template.redirect-entry.php::::12_17_20_21_23_26_27_30_31_32_33_37_38_39_41_42_43_47_52_57",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/wf-flyout/config.php::::10_11_12_14_2_22_4_5_6_7_8_9"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 8,
+      "is_interesting": false,
+      "fuzzer_id": "1",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "url_to"
+    },
+    {
+      "coverage_id": "1787097326-eb250b08-5b05-4de5-abb7-524506b1be3b",
+      "priority": 8,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "eps_redirect_save"
+        },
+        "body_params": {
+          "status": "fuzz<a href='javascript:alert(0xdeadbeef)'"
+        }
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "url_to": "4",
+          "url_from": "fuzz",
+          "id": "fuzz"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": [
+        {
+          "errno": 2,
+          "errstr": "Attempt to read property \"url_from\" on null",
+          "errfile": "/var/www/html/wp-content/plugins/eps-301-redirects/eps-301-redirects.php",
+          "errline": 660
+        },
+        {
+          "errno": 8192,
+          "errstr": "urldecode(): Passing null to parameter #1 ($string) of type string is deprecated",
+          "errfile": "/var/www/html/wp-content/plugins/eps-301-redirects/eps-301-redirects.php",
+          "errline": 660
+        },
+        {
+          "errno": 2,
+          "errstr": "Attempt to read property \"url_to\" on null",
+          "errfile": "/var/www/html/wp-content/plugins/eps-301-redirects/eps-301-redirects.php",
+          "errline": 661
+        },
+        {
+          "errno": 8192,
+          "errstr": "urldecode(): Passing null to parameter #1 ($string) of type string is deprecated",
+          "errfile": "/var/www/html/wp-content/plugins/eps-301-redirects/eps-301-redirects.php",
+          "errline": 661
+        },
+        {
+          "errno": 2,
+          "errstr": "Attempt to read property \"id\" on null",
+          "errfile": "/var/www/html/wp-content/plugins/eps-301-redirects/templates/template.redirect-entry.php",
+          "errline": 17
+        },
+        {
+          "errno": 2,
+          "errstr": "Attempt to read property \"status\" on null",
+          "errfile": "/var/www/html/wp-content/plugins/eps-301-redirects/templates/template.redirect-entry.php",
+          "errline": 20
+        },
+        {
+          "errno": 2,
+          "errstr": "Attempt to read property \"id\" on null",
+          "errfile": "/var/www/html/wp-content/plugins/eps-301-redirects/templates/template.redirect-entry.php",
+          "errline": 20
+        },
+        {
+          "errno": 2,
+          "errstr": "Attempt to read property \"id\" on null",
+          "errfile": "/var/www/html/wp-content/plugins/eps-301-redirects/templates/template.redirect-entry.php",
+          "errline": 21
+        },
+        {
+          "errno": 2,
+          "errstr": "Attempt to read property \"status\" on null",
+          "errfile": "/var/www/html/wp-content/plugins/eps-301-redirects/templates/template.redirect-entry.php",
+          "errline": 21
+        },
+        {
+          "errno": 2,
+          "errstr": "Attempt to read property \"id\" on null",
+          "errfile": "/var/www/html/wp-content/plugins/eps-301-redirects/templates/template.redirect-entry.php",
+          "errline": 23
+        },
+        {
+          "errno": 2,
+          "errstr": "Attempt to read property \"status\" on null",
+          "errfile": "/var/www/html/wp-content/plugins/eps-301-redirects/templates/template.redirect-entry.php",
+          "errline": 30
+        },
+        {
+          "errno": 2,
+          "errstr": "Attempt to read property \"status\" on null",
+          "errfile": "/var/www/html/wp-content/plugins/eps-301-redirects/templates/template.redirect-entry.php",
+          "errline": 30
+        },
+        {
+          "errno": 2,
+          "errstr": "Attempt to read property \"count\" on null",
+          "errfile": "/var/www/html/wp-content/plugins/eps-301-redirects/templates/template.redirect-entry.php",
+          "errline": 39
+        },
+        {
+          "errno": 8192,
+          "errstr": "number_format(): Passing null to parameter #1 ($num) of type float is deprecated",
+          "errfile": "/var/www/html/wp-content/plugins/eps-301-redirects/templates/template.redirect-entry.php",
+          "errline": 39
+        },
+        {
+          "errno": 2,
+          "errstr": "Attempt to read property \"id\" on null",
+          "errfile": "/var/www/html/wp-content/plugins/eps-301-redirects/templates/template.redirect-entry.php",
+          "errline": 41
+        },
+        {
+          "errno": 2,
+          "errstr": "Attempt to read property \"id\" on null",
+          "errfile": "/var/www/html/wp-content/plugins/eps-301-redirects/templates/template.redirect-entry.php",
+          "errline": 43
+        }
+      ],
+      "exceptions": null,
+      "response_body": "\n{\"html\":\"<tr class=\\\"redirect-entry  id-\\\"\\r\\n  data-id=\\\"\\\" data-status=\\\"\\\">\\r\\n  <td>\\r\\n    <p class=\\\"eps-grey-text eps-text-center eps-small\\\"><\\/p>\\r\\n  <\\/td>\\r\\n  <td>\\r\\n    <a target=\\\"_blank\\\" class=\\\"eps-url\\\" href=\\\"http:\\/\\/web\\/\\\"\\r\\n      title=\\\"http:\\/\\/web\\/\\\">\\r\\n      <span class=\\\"eps-url-root eps-url-startcap\\\">\\r\\n        <\\/span><span\\r\\n        class=\\\"eps-url-root\\\">http:\\/\\/web\\/<\\/span><span class=\\\"eps-url-fragment eps-url-endcap\\\"><\\/span>\\r\\n    <\\/a>\\r\\n  <\\/td>\\r\\n  <td>\\r\\n    <span class=\\\"eps-warning\\\">Invalid Destination URL<\\/span>  <\\/td>\\r\\n  <td class=\\\"redirect-hits\\\" nowrap><strong>0<\\/strong> <a class=\\\"open-301-pro-dialog pro-feature\\\" data-pro-feature=\\\"redirect-rules-chart-icon-0\\\" href=\\\"#\\\"><span class=\\\"dashicons dashicons-chart-area\\\"><\\/span><\\/a><\\/td>\\r\\n  <td class=\\\"redirect-actions\\\">\\r\\n    <a class=\\\"button eps-redirect-edit\\\" href=\\\"#eps-redirect-edit\\\" data-id=\\\"\\\">Edit<\\/a>\\r\\n    <a class=\\\"button eps-redirect-remove\\\" href=\\\"http:\\/\\/web\\/wp-admin\\/options-general.php?page=eps_redirects&amp;delete_redirect\\\"\\r\\n      data-id=\\\"\\\">Delete<\\/a>\\r\\n  <\\/td>\\r\\n<\\/tr>\\r\\n\",\"redirect_id\":0}",
+      "response.body.length": 1168,
+      "response.headers": {
+        "Date": "Tue, 18 Aug 2026 23:55:26 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Vary": "Accept-Encoding",
+        "Content-Length": "1168",
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 506.686,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787097299-cdce0f6c-9c90-4e22-840f-b86b1055d73d",
+      "paths": [
+        "/var/www/html/wp-content/plugins/eps-301-redirects/libs/eps-plugin-options.php::::104_116_128_130_132_133_134_135_136_139_14_151_174_176_178_179_18_180_184_187_46_47_48_49_50_51_521_58",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/class.drop-down-pages.php::::14_18_83",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/eps-form-elements.php::::107_109_20_224_77",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/plugin.php::::11_356_359_367_389_390_394_396_400_424_473_50_51_53_54_56_57_59_60_63_64_65_66_67_68_69_70_71_72_75_76_796_802_806_825_826_827_858_859_861_904_905",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/wf-flyout/wf-flyout.php::::168_20_21_22_24_27_29_34_35_37_50_51_52_55_56_73_74_75_76_9",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/eps-301-redirects.php::::1008_32_36_38_39_40_42_43_45_46_47_48_50_51_53_54_55_637_639_643_644_645_646_647_648_651_653_656_657_659_660_661_662_663_664_665_666_667_668_671_70_704_706_707_708_711_713_716_721_722_723_724_725_728_73_731_732_750_77_78_79_795_796_80_81_82_83_84_92_987_995",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/templates/template.redirect-entry.php::::12_17_20_21_23_26_27_30_31_32_33_37_38_39_41_42_43_47_52_57",
+        "/var/www/html/wp-content/plugins/eps-301-redirects/wf-flyout/config.php::::10_11_12_14_2_22_4_5_6_7_8_9"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 8,
+      "is_interesting": false,
+      "fuzzer_id": "1",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "url_to"
+    }
+  ]
+}

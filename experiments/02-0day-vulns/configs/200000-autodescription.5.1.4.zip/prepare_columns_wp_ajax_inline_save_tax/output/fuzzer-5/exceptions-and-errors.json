@@ -1,0 +1,329 @@
+[
+  {
+    "coverage_id": "1786938408-0b94a21b-c368-47c0-8364-f3ba640370a3",
+    "priority": 19,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "inline-save-tax"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "tax_ID": "fbzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n0",
+    "response.body.length": 2,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 03:46:50 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "2",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 160.256,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786938407-85a72fe0-84e9-487b-8095-c8081eb014fc",
+    "paths": [
+      "/var/www/html/wp-content/plugins/autodescription/inc/functions/api.php::::235_237_238_251_259_260_261_403_406_408_409_410_413_416_417_419_527_7_76",
+      "/var/www/html/wp-content/plugins/autodescription/bootstrap/init-admin-ajax.php::::36_39_42_45_48_51_54_55_9",
+      "/var/www/html/wp-content/plugins/autodescription/inc/traits/property-refresher.trait.php::::103_66_68_69_70_9",
+      "/var/www/html/wp-content/plugins/autodescription/inc/classes/helper/query/cache.class.php::::107_110_113_116_120_182_69_70_72_9",
+      "/var/www/html/wp-content/plugins/autodescription/inc/classes/admin/settings/listedit.class.php::::62_638_64_65_66_9",
+      "/var/www/html/wp-content/plugins/autodescription/inc/classes/data/blog.class.php::::189_191_203_216_217_218_222_9",
+      "/var/www/html/wp-content/plugins/autodescription/inc/classes/admin/seobar/listtable.class.php::::179_56_57_9",
+      "/var/www/html/wp-content/plugins/autodescription/inc/classes/data/plugin.class.php::::105_108_110_121_122_123_127_129_241_88_9_90_91_93",
+      "/var/www/html/wp-content/plugins/autodescription/inc/classes/data/admin/plugin.class.php::::228_57_58_59_61_64_9",
+      "/var/www/html/wp-content/plugins/autodescription/bootstrap/define.php::::105_114_122_129_136_143_150_157_164_171_178_203_32_45_46_59_60_69_70_78_79_8_89_97",
+      "/var/www/html/wp-content/plugins/autodescription/bootstrap/init-global.php::::34_35_36_37_41_45_48_51_52_9",
+      "/var/www/html/wp-content/plugins/autodescription/autodescription.php::::150_30_56_65_72_79_82_85_88_95",
+      "/var/www/html/wp-content/plugins/autodescription/bootstrap/init-admin.php::::101_102_103_110_111_112_113_114_117_119_120_121_124_126_127_128_131_132_135_137_140_143_146_147_148_153_154_155_157_158_159_160_161_163_35_37_38_41_42_43_44_46_48_49_52_53_54_55_58_59_61_63_65_66_67_68_72_73_74_77_80_81_84_86_88_9_91_93",
+      "/var/www/html/wp-content/plugins/autodescription/bootstrap/load.php::::101_103_104_114_137_138_162_165_167_169_171_172_174_175_179_180_182_184_187_190_191_193_227_228_230_29_31_32_33_50_51_54_56_58_63_70_72_9_90_92_94_99",
+      "/var/www/html/wp-content/plugins/autodescription/bootstrap/init-compat.php::::29_31_35_43_45_57_63_9",
+      "/var/www/html/wp-content/plugins/autodescription/inc/classes/helper/post-type.class.php::::352_87_9_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/autodescription/inc/classes/admin/lists/table.class.php::::158_159_160_163_164_219_220_223_224_226_230_231_330_79_8_82_83_84_85",
+      "/var/www/html/wp-content/plugins/autodescription/inc/classes/helper/query.class.php::::1330_246_247_248_249_250_88_9",
+      "/var/www/html/wp-content/plugins/autodescription/inc/classes/admin/notice/persistent.class.php::::245_247_265_9"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 19,
+    "is_interesting": false,
+    "fuzzer_id": "5",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "tax_ID"
+  },
+  {
+    "coverage_id": "1786938410-037d13a9-a8ae-4f69-a2e7-4d0dcc899eac",
+    "priority": 19,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "inline-save-tax"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "tax_ID": "https://testytesttestestestest.com/hahahaha.jpg"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n0",
+    "response.body.length": 2,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 03:46:51 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "2",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 971.876,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786938407-85a72fe0-84e9-487b-8095-c8081eb014fc",
+    "paths": [
+      "/var/www/html/wp-content/plugins/autodescription/inc/functions/api.php::::235_237_238_251_259_260_261_403_406_408_409_410_413_416_417_419_527_7_76",
+      "/var/www/html/wp-content/plugins/autodescription/bootstrap/init-admin-ajax.php::::36_39_42_45_48_51_54_55_9",
+      "/var/www/html/wp-content/plugins/autodescription/inc/traits/property-refresher.trait.php::::103_66_68_69_70_9",
+      "/var/www/html/wp-content/plugins/autodescription/inc/classes/helper/query/cache.class.php::::107_110_113_116_120_182_69_70_72_9",
+      "/var/www/html/wp-content/plugins/autodescription/inc/classes/admin/settings/listedit.class.php::::62_638_64_65_66_9",
+      "/var/www/html/wp-content/plugins/autodescription/inc/classes/data/blog.class.php::::189_191_203_216_217_218_222_9",
+      "/var/www/html/wp-content/plugins/autodescription/inc/classes/admin/seobar/listtable.class.php::::179_56_57_9",
+      "/var/www/html/wp-content/plugins/autodescription/inc/classes/data/plugin.class.php::::105_108_110_121_122_123_127_129_241_88_9_90_91_93",
+      "/var/www/html/wp-content/plugins/autodescription/inc/classes/data/admin/plugin.class.php::::228_57_58_59_61_64_9",
+      "/var/www/html/wp-content/plugins/autodescription/bootstrap/define.php::::105_114_122_129_136_143_150_157_164_171_178_203_32_45_46_59_60_69_70_78_79_8_89_97",
+      "/var/www/html/wp-content/plugins/autodescription/bootstrap/init-global.php::::34_35_36_37_41_45_48_51_52_9",
+      "/var/www/html/wp-content/plugins/autodescription/autodescription.php::::150_30_56_65_72_79_82_85_88_95",
+      "/var/www/html/wp-content/plugins/autodescription/bootstrap/init-admin.php::::101_102_103_110_111_112_113_114_117_119_120_121_124_126_127_128_131_132_135_137_140_143_146_147_148_153_154_155_157_158_159_160_161_163_35_37_38_41_42_43_44_46_48_49_52_53_54_55_58_59_61_63_65_66_67_68_72_73_74_77_80_81_84_86_88_9_91_93",
+      "/var/www/html/wp-content/plugins/autodescription/bootstrap/load.php::::101_103_104_114_137_138_162_165_167_169_171_172_174_175_179_180_182_184_187_190_191_193_227_228_230_29_31_32_33_50_51_54_56_58_63_70_72_9_90_92_94_99",
+      "/var/www/html/wp-content/plugins/autodescription/bootstrap/init-compat.php::::29_31_35_43_45_57_63_9",
+      "/var/www/html/wp-content/plugins/autodescription/inc/classes/helper/post-type.class.php::::352_87_9_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/autodescription/inc/classes/admin/lists/table.class.php::::158_159_160_163_164_219_220_223_224_226_230_231_330_79_8_82_83_84_85",
+      "/var/www/html/wp-content/plugins/autodescription/inc/classes/helper/query.class.php::::1330_246_247_248_249_250_88_9",
+      "/var/www/html/wp-content/plugins/autodescription/inc/classes/admin/notice/persistent.class.php::::245_247_265_9"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 19,
+    "is_interesting": false,
+    "fuzzer_id": "5",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "tax_ID"
+  },
+  {
+    "coverage_id": "1786938411-221b1306-cf91-499b-b379-76daf9d63483",
+    "priority": 19,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "inline-save-tax"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "tax_ID": "f8zz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n0",
+    "response.body.length": 2,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 03:46:52 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "2",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 912.401,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786938407-85a72fe0-84e9-487b-8095-c8081eb014fc",
+    "paths": [
+      "/var/www/html/wp-content/plugins/autodescription/inc/functions/api.php::::235_237_238_251_259_260_261_403_406_408_409_410_413_416_417_419_527_7_76",
+      "/var/www/html/wp-content/plugins/autodescription/bootstrap/init-admin-ajax.php::::36_39_42_45_48_51_54_55_9",
+      "/var/www/html/wp-content/plugins/autodescription/inc/traits/property-refresher.trait.php::::103_66_68_69_70_9",
+      "/var/www/html/wp-content/plugins/autodescription/inc/classes/helper/query/cache.class.php::::107_110_113_116_120_182_69_70_72_9",
+      "/var/www/html/wp-content/plugins/autodescription/inc/classes/admin/settings/listedit.class.php::::62_638_64_65_66_9",
+      "/var/www/html/wp-content/plugins/autodescription/inc/classes/data/blog.class.php::::189_191_203_216_217_218_222_9",
+      "/var/www/html/wp-content/plugins/autodescription/inc/classes/admin/seobar/listtable.class.php::::179_56_57_9",
+      "/var/www/html/wp-content/plugins/autodescription/inc/classes/data/plugin.class.php::::105_108_110_121_122_123_127_129_241_88_9_90_91_93",
+      "/var/www/html/wp-content/plugins/autodescription/inc/classes/data/admin/plugin.class.php::::228_57_58_59_61_64_9",
+      "/var/www/html/wp-content/plugins/autodescription/bootstrap/define.php::::105_114_122_129_136_143_150_157_164_171_178_203_32_45_46_59_60_69_70_78_79_8_89_97",
+      "/var/www/html/wp-content/plugins/autodescription/bootstrap/init-global.php::::34_35_36_37_41_45_48_51_52_9",
+      "/var/www/html/wp-content/plugins/autodescription/autodescription.php::::150_30_56_65_72_79_82_85_88_95",
+      "/var/www/html/wp-content/plugins/autodescription/bootstrap/init-admin.php::::101_102_103_110_111_112_113_114_117_119_120_121_124_126_127_128_131_132_135_137_140_143_146_147_148_153_154_155_157_158_159_160_161_163_35_37_38_41_42_43_44_46_48_49_52_53_54_55_58_59_61_63_65_66_67_68_72_73_74_77_80_81_84_86_88_9_91_93",
+      "/var/www/html/wp-content/plugins/autodescription/bootstrap/load.php::::101_103_104_114_137_138_162_165_167_169_171_172_174_175_179_180_182_184_187_190_191_193_227_228_230_29_31_32_33_50_51_54_56_58_63_70_72_9_90_92_94_99",
+      "/var/www/html/wp-content/plugins/autodescription/bootstrap/init-compat.php::::29_31_35_43_45_57_63_9",
+      "/var/www/html/wp-content/plugins/autodescription/inc/classes/helper/post-type.class.php::::352_87_9_95_96_97_98_99",
+      "/var/www/html/wp-content/plugins/autodescription/inc/classes/admin/lists/table.class.php::::158_159_160_163_164_219_220_223_224_226_230_231_330_79_8_82_83_84_85",
+      "/var/www/html/wp-content/plugins/autodescription/inc/classes/helper/query.class.php::::1330_246_247_248_249_250_88_9",
+      "/var/www/html/wp-content/plugins/autodescription/inc/classes/admin/notice/persistent.class.php::::245_247_265_9"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 19,
+    "is_interesting": false,
+    "fuzzer_id": "5",
+    "is_initial_candidate": false,
+    "mutated_param_type": "body_params",
+    "mutated_param_name": "tax_ID"
+  },
+  {
+    "coverage_id": "1786938412-9507d8e4-08d6-4e45-9c14-bf2f64cbe7a1",
+    "priority": 19,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "action": "inline-save-tax"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {},
+      "body_params": {
+        "tax_ID": "_uzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 2,
+        "errstr": "mysqli_query(): (00000/0): No index used in query/prepared statement SELECT option_name, option_value FROM wp_options WHERE autoload = 'yes'",
+        "errfile": "/var/www/fuzzer/overrides.d/02_mysql.php",
+        "errline": 13
+      }
+    ],
+    "exceptions": null,
+    "response_body": "\n0",
+    "response.body.length": 2,
+    "response.headers": {
+      "Date": "Mon, 17 Aug 2026 03:46:52 GMT",
+      "Server": "Apache/2.4.57 (Debian)",
+      "X-Powered-By": "PHP/8.2.10",
+      "X-Robots-Tag": "noindex",
+      "X-Content-Type-Options": "nosniff",
+      "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+      "Cache-Control": "no-cache, must-revalidate, max-age=0",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Length": "2",
+      "Content-Type": "text/html; charset=UTF-8"
+    },
+    "response.status.code": 200,
+    "response.time": 392.294,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1786938407-85a72fe0-84e9-487b-8095-c8081eb014fc",
+    "paths": [
+      "/var/www/html/wp-content/plugins/autodescription/inc/functions/api.php::::235_237_238_251_259_260_261_403_406_408_409_410_413_416_417_419_527_7_76"

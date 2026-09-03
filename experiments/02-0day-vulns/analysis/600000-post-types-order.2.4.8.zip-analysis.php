@@ -5,9 +5,79 @@
 *Found functions:2
 *Extracted functions:2
 *Total parameter names extracted: 2
-*Overview: {'saveArchiveAjaxOrder': {'update-custom-type-order-archive'}, 'saveAjaxOrder': {'update-custom-type-order'}}
+*Overview: {'saveAjaxOrder': {'update-custom-type-order'}, 'saveArchiveAjaxOrder': {'update-custom-type-order-archive'}}
 *
 ***/
+
+/** Function saveAjaxOrder() called by wp_ajax hooks: {'update-custom-type-order'} **/
+/** Parameters found in function saveAjaxOrder(): {"post": ["interface_sort_nonce", "order"]} **/
+function saveAjaxOrder() 
+                {
+                    
+                    set_time_limit(600);
+                    
+                    global $wpdb;
+                    
+                    $nonce      =   $_POST['interface_sort_nonce'];
+                    
+                    //verify the nonce
+                    if (! wp_verify_nonce( $nonce, 'interface_sort_nonce') )
+                        die();
+                        
+                    if ( ! current_user_can( $this->functions->get_required_capability( ) ) )
+                        die();
+                    
+                    parse_str( sanitize_text_field( wp_unslash( $_POST['order'] ) ) , $data );
+                    
+                    if (is_array($data))
+                        {
+                            foreach($data as $key => $values ) 
+                                {
+                                    if ( $key === 'item' ) 
+                                        {
+                                            foreach( $values as $position => $id ) 
+                                                {
+                                                    //sanitize
+                                                    $id =   intval ( $id ); 
+                                                    
+                                                    $data = array('menu_order' => $position);
+                                                    
+                                                    //Deprecated, rely on pto/save-ajax-order
+                                                    $data = apply_filters('post-types-order_save-ajax-order', $data, $key, $id);
+                                                    
+                                                    $data = apply_filters('pto/save-ajax-order', $data, $key, $id);
+                                                    
+                                                    $wpdb->update( $wpdb->posts, $data, array('ID' => $id) );
+                                                } 
+                                        } 
+                                    else 
+                                        {
+                                            foreach( $values as $position => $id ) 
+                                                {
+                                                    
+                                                    //sanitize
+                                                    $id =   intval ( $id );
+                                                    
+                                                    $data = array('menu_order' => $position, 'post_parent' => str_replace('item_', '', $key));
+                                                    
+                                                    //Deprecated, rely on pto/save-ajax-order 
+                                                    $data = apply_filters('post-types-order_save-ajax-order', $data, $key, $id);
+                                                    
+                                                    $data = apply_filters('pto/save-ajax-order', $data, $key, $id);
+                                                    
+                                                    $wpdb->update( $wpdb->posts, $data, array('ID' => $id) );
+                                                }
+                                        }
+                                }
+                            
+                        }
+                        
+                    //trigger action completed
+                    do_action('PTO/order_update_complete');
+                    
+                    CptoFunctions::site_cache_clear();
+                }
+
 
 /** Function saveArchiveAjaxOrder() called by wp_ajax hooks: {'update-custom-type-order-archive'} **/
 /** Parameters found in function saveArchiveAjaxOrder(): {"post": ["post_type", "paged", "archive_sort_nonce", "order"]} **/
@@ -91,76 +161,6 @@ function saveArchiveAjaxOrder()
                     do_action('PTO/order_update_complete');
                     
                     CptoFunctions::site_cache_clear();                
-                }
-
-
-/** Function saveAjaxOrder() called by wp_ajax hooks: {'update-custom-type-order'} **/
-/** Parameters found in function saveAjaxOrder(): {"post": ["interface_sort_nonce", "order"]} **/
-function saveAjaxOrder() 
-                {
-                    
-                    set_time_limit(600);
-                    
-                    global $wpdb;
-                    
-                    $nonce      =   $_POST['interface_sort_nonce'];
-                    
-                    //verify the nonce
-                    if (! wp_verify_nonce( $nonce, 'interface_sort_nonce') )
-                        die();
-                        
-                    if ( ! current_user_can( $this->functions->get_required_capability( ) ) )
-                        die();
-                    
-                    parse_str( sanitize_text_field( wp_unslash( $_POST['order'] ) ) , $data );
-                    
-                    if (is_array($data))
-                        {
-                            foreach($data as $key => $values ) 
-                                {
-                                    if ( $key === 'item' ) 
-                                        {
-                                            foreach( $values as $position => $id ) 
-                                                {
-                                                    //sanitize
-                                                    $id =   intval ( $id ); 
-                                                    
-                                                    $data = array('menu_order' => $position);
-                                                    
-                                                    //Deprecated, rely on pto/save-ajax-order
-                                                    $data = apply_filters('post-types-order_save-ajax-order', $data, $key, $id);
-                                                    
-                                                    $data = apply_filters('pto/save-ajax-order', $data, $key, $id);
-                                                    
-                                                    $wpdb->update( $wpdb->posts, $data, array('ID' => $id) );
-                                                } 
-                                        } 
-                                    else 
-                                        {
-                                            foreach( $values as $position => $id ) 
-                                                {
-                                                    
-                                                    //sanitize
-                                                    $id =   intval ( $id );
-                                                    
-                                                    $data = array('menu_order' => $position, 'post_parent' => str_replace('item_', '', $key));
-                                                    
-                                                    //Deprecated, rely on pto/save-ajax-order 
-                                                    $data = apply_filters('post-types-order_save-ajax-order', $data, $key, $id);
-                                                    
-                                                    $data = apply_filters('pto/save-ajax-order', $data, $key, $id);
-                                                    
-                                                    $wpdb->update( $wpdb->posts, $data, array('ID' => $id) );
-                                                }
-                                        }
-                                }
-                            
-                        }
-                        
-                    //trigger action completed
-                    do_action('PTO/order_update_complete');
-                    
-                    CptoFunctions::site_cache_clear();
                 }
 
 

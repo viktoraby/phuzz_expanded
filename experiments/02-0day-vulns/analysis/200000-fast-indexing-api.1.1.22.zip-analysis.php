@@ -5,13 +5,9 @@
 *Found functions:2
 *Extracted functions:2
 *Total parameter names extracted: 1
-*Overview: {'ajax_get_limits': {'rm_giapi_limits'}, 'ajax_rm_giapi': {'rm_giapi'}}
+*Overview: {'ajax_rm_giapi': {'rm_giapi'}, 'ajax_get_limits': {'rm_giapi_limits'}}
 *
 ***/
-
-/** Function ajax_get_limits() called by wp_ajax hooks: {'rm_giapi_limits'} **/
-/** No params detected :-/ **/
-
 
 /** Function ajax_rm_giapi() called by wp_ajax hooks: {'rm_giapi'} **/
 /** Parameters found in function ajax_rm_giapi(): {"post": ["api_action"]} **/
@@ -30,5 +26,9 @@ function ajax_rm_giapi() {
 		wp_send_json( $result );
 		exit();
 	}
+
+
+/** Function ajax_get_limits() called by wp_ajax hooks: {'rm_giapi_limits'} **/
+/** No params detected :-/ **/
 
 

@@ -5,9 +5,36 @@
 *Found functions:3
 *Extracted functions:3
 *Total parameter names extracted: 2
-*Overview: {'wp_headers_and_footers_log_download': {'wpheadersandfooters_log_download'}, 'ajax_resend_verification_email': {'wpb_sdk_resend_verification_email'}, 'ajax_dismiss_verification_notice': {'wpb_sdk_dismiss_verification_notice'}}
+*Overview: {'ajax_dismiss_verification_notice': {'wpb_sdk_dismiss_verification_notice'}, 'wp_headers_and_footers_log_download': {'wpheadersandfooters_log_download'}, 'ajax_resend_verification_email': {'wpb_sdk_resend_verification_email'}}
 *
 ***/
+
+/** Function ajax_dismiss_verification_notice() called by wp_ajax hooks: {'wpb_sdk_dismiss_verification_notice'} **/
+/** Parameters found in function ajax_dismiss_verification_notice(): {"post": ["slug"]} **/
+function ajax_dismiss_verification_notice() {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_die( -1, '', array( 'response' => 403 ) );
+		}
+
+		check_ajax_referer( 'wpb_sdk_dismiss_verification_notice', 'nonce' );
+
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce verified above.
+		$slug = isset( $_POST['slug'] ) ? sanitize_key( wp_unslash( (string) $_POST['slug'] ) ) : '';
+		if ( '' === $slug ) {
+			wp_die( -1 );
+		}
+
+		$user_id = (int) get_current_user_id();
+		if ( $user_id < 1 ) {
+			wp_die( -1 );
+		}
+
+		if ( function_exists( 'wpb_sdk_dismiss_verification_notice' ) ) {
+			wpb_sdk_dismiss_verification_notice( $slug, $user_id );
+		}
+		wp_die();
+	}
+
 
 /** Function wp_headers_and_footers_log_download() called by wp_ajax hooks: {'wpheadersandfooters_log_download'} **/
 /** No params detected :-/ **/
@@ -66,33 +93,6 @@ function ajax_resend_verification_email() {
 				'show_button'    => $copy['show_button'],
 			)
 		);
-	}
-
-
-/** Function ajax_dismiss_verification_notice() called by wp_ajax hooks: {'wpb_sdk_dismiss_verification_notice'} **/
-/** Parameters found in function ajax_dismiss_verification_notice(): {"post": ["slug"]} **/
-function ajax_dismiss_verification_notice() {
-		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_die( -1, '', array( 'response' => 403 ) );
-		}
-
-		check_ajax_referer( 'wpb_sdk_dismiss_verification_notice', 'nonce' );
-
-		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce verified above.
-		$slug = isset( $_POST['slug'] ) ? sanitize_key( wp_unslash( (string) $_POST['slug'] ) ) : '';
-		if ( '' === $slug ) {
-			wp_die( -1 );
-		}
-
-		$user_id = (int) get_current_user_id();
-		if ( $user_id < 1 ) {
-			wp_die( -1 );
-		}
-
-		if ( function_exists( 'wpb_sdk_dismiss_verification_notice' ) ) {
-			wpb_sdk_dismiss_verification_notice( $slug, $user_id );
-		}
-		wp_die();
 	}
 
 

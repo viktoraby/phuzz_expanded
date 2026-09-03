@@ -1,0 +1,143 @@
+[
+  {
+    "coverage_id": "1787142098-6bc7545c-89a9-4bcf-a955-fd29efb0c1ec",
+    "priority": 24,
+    "http_target": "http://web/wp-admin/admin-ajax.php",
+    "http_method": "POST",
+    "fixed_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "_panelsnonce": "fuzz",
+        "action": "so_panels_style_form"
+      },
+      "body_params": {}
+    },
+    "fuzz_params": {
+      "headers": {},
+      "cookies": {},
+      "query_params": {
+        "style": "fuzYz",
+        "postId": "fuzz",
+        "type": "fuzz"
+      },
+      "body_params": {
+        "args": "fuzz"
+      }
+    },
+    "fuzz_weights": {
+      "headers": 0.25,
+      "cookies": 0.25,
+      "query_params": 1,
+      "body_params": 1
+    },
+    "errors": [
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Cookie_Jar::offsetExists($key) should either be compatible with ArrayAccess::offsetExists(mixed $offset): bool, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Cookie/Jar.php",
+        "errline": 63
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Cookie_Jar::offsetGet($key) should either be compatible with ArrayAccess::offsetGet(mixed $offset): mixed, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Cookie/Jar.php",
+        "errline": 73
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Cookie_Jar::offsetSet($key, $value) should either be compatible with ArrayAccess::offsetSet(mixed $offset, mixed $value): void, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Cookie/Jar.php",
+        "errline": 89
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Cookie_Jar::offsetUnset($key) should either be compatible with ArrayAccess::offsetUnset(mixed $offset): void, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Cookie/Jar.php",
+        "errline": 102
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Cookie_Jar::getIterator() should either be compatible with IteratorAggregate::getIterator(): Traversable, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Cookie/Jar.php",
+        "errline": 111
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Utility_CaseInsensitiveDictionary::offsetExists($key) should either be compatible with ArrayAccess::offsetExists(mixed $offset): bool, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Utility/CaseInsensitiveDictionary.php",
+        "errline": 40
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Utility_CaseInsensitiveDictionary::offsetGet($key) should either be compatible with ArrayAccess::offsetGet(mixed $offset): mixed, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Utility/CaseInsensitiveDictionary.php",
+        "errline": 51
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Utility_CaseInsensitiveDictionary::offsetSet($key, $value) should either be compatible with ArrayAccess::offsetSet(mixed $offset, mixed $value): void, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Utility/CaseInsensitiveDictionary.php",
+        "errline": 68
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Utility_CaseInsensitiveDictionary::offsetUnset($key) should either be compatible with ArrayAccess::offsetUnset(mixed $offset): void, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Utility/CaseInsensitiveDictionary.php",
+        "errline": 82
+      },
+      {
+        "errno": 8192,
+        "errstr": "Return type of Requests_Utility_CaseInsensitiveDictionary::getIterator() should either be compatible with IteratorAggregate::getIterator(): Traversable, or the #[\\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice",
+        "errfile": "/var/www/html/wp-includes/Requests/Utility/CaseInsensitiveDictionary.php",
+        "errline": 91
+      }
+    ],
+    "exceptions": null,
+    "response_body": "",
+    "response.body.length": 0,
+    "response.headers": {},
+    "response.status.code": 0,
+    "response.time": 0,
+    "number_of_new_paths": 0,
+    "total_hit": 0,
+    "total_unhit": 0,
+    "hit_count": 0,
+    "new_lines": 0,
+    "parent": "1787141972-6e2a5df5-1d9d-4386-8140-b7115293356d",
+    "paths": [
+      "/var/www/html/wp-content/plugins/siteorigin-panels/compat/layout-block.php::::103_104_107_108_110_41_43_47_50_53_55_57_58_61_62_752_76_88",
+      "/var/www/html/wp-content/plugins/siteorigin-panels/inc/revisions.php::::10_103_11_13_14_15_21_23",
+      "/var/www/html/wp-content/plugins/siteorigin-panels/siteorigin-panels.php::::104_106_107_108_112_117_119_120_124_128_130_136_138_14_140_142_149_151_152_153_154_155_156_157_158_159_16_160_161_164_165_167_17_180_181_182_189_19_192_196_201_204_205_207_21_247_27_30_32_33_34_35_36_38_40_41_42_44_45_47_50_51_53_56_58_59_602_603_604_605_63_67_678_68_680_687_70_74_768_77_778_78_781_782_81_83_84_87_89_90_93_95",
+      "/var/www/html/wp-content/plugins/siteorigin-panels/inc/renderer.php::::10_11_1461_81_83_9",
+      "/var/www/html/wp-content/plugins/siteorigin-panels/inc/styles.php::::12_13_14_1473_17_18_19_20_23_24_25_28_29_30_32_33_34_36_37_38_41_44_45_46_47_48_50_51_54_55_56_57_61_62_63_64_67_69_9",
+      "/var/www/html/wp-content/plugins/siteorigin-panels/inc/admin-widget-dialog.php::::14_16_227_6_7_8",
+      "/var/www/html/wp-content/plugins/siteorigin-panels/inc/widget-shortcode.php::::12_13_137",
+      "/var/www/html/wp-content/plugins/siteorigin-panels/inc/abilities.php::::36_37_40_46_50_51_746",
+      "/var/www/html/wp-content/plugins/siteorigin-panels/inc/ai-exposure.php::::337_55_56_59_63_64",
+      "/var/www/html/wp-content/plugins/siteorigin-panels/inc/widgets/post-loop.php::::21_22_23_25_28_31_652",
+      "/var/www/html/wp-content/plugins/siteorigin-panels/inc/widgets/layout.php::::10_11_13_15_152_19_21",
+      "/var/www/html/wp-content/plugins/siteorigin-panels/inc/admin-layouts.php::::19_21_23_24_25_26_27_28_34_36_777",
+      "/var/www/html/wp-content/plugins/siteorigin-panels/inc/settings.php::::105_106_107_108_109_110_111_112_121_123_125_126_127_14_145_146_147_148_149_15_150_151_152_153_154_155_156_157_16_160_161_162_163_164_167_168_169_170_171_172_173_174_175_176_177_178_179_180_181_184_185_187_19_196_197_20_202_21_24_25_26_27_33_35_39_40_50_52_54_68_70_73_76_77_80_803_83_84",
+      "/var/www/html/wp-content/plugins/siteorigin-panels/inc/admin-dashboard.php::::118_13_15_5_6_7",
+      "/var/www/html/wp-content/plugins/siteorigin-panels/inc/compatibility.php::::10_102_107_11_112_117_12_122_127_13_132_137_142_145_149_152_154_16_18_23_29_30_36_39_43_44_45_49_55_56_62_67_72_77_82_84_88_9_92_97",
+      "/var/www/html/wp-content/plugins/siteorigin-panels/inc/admin-widgets-bundle.php::::12_14_146_6_9",
+      "/var/www/html/wp-content/plugins/siteorigin-panels/inc/home.php::::11_5_56_6_9",
+      "/var/www/html/wp-content/plugins/siteorigin-panels/inc/styles-admin.php::::10_12_13_16_18_25_33_35_36_37_38_39_5_7_8_957_958",
+      "/var/www/html/wp-content/plugins/siteorigin-panels/inc/functions.php::::73_99",
+      "/var/www/html/wp-content/plugins/siteorigin-panels/inc/installer/inc/admin.php::::10_11_12_13_16_18_3_374_375_6_7_8_9",
+      "/var/www/html/wp-content/plugins/siteorigin-panels/compat/admin-asset-conflicts.php::::17_174_19_23_24",
+      "/var/www/html/wp-content/plugins/siteorigin-panels/inc/widgets/post-content.php::::10_104_11_12_14_17",
+      "/var/www/html/wp-content/plugins/siteorigin-panels/inc/installer/siteorigin-installer.php::::101_102_18_19_20_21_24_27_28_29_30_31_34_36_41_42_44_45_46_47_52_53_54_60_61_62_63_66_73_75_91",
+      "/var/www/html/wp-content/plugins/siteorigin-panels/inc/admin.php::::106_117_15_16_17_20_22_2256_23_24_26_29_30_31_32_33_35_36_39_40_41_42_45_46_47_49_52_53_54_55_56_59_60_61_64_67_68_71_74_75_76_77_78_80_81_86_89_90_91_951_952_97_99"
+    ],
+    "new_paths": [],
+    "vulns": [],
+    "score": 24,
+    "is_interesting": false,
+    "fuzzer_id": "10",
+    "is_initial_candidate": false,
+    "mutated_param_type": "query_params",
+    "mutated_param_name": "style"
+  }
+]

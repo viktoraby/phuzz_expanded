@@ -1,0 +1,39 @@
+{
+  "target": "http://web/wp-admin/admin-ajax.php",
+  "methods": [
+    "POST"
+  ],
+  "body_params": {
+    "weight": 1,
+    "fixed": [
+      "nonce"
+    ],
+    "fuzz": [
+      "grid_settings",
+      "wpr_url_params"
+    ],
+    "data": [
+      {
+        "name": "nonce",
+        "value": "fuzz"
+      },
+      {
+        "name": "wpr_url_params",
+        "value": "fuzz"
+      }
+    ]
+  },
+  "query_params": {
+    "weight": 1,
+    "fixed": [
+      "action"
+    ],
+    "fuzz": [],
+    "data": [
+      {
+        "name": "action",
+        "value": "wpr_get_filtered_count_posts"
+      }
+    ]
+  }
+}

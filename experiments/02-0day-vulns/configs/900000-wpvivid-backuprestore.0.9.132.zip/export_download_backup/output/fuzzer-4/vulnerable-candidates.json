@@ -1,0 +1,186 @@
+{
+  "PathTraversal": [
+    {
+      "coverage_id": "1787299335-26cda665-b258-44fa-bfbc-e3510faa901e",
+      "priority": 0,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "wpvivid_export_download_backup"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "backup_options": "fu"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": [
+        {
+          "errno": 2,
+          "errstr": "Trying to access array offset on value of type null",
+          "errfile": "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-migrate.php",
+          "errline": 854
+        },
+        {
+          "errno": 8192,
+          "errstr": "Automatic conversion of false to array is deprecated",
+          "errfile": "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-backup.php",
+          "errline": 133
+        },
+        {
+          "errno": 8192,
+          "errstr": "Automatic conversion of false to array is deprecated",
+          "errfile": "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-backup.php",
+          "errline": 978
+        },
+        {
+          "errno": 2,
+          "errstr": "Undefined array key \"id\"",
+          "errfile": "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-backup.php",
+          "errline": 981
+        }
+      ],
+      "exceptions": null,
+      "response_body": "\n{\"result\":\"success\",\"task_id\":\"wpvivid-6a8806086969b\"",
+      "response.body.length": 54,
+      "response.headers": {
+        "Date": "Fri, 21 Aug 2026 08:02:15 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "54",
+        "Connection": "close",
+        "Content-Encoding": "none",
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 550.635,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787299332-b9c78fde-1603-48a8-844d-7369b8122b38",
+      "paths": {},
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 0,
+      "is_interesting": false,
+      "fuzzer_id": "4",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "backup_options"
+    },
+    {
+      "coverage_id": "1787299335-26cda665-b258-44fa-bfbc-e3510faa901e",
+      "priority": 0,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "wpvivid_export_download_backup"
+        },
+        "body_params": {}
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "backup_options": "fu"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": [
+        {
+          "errno": 2,
+          "errstr": "Trying to access array offset on value of type null",
+          "errfile": "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-migrate.php",
+          "errline": 854
+        },
+        {
+          "errno": 8192,
+          "errstr": "Automatic conversion of false to array is deprecated",
+          "errfile": "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-backup.php",
+          "errline": 133
+        },
+        {
+          "errno": 8192,
+          "errstr": "Automatic conversion of false to array is deprecated",
+          "errfile": "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-backup.php",
+          "errline": 978
+        },
+        {
+          "errno": 2,
+          "errstr": "Undefined array key \"id\"",
+          "errfile": "/var/www/html/wp-content/plugins/wpvivid-backuprestore/includes/class-wpvivid-backup.php",
+          "errline": 981
+        }
+      ],
+      "exceptions": null,
+      "response_body": "\n{\"result\":\"success\",\"task_id\":\"wpvivid-6a8806086969b\"",
+      "response.body.length": 54,
+      "response.headers": {
+        "Date": "Fri, 21 Aug 2026 08:02:15 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "54",
+        "Connection": "close",
+        "Content-Encoding": "none",
+        "Content-Type": "text/html; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 550.635,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787299332-b9c78fde-1603-48a8-844d-7369b8122b38",
+      "paths": {},
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 0,
+      "is_interesting": false,
+      "fuzzer_id": "4",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "backup_options"
+    }
+  ]
+}

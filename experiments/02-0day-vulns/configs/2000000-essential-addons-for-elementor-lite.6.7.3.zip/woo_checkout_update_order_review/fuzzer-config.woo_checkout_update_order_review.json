@@ -1,0 +1,47 @@
+{
+  "target": "http://web/wp-admin/admin-ajax.php",
+  "methods": [
+    "POST"
+  ],
+  "body_params": {
+    "weight": 1,
+    "fixed": [],
+    "fuzz": [
+      "orderReviewData",
+      "shippingData",
+      "post_data",
+      "woocommerce_checkout_update_totals"
+    ],
+    "data": [
+      {
+        "name": "orderReviewData",
+        "value": "fuzz"
+      },
+      {
+        "name": "shippingData",
+        "value": "fuzz"
+      },
+      {
+        "name": "post_data",
+        "value": "fuzz"
+      },
+      {
+        "name": "woocommerce_checkout_update_totals",
+        "value": "fuzz"
+      }
+    ]
+  },
+  "query_params": {
+    "weight": 1,
+    "fixed": [
+      "action"
+    ],
+    "fuzz": [],
+    "data": [
+      {
+        "name": "action",
+        "value": "woo_checkout_update_order_review"
+      }
+    ]
+  }
+}

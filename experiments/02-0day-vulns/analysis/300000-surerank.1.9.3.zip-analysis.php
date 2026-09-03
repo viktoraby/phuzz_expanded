@@ -5,9 +5,162 @@
 *Found functions:9
 *Extracted functions:9
 *Total parameter names extracted: 9
-*Overview: {'save_user_settings': {'surerank_save_user_settings'}, 'send_plugin_deactivate_feedback': {'uds_plugin_deactivate_feedback'}, 'handle_notice_response': {'surerank_notice_response'}, 'save_post_settings': {'surerank_save_post_settings'}, 'activate_plugin': {'surerank_activate_plugin'}, 'save_admin_settings': {'surerank_save_admin_settings'}, 'dismiss_notice': {'astra-notice-dismiss'}, 'activate_theme': {'surerank_activate_theme'}, 'save_term_settings': {'surerank_save_term_settings'}}
+*Overview: {'activate_theme': {'surerank_activate_theme'}, 'handle_notice_response': {'surerank_notice_response'}, 'save_term_settings': {'surerank_save_term_settings'}, 'save_post_settings': {'surerank_save_post_settings'}, 'save_user_settings': {'surerank_save_user_settings'}, 'send_plugin_deactivate_feedback': {'uds_plugin_deactivate_feedback'}, 'activate_plugin': {'surerank_activate_plugin'}, 'save_admin_settings': {'surerank_save_admin_settings'}, 'dismiss_notice': {'astra-notice-dismiss'}}
 *
 ***/
+
+/** Function activate_theme() called by wp_ajax hooks: {'surerank_activate_theme'} **/
+/** Parameters found in function activate_theme(): {"post": ["slug"]} **/
+function activate_theme() {
+		// Check ajax referer.
+		check_ajax_referer( 'surerank_plugin', '_ajax_nonce' );
+
+		// Check if the request is an ajax request and early return if not.
+		if ( ! wp_doing_ajax() ) {
+			wp_send_json_error(
+				[
+					'success' => false,
+					'message' => __( 'Not an AJAX request.', 'surerank' ),
+				],
+			);
+		}
+
+		// Check user capabilities.
+		if ( ! current_user_can( 'customize' ) ) {
+			wp_send_json_error(
+				[
+					'success' => false,
+					'message' => __( 'You do not have permission to activate themes.', 'surerank' ),
+				],
+			);
+		}
+
+		// Get theme slug from request.
+		$theme_stylesheet = isset( $_POST['slug'] ) ? sanitize_text_field( wp_unslash( $_POST['slug'] ) ) : '';
+
+		if ( empty( $theme_stylesheet ) ) {
+			wp_send_json_error(
+				[
+					'success' => false,
+					'message' => __( 'No theme specified.', 'surerank' ),
+				],
+			);
+		}
+
+		// Activate the theme.
+		switch_theme( $theme_stylesheet );
+
+		// Send success response.
+		wp_send_json_success(
+			[
+				'success' => true,
+				'message' => __( 'Theme activated successfully.', 'surerank' ),
+			],
+		);
+	}
+
+
+/** Function handle_notice_response() called by wp_ajax hooks: {'surerank_notice_response'} **/
+/** Parameters found in function handle_notice_response(): {"post": ["notice_id", "button"]} **/
+function handle_notice_response(): void {
+		if ( ! check_ajax_referer( 'surerank_notice_response', 'nonce', false ) ) {
+			wp_send_json_error( [ 'message' => __( 'Invalid nonce.', 'surerank' ) ], 403 );
+		}
+
+		if ( ! current_user_can( self::get_required_capability() ) ) {
+			wp_send_json_error( [ 'message' => __( 'Unauthorized user.', 'surerank' ) ], 403 );
+		}
+
+		$notice_id = isset( $_POST['notice_id'] ) ? sanitize_text_field( wp_unslash( $_POST['notice_id'] ) ) : '';
+		$button    = isset( $_POST['button'] ) ? sanitize_text_field( wp_unslash( $_POST['button'] ) ) : '';
+		$valid     = self::get_notice_response_events();
+
+		if ( ! isset( $valid[ $notice_id ][ $button ] ) ) {
+			wp_send_json_error( [ 'message' => __( 'Invalid parameters.', 'surerank' ) ], 400 );
+		}
+
+		$events = Analytics::events();
+		if ( null !== $events ) {
+			$events->track( $valid[ $notice_id ][ $button ], $button );
+		}
+
+		wp_send_json_success();
+	}
+
+
+/** Function save_term_settings() called by wp_ajax hooks: {'surerank_save_term_settings'} **/
+/** Parameters found in function save_term_settings(): {"post": ["term_id"]} **/
+function save_term_settings(): void {
+		if ( ! $this->guard_request( 'POST', '/surerank/v1/term/settings' ) ) {
+			return;
+		}
+
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce verified in guard_request() above.
+		$term_id = isset( $_POST['term_id'] ) ? absint( wp_unslash( $_POST['term_id'] ) ) : 0;
+		if ( $term_id <= 0 ) {
+			wp_send_json_error(
+				[
+					'success' => false,
+					'message' => __( 'Invalid term id.', 'surerank' ),
+				],
+				400
+			);
+		}
+
+		if ( ! Term::can_manage_term_seo( $term_id ) ) {
+			wp_send_json(
+				[
+					'success' => false,
+					'message' => __( 'You are not allowed to manage SEO settings for this term.', 'surerank' ),
+				],
+				403
+			);
+		}
+
+		$meta_data = $this->extract_meta_data();
+
+		$result = Term::save_term_seo_meta( $term_id, $meta_data );
+
+		$this->respond_with( $result );
+	}
+
+
+/** Function save_post_settings() called by wp_ajax hooks: {'surerank_save_post_settings'} **/
+/** Parameters found in function save_post_settings(): {"post": ["post_id"]} **/
+function save_post_settings(): void {
+		if ( ! $this->guard_request( 'POST', '/surerank/v1/post/settings' ) ) {
+			return;
+		}
+
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce verified in guard_request() above.
+		$post_id = isset( $_POST['post_id'] ) ? absint( wp_unslash( $_POST['post_id'] ) ) : 0;
+		if ( $post_id <= 0 ) {
+			wp_send_json_error(
+				[
+					'success' => false,
+					'message' => __( 'Invalid post id.', 'surerank' ),
+				],
+				400
+			);
+		}
+
+		if ( ! Post::can_manage_post_seo( $post_id ) ) {
+			wp_send_json(
+				[
+					'success' => false,
+					'message' => __( 'You are not allowed to manage SEO settings for this post.', 'surerank' ),
+				],
+				403
+			);
+		}
+
+		$meta_data = $this->extract_meta_data();
+
+		$result = Post::save_post_seo_meta( $post_id, $meta_data );
+
+		$this->respond_with( $result );
+	}
+
 
 /** Function save_user_settings() called by wp_ajax hooks: {'surerank_save_user_settings'} **/
 /** Parameters found in function save_user_settings(): {"post": ["user_id"]} **/
@@ -88,71 +241,6 @@ function send_plugin_deactivate_feedback() {
 
 			wp_send_json_success();
 		}
-
-
-/** Function handle_notice_response() called by wp_ajax hooks: {'surerank_notice_response'} **/
-/** Parameters found in function handle_notice_response(): {"post": ["notice_id", "button"]} **/
-function handle_notice_response(): void {
-		if ( ! check_ajax_referer( 'surerank_notice_response', 'nonce', false ) ) {
-			wp_send_json_error( [ 'message' => __( 'Invalid nonce.', 'surerank' ) ], 403 );
-		}
-
-		if ( ! current_user_can( self::get_required_capability() ) ) {
-			wp_send_json_error( [ 'message' => __( 'Unauthorized user.', 'surerank' ) ], 403 );
-		}
-
-		$notice_id = isset( $_POST['notice_id'] ) ? sanitize_text_field( wp_unslash( $_POST['notice_id'] ) ) : '';
-		$button    = isset( $_POST['button'] ) ? sanitize_text_field( wp_unslash( $_POST['button'] ) ) : '';
-		$valid     = self::get_notice_response_events();
-
-		if ( ! isset( $valid[ $notice_id ][ $button ] ) ) {
-			wp_send_json_error( [ 'message' => __( 'Invalid parameters.', 'surerank' ) ], 400 );
-		}
-
-		$events = Analytics::events();
-		if ( null !== $events ) {
-			$events->track( $valid[ $notice_id ][ $button ], $button );
-		}
-
-		wp_send_json_success();
-	}
-
-
-/** Function save_post_settings() called by wp_ajax hooks: {'surerank_save_post_settings'} **/
-/** Parameters found in function save_post_settings(): {"post": ["post_id"]} **/
-function save_post_settings(): void {
-		if ( ! $this->guard_request( 'POST', '/surerank/v1/post/settings' ) ) {
-			return;
-		}
-
-		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce verified in guard_request() above.
-		$post_id = isset( $_POST['post_id'] ) ? absint( wp_unslash( $_POST['post_id'] ) ) : 0;
-		if ( $post_id <= 0 ) {
-			wp_send_json_error(
-				[
-					'success' => false,
-					'message' => __( 'Invalid post id.', 'surerank' ),
-				],
-				400
-			);
-		}
-
-		if ( ! Post::can_manage_post_seo( $post_id ) ) {
-			wp_send_json(
-				[
-					'success' => false,
-					'message' => __( 'You are not allowed to manage SEO settings for this post.', 'surerank' ),
-				],
-				403
-			);
-		}
-
-		$meta_data = $this->extract_meta_data();
-
-		$result = Post::save_post_seo_meta( $post_id, $meta_data );
-
-		$this->respond_with( $result );
-	}
 
 
 /** Function activate_plugin() called by wp_ajax hooks: {'surerank_activate_plugin'} **/
@@ -311,93 +399,5 @@ function dismiss_notice() {
 
 			wp_send_json_error();
 		}
-
-
-/** Function activate_theme() called by wp_ajax hooks: {'surerank_activate_theme'} **/
-/** Parameters found in function activate_theme(): {"post": ["slug"]} **/
-function activate_theme() {
-		// Check ajax referer.
-		check_ajax_referer( 'surerank_plugin', '_ajax_nonce' );
-
-		// Check if the request is an ajax request and early return if not.
-		if ( ! wp_doing_ajax() ) {
-			wp_send_json_error(
-				[
-					'success' => false,
-					'message' => __( 'Not an AJAX request.', 'surerank' ),
-				],
-			);
-		}
-
-		// Check user capabilities.
-		if ( ! current_user_can( 'customize' ) ) {
-			wp_send_json_error(
-				[
-					'success' => false,
-					'message' => __( 'You do not have permission to activate themes.', 'surerank' ),
-				],
-			);
-		}
-
-		// Get theme slug from request.
-		$theme_stylesheet = isset( $_POST['slug'] ) ? sanitize_text_field( wp_unslash( $_POST['slug'] ) ) : '';
-
-		if ( empty( $theme_stylesheet ) ) {
-			wp_send_json_error(
-				[
-					'success' => false,
-					'message' => __( 'No theme specified.', 'surerank' ),
-				],
-			);
-		}
-
-		// Activate the theme.
-		switch_theme( $theme_stylesheet );
-
-		// Send success response.
-		wp_send_json_success(
-			[
-				'success' => true,
-				'message' => __( 'Theme activated successfully.', 'surerank' ),
-			],
-		);
-	}
-
-
-/** Function save_term_settings() called by wp_ajax hooks: {'surerank_save_term_settings'} **/
-/** Parameters found in function save_term_settings(): {"post": ["term_id"]} **/
-function save_term_settings(): void {
-		if ( ! $this->guard_request( 'POST', '/surerank/v1/term/settings' ) ) {
-			return;
-		}
-
-		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce verified in guard_request() above.
-		$term_id = isset( $_POST['term_id'] ) ? absint( wp_unslash( $_POST['term_id'] ) ) : 0;
-		if ( $term_id <= 0 ) {
-			wp_send_json_error(
-				[
-					'success' => false,
-					'message' => __( 'Invalid term id.', 'surerank' ),
-				],
-				400
-			);
-		}
-
-		if ( ! Term::can_manage_term_seo( $term_id ) ) {
-			wp_send_json(
-				[
-					'success' => false,
-					'message' => __( 'You are not allowed to manage SEO settings for this term.', 'surerank' ),
-				],
-				403
-			);
-		}
-
-		$meta_data = $this->extract_meta_data();
-
-		$result = Term::save_term_seo_meta( $term_id, $meta_data );
-
-		$this->respond_with( $result );
-	}
 
 

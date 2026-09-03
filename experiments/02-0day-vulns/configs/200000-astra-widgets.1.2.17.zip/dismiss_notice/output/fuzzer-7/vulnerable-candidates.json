@@ -1,0 +1,1286 @@
+{
+  "PathTraversal": [
+    {
+      "coverage_id": "1787170962-176ad474-8178-4eec-baba-2e466249329c",
+      "priority": 11,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "astra-notice-dismiss"
+        },
+        "body_params": {
+          "nonce": "fuzz",
+          "repeat_notice_after": "5uzz"
+        }
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "notice_id": "fu"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n{\"success\":true}",
+      "response.body.length": 17,
+      "response.headers": {
+        "Date": "Wed, 19 Aug 2026 20:22:42 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "17",
+        "Content-Type": "application/json; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 461.698,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787170958-a429f132-81f8-42b5-bbf6-326acebb3b9e",
+      "paths": [
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/widgets/class-astra-widget-social-profiles.php::::606_68_69_70_72_73_76_80_81_82_9",
+        "/var/www/html/wp-content/plugins/astra-widgets/admin/bsf-analytics/class-bsf-analytics-loader.php::::10_100_101_106_107_112_113_114_117_119_57_58_61_68_69_78_79_87_89_90_91_93_94_95_96_97_99",
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/class-astra-widgets-helper.php::::45_46_48_57_58_59_797_806_826_896_9_946",
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/widgets/class-astra-widget-list-icons.php::::553_68_69_70_72_73_76_80_81_82_9",
+        "/var/www/html/wp-content/plugins/astra-widgets/admin/bsf-analytics/class-bsf-analytics.php::::10_14_152_154_155_157_162_174_175_177_178_186_278_282_284_285_337_338_347_349_353_354_356_357_358_359_362_363_364_365_366_367_369_370_371_372_373_374_378_46_475_476_50_509_52_53_55_56_57_59_61_63_64_73_74_75_76_78_89_91_93",
+        "/var/www/html/wp-content/plugins/astra-widgets/lib/astra-notices/class-astra-notices.php::::108_109_11_110_111_112_114_118_123_125_126_131_15_181_183_194_198_199_202_206_387_390_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/widgets/class-astra-widget-address.php::::367_58_59_60_62_63_66_69_70_9",
+        "/var/www/html/wp-content/plugins/astra-widgets/admin/bsf-analytics/class-bsf-analytics-stats.php::::12_231_257_8",
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/class-astra-widgets-loader.php::::29_30_32_41_44_45_46_48_49_50_51_59_60_61_62_77_78_9",
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/class-astra-widgets.php::::31_32_34_41_42_47_49_9",
+        "/var/www/html/wp-content/plugins/astra-widgets/astra-widgets.php::::17_24_25_26_27_28_29_31_33_38_42_43_46_48_51_52_53_54_58"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 11,
+      "is_interesting": false,
+      "fuzzer_id": "7",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "notice_id"
+    },
+    {
+      "coverage_id": "1787170962-176ad474-8178-4eec-baba-2e466249329c",
+      "priority": 11,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "astra-notice-dismiss"
+        },
+        "body_params": {
+          "nonce": "fuzz",
+          "repeat_notice_after": "5uzz"
+        }
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "notice_id": "fu"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n{\"success\":true}",
+      "response.body.length": 17,
+      "response.headers": {
+        "Date": "Wed, 19 Aug 2026 20:22:42 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "17",
+        "Content-Type": "application/json; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 461.698,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787170958-a429f132-81f8-42b5-bbf6-326acebb3b9e",
+      "paths": [
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/widgets/class-astra-widget-social-profiles.php::::606_68_69_70_72_73_76_80_81_82_9",
+        "/var/www/html/wp-content/plugins/astra-widgets/admin/bsf-analytics/class-bsf-analytics-loader.php::::10_100_101_106_107_112_113_114_117_119_57_58_61_68_69_78_79_87_89_90_91_93_94_95_96_97_99",
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/class-astra-widgets-helper.php::::45_46_48_57_58_59_797_806_826_896_9_946",
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/widgets/class-astra-widget-list-icons.php::::553_68_69_70_72_73_76_80_81_82_9",
+        "/var/www/html/wp-content/plugins/astra-widgets/admin/bsf-analytics/class-bsf-analytics.php::::10_14_152_154_155_157_162_174_175_177_178_186_278_282_284_285_337_338_347_349_353_354_356_357_358_359_362_363_364_365_366_367_369_370_371_372_373_374_378_46_475_476_50_509_52_53_55_56_57_59_61_63_64_73_74_75_76_78_89_91_93",
+        "/var/www/html/wp-content/plugins/astra-widgets/lib/astra-notices/class-astra-notices.php::::108_109_11_110_111_112_114_118_123_125_126_131_15_181_183_194_198_199_202_206_387_390_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/widgets/class-astra-widget-address.php::::367_58_59_60_62_63_66_69_70_9",
+        "/var/www/html/wp-content/plugins/astra-widgets/admin/bsf-analytics/class-bsf-analytics-stats.php::::12_231_257_8",
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/class-astra-widgets-loader.php::::29_30_32_41_44_45_46_48_49_50_51_59_60_61_62_77_78_9",
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/class-astra-widgets.php::::31_32_34_41_42_47_49_9",
+        "/var/www/html/wp-content/plugins/astra-widgets/astra-widgets.php::::17_24_25_26_27_28_29_31_33_38_42_43_46_48_51_52_53_54_58"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 11,
+      "is_interesting": false,
+      "fuzzer_id": "7",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "notice_id"
+    },
+    {
+      "coverage_id": "1787171030-47226ac5-25ca-468b-8af7-52167bacd6b1",
+      "priority": 41,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "astra-notice-dismiss"
+        },
+        "body_params": {
+          "nonce": "fuzz",
+          "repeat_notice_after": "9uzz"
+        }
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "notice_id": "r"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n{\"success\":true}",
+      "response.body.length": 17,
+      "response.headers": {
+        "Date": "Wed, 19 Aug 2026 20:23:50 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "17",
+        "Content-Type": "application/json; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 452.829,
+      "number_of_new_paths": 1,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787170979-2424668c-9a67-43b6-8608-985adc819082",
+      "paths": [
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/widgets/class-astra-widget-social-profiles.php::::606_68_69_70_72_73_76_80_81_82_9",
+        "/var/www/html/wp-content/plugins/astra-widgets/admin/bsf-analytics/class-bsf-analytics-loader.php::::10_100_101_106_107_112_113_114_117_119_57_58_61_68_69_78_79_87_89_90_91_93_94_95_96_97_99",
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/class-astra-widgets-helper.php::::45_46_48_57_58_59_797_806_826_896_9_946",
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/widgets/class-astra-widget-list-icons.php::::553_68_69_70_72_73_76_80_81_82_9",
+        "/var/www/html/wp-content/plugins/astra-widgets/admin/bsf-analytics/class-bsf-analytics.php::::10_14_152_154_155_157_162_174_175_177_178_186_278_282_284_285_337_338_347_349_353_354_356_357_358_359_362_363_364_365_366_367_369_370_371_372_373_374_378_46_475_476_50_509_52_53_55_56_57_59_61_63_64_73_74_75_76_78_89_91_93",
+        "/var/www/html/wp-content/plugins/astra-widgets/lib/astra-notices/class-astra-notices.php::::108_109_11_110_111_112_114_118_123_125_126_131_15_181_183_194_198_199_202_206_387_390_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/widgets/class-astra-widget-address.php::::367_58_59_60_62_63_66_69_70_9",
+        "/var/www/html/wp-content/plugins/astra-widgets/admin/bsf-analytics/class-bsf-analytics-stats.php::::12_231_257_8",
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/class-astra-widgets-loader.php::::29_30_32_41_44_45_46_48_49_50_51_59_60_61_62_77_78_9",
+        "/var/www/html/wp-content/plugins/astra-widgets/lib/astra-notices/class-astra-notices.php::::108_109_11_110_111_112_114_118_123_134_15_194_195_387_390_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/class-astra-widgets.php::::31_32_34_41_42_47_49_9",
+        "/var/www/html/wp-content/plugins/astra-widgets/astra-widgets.php::::17_24_25_26_27_28_29_31_33_38_42_43_46_48_51_52_53_54_58"
+      ],
+      "new_paths": [
+        "/var/www/html/wp-content/plugins/astra-widgets/lib/astra-notices/class-astra-notices.php::::108_109_11_110_111_112_114_118_123_125_126_131_15_181_183_194_198_199_202_206_387_390_58_59_61_70_71_72_73_74"
+      ],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 41,
+      "is_interesting": false,
+      "fuzzer_id": "7",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "notice_id"
+    },
+    {
+      "coverage_id": "1787171030-47226ac5-25ca-468b-8af7-52167bacd6b1",
+      "priority": 41,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "astra-notice-dismiss"
+        },
+        "body_params": {
+          "nonce": "fuzz",
+          "repeat_notice_after": "9uzz"
+        }
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "notice_id": "r"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n{\"success\":true}",
+      "response.body.length": 17,
+      "response.headers": {
+        "Date": "Wed, 19 Aug 2026 20:23:50 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "17",
+        "Content-Type": "application/json; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 452.829,
+      "number_of_new_paths": 1,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787170979-2424668c-9a67-43b6-8608-985adc819082",
+      "paths": [
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/widgets/class-astra-widget-social-profiles.php::::606_68_69_70_72_73_76_80_81_82_9",
+        "/var/www/html/wp-content/plugins/astra-widgets/admin/bsf-analytics/class-bsf-analytics-loader.php::::10_100_101_106_107_112_113_114_117_119_57_58_61_68_69_78_79_87_89_90_91_93_94_95_96_97_99",
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/class-astra-widgets-helper.php::::45_46_48_57_58_59_797_806_826_896_9_946",
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/widgets/class-astra-widget-list-icons.php::::553_68_69_70_72_73_76_80_81_82_9",
+        "/var/www/html/wp-content/plugins/astra-widgets/admin/bsf-analytics/class-bsf-analytics.php::::10_14_152_154_155_157_162_174_175_177_178_186_278_282_284_285_337_338_347_349_353_354_356_357_358_359_362_363_364_365_366_367_369_370_371_372_373_374_378_46_475_476_50_509_52_53_55_56_57_59_61_63_64_73_74_75_76_78_89_91_93",
+        "/var/www/html/wp-content/plugins/astra-widgets/lib/astra-notices/class-astra-notices.php::::108_109_11_110_111_112_114_118_123_125_126_131_15_181_183_194_198_199_202_206_387_390_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/widgets/class-astra-widget-address.php::::367_58_59_60_62_63_66_69_70_9",
+        "/var/www/html/wp-content/plugins/astra-widgets/admin/bsf-analytics/class-bsf-analytics-stats.php::::12_231_257_8",
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/class-astra-widgets-loader.php::::29_30_32_41_44_45_46_48_49_50_51_59_60_61_62_77_78_9",
+        "/var/www/html/wp-content/plugins/astra-widgets/lib/astra-notices/class-astra-notices.php::::108_109_11_110_111_112_114_118_123_134_15_194_195_387_390_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/class-astra-widgets.php::::31_32_34_41_42_47_49_9",
+        "/var/www/html/wp-content/plugins/astra-widgets/astra-widgets.php::::17_24_25_26_27_28_29_31_33_38_42_43_46_48_51_52_53_54_58"
+      ],
+      "new_paths": [
+        "/var/www/html/wp-content/plugins/astra-widgets/lib/astra-notices/class-astra-notices.php::::108_109_11_110_111_112_114_118_123_125_126_131_15_181_183_194_198_199_202_206_387_390_58_59_61_70_71_72_73_74"
+      ],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 41,
+      "is_interesting": false,
+      "fuzzer_id": "7",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "notice_id"
+    },
+    {
+      "coverage_id": "1787171039-bf1da6ef-6c72-4adb-b768-aaa88ff80797",
+      "priority": 12,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "astra-notice-dismiss"
+        },
+        "body_params": {
+          "nonce": "fuzz",
+          "repeat_notice_after": "9uzz"
+        }
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "notice_id": "-"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n{\"success\":true}",
+      "response.body.length": 17,
+      "response.headers": {
+        "Date": "Wed, 19 Aug 2026 20:23:59 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "17",
+        "Content-Type": "application/json; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 734.592,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787171017-8058030f-e269-423a-9a04-c78a4dfb928d",
+      "paths": [
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/widgets/class-astra-widget-social-profiles.php::::606_68_69_70_72_73_76_80_81_82_9",
+        "/var/www/html/wp-content/plugins/astra-widgets/admin/bsf-analytics/class-bsf-analytics-loader.php::::10_100_101_106_107_112_113_114_117_119_57_58_61_68_69_78_79_87_89_90_91_93_94_95_96_97_99",
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/class-astra-widgets-helper.php::::45_46_48_57_58_59_797_806_826_896_9_946",
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/widgets/class-astra-widget-list-icons.php::::553_68_69_70_72_73_76_80_81_82_9",
+        "/var/www/html/wp-content/plugins/astra-widgets/admin/bsf-analytics/class-bsf-analytics.php::::10_14_152_154_155_157_162_174_175_177_178_186_278_282_284_285_337_338_347_349_353_354_356_357_358_359_362_363_364_365_366_367_369_370_371_372_373_374_378_46_475_476_50_509_52_53_55_56_57_59_61_63_64_73_74_75_76_78_89_91_93",
+        "/var/www/html/wp-content/plugins/astra-widgets/lib/astra-notices/class-astra-notices.php::::108_109_11_110_111_112_114_118_123_125_126_131_15_181_183_194_198_199_202_206_387_390_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/widgets/class-astra-widget-address.php::::367_58_59_60_62_63_66_69_70_9",
+        "/var/www/html/wp-content/plugins/astra-widgets/admin/bsf-analytics/class-bsf-analytics-stats.php::::12_231_257_8",
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/class-astra-widgets-loader.php::::29_30_32_41_44_45_46_48_49_50_51_59_60_61_62_77_78_9",
+        "/var/www/html/wp-content/plugins/astra-widgets/lib/astra-notices/class-astra-notices.php::::108_109_11_110_111_112_114_118_123_134_15_194_195_387_390_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/class-astra-widgets.php::::31_32_34_41_42_47_49_9",
+        "/var/www/html/wp-content/plugins/astra-widgets/astra-widgets.php::::17_24_25_26_27_28_29_31_33_38_42_43_46_48_51_52_53_54_58"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 12,
+      "is_interesting": false,
+      "fuzzer_id": "7",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "notice_id"
+    },
+    {
+      "coverage_id": "1787171039-bf1da6ef-6c72-4adb-b768-aaa88ff80797",
+      "priority": 12,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "astra-notice-dismiss"
+        },
+        "body_params": {
+          "nonce": "fuzz",
+          "repeat_notice_after": "9uzz"
+        }
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "notice_id": "-"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n{\"success\":true}",
+      "response.body.length": 17,
+      "response.headers": {
+        "Date": "Wed, 19 Aug 2026 20:23:59 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "17",
+        "Content-Type": "application/json; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 734.592,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787171017-8058030f-e269-423a-9a04-c78a4dfb928d",
+      "paths": [
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/widgets/class-astra-widget-social-profiles.php::::606_68_69_70_72_73_76_80_81_82_9",
+        "/var/www/html/wp-content/plugins/astra-widgets/admin/bsf-analytics/class-bsf-analytics-loader.php::::10_100_101_106_107_112_113_114_117_119_57_58_61_68_69_78_79_87_89_90_91_93_94_95_96_97_99",
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/class-astra-widgets-helper.php::::45_46_48_57_58_59_797_806_826_896_9_946",
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/widgets/class-astra-widget-list-icons.php::::553_68_69_70_72_73_76_80_81_82_9",
+        "/var/www/html/wp-content/plugins/astra-widgets/admin/bsf-analytics/class-bsf-analytics.php::::10_14_152_154_155_157_162_174_175_177_178_186_278_282_284_285_337_338_347_349_353_354_356_357_358_359_362_363_364_365_366_367_369_370_371_372_373_374_378_46_475_476_50_509_52_53_55_56_57_59_61_63_64_73_74_75_76_78_89_91_93",
+        "/var/www/html/wp-content/plugins/astra-widgets/lib/astra-notices/class-astra-notices.php::::108_109_11_110_111_112_114_118_123_125_126_131_15_181_183_194_198_199_202_206_387_390_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/widgets/class-astra-widget-address.php::::367_58_59_60_62_63_66_69_70_9",
+        "/var/www/html/wp-content/plugins/astra-widgets/admin/bsf-analytics/class-bsf-analytics-stats.php::::12_231_257_8",
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/class-astra-widgets-loader.php::::29_30_32_41_44_45_46_48_49_50_51_59_60_61_62_77_78_9",
+        "/var/www/html/wp-content/plugins/astra-widgets/lib/astra-notices/class-astra-notices.php::::108_109_11_110_111_112_114_118_123_134_15_194_195_387_390_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/class-astra-widgets.php::::31_32_34_41_42_47_49_9",
+        "/var/www/html/wp-content/plugins/astra-widgets/astra-widgets.php::::17_24_25_26_27_28_29_31_33_38_42_43_46_48_51_52_53_54_58"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 12,
+      "is_interesting": false,
+      "fuzzer_id": "7",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "notice_id"
+    },
+    {
+      "coverage_id": "1787171044-0f843203-86a8-43b3-9f48-9aaee99fd755",
+      "priority": 12,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "astra-notice-dismiss"
+        },
+        "body_params": {
+          "nonce": "fuzz",
+          "repeat_notice_after": "9uzz"
+        }
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "notice_id": "u"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n{\"success\":true}",
+      "response.body.length": 17,
+      "response.headers": {
+        "Date": "Wed, 19 Aug 2026 20:24:04 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "17",
+        "Content-Type": "application/json; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 416.973,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787171017-8058030f-e269-423a-9a04-c78a4dfb928d",
+      "paths": [
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/widgets/class-astra-widget-social-profiles.php::::606_68_69_70_72_73_76_80_81_82_9",
+        "/var/www/html/wp-content/plugins/astra-widgets/admin/bsf-analytics/class-bsf-analytics-loader.php::::10_100_101_106_107_112_113_114_117_119_57_58_61_68_69_78_79_87_89_90_91_93_94_95_96_97_99",
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/class-astra-widgets-helper.php::::45_46_48_57_58_59_797_806_826_896_9_946",
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/widgets/class-astra-widget-list-icons.php::::553_68_69_70_72_73_76_80_81_82_9",
+        "/var/www/html/wp-content/plugins/astra-widgets/admin/bsf-analytics/class-bsf-analytics.php::::10_14_152_154_155_157_162_174_175_177_178_186_278_282_284_285_337_338_347_349_353_354_356_357_358_359_362_363_364_365_366_367_369_370_371_372_373_374_378_46_475_476_50_509_52_53_55_56_57_59_61_63_64_73_74_75_76_78_89_91_93",
+        "/var/www/html/wp-content/plugins/astra-widgets/lib/astra-notices/class-astra-notices.php::::108_109_11_110_111_112_114_118_123_125_126_131_15_181_183_194_198_199_202_206_387_390_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/widgets/class-astra-widget-address.php::::367_58_59_60_62_63_66_69_70_9",
+        "/var/www/html/wp-content/plugins/astra-widgets/admin/bsf-analytics/class-bsf-analytics-stats.php::::12_231_257_8",
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/class-astra-widgets-loader.php::::29_30_32_41_44_45_46_48_49_50_51_59_60_61_62_77_78_9",
+        "/var/www/html/wp-content/plugins/astra-widgets/lib/astra-notices/class-astra-notices.php::::108_109_11_110_111_112_114_118_123_134_15_194_195_387_390_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/class-astra-widgets.php::::31_32_34_41_42_47_49_9",
+        "/var/www/html/wp-content/plugins/astra-widgets/astra-widgets.php::::17_24_25_26_27_28_29_31_33_38_42_43_46_48_51_52_53_54_58"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 12,
+      "is_interesting": false,
+      "fuzzer_id": "7",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "notice_id"
+    },
+    {
+      "coverage_id": "1787171044-0f843203-86a8-43b3-9f48-9aaee99fd755",
+      "priority": 12,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "astra-notice-dismiss"
+        },
+        "body_params": {
+          "nonce": "fuzz",
+          "repeat_notice_after": "9uzz"
+        }
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "notice_id": "u"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n{\"success\":true}",
+      "response.body.length": 17,
+      "response.headers": {
+        "Date": "Wed, 19 Aug 2026 20:24:04 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "17",
+        "Content-Type": "application/json; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 416.973,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787171017-8058030f-e269-423a-9a04-c78a4dfb928d",
+      "paths": [
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/widgets/class-astra-widget-social-profiles.php::::606_68_69_70_72_73_76_80_81_82_9",
+        "/var/www/html/wp-content/plugins/astra-widgets/admin/bsf-analytics/class-bsf-analytics-loader.php::::10_100_101_106_107_112_113_114_117_119_57_58_61_68_69_78_79_87_89_90_91_93_94_95_96_97_99",
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/class-astra-widgets-helper.php::::45_46_48_57_58_59_797_806_826_896_9_946",
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/widgets/class-astra-widget-list-icons.php::::553_68_69_70_72_73_76_80_81_82_9",
+        "/var/www/html/wp-content/plugins/astra-widgets/admin/bsf-analytics/class-bsf-analytics.php::::10_14_152_154_155_157_162_174_175_177_178_186_278_282_284_285_337_338_347_349_353_354_356_357_358_359_362_363_364_365_366_367_369_370_371_372_373_374_378_46_475_476_50_509_52_53_55_56_57_59_61_63_64_73_74_75_76_78_89_91_93",
+        "/var/www/html/wp-content/plugins/astra-widgets/lib/astra-notices/class-astra-notices.php::::108_109_11_110_111_112_114_118_123_125_126_131_15_181_183_194_198_199_202_206_387_390_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/widgets/class-astra-widget-address.php::::367_58_59_60_62_63_66_69_70_9",
+        "/var/www/html/wp-content/plugins/astra-widgets/admin/bsf-analytics/class-bsf-analytics-stats.php::::12_231_257_8",
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/class-astra-widgets-loader.php::::29_30_32_41_44_45_46_48_49_50_51_59_60_61_62_77_78_9",
+        "/var/www/html/wp-content/plugins/astra-widgets/lib/astra-notices/class-astra-notices.php::::108_109_11_110_111_112_114_118_123_134_15_194_195_387_390_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/class-astra-widgets.php::::31_32_34_41_42_47_49_9",
+        "/var/www/html/wp-content/plugins/astra-widgets/astra-widgets.php::::17_24_25_26_27_28_29_31_33_38_42_43_46_48_51_52_53_54_58"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 12,
+      "is_interesting": false,
+      "fuzzer_id": "7",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "notice_id"
+    },
+    {
+      "coverage_id": "1787171060-fe44d842-6473-439f-995f-1565b5061bb8",
+      "priority": 12,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "astra-notice-dismiss"
+        },
+        "body_params": {
+          "nonce": "fuzz",
+          "repeat_notice_after": "9uzz"
+        }
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "notice_id": "f"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n{\"success\":true}",
+      "response.body.length": 17,
+      "response.headers": {
+        "Date": "Wed, 19 Aug 2026 20:24:20 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "17",
+        "Content-Type": "application/json; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 629.562,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787171017-8058030f-e269-423a-9a04-c78a4dfb928d",
+      "paths": [
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/widgets/class-astra-widget-social-profiles.php::::606_68_69_70_72_73_76_80_81_82_9",
+        "/var/www/html/wp-content/plugins/astra-widgets/admin/bsf-analytics/class-bsf-analytics-loader.php::::10_100_101_106_107_112_113_114_117_119_57_58_61_68_69_78_79_87_89_90_91_93_94_95_96_97_99",
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/class-astra-widgets-helper.php::::45_46_48_57_58_59_797_806_826_896_9_946",
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/widgets/class-astra-widget-list-icons.php::::553_68_69_70_72_73_76_80_81_82_9",
+        "/var/www/html/wp-content/plugins/astra-widgets/admin/bsf-analytics/class-bsf-analytics.php::::10_14_152_154_155_157_162_174_175_177_178_186_278_282_284_285_337_338_347_349_353_354_356_357_358_359_362_363_364_365_366_367_369_370_371_372_373_374_378_46_475_476_50_509_52_53_55_56_57_59_61_63_64_73_74_75_76_78_89_91_93",
+        "/var/www/html/wp-content/plugins/astra-widgets/lib/astra-notices/class-astra-notices.php::::108_109_11_110_111_112_114_118_123_125_126_131_15_181_183_194_198_199_202_206_387_390_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/widgets/class-astra-widget-address.php::::367_58_59_60_62_63_66_69_70_9",
+        "/var/www/html/wp-content/plugins/astra-widgets/admin/bsf-analytics/class-bsf-analytics-stats.php::::12_231_257_8",
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/class-astra-widgets-loader.php::::29_30_32_41_44_45_46_48_49_50_51_59_60_61_62_77_78_9",
+        "/var/www/html/wp-content/plugins/astra-widgets/lib/astra-notices/class-astra-notices.php::::108_109_11_110_111_112_114_118_123_134_15_194_195_387_390_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/class-astra-widgets.php::::31_32_34_41_42_47_49_9",
+        "/var/www/html/wp-content/plugins/astra-widgets/astra-widgets.php::::17_24_25_26_27_28_29_31_33_38_42_43_46_48_51_52_53_54_58"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 12,
+      "is_interesting": false,
+      "fuzzer_id": "7",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "notice_id"
+    },
+    {
+      "coverage_id": "1787171060-fe44d842-6473-439f-995f-1565b5061bb8",
+      "priority": 12,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "astra-notice-dismiss"
+        },
+        "body_params": {
+          "nonce": "fuzz",
+          "repeat_notice_after": "9uzz"
+        }
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "notice_id": "f"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n{\"success\":true}",
+      "response.body.length": 17,
+      "response.headers": {
+        "Date": "Wed, 19 Aug 2026 20:24:20 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "17",
+        "Content-Type": "application/json; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 629.562,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787171017-8058030f-e269-423a-9a04-c78a4dfb928d",
+      "paths": [
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/widgets/class-astra-widget-social-profiles.php::::606_68_69_70_72_73_76_80_81_82_9",
+        "/var/www/html/wp-content/plugins/astra-widgets/admin/bsf-analytics/class-bsf-analytics-loader.php::::10_100_101_106_107_112_113_114_117_119_57_58_61_68_69_78_79_87_89_90_91_93_94_95_96_97_99",
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/class-astra-widgets-helper.php::::45_46_48_57_58_59_797_806_826_896_9_946",
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/widgets/class-astra-widget-list-icons.php::::553_68_69_70_72_73_76_80_81_82_9",
+        "/var/www/html/wp-content/plugins/astra-widgets/admin/bsf-analytics/class-bsf-analytics.php::::10_14_152_154_155_157_162_174_175_177_178_186_278_282_284_285_337_338_347_349_353_354_356_357_358_359_362_363_364_365_366_367_369_370_371_372_373_374_378_46_475_476_50_509_52_53_55_56_57_59_61_63_64_73_74_75_76_78_89_91_93",
+        "/var/www/html/wp-content/plugins/astra-widgets/lib/astra-notices/class-astra-notices.php::::108_109_11_110_111_112_114_118_123_125_126_131_15_181_183_194_198_199_202_206_387_390_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/widgets/class-astra-widget-address.php::::367_58_59_60_62_63_66_69_70_9",
+        "/var/www/html/wp-content/plugins/astra-widgets/admin/bsf-analytics/class-bsf-analytics-stats.php::::12_231_257_8",
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/class-astra-widgets-loader.php::::29_30_32_41_44_45_46_48_49_50_51_59_60_61_62_77_78_9",
+        "/var/www/html/wp-content/plugins/astra-widgets/lib/astra-notices/class-astra-notices.php::::108_109_11_110_111_112_114_118_123_134_15_194_195_387_390_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/class-astra-widgets.php::::31_32_34_41_42_47_49_9",
+        "/var/www/html/wp-content/plugins/astra-widgets/astra-widgets.php::::17_24_25_26_27_28_29_31_33_38_42_43_46_48_51_52_53_54_58"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 12,
+      "is_interesting": false,
+      "fuzzer_id": "7",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "notice_id"
+    },
+    {
+      "coverage_id": "1787171098-aa83600e-a71d-4265-ac4c-6712b6cb79be",
+      "priority": 12,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "astra-notice-dismiss"
+        },
+        "body_params": {
+          "nonce": "fuzz",
+          "repeat_notice_after": "9uzz"
+        }
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "notice_id": "c"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n{\"success\":true}",
+      "response.body.length": 17,
+      "response.headers": {
+        "Date": "Wed, 19 Aug 2026 20:24:58 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "17",
+        "Content-Type": "application/json; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 578.491,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787171017-8058030f-e269-423a-9a04-c78a4dfb928d",
+      "paths": [
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/widgets/class-astra-widget-social-profiles.php::::606_68_69_70_72_73_76_80_81_82_9",
+        "/var/www/html/wp-content/plugins/astra-widgets/admin/bsf-analytics/class-bsf-analytics-loader.php::::10_100_101_106_107_112_113_114_117_119_57_58_61_68_69_78_79_87_89_90_91_93_94_95_96_97_99",
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/class-astra-widgets-helper.php::::45_46_48_57_58_59_797_806_826_896_9_946",
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/widgets/class-astra-widget-list-icons.php::::553_68_69_70_72_73_76_80_81_82_9",
+        "/var/www/html/wp-content/plugins/astra-widgets/admin/bsf-analytics/class-bsf-analytics.php::::10_14_152_154_155_157_162_174_175_177_178_186_278_282_284_285_337_338_347_349_353_354_356_357_358_359_362_363_364_365_366_367_369_370_371_372_373_374_378_46_475_476_50_509_52_53_55_56_57_59_61_63_64_73_74_75_76_78_89_91_93",
+        "/var/www/html/wp-content/plugins/astra-widgets/lib/astra-notices/class-astra-notices.php::::108_109_11_110_111_112_114_118_123_125_126_131_15_181_183_194_198_199_202_206_387_390_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/widgets/class-astra-widget-address.php::::367_58_59_60_62_63_66_69_70_9",
+        "/var/www/html/wp-content/plugins/astra-widgets/admin/bsf-analytics/class-bsf-analytics-stats.php::::12_231_257_8",
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/class-astra-widgets-loader.php::::29_30_32_41_44_45_46_48_49_50_51_59_60_61_62_77_78_9",
+        "/var/www/html/wp-content/plugins/astra-widgets/lib/astra-notices/class-astra-notices.php::::108_109_11_110_111_112_114_118_123_134_15_194_195_387_390_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/class-astra-widgets.php::::31_32_34_41_42_47_49_9",
+        "/var/www/html/wp-content/plugins/astra-widgets/astra-widgets.php::::17_24_25_26_27_28_29_31_33_38_42_43_46_48_51_52_53_54_58"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 12,
+      "is_interesting": false,
+      "fuzzer_id": "7",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "notice_id"
+    },
+    {
+      "coverage_id": "1787171098-aa83600e-a71d-4265-ac4c-6712b6cb79be",
+      "priority": 12,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "astra-notice-dismiss"
+        },
+        "body_params": {
+          "nonce": "fuzz",
+          "repeat_notice_after": "9uzz"
+        }
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "notice_id": "c"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n{\"success\":true}",
+      "response.body.length": 17,
+      "response.headers": {
+        "Date": "Wed, 19 Aug 2026 20:24:58 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "17",
+        "Content-Type": "application/json; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 578.491,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787171017-8058030f-e269-423a-9a04-c78a4dfb928d",
+      "paths": [
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/widgets/class-astra-widget-social-profiles.php::::606_68_69_70_72_73_76_80_81_82_9",
+        "/var/www/html/wp-content/plugins/astra-widgets/admin/bsf-analytics/class-bsf-analytics-loader.php::::10_100_101_106_107_112_113_114_117_119_57_58_61_68_69_78_79_87_89_90_91_93_94_95_96_97_99",
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/class-astra-widgets-helper.php::::45_46_48_57_58_59_797_806_826_896_9_946",
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/widgets/class-astra-widget-list-icons.php::::553_68_69_70_72_73_76_80_81_82_9",
+        "/var/www/html/wp-content/plugins/astra-widgets/admin/bsf-analytics/class-bsf-analytics.php::::10_14_152_154_155_157_162_174_175_177_178_186_278_282_284_285_337_338_347_349_353_354_356_357_358_359_362_363_364_365_366_367_369_370_371_372_373_374_378_46_475_476_50_509_52_53_55_56_57_59_61_63_64_73_74_75_76_78_89_91_93",
+        "/var/www/html/wp-content/plugins/astra-widgets/lib/astra-notices/class-astra-notices.php::::108_109_11_110_111_112_114_118_123_125_126_131_15_181_183_194_198_199_202_206_387_390_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/widgets/class-astra-widget-address.php::::367_58_59_60_62_63_66_69_70_9",
+        "/var/www/html/wp-content/plugins/astra-widgets/admin/bsf-analytics/class-bsf-analytics-stats.php::::12_231_257_8",
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/class-astra-widgets-loader.php::::29_30_32_41_44_45_46_48_49_50_51_59_60_61_62_77_78_9",
+        "/var/www/html/wp-content/plugins/astra-widgets/lib/astra-notices/class-astra-notices.php::::108_109_11_110_111_112_114_118_123_134_15_194_195_387_390_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/class-astra-widgets.php::::31_32_34_41_42_47_49_9",
+        "/var/www/html/wp-content/plugins/astra-widgets/astra-widgets.php::::17_24_25_26_27_28_29_31_33_38_42_43_46_48_51_52_53_54_58"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 12,
+      "is_interesting": false,
+      "fuzzer_id": "7",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "notice_id"
+    },
+    {
+      "coverage_id": "1787171104-a291a806-c2a8-4655-838d-c2a9b98707ad",
+      "priority": 12,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "astra-notice-dismiss"
+        },
+        "body_params": {
+          "nonce": "fuzz",
+          "repeat_notice_after": "9uzz"
+        }
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "notice_id": "w"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n{\"success\":true}",
+      "response.body.length": 17,
+      "response.headers": {
+        "Date": "Wed, 19 Aug 2026 20:25:04 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "17",
+        "Content-Type": "application/json; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 556.741,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787171017-8058030f-e269-423a-9a04-c78a4dfb928d",
+      "paths": [
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/widgets/class-astra-widget-social-profiles.php::::606_68_69_70_72_73_76_80_81_82_9",
+        "/var/www/html/wp-content/plugins/astra-widgets/admin/bsf-analytics/class-bsf-analytics-loader.php::::10_100_101_106_107_112_113_114_117_119_57_58_61_68_69_78_79_87_89_90_91_93_94_95_96_97_99",
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/class-astra-widgets-helper.php::::45_46_48_57_58_59_797_806_826_896_9_946",
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/widgets/class-astra-widget-list-icons.php::::553_68_69_70_72_73_76_80_81_82_9",
+        "/var/www/html/wp-content/plugins/astra-widgets/admin/bsf-analytics/class-bsf-analytics.php::::10_14_152_154_155_157_162_174_175_177_178_186_278_282_284_285_337_338_347_349_353_354_356_357_358_359_362_363_364_365_366_367_369_370_371_372_373_374_378_46_475_476_50_509_52_53_55_56_57_59_61_63_64_73_74_75_76_78_89_91_93",
+        "/var/www/html/wp-content/plugins/astra-widgets/lib/astra-notices/class-astra-notices.php::::108_109_11_110_111_112_114_118_123_125_126_131_15_181_183_194_198_199_202_206_387_390_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/widgets/class-astra-widget-address.php::::367_58_59_60_62_63_66_69_70_9",
+        "/var/www/html/wp-content/plugins/astra-widgets/admin/bsf-analytics/class-bsf-analytics-stats.php::::12_231_257_8",
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/class-astra-widgets-loader.php::::29_30_32_41_44_45_46_48_49_50_51_59_60_61_62_77_78_9",
+        "/var/www/html/wp-content/plugins/astra-widgets/lib/astra-notices/class-astra-notices.php::::108_109_11_110_111_112_114_118_123_134_15_194_195_387_390_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/class-astra-widgets.php::::31_32_34_41_42_47_49_9",
+        "/var/www/html/wp-content/plugins/astra-widgets/astra-widgets.php::::17_24_25_26_27_28_29_31_33_38_42_43_46_48_51_52_53_54_58"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 12,
+      "is_interesting": false,
+      "fuzzer_id": "7",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "notice_id"
+    },
+    {
+      "coverage_id": "1787171104-a291a806-c2a8-4655-838d-c2a9b98707ad",
+      "priority": 12,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "astra-notice-dismiss"
+        },
+        "body_params": {
+          "nonce": "fuzz",
+          "repeat_notice_after": "9uzz"
+        }
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "notice_id": "w"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n{\"success\":true}",
+      "response.body.length": 17,
+      "response.headers": {
+        "Date": "Wed, 19 Aug 2026 20:25:04 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "17",
+        "Content-Type": "application/json; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 556.741,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787171017-8058030f-e269-423a-9a04-c78a4dfb928d",
+      "paths": [
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/widgets/class-astra-widget-social-profiles.php::::606_68_69_70_72_73_76_80_81_82_9",
+        "/var/www/html/wp-content/plugins/astra-widgets/admin/bsf-analytics/class-bsf-analytics-loader.php::::10_100_101_106_107_112_113_114_117_119_57_58_61_68_69_78_79_87_89_90_91_93_94_95_96_97_99",
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/class-astra-widgets-helper.php::::45_46_48_57_58_59_797_806_826_896_9_946",
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/widgets/class-astra-widget-list-icons.php::::553_68_69_70_72_73_76_80_81_82_9",
+        "/var/www/html/wp-content/plugins/astra-widgets/admin/bsf-analytics/class-bsf-analytics.php::::10_14_152_154_155_157_162_174_175_177_178_186_278_282_284_285_337_338_347_349_353_354_356_357_358_359_362_363_364_365_366_367_369_370_371_372_373_374_378_46_475_476_50_509_52_53_55_56_57_59_61_63_64_73_74_75_76_78_89_91_93",
+        "/var/www/html/wp-content/plugins/astra-widgets/lib/astra-notices/class-astra-notices.php::::108_109_11_110_111_112_114_118_123_125_126_131_15_181_183_194_198_199_202_206_387_390_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/widgets/class-astra-widget-address.php::::367_58_59_60_62_63_66_69_70_9",
+        "/var/www/html/wp-content/plugins/astra-widgets/admin/bsf-analytics/class-bsf-analytics-stats.php::::12_231_257_8",
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/class-astra-widgets-loader.php::::29_30_32_41_44_45_46_48_49_50_51_59_60_61_62_77_78_9",
+        "/var/www/html/wp-content/plugins/astra-widgets/lib/astra-notices/class-astra-notices.php::::108_109_11_110_111_112_114_118_123_134_15_194_195_387_390_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/class-astra-widgets.php::::31_32_34_41_42_47_49_9",
+        "/var/www/html/wp-content/plugins/astra-widgets/astra-widgets.php::::17_24_25_26_27_28_29_31_33_38_42_43_46_48_51_52_53_54_58"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 12,
+      "is_interesting": false,
+      "fuzzer_id": "7",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "notice_id"
+    },
+    {
+      "coverage_id": "1787171111-bc0c0af6-3e2f-4554-8e02-ace686d582fb",
+      "priority": 12,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "astra-notice-dismiss"
+        },
+        "body_params": {
+          "nonce": "fuzz",
+          "repeat_notice_after": "5uzz"
+        }
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "notice_id": "4"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n{\"success\":true}",
+      "response.body.length": 17,
+      "response.headers": {
+        "Date": "Wed, 19 Aug 2026 20:25:11 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "17",
+        "Content-Type": "application/json; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 423.186,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787170964-becdd9f8-3d6e-4ecd-b91b-2ce9336aefb8",
+      "paths": [
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/widgets/class-astra-widget-social-profiles.php::::606_68_69_70_72_73_76_80_81_82_9",
+        "/var/www/html/wp-content/plugins/astra-widgets/admin/bsf-analytics/class-bsf-analytics-loader.php::::10_100_101_106_107_112_113_114_117_119_57_58_61_68_69_78_79_87_89_90_91_93_94_95_96_97_99",
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/class-astra-widgets-helper.php::::45_46_48_57_58_59_797_806_826_896_9_946",
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/widgets/class-astra-widget-list-icons.php::::553_68_69_70_72_73_76_80_81_82_9",
+        "/var/www/html/wp-content/plugins/astra-widgets/admin/bsf-analytics/class-bsf-analytics.php::::10_14_152_154_155_157_162_174_175_177_178_186_278_282_284_285_337_338_347_349_353_354_356_357_358_359_362_363_364_365_366_367_369_370_371_372_373_374_378_46_475_476_50_509_52_53_55_56_57_59_61_63_64_73_74_75_76_78_89_91_93",
+        "/var/www/html/wp-content/plugins/astra-widgets/lib/astra-notices/class-astra-notices.php::::108_109_11_110_111_112_114_118_123_125_126_131_15_181_183_194_198_199_202_206_387_390_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/widgets/class-astra-widget-address.php::::367_58_59_60_62_63_66_69_70_9",
+        "/var/www/html/wp-content/plugins/astra-widgets/admin/bsf-analytics/class-bsf-analytics-stats.php::::12_231_257_8",
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/class-astra-widgets-loader.php::::29_30_32_41_44_45_46_48_49_50_51_59_60_61_62_77_78_9",
+        "/var/www/html/wp-content/plugins/astra-widgets/lib/astra-notices/class-astra-notices.php::::108_109_11_110_111_112_114_118_123_134_15_194_195_387_390_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/class-astra-widgets.php::::31_32_34_41_42_47_49_9",
+        "/var/www/html/wp-content/plugins/astra-widgets/astra-widgets.php::::17_24_25_26_27_28_29_31_33_38_42_43_46_48_51_52_53_54_58"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 12,
+      "is_interesting": false,
+      "fuzzer_id": "7",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "notice_id"
+    },
+    {
+      "coverage_id": "1787171111-bc0c0af6-3e2f-4554-8e02-ace686d582fb",
+      "priority": 12,
+      "http_target": "http://web/wp-admin/admin-ajax.php",
+      "http_method": "POST",
+      "fixed_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {
+          "action": "astra-notice-dismiss"
+        },
+        "body_params": {
+          "nonce": "fuzz",
+          "repeat_notice_after": "5uzz"
+        }
+      },
+      "fuzz_params": {
+        "headers": {},
+        "cookies": {},
+        "query_params": {},
+        "body_params": {
+          "notice_id": "4"
+        }
+      },
+      "fuzz_weights": {
+        "headers": 0.25,
+        "cookies": 0.25,
+        "query_params": 1,
+        "body_params": 1
+      },
+      "errors": null,
+      "exceptions": null,
+      "response_body": "\n{\"success\":true}",
+      "response.body.length": 17,
+      "response.headers": {
+        "Date": "Wed, 19 Aug 2026 20:25:11 GMT",
+        "Server": "Apache/2.4.57 (Debian)",
+        "X-Powered-By": "PHP/8.2.10",
+        "X-Robots-Tag": "noindex",
+        "X-Content-Type-Options": "nosniff",
+        "Expires": "Wed, 11 Jan 1984 05:00:00 GMT",
+        "Cache-Control": "no-cache, must-revalidate, max-age=0",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Content-Length": "17",
+        "Content-Type": "application/json; charset=UTF-8"
+      },
+      "response.status.code": 200,
+      "response.time": 423.186,
+      "number_of_new_paths": 0,
+      "total_hit": 0,
+      "total_unhit": 0,
+      "hit_count": 0,
+      "new_lines": 0,
+      "parent": "1787170964-becdd9f8-3d6e-4ecd-b91b-2ce9336aefb8",
+      "paths": [
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/widgets/class-astra-widget-social-profiles.php::::606_68_69_70_72_73_76_80_81_82_9",
+        "/var/www/html/wp-content/plugins/astra-widgets/admin/bsf-analytics/class-bsf-analytics-loader.php::::10_100_101_106_107_112_113_114_117_119_57_58_61_68_69_78_79_87_89_90_91_93_94_95_96_97_99",
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/class-astra-widgets-helper.php::::45_46_48_57_58_59_797_806_826_896_9_946",
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/widgets/class-astra-widget-list-icons.php::::553_68_69_70_72_73_76_80_81_82_9",
+        "/var/www/html/wp-content/plugins/astra-widgets/admin/bsf-analytics/class-bsf-analytics.php::::10_14_152_154_155_157_162_174_175_177_178_186_278_282_284_285_337_338_347_349_353_354_356_357_358_359_362_363_364_365_366_367_369_370_371_372_373_374_378_46_475_476_50_509_52_53_55_56_57_59_61_63_64_73_74_75_76_78_89_91_93",
+        "/var/www/html/wp-content/plugins/astra-widgets/lib/astra-notices/class-astra-notices.php::::108_109_11_110_111_112_114_118_123_125_126_131_15_181_183_194_198_199_202_206_387_390_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/widgets/class-astra-widget-address.php::::367_58_59_60_62_63_66_69_70_9",
+        "/var/www/html/wp-content/plugins/astra-widgets/admin/bsf-analytics/class-bsf-analytics-stats.php::::12_231_257_8",
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/class-astra-widgets-loader.php::::29_30_32_41_44_45_46_48_49_50_51_59_60_61_62_77_78_9",
+        "/var/www/html/wp-content/plugins/astra-widgets/lib/astra-notices/class-astra-notices.php::::108_109_11_110_111_112_114_118_123_134_15_194_195_387_390_58_59_61_70_71_72_73_74",
+        "/var/www/html/wp-content/plugins/astra-widgets/classes/class-astra-widgets.php::::31_32_34_41_42_47_49_9",
+        "/var/www/html/wp-content/plugins/astra-widgets/astra-widgets.php::::17_24_25_26_27_28_29_31_33_38_42_43_46_48_51_52_53_54_58"
+      ],
+      "new_paths": [],
+      "vulns": [
+        "PathTraversal"
+      ],
+      "score": 12,
+      "is_interesting": false,
+      "fuzzer_id": "7",
+      "is_initial_candidate": false,
+      "mutated_param_type": "body_params",
+      "mutated_param_name": "notice_id"
+    }
+  ]
+}
