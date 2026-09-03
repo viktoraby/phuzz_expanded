@@ -5,105 +5,9 @@
 *Found functions:20
 *Extracted functions:20
 *Total parameter names extracted: 21
-*Overview: {'siteorigin_widget_preview_widget_action': {'so_widgets_preview'}, 'ajax_render_widget_form': {'elementor_editor_get_wp_widget_form'}, 'block_migration_consent': {'so_widgets_block_migration_notice_consent'}, 'siteorigin_widget_remote_image_search': {'so_widgets_image_search'}, 'siteorigin_widget_action_search_terms': {'so_widgets_search_terms'}, 'admin_ajax_settings_save': {'so_widgets_setting_save'}, 'siteorigin_widget_image_import': {'so_widgets_image_import'}, 'manage_product': {'siteorigin_installer_manage'}, 'admin_ajax_manage_handler': {'so_widgets_bundle_manage'}, 'siteorigin_widget_get_posts_count_action': {'sow_get_posts_count'}, 'sow_carousel_get_next_posts_page': {'sow_carousel_load', 'nopriv_sow_carousel_load'}, 'siteorigin_widget_action_search_posts': {'so_widgets_search_posts'}, 'siteorigin_widgets_dismiss_widget_action': {'so_dismiss_widget_teaser'}, 'siteorigin_widget_get_icon_list': {'siteorigin_widgets_get_icons'}, 'installer_status_ajax': {'so_installer_status'}, 'admin_ajax_settings_form': {'so_widgets_setting_form'}, 'sowb_vc_widget_render_form': {'sowb_vc_widget_render_form'}, 'admin_ajax_get_javascript_variables': {'sow_get_javascript_variables'}, 'dismiss_notice': {'so_installer_dismiss'}, 'siteorigin_widgets_links_get_title': {'so_widgets_links_get_title'}}
+*Overview: {'siteorigin_widget_remote_image_search': {'so_widgets_image_search'}, 'siteorigin_widget_action_search_terms': {'so_widgets_search_terms'}, 'admin_ajax_manage_handler': {'so_widgets_bundle_manage'}, 'installer_status_ajax': {'so_installer_status'}, 'manage_product': {'siteorigin_installer_manage'}, 'siteorigin_widget_image_import': {'so_widgets_image_import'}, 'sow_carousel_get_next_posts_page': {'nopriv_sow_carousel_load', 'sow_carousel_load'}, 'siteorigin_widget_get_icon_list': {'siteorigin_widgets_get_icons'}, 'siteorigin_widgets_dismiss_widget_action': {'so_dismiss_widget_teaser'}, 'block_migration_consent': {'so_widgets_block_migration_notice_consent'}, 'siteorigin_widget_preview_widget_action': {'so_widgets_preview'}, 'sowb_vc_widget_render_form': {'sowb_vc_widget_render_form'}, 'dismiss_notice': {'so_installer_dismiss'}, 'siteorigin_widget_get_posts_count_action': {'sow_get_posts_count'}, 'siteorigin_widget_action_search_posts': {'so_widgets_search_posts'}, 'admin_ajax_get_javascript_variables': {'sow_get_javascript_variables'}, 'siteorigin_widgets_links_get_title': {'so_widgets_links_get_title'}, 'admin_ajax_settings_form': {'so_widgets_setting_form'}, 'admin_ajax_settings_save': {'so_widgets_setting_save'}, 'ajax_render_widget_form': {'elementor_editor_get_wp_widget_form'}}
 *
 ***/
-
-/** Function siteorigin_widget_preview_widget_action() called by wp_ajax hooks: {'so_widgets_preview'} **/
-/** Parameters found in function siteorigin_widget_preview_widget_action(): {"post": ["class", "data"]} **/
-function siteorigin_widget_preview_widget_action() {
-	siteorigin_verify_request_permissions();
-
-	if ( empty( $_POST['class'] ) ) {
-		wp_die( __( 'Invalid widget.', 'so-widgets-bundle' ), 400 );
-	}
-
-	// Get the widget from the widget factory
-	global $wp_widget_factory;
-	$widget_class = str_replace( '\\\\', '\\', $_POST['class'] );
-
-	$widget = ! empty( $wp_widget_factory->widgets[ $widget_class ] ) ? $wp_widget_factory->widgets[ $widget_class ] : false;
-
-	if ( ! is_a( $widget, 'SiteOrigin_Widget' ) ) {
-		wp_die( __( 'Invalid post.', 'so-widgets-bundle' ), 400 );
-	}
-
-	$instance = json_decode( stripslashes_deep( $_POST['data'] ), true );
-	/* @var $widget SiteOrigin_Widget */
-	$instance = $widget->update( $instance, $instance );
-	$instance['is_preview'] = true;
-
-	// The theme stylesheet will change how the button looks
-	wp_enqueue_style( 'theme-css', get_stylesheet_uri(), array(), rand( 0, 65536 ) );
-	wp_enqueue_style( 'so-widget-preview', siteorigin_widgets_url( 'base/css/preview.css' ), array(), rand( 0, 65536 ) );
-
-	$sowb = SiteOrigin_Widgets_Bundle::single();
-	$sowb->register_general_scripts();
-
-	do_action( 'siteorigin_widgets_render_preview_' . $widget->id_base, $widget );
-
-	ob_start();
-	$widget->widget(
-		array(
-			'before_widget' => '',
-			'after_widget' => '',
-			'before_title' => '<h3 class="widget-title">',
-			'after_title' => '</h3>',
-		),
-		$instance
-	);
-	$widget_html = ob_get_clean();
-
-	// Print all the scripts and styles
-	?>
-	<html>
-	<head>
-		<title>
-			<?php esc_html_e( 'Widget Preview', 'so-widgets-bundle' ); ?>
-		</title>
-		<?php
-		wp_print_scripts();
-		wp_print_styles();
-		?>
-	</head>
-	<body>
-		<?php // A lot of themes use entry-content as their main content wrapper. ?>
-		<div class="entry-content">
-			<?php echo $widget_html; ?>
-		</div>
-	</body>
-	</html>
-
-	<?php
-	wp_die();
-}
-
-
-/** Function ajax_render_widget_form() called by wp_ajax hooks: {'elementor_editor_get_wp_widget_form'} **/
-/** No params detected :-/ **/
-
-
-/** Function block_migration_consent() called by wp_ajax hooks: {'so_widgets_block_migration_notice_consent'} **/
-/** Parameters found in function block_migration_consent(): {"post": ["nonce"], "request": ["nonce"]} **/
-function block_migration_consent() {
-		if (
-			! empty( $_POST['nonce'] ) &&
-			! wp_verify_nonce( $_REQUEST['nonce'], 'so_block_migration_consent' )
-		) {
-			die();
-		}
-
-		if ( ! current_user_can( 'manage_options' ) ) {
-			die();
-		}
-
-		update_option(
-			'sowb_block_migration',
-			(int) get_current_user_id(),
-			false
-		);
-	}
-
 
 /** Function siteorigin_widget_remote_image_search() called by wp_ajax hooks: {'so_widgets_image_search'} **/
 /** Parameters found in function siteorigin_widget_remote_image_search(): {"get": ["q", "page"]} **/
@@ -193,10 +97,10 @@ function siteorigin_widget_action_search_terms() {
 }
 
 
-/** Function admin_ajax_settings_save() called by wp_ajax hooks: {'so_widgets_setting_save'} **/
-/** Parameters found in function admin_ajax_settings_save(): {"get": ["_wpnonce", "id"]} **/
-function admin_ajax_settings_save() {
-		if ( ! wp_verify_nonce( $_GET['_wpnonce'], 'save-widget-settings' ) ) {
+/** Function admin_ajax_manage_handler() called by wp_ajax hooks: {'so_widgets_bundle_manage'} **/
+/** Parameters found in function admin_ajax_manage_handler(): {"get": ["_wpnonce"], "post": ["widget", "active"]} **/
+function admin_ajax_manage_handler() {
+		if ( ! wp_verify_nonce( $_GET['_wpnonce'], 'manage_so_widget' ) ) {
 			wp_die( __( 'Invalid request.', 'so-widgets-bundle' ), 403 );
 		}
 
@@ -204,71 +108,28 @@ function admin_ajax_settings_save() {
 			wp_die( __( 'Insufficient permissions.', 'so-widgets-bundle' ), 403 );
 		}
 
-		$widget_objects = $this->get_widget_objects();
-		$widget_path = empty( $_GET['id'] ) ?
-			false :
-			wp_normalize_path( WP_PLUGIN_DIR ) . sanitize_text_field( $_GET['id'] );
-
-		$widget_object = empty( $widget_objects[ $widget_path ] ) ? false : $widget_objects[ $widget_path ];
-
-		if ( empty( $widget_object ) || ! $widget_object->has_form( 'settings' ) ) {
-			wp_die( __( 'Invalid request.', 'so-widgets-bundle' ), 400 );
+		if ( empty( $_POST['widget'] ) ) {
+			wp_die( __( 'Invalid post.', 'so-widgets-bundle' ), 400 );
 		}
 
-		$form_values = array_values( $_POST );
-		$form_values = array_shift( $form_values );
-		$widget_object->save_global_settings( stripslashes_deep( array_shift( $form_values ) ) );
-
-		wp_send_json_success();
-	}
-
-
-/** Function siteorigin_widget_image_import() called by wp_ajax hooks: {'so_widgets_image_import'} **/
-/** Parameters found in function siteorigin_widget_image_import(): {"get": ["import_signature", "full_url", "post_id"]} **/
-function siteorigin_widget_image_import() {
-	siteorigin_verify_request_permissions( 'upload_files', '_sononce', 'so-image' );
-
-	if (
-		empty( $_GET['import_signature'] ) ||
-		empty( $_GET['full_url'] ) ||
-		md5( $_GET['full_url'] . '::' . NONCE_SALT ) !== $_GET['import_signature']
-	) {
-		$result = array(
-			'error' => true,
-			'message' => __( 'Signature error', 'so-widgets-bundle' ),
-		);
-	} else {
-		// Fetch the image
-		$src = media_sideload_image( $_GET['full_url'], $_GET['post_id'], null, 'src' );
-
-		if ( is_wp_error( $src ) ) {
-			$result = array(
-				'error' => true,
-				'message' => $src->get_error_code(),
-			);
+		if ( ! empty( $_POST['active'] ) ) {
+			$this->activate_widget( $_POST['widget'] );
 		} else {
-			global $wpdb;
-			$attachment = $wpdb->get_col( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE guid='%s';", $src ) );
-
-			if ( ! empty( $attachment ) ) {
-				$thumb_src = wp_get_attachment_image_src( $attachment[0], 'thumbnail' );
-				$result = array(
-					'error' => false,
-					'attachment_id' => $attachment[0],
-					'thumb' => $thumb_src[0],
-				);
-			} else {
-				$result = array(
-					'error' => true,
-					'message' => __( 'Attachment error', 'so-widgets-bundle' ),
-				);
-			}
+			$this->deactivate_widget( $_POST['widget'] );
 		}
+
+		// Send a kind of dummy response.
+		wp_send_json( array( 'done' => true ) );
 	}
 
-	// Return the result
-	wp_send_json( $result );
-}
+
+/** Function installer_status_ajax() called by wp_ajax hooks: {'so_installer_status'} **/
+/** Parameters found in function installer_status_ajax(): {"post": ["status"]} **/
+function installer_status_ajax () {
+			check_ajax_referer( 'siteorigin_installer_status', 'nonce' );
+			update_option( 'siteorigin_installer', rest_sanitize_boolean( $_POST['status'] ) );
+			die();
+		}
 
 
 /** Function manage_product() called by wp_ajax hooks: {'siteorigin_installer_manage'} **/
@@ -344,44 +205,55 @@ function manage_product() {
 		}
 
 
-/** Function admin_ajax_manage_handler() called by wp_ajax hooks: {'so_widgets_bundle_manage'} **/
-/** Parameters found in function admin_ajax_manage_handler(): {"get": ["_wpnonce"], "post": ["widget", "active"]} **/
-function admin_ajax_manage_handler() {
-		if ( ! wp_verify_nonce( $_GET['_wpnonce'], 'manage_so_widget' ) ) {
-			wp_die( __( 'Invalid request.', 'so-widgets-bundle' ), 403 );
-		}
+/** Function siteorigin_widget_image_import() called by wp_ajax hooks: {'so_widgets_image_import'} **/
+/** Parameters found in function siteorigin_widget_image_import(): {"get": ["import_signature", "full_url", "post_id"]} **/
+function siteorigin_widget_image_import() {
+	siteorigin_verify_request_permissions( 'upload_files', '_sononce', 'so-image' );
 
-		if ( ! current_user_can( apply_filters( 'siteorigin_widgets_admin_menu_capability', 'manage_options' ) ) ) {
-			wp_die( __( 'Insufficient permissions.', 'so-widgets-bundle' ), 403 );
-		}
+	if (
+		empty( $_GET['import_signature'] ) ||
+		empty( $_GET['full_url'] ) ||
+		md5( $_GET['full_url'] . '::' . NONCE_SALT ) !== $_GET['import_signature']
+	) {
+		$result = array(
+			'error' => true,
+			'message' => __( 'Signature error', 'so-widgets-bundle' ),
+		);
+	} else {
+		// Fetch the image
+		$src = media_sideload_image( $_GET['full_url'], $_GET['post_id'], null, 'src' );
 
-		if ( empty( $_POST['widget'] ) ) {
-			wp_die( __( 'Invalid post.', 'so-widgets-bundle' ), 400 );
-		}
-
-		if ( ! empty( $_POST['active'] ) ) {
-			$this->activate_widget( $_POST['widget'] );
+		if ( is_wp_error( $src ) ) {
+			$result = array(
+				'error' => true,
+				'message' => $src->get_error_code(),
+			);
 		} else {
-			$this->deactivate_widget( $_POST['widget'] );
-		}
+			global $wpdb;
+			$attachment = $wpdb->get_col( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE guid='%s';", $src ) );
 
-		// Send a kind of dummy response.
-		wp_send_json( array( 'done' => true ) );
+			if ( ! empty( $attachment ) ) {
+				$thumb_src = wp_get_attachment_image_src( $attachment[0], 'thumbnail' );
+				$result = array(
+					'error' => false,
+					'attachment_id' => $attachment[0],
+					'thumb' => $thumb_src[0],
+				);
+			} else {
+				$result = array(
+					'error' => true,
+					'message' => __( 'Attachment error', 'so-widgets-bundle' ),
+				);
+			}
+		}
 	}
 
-
-/** Function siteorigin_widget_get_posts_count_action() called by wp_ajax hooks: {'sow_get_posts_count'} **/
-/** Parameters found in function siteorigin_widget_get_posts_count_action(): {"post": ["query"]} **/
-function siteorigin_widget_get_posts_count_action() {
-	siteorigin_verify_request_permissions();
-
-	$query = stripslashes( $_POST['query'] );
-
-	wp_send_json( array( 'posts_count' => siteorigin_widget_post_selector_count_posts( $query ) ) );
+	// Return the result
+	wp_send_json( $result );
 }
 
 
-/** Function sow_carousel_get_next_posts_page() called by wp_ajax hooks: {'sow_carousel_load', 'nopriv_sow_carousel_load'} **/
+/** Function sow_carousel_get_next_posts_page() called by wp_ajax hooks: {'nopriv_sow_carousel_load', 'sow_carousel_load'} **/
 /** Parameters found in function sow_carousel_get_next_posts_page(): {"request": ["_widgets_nonce"], "get": ["instance_hash", "paged"]} **/
 function sow_carousel_get_next_posts_page() {
 	if (
@@ -444,8 +316,19 @@ function sow_carousel_get_next_posts_page() {
 }
 
 
-/** Function siteorigin_widget_action_search_posts() called by wp_ajax hooks: {'so_widgets_search_posts'} **/
-/** No params detected :-/ **/
+/** Function siteorigin_widget_get_icon_list() called by wp_ajax hooks: {'siteorigin_widgets_get_icons'} **/
+/** Parameters found in function siteorigin_widget_get_icon_list(): {"get": ["family"]} **/
+function siteorigin_widget_get_icon_list() {
+	siteorigin_verify_request_permissions();
+
+	if ( empty( $_GET['family'] ) ) {
+		wp_die( __( 'Invalid request.', 'so-widgets-bundle' ), 400 );
+	}
+
+	$widget_icon_families = apply_filters( 'siteorigin_widgets_icon_families', array() );
+	$icons = ! empty( $widget_icon_families[ $_GET['family'] ] ) ? $widget_icon_families[ $_GET['family'] ] : array();
+	wp_send_json( $icons );
+}
 
 
 /** Function siteorigin_widgets_dismiss_widget_action() called by wp_ajax hooks: {'so_dismiss_widget_teaser'} **/
@@ -471,28 +354,192 @@ function siteorigin_widgets_dismiss_widget_action() {
 }
 
 
-/** Function siteorigin_widget_get_icon_list() called by wp_ajax hooks: {'siteorigin_widgets_get_icons'} **/
-/** Parameters found in function siteorigin_widget_get_icon_list(): {"get": ["family"]} **/
-function siteorigin_widget_get_icon_list() {
-	siteorigin_verify_request_permissions();
+/** Function block_migration_consent() called by wp_ajax hooks: {'so_widgets_block_migration_notice_consent'} **/
+/** Parameters found in function block_migration_consent(): {"post": ["nonce"], "request": ["nonce"]} **/
+function block_migration_consent() {
+		if (
+			! empty( $_POST['nonce'] ) &&
+			! wp_verify_nonce( $_REQUEST['nonce'], 'so_block_migration_consent' )
+		) {
+			die();
+		}
 
-	if ( empty( $_GET['family'] ) ) {
-		wp_die( __( 'Invalid request.', 'so-widgets-bundle' ), 400 );
+		if ( ! current_user_can( 'manage_options' ) ) {
+			die();
+		}
+
+		update_option(
+			'sowb_block_migration',
+			(int) get_current_user_id(),
+			false
+		);
 	}
 
-	$widget_icon_families = apply_filters( 'siteorigin_widgets_icon_families', array() );
-	$icons = ! empty( $widget_icon_families[ $_GET['family'] ] ) ? $widget_icon_families[ $_GET['family'] ] : array();
-	wp_send_json( $icons );
+
+/** Function siteorigin_widget_preview_widget_action() called by wp_ajax hooks: {'so_widgets_preview'} **/
+/** Parameters found in function siteorigin_widget_preview_widget_action(): {"post": ["class", "data"]} **/
+function siteorigin_widget_preview_widget_action() {
+	siteorigin_verify_request_permissions();
+
+	if ( empty( $_POST['class'] ) ) {
+		wp_die( __( 'Invalid widget.', 'so-widgets-bundle' ), 400 );
+	}
+
+	// Get the widget from the widget factory
+	global $wp_widget_factory;
+	$widget_class = str_replace( '\\\\', '\\', $_POST['class'] );
+
+	$widget = ! empty( $wp_widget_factory->widgets[ $widget_class ] ) ? $wp_widget_factory->widgets[ $widget_class ] : false;
+
+	if ( ! is_a( $widget, 'SiteOrigin_Widget' ) ) {
+		wp_die( __( 'Invalid post.', 'so-widgets-bundle' ), 400 );
+	}
+
+	$instance = json_decode( stripslashes_deep( $_POST['data'] ), true );
+	/* @var $widget SiteOrigin_Widget */
+	$instance = $widget->update( $instance, $instance );
+	$instance['is_preview'] = true;
+
+	// The theme stylesheet will change how the button looks
+	wp_enqueue_style( 'theme-css', get_stylesheet_uri(), array(), rand( 0, 65536 ) );
+	wp_enqueue_style( 'so-widget-preview', siteorigin_widgets_url( 'base/css/preview.css' ), array(), rand( 0, 65536 ) );
+
+	$sowb = SiteOrigin_Widgets_Bundle::single();
+	$sowb->register_general_scripts();
+
+	do_action( 'siteorigin_widgets_render_preview_' . $widget->id_base, $widget );
+
+	ob_start();
+	$widget->widget(
+		array(
+			'before_widget' => '',
+			'after_widget' => '',
+			'before_title' => '<h3 class="widget-title">',
+			'after_title' => '</h3>',
+		),
+		$instance
+	);
+	$widget_html = ob_get_clean();
+
+	// Print all the scripts and styles
+	?>
+	<html>
+	<head>
+		<title>
+			<?php esc_html_e( 'Widget Preview', 'so-widgets-bundle' ); ?>
+		</title>
+		<?php
+		wp_print_scripts();
+		wp_print_styles();
+		?>
+	</head>
+	<body>
+		<?php // A lot of themes use entry-content as their main content wrapper. ?>
+		<div class="entry-content">
+			<?php echo $widget_html; ?>
+		</div>
+	</body>
+	</html>
+
+	<?php
+	wp_die();
 }
 
 
-/** Function installer_status_ajax() called by wp_ajax hooks: {'so_installer_status'} **/
-/** Parameters found in function installer_status_ajax(): {"post": ["status"]} **/
-function installer_status_ajax () {
-			check_ajax_referer( 'siteorigin_installer_status', 'nonce' );
-			update_option( 'siteorigin_installer', rest_sanitize_boolean( $_POST['status'] ) );
-			die();
+/** Function sowb_vc_widget_render_form() called by wp_ajax hooks: {'sowb_vc_widget_render_form'} **/
+/** Parameters found in function sowb_vc_widget_render_form(): {"request": ["widget"]} **/
+function sowb_vc_widget_render_form() {
+		if ( empty( $_REQUEST['widget'] ) ) {
+			wp_die();
 		}
+
+		siteorigin_verify_request_permissions( 'edit_posts', '_sowbnonce', 'sowb_vc_widget_render_form' );
+
+		$request = array_map( 'stripslashes_deep', $_REQUEST );
+		$widget_class = $request['widget'];
+
+		global $wp_widget_factory;
+
+		$widget = ! empty( $wp_widget_factory->widgets[ $widget_class ] ) ? $wp_widget_factory->widgets[ $widget_class ] : false;
+
+		if ( ! empty( $widget ) && is_object( $widget ) && is_subclass_of( $widget, 'SiteOrigin_Widget' ) ) {
+			/* @var $widget SiteOrigin_Widget */
+			$widget->form( array() );
+		}
+
+		wp_die();
+	}
+
+
+/** Function dismiss_notice() called by wp_ajax hooks: {'so_installer_dismiss'} **/
+/** No params detected :-/ **/
+
+
+/** Function siteorigin_widget_get_posts_count_action() called by wp_ajax hooks: {'sow_get_posts_count'} **/
+/** Parameters found in function siteorigin_widget_get_posts_count_action(): {"post": ["query"]} **/
+function siteorigin_widget_get_posts_count_action() {
+	siteorigin_verify_request_permissions();
+
+	$query = stripslashes( $_POST['query'] );
+
+	wp_send_json( array( 'posts_count' => siteorigin_widget_post_selector_count_posts( $query ) ) );
+}
+
+
+/** Function siteorigin_widget_action_search_posts() called by wp_ajax hooks: {'so_widgets_search_posts'} **/
+/** No params detected :-/ **/
+
+
+/** Function admin_ajax_get_javascript_variables() called by wp_ajax hooks: {'sow_get_javascript_variables'} **/
+/** Parameters found in function admin_ajax_get_javascript_variables(): {"post": ["widget"]} **/
+function admin_ajax_get_javascript_variables() {
+		siteorigin_verify_request_permissions();
+
+		$widget_class = $_POST['widget'];
+		global $wp_widget_factory;
+
+		if ( empty( $wp_widget_factory->widgets[ $widget_class ] ) ) {
+			wp_die( __( 'Invalid post.', 'so-widgets-bundle' ), 400 );
+		}
+
+		$widget = $wp_widget_factory->widgets[ $widget_class ];
+
+		if ( ! method_exists( $widget, 'get_javascript_variables' ) ) {
+			wp_die( __( 'Invalid request.', 'so-widgets-bundle' ), 400 );
+		}
+
+		$result = $widget->get_javascript_variables();
+
+		wp_send_json( $result );
+	}
+
+
+/** Function siteorigin_widgets_links_get_title() called by wp_ajax hooks: {'so_widgets_links_get_title'} **/
+/** Parameters found in function siteorigin_widgets_links_get_title(): {"request": ["_widgets_nonce"], "get": ["postId"]} **/
+function siteorigin_widgets_links_get_title() {
+	if (
+		empty( $_REQUEST['_widgets_nonce'] ) ||
+		! wp_verify_nonce( $_REQUEST['_widgets_nonce'], 'widgets_action' )
+	) {
+		wp_die( __( 'Invalid request.', 'so-widgets-bundle' ), 403 );
+	}
+
+	if (
+		empty( $_GET['postId'] ) ||
+		! is_numeric( $_GET['postId'] )
+	) {
+		wp_die( __( 'Invalid request.', 'so-widgets-bundle' ), 400 );
+	}
+
+	// Don't allow users to link to posts they can't view.
+	if ( ! current_user_can( 'read_post', $_GET['postId'] ) ) {
+		wp_die( __( 'Invalid request.', 'so-widgets-bundle' ), 403 );
+	}
+
+	$postTitle = get_the_title( $_GET['postId'] );
+	echo ! empty( $postTitle ) ? esc_attr( $postTitle ) : esc_html__( '(No Title)', 'so-widgets-bundle' );
+	die();
+}
 
 
 /** Function admin_ajax_settings_form() called by wp_ajax hooks: {'so_widgets_setting_form'} **/
@@ -539,84 +586,37 @@ function admin_ajax_settings_form() {
 	}
 
 
-/** Function sowb_vc_widget_render_form() called by wp_ajax hooks: {'sowb_vc_widget_render_form'} **/
-/** Parameters found in function sowb_vc_widget_render_form(): {"request": ["widget"]} **/
-function sowb_vc_widget_render_form() {
-		if ( empty( $_REQUEST['widget'] ) ) {
-			wp_die();
+/** Function admin_ajax_settings_save() called by wp_ajax hooks: {'so_widgets_setting_save'} **/
+/** Parameters found in function admin_ajax_settings_save(): {"get": ["_wpnonce", "id"]} **/
+function admin_ajax_settings_save() {
+		if ( ! wp_verify_nonce( $_GET['_wpnonce'], 'save-widget-settings' ) ) {
+			wp_die( __( 'Invalid request.', 'so-widgets-bundle' ), 403 );
 		}
 
-		siteorigin_verify_request_permissions( 'edit_posts', '_sowbnonce', 'sowb_vc_widget_render_form' );
-
-		$request = array_map( 'stripslashes_deep', $_REQUEST );
-		$widget_class = $request['widget'];
-
-		global $wp_widget_factory;
-
-		$widget = ! empty( $wp_widget_factory->widgets[ $widget_class ] ) ? $wp_widget_factory->widgets[ $widget_class ] : false;
-
-		if ( ! empty( $widget ) && is_object( $widget ) && is_subclass_of( $widget, 'SiteOrigin_Widget' ) ) {
-			/* @var $widget SiteOrigin_Widget */
-			$widget->form( array() );
+		if ( ! current_user_can( apply_filters( 'siteorigin_widgets_admin_menu_capability', 'manage_options' ) ) ) {
+			wp_die( __( 'Insufficient permissions.', 'so-widgets-bundle' ), 403 );
 		}
 
-		wp_die();
-	}
+		$widget_objects = $this->get_widget_objects();
+		$widget_path = empty( $_GET['id'] ) ?
+			false :
+			wp_normalize_path( WP_PLUGIN_DIR ) . sanitize_text_field( $_GET['id'] );
 
+		$widget_object = empty( $widget_objects[ $widget_path ] ) ? false : $widget_objects[ $widget_path ];
 
-/** Function admin_ajax_get_javascript_variables() called by wp_ajax hooks: {'sow_get_javascript_variables'} **/
-/** Parameters found in function admin_ajax_get_javascript_variables(): {"post": ["widget"]} **/
-function admin_ajax_get_javascript_variables() {
-		siteorigin_verify_request_permissions();
-
-		$widget_class = $_POST['widget'];
-		global $wp_widget_factory;
-
-		if ( empty( $wp_widget_factory->widgets[ $widget_class ] ) ) {
-			wp_die( __( 'Invalid post.', 'so-widgets-bundle' ), 400 );
-		}
-
-		$widget = $wp_widget_factory->widgets[ $widget_class ];
-
-		if ( ! method_exists( $widget, 'get_javascript_variables' ) ) {
+		if ( empty( $widget_object ) || ! $widget_object->has_form( 'settings' ) ) {
 			wp_die( __( 'Invalid request.', 'so-widgets-bundle' ), 400 );
 		}
 
-		$result = $widget->get_javascript_variables();
+		$form_values = array_values( $_POST );
+		$form_values = array_shift( $form_values );
+		$widget_object->save_global_settings( stripslashes_deep( array_shift( $form_values ) ) );
 
-		wp_send_json( $result );
+		wp_send_json_success();
 	}
 
 
-/** Function dismiss_notice() called by wp_ajax hooks: {'so_installer_dismiss'} **/
+/** Function ajax_render_widget_form() called by wp_ajax hooks: {'elementor_editor_get_wp_widget_form'} **/
 /** No params detected :-/ **/
-
-
-/** Function siteorigin_widgets_links_get_title() called by wp_ajax hooks: {'so_widgets_links_get_title'} **/
-/** Parameters found in function siteorigin_widgets_links_get_title(): {"request": ["_widgets_nonce"], "get": ["postId"]} **/
-function siteorigin_widgets_links_get_title() {
-	if (
-		empty( $_REQUEST['_widgets_nonce'] ) ||
-		! wp_verify_nonce( $_REQUEST['_widgets_nonce'], 'widgets_action' )
-	) {
-		wp_die( __( 'Invalid request.', 'so-widgets-bundle' ), 403 );
-	}
-
-	if (
-		empty( $_GET['postId'] ) ||
-		! is_numeric( $_GET['postId'] )
-	) {
-		wp_die( __( 'Invalid request.', 'so-widgets-bundle' ), 400 );
-	}
-
-	// Don't allow users to link to posts they can't view.
-	if ( ! current_user_can( 'read_post', $_GET['postId'] ) ) {
-		wp_die( __( 'Invalid request.', 'so-widgets-bundle' ), 403 );
-	}
-
-	$postTitle = get_the_title( $_GET['postId'] );
-	echo ! empty( $postTitle ) ? esc_attr( $postTitle ) : esc_html__( '(No Title)', 'so-widgets-bundle' );
-	die();
-}
 
 

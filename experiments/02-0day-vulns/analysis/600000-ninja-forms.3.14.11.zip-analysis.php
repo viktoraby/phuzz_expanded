@@ -5,404 +5,12 @@
 *Found functions:24
 *Extracted functions:20
 *Total parameter names extracted: 15
-*Overview: {'update': {'nf_update_saved_field', 'nf_preview_update'}, 'ninja_forms_dashboard_nonce': {'nf_update_cache_mode'}, 'create': {'nf_create_saved_field'}, 'maybe_opt_in': {'nf_optin'}, 'get_new_nonce': {'nf_ajax_get_new_nonce', 'nopriv_nf_ajax_get_new_nonce'}, 'log_error': {'nf_log_js_error', 'nopriv_nf_log_js_error'}, 'ninja_forms_admin_all_forms_capabilities': {'nf_oauth'}, 'delete': {'nf_delete_saved_field', 'nf_delete_form', 'nf_delete'}, 'save': {'nf_save_form'}, 'wp_ajax_ninja_forms_sendwp_remote_install_handler': {'ninja_forms_sendwp_remote_install'}, 'duplicate': {'nf_duplicate'}, 'remove_maintenance_mode': {'nf_remove_maintenance_mode'}, 'disconnect': {'nf_oauth_disconnect'}, 'get_forms': {'nf_get_forms'}, 'resume': {'nopriv_nf_ajax_resume', 'nf_ajax_resume'}, 'hide_columns': {'nf_hide_columns'}, 'maybe_delete_field': {'nf_maybe_delete_field'}, 'delete_all_data': {'nf_delete_all_data'}, 'submit': {'nopriv_nf_ajax_submit', 'nf_ajax_submit'}, 'DashboardServices': {'nf_services'}, 'connect': {'nf_oauth_connect'}, '<pre>': {'nf_services_install'}, 'get_new_form_templates': {'nf_get_new_form_templates'}, 'handle': {'nf_onboarding_complete', 'nf_onboarding_dismiss', 'nf_onboarding_next', 'nf_onboarding_start'}}
+*Overview: {'DashboardServices': {'nf_services'}, 'submit': {'nopriv_nf_ajax_submit', 'nf_ajax_submit'}, 'save': {'nf_save_form'}, 'remove_maintenance_mode': {'nf_remove_maintenance_mode'}, 'delete': {'nf_delete_form', 'nf_delete_saved_field', 'nf_delete'}, 'create': {'nf_create_saved_field'}, 'resume': {'nopriv_nf_ajax_resume', 'nf_ajax_resume'}, 'maybe_opt_in': {'nf_optin'}, 'ninja_forms_admin_all_forms_capabilities': {'nf_oauth'}, 'get_new_nonce': {'nf_ajax_get_new_nonce', 'nopriv_nf_ajax_get_new_nonce'}, 'wp_ajax_ninja_forms_sendwp_remote_install_handler': {'ninja_forms_sendwp_remote_install'}, 'connect': {'nf_oauth_connect'}, '<pre>': {'nf_services_install'}, 'get_new_form_templates': {'nf_get_new_form_templates'}, 'ninja_forms_dashboard_nonce': {'nf_update_cache_mode'}, 'disconnect': {'nf_oauth_disconnect'}, 'get_forms': {'nf_get_forms'}, 'delete_all_data': {'nf_delete_all_data'}, 'log_error': {'nopriv_nf_log_js_error', 'nf_log_js_error'}, 'hide_columns': {'nf_hide_columns'}, 'handle': {'nf_onboarding_next', 'nf_onboarding_start', 'nf_onboarding_complete', 'nf_onboarding_dismiss'}, 'maybe_delete_field': {'nf_maybe_delete_field'}, 'duplicate': {'nf_duplicate'}, 'update': {'nf_preview_update', 'nf_update_saved_field'}}
 *
 ***/
 
-/** Function update() called by wp_ajax hooks: {'nf_update_saved_field', 'nf_preview_update'} **/
-/** No params detected :-/ **/
-
-
-/** Function ninja_forms_dashboard_nonce() called by wp_ajax hooks: {'nf_update_cache_mode'} **/
+/** Function DashboardServices() called by wp_ajax hooks: {'nf_services'} **/
 /** No function found :-/ **/
-
-
-/** Function create() called by wp_ajax hooks: {'nf_create_saved_field'} **/
-/** No params detected :-/ **/
-
-
-/** Function maybe_opt_in() called by wp_ajax hooks: {'nf_optin'} **/
-/** Parameters found in function maybe_opt_in(): {"post": ["_wpnonce"]} **/
-function maybe_opt_in()
-    {
-        // Verify nonce for CSRF protection
-        if ( ! isset( $_POST['_wpnonce'] ) || ! wp_verify_nonce( $_POST['_wpnonce'], 'nf_optin_nonce' ) ) {
-            wp_die( 'Security check failed' );
-        }
-
-        if( $this->can_opt_in() ) {
-
-            $opt_in_action = htmlspecialchars( $_POST[ self::FLAG ] );
-
-            if( self::OPT_IN == $opt_in_action ){
-                $this->opt_in();
-            }
-
-            if( self::OPT_OUT == $opt_in_action ){
-                $this->opt_out();
-            }
-        }
-        die( 1 );
-    }
-
-
-/** Function get_new_nonce() called by wp_ajax hooks: {'nf_ajax_get_new_nonce', 'nopriv_nf_ajax_get_new_nonce'} **/
-/** No params detected :-/ **/
-
-
-/** Function log_error() called by wp_ajax hooks: {'nf_log_js_error', 'nopriv_nf_log_js_error'} **/
-/** Parameters found in function log_error(): {"request": ["message", "url", "lineNumber"]} **/
-function log_error()
-    {
-        check_ajax_referer( 'ninja_forms_display_nonce', 'security' );
-        $message = esc_html( stripslashes( $_REQUEST[ 'message' ] ) );
-        $url = esc_html( stripslashes( $_REQUEST[ 'url' ] ) );
-        $lineNumber = esc_html( stripslashes( $_REQUEST[ 'lineNumber' ] ) );
-
-        Ninja_Forms()->logger()->emergency( $message . ' in ' . $url . ' on line ' . $lineNumber );
- 
-        die( 1 );
-    }
-
-
-/** Function ninja_forms_admin_all_forms_capabilities() called by wp_ajax hooks: {'nf_oauth'} **/
-/** No function found :-/ **/
-
-
-/** Function delete() called by wp_ajax hooks: {'nf_delete_saved_field', 'nf_delete_form', 'nf_delete'} **/
-/** No params detected :-/ **/
-
-
-/** Function save() called by wp_ajax hooks: {'nf_save_form'} **/
-/** No params detected :-/ **/
-
-
-/** Function wp_ajax_ninja_forms_sendwp_remote_install_handler() called by wp_ajax hooks: {'ninja_forms_sendwp_remote_install'} **/
-/** Parameters found in function wp_ajax_ninja_forms_sendwp_remote_install_handler(): {"request": ["nonce"]} **/
-function wp_ajax_ninja_forms_sendwp_remote_install_handler () {
-    if (!current_user_can('manage_options') || ! isset($_REQUEST['nonce']) || ! wp_verify_nonce( $_REQUEST['nonce'] , 'ninja_forms_sendwp_remote_install') ) {
-        ob_end_clean();
-        echo json_encode( array( 'error' => esc_html__( 'Something went wrong. SendWP was not installed correctly.', 'ninja-forms') ) );
-        exit;
-    }
-
-    $all_plugins = get_plugins();
-    $is_sendwp_installed = false;
-    foreach(get_plugins() as $path => $details ) {
-        if(false === strpos($path, '/sendwp.php')) continue;
-        $is_sendwp_installed = true;
-        activate_plugin( $path );
-        break;
-    }
-
-    if( ! $is_sendwp_installed ) {
-
-        $plugin_slug = 'sendwp';
-
-        include_once ABSPATH . 'wp-admin/includes/plugin-install.php';
-        include_once ABSPATH . 'wp-admin/includes/file.php';
-        include_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
-        
-        /*
-        * Use the WordPress Plugins API to get the plugin download link.
-        */
-        $api = plugins_api( 'plugin_information', array(
-            'slug' => $plugin_slug,
-        ) );
-        if ( is_wp_error( $api ) ) {
-            ob_end_clean();
-            echo json_encode( array( 'error' => $api->get_error_message(), 'debug' => $api ) );
-            exit;
-        }
-        
-        /*
-        * Use the AJAX Upgrader skin to quietly install the plugin.
-        */
-        $upgrader = new Plugin_Upgrader( new WP_Ajax_Upgrader_Skin() );
-        $install = $upgrader->install( $api->download_link );
-        if ( is_wp_error( $install ) ) {
-            ob_end_clean();
-            echo json_encode( array( 'error' => $install->get_error_message(), 'debug' => $api ) );
-            exit;
-        }
-        
-        /*
-        * Activate the plugin based on the results of the upgrader.
-        * @NOTE Assume this works, if the download works - otherwise there is a false positive if the plugin is already installed.
-        */
-        $activated = activate_plugin( $upgrader->plugin_info() );
-
-    }
-
-    /*
-     * Final check to see if SendWP is available.
-     */
-    if( ! function_exists('sendwp_get_server_url') ) {
-        ob_end_clean();
-        echo json_encode( array(
-            'error' => esc_html__( 'Something went wrong. SendWP was not installed correctly.' ),
-            'install' => $install,
-            ) );
-        exit;
-    }
-    
-    echo json_encode( array(
-        'partner_id' => 16,
-        'register_url' => esc_url(sendwp_get_server_url() . '_/signup'),
-        'client_name' => esc_attr( sendwp_get_client_name() ),
-        'client_secret' => esc_attr( sendwp_get_client_secret() ),
-        'client_redirect' => esc_url(sendwp_get_client_redirect()),
-        'client_url' => esc_url( sendwp_get_client_url() ),
-    ) );
-    exit;
-}
-
-
-/** Function duplicate() called by wp_ajax hooks: {'nf_duplicate'} **/
-/** Parameters found in function duplicate(): {"request": ["form_id"]} **/
-function duplicate()
-    {
-        $form_id = absint($_REQUEST[ 'form_id' ]);
-
-        //Copied and pasted from NF_Database_models_Form::duplicate line 136
-        $form = Ninja_Forms()->form( $form_id )->get();
-
-        $settings = $form->get_settings();
-
-        $new_form = Ninja_Forms()->form()->get();
-        $new_form->update_settings( $settings );
-
-        $form_title = $form->get_setting( 'title' );
-
-        $new_form_title = $form_title . " - " . esc_html__( 'copy', 'ninja-forms' );
-
-        $new_form->update_setting( 'title', $new_form_title );
-
-        $new_form->update_setting( 'lock', 0 );
-
-        $new_form->save();
-
-        $new_form_id = $new_form->get_id();
-
-        $fields = Ninja_Forms()->form( $form_id )->get_fields();
-
-        foreach( $fields as $field ){
-
-            $field_settings = $field->get_settings();
-
-            $field_settings[ 'parent_id' ] = $new_form_id;
-
-            $new_field = Ninja_Forms()->form( $new_form_id )->field()->get();
-            $new_field->update_settings( $field_settings )->save();
-        }
-
-        $actions = Ninja_Forms()->form( $form_id )->get_actions();
-
-        foreach( $actions as $action ){
-
-            $action_settings = $action->get_settings();
-
-            $new_action = Ninja_Forms()->form( $new_form_id )->action()->get();
-            $new_action->update_settings( $action_settings )->save();
-        }
-
-        return $new_form_id;
-
-    }
-
-
-/** Function remove_maintenance_mode() called by wp_ajax hooks: {'nf_remove_maintenance_mode'} **/
-/** No params detected :-/ **/
-
-
-/** Function disconnect() called by wp_ajax hooks: {'nf_oauth_disconnect'} **/
-/** Parameters found in function disconnect(): {"request": ["nonce"]} **/
-function disconnect() {
-
-    // Does the current user have admin privileges
-    if (!current_user_can('manage_options')) {
-      return;
-    }
-
-    if( ! wp_verify_nonce( $_REQUEST['nonce'], 'nf-oauth-disconnect' ) ) return;
-
-    do_action( 'ninja_forms_oauth_disconnect' );
-
-    $url = trailingslashit( $this->base_url ) . 'disconnect';
-    $args = [
-      'blocking' => false,
-      'method' => 'DELETE',
-      'body' => [
-        'client_id' => get_option( 'ninja_forms_oauth_client_id' ),
-        'client_secret' => get_option( 'ninja_forms_oauth_client_secret' )
-      ]
-    ];
-    $response = wp_remote_request( $url, $args );
-
-    delete_option( 'ninja_forms_oauth_client_id' );
-    delete_option( 'ninja_forms_oauth_client_secret' );
-    wp_die( 1 );
-  }
-
-
-/** Function get_forms() called by wp_ajax hooks: {'nf_get_forms'} **/
-/** No params detected :-/ **/
-
-
-/** Function resume() called by wp_ajax hooks: {'nopriv_nf_ajax_resume', 'nf_ajax_resume'} **/
-/** Parameters found in function resume(): {"post": ["nf_resume"]} **/
-function resume()
-    {
-        $this->_form_data = Ninja_Forms()->session()->get( 'nf_processing_form_data' );
-        $this->_form_cache = Ninja_Forms()->session()->get( 'nf_processing_form_cache' );
-        $this->_data = Ninja_Forms()->session()->get( 'nf_processing_data' );
-        $this->_data[ 'resume' ] = WPN_Helper::sanitize_text_field($_POST[ 'nf_resume' ]);
-
-        $this->_form_id = $this->_data[ 'form_id' ];
-
-        unset( $this->_data[ 'halt' ] );
-        unset( $this->_data[ 'actions' ][ 'redirect' ] );
-
-        $this->process();
-    }
-
-
-/** Function hide_columns() called by wp_ajax hooks: {'nf_hide_columns'} **/
-/** Parameters found in function hide_columns(): {"request": ["form_id"], "post": ["hidden"]} **/
-function hide_columns() {
-        // Grab our current user.
-        $user = wp_get_current_user();
-        // Grab our form id.
-        $form_id = absint( $_REQUEST['form_id'] );
-        $hidden = isset( $_POST['hidden'] ) ? explode( ',', esc_html( $_POST['hidden'] ) ) : array();
-        $hidden = array_filter( $hidden );
-        $hidden = array_map( function($field) {
-            if( is_numeric($field) ) {
-                $field = absint($field);
-            }
-            return $field;
-        }, $hidden );
-        update_user_option( $user->ID, 'manageedit-nf_subcolumnshidden-form-' . $form_id, $hidden, true );
-        die();
-    }
-
-
-/** Function maybe_delete_field() called by wp_ajax hooks: {'nf_maybe_delete_field'} **/
-/** Parameters found in function maybe_delete_field(): {"request": ["security", "fieldID", "fieldKey"]} **/
-function maybe_delete_field() {
-
-		// Does the current user have admin privileges
-		if (!current_user_can(apply_filters('ninja_forms_admin_all_forms_capabilities', 'manage_options'))) {
-			$this->_data['errors'] = esc_html__('Access denied. You must have admin privileges to perform this action.', 'ninja-forms');
-			$this->_respond();
-		}
-
-		// If we don't have a nonce...
-        // OR if the nonce is invalid...
-        if (!isset($_REQUEST['security']) || !wp_verify_nonce($_REQUEST['security'], 'ninja_forms_builder_nonce')) {
-            // Kick the request out now.
-            $this->_data['errors'] = esc_html__('Request forbidden.', 'ninja-forms');
-            $this->_respond();
-        }
-
-		if (!isset($_REQUEST['fieldID']) || empty($_REQUEST['fieldID'])) {
-			$this->_respond();
-		}
-		$field_id = absint($_REQUEST[ 'fieldID' ]);
-//		$field_key = $_REQUEST[ 'fieldKey' ];
-
-		global $wpdb;
-		// query for checking postmeta for submission data for field
-		$sql = $wpdb->prepare( "SELECT meta_value FROM `" . $wpdb->prefix . "postmeta` 
-			WHERE meta_key = '_field_%d' LIMIT 1", $field_id );
-		$result = $wpdb->get_results( $sql, 'ARRAY_N' );
-
-		$has_data = false;
-
-		// if there are results, has_data is true
-		if( 0 < count( $result ) ) {
-			$has_data = true;
-		}
-		$this->_data[ 'field_has_data' ] = $has_data;
-
-		$this->_respond();
-	}
-
-
-/** Function delete_all_data() called by wp_ajax hooks: {'nf_delete_all_data'} **/
-/** Parameters found in function delete_all_data(): {"request": ["security"], "post": ["form", "last_form"]} **/
-function delete_all_data()
-	{
-		// Does the current user have admin privileges
-		if (!current_user_can(apply_filters('ninja_forms_admin_all_forms_capabilities', 'manage_options'))) {
-			$this->_data['errors'] = esc_html__('Access denied. You must have admin privileges to perform this action.', 'ninja-forms');
-			$this->_respond();
-		}
-
-		// If we don't have a nonce...
-        // OR if the nonce is invalid...
-        if (!isset($_REQUEST['security']) || !wp_verify_nonce($_REQUEST['security'], 'ninja_forms_settings_nonce')) {
-            // Kick the request out now.
-            $this->_data['errors'] = esc_html__('Request forbidden.', 'ninja-forms');
-            $this->_respond();
-        }
-
-		check_ajax_referer( 'ninja_forms_settings_nonce', 'security' );
-
-		global $wpdb;
-		$total_subs_deleted = 0;
-		$post_result = 0;
-		$max_cnt = 500;
-
-		if (!isset($_POST['form']) || empty($_POST['form'])) {
-			$this->_respond();
-		}
-
-		$form_id = absint($_POST[ 'form' ]);
-		// SQL for getting 250 subs at a time
-		$sub_sql = "SELECT id FROM `" . $wpdb->prefix . "posts` AS p
-			LEFT JOIN `" . $wpdb->prefix . "postmeta` AS m ON p.id = m.post_id
-			WHERE p.post_type = 'nf_sub' AND m.meta_key = '_form_id'
-			AND m.meta_value = %s LIMIT " . $max_cnt;
-
-		while ($post_result <= $max_cnt ) {
-			$subs = $wpdb->get_col( $wpdb->prepare( $sub_sql, $form_id ),0 );
-			// if we are out of subs, then stop
-			if( 0 === count( $subs ) ) break;
-			// otherwise, let's delete the postmeta as well
-			$delete_meta_query = "DELETE FROM `" . $wpdb->prefix . "postmeta` WHERE post_id IN ( [IN] )";
-			$delete_meta_query = $this->prepare_in( $delete_meta_query, $subs );
-			$meta_result       = $wpdb->query( $delete_meta_query );
-			if ( $meta_result > 0 ) {
-				// now we actually delete the posts(nf_sub)
-				$delete_post_query = "DELETE FROM `" . $wpdb->prefix . "posts` WHERE id IN ( [IN] )";
-				$delete_post_query = $this->prepare_in( $delete_post_query, $subs );
-				$post_result       = $wpdb->query( $delete_post_query );
-				$total_subs_deleted = $total_subs_deleted + $post_result;
-
-			}
-		}
-
-		$this->_data[ 'form_id' ] = $form_id;
-		$this->_data[ 'delete_count' ] = $total_subs_deleted;
-		$this->_data[ 'success' ] = true;
-
-		if ( isset( $_POST['last_form'] ) && 1 == absint( $_POST['last_form'] ) ) {
-			// If we are on the last form, then deactivate and nuke db tables.
-			$migrations = new NF_Database_Migrations();
-
-			$nuke_multisite = $this->should_nuke_multisite();
-
-			$migrations->nuke( TRUE, TRUE, $nuke_multisite );
-			$migrations->nuke_settings( TRUE, TRUE, $nuke_multisite );
-			$migrations->nuke_deprecated( TRUE, TRUE, $nuke_multisite );
-
-			deactivate_plugins( 'ninja-forms/ninja-forms.php' );
-			$this->_data['plugin_url'] = admin_url( 'plugins.php' );
-		}
-
-		$this->_respond();
-	}
 
 
 /** Function submit() called by wp_ajax hooks: {'nopriv_nf_ajax_submit', 'nf_ajax_submit'} **/
@@ -516,8 +124,152 @@ function submit()
     }
 
 
-/** Function DashboardServices() called by wp_ajax hooks: {'nf_services'} **/
+/** Function save() called by wp_ajax hooks: {'nf_save_form'} **/
+/** No params detected :-/ **/
+
+
+/** Function remove_maintenance_mode() called by wp_ajax hooks: {'nf_remove_maintenance_mode'} **/
+/** No params detected :-/ **/
+
+
+/** Function delete() called by wp_ajax hooks: {'nf_delete_form', 'nf_delete_saved_field', 'nf_delete'} **/
+/** No params detected :-/ **/
+
+
+/** Function create() called by wp_ajax hooks: {'nf_create_saved_field'} **/
+/** No params detected :-/ **/
+
+
+/** Function resume() called by wp_ajax hooks: {'nopriv_nf_ajax_resume', 'nf_ajax_resume'} **/
+/** Parameters found in function resume(): {"post": ["nf_resume"]} **/
+function resume()
+    {
+        $this->_form_data = Ninja_Forms()->session()->get( 'nf_processing_form_data' );
+        $this->_form_cache = Ninja_Forms()->session()->get( 'nf_processing_form_cache' );
+        $this->_data = Ninja_Forms()->session()->get( 'nf_processing_data' );
+        $this->_data[ 'resume' ] = WPN_Helper::sanitize_text_field($_POST[ 'nf_resume' ]);
+
+        $this->_form_id = $this->_data[ 'form_id' ];
+
+        unset( $this->_data[ 'halt' ] );
+        unset( $this->_data[ 'actions' ][ 'redirect' ] );
+
+        $this->process();
+    }
+
+
+/** Function maybe_opt_in() called by wp_ajax hooks: {'nf_optin'} **/
+/** Parameters found in function maybe_opt_in(): {"post": ["_wpnonce"]} **/
+function maybe_opt_in()
+    {
+        // Verify nonce for CSRF protection
+        if ( ! isset( $_POST['_wpnonce'] ) || ! wp_verify_nonce( $_POST['_wpnonce'], 'nf_optin_nonce' ) ) {
+            wp_die( 'Security check failed' );
+        }
+
+        if( $this->can_opt_in() ) {
+
+            $opt_in_action = htmlspecialchars( $_POST[ self::FLAG ] );
+
+            if( self::OPT_IN == $opt_in_action ){
+                $this->opt_in();
+            }
+
+            if( self::OPT_OUT == $opt_in_action ){
+                $this->opt_out();
+            }
+        }
+        die( 1 );
+    }
+
+
+/** Function ninja_forms_admin_all_forms_capabilities() called by wp_ajax hooks: {'nf_oauth'} **/
 /** No function found :-/ **/
+
+
+/** Function get_new_nonce() called by wp_ajax hooks: {'nf_ajax_get_new_nonce', 'nopriv_nf_ajax_get_new_nonce'} **/
+/** No params detected :-/ **/
+
+
+/** Function wp_ajax_ninja_forms_sendwp_remote_install_handler() called by wp_ajax hooks: {'ninja_forms_sendwp_remote_install'} **/
+/** Parameters found in function wp_ajax_ninja_forms_sendwp_remote_install_handler(): {"request": ["nonce"]} **/
+function wp_ajax_ninja_forms_sendwp_remote_install_handler () {
+    if (!current_user_can('manage_options') || ! isset($_REQUEST['nonce']) || ! wp_verify_nonce( $_REQUEST['nonce'] , 'ninja_forms_sendwp_remote_install') ) {
+        ob_end_clean();
+        echo json_encode( array( 'error' => esc_html__( 'Something went wrong. SendWP was not installed correctly.', 'ninja-forms') ) );
+        exit;
+    }
+
+    $all_plugins = get_plugins();
+    $is_sendwp_installed = false;
+    foreach(get_plugins() as $path => $details ) {
+        if(false === strpos($path, '/sendwp.php')) continue;
+        $is_sendwp_installed = true;
+        activate_plugin( $path );
+        break;
+    }
+
+    if( ! $is_sendwp_installed ) {
+
+        $plugin_slug = 'sendwp';
+
+        include_once ABSPATH . 'wp-admin/includes/plugin-install.php';
+        include_once ABSPATH . 'wp-admin/includes/file.php';
+        include_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
+        
+        /*
+        * Use the WordPress Plugins API to get the plugin download link.
+        */
+        $api = plugins_api( 'plugin_information', array(
+            'slug' => $plugin_slug,
+        ) );
+        if ( is_wp_error( $api ) ) {
+            ob_end_clean();
+            echo json_encode( array( 'error' => $api->get_error_message(), 'debug' => $api ) );
+            exit;
+        }
+        
+        /*
+        * Use the AJAX Upgrader skin to quietly install the plugin.
+        */
+        $upgrader = new Plugin_Upgrader( new WP_Ajax_Upgrader_Skin() );
+        $install = $upgrader->install( $api->download_link );
+        if ( is_wp_error( $install ) ) {
+            ob_end_clean();
+            echo json_encode( array( 'error' => $install->get_error_message(), 'debug' => $api ) );
+            exit;
+        }
+        
+        /*
+        * Activate the plugin based on the results of the upgrader.
+        * @NOTE Assume this works, if the download works - otherwise there is a false positive if the plugin is already installed.
+        */
+        $activated = activate_plugin( $upgrader->plugin_info() );
+
+    }
+
+    /*
+     * Final check to see if SendWP is available.
+     */
+    if( ! function_exists('sendwp_get_server_url') ) {
+        ob_end_clean();
+        echo json_encode( array(
+            'error' => esc_html__( 'Something went wrong. SendWP was not installed correctly.' ),
+            'install' => $install,
+            ) );
+        exit;
+    }
+    
+    echo json_encode( array(
+        'partner_id' => 16,
+        'register_url' => esc_url(sendwp_get_server_url() . '_/signup'),
+        'client_name' => esc_attr( sendwp_get_client_name() ),
+        'client_secret' => esc_attr( sendwp_get_client_secret() ),
+        'client_redirect' => esc_url(sendwp_get_client_redirect()),
+        'client_url' => esc_url( sendwp_get_client_url() ),
+    ) );
+    exit;
+}
 
 
 /** Function connect() called by wp_ajax hooks: {'nf_oauth_connect'} **/
@@ -555,7 +307,255 @@ function connect() {
 /** No params detected :-/ **/
 
 
-/** Function handle() called by wp_ajax hooks: {'nf_onboarding_complete', 'nf_onboarding_dismiss', 'nf_onboarding_next', 'nf_onboarding_start'} **/
+/** Function ninja_forms_dashboard_nonce() called by wp_ajax hooks: {'nf_update_cache_mode'} **/
+/** No function found :-/ **/
+
+
+/** Function disconnect() called by wp_ajax hooks: {'nf_oauth_disconnect'} **/
+/** Parameters found in function disconnect(): {"request": ["nonce"]} **/
+function disconnect() {
+
+    // Does the current user have admin privileges
+    if (!current_user_can('manage_options')) {
+      return;
+    }
+
+    if( ! wp_verify_nonce( $_REQUEST['nonce'], 'nf-oauth-disconnect' ) ) return;
+
+    do_action( 'ninja_forms_oauth_disconnect' );
+
+    $url = trailingslashit( $this->base_url ) . 'disconnect';
+    $args = [
+      'blocking' => false,
+      'method' => 'DELETE',
+      'body' => [
+        'client_id' => get_option( 'ninja_forms_oauth_client_id' ),
+        'client_secret' => get_option( 'ninja_forms_oauth_client_secret' )
+      ]
+    ];
+    $response = wp_remote_request( $url, $args );
+
+    delete_option( 'ninja_forms_oauth_client_id' );
+    delete_option( 'ninja_forms_oauth_client_secret' );
+    wp_die( 1 );
+  }
+
+
+/** Function get_forms() called by wp_ajax hooks: {'nf_get_forms'} **/
+/** No params detected :-/ **/
+
+
+/** Function delete_all_data() called by wp_ajax hooks: {'nf_delete_all_data'} **/
+/** Parameters found in function delete_all_data(): {"request": ["security"], "post": ["form", "last_form"]} **/
+function delete_all_data()
+	{
+		// Does the current user have admin privileges
+		if (!current_user_can(apply_filters('ninja_forms_admin_all_forms_capabilities', 'manage_options'))) {
+			$this->_data['errors'] = esc_html__('Access denied. You must have admin privileges to perform this action.', 'ninja-forms');
+			$this->_respond();
+		}
+
+		// If we don't have a nonce...
+        // OR if the nonce is invalid...
+        if (!isset($_REQUEST['security']) || !wp_verify_nonce($_REQUEST['security'], 'ninja_forms_settings_nonce')) {
+            // Kick the request out now.
+            $this->_data['errors'] = esc_html__('Request forbidden.', 'ninja-forms');
+            $this->_respond();
+        }
+
+		check_ajax_referer( 'ninja_forms_settings_nonce', 'security' );
+
+		global $wpdb;
+		$total_subs_deleted = 0;
+		$post_result = 0;
+		$max_cnt = 500;
+
+		if (!isset($_POST['form']) || empty($_POST['form'])) {
+			$this->_respond();
+		}
+
+		$form_id = absint($_POST[ 'form' ]);
+		// SQL for getting 250 subs at a time
+		$sub_sql = "SELECT id FROM `" . $wpdb->prefix . "posts` AS p
+			LEFT JOIN `" . $wpdb->prefix . "postmeta` AS m ON p.id = m.post_id
+			WHERE p.post_type = 'nf_sub' AND m.meta_key = '_form_id'
+			AND m.meta_value = %s LIMIT " . $max_cnt;
+
+		while ($post_result <= $max_cnt ) {
+			$subs = $wpdb->get_col( $wpdb->prepare( $sub_sql, $form_id ),0 );
+			// if we are out of subs, then stop
+			if( 0 === count( $subs ) ) break;
+			// otherwise, let's delete the postmeta as well
+			$delete_meta_query = "DELETE FROM `" . $wpdb->prefix . "postmeta` WHERE post_id IN ( [IN] )";
+			$delete_meta_query = $this->prepare_in( $delete_meta_query, $subs );
+			$meta_result       = $wpdb->query( $delete_meta_query );
+			if ( $meta_result > 0 ) {
+				// now we actually delete the posts(nf_sub)
+				$delete_post_query = "DELETE FROM `" . $wpdb->prefix . "posts` WHERE id IN ( [IN] )";
+				$delete_post_query = $this->prepare_in( $delete_post_query, $subs );
+				$post_result       = $wpdb->query( $delete_post_query );
+				$total_subs_deleted = $total_subs_deleted + $post_result;
+
+			}
+		}
+
+		$this->_data[ 'form_id' ] = $form_id;
+		$this->_data[ 'delete_count' ] = $total_subs_deleted;
+		$this->_data[ 'success' ] = true;
+
+		if ( isset( $_POST['last_form'] ) && 1 == absint( $_POST['last_form'] ) ) {
+			// If we are on the last form, then deactivate and nuke db tables.
+			$migrations = new NF_Database_Migrations();
+
+			$nuke_multisite = $this->should_nuke_multisite();
+
+			$migrations->nuke( TRUE, TRUE, $nuke_multisite );
+			$migrations->nuke_settings( TRUE, TRUE, $nuke_multisite );
+			$migrations->nuke_deprecated( TRUE, TRUE, $nuke_multisite );
+
+			deactivate_plugins( 'ninja-forms/ninja-forms.php' );
+			$this->_data['plugin_url'] = admin_url( 'plugins.php' );
+		}
+
+		$this->_respond();
+	}
+
+
+/** Function log_error() called by wp_ajax hooks: {'nopriv_nf_log_js_error', 'nf_log_js_error'} **/
+/** Parameters found in function log_error(): {"request": ["message", "url", "lineNumber"]} **/
+function log_error()
+    {
+        check_ajax_referer( 'ninja_forms_display_nonce', 'security' );
+        $message = esc_html( stripslashes( $_REQUEST[ 'message' ] ) );
+        $url = esc_html( stripslashes( $_REQUEST[ 'url' ] ) );
+        $lineNumber = esc_html( stripslashes( $_REQUEST[ 'lineNumber' ] ) );
+
+        Ninja_Forms()->logger()->emergency( $message . ' in ' . $url . ' on line ' . $lineNumber );
+ 
+        die( 1 );
+    }
+
+
+/** Function hide_columns() called by wp_ajax hooks: {'nf_hide_columns'} **/
+/** Parameters found in function hide_columns(): {"request": ["form_id"], "post": ["hidden"]} **/
+function hide_columns() {
+        // Grab our current user.
+        $user = wp_get_current_user();
+        // Grab our form id.
+        $form_id = absint( $_REQUEST['form_id'] );
+        $hidden = isset( $_POST['hidden'] ) ? explode( ',', esc_html( $_POST['hidden'] ) ) : array();
+        $hidden = array_filter( $hidden );
+        $hidden = array_map( function($field) {
+            if( is_numeric($field) ) {
+                $field = absint($field);
+            }
+            return $field;
+        }, $hidden );
+        update_user_option( $user->ID, 'manageedit-nf_subcolumnshidden-form-' . $form_id, $hidden, true );
+        die();
+    }
+
+
+/** Function handle() called by wp_ajax hooks: {'nf_onboarding_next', 'nf_onboarding_start', 'nf_onboarding_complete', 'nf_onboarding_dismiss'} **/
+/** No params detected :-/ **/
+
+
+/** Function maybe_delete_field() called by wp_ajax hooks: {'nf_maybe_delete_field'} **/
+/** Parameters found in function maybe_delete_field(): {"request": ["security", "fieldID", "fieldKey"]} **/
+function maybe_delete_field() {
+
+		// Does the current user have admin privileges
+		if (!current_user_can(apply_filters('ninja_forms_admin_all_forms_capabilities', 'manage_options'))) {
+			$this->_data['errors'] = esc_html__('Access denied. You must have admin privileges to perform this action.', 'ninja-forms');
+			$this->_respond();
+		}
+
+		// If we don't have a nonce...
+        // OR if the nonce is invalid...
+        if (!isset($_REQUEST['security']) || !wp_verify_nonce($_REQUEST['security'], 'ninja_forms_builder_nonce')) {
+            // Kick the request out now.
+            $this->_data['errors'] = esc_html__('Request forbidden.', 'ninja-forms');
+            $this->_respond();
+        }
+
+		if (!isset($_REQUEST['fieldID']) || empty($_REQUEST['fieldID'])) {
+			$this->_respond();
+		}
+		$field_id = absint($_REQUEST[ 'fieldID' ]);
+//		$field_key = $_REQUEST[ 'fieldKey' ];
+
+		global $wpdb;
+		// query for checking postmeta for submission data for field
+		$sql = $wpdb->prepare( "SELECT meta_value FROM `" . $wpdb->prefix . "postmeta` 
+			WHERE meta_key = '_field_%d' LIMIT 1", $field_id );
+		$result = $wpdb->get_results( $sql, 'ARRAY_N' );
+
+		$has_data = false;
+
+		// if there are results, has_data is true
+		if( 0 < count( $result ) ) {
+			$has_data = true;
+		}
+		$this->_data[ 'field_has_data' ] = $has_data;
+
+		$this->_respond();
+	}
+
+
+/** Function duplicate() called by wp_ajax hooks: {'nf_duplicate'} **/
+/** Parameters found in function duplicate(): {"request": ["form_id"]} **/
+function duplicate()
+    {
+        $form_id = absint($_REQUEST[ 'form_id' ]);
+
+        //Copied and pasted from NF_Database_models_Form::duplicate line 136
+        $form = Ninja_Forms()->form( $form_id )->get();
+
+        $settings = $form->get_settings();
+
+        $new_form = Ninja_Forms()->form()->get();
+        $new_form->update_settings( $settings );
+
+        $form_title = $form->get_setting( 'title' );
+
+        $new_form_title = $form_title . " - " . esc_html__( 'copy', 'ninja-forms' );
+
+        $new_form->update_setting( 'title', $new_form_title );
+
+        $new_form->update_setting( 'lock', 0 );
+
+        $new_form->save();
+
+        $new_form_id = $new_form->get_id();
+
+        $fields = Ninja_Forms()->form( $form_id )->get_fields();
+
+        foreach( $fields as $field ){
+
+            $field_settings = $field->get_settings();
+
+            $field_settings[ 'parent_id' ] = $new_form_id;
+
+            $new_field = Ninja_Forms()->form( $new_form_id )->field()->get();
+            $new_field->update_settings( $field_settings )->save();
+        }
+
+        $actions = Ninja_Forms()->form( $form_id )->get_actions();
+
+        foreach( $actions as $action ){
+
+            $action_settings = $action->get_settings();
+
+            $new_action = Ninja_Forms()->form( $new_form_id )->action()->get();
+            $new_action->update_settings( $action_settings )->save();
+        }
+
+        return $new_form_id;
+
+    }
+
+
+/** Function update() called by wp_ajax hooks: {'nf_preview_update', 'nf_update_saved_field'} **/
 /** No params detected :-/ **/
 
 

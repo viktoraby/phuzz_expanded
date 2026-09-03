@@ -5,9 +5,21 @@
 *Found functions:4
 *Extracted functions:4
 *Total parameter names extracted: 1
-*Overview: {'fileorganizer_close_update_notice': {'fileorganizer_close_update_notice'}, 'fileorganizer_switch_theme': {'fileorganizer_switch_theme'}, 'fileorganizer_ajax_handler': {'fileorganizer_file_folder_manager'}, 'fileorganizer_hide_promo': {'fileorganizer_hide_promo'}}
+*Overview: {'fileorganizer_hide_promo': {'fileorganizer_hide_promo'}, 'fileorganizer_switch_theme': {'fileorganizer_switch_theme'}, 'fileorganizer_ajax_handler': {'fileorganizer_file_folder_manager'}, 'fileorganizer_close_update_notice': {'fileorganizer_close_update_notice'}}
 *
 ***/
+
+/** Function fileorganizer_hide_promo() called by wp_ajax hooks: {'fileorganizer_hide_promo'} **/
+/** No params detected :-/ **/
+
+
+/** Function fileorganizer_switch_theme() called by wp_ajax hooks: {'fileorganizer_switch_theme'} **/
+/** No params detected :-/ **/
+
+
+/** Function fileorganizer_ajax_handler() called by wp_ajax hooks: {'fileorganizer_file_folder_manager'} **/
+/** No params detected :-/ **/
+
 
 /** Function fileorganizer_close_update_notice() called by wp_ajax hooks: {'fileorganizer_close_update_notice'} **/
 /** Parameters found in function fileorganizer_close_update_notice(): {"get": ["security"]} **/
@@ -37,17 +49,5 @@ function fileorganizer_close_update_notice(){
 
 	update_option('softaculous_plugin_update_notice', $plugin_update_notice);
 }
-
-
-/** Function fileorganizer_switch_theme() called by wp_ajax hooks: {'fileorganizer_switch_theme'} **/
-/** No params detected :-/ **/
-
-
-/** Function fileorganizer_ajax_handler() called by wp_ajax hooks: {'fileorganizer_file_folder_manager'} **/
-/** No params detected :-/ **/
-
-
-/** Function fileorganizer_hide_promo() called by wp_ajax hooks: {'fileorganizer_hide_promo'} **/
-/** No params detected :-/ **/
 
 

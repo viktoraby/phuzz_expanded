@@ -5,177 +5,72 @@
 *Found functions:25
 *Extracted functions:25
 *Total parameter names extracted: 15
-*Overview: {'process_ajax': {'easy_wp_smtp_ajax'}, 'email_domain_check_test': {'health-check-email-domain_check_test'}, 'ajax_dismiss': {'easy_wp_smtp_activelayer_wc_dismiss', 'easy_wp_smtp_email_sending_errors_dismiss'}, 'remove_oauth_connection': {'easy_wp_smtp_vue_remove_oauth_connection'}, 'send_feedback': {'easy_wp_smtp_vue_send_feedback'}, 'get_partner_plugins_info': {'easy_wp_smtp_vue_get_partner_plugins_info'}, 'clear_log': {'swpsmtp_clear_log'}, 'ajax_init_connect': {'easy_wp_smtp_sendlayer_connect'}, 'process_ajax_debug_event_preview': {'easy_wp_smtp_debug_event_preview'}, 'init_migrations_ajax_handler': {'nopriv_easy_wp_smtp_init_migrations'}, 'get_settings': {'easy_wp_smtp_vue_get_settings'}, 'check_mailer_configuration': {'easy_wp_smtp_vue_check_mailer_configuration'}, 'get_oauth_url': {'easy_wp_smtp_vue_get_oauth_url'}, 'subscribe_to_newsletter': {'easy_wp_smtp_vue_subscribe_to_newsletter'}, 'upgrade_plugin': {'easy_wp_smtp_vue_upgrade_plugin'}, 'update_settings': {'easy_wp_smtp_vue_update_settings'}, 'wizard_steps_started': {'easy_wp_smtp_vue_wizard_steps_started'}, 'install_plugin': {'easy_wp_smtp_vue_install_plugin'}, 'feedback_notice_dismiss': {'easy_wp_smtp_feedback_notice_dismiss'}, 'ajax_generate_url': {'easy_wp_smtp_connect_url'}, 'ajax_check_plugin_status': {'easy_wp_smtp_page_check_{$plugin}_status'}, 'process_ajax_delete_all_debug_events': {'easy_wp_smtp_delete_all_debug_events'}, 'ajax_disconnect': {'easy_wp_smtp_sendlayer_disconnect'}, 'dismiss': {'easy_wp_smtp_notification_dismiss'}, 'process': {'nopriv_easy_wp_smtp_connect_process'}}
+*Overview: {'ajax_generate_url': {'easy_wp_smtp_connect_url'}, 'ajax_init_connect': {'easy_wp_smtp_sendlayer_connect'}, 'ajax_disconnect': {'easy_wp_smtp_sendlayer_disconnect'}, 'init_migrations_ajax_handler': {'nopriv_easy_wp_smtp_init_migrations'}, 'feedback_notice_dismiss': {'easy_wp_smtp_feedback_notice_dismiss'}, 'email_domain_check_test': {'health-check-email-domain_check_test'}, 'process_ajax': {'easy_wp_smtp_ajax'}, 'process': {'nopriv_easy_wp_smtp_connect_process'}, 'install_plugin': {'easy_wp_smtp_vue_install_plugin'}, 'get_settings': {'easy_wp_smtp_vue_get_settings'}, 'ajax_dismiss': {'easy_wp_smtp_email_sending_errors_dismiss', 'easy_wp_smtp_activelayer_wc_dismiss'}, 'remove_oauth_connection': {'easy_wp_smtp_vue_remove_oauth_connection'}, 'send_feedback': {'easy_wp_smtp_vue_send_feedback'}, 'clear_log': {'swpsmtp_clear_log'}, 'subscribe_to_newsletter': {'easy_wp_smtp_vue_subscribe_to_newsletter'}, 'check_mailer_configuration': {'easy_wp_smtp_vue_check_mailer_configuration'}, 'wizard_steps_started': {'easy_wp_smtp_vue_wizard_steps_started'}, 'process_ajax_delete_all_debug_events': {'easy_wp_smtp_delete_all_debug_events'}, 'process_ajax_debug_event_preview': {'easy_wp_smtp_debug_event_preview'}, 'dismiss': {'easy_wp_smtp_notification_dismiss'}, 'update_settings': {'easy_wp_smtp_vue_update_settings'}, 'get_oauth_url': {'easy_wp_smtp_vue_get_oauth_url'}, 'get_partner_plugins_info': {'easy_wp_smtp_vue_get_partner_plugins_info'}, 'upgrade_plugin': {'easy_wp_smtp_vue_upgrade_plugin'}, 'ajax_check_plugin_status': {'easy_wp_smtp_page_check_{$plugin}_status'}}
 *
 ***/
 
-/** Function process_ajax() called by wp_ajax hooks: {'easy_wp_smtp_ajax'} **/
-/** Parameters found in function process_ajax(): {"post": ["task"]} **/
-function process_ajax() {
+/** Function ajax_generate_url() called by wp_ajax hooks: {'easy_wp_smtp_connect_url'} **/
+/** Parameters found in function ajax_generate_url(): {"post": ["key"]} **/
+function ajax_generate_url() { //phpcs:ignore Generic.Metrics.CyclomaticComplexity.TooHigh
 
-		$data = [];
+		// Run a security check.
+		check_ajax_referer( 'easy-wp-smtp-connect', 'nonce' );
 
-		// Only admins can fire these ajax requests.
-		if ( ! current_user_can( easy_wp_smtp()->get_capability_manage_options() ) ) {
-			wp_send_json_error( $data );
+		// Check for permissions.
+		if ( ! current_user_can( 'install_plugins' ) ) {
+			wp_send_json_error(
+				[
+					'message' => esc_html__( 'You are not allowed to install plugins.', 'easy-wp-smtp' ),
+				]
+			);
 		}
 
-		check_ajax_referer( 'easy-wp-smtp-admin', 'nonce' );
+		$key = ! empty( $_POST['key'] ) ? sanitize_text_field( wp_unslash( $_POST['key'] ) ) : '';
 
-		if ( empty( $_POST['task'] ) ) {
-			wp_send_json_error( $data );
+		if ( empty( $key ) ) {
+			wp_send_json_error(
+				[
+					'message' => esc_html__( 'Please enter your license key to connect.', 'easy-wp-smtp' ),
+				]
+			);
 		}
 
-		$task = sanitize_key( $_POST['task'] );
-
-		switch ( $task ) {
-			case 'pro_banner_dismiss':
-				update_user_meta( get_current_user_id(), 'easy_wp_smtp_pro_banner_dismissed', true );
-				$data['message'] = esc_html__( 'Easy WP SMTP Pro related message was successfully dismissed.', 'easy-wp-smtp' );
-				break;
-
-			case 'notice_dismiss':
-				$dismissal_response = $this->dismiss_notice_via_ajax();
-
-				if ( empty( $dismissal_response ) ) {
-					break;
-				}
-
-				$data['message'] = $dismissal_response;
-				break;
-
-			case 'about_plugin_install':
-				// Installs (and silently activates) a curated recommended plugin.
-				// Sends its own JSON response and exits.
-				$this->recommended_plugins->ajax_plugin_install();
-				break;
-
-			case 'about_plugin_activate':
-				// Activates an already-installed curated recommended plugin.
-				// Sends its own JSON response and exits.
-				$this->recommended_plugins->ajax_plugin_activate();
-				break;
-
-			default:
-				// Allow custom tasks data processing being added here.
-				$data = apply_filters( 'easy_wp_smtp_admin_process_ajax_' . $task . '_data', $data );
+		if ( easy_wp_smtp()->is_pro() ) {
+			wp_send_json_error(
+				[
+					'message' => esc_html__( 'Only the Lite version can be upgraded.', 'easy-wp-smtp' ),
+				]
+			);
 		}
 
-		// Final ability to rewrite all the data, just in case.
-		$data = (array) apply_filters( 'easy_wp_smtp_admin_process_ajax_data', $data, $task );
+		// Verify pro version is not installed.
+		$active = activate_plugin( 'easy-wp-smtp-pro/easy_wp_smtp.php', false, false, true );
 
-		if ( empty( $data ) ) {
-			wp_send_json_error( $data );
+		if ( ! is_wp_error( $active ) ) {
+
+			// Deactivate Lite.
+			deactivate_plugins( plugin_basename( EasyWPSMTP_PLUGIN_FILE ) );
+
+			wp_send_json_success(
+				[
+					'message' => esc_html__( 'Easy WP SMTP Pro was already installed, but was not active. We activated it for you.', 'easy-wp-smtp' ),
+					'reload'  => true,
+				]
+			);
 		}
 
-		wp_send_json_success( $data );
+		$url = self::generate_url( $key );
+
+		if ( empty( $url ) ) {
+			wp_send_json_error(
+				[
+					'message' => esc_html__( 'There was an error while generating an upgrade URL. Please try again.', 'easy-wp-smtp' ),
+				]
+			);
+		}
+
+		wp_send_json_success( [ 'url' => $url ] );
 	}
-
-
-/** Function email_domain_check_test() called by wp_ajax hooks: {'health-check-email-domain_check_test'} **/
-/** No params detected :-/ **/
-
-
-/** Function ajax_dismiss() called by wp_ajax hooks: {'easy_wp_smtp_activelayer_wc_dismiss', 'easy_wp_smtp_email_sending_errors_dismiss'} **/
-/** Parameters found in function ajax_dismiss(): {"post": ["connection_id"]} **/
-function ajax_dismiss() {
-
-		if ( ! check_ajax_referer( 'easy-wp-smtp-admin', 'nonce', false ) ) {
-			wp_send_json_error( esc_html__( 'Security check failed. Please reload the page and try again.', 'easy-wp-smtp' ) );
-		}
-
-		if ( ! current_user_can( easy_wp_smtp()->get_capability_manage_options() ) ) {
-			wp_send_json_error( esc_html__( 'You don\'t have permission to perform this action.', 'easy-wp-smtp' ) );
-		}
-
-		$connection_id = isset( $_POST['connection_id'] ) ? sanitize_key( wp_unslash( $_POST['connection_id'] ) ) : '';
-
-		if ( empty( $connection_id ) ) {
-			wp_send_json_error( esc_html__( 'Missing connection identifier.', 'easy-wp-smtp' ) );
-		}
-
-		EmailSendingDebug::clear( $connection_id );
-
-		wp_send_json_success();
-	}
-
-
-/** Function remove_oauth_connection() called by wp_ajax hooks: {'easy_wp_smtp_vue_remove_oauth_connection'} **/
-/** Parameters found in function remove_oauth_connection(): {"post": ["mailer"]} **/
-function remove_oauth_connection() {
-
-		check_ajax_referer( 'easywpsmtp-admin-nonce', 'nonce' );
-
-		if ( ! current_user_can( easy_wp_smtp()->get_capability_manage_global_options() ) ) {
-			wp_send_json_error();
-		}
-
-		$mailer = ! empty( $_POST['mailer'] ) ? sanitize_text_field( wp_unslash( $_POST['mailer'] ) ) : '';
-
-		if ( empty( $mailer ) ) {
-			wp_send_json_error();
-		}
-
-		$options = Options::init();
-		$old_opt = $options->get_all_raw();
-
-		foreach ( $old_opt[ $mailer ] as $key => $value ) {
-			// Unset everything except Client ID, Client Secret and Domain.
-			if ( ! in_array( $key, [ 'domain', 'client_id', 'client_secret' ], true ) ) {
-				unset( $old_opt[ $mailer ][ $key ] );
-			}
-		}
-
-		$options->set( $old_opt );
-
-		wp_send_json_success();
-	}
-
-
-/** Function send_feedback() called by wp_ajax hooks: {'easy_wp_smtp_vue_send_feedback'} **/
-/** Parameters found in function send_feedback(): {"post": ["data"]} **/
-function send_feedback() {
-
-		check_ajax_referer( 'easywpsmtp-admin-nonce', 'nonce' );
-
-		if ( ! current_user_can( easy_wp_smtp()->get_capability_manage_global_options() ) ) {
-			wp_send_json_error();
-		}
-
-		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-		$data = ! empty( $_POST['data'] ) ? json_decode( wp_unslash( $_POST['data'] ), true ) : [];
-
-		$feedback   = ! empty( $data['feedback'] ) ? sanitize_textarea_field( $data['feedback'] ) : '';
-		$permission = ! empty( $data['permission'] );
-
-		wp_remote_post(
-			'https://easywpsmtp.com/wizard-feedback/',
-			[
-				'user-agent' => Helpers::get_default_user_agent(),
-				'body'       => [
-					'wpforms' => [
-						'id'     => 2271,
-						'fields' => [
-							'1' => $feedback,
-							'2' => $permission ? wp_get_current_user()->user_email : '',
-							'3' => easy_wp_smtp()->get_license_type(),
-							'4' => EasyWPSMTP_PLUGIN_VERSION,
-						],
-					],
-				],
-			]
-		);
-
-		wp_send_json_success();
-	}
-
-
-/** Function get_partner_plugins_info() called by wp_ajax hooks: {'easy_wp_smtp_vue_get_partner_plugins_info'} **/
-/** No params detected :-/ **/
-
-
-/** Function clear_log() called by wp_ajax hooks: {'swpsmtp_clear_log'} **/
-/** No params detected :-/ **/
 
 
 /** Function ajax_init_connect() called by wp_ajax hooks: {'easy_wp_smtp_sendlayer_connect'} **/
@@ -338,40 +233,8 @@ function ajax_init_connect() { // phpcs:ignore Generic.Metrics.CyclomaticComplex
 	}
 
 
-/** Function process_ajax_debug_event_preview() called by wp_ajax hooks: {'easy_wp_smtp_debug_event_preview'} **/
-/** Parameters found in function process_ajax_debug_event_preview(): {"post": ["nonce", "id"]} **/
-function process_ajax_debug_event_preview() {
-
-		if (
-			empty( $_POST['nonce'] ) ||
-			! wp_verify_nonce( sanitize_key( $_POST['nonce'] ), 'easy_wp_smtp_debug_events' )
-		) {
-			wp_send_json_error( esc_html__( 'Access rejected.', 'easy-wp-smtp' ) );
-		}
-
-		if ( ! current_user_can( easy_wp_smtp()->get_capability_manage_options() ) ) {
-			wp_send_json_error( esc_html__( 'You don\'t have the capability to perform this action.', 'easy-wp-smtp' ) );
-		}
-
-		if ( ! self::is_valid_db() ) {
-			wp_send_json_error( esc_html__( 'For some reason the database table was not installed correctly. Please contact plugin support team to diagnose and fix the issue.', 'easy-wp-smtp' ) );
-		}
-
-		$event_id = isset( $_POST['id'] ) ? intval( $_POST['id'] ) : false;
-
-		if ( empty( $event_id ) ) {
-			wp_send_json_error( esc_html__( 'No Debug Event ID provided!', 'easy-wp-smtp' ) );
-		}
-
-		$event = new Event( $event_id );
-
-		wp_send_json_success(
-			[
-				'title'   => $event->get_title(),
-				'content' => $event->get_details_html(),
-			]
-		);
-	}
+/** Function ajax_disconnect() called by wp_ajax hooks: {'easy_wp_smtp_sendlayer_disconnect'} **/
+/** No params detected :-/ **/
 
 
 /** Function init_migrations_ajax_handler() called by wp_ajax hooks: {'nopriv_easy_wp_smtp_init_migrations'} **/
@@ -391,158 +254,78 @@ function init_migrations_ajax_handler() {
 	}
 
 
-/** Function get_settings() called by wp_ajax hooks: {'easy_wp_smtp_vue_get_settings'} **/
+/** Function feedback_notice_dismiss() called by wp_ajax hooks: {'easy_wp_smtp_feedback_notice_dismiss'} **/
 /** No params detected :-/ **/
 
 
-/** Function check_mailer_configuration() called by wp_ajax hooks: {'easy_wp_smtp_vue_check_mailer_configuration'} **/
+/** Function email_domain_check_test() called by wp_ajax hooks: {'health-check-email-domain_check_test'} **/
 /** No params detected :-/ **/
 
 
-/** Function get_oauth_url() called by wp_ajax hooks: {'easy_wp_smtp_vue_get_oauth_url'} **/
-/** Parameters found in function get_oauth_url(): {"post": ["mailer", "settings"]} **/
-function get_oauth_url() { // phpcs:ignore Generic.Metrics.CyclomaticComplexity.TooHigh
+/** Function process_ajax() called by wp_ajax hooks: {'easy_wp_smtp_ajax'} **/
+/** Parameters found in function process_ajax(): {"post": ["task"]} **/
+function process_ajax() {
 
-		check_ajax_referer( 'easywpsmtp-admin-nonce', 'nonce' );
+		$data = [];
 
-		if ( ! current_user_can( easy_wp_smtp()->get_capability_manage_global_options() ) ) {
-			wp_send_json_error();
+		// Only admins can fire these ajax requests.
+		if ( ! current_user_can( easy_wp_smtp()->get_capability_manage_options() ) ) {
+			wp_send_json_error( $data );
 		}
 
-		$data   = [];
-		$mailer = ! empty( $_POST['mailer'] ) ? sanitize_text_field( wp_unslash( $_POST['mailer'] ) ) : '';
+		check_ajax_referer( 'easy-wp-smtp-admin', 'nonce' );
 
-		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-		$settings = isset( $_POST['settings'] ) ? wp_slash( json_decode( wp_unslash( $_POST['settings'] ), true ) ) : [];
-
-		if ( empty( $mailer ) ) {
-			wp_send_json_error();
+		if ( empty( $_POST['task'] ) ) {
+			wp_send_json_error( $data );
 		}
 
-		$settings = array_merge( $settings, [ 'is_setup_wizard_auth' => true ] );
+		$task = sanitize_key( $_POST['task'] );
 
-		$options = Options::init();
-		$options->set( [ $mailer => $settings ], false, false );
+		switch ( $task ) {
+			case 'pro_banner_dismiss':
+				update_user_meta( get_current_user_id(), 'easy_wp_smtp_pro_banner_dismissed', true );
+				$data['message'] = esc_html__( 'Easy WP SMTP Pro related message was successfully dismissed.', 'easy-wp-smtp' );
+				break;
 
-		$data = apply_filters( 'easy_wp_smtp_admin_setup_wizard_get_oauth_url', $data, $mailer );
+			case 'notice_dismiss':
+				$dismissal_response = $this->dismiss_notice_via_ajax();
 
-		wp_send_json_success( array_merge( [ 'mailer' => $mailer ], $data ) );
+				if ( empty( $dismissal_response ) ) {
+					break;
+				}
+
+				$data['message'] = $dismissal_response;
+				break;
+
+			case 'about_plugin_install':
+				// Installs (and silently activates) a curated recommended plugin.
+				// Sends its own JSON response and exits.
+				$this->recommended_plugins->ajax_plugin_install();
+				break;
+
+			case 'about_plugin_activate':
+				// Activates an already-installed curated recommended plugin.
+				// Sends its own JSON response and exits.
+				$this->recommended_plugins->ajax_plugin_activate();
+				break;
+
+			default:
+				// Allow custom tasks data processing being added here.
+				$data = apply_filters( 'easy_wp_smtp_admin_process_ajax_' . $task . '_data', $data );
+		}
+
+		// Final ability to rewrite all the data, just in case.
+		$data = (array) apply_filters( 'easy_wp_smtp_admin_process_ajax_data', $data, $task );
+
+		if ( empty( $data ) ) {
+			wp_send_json_error( $data );
+		}
+
+		wp_send_json_success( $data );
 	}
 
 
-/** Function subscribe_to_newsletter() called by wp_ajax hooks: {'easy_wp_smtp_vue_subscribe_to_newsletter'} **/
-/** Parameters found in function subscribe_to_newsletter(): {"post": ["email"]} **/
-function subscribe_to_newsletter() {
-
-		check_ajax_referer( 'easywpsmtp-admin-nonce', 'nonce' );
-
-		if ( ! current_user_can( easy_wp_smtp()->get_capability_manage_global_options() ) ) {
-			wp_send_json_error( esc_html__( 'You don\'t have the permission to perform this action.', 'easy-wp-smtp' ) );
-		}
-
-		$email = ! empty( $_POST['email'] ) ? filter_var( wp_unslash( $_POST['email'] ), FILTER_VALIDATE_EMAIL ) : '';
-
-		if ( empty( $email ) ) {
-			wp_send_json_error();
-		}
-
-		$body = [
-			'email' => base64_encode( $email ), // phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.obfuscation_base64_encode
-		];
-
-		$wpforms_version_type = $this->get_wpforms_version_type();
-
-		if ( ! empty( $wpforms_version_type ) ) {
-			$body['wpforms_version_type'] = $wpforms_version_type;
-		}
-
-		wp_remote_post(
-			'https://connect.easywpsmtp.com/subscribe/drip/',
-			[
-				'user-agent' => Helpers::get_default_user_agent(),
-				'body'       => $body,
-			]
-		);
-
-		wp_send_json_success();
-	}
-
-
-/** Function upgrade_plugin() called by wp_ajax hooks: {'easy_wp_smtp_vue_upgrade_plugin'} **/
-/** Parameters found in function upgrade_plugin(): {"post": ["license_key"]} **/
-function upgrade_plugin() {
-
-		check_ajax_referer( 'easywpsmtp-admin-nonce', 'nonce' );
-
-		if ( easy_wp_smtp()->is_pro() ) {
-			wp_send_json_success( esc_html__( 'You are already using the Easy WP SMTP PRO version. Please refresh this page and verify your license key.', 'easy-wp-smtp' ) );
-		}
-
-		if ( ! current_user_can( 'install_plugins' ) ) {
-			wp_send_json_error( esc_html__( 'You don\'t have the permission to perform this action.', 'easy-wp-smtp' ) );
-		}
-
-		$license_key = ! empty( $_POST['license_key'] ) ? sanitize_key( $_POST['license_key'] ) : '';
-
-		if ( empty( $license_key ) ) {
-			wp_send_json_error( esc_html__( 'Please enter a valid license key!', 'easy-wp-smtp' ) );
-		}
-
-		$url = Connect::generate_url(
-			$license_key,
-			'',
-			add_query_arg( 'upgrade-redirect', '1', self::get_site_url() ) . '#/step/license'
-		);
-
-		if ( empty( $url ) ) {
-			wp_send_json_error( esc_html__( 'Upgrade functionality not available!', 'easy-wp-smtp' ) );
-		}
-
-		wp_send_json_success( [ 'redirect_url' => $url ] );
-	}
-
-
-/** Function update_settings() called by wp_ajax hooks: {'easy_wp_smtp_vue_update_settings'} **/
-/** Parameters found in function update_settings(): {"post": ["overwrite", "value"]} **/
-function update_settings() {
-
-		check_ajax_referer( 'easywpsmtp-admin-nonce', 'nonce' );
-
-		if ( ! current_user_can( easy_wp_smtp()->get_capability_manage_global_options() ) ) {
-			wp_send_json_error();
-		}
-
-		$options   = Options::init();
-		$overwrite = ! empty( $_POST['overwrite'] );
-
-		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-		$value = isset( $_POST['value'] ) ? wp_slash( json_decode( wp_unslash( $_POST['value'] ), true ) ) : [];
-
-		// Cancel summary report email task if summary report email was disabled.
-		if (
-			! SummaryReportEmail::is_disabled() &&
-			isset( $value['general'][ SummaryReportEmail::SETTINGS_SLUG ] ) &&
-			$value['general'][ SummaryReportEmail::SETTINGS_SLUG ] === true
-		) {
-			( new SummaryReportEmailTask() )->cancel();
-		}
-
-		/**
-		 * Before updating settings in Setup Wizard.
-		 *
-		 * @since 2.1.0
-		 *
-		 * @param array $post POST data.
-		 */
-		do_action( 'easy_wp_smtp_admin_setup_wizard_update_settings', $value );
-
-		$options->set( $value, false, $overwrite );
-
-		wp_send_json_success();
-	}
-
-
-/** Function wizard_steps_started() called by wp_ajax hooks: {'easy_wp_smtp_vue_wizard_steps_started'} **/
+/** Function process() called by wp_ajax hooks: {'nopriv_easy_wp_smtp_connect_process'} **/
 /** No params detected :-/ **/
 
 
@@ -676,75 +459,151 @@ function install_plugin() { // phpcs:ignore Generic.Metrics.CyclomaticComplexity
 	}
 
 
-/** Function feedback_notice_dismiss() called by wp_ajax hooks: {'easy_wp_smtp_feedback_notice_dismiss'} **/
+/** Function get_settings() called by wp_ajax hooks: {'easy_wp_smtp_vue_get_settings'} **/
 /** No params detected :-/ **/
 
 
-/** Function ajax_generate_url() called by wp_ajax hooks: {'easy_wp_smtp_connect_url'} **/
-/** Parameters found in function ajax_generate_url(): {"post": ["key"]} **/
-function ajax_generate_url() { //phpcs:ignore Generic.Metrics.CyclomaticComplexity.TooHigh
+/** Function ajax_dismiss() called by wp_ajax hooks: {'easy_wp_smtp_email_sending_errors_dismiss', 'easy_wp_smtp_activelayer_wc_dismiss'} **/
+/** Parameters found in function ajax_dismiss(): {"post": ["connection_id"]} **/
+function ajax_dismiss() {
 
-		// Run a security check.
-		check_ajax_referer( 'easy-wp-smtp-connect', 'nonce' );
-
-		// Check for permissions.
-		if ( ! current_user_can( 'install_plugins' ) ) {
-			wp_send_json_error(
-				[
-					'message' => esc_html__( 'You are not allowed to install plugins.', 'easy-wp-smtp' ),
-				]
-			);
+		if ( ! check_ajax_referer( 'easy-wp-smtp-admin', 'nonce', false ) ) {
+			wp_send_json_error( esc_html__( 'Security check failed. Please reload the page and try again.', 'easy-wp-smtp' ) );
 		}
 
-		$key = ! empty( $_POST['key'] ) ? sanitize_text_field( wp_unslash( $_POST['key'] ) ) : '';
-
-		if ( empty( $key ) ) {
-			wp_send_json_error(
-				[
-					'message' => esc_html__( 'Please enter your license key to connect.', 'easy-wp-smtp' ),
-				]
-			);
+		if ( ! current_user_can( easy_wp_smtp()->get_capability_manage_options() ) ) {
+			wp_send_json_error( esc_html__( 'You don\'t have permission to perform this action.', 'easy-wp-smtp' ) );
 		}
 
-		if ( easy_wp_smtp()->is_pro() ) {
-			wp_send_json_error(
-				[
-					'message' => esc_html__( 'Only the Lite version can be upgraded.', 'easy-wp-smtp' ),
-				]
-			);
+		$connection_id = isset( $_POST['connection_id'] ) ? sanitize_key( wp_unslash( $_POST['connection_id'] ) ) : '';
+
+		if ( empty( $connection_id ) ) {
+			wp_send_json_error( esc_html__( 'Missing connection identifier.', 'easy-wp-smtp' ) );
 		}
 
-		// Verify pro version is not installed.
-		$active = activate_plugin( 'easy-wp-smtp-pro/easy_wp_smtp.php', false, false, true );
+		EmailSendingDebug::clear( $connection_id );
 
-		if ( ! is_wp_error( $active ) ) {
-
-			// Deactivate Lite.
-			deactivate_plugins( plugin_basename( EasyWPSMTP_PLUGIN_FILE ) );
-
-			wp_send_json_success(
-				[
-					'message' => esc_html__( 'Easy WP SMTP Pro was already installed, but was not active. We activated it for you.', 'easy-wp-smtp' ),
-					'reload'  => true,
-				]
-			);
-		}
-
-		$url = self::generate_url( $key );
-
-		if ( empty( $url ) ) {
-			wp_send_json_error(
-				[
-					'message' => esc_html__( 'There was an error while generating an upgrade URL. Please try again.', 'easy-wp-smtp' ),
-				]
-			);
-		}
-
-		wp_send_json_success( [ 'url' => $url ] );
+		wp_send_json_success();
 	}
 
 
-/** Function ajax_check_plugin_status() called by wp_ajax hooks: {'easy_wp_smtp_page_check_{$plugin}_status'} **/
+/** Function remove_oauth_connection() called by wp_ajax hooks: {'easy_wp_smtp_vue_remove_oauth_connection'} **/
+/** Parameters found in function remove_oauth_connection(): {"post": ["mailer"]} **/
+function remove_oauth_connection() {
+
+		check_ajax_referer( 'easywpsmtp-admin-nonce', 'nonce' );
+
+		if ( ! current_user_can( easy_wp_smtp()->get_capability_manage_global_options() ) ) {
+			wp_send_json_error();
+		}
+
+		$mailer = ! empty( $_POST['mailer'] ) ? sanitize_text_field( wp_unslash( $_POST['mailer'] ) ) : '';
+
+		if ( empty( $mailer ) ) {
+			wp_send_json_error();
+		}
+
+		$options = Options::init();
+		$old_opt = $options->get_all_raw();
+
+		foreach ( $old_opt[ $mailer ] as $key => $value ) {
+			// Unset everything except Client ID, Client Secret and Domain.
+			if ( ! in_array( $key, [ 'domain', 'client_id', 'client_secret' ], true ) ) {
+				unset( $old_opt[ $mailer ][ $key ] );
+			}
+		}
+
+		$options->set( $old_opt );
+
+		wp_send_json_success();
+	}
+
+
+/** Function send_feedback() called by wp_ajax hooks: {'easy_wp_smtp_vue_send_feedback'} **/
+/** Parameters found in function send_feedback(): {"post": ["data"]} **/
+function send_feedback() {
+
+		check_ajax_referer( 'easywpsmtp-admin-nonce', 'nonce' );
+
+		if ( ! current_user_can( easy_wp_smtp()->get_capability_manage_global_options() ) ) {
+			wp_send_json_error();
+		}
+
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		$data = ! empty( $_POST['data'] ) ? json_decode( wp_unslash( $_POST['data'] ), true ) : [];
+
+		$feedback   = ! empty( $data['feedback'] ) ? sanitize_textarea_field( $data['feedback'] ) : '';
+		$permission = ! empty( $data['permission'] );
+
+		wp_remote_post(
+			'https://easywpsmtp.com/wizard-feedback/',
+			[
+				'user-agent' => Helpers::get_default_user_agent(),
+				'body'       => [
+					'wpforms' => [
+						'id'     => 2271,
+						'fields' => [
+							'1' => $feedback,
+							'2' => $permission ? wp_get_current_user()->user_email : '',
+							'3' => easy_wp_smtp()->get_license_type(),
+							'4' => EasyWPSMTP_PLUGIN_VERSION,
+						],
+					],
+				],
+			]
+		);
+
+		wp_send_json_success();
+	}
+
+
+/** Function clear_log() called by wp_ajax hooks: {'swpsmtp_clear_log'} **/
+/** No params detected :-/ **/
+
+
+/** Function subscribe_to_newsletter() called by wp_ajax hooks: {'easy_wp_smtp_vue_subscribe_to_newsletter'} **/
+/** Parameters found in function subscribe_to_newsletter(): {"post": ["email"]} **/
+function subscribe_to_newsletter() {
+
+		check_ajax_referer( 'easywpsmtp-admin-nonce', 'nonce' );
+
+		if ( ! current_user_can( easy_wp_smtp()->get_capability_manage_global_options() ) ) {
+			wp_send_json_error( esc_html__( 'You don\'t have the permission to perform this action.', 'easy-wp-smtp' ) );
+		}
+
+		$email = ! empty( $_POST['email'] ) ? filter_var( wp_unslash( $_POST['email'] ), FILTER_VALIDATE_EMAIL ) : '';
+
+		if ( empty( $email ) ) {
+			wp_send_json_error();
+		}
+
+		$body = [
+			'email' => base64_encode( $email ), // phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.obfuscation_base64_encode
+		];
+
+		$wpforms_version_type = $this->get_wpforms_version_type();
+
+		if ( ! empty( $wpforms_version_type ) ) {
+			$body['wpforms_version_type'] = $wpforms_version_type;
+		}
+
+		wp_remote_post(
+			'https://connect.easywpsmtp.com/subscribe/drip/',
+			[
+				'user-agent' => Helpers::get_default_user_agent(),
+				'body'       => $body,
+			]
+		);
+
+		wp_send_json_success();
+	}
+
+
+/** Function check_mailer_configuration() called by wp_ajax hooks: {'easy_wp_smtp_vue_check_mailer_configuration'} **/
+/** No params detected :-/ **/
+
+
+/** Function wizard_steps_started() called by wp_ajax hooks: {'easy_wp_smtp_vue_wizard_steps_started'} **/
 /** No params detected :-/ **/
 
 
@@ -789,8 +648,40 @@ function process_ajax_delete_all_debug_events() {
 	}
 
 
-/** Function ajax_disconnect() called by wp_ajax hooks: {'easy_wp_smtp_sendlayer_disconnect'} **/
-/** No params detected :-/ **/
+/** Function process_ajax_debug_event_preview() called by wp_ajax hooks: {'easy_wp_smtp_debug_event_preview'} **/
+/** Parameters found in function process_ajax_debug_event_preview(): {"post": ["nonce", "id"]} **/
+function process_ajax_debug_event_preview() {
+
+		if (
+			empty( $_POST['nonce'] ) ||
+			! wp_verify_nonce( sanitize_key( $_POST['nonce'] ), 'easy_wp_smtp_debug_events' )
+		) {
+			wp_send_json_error( esc_html__( 'Access rejected.', 'easy-wp-smtp' ) );
+		}
+
+		if ( ! current_user_can( easy_wp_smtp()->get_capability_manage_options() ) ) {
+			wp_send_json_error( esc_html__( 'You don\'t have the capability to perform this action.', 'easy-wp-smtp' ) );
+		}
+
+		if ( ! self::is_valid_db() ) {
+			wp_send_json_error( esc_html__( 'For some reason the database table was not installed correctly. Please contact plugin support team to diagnose and fix the issue.', 'easy-wp-smtp' ) );
+		}
+
+		$event_id = isset( $_POST['id'] ) ? intval( $_POST['id'] ) : false;
+
+		if ( empty( $event_id ) ) {
+			wp_send_json_error( esc_html__( 'No Debug Event ID provided!', 'easy-wp-smtp' ) );
+		}
+
+		$event = new Event( $event_id );
+
+		wp_send_json_success(
+			[
+				'title'   => $event->get_title(),
+				'content' => $event->get_details_html(),
+			]
+		);
+	}
 
 
 /** Function dismiss() called by wp_ajax hooks: {'easy_wp_smtp_notification_dismiss'} **/
@@ -828,7 +719,116 @@ function dismiss() {
 	}
 
 
-/** Function process() called by wp_ajax hooks: {'nopriv_easy_wp_smtp_connect_process'} **/
+/** Function update_settings() called by wp_ajax hooks: {'easy_wp_smtp_vue_update_settings'} **/
+/** Parameters found in function update_settings(): {"post": ["overwrite", "value"]} **/
+function update_settings() {
+
+		check_ajax_referer( 'easywpsmtp-admin-nonce', 'nonce' );
+
+		if ( ! current_user_can( easy_wp_smtp()->get_capability_manage_global_options() ) ) {
+			wp_send_json_error();
+		}
+
+		$options   = Options::init();
+		$overwrite = ! empty( $_POST['overwrite'] );
+
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		$value = isset( $_POST['value'] ) ? wp_slash( json_decode( wp_unslash( $_POST['value'] ), true ) ) : [];
+
+		// Cancel summary report email task if summary report email was disabled.
+		if (
+			! SummaryReportEmail::is_disabled() &&
+			isset( $value['general'][ SummaryReportEmail::SETTINGS_SLUG ] ) &&
+			$value['general'][ SummaryReportEmail::SETTINGS_SLUG ] === true
+		) {
+			( new SummaryReportEmailTask() )->cancel();
+		}
+
+		/**
+		 * Before updating settings in Setup Wizard.
+		 *
+		 * @since 2.1.0
+		 *
+		 * @param array $post POST data.
+		 */
+		do_action( 'easy_wp_smtp_admin_setup_wizard_update_settings', $value );
+
+		$options->set( $value, false, $overwrite );
+
+		wp_send_json_success();
+	}
+
+
+/** Function get_oauth_url() called by wp_ajax hooks: {'easy_wp_smtp_vue_get_oauth_url'} **/
+/** Parameters found in function get_oauth_url(): {"post": ["mailer", "settings"]} **/
+function get_oauth_url() { // phpcs:ignore Generic.Metrics.CyclomaticComplexity.TooHigh
+
+		check_ajax_referer( 'easywpsmtp-admin-nonce', 'nonce' );
+
+		if ( ! current_user_can( easy_wp_smtp()->get_capability_manage_global_options() ) ) {
+			wp_send_json_error();
+		}
+
+		$data   = [];
+		$mailer = ! empty( $_POST['mailer'] ) ? sanitize_text_field( wp_unslash( $_POST['mailer'] ) ) : '';
+
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		$settings = isset( $_POST['settings'] ) ? wp_slash( json_decode( wp_unslash( $_POST['settings'] ), true ) ) : [];
+
+		if ( empty( $mailer ) ) {
+			wp_send_json_error();
+		}
+
+		$settings = array_merge( $settings, [ 'is_setup_wizard_auth' => true ] );
+
+		$options = Options::init();
+		$options->set( [ $mailer => $settings ], false, false );
+
+		$data = apply_filters( 'easy_wp_smtp_admin_setup_wizard_get_oauth_url', $data, $mailer );
+
+		wp_send_json_success( array_merge( [ 'mailer' => $mailer ], $data ) );
+	}
+
+
+/** Function get_partner_plugins_info() called by wp_ajax hooks: {'easy_wp_smtp_vue_get_partner_plugins_info'} **/
+/** No params detected :-/ **/
+
+
+/** Function upgrade_plugin() called by wp_ajax hooks: {'easy_wp_smtp_vue_upgrade_plugin'} **/
+/** Parameters found in function upgrade_plugin(): {"post": ["license_key"]} **/
+function upgrade_plugin() {
+
+		check_ajax_referer( 'easywpsmtp-admin-nonce', 'nonce' );
+
+		if ( easy_wp_smtp()->is_pro() ) {
+			wp_send_json_success( esc_html__( 'You are already using the Easy WP SMTP PRO version. Please refresh this page and verify your license key.', 'easy-wp-smtp' ) );
+		}
+
+		if ( ! current_user_can( 'install_plugins' ) ) {
+			wp_send_json_error( esc_html__( 'You don\'t have the permission to perform this action.', 'easy-wp-smtp' ) );
+		}
+
+		$license_key = ! empty( $_POST['license_key'] ) ? sanitize_key( $_POST['license_key'] ) : '';
+
+		if ( empty( $license_key ) ) {
+			wp_send_json_error( esc_html__( 'Please enter a valid license key!', 'easy-wp-smtp' ) );
+		}
+
+		$url = Connect::generate_url(
+			$license_key,
+			'',
+			add_query_arg( 'upgrade-redirect', '1', self::get_site_url() ) . '#/step/license'
+		);
+
+		if ( empty( $url ) ) {
+			wp_send_json_error( esc_html__( 'Upgrade functionality not available!', 'easy-wp-smtp' ) );
+		}
+
+		wp_send_json_success( [ 'redirect_url' => $url ] );
+	}
+
+
+/** Function ajax_check_plugin_status() called by wp_ajax hooks: {'easy_wp_smtp_page_check_{$plugin}_status'} **/
 /** No params detected :-/ **/
 
 

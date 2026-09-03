@@ -5,9 +5,41 @@
 *Found functions:4
 *Extracted functions:4
 *Total parameter names extracted: 3
-*Overview: {'ajax_handler': {'eum_ajax'}, 'updraft_taskmanager_ajax': {'updraft_taskmanager_ajax'}, 'easy_updates_manager_ajax_handler': {'easy_updates_manager_ajax'}, 'axios_ajax_handler': {'eum_axios_ajax'}}
+*Overview: {'easy_updates_manager_ajax_handler': {'easy_updates_manager_ajax'}, 'ajax_handler': {'eum_ajax'}, 'axios_ajax_handler': {'eum_axios_ajax'}, 'updraft_taskmanager_ajax': {'updraft_taskmanager_ajax'}}
 *
 ***/
+
+/** Function easy_updates_manager_ajax_handler() called by wp_ajax hooks: {'easy_updates_manager_ajax'} **/
+/** Parameters found in function easy_updates_manager_ajax_handler(): {"post": ["nonce", "subaction"]} **/
+function easy_updates_manager_ajax_handler() {
+			$nonce = empty($_POST['nonce']) ? '' : sanitize_text_field(wp_unslash($_POST['nonce']));
+
+			if (!wp_verify_nonce($nonce, 'easy-updates-manager-ajax-nonce') || empty($_POST['subaction'])) die('Security check');
+
+			$subaction = sanitize_text_field(wp_unslash($_POST['subaction']));
+
+			if (!current_user_can($this->capability_required())) die('Security check');
+
+			$results = array();
+
+			// Some commands that are available via AJAX only.
+			if ('dismiss_eum_notice_until' == $subaction) {
+				update_site_option('easy_updates_manager_dismiss_eum_notice_until', (time() + 183 * 86400));
+			} elseif ('dismiss_dash_notice_until' == $subaction) {
+				update_site_option('easy_updates_manager_dismiss_dash_notice_until', (time() + 366 * 86400));
+			} elseif ('dismiss_page_notice_until' == $subaction) {
+				update_site_option('easy_updates_manager_dismiss_page_notice_until', (time() + 84 * 86400));
+			} elseif ('dismiss_season_notice_until' == $subaction) {
+				update_site_option('easy_updates_manager_dismiss_season_notice_until', (time() + 84 * 86400));
+			} elseif ('dismiss_survey_notice_until' == $subaction) {
+				update_site_option('easy_updates_manager_dismiss_survey_notice_until', (time() + 366 * 86400));
+			} elseif ('dismiss_constant_notices' == $subaction) {
+				update_site_option('easy_updates_manager_dismiss_constant_notices', MPSUM_Constant_Checks::get_instance()->get_prohibited_active_constants());
+			}
+
+			wp_send_json($results);
+		}
+
 
 /** Function ajax_handler() called by wp_ajax hooks: {'eum_ajax'} **/
 /** Parameters found in function ajax_handler(): {"request": ["subaction", "nonce", "data"]} **/
@@ -72,6 +104,10 @@ function ajax_handler() {
 	}
 
 
+/** Function axios_ajax_handler() called by wp_ajax hooks: {'eum_axios_ajax'} **/
+/** No params detected :-/ **/
+
+
 /** Function updraft_taskmanager_ajax() called by wp_ajax hooks: {'updraft_taskmanager_ajax'} **/
 /** Parameters found in function updraft_taskmanager_ajax(): {"request": ["nonce", "subaction", "action_data"]} **/
 function updraft_taskmanager_ajax() {
@@ -107,41 +143,5 @@ function updraft_taskmanager_ajax() {
 		}
 		die;
 	}
-
-
-/** Function easy_updates_manager_ajax_handler() called by wp_ajax hooks: {'easy_updates_manager_ajax'} **/
-/** Parameters found in function easy_updates_manager_ajax_handler(): {"post": ["nonce", "subaction"]} **/
-function easy_updates_manager_ajax_handler() {
-			$nonce = empty($_POST['nonce']) ? '' : sanitize_text_field(wp_unslash($_POST['nonce']));
-
-			if (!wp_verify_nonce($nonce, 'easy-updates-manager-ajax-nonce') || empty($_POST['subaction'])) die('Security check');
-
-			$subaction = sanitize_text_field(wp_unslash($_POST['subaction']));
-
-			if (!current_user_can($this->capability_required())) die('Security check');
-
-			$results = array();
-
-			// Some commands that are available via AJAX only.
-			if ('dismiss_eum_notice_until' == $subaction) {
-				update_site_option('easy_updates_manager_dismiss_eum_notice_until', (time() + 183 * 86400));
-			} elseif ('dismiss_dash_notice_until' == $subaction) {
-				update_site_option('easy_updates_manager_dismiss_dash_notice_until', (time() + 366 * 86400));
-			} elseif ('dismiss_page_notice_until' == $subaction) {
-				update_site_option('easy_updates_manager_dismiss_page_notice_until', (time() + 84 * 86400));
-			} elseif ('dismiss_season_notice_until' == $subaction) {
-				update_site_option('easy_updates_manager_dismiss_season_notice_until', (time() + 84 * 86400));
-			} elseif ('dismiss_survey_notice_until' == $subaction) {
-				update_site_option('easy_updates_manager_dismiss_survey_notice_until', (time() + 366 * 86400));
-			} elseif ('dismiss_constant_notices' == $subaction) {
-				update_site_option('easy_updates_manager_dismiss_constant_notices', MPSUM_Constant_Checks::get_instance()->get_prohibited_active_constants());
-			}
-
-			wp_send_json($results);
-		}
-
-
-/** Function axios_ajax_handler() called by wp_ajax hooks: {'eum_axios_ajax'} **/
-/** No params detected :-/ **/
 
 

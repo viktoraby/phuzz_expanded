@@ -5,11 +5,11 @@
 *Found functions:1
 *Extracted functions:0
 *Total parameter names extracted: 0
-*Overview: {'Akismet_Admin': {'akismet_recheck_queue', 'comment_author_deurl', 'comment_author_reurl'}}
+*Overview: {'Akismet_Admin': {'comment_author_deurl', 'comment_author_reurl', 'akismet_recheck_queue'}}
 *
 ***/
 
-/** Function Akismet_Admin() called by wp_ajax hooks: {'akismet_recheck_queue', 'comment_author_deurl', 'comment_author_reurl'} **/
+/** Function Akismet_Admin() called by wp_ajax hooks: {'comment_author_deurl', 'comment_author_reurl', 'akismet_recheck_queue'} **/
 /** No function found :-/ **/
 
 

@@ -5,58 +5,9 @@
 *Found functions:4
 *Extracted functions:4
 *Total parameter names extracted: 2
-*Overview: {'handle_delete_previous_404_image': {'delete_previous_404_image'}, 'P404REDIRECT_HideMsg': {'P404REDIRECT_HideMsg'}, 'P404REDIRECT_HideAlert': {'P404REDIRECT_HideAlert'}, 'handle_send_test_404_email': {'send_test_404_email'}}
+*Overview: {'handle_send_test_404_email': {'send_test_404_email'}, 'handle_delete_previous_404_image': {'delete_previous_404_image'}, 'P404REDIRECT_HideMsg': {'P404REDIRECT_HideMsg'}, 'P404REDIRECT_HideAlert': {'P404REDIRECT_HideAlert'}}
 *
 ***/
-
-/** Function handle_delete_previous_404_image() called by wp_ajax hooks: {'delete_previous_404_image'} **/
-/** Parameters found in function handle_delete_previous_404_image(): {"post": ["nonce", "image_id", "option_name"]} **/
-function handle_delete_previous_404_image()
-{
-	// Check nonce for security
-	if (!wp_verify_nonce($_POST['nonce'], 'delete_404_image_nonce')) {
-		wp_die('Security check failed');
-	}
-
-	// Check user permissions
-	if (!current_user_can('manage_options')) {
-		wp_die('Insufficient permissions');
-	}
-
-	$image_id = intval($_POST['image_id']);
-	$option_name = sanitize_text_field($_POST['option_name']);
-
-	if ($image_id) {
-		// Get current options
-		$options = get_option('p404_redirect_options', array());
-
-		// Clear the specific option if it matches the image being deleted
-		if (isset($options[$option_name]) && $options[$option_name] == $image_id) {
-			$options[$option_name] = '';
-			update_option('p404_redirect_options', $options);
-		}
-
-		// Delete the attachment
-		$deleted = wp_delete_attachment($image_id, true);
-
-		if ($deleted) {
-			wp_send_json_success('Image deleted successfully and option cleared');
-		} else {
-			wp_send_json_error('Failed to delete image');
-		}
-	} else {
-		wp_send_json_error('Invalid image ID');
-	}
-}
-
-
-/** Function P404REDIRECT_HideMsg() called by wp_ajax hooks: {'P404REDIRECT_HideMsg'} **/
-/** No params detected :-/ **/
-
-
-/** Function P404REDIRECT_HideAlert() called by wp_ajax hooks: {'P404REDIRECT_HideAlert'} **/
-/** No params detected :-/ **/
-
 
 /** Function handle_send_test_404_email() called by wp_ajax hooks: {'send_test_404_email'} **/
 /** Parameters found in function handle_send_test_404_email(): {"post": ["nonce", "email"]} **/
@@ -107,5 +58,54 @@ function handle_send_test_404_email()
 		wp_send_json_error('Error generating email: ' . $e->getMessage());
 	}
 }
+
+
+/** Function handle_delete_previous_404_image() called by wp_ajax hooks: {'delete_previous_404_image'} **/
+/** Parameters found in function handle_delete_previous_404_image(): {"post": ["nonce", "image_id", "option_name"]} **/
+function handle_delete_previous_404_image()
+{
+	// Check nonce for security
+	if (!wp_verify_nonce($_POST['nonce'], 'delete_404_image_nonce')) {
+		wp_die('Security check failed');
+	}
+
+	// Check user permissions
+	if (!current_user_can('manage_options')) {
+		wp_die('Insufficient permissions');
+	}
+
+	$image_id = intval($_POST['image_id']);
+	$option_name = sanitize_text_field($_POST['option_name']);
+
+	if ($image_id) {
+		// Get current options
+		$options = get_option('p404_redirect_options', array());
+
+		// Clear the specific option if it matches the image being deleted
+		if (isset($options[$option_name]) && $options[$option_name] == $image_id) {
+			$options[$option_name] = '';
+			update_option('p404_redirect_options', $options);
+		}
+
+		// Delete the attachment
+		$deleted = wp_delete_attachment($image_id, true);
+
+		if ($deleted) {
+			wp_send_json_success('Image deleted successfully and option cleared');
+		} else {
+			wp_send_json_error('Failed to delete image');
+		}
+	} else {
+		wp_send_json_error('Invalid image ID');
+	}
+}
+
+
+/** Function P404REDIRECT_HideMsg() called by wp_ajax hooks: {'P404REDIRECT_HideMsg'} **/
+/** No params detected :-/ **/
+
+
+/** Function P404REDIRECT_HideAlert() called by wp_ajax hooks: {'P404REDIRECT_HideAlert'} **/
+/** No params detected :-/ **/
 
 

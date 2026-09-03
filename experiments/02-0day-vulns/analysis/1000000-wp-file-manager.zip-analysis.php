@@ -5,9 +5,123 @@
 *Found functions:10
 *Extracted functions:10
 *Total parameter names extracted: 12
-*Overview: {'verify_filemanager_email_callback': {'verify_filemanager_email'}, 'mk_file_manager_backup_remove_callback': {'mk_file_manager_backup_remove'}, 'mk_file_manager_single_backup_restore_callback': {'mk_file_manager_single_backup_restore'}, 'mk_filemanager_verify_email_callback': {'mk_filemanager_verify_email'}, 'mk_file_folder_manager_action_callback': {'mk_file_folder_manager'}, 'mk_fm_close_fm_help': {'mk_fm_close_fm_help'}, 'mk_file_manager_single_backup_logs_callback': {'mk_file_manager_single_backup_logs'}, 'mk_file_manager_backup_callback': {'mk_file_manager_backup'}, 'mk_file_manager_single_backup_remove_callback': {'mk_file_manager_single_backup_remove'}, 'mk_file_folder_manager_media_upload': {'mk_file_folder_manager_media_upload'}}
+*Overview: {'mk_file_folder_manager_action_callback': {'mk_file_folder_manager'}, 'mk_fm_close_fm_help': {'mk_fm_close_fm_help'}, 'verify_filemanager_email_callback': {'verify_filemanager_email'}, 'mk_file_manager_backup_remove_callback': {'mk_file_manager_backup_remove'}, 'mk_file_manager_single_backup_logs_callback': {'mk_file_manager_single_backup_logs'}, 'mk_file_folder_manager_media_upload': {'mk_file_folder_manager_media_upload'}, 'mk_filemanager_verify_email_callback': {'mk_filemanager_verify_email'}, 'mk_file_manager_single_backup_remove_callback': {'mk_file_manager_single_backup_remove'}, 'mk_file_manager_single_backup_restore_callback': {'mk_file_manager_single_backup_restore'}, 'mk_file_manager_backup_callback': {'mk_file_manager_backup'}}
 *
 ***/
+
+/** Function mk_file_folder_manager_action_callback() called by wp_ajax hooks: {'mk_file_folder_manager'} **/
+/** Parameters found in function mk_file_folder_manager_action_callback(): {"request": ["_wpnonce"]} **/
+function mk_file_folder_manager_action_callback()
+        {
+            $path = ABSPATH;
+            $settings      = get_option( 'wp_file_manager_settings' );
+            $mk_restrictions = array();
+            $mk_restrictions[] = array(
+                                  'pattern' => '/.tmb/',
+                                   'read' => false,
+                                   'write' => false,
+                                   'hidden' => true,
+                                   'locked' => false,
+                                );
+            $mk_restrictions[] = array(
+                                  'pattern' => '/.quarantine/',
+                                   'read' => false,
+                                   'write' => false,
+                                   'hidden' => true,
+                                   'locked' => false,
+                                );
+            $nonce = sanitize_text_field($_REQUEST['_wpnonce']);
+            if ( ! current_user_can('manage_options') ) {
+                status_header(403);
+                echo json_encode([
+                    'error' => 'Access denied'
+                ]);
+                exit;
+            }
+            if (wp_verify_nonce($nonce, 'wp-file-manager')) {
+                require 'lib/php/autoload.php';
+                if (isset($settings['fm_enable_trash']) && $settings['fm_enable_trash'] == '1') {
+                    $mkTrash = array(
+                            'id' => '1',
+                            'driver' => 'Trash',
+                            'path' => WP_FILE_MANAGER_PATH.'lib/files/.trash/',
+                            'tmbURL' => site_url().'/lib/files/.trash/.tmb/',
+                            'winHashFix' => DIRECTORY_SEPARATOR !== '/',
+                            'uploadDeny' => array(''),
+                            'uploadAllow' => array(''),
+                            'uploadOrder' => array('deny', 'allow'),
+                            'accessControl' => 'access',
+                            'attributes' => $mk_restrictions,
+                        );
+                    $mkTrashHash = 't1_Lw';
+                } else {
+                    $mkTrash = array();
+                    $mkTrashHash = '';
+                }
+                $path_url      =  is_multisite() ? network_home_url() : site_url();
+                /**
+                 * @Preference
+                 * If public root path is changed.
+                 */
+                $absolute_path = str_replace( '\\', '/', $path ); 
+                $path_length   = strlen( $absolute_path );
+                $access_folder = isset( $settings['public_path'] ) && ! empty( $settings['public_path'] ) ? substr( $settings['public_path'], $path_length ) : '';
+                if ( isset( $settings['public_path'] ) && ! empty( $settings['public_path'] ) ) {
+                    $path     = $settings['public_path'];
+                    $path_url = is_multisite() ? network_home_url() .'/'. ltrim( $access_folder, '/' ) : site_url() .'/'. ltrim( $access_folder, '/' );
+                }
+                $opts = array(
+                       'debug' => false,
+                       'roots' => array(
+                        array(
+                            'driver' => 'LocalFileSystem',
+                            'path' => $path,
+                            'URL' => $path_url,
+                            'trashHash' => $mkTrashHash,
+                            'winHashFix' => DIRECTORY_SEPARATOR !== '/',
+                            'uploadDeny' => array(),
+                            'uploadAllow' => array('image', 'text/plain'),
+                            'uploadOrder' => array('deny', 'allow'),
+                            'accessControl' => 'access',
+                            'acceptedName' => 'validName',
+                            'disabled' => array('help', 'preference','hide','netmount'),
+                            'attributes' => $mk_restrictions,
+                        ),
+                        $mkTrash,
+                    ),
+                );
+                //run elFinder
+                $connector = new elFinderConnector(new elFinder($opts));
+                $connector->run();
+            }
+            die;
+        }
+
+
+/** Function mk_fm_close_fm_help() called by wp_ajax hooks: {'mk_fm_close_fm_help'} **/
+/** Parameters found in function mk_fm_close_fm_help(): {"post": ["what_to_do"]} **/
+function mk_fm_close_fm_help()
+        {
+            $what_to_do = sanitize_text_field($_POST['what_to_do']);
+            $expire_time = 15;
+            if ($what_to_do == 'rate_now' || $what_to_do == 'rate_never') {
+                $expire_time = 365;
+            } elseif ($what_to_do == 'rate_later') {
+                $expire_time = 15;
+            }
+            if (false === ($mk_fm_close_fm_help_c_fm = get_option('mk_fm_close_fm_help_c_fm'))) {
+                $set = update_option('mk_fm_close_fm_help_c_fm', 'done');
+                if ($set) {
+                    echo 'ok';
+                } else {
+                    echo 'oh';
+                }
+            } else {
+                echo 'ac';
+            }
+            die;
+        }
+
 
 /** Function verify_filemanager_email_callback() called by wp_ajax hooks: {'verify_filemanager_email'} **/
 /** Parameters found in function verify_filemanager_email_callback(): {"get": ["token"]} **/
@@ -70,6 +184,180 @@ function mk_file_manager_backup_remove_callback(){
                 echo __('Backups removed successfully!','wp-file-manager');
             } else {
                 echo __('Unable to removed backup!','wp-file-manager'); 
+            }
+            die;
+        }
+        }
+
+
+/** Function mk_file_manager_single_backup_logs_callback() called by wp_ajax hooks: {'mk_file_manager_single_backup_logs'} **/
+/** Parameters found in function mk_file_manager_single_backup_logs_callback(): {"post": ["nonce", "id"]} **/
+function mk_file_manager_single_backup_logs_callback() {
+            $nonce = sanitize_text_field($_POST['nonce']);
+            if(current_user_can('manage_options') && wp_verify_nonce( $nonce, 'wpfmbackuplogs' )) {
+            global $wpdb;
+            $fmdb = $wpdb->prefix.'wpfm_backup';
+            $upload_dir = wp_upload_dir();
+            $backup_dirname = $upload_dir['basedir'].'/wp-file-manager-pro/fm_backup/';
+            $bkpId = intval($_POST['id']);
+            $logs = array(); 
+            $logMessage = '';       
+            if(isset($bkpId)) {
+                    $fmbkp = $wpdb->get_row(
+                        $wpdb->prepare('select * from '.$fmdb.' where id = %d', $bkpId)
+                    );
+                    if(file_exists($backup_dirname.$fmbkp->backup_name.'-db.sql.gz')) {
+                        $size = filesize($backup_dirname.$fmbkp->backup_name.'-db.sql.gz');
+                        $logs[] = __('Database backup done on date ', 'wp-file-manager').$fmbkp->backup_date.' ('.$fmbkp->backup_name.'-db.sql.gz) ('.$this->formatSizeUnits($size).')';
+                    }                    
+                    if(file_exists($backup_dirname.$fmbkp->backup_name.'-plugins.zip')) {
+                        $size = filesize($backup_dirname.$fmbkp->backup_name.'-plugins.zip');
+                        $logs[] = __('Plugins backup done on date ', 'wp-file-manager').$fmbkp->backup_date.' ('.$fmbkp->backup_name.'-plugins.zip) ('.$this->formatSizeUnits($size).')';
+                    }
+                    if(file_exists($backup_dirname.$fmbkp->backup_name.'-themes.zip')) {
+                        $size = filesize($backup_dirname.$fmbkp->backup_name.'-themes.zip');
+                        $logs[] = __('Themes backup done on date ', 'wp-file-manager').$fmbkp->backup_date.' ('.$fmbkp->backup_name.'-themes.zip) ('.$this->formatSizeUnits($size).')';
+                    }
+                    if(file_exists($backup_dirname.$fmbkp->backup_name.'-uploads.zip')) {
+                        $size = filesize($backup_dirname.$fmbkp->backup_name.'-uploads.zip');
+                        $logs[] = __('Uploads backup done on date ', 'wp-file-manager').$fmbkp->backup_date.' ('.$fmbkp->backup_name.'-uploads.zip) ('.$this->formatSizeUnits($size).')';
+                    }
+                    if(file_exists($backup_dirname.$fmbkp->backup_name.'-others.zip')) {
+                        $size = filesize($backup_dirname.$fmbkp->backup_name.'-others.zip');
+                        $logs[] = __('Others backup done on date ', 'wp-file-manager').$fmbkp->backup_date.' ('.$fmbkp->backup_name.'-others.zip) ('.$this->formatSizeUnits($size).')';
+                    }
+            }
+            $count = 1;
+            $logMessage = '<h3 class="fm_console_log_pop log_msg_align_center">'.__('Logs', 'wp-file-manager').'</h3>';
+            if(isset($logs)) {
+                foreach($logs as $log) {
+                    $logMessage .= '<p class="fm_console_success">('.$count++.') '.$log.'</p>';
+                }
+            } else {
+                $logMessage .= '<p class="fm_console_error">'.__('No logs found!', 'wp-file-manager').'</p>';
+            }
+            echo $logMessage;
+            die; 
+        }
+        }
+
+
+/** Function mk_file_folder_manager_media_upload() called by wp_ajax hooks: {'mk_file_folder_manager_media_upload'} **/
+/** Parameters found in function mk_file_folder_manager_media_upload(): {"request": ["_wpnonce", "networkhref"], "post": ["uploadefiles"]} **/
+function mk_file_folder_manager_media_upload() {	
+            $nonce = sanitize_text_field($_REQUEST['_wpnonce']);
+            if (current_user_can('manage_options') && wp_verify_nonce($nonce, 'wp-file-manager')) {
+                $uploadedfiles = isset($_POST['uploadefiles']) ? $_POST['uploadefiles'] : '';
+                if(!empty($uploadedfiles)) {
+                    foreach($uploadedfiles as $uploadedfile) {
+                        $uploadedfile = esc_url_raw($uploadedfile);
+                        /* Start - Uploading Image to Media Lib */
+                        if(is_multisite() && isset($_REQUEST['networkhref']) && !empty($_REQUEST['networkhref']))
+                        {
+                            $network_home = network_home_url();
+                            $uploadedfile =  $network_home.basename($uploadedfile);
+                        }
+                        $this->upload_to_media_library($uploadedfile);
+                        /* End - Uploading Image to Media Lib */
+                    }
+                }
+            }
+            die;
+        }
+
+
+/** Function mk_filemanager_verify_email_callback() called by wp_ajax hooks: {'mk_filemanager_verify_email'} **/
+/** Parameters found in function mk_filemanager_verify_email_callback(): {"request": ["vle_nonce"], "post": ["todo", "lokhal_email", "lokhal_fname", "lokhal_lname"]} **/
+function mk_filemanager_verify_email_callback()
+        {
+            $current_user = wp_get_current_user();
+            $nonce = sanitize_text_field($_REQUEST['vle_nonce']);
+            if (wp_verify_nonce($nonce, 'verify-filemanager-email')) {
+                $action = sanitize_text_field($_POST['todo']);
+                $lokhal_email = sanitize_email($_POST['lokhal_email']);
+                $lokhal_fname = sanitize_text_field(htmlentities($_POST['lokhal_fname']));
+                $lokhal_lname = sanitize_text_field(htmlentities($_POST['lokhal_lname']));
+                // case - 1 - close
+                if ($action == 'cancel') {
+                    set_transient('filemanager_cancel_lk_popup_'.$current_user->ID, 'filemanager_cancel_lk_popup_'.$current_user->ID, 60 * 60 * 24 * 30);
+                    update_option('filemanager_email_verified_'.$current_user->ID, 'yes');
+                } elseif ($action == 'verify') {
+                    $engagement = '75';
+                    update_option('filemanager_email_address_'.$current_user->ID, $lokhal_email);
+                    update_option('verify_filemanager_fname_'.$current_user->ID, $lokhal_fname);
+                    update_option('verify_filemanager_lname_'.$current_user->ID, $lokhal_lname);
+                    update_option('filemanager_email_verified_'.$current_user->ID, 'yes');
+                    /* Send Email Code */
+                    $subject = 'Email Verification';
+                    $message = "
+					<html>
+					<head>
+					<title>Email Verification</title>
+					</head>
+					<body>
+					<p>Thanks for signing up! Just click the link below to verify your email and we’ll keep you up-to-date with the latest and greatest brewing in our dev labs!</p>	
+					<p><a href='".admin_url('admin-ajax.php?action=verify_filemanager_email&token='.md5($lokhal_email))."'>Click Here to Verify
+</a></p>				
+					</body>
+					</html>
+					";
+                    // Always set content-type when sending HTML email
+                    $headers = 'MIME-Version: 1.0'."\r\n";
+                    $headers .= 'Content-type:text/html;charset=UTF-8'."\r\n";
+                    $headers .= 'From: noreply@filemanagerpro.io'."\r\n";
+                    $mail = mail($lokhal_email, $subject, $message, $headers);
+                    $data = $this->verify_on_server($lokhal_email, $lokhal_fname, $lokhal_lname, $engagement, 'verify', '0');
+                    if ($mail) {
+                        echo '1';
+                    } else {
+                        echo '2';
+                    }
+                }
+            } else {
+                echo 'Nonce';
+            }
+            die;
+        }
+
+
+/** Function mk_file_manager_single_backup_remove_callback() called by wp_ajax hooks: {'mk_file_manager_single_backup_remove'} **/
+/** Parameters found in function mk_file_manager_single_backup_remove_callback(): {"post": ["nonce", "id"]} **/
+function mk_file_manager_single_backup_remove_callback(){
+            $nonce = sanitize_text_field($_POST['nonce']);
+            if(current_user_can('manage_options') && wp_verify_nonce( $nonce, 'wpfmbackupremove' )) {
+            global $wpdb;
+            $fmdb = $wpdb->prefix.'wpfm_backup';
+            $upload_dir = wp_upload_dir();
+            $backup_dirname = $upload_dir['basedir'].'/wp-file-manager-pro/fm_backup/';
+            $bkpId = intval($_POST['id']);
+            $isRemoved = false;        
+            if(isset($bkpId)) {
+                    $fmbkp = $wpdb->get_row(
+                        $wpdb->prepare('select * from '.$fmdb.' where id = %d',$bkpId)
+                    );
+                    if(file_exists($backup_dirname.$fmbkp->backup_name.'-db.sql.gz')) {
+                        unlink($backup_dirname.$fmbkp->backup_name.'-db.sql.gz');
+                    }
+                    if(file_exists($backup_dirname.$fmbkp->backup_name.'-others.zip')) {
+                        unlink($backup_dirname.$fmbkp->backup_name.'-others.zip');
+                    }
+                    if(file_exists($backup_dirname.$fmbkp->backup_name.'-plugins.zip')) {
+                        unlink($backup_dirname.$fmbkp->backup_name.'-plugins.zip');
+                    }
+                    if(file_exists($backup_dirname.$fmbkp->backup_name.'-themes.zip')) {
+                        unlink($backup_dirname.$fmbkp->backup_name.'-themes.zip');
+                    }
+                    if(file_exists($backup_dirname.$fmbkp->backup_name.'-uploads.zip')) {
+                        unlink($backup_dirname.$fmbkp->backup_name.'-uploads.zip');
+                    }
+                    // removing from db
+                    $wpdb->delete($fmdb, array('id' => $bkpId));
+                    $isRemoved = true;
+            }
+            if($isRemoved) {
+                echo  "1";
+            } else {
+                echo "2";
             }
             die;
         }
@@ -249,226 +537,6 @@ function mk_file_manager_single_backup_restore_callback() {
         }
 
 
-/** Function mk_filemanager_verify_email_callback() called by wp_ajax hooks: {'mk_filemanager_verify_email'} **/
-/** Parameters found in function mk_filemanager_verify_email_callback(): {"request": ["vle_nonce"], "post": ["todo", "lokhal_email", "lokhal_fname", "lokhal_lname"]} **/
-function mk_filemanager_verify_email_callback()
-        {
-            $current_user = wp_get_current_user();
-            $nonce = sanitize_text_field($_REQUEST['vle_nonce']);
-            if (wp_verify_nonce($nonce, 'verify-filemanager-email')) {
-                $action = sanitize_text_field($_POST['todo']);
-                $lokhal_email = sanitize_email($_POST['lokhal_email']);
-                $lokhal_fname = sanitize_text_field(htmlentities($_POST['lokhal_fname']));
-                $lokhal_lname = sanitize_text_field(htmlentities($_POST['lokhal_lname']));
-                // case - 1 - close
-                if ($action == 'cancel') {
-                    set_transient('filemanager_cancel_lk_popup_'.$current_user->ID, 'filemanager_cancel_lk_popup_'.$current_user->ID, 60 * 60 * 24 * 30);
-                    update_option('filemanager_email_verified_'.$current_user->ID, 'yes');
-                } elseif ($action == 'verify') {
-                    $engagement = '75';
-                    update_option('filemanager_email_address_'.$current_user->ID, $lokhal_email);
-                    update_option('verify_filemanager_fname_'.$current_user->ID, $lokhal_fname);
-                    update_option('verify_filemanager_lname_'.$current_user->ID, $lokhal_lname);
-                    update_option('filemanager_email_verified_'.$current_user->ID, 'yes');
-                    /* Send Email Code */
-                    $subject = 'Email Verification';
-                    $message = "
-					<html>
-					<head>
-					<title>Email Verification</title>
-					</head>
-					<body>
-					<p>Thanks for signing up! Just click the link below to verify your email and we’ll keep you up-to-date with the latest and greatest brewing in our dev labs!</p>	
-					<p><a href='".admin_url('admin-ajax.php?action=verify_filemanager_email&token='.md5($lokhal_email))."'>Click Here to Verify
-</a></p>				
-					</body>
-					</html>
-					";
-                    // Always set content-type when sending HTML email
-                    $headers = 'MIME-Version: 1.0'."\r\n";
-                    $headers .= 'Content-type:text/html;charset=UTF-8'."\r\n";
-                    $headers .= 'From: noreply@filemanagerpro.io'."\r\n";
-                    $mail = mail($lokhal_email, $subject, $message, $headers);
-                    $data = $this->verify_on_server($lokhal_email, $lokhal_fname, $lokhal_lname, $engagement, 'verify', '0');
-                    if ($mail) {
-                        echo '1';
-                    } else {
-                        echo '2';
-                    }
-                }
-            } else {
-                echo 'Nonce';
-            }
-            die;
-        }
-
-
-/** Function mk_file_folder_manager_action_callback() called by wp_ajax hooks: {'mk_file_folder_manager'} **/
-/** Parameters found in function mk_file_folder_manager_action_callback(): {"request": ["_wpnonce"]} **/
-function mk_file_folder_manager_action_callback()
-        {
-            $path = ABSPATH;
-            $settings      = get_option( 'wp_file_manager_settings' );
-            $mk_restrictions = array();
-            $mk_restrictions[] = array(
-                                  'pattern' => '/.tmb/',
-                                   'read' => false,
-                                   'write' => false,
-                                   'hidden' => true,
-                                   'locked' => false,
-                                );
-            $mk_restrictions[] = array(
-                                  'pattern' => '/.quarantine/',
-                                   'read' => false,
-                                   'write' => false,
-                                   'hidden' => true,
-                                   'locked' => false,
-                                );
-            $nonce = sanitize_text_field($_REQUEST['_wpnonce']);
-            if ( ! current_user_can('manage_options') ) {
-                status_header(403);
-                echo json_encode([
-                    'error' => 'Access denied'
-                ]);
-                exit;
-            }
-            if (wp_verify_nonce($nonce, 'wp-file-manager')) {
-                require 'lib/php/autoload.php';
-                if (isset($settings['fm_enable_trash']) && $settings['fm_enable_trash'] == '1') {
-                    $mkTrash = array(
-                            'id' => '1',
-                            'driver' => 'Trash',
-                            'path' => WP_FILE_MANAGER_PATH.'lib/files/.trash/',
-                            'tmbURL' => site_url().'/lib/files/.trash/.tmb/',
-                            'winHashFix' => DIRECTORY_SEPARATOR !== '/',
-                            'uploadDeny' => array(''),
-                            'uploadAllow' => array(''),
-                            'uploadOrder' => array('deny', 'allow'),
-                            'accessControl' => 'access',
-                            'attributes' => $mk_restrictions,
-                        );
-                    $mkTrashHash = 't1_Lw';
-                } else {
-                    $mkTrash = array();
-                    $mkTrashHash = '';
-                }
-                $path_url      =  is_multisite() ? network_home_url() : site_url();
-                /**
-                 * @Preference
-                 * If public root path is changed.
-                 */
-                $absolute_path = str_replace( '\\', '/', $path ); 
-                $path_length   = strlen( $absolute_path );
-                $access_folder = isset( $settings['public_path'] ) && ! empty( $settings['public_path'] ) ? substr( $settings['public_path'], $path_length ) : '';
-                if ( isset( $settings['public_path'] ) && ! empty( $settings['public_path'] ) ) {
-                    $path     = $settings['public_path'];
-                    $path_url = is_multisite() ? network_home_url() .'/'. ltrim( $access_folder, '/' ) : site_url() .'/'. ltrim( $access_folder, '/' );
-                }
-                $opts = array(
-                       'debug' => false,
-                       'roots' => array(
-                        array(
-                            'driver' => 'LocalFileSystem',
-                            'path' => $path,
-                            'URL' => $path_url,
-                            'trashHash' => $mkTrashHash,
-                            'winHashFix' => DIRECTORY_SEPARATOR !== '/',
-                            'uploadDeny' => array(),
-                            'uploadAllow' => array('image', 'text/plain'),
-                            'uploadOrder' => array('deny', 'allow'),
-                            'accessControl' => 'access',
-                            'acceptedName' => 'validName',
-                            'disabled' => array('help', 'preference','hide','netmount'),
-                            'attributes' => $mk_restrictions,
-                        ),
-                        $mkTrash,
-                    ),
-                );
-                //run elFinder
-                $connector = new elFinderConnector(new elFinder($opts));
-                $connector->run();
-            }
-            die;
-        }
-
-
-/** Function mk_fm_close_fm_help() called by wp_ajax hooks: {'mk_fm_close_fm_help'} **/
-/** Parameters found in function mk_fm_close_fm_help(): {"post": ["what_to_do"]} **/
-function mk_fm_close_fm_help()
-        {
-            $what_to_do = sanitize_text_field($_POST['what_to_do']);
-            $expire_time = 15;
-            if ($what_to_do == 'rate_now' || $what_to_do == 'rate_never') {
-                $expire_time = 365;
-            } elseif ($what_to_do == 'rate_later') {
-                $expire_time = 15;
-            }
-            if (false === ($mk_fm_close_fm_help_c_fm = get_option('mk_fm_close_fm_help_c_fm'))) {
-                $set = update_option('mk_fm_close_fm_help_c_fm', 'done');
-                if ($set) {
-                    echo 'ok';
-                } else {
-                    echo 'oh';
-                }
-            } else {
-                echo 'ac';
-            }
-            die;
-        }
-
-
-/** Function mk_file_manager_single_backup_logs_callback() called by wp_ajax hooks: {'mk_file_manager_single_backup_logs'} **/
-/** Parameters found in function mk_file_manager_single_backup_logs_callback(): {"post": ["nonce", "id"]} **/
-function mk_file_manager_single_backup_logs_callback() {
-            $nonce = sanitize_text_field($_POST['nonce']);
-            if(current_user_can('manage_options') && wp_verify_nonce( $nonce, 'wpfmbackuplogs' )) {
-            global $wpdb;
-            $fmdb = $wpdb->prefix.'wpfm_backup';
-            $upload_dir = wp_upload_dir();
-            $backup_dirname = $upload_dir['basedir'].'/wp-file-manager-pro/fm_backup/';
-            $bkpId = intval($_POST['id']);
-            $logs = array(); 
-            $logMessage = '';       
-            if(isset($bkpId)) {
-                    $fmbkp = $wpdb->get_row(
-                        $wpdb->prepare('select * from '.$fmdb.' where id = %d', $bkpId)
-                    );
-                    if(file_exists($backup_dirname.$fmbkp->backup_name.'-db.sql.gz')) {
-                        $size = filesize($backup_dirname.$fmbkp->backup_name.'-db.sql.gz');
-                        $logs[] = __('Database backup done on date ', 'wp-file-manager').$fmbkp->backup_date.' ('.$fmbkp->backup_name.'-db.sql.gz) ('.$this->formatSizeUnits($size).')';
-                    }                    
-                    if(file_exists($backup_dirname.$fmbkp->backup_name.'-plugins.zip')) {
-                        $size = filesize($backup_dirname.$fmbkp->backup_name.'-plugins.zip');
-                        $logs[] = __('Plugins backup done on date ', 'wp-file-manager').$fmbkp->backup_date.' ('.$fmbkp->backup_name.'-plugins.zip) ('.$this->formatSizeUnits($size).')';
-                    }
-                    if(file_exists($backup_dirname.$fmbkp->backup_name.'-themes.zip')) {
-                        $size = filesize($backup_dirname.$fmbkp->backup_name.'-themes.zip');
-                        $logs[] = __('Themes backup done on date ', 'wp-file-manager').$fmbkp->backup_date.' ('.$fmbkp->backup_name.'-themes.zip) ('.$this->formatSizeUnits($size).')';
-                    }
-                    if(file_exists($backup_dirname.$fmbkp->backup_name.'-uploads.zip')) {
-                        $size = filesize($backup_dirname.$fmbkp->backup_name.'-uploads.zip');
-                        $logs[] = __('Uploads backup done on date ', 'wp-file-manager').$fmbkp->backup_date.' ('.$fmbkp->backup_name.'-uploads.zip) ('.$this->formatSizeUnits($size).')';
-                    }
-                    if(file_exists($backup_dirname.$fmbkp->backup_name.'-others.zip')) {
-                        $size = filesize($backup_dirname.$fmbkp->backup_name.'-others.zip');
-                        $logs[] = __('Others backup done on date ', 'wp-file-manager').$fmbkp->backup_date.' ('.$fmbkp->backup_name.'-others.zip) ('.$this->formatSizeUnits($size).')';
-                    }
-            }
-            $count = 1;
-            $logMessage = '<h3 class="fm_console_log_pop log_msg_align_center">'.__('Logs', 'wp-file-manager').'</h3>';
-            if(isset($logs)) {
-                foreach($logs as $log) {
-                    $logMessage .= '<p class="fm_console_success">('.$count++.') '.$log.'</p>';
-                }
-            } else {
-                $logMessage .= '<p class="fm_console_error">'.__('No logs found!', 'wp-file-manager').'</p>';
-            }
-            echo $logMessage;
-            die; 
-        }
-        }
-
-
 /** Function mk_file_manager_backup_callback() called by wp_ajax hooks: {'mk_file_manager_backup'} **/
 /** Parameters found in function mk_file_manager_backup_callback(): {"post": ["nonce", "database", "files", "plugins", "themes", "uploads", "others", "bkpid"]} **/
 function mk_file_manager_backup_callback(){
@@ -588,74 +656,6 @@ function mk_file_manager_backup_callback(){
             }
             } else {
                 die(__('Invalid security token!', 'wp-file-manager'));
-            }
-            die;
-        }
-
-
-/** Function mk_file_manager_single_backup_remove_callback() called by wp_ajax hooks: {'mk_file_manager_single_backup_remove'} **/
-/** Parameters found in function mk_file_manager_single_backup_remove_callback(): {"post": ["nonce", "id"]} **/
-function mk_file_manager_single_backup_remove_callback(){
-            $nonce = sanitize_text_field($_POST['nonce']);
-            if(current_user_can('manage_options') && wp_verify_nonce( $nonce, 'wpfmbackupremove' )) {
-            global $wpdb;
-            $fmdb = $wpdb->prefix.'wpfm_backup';
-            $upload_dir = wp_upload_dir();
-            $backup_dirname = $upload_dir['basedir'].'/wp-file-manager-pro/fm_backup/';
-            $bkpId = intval($_POST['id']);
-            $isRemoved = false;        
-            if(isset($bkpId)) {
-                    $fmbkp = $wpdb->get_row(
-                        $wpdb->prepare('select * from '.$fmdb.' where id = %d',$bkpId)
-                    );
-                    if(file_exists($backup_dirname.$fmbkp->backup_name.'-db.sql.gz')) {
-                        unlink($backup_dirname.$fmbkp->backup_name.'-db.sql.gz');
-                    }
-                    if(file_exists($backup_dirname.$fmbkp->backup_name.'-others.zip')) {
-                        unlink($backup_dirname.$fmbkp->backup_name.'-others.zip');
-                    }
-                    if(file_exists($backup_dirname.$fmbkp->backup_name.'-plugins.zip')) {
-                        unlink($backup_dirname.$fmbkp->backup_name.'-plugins.zip');
-                    }
-                    if(file_exists($backup_dirname.$fmbkp->backup_name.'-themes.zip')) {
-                        unlink($backup_dirname.$fmbkp->backup_name.'-themes.zip');
-                    }
-                    if(file_exists($backup_dirname.$fmbkp->backup_name.'-uploads.zip')) {
-                        unlink($backup_dirname.$fmbkp->backup_name.'-uploads.zip');
-                    }
-                    // removing from db
-                    $wpdb->delete($fmdb, array('id' => $bkpId));
-                    $isRemoved = true;
-            }
-            if($isRemoved) {
-                echo  "1";
-            } else {
-                echo "2";
-            }
-            die;
-        }
-        }
-
-
-/** Function mk_file_folder_manager_media_upload() called by wp_ajax hooks: {'mk_file_folder_manager_media_upload'} **/
-/** Parameters found in function mk_file_folder_manager_media_upload(): {"request": ["_wpnonce", "networkhref"], "post": ["uploadefiles"]} **/
-function mk_file_folder_manager_media_upload() {	
-            $nonce = sanitize_text_field($_REQUEST['_wpnonce']);
-            if (current_user_can('manage_options') && wp_verify_nonce($nonce, 'wp-file-manager')) {
-                $uploadedfiles = isset($_POST['uploadefiles']) ? $_POST['uploadefiles'] : '';
-                if(!empty($uploadedfiles)) {
-                    foreach($uploadedfiles as $uploadedfile) {
-                        $uploadedfile = esc_url_raw($uploadedfile);
-                        /* Start - Uploading Image to Media Lib */
-                        if(is_multisite() && isset($_REQUEST['networkhref']) && !empty($_REQUEST['networkhref']))
-                        {
-                            $network_home = network_home_url();
-                            $uploadedfile =  $network_home.basename($uploadedfile);
-                        }
-                        $this->upload_to_media_library($uploadedfile);
-                        /* End - Uploading Image to Media Lib */
-                    }
-                }
             }
             die;
         }

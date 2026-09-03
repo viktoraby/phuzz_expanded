@@ -5,9 +5,28 @@
 *Found functions:2
 *Extracted functions:2
 *Total parameter names extracted: 2
-*Overview: {'ajax_action': {'mtnc_action'}, 'ajax_dismiss_notice': {'maintenance_dismiss_notice'}}
+*Overview: {'ajax_dismiss_notice': {'maintenance_dismiss_notice'}, 'ajax_action': {'mtnc_action'}}
 *
 ***/
+
+/** Function ajax_dismiss_notice() called by wp_ajax hooks: {'maintenance_dismiss_notice'} **/
+/** Parameters found in function ajax_dismiss_notice(): {"get": ["notice_name"]} **/
+function ajax_dismiss_notice()
+    {
+        check_ajax_referer('maintenance_dismiss_notice');
+
+        if (!current_user_can('manage_options')) {
+            wp_send_json_error('You are not allowed to run this action.');
+        }
+
+        $notice_name = trim(sanitize_text_field(wp_unslash($_GET['notice_name'] ?? '')));
+        if (!$this->dismiss_notice($notice_name)) {
+            wp_send_json_error('Notice is already dismissed.');
+        } else {
+            wp_send_json_success();
+        }
+    }
+
 
 /** Function ajax_action() called by wp_ajax hooks: {'mtnc_action'} **/
 /** Parameters found in function ajax_action(): {"request": ["mtnc_action", "extra_data", "theme_global", "theme", "theme_id", "theme_new", "theme_name"]} **/
@@ -105,25 +124,6 @@ function ajax_action()
                 $this->update_options('options', $new_options);
                 wp_send_json_success(array('theme_id' => $theme_id, 'theme' => $new_options['themes'][$theme_id]));
                 break;
-        }
-    }
-
-
-/** Function ajax_dismiss_notice() called by wp_ajax hooks: {'maintenance_dismiss_notice'} **/
-/** Parameters found in function ajax_dismiss_notice(): {"get": ["notice_name"]} **/
-function ajax_dismiss_notice()
-    {
-        check_ajax_referer('maintenance_dismiss_notice');
-
-        if (!current_user_can('manage_options')) {
-            wp_send_json_error('You are not allowed to run this action.');
-        }
-
-        $notice_name = trim(sanitize_text_field(wp_unslash($_GET['notice_name'] ?? '')));
-        if (!$this->dismiss_notice($notice_name)) {
-            wp_send_json_error('Notice is already dismissed.');
-        } else {
-            wp_send_json_success();
         }
     }
 

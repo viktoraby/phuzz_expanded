@@ -5,21 +5,9 @@
 *Found functions:13
 *Extracted functions:13
 *Total parameter names extracted: 6
-*Overview: {'wp_ajax_updraftcentral_receivepublickey': {'updraftcentral_receivepublickey', 'nopriv_updraftcentral_receivepublickey'}, 'updraftplus_user_notice_ajax': {'updraftplus_user_notice_ajax'}, 'updraft_ajaxrestore': {'nopriv_updraft_ajaxrestore_continue', 'updraft_ajaxrestore_continue', 'nopriv_updraft_ajaxrestore', 'updraft_ajaxrestore'}, 'updraft_ajax_savesettings': {'updraft_savesettings'}, 'wp_ajax_dashboard_widgets_high_priority': {'dashboard-widgets'}, 'updraft_ajax_handler': {'updraft_ajax'}, 'updraft_download_backup': {'updraft_download_backup'}, 'plupload_action2': {'plupload_action2'}, 'plupload_action': {'plupload_action'}, 'updraft_ajax_importsettings': {'updraft_importsettings'}, 'updraft_central_ajax_handler': {'updraft_central_ajax'}, 'updraftplus_dash_notice_ajax': {'updraftplus_dash_notice_ajax'}, 'wp_ajax_dashboard_widgets_low_priority': {'dashboard-widgets'}}
+*Overview: {'updraft_ajax_savesettings': {'updraft_savesettings'}, 'wp_ajax_updraftcentral_receivepublickey': {'nopriv_updraftcentral_receivepublickey', 'updraftcentral_receivepublickey'}, 'updraftplus_dash_notice_ajax': {'updraftplus_dash_notice_ajax'}, 'wp_ajax_dashboard_widgets_low_priority': {'dashboard-widgets'}, 'updraftplus_user_notice_ajax': {'updraftplus_user_notice_ajax'}, 'plupload_action2': {'plupload_action2'}, 'wp_ajax_dashboard_widgets_high_priority': {'dashboard-widgets'}, 'plupload_action': {'plupload_action'}, 'updraft_central_ajax_handler': {'updraft_central_ajax'}, 'updraft_download_backup': {'updraft_download_backup'}, 'updraft_ajaxrestore': {'nopriv_updraft_ajaxrestore_continue', 'nopriv_updraft_ajaxrestore', 'updraft_ajaxrestore_continue', 'updraft_ajaxrestore'}, 'updraft_ajax_importsettings': {'updraft_importsettings'}, 'updraft_ajax_handler': {'updraft_ajax'}}
 *
 ***/
-
-/** Function wp_ajax_updraftcentral_receivepublickey() called by wp_ajax hooks: {'updraftcentral_receivepublickey', 'nopriv_updraftcentral_receivepublickey'} **/
-/** No params detected :-/ **/
-
-
-/** Function updraftplus_user_notice_ajax() called by wp_ajax hooks: {'updraftplus_user_notice_ajax'} **/
-/** No params detected :-/ **/
-
-
-/** Function updraft_ajaxrestore() called by wp_ajax hooks: {'nopriv_updraft_ajaxrestore_continue', 'updraft_ajaxrestore_continue', 'nopriv_updraft_ajaxrestore', 'updraft_ajaxrestore'} **/
-/** No params detected :-/ **/
-
 
 /** Function updraft_ajax_savesettings() called by wp_ajax hooks: {'updraft_savesettings'} **/
 /** Parameters found in function updraft_ajax_savesettings(): {"post": ["subaction"]} **/
@@ -55,195 +43,20 @@ function updraft_ajax_savesettings() {
 	}
 
 
-/** Function wp_ajax_dashboard_widgets_high_priority() called by wp_ajax hooks: {'dashboard-widgets'} **/
+/** Function wp_ajax_updraftcentral_receivepublickey() called by wp_ajax hooks: {'nopriv_updraftcentral_receivepublickey', 'updraftcentral_receivepublickey'} **/
 /** No params detected :-/ **/
 
 
-/** Function updraft_ajax_handler() called by wp_ajax hooks: {'updraft_ajax'} **/
-/** Parameters found in function updraft_ajax_handler(): {"request": ["curl"]} **/
-function updraft_ajax_handler() {
-		$request_nonce = UpdraftPlus_Manipulation_Functions::fetch_superglobal('request', 'nonce');
-		$subaction = UpdraftPlus_Manipulation_Functions::fetch_superglobal('request', 'subaction');
-
-		$nonce = empty($request_nonce) ? '' : $request_nonce;
-
-		if (!wp_verify_nonce($nonce, 'updraftplus-credentialtest-nonce') || empty($subaction)) die('Security check');
-
-		// Mitigation in case the nonce leaked to an unauthorised user
-		if ('dismissautobackup' == $subaction) {
-			if (!current_user_can('update_plugins') && !current_user_can('update_themes')) return;
-		} elseif ('dismissexpiry' == $subaction || 'dismissdashnotice' == $subaction) {
-			if (!current_user_can('update_plugins')) return;
-		} else {
-			if (!UpdraftPlus_Options::user_can_manage()) return;
-		}
-		
-		// All others use _POST
-		$data_in_get = array('get_log', 'get_fragment');
-		
-		// UpdraftPlus_WPAdmin_Commands extends UpdraftPlus_Commands - i.e. all commands are in there
-		if (!class_exists('UpdraftPlus_WPAdmin_Commands')) updraft_try_include_file('includes/class-wpadmin-commands.php', 'include_once');
-		$commands = new UpdraftPlus_WPAdmin_Commands($this);
-		
-		if (method_exists($commands, $subaction)) {
-
-			$data = in_array($subaction, $data_in_get) ? $_GET : $_POST;
-			
-			// Undo WP's slashing of GET/POST data
-			$data = UpdraftPlus_Manipulation_Functions::wp_unslash($data);
-			
-			// TODO: Once all commands come through here and through updraft_send_command(), the data should always come from this attribute (once updraft_send_command() is modified appropriately).
-			if (isset($data['action_data'])) $data = $data['action_data'];
-			try {
-				$results = call_user_func(array($commands, $subaction), $data);
-			} catch (Exception $e) {
-				$log_message = 'PHP Fatal Exception error ('.get_class($e).') has occurred during '.$subaction.' subaction. Error Message: '.$e->getMessage().' (Code: '.$e->getCode().', line '.$e->getLine().' in '.$e->getFile().')';
-				UpdraftPlus_Manipulation_Functions::error_log($log_message);
-				echo json_encode(array(
-					'fatal_error' => true,
-					'fatal_error_message' => $log_message
-				));
-				die;
-			} catch (Error $e) { // phpcs:ignore PHPCompatibility.Classes.NewClasses.errorFound -- The Error class does not exist in PHP below 5.6.
-				$log_message = 'PHP Fatal error ('.get_class($e).') has occurred during '.$subaction.' subaction. Error Message: '.$e->getMessage().' (Code: '.$e->getCode().', line '.$e->getLine().' in '.$e->getFile().')';
-				UpdraftPlus_Manipulation_Functions::error_log($log_message);
-				echo json_encode(array(
-					'fatal_error' => true,
-					'fatal_error_message' => $log_message
-				));
-				die;
-			}
-			if (is_wp_error($results)) {
-				$results = array(
-					'result' => false,
-					'error_code' => $results->get_error_code(),
-					'error_message' => $results->get_error_message(),
-					'error_data' => $results->get_error_data(),
-				);
-			}
-			
-			if (is_string($results)) {
-				// A handful of legacy methods, and some which are directly the source for iframes, for which JSON is not appropriate.
-				echo $results; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped --the escaping should take place at the time the caller of this ajax handler receives a response from its request possibly after calling wp_remote_*() or JS jQuery.ajax()
-			} else {
-				echo json_encode($results);
-			}
-			die;
-		}
-		
-		// Below are all the commands not ported over into class-commands.php or class-wpadmin-commands.php
-		$request_subsubaction = UpdraftPlus_Manipulation_Functions::fetch_superglobal('request', 'subsubaction');
-		if ('activejobs_list' == $subaction) {
-			try {
-				// N.B. Also called from autobackup.php
-				// TODO: This should go into UpdraftPlus_Commands, once the add-ons have been ported to use updraft_send_command()
-				echo json_encode($this->get_activejobs_list(UpdraftPlus_Manipulation_Functions::wp_unslash($_GET)));
-			} catch (Exception $e) {
-				$log_message = 'PHP Fatal Exception error ('.get_class($e).') has occurred during get active job list. Error Message: '.$e->getMessage().' (Code: '.$e->getCode().', line '.$e->getLine().' in '.$e->getFile().')';
-				UpdraftPlus_Manipulation_Functions::error_log($log_message);
-				echo json_encode(array(
-					'fatal_error' => true,
-					'fatal_error_message' => $log_message
-				));
-			} catch (Error $e) { // phpcs:ignore PHPCompatibility.Classes.NewClasses.errorFound -- The Error class does not exist in PHP below 5.6.
-				$log_message = 'PHP Fatal error ('.get_class($e).') has occurred during get active job list. Error Message: '.$e->getMessage().' (Code: '.$e->getCode().', line '.$e->getLine().' in '.$e->getFile().')';
-				UpdraftPlus_Manipulation_Functions::error_log($log_message);
-				echo json_encode(array(
-					'fatal_error' => true,
-					'fatal_error_message' => $log_message
-				));
-			}
-			
-		} elseif ('httpget' == $subaction) {
-			try {
-				// httpget
-				$curl = empty($_REQUEST['curl']) ? false : true;
-				$request_uri = UpdraftPlus_Manipulation_Functions::fetch_superglobal('request', 'uri');
-				echo $this->http_get(UpdraftPlus_Manipulation_Functions::wp_unslash($request_uri), $curl); //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- It's not HTML content; the output is in JSON format which can't be escaped
-			} catch (Error $e) { // phpcs:ignore PHPCompatibility.Classes.NewClasses.errorFound -- The Error class does not exist in PHP below 5.6.
-				$log_message = 'PHP Fatal error ('.get_class($e).') has occurred during http get. Error Message: '.$e->getMessage().' (Code: '.$e->getCode().', line '.$e->getLine().' in '.$e->getFile().')';
-				UpdraftPlus_Manipulation_Functions::error_log($log_message);
-				echo json_encode(array(
-					'fatal_error' => true,
-					'fatal_error_message' => $log_message
-				));
-			} catch (Exception $e) {
-				$log_message = 'PHP Fatal Exception error ('.get_class($e).') has occurred during http get. Error Message: '.$e->getMessage().' (Code: '.$e->getCode().', line '.$e->getLine().' in '.$e->getFile().')';
-				UpdraftPlus_Manipulation_Functions::error_log($log_message);
-				echo json_encode(array(
-					'fatal_error' => true,
-					'fatal_error_message' => $log_message
-				));
-			}
-			 
-		} elseif ('doaction' == $subaction && !empty($request_subsubaction) && 'updraft_' == substr($request_subsubaction, 0, 8)) {
-			$subsubaction = $request_subsubaction;
-			try {
-					// These generally echo and die - they will need further work to port to one of the command classes. Some may already have equivalents in UpdraftPlus_Commands, if they are used from UpdraftCentral.
-				do_action(UpdraftPlus_Manipulation_Functions::wp_unslash($subsubaction), $_REQUEST);
-			} catch (Exception $e) {
-				$log_message = 'PHP Fatal Exception error ('.get_class($e).') has occurred during doaction subaction with '.$subsubaction.' subsubaction. Error Message: '.$e->getMessage().' (Code: '.$e->getCode().', line '.$e->getLine().' in '.$e->getFile().')';
-				UpdraftPlus_Manipulation_Functions::error_log($log_message);
-				echo json_encode(array(
-					'fatal_error' => true,
-					'fatal_error_message' => $log_message
-				));
-				die;
-			} catch (Error $e) { // phpcs:ignore PHPCompatibility.Classes.NewClasses.errorFound -- The Error class does not exist in PHP below 5.6.
-				$log_message = 'PHP Fatal error ('.get_class($e).') has occurred during doaction subaction with '.$subsubaction.' subsubaction. Error Message: '.$e->getMessage().' (Code: '.$e->getCode().', line '.$e->getLine().' in '.$e->getFile().')';
-				UpdraftPlus_Manipulation_Functions::error_log($log_message);
-				echo json_encode(array(
-					'fatal_error' => true,
-					'fatal_error_message' => $log_message
-				));
-				die;
-			}
-		}
-		
-		die;
-
-	}
+/** Function updraftplus_dash_notice_ajax() called by wp_ajax hooks: {'updraftplus_dash_notice_ajax'} **/
+/** No params detected :-/ **/
 
 
-/** Function updraft_download_backup() called by wp_ajax hooks: {'updraft_download_backup'} **/
-/** Parameters found in function updraft_download_backup(): {"request": ["timestamp", "type"]} **/
-function updraft_download_backup() {
-		
-		if (!UpdraftPlus_Options::user_can_manage()) die('Unauthorised.');
-		
-		try {
-			$global_wp_nonce = UpdraftPlus_Manipulation_Functions::fetch_superglobal('request', '_wpnonce');
-			if (empty($global_wp_nonce) || !wp_verify_nonce($global_wp_nonce, 'updraftplus_download')) die('Unauthorised.');
-	
-			if (empty($_REQUEST['timestamp']) || !is_numeric($_REQUEST['timestamp']) || empty($_REQUEST['type'])) die;
-			$findex = UpdraftPlus_Manipulation_Functions::fetch_superglobal('request', 'findex');
-			$findexes = empty($findex) ? array(0) : $findex;
-			$stage = UpdraftPlus_Manipulation_Functions::fetch_superglobal('request', 'stage', '', false, 'string', 'sanitize_text_field');
-			$file_path = UpdraftPlus_Manipulation_Functions::fetch_superglobal('request', 'filepath', '', false, 'string', null);
-			
-			$type = UpdraftPlus_Manipulation_Functions::fetch_superglobal('request', 'type', '', false, 'string', null);
-			// This call may not actually return, depending upon what mode it is called in
-			$result = $this->do_updraft_download_backup($findexes, $type, (int) $_REQUEST['timestamp'], $stage, false, $file_path);
-			
-			// In theory, if a response was already sent, then Connection: close has been issued, and a Content-Length. However, in https://updraftplus.com/forums/topic/pclzip_err_bad_format-10-invalid-archive-structure/ a browser ignores both of these, and then picks up the second output and complains.
-			if (empty($result['already_closed'])) echo json_encode($result);
-		} catch (Exception $e) {
-			$log_message = 'PHP Fatal Exception error ('.get_class($e).') has occurred during download backup. Error Message: '.$e->getMessage().' (Code: '.$e->getCode().', line '.$e->getLine().' in '.$e->getFile().')';
-			UpdraftPlus_Manipulation_Functions::error_log($log_message);
-			echo json_encode(array(
-				'fatal_error' => true,
-				'fatal_error_message' => $log_message
-			));
-		} catch (Error $e) { // phpcs:ignore PHPCompatibility.Classes.NewClasses.errorFound -- The Error class does not exist in PHP below 5.6.
-			$log_message = 'PHP Fatal error ('.get_class($e).') has occurred during download backup. Error Message: '.$e->getMessage().' (Code: '.$e->getCode().', line '.$e->getLine().' in '.$e->getFile().')';
-			UpdraftPlus_Manipulation_Functions::error_log($log_message);
-			echo json_encode(array(
-				'fatal_error' => true,
-				'fatal_error_message' => $log_message
-			));
-		}
-		die();
-	}
+/** Function wp_ajax_dashboard_widgets_low_priority() called by wp_ajax hooks: {'dashboard-widgets'} **/
+/** No params detected :-/ **/
+
+
+/** Function updraftplus_user_notice_ajax() called by wp_ajax hooks: {'updraftplus_user_notice_ajax'} **/
+/** No params detected :-/ **/
 
 
 /** Function plupload_action2() called by wp_ajax hooks: {'plupload_action2'} **/
@@ -322,6 +135,10 @@ function plupload_action2() {
 		if (isset($final_file)) echo 'OK:'.wp_kses_post($final_file);
 		exit;
 	}
+
+
+/** Function wp_ajax_dashboard_widgets_high_priority() called by wp_ajax hooks: {'dashboard-widgets'} **/
+/** No params detected :-/ **/
 
 
 /** Function plupload_action() called by wp_ajax hooks: {'plupload_action'} **/
@@ -491,6 +308,55 @@ function plupload_action() {
 	}
 
 
+/** Function updraft_central_ajax_handler() called by wp_ajax hooks: {'updraft_central_ajax'} **/
+/** No params detected :-/ **/
+
+
+/** Function updraft_download_backup() called by wp_ajax hooks: {'updraft_download_backup'} **/
+/** Parameters found in function updraft_download_backup(): {"request": ["timestamp", "type"]} **/
+function updraft_download_backup() {
+		
+		if (!UpdraftPlus_Options::user_can_manage()) die('Unauthorised.');
+		
+		try {
+			$global_wp_nonce = UpdraftPlus_Manipulation_Functions::fetch_superglobal('request', '_wpnonce');
+			if (empty($global_wp_nonce) || !wp_verify_nonce($global_wp_nonce, 'updraftplus_download')) die('Unauthorised.');
+	
+			if (empty($_REQUEST['timestamp']) || !is_numeric($_REQUEST['timestamp']) || empty($_REQUEST['type'])) die;
+			$findex = UpdraftPlus_Manipulation_Functions::fetch_superglobal('request', 'findex');
+			$findexes = empty($findex) ? array(0) : $findex;
+			$stage = UpdraftPlus_Manipulation_Functions::fetch_superglobal('request', 'stage', '', false, 'string', 'sanitize_text_field');
+			$file_path = UpdraftPlus_Manipulation_Functions::fetch_superglobal('request', 'filepath', '', false, 'string', null);
+			
+			$type = UpdraftPlus_Manipulation_Functions::fetch_superglobal('request', 'type', '', false, 'string', null);
+			// This call may not actually return, depending upon what mode it is called in
+			$result = $this->do_updraft_download_backup($findexes, $type, (int) $_REQUEST['timestamp'], $stage, false, $file_path);
+			
+			// In theory, if a response was already sent, then Connection: close has been issued, and a Content-Length. However, in https://updraftplus.com/forums/topic/pclzip_err_bad_format-10-invalid-archive-structure/ a browser ignores both of these, and then picks up the second output and complains.
+			if (empty($result['already_closed'])) echo json_encode($result);
+		} catch (Exception $e) {
+			$log_message = 'PHP Fatal Exception error ('.get_class($e).') has occurred during download backup. Error Message: '.$e->getMessage().' (Code: '.$e->getCode().', line '.$e->getLine().' in '.$e->getFile().')';
+			UpdraftPlus_Manipulation_Functions::error_log($log_message);
+			echo json_encode(array(
+				'fatal_error' => true,
+				'fatal_error_message' => $log_message
+			));
+		} catch (Error $e) { // phpcs:ignore PHPCompatibility.Classes.NewClasses.errorFound -- The Error class does not exist in PHP below 5.6.
+			$log_message = 'PHP Fatal error ('.get_class($e).') has occurred during download backup. Error Message: '.$e->getMessage().' (Code: '.$e->getCode().', line '.$e->getLine().' in '.$e->getFile().')';
+			UpdraftPlus_Manipulation_Functions::error_log($log_message);
+			echo json_encode(array(
+				'fatal_error' => true,
+				'fatal_error_message' => $log_message
+			));
+		}
+		die();
+	}
+
+
+/** Function updraft_ajaxrestore() called by wp_ajax hooks: {'nopriv_updraft_ajaxrestore_continue', 'nopriv_updraft_ajaxrestore', 'updraft_ajaxrestore_continue', 'updraft_ajaxrestore'} **/
+/** No params detected :-/ **/
+
+
 /** Function updraft_ajax_importsettings() called by wp_ajax hooks: {'updraft_importsettings'} **/
 /** Parameters found in function updraft_ajax_importsettings(): {"post": ["subaction", "settings"]} **/
 function updraft_ajax_importsettings() {
@@ -519,15 +385,149 @@ function updraft_ajax_importsettings() {
 	}
 
 
-/** Function updraft_central_ajax_handler() called by wp_ajax hooks: {'updraft_central_ajax'} **/
-/** No params detected :-/ **/
+/** Function updraft_ajax_handler() called by wp_ajax hooks: {'updraft_ajax'} **/
+/** Parameters found in function updraft_ajax_handler(): {"request": ["curl"]} **/
+function updraft_ajax_handler() {
+		$request_nonce = UpdraftPlus_Manipulation_Functions::fetch_superglobal('request', 'nonce');
+		$subaction = UpdraftPlus_Manipulation_Functions::fetch_superglobal('request', 'subaction');
 
+		$nonce = empty($request_nonce) ? '' : $request_nonce;
 
-/** Function updraftplus_dash_notice_ajax() called by wp_ajax hooks: {'updraftplus_dash_notice_ajax'} **/
-/** No params detected :-/ **/
+		if (!wp_verify_nonce($nonce, 'updraftplus-credentialtest-nonce') || empty($subaction)) die('Security check');
 
+		// Mitigation in case the nonce leaked to an unauthorised user
+		if ('dismissautobackup' == $subaction) {
+			if (!current_user_can('update_plugins') && !current_user_can('update_themes')) return;
+		} elseif ('dismissexpiry' == $subaction || 'dismissdashnotice' == $subaction) {
+			if (!current_user_can('update_plugins')) return;
+		} else {
+			if (!UpdraftPlus_Options::user_can_manage()) return;
+		}
+		
+		// All others use _POST
+		$data_in_get = array('get_log', 'get_fragment');
+		
+		// UpdraftPlus_WPAdmin_Commands extends UpdraftPlus_Commands - i.e. all commands are in there
+		if (!class_exists('UpdraftPlus_WPAdmin_Commands')) updraft_try_include_file('includes/class-wpadmin-commands.php', 'include_once');
+		$commands = new UpdraftPlus_WPAdmin_Commands($this);
+		
+		if (method_exists($commands, $subaction)) {
 
-/** Function wp_ajax_dashboard_widgets_low_priority() called by wp_ajax hooks: {'dashboard-widgets'} **/
-/** No params detected :-/ **/
+			$data = in_array($subaction, $data_in_get) ? $_GET : $_POST;
+			
+			// Undo WP's slashing of GET/POST data
+			$data = UpdraftPlus_Manipulation_Functions::wp_unslash($data);
+			
+			// TODO: Once all commands come through here and through updraft_send_command(), the data should always come from this attribute (once updraft_send_command() is modified appropriately).
+			if (isset($data['action_data'])) $data = $data['action_data'];
+			try {
+				$results = call_user_func(array($commands, $subaction), $data);
+			} catch (Exception $e) {
+				$log_message = 'PHP Fatal Exception error ('.get_class($e).') has occurred during '.$subaction.' subaction. Error Message: '.$e->getMessage().' (Code: '.$e->getCode().', line '.$e->getLine().' in '.$e->getFile().')';
+				UpdraftPlus_Manipulation_Functions::error_log($log_message);
+				echo json_encode(array(
+					'fatal_error' => true,
+					'fatal_error_message' => $log_message
+				));
+				die;
+			} catch (Error $e) { // phpcs:ignore PHPCompatibility.Classes.NewClasses.errorFound -- The Error class does not exist in PHP below 5.6.
+				$log_message = 'PHP Fatal error ('.get_class($e).') has occurred during '.$subaction.' subaction. Error Message: '.$e->getMessage().' (Code: '.$e->getCode().', line '.$e->getLine().' in '.$e->getFile().')';
+				UpdraftPlus_Manipulation_Functions::error_log($log_message);
+				echo json_encode(array(
+					'fatal_error' => true,
+					'fatal_error_message' => $log_message
+				));
+				die;
+			}
+			if (is_wp_error($results)) {
+				$results = array(
+					'result' => false,
+					'error_code' => $results->get_error_code(),
+					'error_message' => $results->get_error_message(),
+					'error_data' => $results->get_error_data(),
+				);
+			}
+			
+			if (is_string($results)) {
+				// A handful of legacy methods, and some which are directly the source for iframes, for which JSON is not appropriate.
+				echo $results; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped --the escaping should take place at the time the caller of this ajax handler receives a response from its request possibly after calling wp_remote_*() or JS jQuery.ajax()
+			} else {
+				echo json_encode($results);
+			}
+			die;
+		}
+		
+		// Below are all the commands not ported over into class-commands.php or class-wpadmin-commands.php
+		$request_subsubaction = UpdraftPlus_Manipulation_Functions::fetch_superglobal('request', 'subsubaction');
+		if ('activejobs_list' == $subaction) {
+			try {
+				// N.B. Also called from autobackup.php
+				// TODO: This should go into UpdraftPlus_Commands, once the add-ons have been ported to use updraft_send_command()
+				echo json_encode($this->get_activejobs_list(UpdraftPlus_Manipulation_Functions::wp_unslash($_GET)));
+			} catch (Exception $e) {
+				$log_message = 'PHP Fatal Exception error ('.get_class($e).') has occurred during get active job list. Error Message: '.$e->getMessage().' (Code: '.$e->getCode().', line '.$e->getLine().' in '.$e->getFile().')';
+				UpdraftPlus_Manipulation_Functions::error_log($log_message);
+				echo json_encode(array(
+					'fatal_error' => true,
+					'fatal_error_message' => $log_message
+				));
+			} catch (Error $e) { // phpcs:ignore PHPCompatibility.Classes.NewClasses.errorFound -- The Error class does not exist in PHP below 5.6.
+				$log_message = 'PHP Fatal error ('.get_class($e).') has occurred during get active job list. Error Message: '.$e->getMessage().' (Code: '.$e->getCode().', line '.$e->getLine().' in '.$e->getFile().')';
+				UpdraftPlus_Manipulation_Functions::error_log($log_message);
+				echo json_encode(array(
+					'fatal_error' => true,
+					'fatal_error_message' => $log_message
+				));
+			}
+			
+		} elseif ('httpget' == $subaction) {
+			try {
+				// httpget
+				$curl = empty($_REQUEST['curl']) ? false : true;
+				$request_uri = UpdraftPlus_Manipulation_Functions::fetch_superglobal('request', 'uri');
+				echo $this->http_get(UpdraftPlus_Manipulation_Functions::wp_unslash($request_uri), $curl); //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- It's not HTML content; the output is in JSON format which can't be escaped
+			} catch (Error $e) { // phpcs:ignore PHPCompatibility.Classes.NewClasses.errorFound -- The Error class does not exist in PHP below 5.6.
+				$log_message = 'PHP Fatal error ('.get_class($e).') has occurred during http get. Error Message: '.$e->getMessage().' (Code: '.$e->getCode().', line '.$e->getLine().' in '.$e->getFile().')';
+				UpdraftPlus_Manipulation_Functions::error_log($log_message);
+				echo json_encode(array(
+					'fatal_error' => true,
+					'fatal_error_message' => $log_message
+				));
+			} catch (Exception $e) {
+				$log_message = 'PHP Fatal Exception error ('.get_class($e).') has occurred during http get. Error Message: '.$e->getMessage().' (Code: '.$e->getCode().', line '.$e->getLine().' in '.$e->getFile().')';
+				UpdraftPlus_Manipulation_Functions::error_log($log_message);
+				echo json_encode(array(
+					'fatal_error' => true,
+					'fatal_error_message' => $log_message
+				));
+			}
+			 
+		} elseif ('doaction' == $subaction && !empty($request_subsubaction) && 'updraft_' == substr($request_subsubaction, 0, 8)) {
+			$subsubaction = $request_subsubaction;
+			try {
+					// These generally echo and die - they will need further work to port to one of the command classes. Some may already have equivalents in UpdraftPlus_Commands, if they are used from UpdraftCentral.
+				do_action(UpdraftPlus_Manipulation_Functions::wp_unslash($subsubaction), $_REQUEST);
+			} catch (Exception $e) {
+				$log_message = 'PHP Fatal Exception error ('.get_class($e).') has occurred during doaction subaction with '.$subsubaction.' subsubaction. Error Message: '.$e->getMessage().' (Code: '.$e->getCode().', line '.$e->getLine().' in '.$e->getFile().')';
+				UpdraftPlus_Manipulation_Functions::error_log($log_message);
+				echo json_encode(array(
+					'fatal_error' => true,
+					'fatal_error_message' => $log_message
+				));
+				die;
+			} catch (Error $e) { // phpcs:ignore PHPCompatibility.Classes.NewClasses.errorFound -- The Error class does not exist in PHP below 5.6.
+				$log_message = 'PHP Fatal error ('.get_class($e).') has occurred during doaction subaction with '.$subsubaction.' subsubaction. Error Message: '.$e->getMessage().' (Code: '.$e->getCode().', line '.$e->getLine().' in '.$e->getFile().')';
+				UpdraftPlus_Manipulation_Functions::error_log($log_message);
+				echo json_encode(array(
+					'fatal_error' => true,
+					'fatal_error_message' => $log_message
+				));
+				die;
+			}
+		}
+		
+		die;
+
+	}
 
 

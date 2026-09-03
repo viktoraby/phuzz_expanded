@@ -5,15 +5,11 @@
 *Found functions:7
 *Extracted functions:7
 *Total parameter names extracted: 3
-*Overview: {'open': {'pdfemb_admin_settings_getstarted_open'}, 'defer_review': {'wppdf_defer_review'}, 'deactivate_partner': {'pdfemb_partners_deactivate'}, 'activate_partner': {'pdfemb_partners_activate'}, 'dismiss_review': {'wppdf_dismiss_review'}, 'install_partner': {'pdfemb_partners_install'}, 'dismiss': {'pdfemb_admin_settings_topbar_upgrade', 'pdfemb_admin_settings_getstarted_dismiss'}}
+*Overview: {'open': {'pdfemb_admin_settings_getstarted_open'}, 'deactivate_partner': {'pdfemb_partners_deactivate'}, 'dismiss_review': {'wppdf_dismiss_review'}, 'activate_partner': {'pdfemb_partners_activate'}, 'defer_review': {'wppdf_defer_review'}, 'install_partner': {'pdfemb_partners_install'}, 'dismiss': {'pdfemb_admin_settings_getstarted_dismiss', 'pdfemb_admin_settings_topbar_upgrade'}}
 *
 ***/
 
 /** Function open() called by wp_ajax hooks: {'pdfemb_admin_settings_getstarted_open'} **/
-/** No params detected :-/ **/
-
-
-/** Function defer_review() called by wp_ajax hooks: {'wppdf_defer_review'} **/
 /** No params detected :-/ **/
 
 
@@ -36,6 +32,10 @@ function deactivate_partner(): void {
 		echo wp_json_encode( true );
 		die;
 	}
+
+
+/** Function dismiss_review() called by wp_ajax hooks: {'wppdf_dismiss_review'} **/
+/** No params detected :-/ **/
 
 
 /** Function activate_partner() called by wp_ajax hooks: {'pdfemb_partners_activate'} **/
@@ -63,7 +63,7 @@ function activate_partner(): void {
 	}
 
 
-/** Function dismiss_review() called by wp_ajax hooks: {'wppdf_dismiss_review'} **/
+/** Function defer_review() called by wp_ajax hooks: {'wppdf_defer_review'} **/
 /** No params detected :-/ **/
 
 
@@ -140,7 +140,7 @@ function install_partner(): void {
 	}
 
 
-/** Function dismiss() called by wp_ajax hooks: {'pdfemb_admin_settings_topbar_upgrade', 'pdfemb_admin_settings_getstarted_dismiss'} **/
+/** Function dismiss() called by wp_ajax hooks: {'pdfemb_admin_settings_getstarted_dismiss', 'pdfemb_admin_settings_topbar_upgrade'} **/
 /** No params detected :-/ **/
 
 

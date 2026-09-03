@@ -5,11 +5,15 @@
 *Found functions:8
 *Extracted functions:7
 *Total parameter names extracted: 1
-*Overview: {'wpsc_hide_boost_banner': {'wpsc-hide-boost-banner'}, 'wpsc_ajax_activate_boost': {'wpsc_activate_boost'}, 'wpsc_dismiss_boost_notice_ajax_handler': {'wpsc_dismiss_boost_notice'}, 'wpsc_dismiss_indexhtml_warning': {'wpsc-index-dismiss'}, 'wpsc_dismiss_notice_on_activation': {'wpsc_activate_boost'}, 'wpsc_admin_bar_delete_cache_ajax': {'ajax-delete-cache'}, 'wp_ajax_install_plugin': {'wpsc_install_plugin'}, 'wpsc_ajax_get_preload_status': {'wpsc_get_preload_status'}}
+*Overview: {'wp_ajax_install_plugin': {'wpsc_install_plugin'}, 'wpsc_dismiss_notice_on_activation': {'wpsc_activate_boost'}, 'wpsc_ajax_activate_boost': {'wpsc_activate_boost'}, 'wpsc_admin_bar_delete_cache_ajax': {'ajax-delete-cache'}, 'wpsc_dismiss_boost_notice_ajax_handler': {'wpsc_dismiss_boost_notice'}, 'wpsc_hide_boost_banner': {'wpsc-hide-boost-banner'}, 'wpsc_ajax_get_preload_status': {'wpsc_get_preload_status'}, 'wpsc_dismiss_indexhtml_warning': {'wpsc-index-dismiss'}}
 *
 ***/
 
-/** Function wpsc_hide_boost_banner() called by wp_ajax hooks: {'wpsc-hide-boost-banner'} **/
+/** Function wp_ajax_install_plugin() called by wp_ajax hooks: {'wpsc_install_plugin'} **/
+/** No function found :-/ **/
+
+
+/** Function wpsc_dismiss_notice_on_activation() called by wp_ajax hooks: {'wpsc_activate_boost'} **/
 /** No params detected :-/ **/
 
 
@@ -34,27 +38,23 @@ function wpsc_ajax_activate_boost() {
 }
 
 
-/** Function wpsc_dismiss_boost_notice_ajax_handler() called by wp_ajax hooks: {'wpsc_dismiss_boost_notice'} **/
-/** No params detected :-/ **/
-
-
-/** Function wpsc_dismiss_indexhtml_warning() called by wp_ajax hooks: {'wpsc-index-dismiss'} **/
-/** No params detected :-/ **/
-
-
-/** Function wpsc_dismiss_notice_on_activation() called by wp_ajax hooks: {'wpsc_activate_boost'} **/
-/** No params detected :-/ **/
-
-
 /** Function wpsc_admin_bar_delete_cache_ajax() called by wp_ajax hooks: {'ajax-delete-cache'} **/
 /** No params detected :-/ **/
 
 
-/** Function wp_ajax_install_plugin() called by wp_ajax hooks: {'wpsc_install_plugin'} **/
-/** No function found :-/ **/
+/** Function wpsc_dismiss_boost_notice_ajax_handler() called by wp_ajax hooks: {'wpsc_dismiss_boost_notice'} **/
+/** No params detected :-/ **/
+
+
+/** Function wpsc_hide_boost_banner() called by wp_ajax hooks: {'wpsc-hide-boost-banner'} **/
+/** No params detected :-/ **/
 
 
 /** Function wpsc_ajax_get_preload_status() called by wp_ajax hooks: {'wpsc_get_preload_status'} **/
+/** No params detected :-/ **/
+
+
+/** Function wpsc_dismiss_indexhtml_warning() called by wp_ajax hooks: {'wpsc-index-dismiss'} **/
 /** No params detected :-/ **/
 
 

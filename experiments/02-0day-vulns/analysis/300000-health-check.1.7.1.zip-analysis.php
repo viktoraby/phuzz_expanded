@@ -5,12 +5,65 @@
 *Found functions:4
 *Extracted functions:3
 *Total parameter names extracted: 2
-*Overview: {'run_files_integrity_check': {'health-check-files-integrity-check'}, 'run_mail_check': {'health-check-mail-check'}, 'Health_Check_Loopback': {'health-check-loopback-default-theme', 'health-check-loopback-individual-plugins', 'health-check-loopback-no-plugins'}, 'view_file_diff': {'health-check-view-file-diff'}}
+*Overview: {'view_file_diff': {'health-check-view-file-diff'}, 'run_files_integrity_check': {'health-check-files-integrity-check'}, 'Health_Check_Loopback': {'health-check-loopback-individual-plugins', 'health-check-loopback-no-plugins', 'health-check-loopback-default-theme'}, 'run_mail_check': {'health-check-mail-check'}}
 *
 ***/
 
+/** Function view_file_diff() called by wp_ajax hooks: {'health-check-view-file-diff'} **/
+/** Parameters found in function view_file_diff(): {"post": ["file"]} **/
+function view_file_diff() {
+		check_ajax_referer( 'health-check-view-file-diff' );
+
+		if ( ! current_user_can( 'view_site_health_checks' ) ) {
+			wp_send_json_error();
+		}
+
+		$filepath  = ABSPATH;
+		$file      = $_POST['file'];
+		$wpversion = get_bloginfo( 'version' );
+
+		if ( 0 !== validate_file( $file ) ) {
+			wp_send_json_error( array( 'message' => esc_html__( 'You do not have access to this file.', 'health-check' ) ) );
+		}
+
+		$allowed_files = get_transient( 'health-check-checksums' );
+		if ( false === $allowed_files ) {
+			$allowed_files = $this->call_checksum_api();
+		}
+
+		if ( ! isset( $allowed_files[ $file ] ) ) {
+			wp_send_json_error( array( 'message' => esc_html__( 'You do not have access to this file.', 'health-check' ) ) );
+		}
+
+		$local_file_body  = file_get_contents( $filepath . $file, FILE_USE_INCLUDE_PATH );
+		$remote_file      = wp_remote_get( 'https://core.svn.wordpress.org/tags/' . $wpversion . '/' . $file );
+		$remote_file_body = wp_remote_retrieve_body( $remote_file );
+		$diff_args        = array(
+			'show_split_view' => true,
+		);
+
+		$output   = '<table class="diff"><thead><tr class="diff-sub-title"><th>';
+		$output  .= esc_html__( 'Original', 'health-check' );
+		$output  .= '</th><th>';
+		$output  .= esc_html__( 'Modified', 'health-check' );
+		$output  .= '</th></tr></table>';
+		$output  .= wp_text_diff( $remote_file_body, $local_file_body, $diff_args );
+		$response = array(
+			'message' => $output,
+		);
+
+		wp_send_json_success( $response );
+
+		wp_die();
+	}
+
+
 /** Function run_files_integrity_check() called by wp_ajax hooks: {'health-check-files-integrity-check'} **/
 /** No params detected :-/ **/
+
+
+/** Function Health_Check_Loopback() called by wp_ajax hooks: {'health-check-loopback-individual-plugins', 'health-check-loopback-no-plugins', 'health-check-loopback-default-theme'} **/
+/** No function found :-/ **/
 
 
 /** Function run_mail_check() called by wp_ajax hooks: {'health-check-mail-check'} **/
@@ -88,59 +141,6 @@ function run_mail_check() {
 
 		wp_die();
 
-	}
-
-
-/** Function Health_Check_Loopback() called by wp_ajax hooks: {'health-check-loopback-default-theme', 'health-check-loopback-individual-plugins', 'health-check-loopback-no-plugins'} **/
-/** No function found :-/ **/
-
-
-/** Function view_file_diff() called by wp_ajax hooks: {'health-check-view-file-diff'} **/
-/** Parameters found in function view_file_diff(): {"post": ["file"]} **/
-function view_file_diff() {
-		check_ajax_referer( 'health-check-view-file-diff' );
-
-		if ( ! current_user_can( 'view_site_health_checks' ) ) {
-			wp_send_json_error();
-		}
-
-		$filepath  = ABSPATH;
-		$file      = $_POST['file'];
-		$wpversion = get_bloginfo( 'version' );
-
-		if ( 0 !== validate_file( $file ) ) {
-			wp_send_json_error( array( 'message' => esc_html__( 'You do not have access to this file.', 'health-check' ) ) );
-		}
-
-		$allowed_files = get_transient( 'health-check-checksums' );
-		if ( false === $allowed_files ) {
-			$allowed_files = $this->call_checksum_api();
-		}
-
-		if ( ! isset( $allowed_files[ $file ] ) ) {
-			wp_send_json_error( array( 'message' => esc_html__( 'You do not have access to this file.', 'health-check' ) ) );
-		}
-
-		$local_file_body  = file_get_contents( $filepath . $file, FILE_USE_INCLUDE_PATH );
-		$remote_file      = wp_remote_get( 'https://core.svn.wordpress.org/tags/' . $wpversion . '/' . $file );
-		$remote_file_body = wp_remote_retrieve_body( $remote_file );
-		$diff_args        = array(
-			'show_split_view' => true,
-		);
-
-		$output   = '<table class="diff"><thead><tr class="diff-sub-title"><th>';
-		$output  .= esc_html__( 'Original', 'health-check' );
-		$output  .= '</th><th>';
-		$output  .= esc_html__( 'Modified', 'health-check' );
-		$output  .= '</th></tr></table>';
-		$output  .= wp_text_diff( $remote_file_body, $local_file_body, $diff_args );
-		$response = array(
-			'message' => $output,
-		);
-
-		wp_send_json_success( $response );
-
-		wp_die();
 	}
 
 

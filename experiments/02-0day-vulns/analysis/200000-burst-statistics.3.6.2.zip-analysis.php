@@ -5,44 +5,16 @@
 *Found functions:6
 *Extracted functions:6
 *Total parameter names extracted: 4
-*Overview: {'ajax_toggle_low_traffic_auto_update': {'burst_toggle_low_traffic_auto_update'}, 'rest_api_fallback': {'burst_autoinstaller_rest_api_fallback'}, 'log_tracking_error': {'burst_tracking_error', 'nopriv_burst_tracking_error'}, 'dismiss_review_notice_callback': {'dismiss_review_notice'}, 'rest_api_fallback_get_action': {'burst_rest_api_fallback_get_action'}, 'rest_api_fallback_do_action': {'burst_rest_api_fallback_do_action'}}
+*Overview: {'rest_api_fallback_get_action': {'burst_rest_api_fallback_get_action'}, 'rest_api_fallback_do_action': {'burst_rest_api_fallback_do_action'}, 'rest_api_fallback': {'burst_autoinstaller_rest_api_fallback'}, 'ajax_toggle_low_traffic_auto_update': {'burst_toggle_low_traffic_auto_update'}, 'dismiss_review_notice_callback': {'dismiss_review_notice'}, 'log_tracking_error': {'nopriv_burst_tracking_error', 'burst_tracking_error'}}
 *
 ***/
 
-/** Function ajax_toggle_low_traffic_auto_update() called by wp_ajax hooks: {'burst_toggle_low_traffic_auto_update'} **/
-/** Parameters found in function ajax_toggle_low_traffic_auto_update(): {"post": ["nonce", "plugin", "enable"]} **/
-function ajax_toggle_low_traffic_auto_update(): void {
-		if ( ! current_user_can( 'update_plugins' ) ) {
-			wp_send_json_error( 'Unauthorized', 403 );
-		}
-		$nonce = isset( $_POST['nonce'] ) ? sanitize_text_field( wp_unslash( $_POST['nonce'] ) ) : '';
-		if ( ! wp_verify_nonce( $nonce, 'burst_toggle_low_traffic_auto_update' ) ) {
-			wp_send_json_error( 'Unauthorized', 403 );
-		}
+/** Function rest_api_fallback_get_action() called by wp_ajax hooks: {'burst_rest_api_fallback_get_action'} **/
+/** No params detected :-/ **/
 
-		$plugin_file = isset( $_POST['plugin'] ) ? sanitize_text_field( wp_unslash( $_POST['plugin'] ) ) : '';
-		if ( ! $this->is_installed_plugin( $plugin_file ) ) {
-			wp_send_json_error( null, 400 );
-		}
-		$enable = isset( $_POST['enable'] ) && sanitize_text_field( wp_unslash( $_POST['enable'] ) ) === '1';
 
-		$managed = $this->get_managed_plugins();
-		if ( $enable ) {
-			$managed[] = $plugin_file;
-			$managed   = array_values( array_unique( $managed ) );
-		} else {
-			$managed = array_values( array_diff( $managed, [ $plugin_file ] ) );
-		}
-		// Autoloaded: read by the auto_update_plugin filter on cron requests.
-		update_option( self::MANAGED_PLUGINS_OPTION, $managed, true );
-
-		// No trigger to (re)schedule: the hourly check picks the change up.
-		if ( $enable ) {
-			$this->maybe_schedule_initial_calculation();
-		}
-
-		wp_send_json_success();
-	}
+/** Function rest_api_fallback_do_action() called by wp_ajax hooks: {'burst_rest_api_fallback_do_action'} **/
+/** No params detected :-/ **/
 
 
 /** Function rest_api_fallback() called by wp_ajax hooks: {'burst_autoinstaller_rest_api_fallback'} **/
@@ -228,7 +200,63 @@ function rest_api_fallback( string $context = '' ): void {
 	}
 
 
-/** Function log_tracking_error() called by wp_ajax hooks: {'burst_tracking_error', 'nopriv_burst_tracking_error'} **/
+/** Function ajax_toggle_low_traffic_auto_update() called by wp_ajax hooks: {'burst_toggle_low_traffic_auto_update'} **/
+/** Parameters found in function ajax_toggle_low_traffic_auto_update(): {"post": ["nonce", "plugin", "enable"]} **/
+function ajax_toggle_low_traffic_auto_update(): void {
+		if ( ! current_user_can( 'update_plugins' ) ) {
+			wp_send_json_error( 'Unauthorized', 403 );
+		}
+		$nonce = isset( $_POST['nonce'] ) ? sanitize_text_field( wp_unslash( $_POST['nonce'] ) ) : '';
+		if ( ! wp_verify_nonce( $nonce, 'burst_toggle_low_traffic_auto_update' ) ) {
+			wp_send_json_error( 'Unauthorized', 403 );
+		}
+
+		$plugin_file = isset( $_POST['plugin'] ) ? sanitize_text_field( wp_unslash( $_POST['plugin'] ) ) : '';
+		if ( ! $this->is_installed_plugin( $plugin_file ) ) {
+			wp_send_json_error( null, 400 );
+		}
+		$enable = isset( $_POST['enable'] ) && sanitize_text_field( wp_unslash( $_POST['enable'] ) ) === '1';
+
+		$managed = $this->get_managed_plugins();
+		if ( $enable ) {
+			$managed[] = $plugin_file;
+			$managed   = array_values( array_unique( $managed ) );
+		} else {
+			$managed = array_values( array_diff( $managed, [ $plugin_file ] ) );
+		}
+		// Autoloaded: read by the auto_update_plugin filter on cron requests.
+		update_option( self::MANAGED_PLUGINS_OPTION, $managed, true );
+
+		// No trigger to (re)schedule: the hourly check picks the change up.
+		if ( $enable ) {
+			$this->maybe_schedule_initial_calculation();
+		}
+
+		wp_send_json_success();
+	}
+
+
+/** Function dismiss_review_notice_callback() called by wp_ajax hooks: {'dismiss_review_notice'} **/
+/** Parameters found in function dismiss_review_notice_callback(): {"post": ["type", "token"]} **/
+function dismiss_review_notice_callback(): void {
+		$type  = isset( $_POST['type'] ) ? sanitize_title( wp_unslash( $_POST['type'] ) ) : false;
+		$token = isset( $_POST['token'] ) ? sanitize_title( wp_unslash( $_POST['token'] ) ) : false;
+		if ( ! wp_verify_nonce( $token, 'burst_dismiss_review' ) ) {
+			wp_die();
+		}
+		if ( $type === 'dismiss' ) {
+			update_option( 'burst_review_notice_shown', true, false );
+		}
+		if ( $type === 'later' ) {
+			update_option( 'burst_activation_time', time(), false );
+		}
+
+		// this is required to terminate immediately and return a proper response.
+		wp_die();
+	}
+
+
+/** Function log_tracking_error() called by wp_ajax hooks: {'nopriv_burst_tracking_error', 'burst_tracking_error'} **/
 /** Parameters found in function log_tracking_error(): {"post": ["status", "data", "error"]} **/
 function log_tracking_error(): void {
 		if ( ! defined( 'BURST_DEBUG' ) || ! BURST_DEBUG ) {
@@ -272,33 +300,5 @@ function log_tracking_error(): void {
 		// phpcs:ignore
 		$this::error_log( "Burst tracking error: status=$status, error=$error, data=" . print_r( $data, true ) );
 	}
-
-
-/** Function dismiss_review_notice_callback() called by wp_ajax hooks: {'dismiss_review_notice'} **/
-/** Parameters found in function dismiss_review_notice_callback(): {"post": ["type", "token"]} **/
-function dismiss_review_notice_callback(): void {
-		$type  = isset( $_POST['type'] ) ? sanitize_title( wp_unslash( $_POST['type'] ) ) : false;
-		$token = isset( $_POST['token'] ) ? sanitize_title( wp_unslash( $_POST['token'] ) ) : false;
-		if ( ! wp_verify_nonce( $token, 'burst_dismiss_review' ) ) {
-			wp_die();
-		}
-		if ( $type === 'dismiss' ) {
-			update_option( 'burst_review_notice_shown', true, false );
-		}
-		if ( $type === 'later' ) {
-			update_option( 'burst_activation_time', time(), false );
-		}
-
-		// this is required to terminate immediately and return a proper response.
-		wp_die();
-	}
-
-
-/** Function rest_api_fallback_get_action() called by wp_ajax hooks: {'burst_rest_api_fallback_get_action'} **/
-/** No params detected :-/ **/
-
-
-/** Function rest_api_fallback_do_action() called by wp_ajax hooks: {'burst_rest_api_fallback_do_action'} **/
-/** No params detected :-/ **/
 
 

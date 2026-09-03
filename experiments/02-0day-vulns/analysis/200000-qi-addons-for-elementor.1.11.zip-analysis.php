@@ -5,15 +5,39 @@
 *Found functions:5
 *Extracted functions:5
 *Total parameter names extracted: 3
-*Overview: {'handle_notice': {'qi_addons_for_elementor_notice'}, 'handle_review_notice': {'qi_addons_for_elementor_review_notice'}, 'save_widgets': {'qi_addons_for_elementor_action_framework_save_options'}, 'save_settings': {'qi_addons_for_elementor_action_settings_save_options'}, 'handle_deactivation': {'qi_addons_for_elementor_deactivation'}}
+*Overview: {'handle_review_notice': {'qi_addons_for_elementor_review_notice'}, 'save_settings': {'qi_addons_for_elementor_action_settings_save_options'}, 'handle_notice': {'qi_addons_for_elementor_notice'}, 'save_widgets': {'qi_addons_for_elementor_action_framework_save_options'}, 'handle_deactivation': {'qi_addons_for_elementor_deactivation'}}
 *
 ***/
 
-/** Function handle_notice() called by wp_ajax hooks: {'qi_addons_for_elementor_notice'} **/
+/** Function handle_review_notice() called by wp_ajax hooks: {'qi_addons_for_elementor_review_notice'} **/
 /** No params detected :-/ **/
 
 
-/** Function handle_review_notice() called by wp_ajax hooks: {'qi_addons_for_elementor_review_notice'} **/
+/** Function save_settings() called by wp_ajax hooks: {'qi_addons_for_elementor_action_settings_save_options'} **/
+/** Parameters found in function save_settings(): {"request": ["action", "qi_addons_for_elementor_swiper_new"]} **/
+function save_settings() {
+
+			if ( current_user_can( 'edit_theme_options' ) ) {
+
+				$_REQUEST = stripslashes_deep( $_REQUEST );
+				unset( $_REQUEST['action'] );
+				check_ajax_referer( 'qi_addons_for_elementor_settings_ajax_save_nonce', 'qi_addons_for_elementor_settings_ajax_save_nonce' );
+
+				$new_swiper = $_REQUEST['qi_addons_for_elementor_swiper_new'] == 'yes' ? 'yes' : 'no';
+				$results    = update_option( 'qi_addons_for_elementor_swiper_new', $new_swiper );
+
+				do_action( 'qi_addons_for_elementor_action_saved_settings' );
+
+				if ( $results ) {
+					esc_html_e( 'Saved', 'qi-addons-for-elementor' );
+				}
+
+				die();
+			}
+		}
+
+
+/** Function handle_notice() called by wp_ajax hooks: {'qi_addons_for_elementor_notice'} **/
 /** No params detected :-/ **/
 
 
@@ -46,30 +70,6 @@ function save_widgets() {
 				$this->generate_widget_stylesheet( $enabled );
 
 				do_action( 'qi_addons_for_elementor_action_saved_widgets', $enabled );
-
-				if ( $results ) {
-					esc_html_e( 'Saved', 'qi-addons-for-elementor' );
-				}
-
-				die();
-			}
-		}
-
-
-/** Function save_settings() called by wp_ajax hooks: {'qi_addons_for_elementor_action_settings_save_options'} **/
-/** Parameters found in function save_settings(): {"request": ["action", "qi_addons_for_elementor_swiper_new"]} **/
-function save_settings() {
-
-			if ( current_user_can( 'edit_theme_options' ) ) {
-
-				$_REQUEST = stripslashes_deep( $_REQUEST );
-				unset( $_REQUEST['action'] );
-				check_ajax_referer( 'qi_addons_for_elementor_settings_ajax_save_nonce', 'qi_addons_for_elementor_settings_ajax_save_nonce' );
-
-				$new_swiper = $_REQUEST['qi_addons_for_elementor_swiper_new'] == 'yes' ? 'yes' : 'no';
-				$results    = update_option( 'qi_addons_for_elementor_swiper_new', $new_swiper );
-
-				do_action( 'qi_addons_for_elementor_action_saved_settings' );
 
 				if ( $results ) {
 					esc_html_e( 'Saved', 'qi-addons-for-elementor' );

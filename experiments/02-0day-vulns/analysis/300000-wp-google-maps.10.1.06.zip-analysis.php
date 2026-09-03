@@ -5,149 +5,16 @@
 *Found functions:11
 *Extracted functions:4
 *Total parameter names extracted: 5
-*Overview: {'dismissFromPostAjax': {'wpgmza_dismiss_persistent_notice'}, 'WPGMZA\\\\Page': {'wpgmza_hide_chat'}, 'WPGMZA\\\\MapEditorTour': {'wpgmza_tour_progress_update'}, 'WPGMZA\\\\InstallerPage': {'wpgmza_installer_page_save_options', 'wpgmza_installer_page_skip', 'wpgmza_installer_page_temp_api_key', 'wpgmza_installer_page_auto_onboarding_procedure'}, 'processBackgroundAction': {'wpgmza_persisten_notice_quick_action'}, 'wpgmaps_action_callback_pro': {'delete_poly', 'delete_polyline', 'delete_circle', 'add_marker', 'delete_marker', 'delete_rectangle', 'delete_dataset', 'approve_marker', 'edit_marker'}, 'WPGMZA\\\\clear_nominatim_cache': {'wpgmza_clear_nominatim_cache'}, 'WPGMZA\\\\SettingsPage': {'wpgmza_maps_settings_danger_zone_delete_data'}, 'WPGMZA\\\\MapsEngineDialog': {'wpgmza_maps_engine_dialog_set_engine'}, 'onReportRestAPIBlocked': {'wpgmza_report_rest_api_blocked', 'nopriv_wpgmza_report_rest_api_blocked'}, 'onAJAXRequest': {'nopriv_wpgmza_rest_api_request', 'wpgmza_rest_api_request'}}
+*Overview: {'WPGMZA\\\\SettingsPage': {'wpgmza_maps_settings_danger_zone_delete_data'}, 'wpgmaps_action_callback_pro': {'delete_marker', 'edit_marker', 'delete_circle', 'delete_dataset', 'delete_rectangle', 'delete_polyline', 'approve_marker', 'add_marker', 'delete_poly'}, 'onAJAXRequest': {'nopriv_wpgmza_rest_api_request', 'wpgmza_rest_api_request'}, 'WPGMZA\\\\Page': {'wpgmza_hide_chat'}, 'dismissFromPostAjax': {'wpgmza_dismiss_persistent_notice'}, 'WPGMZA\\\\MapEditorTour': {'wpgmza_tour_progress_update'}, 'processBackgroundAction': {'wpgmza_persisten_notice_quick_action'}, 'WPGMZA\\\\InstallerPage': {'wpgmza_installer_page_temp_api_key', 'wpgmza_installer_page_skip', 'wpgmza_installer_page_save_options', 'wpgmza_installer_page_auto_onboarding_procedure'}, 'WPGMZA\\\\clear_nominatim_cache': {'wpgmza_clear_nominatim_cache'}, 'WPGMZA\\\\MapsEngineDialog': {'wpgmza_maps_engine_dialog_set_engine'}, 'onReportRestAPIBlocked': {'wpgmza_report_rest_api_blocked', 'nopriv_wpgmza_report_rest_api_blocked'}}
 *
 ***/
-
-/** Function dismissFromPostAjax() called by wp_ajax hooks: {'wpgmza_dismiss_persistent_notice'} **/
-/** Parameters found in function dismissFromPostAjax(): {"post": ["slug", "wpgmza_security"]} **/
-function dismissFromPostAjax(){
-		global $wpgmza;
-		
-		if (empty($_POST['slug']) || empty($_POST['wpgmza_security']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['wpgmza_security'])), 'wpgmza_ajaxnonce') || !$wpgmza->isUserAllowedToEdit()) {
-			wp_send_json_error(__( 'Security check failed, import will continue, however, we cannot provide you with live updates', 'wp-google-maps' ));
-		}
-
-		$slug = sanitize_text_field(wp_unslash($_POST['slug']));
-		if (!empty($slug)){
-			$this->dismiss($slug);
-			wp_send_json_success('Complete');
-		}
-
-		wp_send_json_error('Could not complete');
-	}
-
-
-/** Function WPGMZA\\Page() called by wp_ajax hooks: {'wpgmza_hide_chat'} **/
-/** No function found :-/ **/
-
-
-/** Function WPGMZA\\MapEditorTour() called by wp_ajax hooks: {'wpgmza_tour_progress_update'} **/
-/** No function found :-/ **/
-
-
-/** Function WPGMZA\\InstallerPage() called by wp_ajax hooks: {'wpgmza_installer_page_save_options', 'wpgmza_installer_page_skip', 'wpgmza_installer_page_temp_api_key', 'wpgmza_installer_page_auto_onboarding_procedure'} **/
-/** No function found :-/ **/
-
-
-/** Function processBackgroundAction() called by wp_ajax hooks: {'wpgmza_persisten_notice_quick_action'} **/
-/** Parameters found in function processBackgroundAction(): {"post": ["relay", "wpgmza_security", "slug", "map_engine"]} **/
-function processBackgroundAction(){
-		global $wpgmza;
-
-		if (empty($_POST['relay']) || empty($_POST['wpgmza_security']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['wpgmza_security'])), 'wpgmza_ajaxnonce') || !$wpgmza->isUserAllowedToEdit()) {
-			wp_send_json_error(__( 'Security check failed, import will continue, however, we cannot provide you with live updates', 'wp-google-maps' ));
-		}
-
-		$relayAction = sanitize_text_field(wp_unslash($_POST['relay']));
-		if(!empty($relayAction)){
-			switch($relayAction){
-				case 'swap_internal_engine':
-					global $wpgmza;
-					$engine = $wpgmza->settings->internal_engine;
-					if($engine === 'atlas-novus'){
-						$engine = 'legacy';
-					} else {
-						$engine = 'atlas-novus';
-					}
-
-					$wpgmza->settings->internal_engine = $engine;
-
-					/* Dismiss it - It's one-switch and done */
-					if(!empty($_POST['slug'])){
-						$slug = sanitize_text_field(wp_unslash($_POST['slug']));
-						if (!empty($slug)){
-							$this->dismiss($slug);
-						}
-					}
-					break;
-				case 'swap_map_engine_from_toolbar':
-					/* We handle this here for simplicity - but it belongs somewhere else to be honest */
-					global $wpgmza;
-					$switch = !empty($_POST['map_engine']) ? sanitize_text_field($_POST['map_engine']) : false;
-					$valid = array("google-maps", "leaflet-azure", "leaflet-stadia", "leaflet-maptiler", "leaflet-locationiq", "leaflet-zerocost", "leaflet", "open-layers-latest");
-					
-					if(in_array($switch, $valid)){
-						/* Valid switch */
-						$wpgmza->settings->wpgmza_maps_engine = $switch;
-
-						switch($switch){
-							case 'leaflet-azure':
-								if(empty($wpgmza->settings->tile_server_url_leaflet_azure)){
-									$wpgmza->settings->tile_server_url_leaflet_azure = "{alias:azure-multilayer}";
-								}
-								break;
-							case 'leaflet-stadia':
-								if(empty($wpgmza->settings->tile_server_url_leaflet_stadia)){
-									$wpgmza->settings->tile_server_url_leaflet_stadia = "{alias:stadia-multilayer}";
-								}
-								break;
-							case 'leaflet-maptiler':
-								if(empty($wpgmza->settings->tile_server_url_leaflet_maptiler)){
-									$wpgmza->settings->tile_server_url_leaflet_maptiler = "{alias:maptiler-multilayer}";
-								}
-								break;
-							case 'leaflet-locationiq':
-								if(empty($wpgmza->settings->tile_server_url_leaflet_locationiq)){
-									$wpgmza->settings->tile_server_url_leaflet_locationiq = "https://{s}-tiles.locationiq.com/v3/streets/r/{z}/{x}/{y}.png";
-								}
-								break;
-							case 'leaflet-zerocost':
-								if(empty($wpgmza->settings->tile_server_url_leaflet_zerocost)){
-									$wpgmza->settings->tile_server_url_leaflet_zerocost = "https://tiles.openfreemap.org/styles/liberty";
-								}
-								break;
-							case 'leaflet':
-							case 'open-layers-latest':
-								if(empty($wpgmza->settings->tile_server_url)){
-									$wpgmza->settings->tile_server_url = "https://{a-c}.tile.openstreetmap.org/{z}/{x}/{y}.png";
-								}
-								break;
-						}
-					}
-					break;
-				case 'swap_map_engine_from_toolbar_dismiss':
-					/* We handle this here for simplicity - but it belongs somewhere else to be honest */
-					update_option("wpgmza-engine-switch-toolbar-dismissed", date("Y-m-d H:i:s"), false);
-					break;
-			}
-		}
-
-	    /* Developer Hook (Action) - Add processing for non standard background actions present in persistent notifications */     
-		do_action("wpgmza_admin_notice_process_background_action", $relayAction);
-
-		wp_send_json_success('Complete');
-	}
-
-
-/** Function wpgmaps_action_callback_pro() called by wp_ajax hooks: {'delete_poly', 'delete_polyline', 'delete_circle', 'add_marker', 'delete_marker', 'delete_rectangle', 'delete_dataset', 'approve_marker', 'edit_marker'} **/
-/** No function found :-/ **/
-
-
-/** Function WPGMZA\\clear_nominatim_cache() called by wp_ajax hooks: {'wpgmza_clear_nominatim_cache'} **/
-/** No function found :-/ **/
-
 
 /** Function WPGMZA\\SettingsPage() called by wp_ajax hooks: {'wpgmza_maps_settings_danger_zone_delete_data'} **/
 /** No function found :-/ **/
 
 
-/** Function WPGMZA\\MapsEngineDialog() called by wp_ajax hooks: {'wpgmza_maps_engine_dialog_set_engine'} **/
+/** Function wpgmaps_action_callback_pro() called by wp_ajax hooks: {'delete_marker', 'edit_marker', 'delete_circle', 'delete_dataset', 'delete_rectangle', 'delete_polyline', 'approve_marker', 'add_marker', 'delete_poly'} **/
 /** No function found :-/ **/
-
-
-/** Function onReportRestAPIBlocked() called by wp_ajax hooks: {'wpgmza_report_rest_api_blocked', 'nopriv_wpgmza_report_rest_api_blocked'} **/
-/** No params detected :-/ **/
 
 
 /** Function onAJAXRequest() called by wp_ajax hooks: {'nopriv_wpgmza_rest_api_request', 'wpgmza_rest_api_request'} **/
@@ -259,5 +126,138 @@ function onAJAXRequest()
 		
 		exit;
 	}
+
+
+/** Function WPGMZA\\Page() called by wp_ajax hooks: {'wpgmza_hide_chat'} **/
+/** No function found :-/ **/
+
+
+/** Function dismissFromPostAjax() called by wp_ajax hooks: {'wpgmza_dismiss_persistent_notice'} **/
+/** Parameters found in function dismissFromPostAjax(): {"post": ["slug", "wpgmza_security"]} **/
+function dismissFromPostAjax(){
+		global $wpgmza;
+		
+		if (empty($_POST['slug']) || empty($_POST['wpgmza_security']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['wpgmza_security'])), 'wpgmza_ajaxnonce') || !$wpgmza->isUserAllowedToEdit()) {
+			wp_send_json_error(__( 'Security check failed, import will continue, however, we cannot provide you with live updates', 'wp-google-maps' ));
+		}
+
+		$slug = sanitize_text_field(wp_unslash($_POST['slug']));
+		if (!empty($slug)){
+			$this->dismiss($slug);
+			wp_send_json_success('Complete');
+		}
+
+		wp_send_json_error('Could not complete');
+	}
+
+
+/** Function WPGMZA\\MapEditorTour() called by wp_ajax hooks: {'wpgmza_tour_progress_update'} **/
+/** No function found :-/ **/
+
+
+/** Function processBackgroundAction() called by wp_ajax hooks: {'wpgmza_persisten_notice_quick_action'} **/
+/** Parameters found in function processBackgroundAction(): {"post": ["relay", "wpgmza_security", "slug", "map_engine"]} **/
+function processBackgroundAction(){
+		global $wpgmza;
+
+		if (empty($_POST['relay']) || empty($_POST['wpgmza_security']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['wpgmza_security'])), 'wpgmza_ajaxnonce') || !$wpgmza->isUserAllowedToEdit()) {
+			wp_send_json_error(__( 'Security check failed, import will continue, however, we cannot provide you with live updates', 'wp-google-maps' ));
+		}
+
+		$relayAction = sanitize_text_field(wp_unslash($_POST['relay']));
+		if(!empty($relayAction)){
+			switch($relayAction){
+				case 'swap_internal_engine':
+					global $wpgmza;
+					$engine = $wpgmza->settings->internal_engine;
+					if($engine === 'atlas-novus'){
+						$engine = 'legacy';
+					} else {
+						$engine = 'atlas-novus';
+					}
+
+					$wpgmza->settings->internal_engine = $engine;
+
+					/* Dismiss it - It's one-switch and done */
+					if(!empty($_POST['slug'])){
+						$slug = sanitize_text_field(wp_unslash($_POST['slug']));
+						if (!empty($slug)){
+							$this->dismiss($slug);
+						}
+					}
+					break;
+				case 'swap_map_engine_from_toolbar':
+					/* We handle this here for simplicity - but it belongs somewhere else to be honest */
+					global $wpgmza;
+					$switch = !empty($_POST['map_engine']) ? sanitize_text_field($_POST['map_engine']) : false;
+					$valid = array("google-maps", "leaflet-azure", "leaflet-stadia", "leaflet-maptiler", "leaflet-locationiq", "leaflet-zerocost", "leaflet", "open-layers-latest");
+					
+					if(in_array($switch, $valid)){
+						/* Valid switch */
+						$wpgmza->settings->wpgmza_maps_engine = $switch;
+
+						switch($switch){
+							case 'leaflet-azure':
+								if(empty($wpgmza->settings->tile_server_url_leaflet_azure)){
+									$wpgmza->settings->tile_server_url_leaflet_azure = "{alias:azure-multilayer}";
+								}
+								break;
+							case 'leaflet-stadia':
+								if(empty($wpgmza->settings->tile_server_url_leaflet_stadia)){
+									$wpgmza->settings->tile_server_url_leaflet_stadia = "{alias:stadia-multilayer}";
+								}
+								break;
+							case 'leaflet-maptiler':
+								if(empty($wpgmza->settings->tile_server_url_leaflet_maptiler)){
+									$wpgmza->settings->tile_server_url_leaflet_maptiler = "{alias:maptiler-multilayer}";
+								}
+								break;
+							case 'leaflet-locationiq':
+								if(empty($wpgmza->settings->tile_server_url_leaflet_locationiq)){
+									$wpgmza->settings->tile_server_url_leaflet_locationiq = "https://{s}-tiles.locationiq.com/v3/streets/r/{z}/{x}/{y}.png";
+								}
+								break;
+							case 'leaflet-zerocost':
+								if(empty($wpgmza->settings->tile_server_url_leaflet_zerocost)){
+									$wpgmza->settings->tile_server_url_leaflet_zerocost = "https://tiles.openfreemap.org/styles/liberty";
+								}
+								break;
+							case 'leaflet':
+							case 'open-layers-latest':
+								if(empty($wpgmza->settings->tile_server_url)){
+									$wpgmza->settings->tile_server_url = "https://{a-c}.tile.openstreetmap.org/{z}/{x}/{y}.png";
+								}
+								break;
+						}
+					}
+					break;
+				case 'swap_map_engine_from_toolbar_dismiss':
+					/* We handle this here for simplicity - but it belongs somewhere else to be honest */
+					update_option("wpgmza-engine-switch-toolbar-dismissed", date("Y-m-d H:i:s"), false);
+					break;
+			}
+		}
+
+	    /* Developer Hook (Action) - Add processing for non standard background actions present in persistent notifications */     
+		do_action("wpgmza_admin_notice_process_background_action", $relayAction);
+
+		wp_send_json_success('Complete');
+	}
+
+
+/** Function WPGMZA\\InstallerPage() called by wp_ajax hooks: {'wpgmza_installer_page_temp_api_key', 'wpgmza_installer_page_skip', 'wpgmza_installer_page_save_options', 'wpgmza_installer_page_auto_onboarding_procedure'} **/
+/** No function found :-/ **/
+
+
+/** Function WPGMZA\\clear_nominatim_cache() called by wp_ajax hooks: {'wpgmza_clear_nominatim_cache'} **/
+/** No function found :-/ **/
+
+
+/** Function WPGMZA\\MapsEngineDialog() called by wp_ajax hooks: {'wpgmza_maps_engine_dialog_set_engine'} **/
+/** No function found :-/ **/
+
+
+/** Function onReportRestAPIBlocked() called by wp_ajax hooks: {'wpgmza_report_rest_api_blocked', 'nopriv_wpgmza_report_rest_api_blocked'} **/
+/** No params detected :-/ **/
 
 

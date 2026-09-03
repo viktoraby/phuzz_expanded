@@ -5,9 +5,76 @@
 *Found functions:5
 *Extracted functions:5
 *Total parameter names extracted: 5
-*Overview: {'dismiss_review_prompt': {'members_dismiss_review_prompt'}, 'dismiss': {'members_notification_dismiss'}, 'reset_roles': {'members_reset_roles'}, 'toggle_addon': {'mbrs_toggle_addon'}, 'members_dismiss_upgrade_header': {'members_dismiss_upgrade_header'}}
+*Overview: {'members_dismiss_upgrade_header': {'members_dismiss_upgrade_header'}, 'toggle_addon': {'mbrs_toggle_addon'}, 'dismiss_review_prompt': {'members_dismiss_review_prompt'}, 'reset_roles': {'members_reset_roles'}, 'dismiss': {'members_notification_dismiss'}}
 *
 ***/
+
+/** Function members_dismiss_upgrade_header() called by wp_ajax hooks: {'members_dismiss_upgrade_header'} **/
+/** Parameters found in function members_dismiss_upgrade_header(): {"post": ["nonce"]} **/
+function members_dismiss_upgrade_header() {
+
+	// Security check
+	if ( empty( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'members_dismiss_upgrade_header' ) ) {
+		die();
+	}
+	if ( ! current_user_can( 'manage_options' ) ) {
+		wp_send_json_error( array(
+			'msg' => esc_html__( 'You are not allowed to make these changes.', 'members' )
+		) );
+	}
+	update_option( 'members_dismiss_upgrade_header', true );
+}
+
+
+/** Function toggle_addon() called by wp_ajax hooks: {'mbrs_toggle_addon'} **/
+/** Parameters found in function toggle_addon(): {"post": ["nonce", "addon"]} **/
+function toggle_addon() {
+		
+		if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'mbrs_toggle_addon' ) ) {
+			die();
+		}
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( array(
+				'msg' => esc_html__( 'You are not allowed to make these changes.', 'members' )
+			) );
+		}
+		$addon = ! empty( $_POST['addon'] ) ? sanitize_text_field( $_POST['addon'] ) : false;
+
+		if ( false === $addon ) {
+			wp_send_json_error( array(
+				'msg' => esc_html__( 'No add-on provided.', 'members' )
+			) );
+		}
+
+		// Grab the currently active add-ons
+		$active_addons = get_option( 'members_active_addons', array() );
+
+		if ( ! in_array( $addon, $active_addons ) ) { // Activate the addon
+			$active_addons[] = $addon;
+			$response = array(
+				'status' => 'active',
+				'action_label' => esc_html__( 'Active', 'members' ),
+				'msg' => esc_html__( 'Add-on activated', 'members' )
+			);
+
+			// Run the add-on's activation hook
+			members_plugin()->run_addon_activator( $addon );
+
+		} else { // Deactivate the addon
+			$key = array_search( $addon, $active_addons );
+			unset( $active_addons[$key] );
+			$response = array(
+				'status' => 'inactive',
+				'action_label' => esc_html__( 'Activate', 'members' ),
+				'msg' => esc_html__( 'Add-on deactivated', 'members' )
+			);
+		}
+
+		update_option( 'members_active_addons', $active_addons );
+
+		wp_send_json_success( $response );
+	}
+
 
 /** Function dismiss_review_prompt() called by wp_ajax hooks: {'members_dismiss_review_prompt'} **/
 /** Parameters found in function dismiss_review_prompt(): {"post": ["nonce", "type"]} **/
@@ -39,70 +106,6 @@ function dismiss_review_prompt() {
 			}
 		}
 	}
-
-
-/** Function dismiss() called by wp_ajax hooks: {'members_notification_dismiss'} **/
-/** Parameters found in function dismiss(): {"post": ["id"]} **/
-function dismiss() {
-
-    // Run a security check.
-    check_ajax_referer( 'members-admin-notifications', 'nonce' );
-
-    // Check for access and required param.
-    if ( ! self::has_access() || empty( $_POST['id'] ) ) {
-      wp_send_json_error();
-    }
-
-    $id = sanitize_text_field( wp_unslash( $_POST['id'] ) );
-    $option = $this->get_option();
-
-    if ( 'all' === $id ) { // Dismiss all notifications
-
-      // Feed notifications
-      if ( ! empty( $option['feed'] ) ) {
-        foreach ( $option['feed'] as $key => $notification ) {
-          $option['dismissed'][$key] = $option['feed'][$key];
-          unset( $option['feed'][$key] );
-        }
-      }
-
-      // Event notifications
-      if ( ! empty( $option['events'] ) ) {
-        foreach ( $option['events'] as $key => $notification ) {
-          $option['dismissed'][$key] = $option['events'][$key];
-          unset( $option['events'][$key] );
-        }
-      }
-
-    } else { // Dismiss one notification
-
-      // Event notifications need a prefix to distinguish them from feed notifications
-      // For a naming convention, we'll use "event_{timestamp}"
-      // If the notification ID includes "event_", we know it's an even notification
-      $type = false !== strpos( $id, 'event_' ) ? 'events' : 'feed';
-
-      if( $type == 'events' ){
-        if( !empty($option[$type]) ){
-            foreach( $option[$type] as $index => $event_notification ){
-               if( $event_notification['id'] == $id ){
-                  unset( $option[$type][$index] );
-                  break;
-               }
-            }
-        }
-      }else{
-        if ( ! empty( $option[$type][$id] ) ) {
-          $option['dismissed'][$id] = $option[$type][$id];
-          unset( $option[$type][$id] );
-        }
-      }
-    }
-
-
-    update_option( 'members_notifications', $option );
-
-    wp_send_json_success();
-  }
 
 
 /** Function reset_roles() called by wp_ajax hooks: {'members_reset_roles'} **/
@@ -180,70 +183,67 @@ function reset_roles() {
 	}
 
 
-/** Function toggle_addon() called by wp_ajax hooks: {'mbrs_toggle_addon'} **/
-/** Parameters found in function toggle_addon(): {"post": ["nonce", "addon"]} **/
-function toggle_addon() {
-		
-		if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'mbrs_toggle_addon' ) ) {
-			die();
-		}
-		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_send_json_error( array(
-				'msg' => esc_html__( 'You are not allowed to make these changes.', 'members' )
-			) );
-		}
-		$addon = ! empty( $_POST['addon'] ) ? sanitize_text_field( $_POST['addon'] ) : false;
+/** Function dismiss() called by wp_ajax hooks: {'members_notification_dismiss'} **/
+/** Parameters found in function dismiss(): {"post": ["id"]} **/
+function dismiss() {
 
-		if ( false === $addon ) {
-			wp_send_json_error( array(
-				'msg' => esc_html__( 'No add-on provided.', 'members' )
-			) );
-		}
+    // Run a security check.
+    check_ajax_referer( 'members-admin-notifications', 'nonce' );
 
-		// Grab the currently active add-ons
-		$active_addons = get_option( 'members_active_addons', array() );
+    // Check for access and required param.
+    if ( ! self::has_access() || empty( $_POST['id'] ) ) {
+      wp_send_json_error();
+    }
 
-		if ( ! in_array( $addon, $active_addons ) ) { // Activate the addon
-			$active_addons[] = $addon;
-			$response = array(
-				'status' => 'active',
-				'action_label' => esc_html__( 'Active', 'members' ),
-				'msg' => esc_html__( 'Add-on activated', 'members' )
-			);
+    $id = sanitize_text_field( wp_unslash( $_POST['id'] ) );
+    $option = $this->get_option();
 
-			// Run the add-on's activation hook
-			members_plugin()->run_addon_activator( $addon );
+    if ( 'all' === $id ) { // Dismiss all notifications
 
-		} else { // Deactivate the addon
-			$key = array_search( $addon, $active_addons );
-			unset( $active_addons[$key] );
-			$response = array(
-				'status' => 'inactive',
-				'action_label' => esc_html__( 'Activate', 'members' ),
-				'msg' => esc_html__( 'Add-on deactivated', 'members' )
-			);
-		}
+      // Feed notifications
+      if ( ! empty( $option['feed'] ) ) {
+        foreach ( $option['feed'] as $key => $notification ) {
+          $option['dismissed'][$key] = $option['feed'][$key];
+          unset( $option['feed'][$key] );
+        }
+      }
 
-		update_option( 'members_active_addons', $active_addons );
+      // Event notifications
+      if ( ! empty( $option['events'] ) ) {
+        foreach ( $option['events'] as $key => $notification ) {
+          $option['dismissed'][$key] = $option['events'][$key];
+          unset( $option['events'][$key] );
+        }
+      }
 
-		wp_send_json_success( $response );
-	}
+    } else { // Dismiss one notification
+
+      // Event notifications need a prefix to distinguish them from feed notifications
+      // For a naming convention, we'll use "event_{timestamp}"
+      // If the notification ID includes "event_", we know it's an even notification
+      $type = false !== strpos( $id, 'event_' ) ? 'events' : 'feed';
+
+      if( $type == 'events' ){
+        if( !empty($option[$type]) ){
+            foreach( $option[$type] as $index => $event_notification ){
+               if( $event_notification['id'] == $id ){
+                  unset( $option[$type][$index] );
+                  break;
+               }
+            }
+        }
+      }else{
+        if ( ! empty( $option[$type][$id] ) ) {
+          $option['dismissed'][$id] = $option[$type][$id];
+          unset( $option[$type][$id] );
+        }
+      }
+    }
 
 
-/** Function members_dismiss_upgrade_header() called by wp_ajax hooks: {'members_dismiss_upgrade_header'} **/
-/** Parameters found in function members_dismiss_upgrade_header(): {"post": ["nonce"]} **/
-function members_dismiss_upgrade_header() {
+    update_option( 'members_notifications', $option );
 
-	// Security check
-	if ( empty( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'members_dismiss_upgrade_header' ) ) {
-		die();
-	}
-	if ( ! current_user_can( 'manage_options' ) ) {
-		wp_send_json_error( array(
-			'msg' => esc_html__( 'You are not allowed to make these changes.', 'members' )
-		) );
-	}
-	update_option( 'members_dismiss_upgrade_header', true );
-}
+    wp_send_json_success();
+  }
 
 

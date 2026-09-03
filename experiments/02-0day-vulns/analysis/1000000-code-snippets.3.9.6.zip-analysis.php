@@ -5,9 +5,31 @@
 *Found functions:3
 *Extracted functions:3
 *Total parameter names extracted: 3
-*Overview: {'ajax_switch_version': {'code_snippets_switch_version'}, 'ajax_callback': {'update_code_snippet'}, 'ajax_refresh_versions': {'code_snippets_refresh_versions'}}
+*Overview: {'ajax_refresh_versions': {'code_snippets_refresh_versions'}, 'ajax_switch_version': {'code_snippets_switch_version'}, 'ajax_callback': {'update_code_snippet'}}
 *
 ***/
+
+/** Function ajax_refresh_versions() called by wp_ajax hooks: {'code_snippets_refresh_versions'} **/
+/** Parameters found in function ajax_refresh_versions(): {"post": ["nonce"]} **/
+function ajax_refresh_versions(): void {
+		if ( ! wp_verify_nonce( $_POST['nonce'] ?? '', 'code_snippets_refresh_versions' ) ) {
+			wp_die( __( 'Security check failed.', 'code-snippets' ) );
+		}
+
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( [
+				'message' => __( 'You do not have permission to manage options.', 'code-snippets' ),
+			] );
+		}
+
+		delete_transient( VERSION_CACHE_KEY );
+		self::get_available_versions();
+
+		wp_send_json_success( [
+			'message' => __( 'Available versions updated successfully.', 'code-snippets' ),
+		] );
+	}
+
 
 /** Function ajax_switch_version() called by wp_ajax hooks: {'code_snippets_switch_version'} **/
 /** Parameters found in function ajax_switch_version(): {"post": ["nonce", "target_version"]} **/
@@ -112,28 +134,6 @@ function ajax_callback() {
 		}
 
 		wp_send_json_success();
-	}
-
-
-/** Function ajax_refresh_versions() called by wp_ajax hooks: {'code_snippets_refresh_versions'} **/
-/** Parameters found in function ajax_refresh_versions(): {"post": ["nonce"]} **/
-function ajax_refresh_versions(): void {
-		if ( ! wp_verify_nonce( $_POST['nonce'] ?? '', 'code_snippets_refresh_versions' ) ) {
-			wp_die( __( 'Security check failed.', 'code-snippets' ) );
-		}
-
-		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_send_json_error( [
-				'message' => __( 'You do not have permission to manage options.', 'code-snippets' ),
-			] );
-		}
-
-		delete_transient( VERSION_CACHE_KEY );
-		self::get_available_versions();
-
-		wp_send_json_success( [
-			'message' => __( 'Available versions updated successfully.', 'code-snippets' ),
-		] );
 	}
 
 

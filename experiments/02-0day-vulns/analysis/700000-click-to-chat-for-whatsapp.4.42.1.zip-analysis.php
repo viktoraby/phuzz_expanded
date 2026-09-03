@@ -5,13 +5,9 @@
 *Found functions:2
 *Extracted functions:2
 *Total parameter names extracted: 2
-*Overview: {'dismiss_notices': {'ht_ctc_admin_dismiss_notices'}, 'ht_ctc_deactivate_feedback_details': {'ht_ctc_deactivate_feedback_details'}}
+*Overview: {'ht_ctc_deactivate_feedback_details': {'ht_ctc_deactivate_feedback_details'}, 'dismiss_notices': {'ht_ctc_admin_dismiss_notices'}}
 *
 ***/
-
-/** Function dismiss_notices() called by wp_ajax hooks: {'ht_ctc_admin_dismiss_notices'} **/
-/** No params detected :-/ **/
-
 
 /** Function ht_ctc_deactivate_feedback_details() called by wp_ajax hooks: {'ht_ctc_deactivate_feedback_details'} **/
 /** Parameters found in function ht_ctc_deactivate_feedback_details(): {"post": ["userFeedback", "userEmail"], "server": ["SERVER_SOFTWARE"]} **/
@@ -107,5 +103,9 @@ function ht_ctc_deactivate_feedback_details() {
 			// Respond to the AJAX request immediately.
 			wp_send_json_success( 'Feedback sent (no wait)' );
 		}
+
+
+/** Function dismiss_notices() called by wp_ajax hooks: {'ht_ctc_admin_dismiss_notices'} **/
+/** No params detected :-/ **/
 
 

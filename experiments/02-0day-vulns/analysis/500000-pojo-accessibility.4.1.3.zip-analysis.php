@@ -5,40 +5,9 @@
 *Found functions:3
 *Extracted functions:3
 *Total parameter names extracted: 2
-*Overview: {'dismiss_pointers': {'ea11y_pointer_dismissed'}, 'handle_deactivation_feedback': {'ea11y_deactivation_feedback'}, 'ajax_a11y_install_elementor_set_admin_notice_viewed': {'a11y_install_elementor_set_admin_notice_viewed'}}
+*Overview: {'handle_deactivation_feedback': {'ea11y_deactivation_feedback'}, 'ajax_a11y_install_elementor_set_admin_notice_viewed': {'a11y_install_elementor_set_admin_notice_viewed'}, 'dismiss_pointers': {'ea11y_pointer_dismissed'}}
 *
 ***/
-
-/** Function dismiss_pointers() called by wp_ajax hooks: {'ea11y_pointer_dismissed'} **/
-/** Parameters found in function dismiss_pointers(): {"post": ["nonce", "data"]} **/
-function dismiss_pointers() {
-		if ( empty( $_POST['nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'ea11y-pointer-dismissed' ) ) {
-			wp_send_json_error( [ 'message' => 'Invalid nonce' ] );
-		}
-
-		$pointer = sanitize_text_field( $_POST['data']['pointer'] ) ?? null;
-
-		if ( empty( $pointer ) ) {
-			wp_send_json_error( [ 'message' => 'The pointer id must be provided' ] );
-		}
-
-		$pointer = explode( ',', $pointer );
-
-		$user_dismissed_meta = get_user_meta( get_current_user_id(), self::DISMISSED_POINTERS_META_KEY, true );
-
-		if ( ! $user_dismissed_meta ) {
-			$user_dismissed_meta = [];
-		}
-
-		foreach ( $pointer as $item ) {
-			$user_dismissed_meta[ $item ] = true;
-		}
-
-		update_user_meta( get_current_user_id(), self::DISMISSED_POINTERS_META_KEY, $user_dismissed_meta );
-
-		wp_send_json_success( [] );
-	}
-
 
 /** Function handle_deactivation_feedback() called by wp_ajax hooks: {'ea11y_deactivation_feedback'} **/
 /** Parameters found in function handle_deactivation_feedback(): {"post": ["nonce", "reason", "additional_data"]} **/
@@ -85,5 +54,36 @@ function handle_deactivation_feedback(): void {
 
 /** Function ajax_a11y_install_elementor_set_admin_notice_viewed() called by wp_ajax hooks: {'a11y_install_elementor_set_admin_notice_viewed'} **/
 /** No params detected :-/ **/
+
+
+/** Function dismiss_pointers() called by wp_ajax hooks: {'ea11y_pointer_dismissed'} **/
+/** Parameters found in function dismiss_pointers(): {"post": ["nonce", "data"]} **/
+function dismiss_pointers() {
+		if ( empty( $_POST['nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'ea11y-pointer-dismissed' ) ) {
+			wp_send_json_error( [ 'message' => 'Invalid nonce' ] );
+		}
+
+		$pointer = sanitize_text_field( $_POST['data']['pointer'] ) ?? null;
+
+		if ( empty( $pointer ) ) {
+			wp_send_json_error( [ 'message' => 'The pointer id must be provided' ] );
+		}
+
+		$pointer = explode( ',', $pointer );
+
+		$user_dismissed_meta = get_user_meta( get_current_user_id(), self::DISMISSED_POINTERS_META_KEY, true );
+
+		if ( ! $user_dismissed_meta ) {
+			$user_dismissed_meta = [];
+		}
+
+		foreach ( $pointer as $item ) {
+			$user_dismissed_meta[ $item ] = true;
+		}
+
+		update_user_meta( get_current_user_id(), self::DISMISSED_POINTERS_META_KEY, $user_dismissed_meta );
+
+		wp_send_json_success( [] );
+	}
 
 

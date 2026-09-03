@@ -5,13 +5,9 @@
 *Found functions:3
 *Extracted functions:2
 *Total parameter names extracted: 2
-*Overview: {'Wrong nonce': {'emr_{$action}'}, 'emr_activate': {'emr_plugin_activate'}, 'emr_plugin_install': {'emr_plugin_install'}}
+*Overview: {'emr_activate': {'emr_plugin_activate'}, 'emr_plugin_install': {'emr_plugin_install'}, 'Wrong nonce': {'emr_{$action}'}}
 *
 ***/
-
-/** Function Wrong nonce() called by wp_ajax hooks: {'emr_{$action}'} **/
-/** No function found :-/ **/
-
 
 /** Function emr_activate() called by wp_ajax hooks: {'emr_plugin_activate'} **/
 /** Parameters found in function emr_activate(): {"post": ["plugin"]} **/
@@ -157,5 +153,9 @@ function emr_plugin_install() {
 	die;
 
 }
+
+
+/** Function Wrong nonce() called by wp_ajax hooks: {'emr_{$action}'} **/
+/** No function found :-/ **/
 
 

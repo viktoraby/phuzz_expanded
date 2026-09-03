@@ -5,66 +5,87 @@
 *Found functions:14
 *Extracted functions:14
 *Total parameter names extracted: 13
-*Overview: {'cmp_ajax_upload_font': {'cmp_ajax_upload_font'}, 'cmp_get_post_detail': {'nopriv_cmp_get_post_detail', 'cmp_get_post_detail'}, 'niteo_themeinfo': {'niteo_themeinfo'}, 'cmp_theme_update_install': {'cmp_theme_update_install'}, 'cmp_ajax_import_settings': {'cmp_ajax_import_settings'}, 'niteo_export_csv': {'niteo_export_csv'}, 'cmp_check_update': {'cmp_check_update'}, 'niteo_subscribe': {'niteo_subscribe', 'nopriv_niteo_subscribe'}, 'cmp_ajax_export_settings': {'cmp_ajax_export_settings'}, 'niteo_unsplash': {'niteo_unsplash'}, 'cmp_ajax_toggle_activation': {'cmp_toggle_activation'}, 'cmp_disable_comingsoon_ajax': {'nopriv_cmp_disable_comingsoon_ajax'}, 'cmp_mailchimp_list_ajax': {'cmp_mailchimp_list_ajax'}, 'cmp_ajax_dismiss_activation_notice': {'cmp_ajax_dismiss_activation_notice'}}
+*Overview: {'cmp_mailchimp_list_ajax': {'cmp_mailchimp_list_ajax'}, 'cmp_ajax_dismiss_activation_notice': {'cmp_ajax_dismiss_activation_notice'}, 'cmp_get_post_detail': {'nopriv_cmp_get_post_detail', 'cmp_get_post_detail'}, 'cmp_ajax_export_settings': {'cmp_ajax_export_settings'}, 'cmp_check_update': {'cmp_check_update'}, 'cmp_theme_update_install': {'cmp_theme_update_install'}, 'niteo_themeinfo': {'niteo_themeinfo'}, 'niteo_unsplash': {'niteo_unsplash'}, 'cmp_ajax_toggle_activation': {'cmp_toggle_activation'}, 'cmp_ajax_upload_font': {'cmp_ajax_upload_font'}, 'cmp_disable_comingsoon_ajax': {'nopriv_cmp_disable_comingsoon_ajax'}, 'niteo_subscribe': {'nopriv_niteo_subscribe', 'niteo_subscribe'}, 'niteo_export_csv': {'niteo_export_csv'}, 'cmp_ajax_import_settings': {'cmp_ajax_import_settings'}}
 *
 ***/
 
-/** Function cmp_ajax_upload_font() called by wp_ajax hooks: {'cmp_ajax_upload_font'} **/
-/** Parameters found in function cmp_ajax_upload_font(): {"post": ["payload"]} **/
-function cmp_ajax_upload_font()
+/** Function cmp_mailchimp_list_ajax() called by wp_ajax hooks: {'cmp_mailchimp_list_ajax'} **/
+/** Parameters found in function cmp_mailchimp_list_ajax(): {"post": ["params"]} **/
+function cmp_mailchimp_list_ajax($apikey)
 		{
-			// verify nonce
-			check_ajax_referer('cmp-coming-soon-ajax-secret', 'security');
 
-			// verify user rights
-			if (!current_user_can('publish_pages')) {
-				die('Sorry, but this request is invalid');
-			}
+			// check for ajax 
+			if (isset($_POST['params'])) {
+				// verify nonce
+				check_ajax_referer('cmp-coming-soon-ajax-secret', 'security');
+				// verify user rights
+				if (!current_user_can('publish_pages')) {
+					die('Sorry, but this request is invalid');
+				}
+
+				// sanitize array
+				$_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+				// check params
+				if (!empty($_POST['params'])) {
+					$params = $_POST['params'];
+				}
+
+				$api_key = $this->sanitize_api_key($params['apikey']);
+
+				$dc = substr($api_key, strpos($api_key, '-') + 1); // datacenter, it is the part of your api key - us5, us8 etc
+
+				$args = array(
+					'headers' => array(
+						'Authorization' => 'Basic ' . base64_encode('user:' . $api_key)
+					)
+				);
 
 
-			if (isset($_POST['payload'])) {
+				// retrieve response from mailchimp
+				$response = wp_remote_get('https://' . $dc . '.api.mailchimp.com/3.0/lists/', $args);
 
-				$payload = json_decode(stripslashes($_POST['payload']), true);
-				$action = $payload['action'];
+				// if we have it, create new array with lists id and name, else push error messages into array
+				if (!is_wp_error($response)) {
+					$lists_array = array();
 
-				if ($action === 'upload_font') {
+					$body = json_decode($response['body'], true);
 
-					$new_fonts = $payload['files'];
-
-					// delete_option('niteoCS_custom_fonts');
-
-					if (get_option('niteoCS_custom_fonts')) {
-
-						$old_fonts = json_decode(get_option('niteoCS_custom_fonts'), true);
-
+					if ($response['response']['code'] == 200) {
+						$lists_array['response'] = 200;
 						$i = 0;
-
-						foreach ($old_fonts as $old_font) {
-
-							foreach ($new_fonts as $new_font) {
-								if ($old_font['id'] === $new_font['id']) {
-
-									$old_fonts[$i]['urls'] = (is_array($old_font['urls'])) ? array_unique(array_merge($old_font['urls'], $new_font['urls'])) : $new_font['urls'];
-									$old_fonts[$i]['ids'] = (is_array($old_font['ids'])) ? array_unique(array_merge($old_font['ids'], $new_font['ids'])) : $new_font['ids'];
-								} else if (!$this->niteo_in_array_r($new_font['id'], $old_fonts)) {
-									array_push($old_fonts, $new_font);
-								}
-							}
-
+						foreach ($body['lists'] as $list) {
+							$lists_array['lists'][$i]['id'] = $list['id'];
+							$lists_array['lists'][$i]['name'] = $list['name'];
 							$i++;
 						}
-
-						$new_fonts = $old_fonts;
+					} else {
+						$lists_array['response'] = $response['response']['code'];
+						$lists_array['message'] = $body['title'] . ': ' . $body['detail'];
 					}
-
-					update_option('niteoCS_custom_fonts', json_encode($new_fonts));
+				} else {
+					$lists_array['response'] = '500';
+					$lists_array['message'] = $response->get_error_message();
 				}
-			}
 
-			// echo confirmation
-			echo 'success';
-			wp_die();
+				// json encode response
+				$lists_json = json_encode($lists_array);
+
+				// save it
+				update_option('niteoCS_mailchimp_lists', $lists_json);
+
+				// delete selected old mailchimp list because we do not want it
+				delete_option('niteoCS_mailchimp_list_selected');
+
+				// echo ajax result
+				echo $lists_json;
+				wp_die();
+			}
 		}
+
+
+/** Function cmp_ajax_dismiss_activation_notice() called by wp_ajax hooks: {'cmp_ajax_dismiss_activation_notice'} **/
+/** No params detected :-/ **/
 
 
 /** Function cmp_get_post_detail() called by wp_ajax hooks: {'nopriv_cmp_get_post_detail', 'cmp_get_post_detail'} **/
@@ -102,43 +123,112 @@ function cmp_get_post_detail()
 		}
 
 
-/** Function niteo_themeinfo() called by wp_ajax hooks: {'niteo_themeinfo'} **/
-/** Parameters found in function niteo_themeinfo(): {"post": ["theme_slug"]} **/
-function niteo_themeinfo()
+/** Function cmp_ajax_export_settings() called by wp_ajax hooks: {'cmp_ajax_export_settings'} **/
+/** No params detected :-/ **/
+
+
+/** Function cmp_check_update() called by wp_ajax hooks: {'cmp_check_update'} **/
+/** Parameters found in function cmp_check_update(): {"post": ["theme_slug"], "get": ["theme"]} **/
+function cmp_check_update($theme_slug)
 		{
 
+			$ajax = false;
 			// check for ajax 
 			if (isset($_POST['theme_slug'])) {
 				// verify nonce
 				check_ajax_referer('cmp-coming-soon-ajax-secret', 'security');
 				// verify user rights
-				if (!current_user_can('publish_pages')) {
+				if (!current_user_can('manage_options')) {
 					die('Sorry, but this request is invalid');
 				}
 
+				// sanitize array
+				$_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
-				// sanitize  $post
-				$theme_slug = sanitize_text_field($_POST['theme_slug']);
-				$data = array('result' => 'true', 'author_homepage' => CMP_AUTHOR_HOMEPAGE, 'author' => CMP_AUTHOR);
+				if (!empty($_POST['theme_slug'])) {
+					$theme_slug = $_POST['theme_slug'];
+					$ajax   = true;
+				}
+			}
 
-				if (!empty($theme_slug)) {
-					$headers  = array('Theme Name', 'Description');
-					$theme_info = get_file_data(plugin_dir_path(__FILE__) . '/themes/' . $theme_slug . '.txt', $headers, '');
+			if (!in_array($theme_slug, $this->cmp_premium_themes_installed())) {
+				return;
+			}
 
-					$screenshots = array_map('basename', glob(plugin_dir_path(__FILE__) . 'img/thumbnails/' . $theme_slug . '/*'));
+			// check for current theme version
+			$remote_version = '';
+			$current_version = '';
 
-					foreach ($screenshots as $key => $screenshot) {
-						$screenshots[$key] = plugins_url('img/thumbnails/' . $theme_slug . '/' . $screenshot, __FILE__);
+			if (CMP_DEBUG === TRUE) {
+				delete_transient($theme_slug . '_updatecheck');
+			}
+
+			// always check if update check transient is set or ajax request
+			if (false === ($updatecheck_transient = get_transient($theme_slug . '_updatecheck')) || $ajax === TRUE) {
+
+				$current_version = $this->cmp_theme_version($theme_slug);
+				// get remote version from  remote server
+				$request = wp_remote_post(CMP_UPDATE_URL . '?action=get_metadata&slug=' . $theme_slug, array('body' => array('action' => 'version')));
+
+				// if no error, retrivee body
+				if (!is_wp_error($request)) {
+
+					// decode to json
+					$remote_version = json_decode($request['body'], true);
+
+					// get remove version key
+					if (isset($remote_version['version'])) {
+
+						$remote_version = $remote_version['version'];
+
+						// if remote version is bigger than current, display info about new version
+						if ((float)$remote_version > (float)$current_version) {
+
+							$title = ucwords(str_replace('_', ' ', $theme_slug));
+
+							// create nonce
+							$ajax_nonce = wp_create_nonce('cmp-coming-soon-ajax-secret');
+
+							// if admin screen is not in updating theme
+							if (!isset($_GET['theme']) || (isset($_GET['theme']) && $_GET['theme'] != $theme_slug)) {
+
+								$transient = '<div class="notice notice-warning"><p class="message">' . sprintf(__('There is a <b>recommended</b> update of <b>CMP Theme: %s</b> available:', 'cmp-coming-soon-maintenance'), $title) . ' <a href="' . admin_url() . 'options-general.php?page=cmp-settings&action=update-cmp-theme&theme=' . esc_attr($theme_slug) . '&type=premium" class="cmp update-theme" data-type="premium" data-security="' . esc_attr($ajax_nonce) . '" data-slug="' . esc_attr($theme_slug) . '" data-name="' . esc_attr($title) . '" data-remote_url="' . esc_url(CMP_UPDATE_URL) . '" data-new_ver="' . esc_attr($remote_version) . '">' . sprintf(__(' click to update to %s version from NiteoThemes server now', 'cmp-coming-soon-maintenance'), esc_attr($remote_version)) . '!</a></div>';
+
+								// set transient with 12 hour expire
+								set_transient($theme_slug . '_updatecheck', $transient, 60 * 60 * 12);
+
+								// die early if this is ajax request with status = true
+								if ($ajax) {
+									wp_die($remote_version);
+									return;
+								}
+
+
+								echo $transient;
+							}
+						} else {
+							// die early if this is ajax request with status = false
+							if ($ajax) {
+								wp_die('false');
+								return;
+							}
+							// set transient no update available with 12 hours expire
+							set_transient($theme_slug . '_updatecheck', '', 60 * 60 * 12);
+						}
 					}
-
-					$data['name'] = $theme_info[0];
-					$data['description'] = $theme_info[1];
-					$data['screenshots'] = $screenshots;
 				}
 
-				echo json_encode($data);
-				wp_die();
+				// empty transient means theme was updated in last 24 hours
+			} else if ($updatecheck_transient != '') {
+
+				echo $updatecheck_transient;
 			}
+
+			if ($ajax) {
+				wp_die('false');
+			}
+
+			return;
 		}
 
 
@@ -286,11 +376,202 @@ function cmp_theme_update_install($file)
 		}
 
 
-/** Function cmp_ajax_import_settings() called by wp_ajax hooks: {'cmp_ajax_import_settings'} **/
-/** Parameters found in function cmp_ajax_import_settings(): {"post": ["json"]} **/
-function cmp_ajax_import_settings()
+/** Function niteo_themeinfo() called by wp_ajax hooks: {'niteo_themeinfo'} **/
+/** Parameters found in function niteo_themeinfo(): {"post": ["theme_slug"]} **/
+function niteo_themeinfo()
 		{
 
+			// check for ajax 
+			if (isset($_POST['theme_slug'])) {
+				// verify nonce
+				check_ajax_referer('cmp-coming-soon-ajax-secret', 'security');
+				// verify user rights
+				if (!current_user_can('publish_pages')) {
+					die('Sorry, but this request is invalid');
+				}
+
+
+				// sanitize  $post
+				$theme_slug = sanitize_text_field($_POST['theme_slug']);
+				$data = array('result' => 'true', 'author_homepage' => CMP_AUTHOR_HOMEPAGE, 'author' => CMP_AUTHOR);
+
+				if (!empty($theme_slug)) {
+					$headers  = array('Theme Name', 'Description');
+					$theme_info = get_file_data(plugin_dir_path(__FILE__) . '/themes/' . $theme_slug . '.txt', $headers, '');
+
+					$screenshots = array_map('basename', glob(plugin_dir_path(__FILE__) . 'img/thumbnails/' . $theme_slug . '/*'));
+
+					foreach ($screenshots as $key => $screenshot) {
+						$screenshots[$key] = plugins_url('img/thumbnails/' . $theme_slug . '/' . $screenshot, __FILE__);
+					}
+
+					$data['name'] = $theme_info[0];
+					$data['description'] = $theme_info[1];
+					$data['screenshots'] = $screenshots;
+				}
+
+				echo json_encode($data);
+				wp_die();
+			}
+		}
+
+
+/** Function niteo_unsplash() called by wp_ajax hooks: {'niteo_unsplash'} **/
+/** Parameters found in function niteo_unsplash(): {"post": ["params"]} **/
+function niteo_unsplash($params)
+		{
+			$ajax = false;
+
+			// check for ajax 
+			if (isset($_POST['params'])) {
+				// verify nonce
+				check_ajax_referer('cmp-coming-soon-ajax-secret', 'security');
+				// verify user rights
+				if (!current_user_can('publish_pages')) {
+					die('Sorry, but this request is invalid');
+				}
+
+				// sanitize array
+				$_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+				if (!empty($_POST['params'])) {
+					$params = $_POST['params'];
+					$ajax   = true;
+				}
+			}
+
+			array_key_exists('feed', $params) 			? $feed 		= $params['feed'] 		: $feed = '';
+			array_key_exists('url', $params)			? $url 			= $params['url'] 		: $url = '';
+			array_key_exists('feat', $params)			? $feat 		= $params['feat'] 		: $feat = '';
+			array_key_exists('custom_str', $params)	? $custom_str 	= $params['custom_str'] : $custom_str = '';
+			array_key_exists('count', $params)			? $count 		= $params['count'] 		: $count = '1';
+
+			switch ($feed) {
+					// specific unsplash photo by url/id
+				case '0':
+					$id = '';
+					// check if $query contains unsplash.com url
+					if (strpos($url, 'unsplash.com') !== false) {
+						$parts = parse_url($url);
+						// check for photo parameter in URL
+						if (isset($parts['query'])) {
+							parse_str($parts['query'], $query);
+							$id = $query['photo'];
+						}
+						// if no ID found, get last part of URL containing ID
+						if ($id == '') {
+
+							$pathFragments = explode('/', $parts['path']);
+							$id = end($pathFragments);
+						}
+
+						// $query is ID
+					} else {
+						$id = $url;
+					}
+
+					// prepare query for single image
+					$api_query = 'photos/' . $id . '?';
+					break;
+
+					// random from user
+				case '1':
+
+					if ($custom_str[0] == '@') {
+						$custom_str = substr($custom_str, 1);
+					}
+
+					// prepare query for random photo from collection
+					$api_query = 'photos/random/?username=' . $custom_str . '&count=' . $count;
+					break;
+
+					// random from collection
+				case '2':
+					if (is_numeric($url)) {
+						$collection = $url;
+					} else {
+						$collection = filter_var($url, FILTER_SANITIZE_NUMBER_INT);
+						$collection = str_replace('-', '', $collection);
+					}
+
+					// prepare query for random photo from collection
+					$api_query = 'photos/random/?collections=' . $collection . '&count=' . $count;
+					break;
+
+					// random photo
+				case '3':
+
+					// featured
+					if ($feat == '0' || $feat == '') {
+						$featured = 'false';
+					} else {
+						$featured = 'true';
+					}
+
+					// category
+					$search = str_replace(' ', ',', $url);
+
+					if ($search !== '') {
+						$search = 'query=' . $search . '&';
+					}
+					// prepare query for random photo
+					$api_query = 'photos/random/?orientation=landscape&featured=' . $featured . '&' . $search . 'count=' . $count;
+					break;
+
+				default:
+					$api_query = 'photos/random/?orientation=landscape&count=' . $count;
+					break;
+			}
+
+			$unsplash_img = $this->cmp_unsplash_api($api_query);
+
+			if ($ajax === true) {
+				echo json_encode($unsplash_img);
+				wp_die();
+			} else {
+				return $unsplash_img;
+			}
+		}
+
+
+/** Function cmp_ajax_toggle_activation() called by wp_ajax hooks: {'cmp_toggle_activation'} **/
+/** Parameters found in function cmp_ajax_toggle_activation(): {"post": ["payload"]} **/
+function cmp_ajax_toggle_activation()
+		{
+			// check for ajax payoload
+			if (isset($_POST['payload']) && $_POST['payload'] == 'toggle_cmp_status') {
+
+				// verify nonce
+				check_ajax_referer('cmp-coming-soon-ajax-secret', 'security');
+				// verify user rights
+				if (!$this->cmp_user_can_admin_bar_activation()) {
+					echo 'Current user cannot toggle CMP activation';
+					wp_die();
+					return;
+				}
+
+				if ($this->cmp_active() === '0') {
+					update_option('niteoCS_status', '1');
+					$this->cmp_send_notification('on');
+				} else {
+					update_option('niteoCS_status', '0');
+					$this->cmp_send_notification('off');
+				}
+
+				$this->cmp_purge_cache();
+
+				echo 'success';
+				wp_die();
+				return;
+			}
+		}
+
+
+/** Function cmp_ajax_upload_font() called by wp_ajax hooks: {'cmp_ajax_upload_font'} **/
+/** Parameters found in function cmp_ajax_upload_font(): {"post": ["payload"]} **/
+function cmp_ajax_upload_font()
+		{
+			// verify nonce
 			check_ajax_referer('cmp-coming-soon-ajax-secret', 'security');
 
 			// verify user rights
@@ -298,175 +579,83 @@ function cmp_ajax_import_settings()
 				die('Sorry, but this request is invalid');
 			}
 
-			$settings = json_decode(stripslashes($_POST['json']), true);
 
-			$result = array(
-				'result' => 'success',
-				'message' => __('All done!', 'cmp-coming-soon-maintenance')
-			);
+			if (isset($_POST['payload'])) {
 
-			if (json_last_error() == JSON_ERROR_NONE) {
-				if ($settings[0] === 'CMP_EXPORT') {
-					// remove first value used for JSON CMP Settings check
-					unset($settings[0]);
+				$payload = json_decode(stripslashes($_POST['payload']), true);
+				$action = $payload['action'];
 
-					// delete all current CMP Settings
-					global $wpdb;
-					$saved_options = $wpdb->get_results("SELECT * FROM $wpdb->options WHERE option_name LIKE 'niteoCS_%'", OBJECT);
-					foreach ($saved_options as $option) {
-						delete_option($option->option_name);
-					}
+				if ($action === 'upload_font') {
 
-					// import cmp settings from JSON structure
-					foreach ($settings as $setting) {
+					$new_fonts = $payload['files'];
 
-						$img_settings = array('niteoCS_banner_id', 'niteoCS_logo_id', 'niteoCS_seo_img_id', 'niteoCS_favicon_id', 'niteoCS_subs_img_id', 'niteoCS_subs_img_popup_id');
+					// delete_option('niteoCS_custom_fonts');
 
-						$name = key($setting);
-						$value = $setting[$name];
+					if (get_option('niteoCS_custom_fonts')) {
 
-						if (in_array($name, $img_settings)) {
+						$old_fonts = json_decode(get_option('niteoCS_custom_fonts'), true);
 
-							$urls = explode(',', $value);
+						$i = 0;
 
-							if (is_array($urls)) {
-								foreach ($urls as $url) {
-									$value = $this->cmp_insert_attachment_from_url($url);
-									$value .= ',' . $value;
+						foreach ($old_fonts as $old_font) {
+
+							foreach ($new_fonts as $new_font) {
+								if ($old_font['id'] === $new_font['id']) {
+
+									$old_fonts[$i]['urls'] = (is_array($old_font['urls'])) ? array_unique(array_merge($old_font['urls'], $new_font['urls'])) : $new_font['urls'];
+									$old_fonts[$i]['ids'] = (is_array($old_font['ids'])) ? array_unique(array_merge($old_font['ids'], $new_font['ids'])) : $new_font['ids'];
+								} else if (!$this->niteo_in_array_r($new_font['id'], $old_fonts)) {
+									array_push($old_fonts, $new_font);
 								}
 							}
+
+							$i++;
 						}
 
-						update_option($name, $value);
+						$new_fonts = $old_fonts;
 					}
-				} else {
-					$result = array(
-						'result' => 'error',
-						'message' =>  __('JSON file is valid but it does not contain CMP Settings.', 'cmp-coming-soon-maintenance')
-					);
+
+					update_option('niteoCS_custom_fonts', json_encode($new_fonts));
 				}
-			} else {
-				$result = array(
-					'result' => 'error',
-					'message' =>  __('Please insert valid JSON file and try again.', 'cmp-coming-soon-maintenance')
-				);
 			}
 
-			echo json_encode($result);
+			// echo confirmation
+			echo 'success';
 			wp_die();
 		}
 
 
-/** Function niteo_export_csv() called by wp_ajax hooks: {'niteo_export_csv'} **/
-/** No params detected :-/ **/
-
-
-/** Function cmp_check_update() called by wp_ajax hooks: {'cmp_check_update'} **/
-/** Parameters found in function cmp_check_update(): {"post": ["theme_slug"], "get": ["theme"]} **/
-function cmp_check_update($theme_slug)
+/** Function cmp_disable_comingsoon_ajax() called by wp_ajax hooks: {'nopriv_cmp_disable_comingsoon_ajax'} **/
+/** Parameters found in function cmp_disable_comingsoon_ajax(): {"request": ["status"]} **/
+function cmp_disable_comingsoon_ajax()
 		{
 
-			$ajax = false;
-			// check for ajax 
-			if (isset($_POST['theme_slug'])) {
-				// verify nonce
-				check_ajax_referer('cmp-coming-soon-ajax-secret', 'security');
-				// verify user rights
-				if (!current_user_can('manage_options')) {
-					die('Sorry, but this request is invalid');
-				}
+			$theme = $this->cmp_selectedTheme();
 
-				// sanitize array
-				$_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
-				if (!empty($_POST['theme_slug'])) {
-					$theme_slug = $_POST['theme_slug'];
-					$ajax   = true;
-				}
+			if (!in_array($theme, $this->cmp_builder_themes())) {
+				check_ajax_referer('cmp-coming-soon-maintenance-nonce', 'security');
 			}
 
-			if (!in_array($theme_slug, $this->cmp_premium_themes_installed())) {
-				return;
+			$result = array('message' => 'error');
+
+			if (get_option('niteoCS_countdown_action', 'no-action') !== 'disable-cmp') {
+				echo json_encode($result);
+				wp_die();
 			}
 
-			// check for current theme version
-			$remote_version = '';
-			$current_version = '';
-
-			if (CMP_DEBUG === TRUE) {
-				delete_transient($theme_slug . '_updatecheck');
+			if (!empty($_REQUEST['status']) && $_REQUEST['status'] === 'disable-cmp' && get_option('niteoCS_counter_date') < time()) {
+				update_option('niteoCS_status', '0');
+				$this->cmp_purge_cache();
+				$result = array('message' => 'success');
 			}
 
-			// always check if update check transient is set or ajax request
-			if (false === ($updatecheck_transient = get_transient($theme_slug . '_updatecheck')) || $ajax === TRUE) {
+			echo json_encode($result);
 
-				$current_version = $this->cmp_theme_version($theme_slug);
-				// get remote version from  remote server
-				$request = wp_remote_post(CMP_UPDATE_URL . '?action=get_metadata&slug=' . $theme_slug, array('body' => array('action' => 'version')));
-
-				// if no error, retrivee body
-				if (!is_wp_error($request)) {
-
-					// decode to json
-					$remote_version = json_decode($request['body'], true);
-
-					// get remove version key
-					if (isset($remote_version['version'])) {
-
-						$remote_version = $remote_version['version'];
-
-						// if remote version is bigger than current, display info about new version
-						if ((float)$remote_version > (float)$current_version) {
-
-							$title = ucwords(str_replace('_', ' ', $theme_slug));
-
-							// create nonce
-							$ajax_nonce = wp_create_nonce('cmp-coming-soon-ajax-secret');
-
-							// if admin screen is not in updating theme
-							if (!isset($_GET['theme']) || (isset($_GET['theme']) && $_GET['theme'] != $theme_slug)) {
-
-								$transient = '<div class="notice notice-warning"><p class="message">' . sprintf(__('There is a <b>recommended</b> update of <b>CMP Theme: %s</b> available:', 'cmp-coming-soon-maintenance'), $title) . ' <a href="' . admin_url() . 'options-general.php?page=cmp-settings&action=update-cmp-theme&theme=' . esc_attr($theme_slug) . '&type=premium" class="cmp update-theme" data-type="premium" data-security="' . esc_attr($ajax_nonce) . '" data-slug="' . esc_attr($theme_slug) . '" data-name="' . esc_attr($title) . '" data-remote_url="' . esc_url(CMP_UPDATE_URL) . '" data-new_ver="' . esc_attr($remote_version) . '">' . sprintf(__(' click to update to %s version from NiteoThemes server now', 'cmp-coming-soon-maintenance'), esc_attr($remote_version)) . '!</a></div>';
-
-								// set transient with 12 hour expire
-								set_transient($theme_slug . '_updatecheck', $transient, 60 * 60 * 12);
-
-								// die early if this is ajax request with status = true
-								if ($ajax) {
-									wp_die($remote_version);
-									return;
-								}
-
-
-								echo $transient;
-							}
-						} else {
-							// die early if this is ajax request with status = false
-							if ($ajax) {
-								wp_die('false');
-								return;
-							}
-							// set transient no update available with 12 hours expire
-							set_transient($theme_slug . '_updatecheck', '', 60 * 60 * 12);
-						}
-					}
-				}
-
-				// empty transient means theme was updated in last 24 hours
-			} else if ($updatecheck_transient != '') {
-
-				echo $updatecheck_transient;
-			}
-
-			if ($ajax) {
-				wp_die('false');
-			}
-
-			return;
+			wp_die();
 		}
 
 
-/** Function niteo_subscribe() called by wp_ajax hooks: {'niteo_subscribe', 'nopriv_niteo_subscribe'} **/
+/** Function niteo_subscribe() called by wp_ajax hooks: {'nopriv_niteo_subscribe', 'niteo_subscribe'} **/
 /** Parameters found in function niteo_subscribe(): {"post": ["ajax", "form_honeypot", "email", "token", "lastname", "firstname"], "server": ["REQUEST_METHOD", "REMOTE_ADDR"]} **/
 function niteo_subscribe($check)
 		{
@@ -678,267 +867,78 @@ function niteo_subscribe($check)
 		}
 
 
-/** Function cmp_ajax_export_settings() called by wp_ajax hooks: {'cmp_ajax_export_settings'} **/
+/** Function niteo_export_csv() called by wp_ajax hooks: {'niteo_export_csv'} **/
 /** No params detected :-/ **/
 
 
-/** Function niteo_unsplash() called by wp_ajax hooks: {'niteo_unsplash'} **/
-/** Parameters found in function niteo_unsplash(): {"post": ["params"]} **/
-function niteo_unsplash($params)
+/** Function cmp_ajax_import_settings() called by wp_ajax hooks: {'cmp_ajax_import_settings'} **/
+/** Parameters found in function cmp_ajax_import_settings(): {"post": ["json"]} **/
+function cmp_ajax_import_settings()
 		{
-			$ajax = false;
 
-			// check for ajax 
-			if (isset($_POST['params'])) {
-				// verify nonce
-				check_ajax_referer('cmp-coming-soon-ajax-secret', 'security');
-				// verify user rights
-				if (!current_user_can('publish_pages')) {
-					die('Sorry, but this request is invalid');
-				}
+			check_ajax_referer('cmp-coming-soon-ajax-secret', 'security');
 
-				// sanitize array
-				$_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
-				if (!empty($_POST['params'])) {
-					$params = $_POST['params'];
-					$ajax   = true;
-				}
+			// verify user rights
+			if (!current_user_can('publish_pages')) {
+				die('Sorry, but this request is invalid');
 			}
 
-			array_key_exists('feed', $params) 			? $feed 		= $params['feed'] 		: $feed = '';
-			array_key_exists('url', $params)			? $url 			= $params['url'] 		: $url = '';
-			array_key_exists('feat', $params)			? $feat 		= $params['feat'] 		: $feat = '';
-			array_key_exists('custom_str', $params)	? $custom_str 	= $params['custom_str'] : $custom_str = '';
-			array_key_exists('count', $params)			? $count 		= $params['count'] 		: $count = '1';
+			$settings = json_decode(stripslashes($_POST['json']), true);
 
-			switch ($feed) {
-					// specific unsplash photo by url/id
-				case '0':
-					$id = '';
-					// check if $query contains unsplash.com url
-					if (strpos($url, 'unsplash.com') !== false) {
-						$parts = parse_url($url);
-						// check for photo parameter in URL
-						if (isset($parts['query'])) {
-							parse_str($parts['query'], $query);
-							$id = $query['photo'];
+			$result = array(
+				'result' => 'success',
+				'message' => __('All done!', 'cmp-coming-soon-maintenance')
+			);
+
+			if (json_last_error() == JSON_ERROR_NONE) {
+				if ($settings[0] === 'CMP_EXPORT') {
+					// remove first value used for JSON CMP Settings check
+					unset($settings[0]);
+
+					// delete all current CMP Settings
+					global $wpdb;
+					$saved_options = $wpdb->get_results("SELECT * FROM $wpdb->options WHERE option_name LIKE 'niteoCS_%'", OBJECT);
+					foreach ($saved_options as $option) {
+						delete_option($option->option_name);
+					}
+
+					// import cmp settings from JSON structure
+					foreach ($settings as $setting) {
+
+						$img_settings = array('niteoCS_banner_id', 'niteoCS_logo_id', 'niteoCS_seo_img_id', 'niteoCS_favicon_id', 'niteoCS_subs_img_id', 'niteoCS_subs_img_popup_id');
+
+						$name = key($setting);
+						$value = $setting[$name];
+
+						if (in_array($name, $img_settings)) {
+
+							$urls = explode(',', $value);
+
+							if (is_array($urls)) {
+								foreach ($urls as $url) {
+									$value = $this->cmp_insert_attachment_from_url($url);
+									$value .= ',' . $value;
+								}
+							}
 						}
-						// if no ID found, get last part of URL containing ID
-						if ($id == '') {
 
-							$pathFragments = explode('/', $parts['path']);
-							$id = end($pathFragments);
-						}
-
-						// $query is ID
-					} else {
-						$id = $url;
+						update_option($name, $value);
 					}
-
-					// prepare query for single image
-					$api_query = 'photos/' . $id . '?';
-					break;
-
-					// random from user
-				case '1':
-
-					if ($custom_str[0] == '@') {
-						$custom_str = substr($custom_str, 1);
-					}
-
-					// prepare query for random photo from collection
-					$api_query = 'photos/random/?username=' . $custom_str . '&count=' . $count;
-					break;
-
-					// random from collection
-				case '2':
-					if (is_numeric($url)) {
-						$collection = $url;
-					} else {
-						$collection = filter_var($url, FILTER_SANITIZE_NUMBER_INT);
-						$collection = str_replace('-', '', $collection);
-					}
-
-					// prepare query for random photo from collection
-					$api_query = 'photos/random/?collections=' . $collection . '&count=' . $count;
-					break;
-
-					// random photo
-				case '3':
-
-					// featured
-					if ($feat == '0' || $feat == '') {
-						$featured = 'false';
-					} else {
-						$featured = 'true';
-					}
-
-					// category
-					$search = str_replace(' ', ',', $url);
-
-					if ($search !== '') {
-						$search = 'query=' . $search . '&';
-					}
-					// prepare query for random photo
-					$api_query = 'photos/random/?orientation=landscape&featured=' . $featured . '&' . $search . 'count=' . $count;
-					break;
-
-				default:
-					$api_query = 'photos/random/?orientation=landscape&count=' . $count;
-					break;
-			}
-
-			$unsplash_img = $this->cmp_unsplash_api($api_query);
-
-			if ($ajax === true) {
-				echo json_encode($unsplash_img);
-				wp_die();
-			} else {
-				return $unsplash_img;
-			}
-		}
-
-
-/** Function cmp_ajax_toggle_activation() called by wp_ajax hooks: {'cmp_toggle_activation'} **/
-/** Parameters found in function cmp_ajax_toggle_activation(): {"post": ["payload"]} **/
-function cmp_ajax_toggle_activation()
-		{
-			// check for ajax payoload
-			if (isset($_POST['payload']) && $_POST['payload'] == 'toggle_cmp_status') {
-
-				// verify nonce
-				check_ajax_referer('cmp-coming-soon-ajax-secret', 'security');
-				// verify user rights
-				if (!$this->cmp_user_can_admin_bar_activation()) {
-					echo 'Current user cannot toggle CMP activation';
-					wp_die();
-					return;
-				}
-
-				if ($this->cmp_active() === '0') {
-					update_option('niteoCS_status', '1');
-					$this->cmp_send_notification('on');
 				} else {
-					update_option('niteoCS_status', '0');
-					$this->cmp_send_notification('off');
+					$result = array(
+						'result' => 'error',
+						'message' =>  __('JSON file is valid but it does not contain CMP Settings.', 'cmp-coming-soon-maintenance')
+					);
 				}
-
-				$this->cmp_purge_cache();
-
-				echo 'success';
-				wp_die();
-				return;
-			}
-		}
-
-
-/** Function cmp_disable_comingsoon_ajax() called by wp_ajax hooks: {'nopriv_cmp_disable_comingsoon_ajax'} **/
-/** Parameters found in function cmp_disable_comingsoon_ajax(): {"request": ["status"]} **/
-function cmp_disable_comingsoon_ajax()
-		{
-
-			$theme = $this->cmp_selectedTheme();
-
-			if (!in_array($theme, $this->cmp_builder_themes())) {
-				check_ajax_referer('cmp-coming-soon-maintenance-nonce', 'security');
-			}
-
-			$result = array('message' => 'error');
-
-			if (get_option('niteoCS_countdown_action', 'no-action') !== 'disable-cmp') {
-				echo json_encode($result);
-				wp_die();
-			}
-
-			if (!empty($_REQUEST['status']) && $_REQUEST['status'] === 'disable-cmp' && get_option('niteoCS_counter_date') < time()) {
-				update_option('niteoCS_status', '0');
-				$this->cmp_purge_cache();
-				$result = array('message' => 'success');
+			} else {
+				$result = array(
+					'result' => 'error',
+					'message' =>  __('Please insert valid JSON file and try again.', 'cmp-coming-soon-maintenance')
+				);
 			}
 
 			echo json_encode($result);
-
 			wp_die();
 		}
-
-
-/** Function cmp_mailchimp_list_ajax() called by wp_ajax hooks: {'cmp_mailchimp_list_ajax'} **/
-/** Parameters found in function cmp_mailchimp_list_ajax(): {"post": ["params"]} **/
-function cmp_mailchimp_list_ajax($apikey)
-		{
-
-			// check for ajax 
-			if (isset($_POST['params'])) {
-				// verify nonce
-				check_ajax_referer('cmp-coming-soon-ajax-secret', 'security');
-				// verify user rights
-				if (!current_user_can('publish_pages')) {
-					die('Sorry, but this request is invalid');
-				}
-
-				// sanitize array
-				$_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
-				// check params
-				if (!empty($_POST['params'])) {
-					$params = $_POST['params'];
-				}
-
-				$api_key = $this->sanitize_api_key($params['apikey']);
-
-				$dc = substr($api_key, strpos($api_key, '-') + 1); // datacenter, it is the part of your api key - us5, us8 etc
-
-				$args = array(
-					'headers' => array(
-						'Authorization' => 'Basic ' . base64_encode('user:' . $api_key)
-					)
-				);
-
-
-				// retrieve response from mailchimp
-				$response = wp_remote_get('https://' . $dc . '.api.mailchimp.com/3.0/lists/', $args);
-
-				// if we have it, create new array with lists id and name, else push error messages into array
-				if (!is_wp_error($response)) {
-					$lists_array = array();
-
-					$body = json_decode($response['body'], true);
-
-					if ($response['response']['code'] == 200) {
-						$lists_array['response'] = 200;
-						$i = 0;
-						foreach ($body['lists'] as $list) {
-							$lists_array['lists'][$i]['id'] = $list['id'];
-							$lists_array['lists'][$i]['name'] = $list['name'];
-							$i++;
-						}
-					} else {
-						$lists_array['response'] = $response['response']['code'];
-						$lists_array['message'] = $body['title'] . ': ' . $body['detail'];
-					}
-				} else {
-					$lists_array['response'] = '500';
-					$lists_array['message'] = $response->get_error_message();
-				}
-
-				// json encode response
-				$lists_json = json_encode($lists_array);
-
-				// save it
-				update_option('niteoCS_mailchimp_lists', $lists_json);
-
-				// delete selected old mailchimp list because we do not want it
-				delete_option('niteoCS_mailchimp_list_selected');
-
-				// echo ajax result
-				echo $lists_json;
-				wp_die();
-			}
-		}
-
-
-/** Function cmp_ajax_dismiss_activation_notice() called by wp_ajax hooks: {'cmp_ajax_dismiss_activation_notice'} **/
-/** No params detected :-/ **/
 
 

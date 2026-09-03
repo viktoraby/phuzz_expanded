@@ -5,35 +5,9 @@
 *Found functions:6
 *Extracted functions:5
 *Total parameter names extracted: 4
-*Overview: {'eztoc_export_all_settings': {'eztoc_export_all_settings'}, 'eztoc_send_query_message': {'eztoc_send_query_message'}, 'eztoc_subscribe_for_newsletter': {'eztoc_subscribe_newsletter'}, 'eztoc_send_feedback': {'eztoc_send_feedback'}, 'eztoc_migrate_tocplus': {'eztoc_migrate_tocplus'}, 'ezTOC_Option': {'eztoc_reset_options_to_default'}}
+*Overview: {'eztoc_send_query_message': {'eztoc_send_query_message'}, 'ezTOC_Option': {'eztoc_reset_options_to_default'}, 'eztoc_subscribe_for_newsletter': {'eztoc_subscribe_newsletter'}, 'eztoc_send_feedback': {'eztoc_send_feedback'}, 'eztoc_migrate_tocplus': {'eztoc_migrate_tocplus'}, 'eztoc_export_all_settings': {'eztoc_export_all_settings'}}
 *
 ***/
-
-/** Function eztoc_export_all_settings() called by wp_ajax hooks: {'eztoc_export_all_settings'} **/
-/** Parameters found in function eztoc_export_all_settings(): {"get": ["_wpnonce"]} **/
-function eztoc_export_all_settings()
-{
-    if ( !current_user_can( 'manage_options' ) ) {
-        die('-1');
-    }
-    if(!isset($_GET['_wpnonce'])){
-        die('-1');
-    }
-    if( !wp_verify_nonce(  wp_unslash( $_GET['_wpnonce'] ) , '_wpnonce' ) ){  //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized --Nonce is validated
-        die('-1');
-    }
-
-    $export_settings_data = get_option('ez-toc-settings');
-    if(empty($export_settings_data)){
-        $export_settings_data = array();
-    }
-    
-    header('Content-type: application/json');
-    header('Content-disposition: attachment; filename=ez_toc_settings_backup.json');
-    echo wp_json_encode($export_settings_data);   
-    wp_die();
-}
-
 
 /** Function eztoc_send_query_message() called by wp_ajax hooks: {'eztoc_send_query_message'} **/
 /** Parameters found in function eztoc_send_query_message(): {"post": ["eztoc_security_nonce", "message", "email"]} **/
@@ -92,6 +66,10 @@ function eztoc_send_query_message(){
 		                        
 		        wp_die();           
 		}
+
+
+/** Function ezTOC_Option() called by wp_ajax hooks: {'eztoc_reset_options_to_default'} **/
+/** No function found :-/ **/
 
 
 /** Function eztoc_subscribe_for_newsletter() called by wp_ajax hooks: {'eztoc_subscribe_newsletter'} **/
@@ -184,7 +162,29 @@ function eztoc_send_feedback() {
 /** No params detected :-/ **/
 
 
-/** Function ezTOC_Option() called by wp_ajax hooks: {'eztoc_reset_options_to_default'} **/
-/** No function found :-/ **/
+/** Function eztoc_export_all_settings() called by wp_ajax hooks: {'eztoc_export_all_settings'} **/
+/** Parameters found in function eztoc_export_all_settings(): {"get": ["_wpnonce"]} **/
+function eztoc_export_all_settings()
+{
+    if ( !current_user_can( 'manage_options' ) ) {
+        die('-1');
+    }
+    if(!isset($_GET['_wpnonce'])){
+        die('-1');
+    }
+    if( !wp_verify_nonce(  wp_unslash( $_GET['_wpnonce'] ) , '_wpnonce' ) ){  //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized --Nonce is validated
+        die('-1');
+    }
+
+    $export_settings_data = get_option('ez-toc-settings');
+    if(empty($export_settings_data)){
+        $export_settings_data = array();
+    }
+    
+    header('Content-type: application/json');
+    header('Content-disposition: attachment; filename=ez_toc_settings_backup.json');
+    echo wp_json_encode($export_settings_data);   
+    wp_die();
+}
 
 

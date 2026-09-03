@@ -5,16 +5,77 @@
 *Found functions:7
 *Extracted functions:7
 *Total parameter names extracted: 4
-*Overview: {'ajax_checkquota': {'shortpixel_check_quota'}, 'ajax_getBackupFolderSize': {'shortpixel_get_backup_size'}, 'deactivatePluginCallback': {'shortpixel_deactivate_plugin'}, 'settingsRequest': {'shortpixel_settingsRequest'}, 'ajax_proposeQuotaUpgrade': {'shortpixel_propose_upgrade'}, 'ajax_processQueue': {'shortpixel_image_processing'}, 'ajaxRequest': {'shortpixel_ajaxRequest'}}
+*Overview: {'ajax_getBackupFolderSize': {'shortpixel_get_backup_size'}, 'ajax_processQueue': {'shortpixel_image_processing'}, 'ajax_checkquota': {'shortpixel_check_quota'}, 'settingsRequest': {'shortpixel_settingsRequest'}, 'deactivatePluginCallback': {'shortpixel_deactivate_plugin'}, 'ajaxRequest': {'shortpixel_ajaxRequest'}, 'ajax_proposeQuotaUpgrade': {'shortpixel_propose_upgrade'}}
 *
 ***/
+
+/** Function ajax_getBackupFolderSize() called by wp_ajax hooks: {'shortpixel_get_backup_size'} **/
+/** No params detected :-/ **/
+
+
+/** Function ajax_processQueue() called by wp_ajax hooks: {'shortpixel_image_processing'} **/
+/** Parameters found in function ajax_processQueue(): {"post": ["isBulk", "queues"]} **/
+function ajax_processQueue()
+	{
+		$this->checkNonce('processing');
+		$this->checkActionAccess('processQueue', 'is_author');
+		$this->checkProcessorKey();
+
+		ErrorController::start(); // Capture fatal errors for us.
+
+		// Notice that POST variables are always string, so 'true', not true.
+		// phpcs:ignore -- Nonce is checked
+		$isBulk = (isset($_POST['isBulk']) && $_POST['isBulk'] == 'true') ? true : false;
+		// phpcs:ignore -- Nonce is checked
+		$queue = (isset($_POST['queues'])) ? sanitize_text_field($_POST['queues']) : 'media,custom';
+
+		$queues = array_filter(explode(',', $queue), 'trim');
+
+		$control = new QueueController(['is_bulk' => $isBulk]);
+		$result = $control->processQueue($queues);
+
+		$this->send($result);
+	}
+
 
 /** Function ajax_checkquota() called by wp_ajax hooks: {'shortpixel_check_quota'} **/
 /** No params detected :-/ **/
 
 
-/** Function ajax_getBackupFolderSize() called by wp_ajax hooks: {'shortpixel_get_backup_size'} **/
-/** No params detected :-/ **/
+/** Function settingsRequest() called by wp_ajax hooks: {'shortpixel_settingsRequest'} **/
+/** Parameters found in function settingsRequest(): {"post": ["screen_action"]} **/
+function settingsRequest()
+	{
+		$this->checkNonce('settings_request');
+		ErrorController::start(); // Capture fatal errors for us.
+
+		$action = isset($_POST['screen_action']) ? sanitize_text_field($_POST['screen_action']) : false;
+
+		$this->checkActionAccess($action, 'is_admin_user');
+
+		switch ($action) {
+			case 'form_submit':
+			case 'action_addkey':
+			case 'action_debug_redirectBulk':
+			case 'action_debug_removePrevented':
+			case 'action_debug_removeProcessorKey':
+			case 'action_debug_resetNotices':
+			case 'action_debug_resetQueue':
+			case 'action_debug_resetquota':
+			case 'action_debug_resetStats':
+			case 'action_debug_triggerNotice':
+			case 'action_request_new_key':
+			case 'action_debug_editSetting':
+			case 'action_end_quick_tour':
+				$this->settingsFormSubmit($action);
+				break;
+			default:
+
+				Log::addError('Issue with settingsRequest, not valid action');
+				exit('0');
+				break;
+		}
+	}
 
 
 /** Function deactivatePluginCallback() called by wp_ajax hooks: {'shortpixel_deactivate_plugin'} **/
@@ -54,71 +115,6 @@ function deactivatePluginCallback() {
         die();
 
     }
-
-
-/** Function settingsRequest() called by wp_ajax hooks: {'shortpixel_settingsRequest'} **/
-/** Parameters found in function settingsRequest(): {"post": ["screen_action"]} **/
-function settingsRequest()
-	{
-		$this->checkNonce('settings_request');
-		ErrorController::start(); // Capture fatal errors for us.
-
-		$action = isset($_POST['screen_action']) ? sanitize_text_field($_POST['screen_action']) : false;
-
-		$this->checkActionAccess($action, 'is_admin_user');
-
-		switch ($action) {
-			case 'form_submit':
-			case 'action_addkey':
-			case 'action_debug_redirectBulk':
-			case 'action_debug_removePrevented':
-			case 'action_debug_removeProcessorKey':
-			case 'action_debug_resetNotices':
-			case 'action_debug_resetQueue':
-			case 'action_debug_resetquota':
-			case 'action_debug_resetStats':
-			case 'action_debug_triggerNotice':
-			case 'action_request_new_key':
-			case 'action_debug_editSetting':
-			case 'action_end_quick_tour':
-				$this->settingsFormSubmit($action);
-				break;
-			default:
-
-				Log::addError('Issue with settingsRequest, not valid action');
-				exit('0');
-				break;
-		}
-	}
-
-
-/** Function ajax_proposeQuotaUpgrade() called by wp_ajax hooks: {'shortpixel_propose_upgrade'} **/
-/** No params detected :-/ **/
-
-
-/** Function ajax_processQueue() called by wp_ajax hooks: {'shortpixel_image_processing'} **/
-/** Parameters found in function ajax_processQueue(): {"post": ["isBulk", "queues"]} **/
-function ajax_processQueue()
-	{
-		$this->checkNonce('processing');
-		$this->checkActionAccess('processQueue', 'is_author');
-		$this->checkProcessorKey();
-
-		ErrorController::start(); // Capture fatal errors for us.
-
-		// Notice that POST variables are always string, so 'true', not true.
-		// phpcs:ignore -- Nonce is checked
-		$isBulk = (isset($_POST['isBulk']) && $_POST['isBulk'] == 'true') ? true : false;
-		// phpcs:ignore -- Nonce is checked
-		$queue = (isset($_POST['queues'])) ? sanitize_text_field($_POST['queues']) : 'media,custom';
-
-		$queues = array_filter(explode(',', $queue), 'trim');
-
-		$control = new QueueController(['is_bulk' => $isBulk]);
-		$result = $control->processQueue($queues);
-
-		$this->send($result);
-	}
 
 
 /** Function ajaxRequest() called by wp_ajax hooks: {'shortpixel_ajaxRequest'} **/
@@ -306,5 +302,9 @@ function ajaxRequest()
 		}
 		$this->send($json);
 	}
+
+
+/** Function ajax_proposeQuotaUpgrade() called by wp_ajax hooks: {'shortpixel_propose_upgrade'} **/
+/** No params detected :-/ **/
 
 

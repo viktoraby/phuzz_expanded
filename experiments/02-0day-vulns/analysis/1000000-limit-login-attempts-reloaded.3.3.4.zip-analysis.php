@@ -5,106 +5,134 @@
 *Found functions:28
 *Extracted functions:27
 *Total parameter names extracted: 21
-*Overview: {'enable_notify_callback': {'enable_notify'}, 'close_premium_message': {'close_premium_message'}, 'ajax_unlock': {'limit-login-unlock'}, 'app_load_lockouts_callback': {'app_load_lockouts'}, 'get_remaining_attempts_message_callback': {'nopriv_get_remaining_attempts_message'}, 'app_config_save_callback': {'app_config_save'}, 'app_acl_add_rule_callback': {'app_acl_add_rule'}, 'subscribe_email_callback': {'subscribe_email'}, 'onboarding_reset_callback': {'onboarding_reset'}, 'app_acl_remove_rule_callback': {'app_acl_remove_rule'}, 'dismiss_notify_notice_callback': {'dismiss_notify_notice'}, 'app_load_successful_login_callback': {'app_load_successful_login'}, 'app_load_country_access_rules_callback': {'app_load_country_access_rules'}, 'activate_micro_cloud_callback': {'activate_micro_cloud'}, 'test_email_notifications_callback': {'test_email_notifications'}, 'app_country_rule_callback': {'app_country_rule'}, 'app_load_acl_rules_callback': {'app_load_acl_rules'}, 'toggle_auto_update_callback': {'toggle_auto_update'}, 'mfa_flow_send_code_callback': {'llar_mfa_flow_send_code', 'nopriv_llar_mfa_flow_send_code'}, 'dismiss_review_notice_callback': {'dismiss_review_notice'}, 'app_toggle_country_callback': {'app_toggle_country'}, 'app_load_log_callback': {'app_load_log'}, 'strong_account_policies_callback': {'strong_account_policies'}, 'app_log_action_callback': {'app_log_action'}, 'app_setup_callback': {'app_setup'}, 'block_by_country_callback': {'block_by_country'}, 'dismiss_onboarding_popup_callback': {'dismiss_onboarding_popup'}, 'ajax_generate_rescue_codes': {'llar_mfa_generate_rescue_codes'}}
+*Overview: {'strong_account_policies_callback': {'strong_account_policies'}, 'dismiss_review_notice_callback': {'dismiss_review_notice'}, 'app_load_log_callback': {'app_load_log'}, 'dismiss_notify_notice_callback': {'dismiss_notify_notice'}, 'app_load_acl_rules_callback': {'app_load_acl_rules'}, 'ajax_generate_rescue_codes': {'llar_mfa_generate_rescue_codes'}, 'app_acl_remove_rule_callback': {'app_acl_remove_rule'}, 'app_acl_add_rule_callback': {'app_acl_add_rule'}, 'app_log_action_callback': {'app_log_action'}, 'toggle_auto_update_callback': {'toggle_auto_update'}, 'mfa_flow_send_code_callback': {'llar_mfa_flow_send_code', 'nopriv_llar_mfa_flow_send_code'}, 'enable_notify_callback': {'enable_notify'}, 'app_setup_callback': {'app_setup'}, 'test_email_notifications_callback': {'test_email_notifications'}, 'onboarding_reset_callback': {'onboarding_reset'}, 'app_toggle_country_callback': {'app_toggle_country'}, 'ajax_unlock': {'limit-login-unlock'}, 'app_load_successful_login_callback': {'app_load_successful_login'}, 'activate_micro_cloud_callback': {'activate_micro_cloud'}, 'app_country_rule_callback': {'app_country_rule'}, 'app_load_country_access_rules_callback': {'app_load_country_access_rules'}, 'dismiss_onboarding_popup_callback': {'dismiss_onboarding_popup'}, 'get_remaining_attempts_message_callback': {'nopriv_get_remaining_attempts_message'}, 'app_load_lockouts_callback': {'app_load_lockouts'}, 'subscribe_email_callback': {'subscribe_email'}, 'block_by_country_callback': {'block_by_country'}, 'app_config_save_callback': {'app_config_save'}, 'close_premium_message': {'close_premium_message'}}
 *
 ***/
 
-/** Function enable_notify_callback() called by wp_ajax hooks: {'enable_notify'} **/
-/** No params detected :-/ **/
+/** Function strong_account_policies_callback() called by wp_ajax hooks: {'strong_account_policies'} **/
+/** Parameters found in function strong_account_policies_callback(): {"post": ["is_checklist"]} **/
+function strong_account_policies_callback() {
+
+	    if ( ! LimitLoginAttempts::$instance->has_capability ) {
+
+            wp_send_json_error( array() );
+        }
+
+        check_ajax_referer( 'llar-strong-account-policies', 'sec' );
+
+        $is_checklist = sanitize_text_field( trim( $_POST['is_checklist'] ) );
+
+        Config::update( 'checklist', $is_checklist );
+
+        wp_send_json_success();
+    }
 
 
-/** Function close_premium_message() called by wp_ajax hooks: {'close_premium_message'} **/
-/** No params detected :-/ **/
-
-
-/** Function ajax_unlock() called by wp_ajax hooks: {'limit-login-unlock'} **/
-/** Parameters found in function ajax_unlock(): {"post": ["ip", "username"]} **/
-function ajax_unlock() {
+/** Function dismiss_review_notice_callback() called by wp_ajax hooks: {'dismiss_review_notice'} **/
+/** Parameters found in function dismiss_review_notice_callback(): {"post": ["type"]} **/
+function dismiss_review_notice_callback() {
 
 		$this->check_user_capabilities();
 
-		check_ajax_referer( 'llar-unlock', 'sec' );
-		$ip = (string) @$_POST['ip'];
+		check_ajax_referer( 'llar-dismiss-review', 'sec' );
 
-		$lockouts = (array) Config::get( Config::OPTION_LOCKOUTS );
+		$type = isset( $_POST['type'] ) ? sanitize_text_field( $_POST['type'] ) : false;
 
-		if ( isset( $lockouts[ $ip ] ) ) {
-			unset( $lockouts[ $ip ] );
-			Config::update( Config::OPTION_LOCKOUTS, $lockouts );
+		if ( $type === 'dismiss' ) {
+
+			Config::update( 'review_notice_shown', true );
 		}
 
-		//save to log
-		$user_login = @(string) $_POST['username'];
-		$log        = Config::get( Config::OPTION_LOGGED );
+		if ( $type === 'later' ) {
 
-		if ( @$log[ $ip ][ $user_login ] ) {
-			if ( ! is_array( $log[ $ip ][ $user_login ] ) ) {
-				$log[ $ip ][ $user_login ] = array(
-					'counter' => $log[ $ip ][ $user_login ],
-				);
-			}
-			$log[ $ip ][ $user_login ]['unlocked'] = true;
-
-			Config::update( Config::OPTION_LOGGED, $log );
+			Config::update( 'activation_timestamp', time() );
 		}
 
-		header( 'Content-Type: application/json' );
-		echo 'true';
-		exit;
+		wp_send_json_success( array() );
 	}
 
 
-/** Function app_load_lockouts_callback() called by wp_ajax hooks: {'app_load_lockouts'} **/
-/** Parameters found in function app_load_lockouts_callback(): {"post": ["offset", "limit"]} **/
-function app_load_lockouts_callback() {
+/** Function app_load_log_callback() called by wp_ajax hooks: {'app_load_log'} **/
+/** Parameters found in function app_load_log_callback(): {"post": ["offset", "limit"]} **/
+function app_load_log_callback() {
 
 		$this->check_user_capabilities();
 
-		check_ajax_referer( 'llar-app-load-lockouts', 'sec' );
+		check_ajax_referer( 'llar-app-load-log', 'sec' );
 
 		$offset = sanitize_text_field( $_POST['offset'] );
 		$limit  = sanitize_text_field( $_POST['limit'] );
 
-		$lockouts = LimitLoginAttempts::$cloud_app->get_lockouts( $limit, $offset );
+		$log = LimitLoginAttempts::$cloud_app->log( $limit, $offset );
 
-		if ( $lockouts ) {
+		if ( $log ) {
 
-			ob_start(); ?>
+			$date_format    = get_option( 'date_format' ) . ' ' . get_option( 'time_format' );
+			$countries_list = Helpers::get_countries_list();
 
-			<?php if ( $lockouts['items'] ) : ?>
-				<?php foreach ( $lockouts['items'] as $item ) : ?>
+			ob_start();
+			if ( empty( $log['items'] ) && ! empty( $log['offset'] ) ) : ?>
+			<?php elseif ( $log['items'] ) : ?>
+
+				<?php foreach ( $log['items'] as $item ) :
+					$country_name = ! empty( $countries_list[ $item['country_code'] ] ) ? $countries_list[ $item['country_code'] ] : '';
+					?>
                     <tr>
-                        <td><?php echo esc_html( $item['ip'] ); ?></td>
-                        <td><?php echo ( is_null( $item['login'] ) ) ? '-' : esc_html( implode( ',', $item['login'] ) ); ?></td>
-                        <td><?php echo ( is_null( $item['count'] ) ) ? '-' : esc_html( $item['count'] ); ?></td>
-                        <td><?php echo ( is_null( $item['ttl'] ) ) ? '-' : esc_html( round( ( $item['ttl'] - time() ) / 60 ) ); ?></td>
+                        <td class="llar-col-nowrap"><?php echo get_date_from_gmt( date( 'Y-m-d H:i:s', $item['created_at'] ), $date_format ); ?></td>
+                        <td>
+                            <div class="llar-log-country-flag">
+                                <span class="hint_tooltip-parent">
+                                    <img src="<?php echo LLA_PLUGIN_URL . 'assets/img/flags/' . esc_attr( strtolower( $item['country_code'] ) ) . '.png' ?>">
+                                    <div class="hint_tooltip">
+                                        <div class="hint_tooltip-content">
+                                            <?php echo esc_attr( $country_name ) ?>
+                                        </div>
+                                    </div>
+                                </span>
+                                <span><?php echo esc_html( $item['ip'] ); ?></span></div>
+                        </td>
+                        <td><?php echo esc_html( $item['gateway'] ); ?></td>
+                        <td><?php echo ( is_null( $item['login'] ) ) ? '-' : esc_html( $item['login'] ); ?></td>
+                        <td><?php echo ( is_null( $item['result'] ) ) ? '-' : esc_html( $item['result'] ); ?></td>
+                        <td><?php echo ( is_null( $item['reason'] ) ) ? '-' : esc_html( $item['reason'] ); ?></td>
+                        <td><?php echo ( is_null( $item['pattern'] ) ) ? '-' : esc_html( $item['pattern'] ); ?></td>
+                        <td><?php echo ( is_null( $item['attempts_left'] ) ) ? '-' : esc_html( $item['attempts_left'] ); ?></td>
+                        <td><?php echo ( is_null( $item['time_left'] ) ) ? '-' : esc_html( $item['time_left'] ) ?></td>
+                        <td class="llar-app-log-actions">
+							<?php
+							if ( $item['actions'] ) {
+
+								foreach ( $item['actions'] as $action ) {
+
+									echo '<button class="button llar-app-log-action-btn js-app-log-action" 
+									style="color:' . esc_attr( $action['color'] ) . '; border-color:' . esc_attr( $action['color'] ) . '" 
+                                    data-method="' . esc_attr( $action['method'] ) . '" 
+                                    data-params="' . esc_attr( json_encode( $action['data'], JSON_FORCE_OBJECT ) ) . '" 
+                                    href="#" title="' . $action['label'] . '"><i class="dashicons dashicons-' . esc_attr( $action['icon'] ) . '"></i></button>';
+								}
+							} else {
+								echo '-';
+							}
+							?>
+                        </td>
                     </tr>
 				<?php endforeach; ?>
-
-			<?php else: ?>
+			<?php else : ?>
 				<?php if ( empty( $offset ) ) : ?>
                     <tr class="empty-row">
-                        <td colspan="4"
-                            style="text-align: center"><?php _e( 'No lockouts yet.', 'limit-login-attempts-reloaded' ); ?></td>
+                        <td colspan="100%"
+                            style="text-align: center"><?php _e( 'No events yet.', 'limit-login-attempts-reloaded' ); ?></td>
                     </tr>
 				<?php endif; ?>
 			<?php endif; ?>
 			<?php
 
 			wp_send_json_success( array(
-				'html'   => ob_get_clean(),
-				'offset' => $lockouts['offset']
+				'html'        => ob_get_clean(),
+				'offset'      => $log['offset'],
+				'total_items' => count( $log['items'] )
 			) );
 
-		} elseif ( intval( LimitLoginAttempts::$cloud_app->last_response_code ) >= 400 && intval( LimitLoginAttempts::$cloud_app->last_response_code ) < 500 ) {
-
-			$app_config = Config::get( 'app_config' );
-
-			wp_send_json_error( array(
-				'error_notice' => '<div class="llar-app-notice">
-                                        <p>' . $app_config['messages']['sync_error'] . '<br><br>' . sprintf( __( 'Meanwhile, the app falls over to the <a href="%s">default functionality</a>.', 'limit-login-attempts-reloaded' ), admin_url( 'options-general.php?page=limit-login-attempts&tab=logs-local' ) ) . '</p>
-                                    </div>'
-			) );
 		} else {
 
 			wp_send_json_error( array(
@@ -114,12 +142,130 @@ function app_load_lockouts_callback() {
 	}
 
 
-/** Function get_remaining_attempts_message_callback() called by wp_ajax hooks: {'nopriv_get_remaining_attempts_message'} **/
+/** Function dismiss_notify_notice_callback() called by wp_ajax hooks: {'dismiss_notify_notice'} **/
+/** Parameters found in function dismiss_notify_notice_callback(): {"post": ["type"]} **/
+function dismiss_notify_notice_callback() {
+
+		$this->check_user_capabilities();
+
+		check_ajax_referer( 'llar-dismiss-notify-notice', 'sec' );
+
+		$type = isset( $_POST['type'] ) ? sanitize_text_field( $_POST['type'] ) : false;
+
+		if ( $type === 'dismiss' ) {
+
+			Config::update( 'enable_notify_notice_shown', true );
+		}
+
+		if ( $type === 'later' ) {
+
+			Config::update( 'notice_enable_notify_timestamp', time() );
+		}
+
+		wp_send_json_success( array() );
+	}
+
+
+/** Function app_load_acl_rules_callback() called by wp_ajax hooks: {'app_load_acl_rules'} **/
+/** Parameters found in function app_load_acl_rules_callback(): {"post": ["type", "limit", "offset"]} **/
+function app_load_acl_rules_callback() {
+
+		$this->check_user_capabilities();
+
+		check_ajax_referer( 'llar-app-load-acl-rules', 'sec' );
+
+		$type   = sanitize_text_field( $_POST['type'] );
+		$limit  = sanitize_text_field( $_POST['limit'] );
+		$offset = sanitize_text_field( $_POST['offset'] );
+
+		$acl_list = LimitLoginAttempts::$cloud_app->acl( array(
+			'type'   => $type,
+			'limit'  => $limit,
+			'offset' => $offset
+		) );
+
+		if ( $acl_list ) {
+
+			ob_start(); ?>
+
+			<?php if ( $acl_list['items'] ) : ?>
+				<?php foreach ( $acl_list['items'] as $item ) : ?>
+                    <tr class="llar-app-rule-<?php echo esc_attr( $item['rule'] ); ?>">
+                        <td class="rule-pattern" scope="col">
+                            <?php echo esc_html( $item['pattern'] ); ?>
+                        </td>
+                        <td scope="col">
+                            <?php echo esc_html( $item['rule'] ); ?><?php echo ( $type === 'ip' ) ? '<span class="origin">' . esc_html( $item['origin'] ) . '</span>' : ''; ?>
+                        </td>
+                        <td class="llar-app-acl-action-col" scope="col">
+                            <button class="button llar-app-acl-remove" data-type="<?php echo esc_attr( $type ); ?>"
+                                    data-pattern="<?php echo esc_attr( $item['pattern'] ); ?>">
+                                <span class="dashicons dashicons-no"></span>
+                            </button>
+                        </td>
+                    </tr>
+				<?php endforeach; ?>
+			<?php else : ?>
+                <tr class="empty-row">
+                    <td colspan="3" style="text-align: center">
+                        <?php _e( 'No rules yet.', 'limit-login-attempts-reloaded' ); ?>
+                    </td>
+                </tr>
+			<?php endif; ?>
+			<?php
+
+			wp_send_json_success( array(
+				'html'   => ob_get_clean(),
+				'offset' => $acl_list['offset']
+			) );
+
+		} else {
+
+			wp_send_json_error( array(
+				'msg' => 'The endpoint is not responding. Please contact your app provider to settle that.'
+			) );
+		}
+	}
+
+
+/** Function ajax_generate_rescue_codes() called by wp_ajax hooks: {'llar_mfa_generate_rescue_codes'} **/
 /** No params detected :-/ **/
 
 
-/** Function app_config_save_callback() called by wp_ajax hooks: {'app_config_save'} **/
-/** No function found :-/ **/
+/** Function app_acl_remove_rule_callback() called by wp_ajax hooks: {'app_acl_remove_rule'} **/
+/** Parameters found in function app_acl_remove_rule_callback(): {"post": ["pattern", "type"]} **/
+function app_acl_remove_rule_callback() {
+
+		$this->check_user_capabilities();
+
+		check_ajax_referer( 'llar-app-acl-remove-rule', 'sec' );
+
+		if ( ! empty( $_POST['pattern'] ) && ! empty( $_POST['type'] ) ) {
+
+			$pattern = sanitize_text_field( $_POST['pattern'] );
+			$type    = sanitize_text_field( $_POST['type'] );
+
+			if ( $response = LimitLoginAttempts::$cloud_app->acl_delete( array(
+				'pattern' => $pattern,
+				'type'    => ( $type === 'ip' ) ? 'ip' : 'login',
+			) ) ) {
+
+				wp_send_json_success( array(
+					'msg' => $response['message']
+				) );
+
+			} else {
+
+				wp_send_json_error( array(
+					'msg' => 'The endpoint is not responding. Please contact your app provider to settle that.'
+				) );
+			}
+		}
+
+		wp_send_json_error( array(
+			'msg' => 'Wrong input data.'
+		) );
+	}
 
 
 /** Function app_acl_add_rule_callback() called by wp_ajax hooks: {'app_acl_add_rule'} **/
@@ -167,77 +313,27 @@ function app_acl_add_rule_callback() {
 	}
 
 
-/** Function subscribe_email_callback() called by wp_ajax hooks: {'subscribe_email'} **/
-/** Parameters found in function subscribe_email_callback(): {"post": ["email", "is_subscribe_yes"]} **/
-function subscribe_email_callback() {
+/** Function app_log_action_callback() called by wp_ajax hooks: {'app_log_action'} **/
+/** Parameters found in function app_log_action_callback(): {"post": ["method", "params"]} **/
+function app_log_action_callback() {
 
 		$this->check_user_capabilities();
 
-		check_ajax_referer( 'llar-subscribe-email', 'sec' );
+		check_ajax_referer( 'llar-app-log', 'sec' );
 
-		$email            = sanitize_text_field( trim( $_POST['email'] ) );
-		$is_subscribe_yes = sanitize_text_field( $_POST['is_subscribe_yes'] ) === 'true';
-		$admin_email   = ( ! is_multisite() ) ? get_option( 'admin_email' ) : get_site_option( 'admin_email' );
+		if ( ! empty( $_POST['method'] ) && ! empty( $_POST['params'] ) ) {
 
-		if ( ! empty( $email ) && is_email( $email ) ) {
+			$method = sanitize_text_field( $_POST['method'] );
+			$params = (array) $_POST['params'];
 
-			Config::update( 'admin_notify_email', $email );
-			Config::update( 'lockout_notify', 'email' );
+			if ( ! in_array( $method, array( 'lockout/delete', 'acl/create', 'acl/delete' ) ) ) {
 
-			if ( $is_subscribe_yes ) {
-				$response = Http::post( 'https://api.limitloginattempts.com/my/key', array(
-					'data' => array(
-						'email' => $email
-					)
+				wp_send_json_error( array(
+					'msg' => 'Wrong method.'
 				) );
-
-				if ( !empty( $response['error'] ) ) {
-
-					wp_send_json_error( $response['error'] );
-				} else {
-
-					$response_body = json_decode( $response['data'], true );
-
-					if ( ! empty( $response_body['key'] ) ) {
-						Config::update( 'cloud_key', $response_body['key'] );
-					}
-				}
 			}
 
-			wp_send_json_success( array( 'email' => $email, 'is_subscribe_yes' => $is_subscribe_yes ) );
-
-		} else if ( empty( $email ) ) {
-			Config::update( 'admin_notify_email', $admin_email );
-			Config::update( 'lockout_notify', '' );
-
-			wp_send_json_success( array( 'email' => $admin_email, 'is_subscribe_yes' => '' ) );
-		}
-
-		wp_send_json_error( array( 'email' => $email, 'is_subscribe_yes' => $is_subscribe_yes ) );
-	}
-
-
-/** Function onboarding_reset_callback() called by wp_ajax hooks: {'onboarding_reset'} **/
-/** No params detected :-/ **/
-
-
-/** Function app_acl_remove_rule_callback() called by wp_ajax hooks: {'app_acl_remove_rule'} **/
-/** Parameters found in function app_acl_remove_rule_callback(): {"post": ["pattern", "type"]} **/
-function app_acl_remove_rule_callback() {
-
-		$this->check_user_capabilities();
-
-		check_ajax_referer( 'llar-app-acl-remove-rule', 'sec' );
-
-		if ( ! empty( $_POST['pattern'] ) && ! empty( $_POST['type'] ) ) {
-
-			$pattern = sanitize_text_field( $_POST['pattern'] );
-			$type    = sanitize_text_field( $_POST['type'] );
-
-			if ( $response = LimitLoginAttempts::$cloud_app->acl_delete( array(
-				'pattern' => $pattern,
-				'type'    => ( $type === 'ip' ) ? 'ip' : 'login',
-			) ) ) {
+			if ( $response = LimitLoginAttempts::$cloud_app->request( $method, 'post', $params ) ) {
 
 				wp_send_json_success( array(
 					'msg' => $response['message']
@@ -252,32 +348,260 @@ function app_acl_remove_rule_callback() {
 		}
 
 		wp_send_json_error( array(
-			'msg' => 'Wrong input data.'
+			'msg' => 'Wrong App id.'
 		) );
 	}
 
 
-/** Function dismiss_notify_notice_callback() called by wp_ajax hooks: {'dismiss_notify_notice'} **/
-/** Parameters found in function dismiss_notify_notice_callback(): {"post": ["type"]} **/
-function dismiss_notify_notice_callback() {
+/** Function toggle_auto_update_callback() called by wp_ajax hooks: {'toggle_auto_update'} **/
+/** Parameters found in function toggle_auto_update_callback(): {"post": ["value"]} **/
+function toggle_auto_update_callback() {
 
 		$this->check_user_capabilities();
 
-		check_ajax_referer( 'llar-dismiss-notify-notice', 'sec' );
+		if ( Helpers::is_block_automatic_update_disabled() ) {
 
-		$type = isset( $_POST['type'] ) ? sanitize_text_field( $_POST['type'] ) : false;
+            wp_send_json_error( array( 'msg' => 'Can\'t turn auto-updates on. Please ask your hosting provider or developer for assistance.') );
+        }
 
-		if ( $type === 'dismiss' ) {
+		check_ajax_referer( 'llar-toggle-auto-update', 'sec' );
 
-			Config::update( 'enable_notify_notice_shown', true );
+		$value = sanitize_text_field( $_POST['value'] );
+		$auto_update_plugins = get_site_option( 'auto_update_plugins', array() );
+
+		if( $value === 'yes' ) {
+			$auto_update_plugins[] = LLA_PLUGIN_BASENAME;
+			Config::update( 'auto_update_choice', 1 );
+
+		} else if ( $value === 'no' ) {
+			if ( ( $key = array_search( LLA_PLUGIN_BASENAME, $auto_update_plugins ) ) !== false ) {
+				unset($auto_update_plugins[$key]);
+			}
+			Config::update( 'auto_update_choice', 0 );
 		}
 
-		if ( $type === 'later' ) {
+		update_site_option( 'auto_update_plugins', $auto_update_plugins );
 
-			Config::update( 'notice_enable_notify_timestamp', time() );
+		wp_send_json_success();
+	}
+
+
+/** Function mfa_flow_send_code_callback() called by wp_ajax hooks: {'llar_mfa_flow_send_code', 'nopriv_llar_mfa_flow_send_code'} **/
+/** Parameters found in function mfa_flow_send_code_callback(): {"server": ["REQUEST_METHOD"], "post": ["token", "secret", "code", "ip", "browser", "location"]} **/
+function mfa_flow_send_code_callback() {
+		check_ajax_referer( 'llar_mfa_flow_send_code', '_ajax_nonce', true );
+
+		$method = isset( $_SERVER['REQUEST_METHOD'] ) ? $_SERVER['REQUEST_METHOD'] : '';
+		if ( 'POST' !== $method ) {
+			status_header( 405 );
+			wp_send_json_error( array( 'message' => 'Method not allowed' ) );
 		}
 
-		wp_send_json_success( array() );
+		$token   = isset( $_POST['token'] ) ? sanitize_text_field( wp_unslash( $_POST['token'] ) ) : '';
+		$secret  = isset( $_POST['secret'] ) ? sanitize_text_field( wp_unslash( $_POST['secret'] ) ) : '';
+		$code    = isset( $_POST['code'] ) ? sanitize_text_field( wp_unslash( $_POST['code'] ) ) : '';
+		$ip       = isset( $_POST['ip'] ) ? sanitize_text_field( wp_unslash( $_POST['ip'] ) ) : '';
+		$browser  = isset( $_POST['browser'] ) ? sanitize_text_field( wp_unslash( $_POST['browser'] ) ) : '';
+		$location = isset( $_POST['location'] ) ? sanitize_text_field( wp_unslash( $_POST['location'] ) ) : '';
+		$context  = array(
+			'ip'       => is_string( $ip ) ? $ip : '',
+			'browser'  => is_string( $browser ) ? $browser : '',
+			'location' => is_string( $location ) ? $location : '',
+		);
+
+		if ( '' === $token || '' === $secret ) {
+			status_header( 403 );
+			wp_send_json_error( array( 'message' => 'Forbidden' ) );
+		}
+
+		$result  = \LLAR\Core\MfaFlow\MfaFlowSendCode::execute( $token, $secret, $code, $context );
+		$status  = isset( $result['http_status'] ) ? (int) $result['http_status'] : 200;
+		$message = isset( $result['message'] ) ? $result['message'] : '';
+
+		status_header( $status );
+		if ( ! empty( $result['success'] ) ) {
+			wp_send_json_success();
+		}
+		wp_send_json_error( array( 'message' => $message ? $message : 'Forbidden' ) );
+	}
+
+
+/** Function enable_notify_callback() called by wp_ajax hooks: {'enable_notify'} **/
+/** No params detected :-/ **/
+
+
+/** Function app_setup_callback() called by wp_ajax hooks: {'app_setup'} **/
+/** Parameters found in function app_setup_callback(): {"post": ["code"]} **/
+function app_setup_callback() {
+
+		$this->check_user_capabilities();
+
+		check_ajax_referer( 'llar-app-setup', 'sec' );
+
+		if ( ! empty( $_POST['code'] ) ) {
+
+			$setup_code = sanitize_text_field( $_POST['code'] );
+
+			if ( $key_result = CloudApp::activate_license_key( $setup_code ) ) {
+
+			    if ( $key_result['success'] ) {
+
+				    wp_send_json_success( array(
+					    'msg' => ( $key_result['app_config']['messages']['setup_success'] )
+				    ) );
+                } else {
+
+				    wp_send_json_error( array(
+					    'msg' => ( $key_result['error'] )
+				    ) );
+                }
+            } else {
+
+                wp_send_json_error( array(
+                    'msg' => $key_result['error']
+                ) );
+            }
+		}
+
+		wp_send_json_error( array(
+			'msg' => __( 'Please specify the Setup Code', 'limit-login-attempts-reloaded' )
+		) );
+	}
+
+
+/** Function test_email_notifications_callback() called by wp_ajax hooks: {'test_email_notifications'} **/
+/** Parameters found in function test_email_notifications_callback(): {"post": ["email"]} **/
+function test_email_notifications_callback() {
+
+		$this->check_user_capabilities();
+
+		check_ajax_referer('llar-test-email-notifications', 'sec');
+
+		$to = sanitize_email( $_POST['email'] );
+
+		if( empty( $to ) || !is_email( $to ) ) {
+
+			wp_send_json_error( array(
+                'msg' => __( 'Wrong email format.', 'limit-login-attempts-reloaded' ),
+            ) );
+		}
+
+		$subject        = __( 'LLAR Security Notifications [TEST]', 'limit-login-attempts-reloaded' );
+
+		ob_start();
+		include LLA_PLUGIN_DIR . 'views/emails/test-notification-content.php';
+		$content = (string) ob_get_clean();
+
+		add_action( 'phpmailer_init', array( 'LLAR\Core\Helpers', 'add_attachments_to_php_mailer' ) );
+
+		$sent = Mailer::send(
+			$to,
+			$subject,
+			$content,
+			array( 'content-type: text/html' ),
+			array(),
+			false,
+			array(
+				'title'    => $subject,
+				'logo_cid' => 'logo',
+			)
+		);
+
+		remove_action( 'phpmailer_init', array( 'LLAR\Core\Helpers', 'add_attachments_to_php_mailer' ) );
+
+		if ( $sent ) {
+
+			wp_send_json_success();
+		} else {
+
+			wp_send_json_error();
+		}
+	}
+
+
+/** Function onboarding_reset_callback() called by wp_ajax hooks: {'onboarding_reset'} **/
+/** No params detected :-/ **/
+
+
+/** Function app_toggle_country_callback() called by wp_ajax hooks: {'app_toggle_country'} **/
+/** Parameters found in function app_toggle_country_callback(): {"post": ["code", "type"]} **/
+function app_toggle_country_callback() {
+
+		$this->check_user_capabilities();
+
+		check_ajax_referer( 'llar-app-toggle-country', 'sec' );
+
+		$code        = sanitize_text_field( $_POST['code'] );
+		$action_type = sanitize_text_field( $_POST['type'] );
+
+		if ( ! $code ) {
+
+			wp_send_json_error( array(
+				'msg' => 'Wrong country code.'
+			) );
+		}
+
+		$result = false;
+
+		if ( $action_type === 'add' ) {
+
+			$result = LimitLoginAttempts::$cloud_app->country_add( array(
+				'code' => $code
+			) );
+
+		} else if ( $action_type === 'remove' ) {
+
+			$result = LimitLoginAttempts::$cloud_app->country_remove( array(
+				'code' => $code
+			) );
+		}
+
+		if ( $result ) {
+
+			wp_send_json_success( array() );
+		} else {
+
+			wp_send_json_error( array(
+				'msg' => 'Something wrong.'
+			) );
+		}
+	}
+
+
+/** Function ajax_unlock() called by wp_ajax hooks: {'limit-login-unlock'} **/
+/** Parameters found in function ajax_unlock(): {"post": ["ip", "username"]} **/
+function ajax_unlock() {
+
+		$this->check_user_capabilities();
+
+		check_ajax_referer( 'llar-unlock', 'sec' );
+		$ip = (string) @$_POST['ip'];
+
+		$lockouts = (array) Config::get( Config::OPTION_LOCKOUTS );
+
+		if ( isset( $lockouts[ $ip ] ) ) {
+			unset( $lockouts[ $ip ] );
+			Config::update( Config::OPTION_LOCKOUTS, $lockouts );
+		}
+
+		//save to log
+		$user_login = @(string) $_POST['username'];
+		$log        = Config::get( Config::OPTION_LOGGED );
+
+		if ( @$log[ $ip ][ $user_login ] ) {
+			if ( ! is_array( $log[ $ip ][ $user_login ] ) ) {
+				$log[ $ip ][ $user_login ] = array(
+					'counter' => $log[ $ip ][ $user_login ],
+				);
+			}
+			$log[ $ip ][ $user_login ]['unlocked'] = true;
+
+			Config::update( Config::OPTION_LOGGED, $log );
+		}
+
+		header( 'Content-Type: application/json' );
+		echo 'true';
+		exit;
 	}
 
 
@@ -586,10 +910,6 @@ function app_load_successful_login_callback() {
 	}
 
 
-/** Function app_load_country_access_rules_callback() called by wp_ajax hooks: {'app_load_country_access_rules'} **/
-/** No params detected :-/ **/
-
-
 /** Function activate_micro_cloud_callback() called by wp_ajax hooks: {'activate_micro_cloud'} **/
 /** Parameters found in function activate_micro_cloud_callback(): {"post": ["email"]} **/
 function activate_micro_cloud_callback() {
@@ -652,56 +972,6 @@ function activate_micro_cloud_callback() {
     }
 
 
-/** Function test_email_notifications_callback() called by wp_ajax hooks: {'test_email_notifications'} **/
-/** Parameters found in function test_email_notifications_callback(): {"post": ["email"]} **/
-function test_email_notifications_callback() {
-
-		$this->check_user_capabilities();
-
-		check_ajax_referer('llar-test-email-notifications', 'sec');
-
-		$to = sanitize_email( $_POST['email'] );
-
-		if( empty( $to ) || !is_email( $to ) ) {
-
-			wp_send_json_error( array(
-                'msg' => __( 'Wrong email format.', 'limit-login-attempts-reloaded' ),
-            ) );
-		}
-
-		$subject        = __( 'LLAR Security Notifications [TEST]', 'limit-login-attempts-reloaded' );
-
-		ob_start();
-		include LLA_PLUGIN_DIR . 'views/emails/test-notification-content.php';
-		$content = (string) ob_get_clean();
-
-		add_action( 'phpmailer_init', array( 'LLAR\Core\Helpers', 'add_attachments_to_php_mailer' ) );
-
-		$sent = Mailer::send(
-			$to,
-			$subject,
-			$content,
-			array( 'content-type: text/html' ),
-			array(),
-			false,
-			array(
-				'title'    => $subject,
-				'logo_cid' => 'logo',
-			)
-		);
-
-		remove_action( 'phpmailer_init', array( 'LLAR\Core\Helpers', 'add_attachments_to_php_mailer' ) );
-
-		if ( $sent ) {
-
-			wp_send_json_success();
-		} else {
-
-			wp_send_json_error();
-		}
-	}
-
-
 /** Function app_country_rule_callback() called by wp_ajax hooks: {'app_country_rule'} **/
 /** Parameters found in function app_country_rule_callback(): {"post": ["rule"]} **/
 function app_country_rule_callback() {
@@ -735,291 +1005,69 @@ function app_country_rule_callback() {
 	}
 
 
-/** Function app_load_acl_rules_callback() called by wp_ajax hooks: {'app_load_acl_rules'} **/
-/** Parameters found in function app_load_acl_rules_callback(): {"post": ["type", "limit", "offset"]} **/
-function app_load_acl_rules_callback() {
+/** Function app_load_country_access_rules_callback() called by wp_ajax hooks: {'app_load_country_access_rules'} **/
+/** No params detected :-/ **/
+
+
+/** Function dismiss_onboarding_popup_callback() called by wp_ajax hooks: {'dismiss_onboarding_popup'} **/
+/** No params detected :-/ **/
+
+
+/** Function get_remaining_attempts_message_callback() called by wp_ajax hooks: {'nopriv_get_remaining_attempts_message'} **/
+/** No params detected :-/ **/
+
+
+/** Function app_load_lockouts_callback() called by wp_ajax hooks: {'app_load_lockouts'} **/
+/** Parameters found in function app_load_lockouts_callback(): {"post": ["offset", "limit"]} **/
+function app_load_lockouts_callback() {
 
 		$this->check_user_capabilities();
 
-		check_ajax_referer( 'llar-app-load-acl-rules', 'sec' );
+		check_ajax_referer( 'llar-app-load-lockouts', 'sec' );
 
-		$type   = sanitize_text_field( $_POST['type'] );
-		$limit  = sanitize_text_field( $_POST['limit'] );
 		$offset = sanitize_text_field( $_POST['offset'] );
+		$limit  = sanitize_text_field( $_POST['limit'] );
 
-		$acl_list = LimitLoginAttempts::$cloud_app->acl( array(
-			'type'   => $type,
-			'limit'  => $limit,
-			'offset' => $offset
-		) );
+		$lockouts = LimitLoginAttempts::$cloud_app->get_lockouts( $limit, $offset );
 
-		if ( $acl_list ) {
+		if ( $lockouts ) {
 
 			ob_start(); ?>
 
-			<?php if ( $acl_list['items'] ) : ?>
-				<?php foreach ( $acl_list['items'] as $item ) : ?>
-                    <tr class="llar-app-rule-<?php echo esc_attr( $item['rule'] ); ?>">
-                        <td class="rule-pattern" scope="col">
-                            <?php echo esc_html( $item['pattern'] ); ?>
-                        </td>
-                        <td scope="col">
-                            <?php echo esc_html( $item['rule'] ); ?><?php echo ( $type === 'ip' ) ? '<span class="origin">' . esc_html( $item['origin'] ) . '</span>' : ''; ?>
-                        </td>
-                        <td class="llar-app-acl-action-col" scope="col">
-                            <button class="button llar-app-acl-remove" data-type="<?php echo esc_attr( $type ); ?>"
-                                    data-pattern="<?php echo esc_attr( $item['pattern'] ); ?>">
-                                <span class="dashicons dashicons-no"></span>
-                            </button>
-                        </td>
-                    </tr>
-				<?php endforeach; ?>
-			<?php else : ?>
-                <tr class="empty-row">
-                    <td colspan="3" style="text-align: center">
-                        <?php _e( 'No rules yet.', 'limit-login-attempts-reloaded' ); ?>
-                    </td>
-                </tr>
-			<?php endif; ?>
-			<?php
-
-			wp_send_json_success( array(
-				'html'   => ob_get_clean(),
-				'offset' => $acl_list['offset']
-			) );
-
-		} else {
-
-			wp_send_json_error( array(
-				'msg' => 'The endpoint is not responding. Please contact your app provider to settle that.'
-			) );
-		}
-	}
-
-
-/** Function toggle_auto_update_callback() called by wp_ajax hooks: {'toggle_auto_update'} **/
-/** Parameters found in function toggle_auto_update_callback(): {"post": ["value"]} **/
-function toggle_auto_update_callback() {
-
-		$this->check_user_capabilities();
-
-		if ( Helpers::is_block_automatic_update_disabled() ) {
-
-            wp_send_json_error( array( 'msg' => 'Can\'t turn auto-updates on. Please ask your hosting provider or developer for assistance.') );
-        }
-
-		check_ajax_referer( 'llar-toggle-auto-update', 'sec' );
-
-		$value = sanitize_text_field( $_POST['value'] );
-		$auto_update_plugins = get_site_option( 'auto_update_plugins', array() );
-
-		if( $value === 'yes' ) {
-			$auto_update_plugins[] = LLA_PLUGIN_BASENAME;
-			Config::update( 'auto_update_choice', 1 );
-
-		} else if ( $value === 'no' ) {
-			if ( ( $key = array_search( LLA_PLUGIN_BASENAME, $auto_update_plugins ) ) !== false ) {
-				unset($auto_update_plugins[$key]);
-			}
-			Config::update( 'auto_update_choice', 0 );
-		}
-
-		update_site_option( 'auto_update_plugins', $auto_update_plugins );
-
-		wp_send_json_success();
-	}
-
-
-/** Function mfa_flow_send_code_callback() called by wp_ajax hooks: {'llar_mfa_flow_send_code', 'nopriv_llar_mfa_flow_send_code'} **/
-/** Parameters found in function mfa_flow_send_code_callback(): {"server": ["REQUEST_METHOD"], "post": ["token", "secret", "code", "ip", "browser", "location"]} **/
-function mfa_flow_send_code_callback() {
-		check_ajax_referer( 'llar_mfa_flow_send_code', '_ajax_nonce', true );
-
-		$method = isset( $_SERVER['REQUEST_METHOD'] ) ? $_SERVER['REQUEST_METHOD'] : '';
-		if ( 'POST' !== $method ) {
-			status_header( 405 );
-			wp_send_json_error( array( 'message' => 'Method not allowed' ) );
-		}
-
-		$token   = isset( $_POST['token'] ) ? sanitize_text_field( wp_unslash( $_POST['token'] ) ) : '';
-		$secret  = isset( $_POST['secret'] ) ? sanitize_text_field( wp_unslash( $_POST['secret'] ) ) : '';
-		$code    = isset( $_POST['code'] ) ? sanitize_text_field( wp_unslash( $_POST['code'] ) ) : '';
-		$ip       = isset( $_POST['ip'] ) ? sanitize_text_field( wp_unslash( $_POST['ip'] ) ) : '';
-		$browser  = isset( $_POST['browser'] ) ? sanitize_text_field( wp_unslash( $_POST['browser'] ) ) : '';
-		$location = isset( $_POST['location'] ) ? sanitize_text_field( wp_unslash( $_POST['location'] ) ) : '';
-		$context  = array(
-			'ip'       => is_string( $ip ) ? $ip : '',
-			'browser'  => is_string( $browser ) ? $browser : '',
-			'location' => is_string( $location ) ? $location : '',
-		);
-
-		if ( '' === $token || '' === $secret ) {
-			status_header( 403 );
-			wp_send_json_error( array( 'message' => 'Forbidden' ) );
-		}
-
-		$result  = \LLAR\Core\MfaFlow\MfaFlowSendCode::execute( $token, $secret, $code, $context );
-		$status  = isset( $result['http_status'] ) ? (int) $result['http_status'] : 200;
-		$message = isset( $result['message'] ) ? $result['message'] : '';
-
-		status_header( $status );
-		if ( ! empty( $result['success'] ) ) {
-			wp_send_json_success();
-		}
-		wp_send_json_error( array( 'message' => $message ? $message : 'Forbidden' ) );
-	}
-
-
-/** Function dismiss_review_notice_callback() called by wp_ajax hooks: {'dismiss_review_notice'} **/
-/** Parameters found in function dismiss_review_notice_callback(): {"post": ["type"]} **/
-function dismiss_review_notice_callback() {
-
-		$this->check_user_capabilities();
-
-		check_ajax_referer( 'llar-dismiss-review', 'sec' );
-
-		$type = isset( $_POST['type'] ) ? sanitize_text_field( $_POST['type'] ) : false;
-
-		if ( $type === 'dismiss' ) {
-
-			Config::update( 'review_notice_shown', true );
-		}
-
-		if ( $type === 'later' ) {
-
-			Config::update( 'activation_timestamp', time() );
-		}
-
-		wp_send_json_success( array() );
-	}
-
-
-/** Function app_toggle_country_callback() called by wp_ajax hooks: {'app_toggle_country'} **/
-/** Parameters found in function app_toggle_country_callback(): {"post": ["code", "type"]} **/
-function app_toggle_country_callback() {
-
-		$this->check_user_capabilities();
-
-		check_ajax_referer( 'llar-app-toggle-country', 'sec' );
-
-		$code        = sanitize_text_field( $_POST['code'] );
-		$action_type = sanitize_text_field( $_POST['type'] );
-
-		if ( ! $code ) {
-
-			wp_send_json_error( array(
-				'msg' => 'Wrong country code.'
-			) );
-		}
-
-		$result = false;
-
-		if ( $action_type === 'add' ) {
-
-			$result = LimitLoginAttempts::$cloud_app->country_add( array(
-				'code' => $code
-			) );
-
-		} else if ( $action_type === 'remove' ) {
-
-			$result = LimitLoginAttempts::$cloud_app->country_remove( array(
-				'code' => $code
-			) );
-		}
-
-		if ( $result ) {
-
-			wp_send_json_success( array() );
-		} else {
-
-			wp_send_json_error( array(
-				'msg' => 'Something wrong.'
-			) );
-		}
-	}
-
-
-/** Function app_load_log_callback() called by wp_ajax hooks: {'app_load_log'} **/
-/** Parameters found in function app_load_log_callback(): {"post": ["offset", "limit"]} **/
-function app_load_log_callback() {
-
-		$this->check_user_capabilities();
-
-		check_ajax_referer( 'llar-app-load-log', 'sec' );
-
-		$offset = sanitize_text_field( $_POST['offset'] );
-		$limit  = sanitize_text_field( $_POST['limit'] );
-
-		$log = LimitLoginAttempts::$cloud_app->log( $limit, $offset );
-
-		if ( $log ) {
-
-			$date_format    = get_option( 'date_format' ) . ' ' . get_option( 'time_format' );
-			$countries_list = Helpers::get_countries_list();
-
-			ob_start();
-			if ( empty( $log['items'] ) && ! empty( $log['offset'] ) ) : ?>
-			<?php elseif ( $log['items'] ) : ?>
-
-				<?php foreach ( $log['items'] as $item ) :
-					$country_name = ! empty( $countries_list[ $item['country_code'] ] ) ? $countries_list[ $item['country_code'] ] : '';
-					?>
+			<?php if ( $lockouts['items'] ) : ?>
+				<?php foreach ( $lockouts['items'] as $item ) : ?>
                     <tr>
-                        <td class="llar-col-nowrap"><?php echo get_date_from_gmt( date( 'Y-m-d H:i:s', $item['created_at'] ), $date_format ); ?></td>
-                        <td>
-                            <div class="llar-log-country-flag">
-                                <span class="hint_tooltip-parent">
-                                    <img src="<?php echo LLA_PLUGIN_URL . 'assets/img/flags/' . esc_attr( strtolower( $item['country_code'] ) ) . '.png' ?>">
-                                    <div class="hint_tooltip">
-                                        <div class="hint_tooltip-content">
-                                            <?php echo esc_attr( $country_name ) ?>
-                                        </div>
-                                    </div>
-                                </span>
-                                <span><?php echo esc_html( $item['ip'] ); ?></span></div>
-                        </td>
-                        <td><?php echo esc_html( $item['gateway'] ); ?></td>
-                        <td><?php echo ( is_null( $item['login'] ) ) ? '-' : esc_html( $item['login'] ); ?></td>
-                        <td><?php echo ( is_null( $item['result'] ) ) ? '-' : esc_html( $item['result'] ); ?></td>
-                        <td><?php echo ( is_null( $item['reason'] ) ) ? '-' : esc_html( $item['reason'] ); ?></td>
-                        <td><?php echo ( is_null( $item['pattern'] ) ) ? '-' : esc_html( $item['pattern'] ); ?></td>
-                        <td><?php echo ( is_null( $item['attempts_left'] ) ) ? '-' : esc_html( $item['attempts_left'] ); ?></td>
-                        <td><?php echo ( is_null( $item['time_left'] ) ) ? '-' : esc_html( $item['time_left'] ) ?></td>
-                        <td class="llar-app-log-actions">
-							<?php
-							if ( $item['actions'] ) {
-
-								foreach ( $item['actions'] as $action ) {
-
-									echo '<button class="button llar-app-log-action-btn js-app-log-action" 
-									style="color:' . esc_attr( $action['color'] ) . '; border-color:' . esc_attr( $action['color'] ) . '" 
-                                    data-method="' . esc_attr( $action['method'] ) . '" 
-                                    data-params="' . esc_attr( json_encode( $action['data'], JSON_FORCE_OBJECT ) ) . '" 
-                                    href="#" title="' . $action['label'] . '"><i class="dashicons dashicons-' . esc_attr( $action['icon'] ) . '"></i></button>';
-								}
-							} else {
-								echo '-';
-							}
-							?>
-                        </td>
+                        <td><?php echo esc_html( $item['ip'] ); ?></td>
+                        <td><?php echo ( is_null( $item['login'] ) ) ? '-' : esc_html( implode( ',', $item['login'] ) ); ?></td>
+                        <td><?php echo ( is_null( $item['count'] ) ) ? '-' : esc_html( $item['count'] ); ?></td>
+                        <td><?php echo ( is_null( $item['ttl'] ) ) ? '-' : esc_html( round( ( $item['ttl'] - time() ) / 60 ) ); ?></td>
                     </tr>
 				<?php endforeach; ?>
-			<?php else : ?>
+
+			<?php else: ?>
 				<?php if ( empty( $offset ) ) : ?>
                     <tr class="empty-row">
-                        <td colspan="100%"
-                            style="text-align: center"><?php _e( 'No events yet.', 'limit-login-attempts-reloaded' ); ?></td>
+                        <td colspan="4"
+                            style="text-align: center"><?php _e( 'No lockouts yet.', 'limit-login-attempts-reloaded' ); ?></td>
                     </tr>
 				<?php endif; ?>
 			<?php endif; ?>
 			<?php
 
 			wp_send_json_success( array(
-				'html'        => ob_get_clean(),
-				'offset'      => $log['offset'],
-				'total_items' => count( $log['items'] )
+				'html'   => ob_get_clean(),
+				'offset' => $lockouts['offset']
 			) );
 
+		} elseif ( intval( LimitLoginAttempts::$cloud_app->last_response_code ) >= 400 && intval( LimitLoginAttempts::$cloud_app->last_response_code ) < 500 ) {
+
+			$app_config = Config::get( 'app_config' );
+
+			wp_send_json_error( array(
+				'error_notice' => '<div class="llar-app-notice">
+                                        <p>' . $app_config['messages']['sync_error'] . '<br><br>' . sprintf( __( 'Meanwhile, the app falls over to the <a href="%s">default functionality</a>.', 'limit-login-attempts-reloaded' ), admin_url( 'options-general.php?page=limit-login-attempts&tab=logs-local' ) ) . '</p>
+                                    </div>'
+			) );
 		} else {
 
 			wp_send_json_error( array(
@@ -1029,101 +1077,53 @@ function app_load_log_callback() {
 	}
 
 
-/** Function strong_account_policies_callback() called by wp_ajax hooks: {'strong_account_policies'} **/
-/** Parameters found in function strong_account_policies_callback(): {"post": ["is_checklist"]} **/
-function strong_account_policies_callback() {
-
-	    if ( ! LimitLoginAttempts::$instance->has_capability ) {
-
-            wp_send_json_error( array() );
-        }
-
-        check_ajax_referer( 'llar-strong-account-policies', 'sec' );
-
-        $is_checklist = sanitize_text_field( trim( $_POST['is_checklist'] ) );
-
-        Config::update( 'checklist', $is_checklist );
-
-        wp_send_json_success();
-    }
-
-
-/** Function app_log_action_callback() called by wp_ajax hooks: {'app_log_action'} **/
-/** Parameters found in function app_log_action_callback(): {"post": ["method", "params"]} **/
-function app_log_action_callback() {
+/** Function subscribe_email_callback() called by wp_ajax hooks: {'subscribe_email'} **/
+/** Parameters found in function subscribe_email_callback(): {"post": ["email", "is_subscribe_yes"]} **/
+function subscribe_email_callback() {
 
 		$this->check_user_capabilities();
 
-		check_ajax_referer( 'llar-app-log', 'sec' );
+		check_ajax_referer( 'llar-subscribe-email', 'sec' );
 
-		if ( ! empty( $_POST['method'] ) && ! empty( $_POST['params'] ) ) {
+		$email            = sanitize_text_field( trim( $_POST['email'] ) );
+		$is_subscribe_yes = sanitize_text_field( $_POST['is_subscribe_yes'] ) === 'true';
+		$admin_email   = ( ! is_multisite() ) ? get_option( 'admin_email' ) : get_site_option( 'admin_email' );
 
-			$method = sanitize_text_field( $_POST['method'] );
-			$params = (array) $_POST['params'];
+		if ( ! empty( $email ) && is_email( $email ) ) {
 
-			if ( ! in_array( $method, array( 'lockout/delete', 'acl/create', 'acl/delete' ) ) ) {
+			Config::update( 'admin_notify_email', $email );
+			Config::update( 'lockout_notify', 'email' );
 
-				wp_send_json_error( array(
-					'msg' => 'Wrong method.'
+			if ( $is_subscribe_yes ) {
+				$response = Http::post( 'https://api.limitloginattempts.com/my/key', array(
+					'data' => array(
+						'email' => $email
+					)
 				) );
+
+				if ( !empty( $response['error'] ) ) {
+
+					wp_send_json_error( $response['error'] );
+				} else {
+
+					$response_body = json_decode( $response['data'], true );
+
+					if ( ! empty( $response_body['key'] ) ) {
+						Config::update( 'cloud_key', $response_body['key'] );
+					}
+				}
 			}
 
-			if ( $response = LimitLoginAttempts::$cloud_app->request( $method, 'post', $params ) ) {
+			wp_send_json_success( array( 'email' => $email, 'is_subscribe_yes' => $is_subscribe_yes ) );
 
-				wp_send_json_success( array(
-					'msg' => $response['message']
-				) );
+		} else if ( empty( $email ) ) {
+			Config::update( 'admin_notify_email', $admin_email );
+			Config::update( 'lockout_notify', '' );
 
-			} else {
-
-				wp_send_json_error( array(
-					'msg' => 'The endpoint is not responding. Please contact your app provider to settle that.'
-				) );
-			}
+			wp_send_json_success( array( 'email' => $admin_email, 'is_subscribe_yes' => '' ) );
 		}
 
-		wp_send_json_error( array(
-			'msg' => 'Wrong App id.'
-		) );
-	}
-
-
-/** Function app_setup_callback() called by wp_ajax hooks: {'app_setup'} **/
-/** Parameters found in function app_setup_callback(): {"post": ["code"]} **/
-function app_setup_callback() {
-
-		$this->check_user_capabilities();
-
-		check_ajax_referer( 'llar-app-setup', 'sec' );
-
-		if ( ! empty( $_POST['code'] ) ) {
-
-			$setup_code = sanitize_text_field( $_POST['code'] );
-
-			if ( $key_result = CloudApp::activate_license_key( $setup_code ) ) {
-
-			    if ( $key_result['success'] ) {
-
-				    wp_send_json_success( array(
-					    'msg' => ( $key_result['app_config']['messages']['setup_success'] )
-				    ) );
-                } else {
-
-				    wp_send_json_error( array(
-					    'msg' => ( $key_result['error'] )
-				    ) );
-                }
-            } else {
-
-                wp_send_json_error( array(
-                    'msg' => $key_result['error']
-                ) );
-            }
-		}
-
-		wp_send_json_error( array(
-			'msg' => __( 'Please specify the Setup Code', 'limit-login-attempts-reloaded' )
-		) );
+		wp_send_json_error( array( 'email' => $email, 'is_subscribe_yes' => $is_subscribe_yes ) );
 	}
 
 
@@ -1146,11 +1146,11 @@ function block_by_country_callback() {
     }
 
 
-/** Function dismiss_onboarding_popup_callback() called by wp_ajax hooks: {'dismiss_onboarding_popup'} **/
-/** No params detected :-/ **/
+/** Function app_config_save_callback() called by wp_ajax hooks: {'app_config_save'} **/
+/** No function found :-/ **/
 
 
-/** Function ajax_generate_rescue_codes() called by wp_ajax hooks: {'llar_mfa_generate_rescue_codes'} **/
+/** Function close_premium_message() called by wp_ajax hooks: {'close_premium_message'} **/
 /** No params detected :-/ **/
 
 

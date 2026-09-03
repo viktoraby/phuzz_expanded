@@ -5,13 +5,9 @@
 *Found functions:3
 *Extracted functions:2
 *Total parameter names extracted: 1
-*Overview: {'ajax_action_{$action}': {'tablepress_{$action}'}, 'dismiss_notice_ajax_callback': {'fs_dismiss_notice_action_{$ajax_action_suffix}'}, '_toggle_debug_mode': {'fs_toggle_debug_mode'}}
+*Overview: {'dismiss_notice_ajax_callback': {'fs_dismiss_notice_action_{$ajax_action_suffix}'}, '_toggle_debug_mode': {'fs_toggle_debug_mode'}, 'ajax_action_{$action}': {'tablepress_{$action}'}}
 *
 ***/
-
-/** Function ajax_action_{$action}() called by wp_ajax hooks: {'tablepress_{$action}'} **/
-/** No function found :-/ **/
-
 
 /** Function dismiss_notice_ajax_callback() called by wp_ajax hooks: {'fs_dismiss_notice_action_{$ajax_action_suffix}'} **/
 /** Parameters found in function dismiss_notice_ajax_callback(): {"post": ["message_id"]} **/
@@ -28,5 +24,9 @@ function dismiss_notice_ajax_callback() {
 
 /** Function _toggle_debug_mode() called by wp_ajax hooks: {'fs_toggle_debug_mode'} **/
 /** No params detected :-/ **/
+
+
+/** Function ajax_action_{$action}() called by wp_ajax hooks: {'tablepress_{$action}'} **/
+/** No function found :-/ **/
 
 

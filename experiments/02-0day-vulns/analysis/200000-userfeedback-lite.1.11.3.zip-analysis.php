@@ -5,27 +5,19 @@
 *Found functions:20
 *Extracted functions:20
 *Total parameter names extracted: 2
-*Overview: {'userfeedback_validate_settings_blurb': {'userfeedback_validate_settings_blurb'}, 'userfeedback_ajax_vue_remove_notice': {'userfeedback_ajax_vue_remove_notice'}, 'userfeedback_install_plugin': {'userfeedback_install_plugin'}, 'userfeedback_ajax_dismiss_notice': {'userfeedback_ajax_dismiss_notice'}, 'userfeedback_ajax_get_addons': {'userfeedback_get_addons'}, 'userfeedback_vue_onboarding_step': {'userfeedback_vue_onboarding_step'}, 'userfeedback_onboarding_drop_opt_in': {'userfeedback_vue_onboarding_drip_opt_in'}, 'userfeedback_mark_admin_menu_tooltip_hidden': {'userfeedback_hide_admin_menu_tooltip'}, 'userfeedback_ajax_deactivate_addon': {'userfeedback_deactivate_addon'}, 'generate_connect_url': {'userfeedback_connect_url'}, 'userfeedback_ajax_activate_addon': {'userfeedback_activate_addon'}, 'userfeedback_ajax_install_addon': {'userfeedback_install_addon'}, 'userfeedback_activate_plugin': {'userfeedback_activate_plugin'}, 'review_dismiss': {'userfeedback_review_dismiss'}, 'userfeedback_get_plugins': {'userfeedback_get_plugins'}, 'process': {'nopriv_userfeedback_connect_process'}, 'send_test_email': {'userfeedback_send_test_summary_email'}, 'userfeedback_complete_onboarding': {'userfeedback_vue_onboarding_complete'}, 'userfeedback_dismiss_settings_blurb': {'userfeedback_dismiss_settings_blurb'}, 'userfeedback_ajax_vue_remove_wp_notice': {'userfeedback_ajax_vue_remove_wp_notice'}}
+*Overview: {'userfeedback_install_plugin': {'userfeedback_install_plugin'}, 'userfeedback_ajax_deactivate_addon': {'userfeedback_deactivate_addon'}, 'userfeedback_ajax_activate_addon': {'userfeedback_activate_addon'}, 'userfeedback_vue_onboarding_step': {'userfeedback_vue_onboarding_step'}, 'userfeedback_dismiss_settings_blurb': {'userfeedback_dismiss_settings_blurb'}, 'userfeedback_activate_plugin': {'userfeedback_activate_plugin'}, 'generate_connect_url': {'userfeedback_connect_url'}, 'userfeedback_onboarding_drop_opt_in': {'userfeedback_vue_onboarding_drip_opt_in'}, 'userfeedback_ajax_vue_remove_wp_notice': {'userfeedback_ajax_vue_remove_wp_notice'}, 'userfeedback_ajax_install_addon': {'userfeedback_install_addon'}, 'send_test_email': {'userfeedback_send_test_summary_email'}, 'process': {'nopriv_userfeedback_connect_process'}, 'userfeedback_ajax_vue_remove_notice': {'userfeedback_ajax_vue_remove_notice'}, 'userfeedback_complete_onboarding': {'userfeedback_vue_onboarding_complete'}, 'userfeedback_ajax_get_addons': {'userfeedback_get_addons'}, 'userfeedback_ajax_dismiss_notice': {'userfeedback_ajax_dismiss_notice'}, 'userfeedback_validate_settings_blurb': {'userfeedback_validate_settings_blurb'}, 'userfeedback_get_plugins': {'userfeedback_get_plugins'}, 'review_dismiss': {'userfeedback_review_dismiss'}, 'userfeedback_mark_admin_menu_tooltip_hidden': {'userfeedback_hide_admin_menu_tooltip'}}
 *
 ***/
-
-/** Function userfeedback_validate_settings_blurb() called by wp_ajax hooks: {'userfeedback_validate_settings_blurb'} **/
-/** No params detected :-/ **/
-
-
-/** Function userfeedback_ajax_vue_remove_notice() called by wp_ajax hooks: {'userfeedback_ajax_vue_remove_notice'} **/
-/** No params detected :-/ **/
-
 
 /** Function userfeedback_install_plugin() called by wp_ajax hooks: {'userfeedback_install_plugin'} **/
 /** No params detected :-/ **/
 
 
-/** Function userfeedback_ajax_dismiss_notice() called by wp_ajax hooks: {'userfeedback_ajax_dismiss_notice'} **/
+/** Function userfeedback_ajax_deactivate_addon() called by wp_ajax hooks: {'userfeedback_deactivate_addon'} **/
 /** No params detected :-/ **/
 
 
-/** Function userfeedback_ajax_get_addons() called by wp_ajax hooks: {'userfeedback_get_addons'} **/
+/** Function userfeedback_ajax_activate_addon() called by wp_ajax hooks: {'userfeedback_activate_addon'} **/
 /** No params detected :-/ **/
 
 
@@ -43,15 +35,11 @@ function userfeedback_vue_onboarding_step() {
 }
 
 
-/** Function userfeedback_onboarding_drop_opt_in() called by wp_ajax hooks: {'userfeedback_vue_onboarding_drip_opt_in'} **/
+/** Function userfeedback_dismiss_settings_blurb() called by wp_ajax hooks: {'userfeedback_dismiss_settings_blurb'} **/
 /** No params detected :-/ **/
 
 
-/** Function userfeedback_mark_admin_menu_tooltip_hidden() called by wp_ajax hooks: {'userfeedback_hide_admin_menu_tooltip'} **/
-/** No params detected :-/ **/
-
-
-/** Function userfeedback_ajax_deactivate_addon() called by wp_ajax hooks: {'userfeedback_deactivate_addon'} **/
+/** Function userfeedback_activate_plugin() called by wp_ajax hooks: {'userfeedback_activate_plugin'} **/
 /** No params detected :-/ **/
 
 
@@ -59,7 +47,11 @@ function userfeedback_vue_onboarding_step() {
 /** No params detected :-/ **/
 
 
-/** Function userfeedback_ajax_activate_addon() called by wp_ajax hooks: {'userfeedback_activate_addon'} **/
+/** Function userfeedback_onboarding_drop_opt_in() called by wp_ajax hooks: {'userfeedback_vue_onboarding_drip_opt_in'} **/
+/** No params detected :-/ **/
+
+
+/** Function userfeedback_ajax_vue_remove_wp_notice() called by wp_ajax hooks: {'userfeedback_ajax_vue_remove_wp_notice'} **/
 /** No params detected :-/ **/
 
 
@@ -67,7 +59,35 @@ function userfeedback_vue_onboarding_step() {
 /** No params detected :-/ **/
 
 
-/** Function userfeedback_activate_plugin() called by wp_ajax hooks: {'userfeedback_activate_plugin'} **/
+/** Function send_test_email() called by wp_ajax hooks: {'userfeedback_send_test_summary_email'} **/
+/** No params detected :-/ **/
+
+
+/** Function process() called by wp_ajax hooks: {'nopriv_userfeedback_connect_process'} **/
+/** No params detected :-/ **/
+
+
+/** Function userfeedback_ajax_vue_remove_notice() called by wp_ajax hooks: {'userfeedback_ajax_vue_remove_notice'} **/
+/** No params detected :-/ **/
+
+
+/** Function userfeedback_complete_onboarding() called by wp_ajax hooks: {'userfeedback_vue_onboarding_complete'} **/
+/** No params detected :-/ **/
+
+
+/** Function userfeedback_ajax_get_addons() called by wp_ajax hooks: {'userfeedback_get_addons'} **/
+/** No params detected :-/ **/
+
+
+/** Function userfeedback_ajax_dismiss_notice() called by wp_ajax hooks: {'userfeedback_ajax_dismiss_notice'} **/
+/** No params detected :-/ **/
+
+
+/** Function userfeedback_validate_settings_blurb() called by wp_ajax hooks: {'userfeedback_validate_settings_blurb'} **/
+/** No params detected :-/ **/
+
+
+/** Function userfeedback_get_plugins() called by wp_ajax hooks: {'userfeedback_get_plugins'} **/
 /** No params detected :-/ **/
 
 
@@ -103,27 +123,7 @@ function review_dismiss() {
 	}
 
 
-/** Function userfeedback_get_plugins() called by wp_ajax hooks: {'userfeedback_get_plugins'} **/
-/** No params detected :-/ **/
-
-
-/** Function process() called by wp_ajax hooks: {'nopriv_userfeedback_connect_process'} **/
-/** No params detected :-/ **/
-
-
-/** Function send_test_email() called by wp_ajax hooks: {'userfeedback_send_test_summary_email'} **/
-/** No params detected :-/ **/
-
-
-/** Function userfeedback_complete_onboarding() called by wp_ajax hooks: {'userfeedback_vue_onboarding_complete'} **/
-/** No params detected :-/ **/
-
-
-/** Function userfeedback_dismiss_settings_blurb() called by wp_ajax hooks: {'userfeedback_dismiss_settings_blurb'} **/
-/** No params detected :-/ **/
-
-
-/** Function userfeedback_ajax_vue_remove_wp_notice() called by wp_ajax hooks: {'userfeedback_ajax_vue_remove_wp_notice'} **/
+/** Function userfeedback_mark_admin_menu_tooltip_hidden() called by wp_ajax hooks: {'userfeedback_hide_admin_menu_tooltip'} **/
 /** No params detected :-/ **/
 
 

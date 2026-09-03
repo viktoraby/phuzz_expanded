@@ -5,9 +5,13 @@
 *Found functions:3
 *Extracted functions:3
 *Total parameter names extracted: 1
-*Overview: {'api_crop': {'coblocks_crop_settings'}, 'design_endpoint_ajax': {'site_design_update_design_style'}, 'get_original_image': {'coblocks_crop_settings_original_image'}}
+*Overview: {'get_original_image': {'coblocks_crop_settings_original_image'}, 'api_crop': {'coblocks_crop_settings'}, 'design_endpoint_ajax': {'site_design_update_design_style'}}
 *
 ***/
+
+/** Function get_original_image() called by wp_ajax hooks: {'coblocks_crop_settings_original_image'} **/
+/** No params detected :-/ **/
+
 
 /** Function api_crop() called by wp_ajax hooks: {'coblocks_crop_settings'} **/
 /** Parameters found in function api_crop(): {"post": ["id", "cropX", "cropY", "cropWidth", "cropHeight", "cropRotation"]} **/
@@ -70,10 +74,6 @@ function api_crop() {
 
 
 /** Function design_endpoint_ajax() called by wp_ajax hooks: {'site_design_update_design_style'} **/
-/** No params detected :-/ **/
-
-
-/** Function get_original_image() called by wp_ajax hooks: {'coblocks_crop_settings_original_image'} **/
 /** No params detected :-/ **/
 
 

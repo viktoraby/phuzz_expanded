@@ -5,7 +5,7 @@
 *Found functions:4
 *Extracted functions:4
 *Total parameter names extracted: 3
-*Overview: {'ajax_aal_promotion_dismiss': {'aal_promotion_dismiss'}, 'ajax_aal_promotion_campaign': {'aal_promotion_campaign'}, 'ajax_aal_get_properties': {'aal_get_properties'}, 'ajax_aal_reset_items': {'aal_reset_items'}}
+*Overview: {'ajax_aal_promotion_dismiss': {'aal_promotion_dismiss'}, 'ajax_aal_promotion_campaign': {'aal_promotion_campaign'}, 'ajax_aal_reset_items': {'aal_reset_items'}, 'ajax_aal_get_properties': {'aal_get_properties'}}
 *
 ***/
 
@@ -63,6 +63,10 @@ function ajax_aal_promotion_campaign() {
 	}
 
 
+/** Function ajax_aal_reset_items() called by wp_ajax hooks: {'aal_reset_items'} **/
+/** No params detected :-/ **/
+
+
 /** Function ajax_aal_get_properties() called by wp_ajax hooks: {'aal_get_properties'} **/
 /** Parameters found in function ajax_aal_get_properties(): {"request": ["action_category"]} **/
 function ajax_aal_get_properties() {
@@ -80,9 +84,5 @@ function ajax_aal_get_properties() {
 
 		wp_send_json_error();
 	}
-
-
-/** Function ajax_aal_reset_items() called by wp_ajax hooks: {'aal_reset_items'} **/
-/** No params detected :-/ **/
 
 

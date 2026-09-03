@@ -5,12 +5,47 @@
 *Found functions:4
 *Extracted functions:4
 *Total parameter names extracted: 3
-*Overview: {'loginpress_handle_notification_dismiss': {'dismiss_notification'}, 'ajax_resend_verification_email': {'wpb_sdk_resend_verification_email'}, 'remote_get_notice_ajax': {'rdn_fetch_notifications'}, 'ajax_dismiss_verification_notice': {'wpb_sdk_dismiss_verification_notice'}}
+*Overview: {'remote_get_notice_ajax': {'rdn_fetch_notifications'}, 'ajax_resend_verification_email': {'wpb_sdk_resend_verification_email'}, 'ajax_dismiss_verification_notice': {'wpb_sdk_dismiss_verification_notice'}, 'loginpress_handle_notification_dismiss': {'dismiss_notification'}}
 *
 ***/
 
-/** Function loginpress_handle_notification_dismiss() called by wp_ajax hooks: {'dismiss_notification'} **/
-/** No params detected :-/ **/
+/** Function remote_get_notice_ajax() called by wp_ajax hooks: {'rdn_fetch_notifications'} **/
+/** Parameters found in function remote_get_notice_ajax(): {"post": ["notices"]} **/
+function remote_get_notice_ajax() {
+			check_ajax_referer( 'rdn_fetch_notifications', 'nonce' );
+
+			// Transient set for 1 week.
+			set_transient( 'loginpress_rdn_fetch_notifications', 'rdn_fetch_notifications', 604800 );
+
+			if ( isset( $_POST['notices'] ) ) {
+				$notices = sanitize_text_field( wp_unslash( $_POST['notices'] ) );
+			} else {
+				echo 'No notice ID';
+				die();
+			}
+
+			if ( ! is_array( $notices ) ) {
+				$notices = array( $notices );
+			}
+
+			foreach ( $notices as $notice_id ) {
+
+				$notification = $this->get_notification( $notice_id );
+				if ( false === $notification ) {
+					continue;
+				}
+				$rn = $this->remote_get_notification( $notification );
+
+				if ( is_wp_error( $rn ) ) {
+					echo esc_html( $rn->get_error_message() );
+				} else {
+					// Intentional JSON output for AJAX response.
+					echo wp_json_encode( $rn ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				}
+			}
+
+			die();
+		}
 
 
 /** Function ajax_resend_verification_email() called by wp_ajax hooks: {'wpb_sdk_resend_verification_email'} **/
@@ -69,45 +104,6 @@ function ajax_resend_verification_email() {
 	}
 
 
-/** Function remote_get_notice_ajax() called by wp_ajax hooks: {'rdn_fetch_notifications'} **/
-/** Parameters found in function remote_get_notice_ajax(): {"post": ["notices"]} **/
-function remote_get_notice_ajax() {
-			check_ajax_referer( 'rdn_fetch_notifications', 'nonce' );
-
-			// Transient set for 1 week.
-			set_transient( 'loginpress_rdn_fetch_notifications', 'rdn_fetch_notifications', 604800 );
-
-			if ( isset( $_POST['notices'] ) ) {
-				$notices = sanitize_text_field( wp_unslash( $_POST['notices'] ) );
-			} else {
-				echo 'No notice ID';
-				die();
-			}
-
-			if ( ! is_array( $notices ) ) {
-				$notices = array( $notices );
-			}
-
-			foreach ( $notices as $notice_id ) {
-
-				$notification = $this->get_notification( $notice_id );
-				if ( false === $notification ) {
-					continue;
-				}
-				$rn = $this->remote_get_notification( $notification );
-
-				if ( is_wp_error( $rn ) ) {
-					echo esc_html( $rn->get_error_message() );
-				} else {
-					// Intentional JSON output for AJAX response.
-					echo wp_json_encode( $rn ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-				}
-			}
-
-			die();
-		}
-
-
 /** Function ajax_dismiss_verification_notice() called by wp_ajax hooks: {'wpb_sdk_dismiss_verification_notice'} **/
 /** Parameters found in function ajax_dismiss_verification_notice(): {"post": ["slug"]} **/
 function ajax_dismiss_verification_notice() {
@@ -133,5 +129,9 @@ function ajax_dismiss_verification_notice() {
 		}
 		wp_die();
 	}
+
+
+/** Function loginpress_handle_notification_dismiss() called by wp_ajax hooks: {'dismiss_notification'} **/
+/** No params detected :-/ **/
 
 

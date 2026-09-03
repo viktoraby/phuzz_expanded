@@ -5,63 +5,9 @@
 *Found functions:4
 *Extracted functions:4
 *Total parameter names extracted: 4
-*Overview: {'send_plugin_deactivate_feedback': {'uds_plugin_deactivate_feedback'}, 'activate_theme': {'suremails-activate_theme'}, 'handle_activate_plugin': {'suremails-activate_plugin'}, 'dismiss_notice': {'astra-notice-dismiss'}}
+*Overview: {'activate_theme': {'suremails-activate_theme'}, 'send_plugin_deactivate_feedback': {'uds_plugin_deactivate_feedback'}, 'handle_activate_plugin': {'suremails-activate_plugin'}, 'dismiss_notice': {'astra-notice-dismiss'}}
 *
 ***/
-
-/** Function send_plugin_deactivate_feedback() called by wp_ajax hooks: {'uds_plugin_deactivate_feedback'} **/
-/** Parameters found in function send_plugin_deactivate_feedback(): {"post": ["reason", "feedback", "referer", "version", "source"]} **/
-function send_plugin_deactivate_feedback() {
-
-			$response_data = array( 'message' => __( 'Sorry, you are not allowed to do this operation.' ) );
-
-			/**
-			 * Check permission
-			 */
-			if ( ! current_user_can( 'manage_options' ) ) {
-				wp_send_json_error( $response_data );
-			}
-
-			/**
-			 * Nonce verification
-			 */
-			if ( ! check_ajax_referer( 'uds_plugin_deactivate_feedback', 'security', false ) ) {
-				$response_data = array( 'message' => __( 'Nonce validation failed' ) );
-				wp_send_json_error( $response_data );
-			}
-
-			$feedback_data = array(
-				'reason'      => isset( $_POST['reason'] ) ? sanitize_text_field( wp_unslash( $_POST['reason'] ) ) : '',
-				'feedback'    => isset( $_POST['feedback'] ) ? sanitize_text_field( wp_unslash( $_POST['feedback'] ) ) : '',
-				'domain_name' => isset( $_POST['referer'] ) ? sanitize_text_field( wp_unslash( $_POST['referer'] ) ) : '',
-				'version'     => isset( $_POST['version'] ) ? sanitize_text_field( wp_unslash( $_POST['version'] ) ) : '',
-				'plugin'      => isset( $_POST['source'] ) ? sanitize_text_field( wp_unslash( $_POST['source'] ) ) : '',
-			);
-
-			$api_args = array(
-				'body'    => wp_json_encode( $feedback_data ),
-				'headers' => BSF_Analytics_Helper::get_api_headers(),
-				'timeout' => 15, //phpcs:ignore WordPressVIPMinimum.Performance.RemoteRequestTimeout.timeout_timeout
-			);
-
-			$target_url = BSF_Analytics_Helper::get_api_url() . self::$feedback_api_endpoint;
-
-			$response = wp_safe_remote_post( $target_url, $api_args );
-
-			$has_errors = BSF_Analytics_Helper::is_api_error( $response );
-
-			if ( $has_errors['error'] ) {
-				wp_send_json_error(
-					array(
-						'success' => false,
-						'message' => $has_errors['error_message'],
-					)
-				);
-			}
-
-			wp_send_json_success();
-		}
-
 
 /** Function activate_theme() called by wp_ajax hooks: {'suremails-activate_theme'} **/
 /** Parameters found in function activate_theme(): {"post": ["slug"]} **/
@@ -118,6 +64,60 @@ function activate_theme() {
 			]
 		);
 	}
+
+
+/** Function send_plugin_deactivate_feedback() called by wp_ajax hooks: {'uds_plugin_deactivate_feedback'} **/
+/** Parameters found in function send_plugin_deactivate_feedback(): {"post": ["reason", "feedback", "referer", "version", "source"]} **/
+function send_plugin_deactivate_feedback() {
+
+			$response_data = array( 'message' => __( 'Sorry, you are not allowed to do this operation.' ) );
+
+			/**
+			 * Check permission
+			 */
+			if ( ! current_user_can( 'manage_options' ) ) {
+				wp_send_json_error( $response_data );
+			}
+
+			/**
+			 * Nonce verification
+			 */
+			if ( ! check_ajax_referer( 'uds_plugin_deactivate_feedback', 'security', false ) ) {
+				$response_data = array( 'message' => __( 'Nonce validation failed' ) );
+				wp_send_json_error( $response_data );
+			}
+
+			$feedback_data = array(
+				'reason'      => isset( $_POST['reason'] ) ? sanitize_text_field( wp_unslash( $_POST['reason'] ) ) : '',
+				'feedback'    => isset( $_POST['feedback'] ) ? sanitize_text_field( wp_unslash( $_POST['feedback'] ) ) : '',
+				'domain_name' => isset( $_POST['referer'] ) ? sanitize_text_field( wp_unslash( $_POST['referer'] ) ) : '',
+				'version'     => isset( $_POST['version'] ) ? sanitize_text_field( wp_unslash( $_POST['version'] ) ) : '',
+				'plugin'      => isset( $_POST['source'] ) ? sanitize_text_field( wp_unslash( $_POST['source'] ) ) : '',
+			);
+
+			$api_args = array(
+				'body'    => wp_json_encode( $feedback_data ),
+				'headers' => BSF_Analytics_Helper::get_api_headers(),
+				'timeout' => 15, //phpcs:ignore WordPressVIPMinimum.Performance.RemoteRequestTimeout.timeout_timeout
+			);
+
+			$target_url = BSF_Analytics_Helper::get_api_url() . self::$feedback_api_endpoint;
+
+			$response = wp_safe_remote_post( $target_url, $api_args );
+
+			$has_errors = BSF_Analytics_Helper::is_api_error( $response );
+
+			if ( $has_errors['error'] ) {
+				wp_send_json_error(
+					array(
+						'success' => false,
+						'message' => $has_errors['error_message'],
+					)
+				);
+			}
+
+			wp_send_json_success();
+		}
 
 
 /** Function handle_activate_plugin() called by wp_ajax hooks: {'suremails-activate_plugin'} **/

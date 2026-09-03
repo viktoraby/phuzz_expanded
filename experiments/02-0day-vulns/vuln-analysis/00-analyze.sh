@@ -1,7 +1,7 @@
 #!/bin/bash
 set -x
 
-find ../phuzz-output -type f -name '*vulnerable*.json' | sort -u > vulnerable-endpoints.txt
+find ../configs -type f -name '*vulnerable*.json' | sort -u > vulnerable-endpoints.txt
 
 
 ## General info
@@ -49,7 +49,7 @@ python3 01-analyze-endpoints.py
 # 1187 candidates
 
 ## Get server-side debug info for SQLi and PathTraversal. There's no such info for open redirection and XSS, since these are detected on the client-side.
-find ../phuzz-output -type f -name 'SQLi-*.json' > vulnerable-candidates-debuginfo-SQLi.txt
-find ../phuzz-output -type f -name 'PathTraversal-*.json' > vulnerable-candidates-debuginfo-PathTraversal.txt
+find ../configs -type f -name 'SQLi-*.json' > vulnerable-candidates-debuginfo-SQLi.txt
+find ../configs -type f -name 'PathTraversal-*.json' > vulnerable-candidates-debuginfo-PathTraversal.txt
 
 python3 02-analyze-vulns.py

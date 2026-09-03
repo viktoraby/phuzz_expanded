@@ -5,151 +5,9 @@
 *Found functions:9
 *Extracted functions:9
 *Total parameter names extracted: 9
-*Overview: {'term_lang_choice': {'term_lang_choice'}, 'ajax_terms_not_translated': {'pll_terms_not_translated'}, 'ajax_update_post_rows': {'pll_update_post_rows'}, 'inline_edit_post': {'inline-save'}, 'deactivate_license': {'pll_deactivate_license'}, 'ajax_update_term_rows': {'pll_update_term_rows'}, 'ajax_posts_not_translated': {'pll_posts_not_translated'}, 'save_options': {'pll_save_options'}, 'post_lang_choice': {'post_lang_choice'}}
+*Overview: {'ajax_update_post_rows': {'pll_update_post_rows'}, 'ajax_update_term_rows': {'pll_update_term_rows'}, 'post_lang_choice': {'post_lang_choice'}, 'save_options': {'pll_save_options'}, 'term_lang_choice': {'term_lang_choice'}, 'ajax_posts_not_translated': {'pll_posts_not_translated'}, 'inline_edit_post': {'inline-save'}, 'deactivate_license': {'pll_deactivate_license'}, 'ajax_terms_not_translated': {'pll_terms_not_translated'}}
 *
 ***/
-
-/** Function term_lang_choice() called by wp_ajax hooks: {'term_lang_choice'} **/
-/** Parameters found in function term_lang_choice(): {"post": ["taxonomy", "post_type", "lang", "term_id"]} **/
-function term_lang_choice() {
-		check_ajax_referer( 'pll_language', '_pll_nonce' );
-
-		if ( ! isset( $_POST['taxonomy'], $_POST['post_type'], $_POST['lang'] ) ) {
-			wp_die( 0 );
-		}
-
-		$lang      = $this->model->get_language( sanitize_key( $_POST['lang'] ) );
-		$taxonomy  = sanitize_key( $_POST['taxonomy'] );
-		$post_type = sanitize_key( $_POST['post_type'] );
-
-		if ( empty( $lang ) || ! post_type_exists( $post_type ) || ! taxonomy_exists( $taxonomy ) ) {
-			wp_die( 0 );
-		}
-
-		if ( ! empty( $_POST['term_id'] ) ) {
-			$term = get_term( (int) $_POST['term_id'], $taxonomy ); // phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UnusedVariable
-			$term = $term instanceof WP_Term ? $term : null;
-		}
-
-		ob_start();
-		include __DIR__ . '/view-translations-term.php';
-		$x = new WP_Ajax_Response( array( 'what' => 'translations', 'data' => ob_get_contents() ) );
-		ob_end_clean();
-
-		// Parent dropdown list ( only for hierarchical taxonomies )
-		// $args copied from edit_tags.php except echo
-		if ( is_taxonomy_hierarchical( $taxonomy ) ) {
-			$args = array(
-				'hide_empty'       => 0,
-				'hide_if_empty'    => false,
-				'taxonomy'         => $taxonomy,
-				'name'             => 'parent',
-				'orderby'          => 'name',
-				'hierarchical'     => true,
-				'show_option_none' => __( 'None', 'polylang' ),
-				'echo'             => 0,
-			);
-			$x->Add( array( 'what' => 'parent', 'data' => wp_dropdown_categories( $args ) ) );
-		}
-
-		// Tag cloud
-		// Tests copied from edit_tags.php
-		else {
-			$tax = get_taxonomy( $taxonomy );
-			if ( ! empty( $tax ) && ! is_null( $tax->labels->popular_items ) ) {
-				$args = array( 'taxonomy' => $taxonomy, 'echo' => false );
-				if ( current_user_can( $tax->cap->edit_terms ) ) {
-					$args = array_merge( $args, array( 'link' => 'edit' ) );
-				}
-
-				$tag_cloud = wp_tag_cloud( $args );
-
-				if ( ! empty( $tag_cloud ) ) {
-					/** @phpstan-var non-falsy-string $tag_cloud */
-					$html = sprintf( '<div class="tagcloud"><h2>%1$s</h2>%2$s</div>', esc_html( $tax->labels->popular_items ), $tag_cloud );
-					$x->Add( array( 'what' => 'tag_cloud', 'data' => $html ) );
-				}
-			}
-		}
-
-		// Flag
-		$x->Add( array( 'what' => 'flag', 'data' => empty( $lang->flag ) ? esc_html( $lang->slug ) : $lang->flag ) );
-
-		$x->send();
-	}
-
-
-/** Function ajax_terms_not_translated() called by wp_ajax hooks: {'pll_terms_not_translated'} **/
-/** Parameters found in function ajax_terms_not_translated(): {"get": ["term", "post_type", "taxonomy", "term_language", "translation_language", "term_id"]} **/
-function ajax_terms_not_translated() {
-		check_ajax_referer( 'pll_language', '_pll_nonce' );
-
-		if ( ! isset( $_GET['term'], $_GET['post_type'], $_GET['taxonomy'], $_GET['term_language'], $_GET['translation_language'] ) ) {
-			wp_die( 0 );
-		}
-
-		/** @var string */
-		$s = wp_unslash( $_GET['term'] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
-		$post_type = sanitize_key( $_GET['post_type'] );
-		$taxonomy  = sanitize_key( $_GET['taxonomy'] );
-
-		if ( ! post_type_exists( $post_type ) || ! taxonomy_exists( $taxonomy ) ) {
-			wp_die( 0 );
-		}
-
-		$term_language = $this->model->get_language( sanitize_key( $_GET['term_language'] ) );
-		$translation_language = $this->model->get_language( sanitize_key( $_GET['translation_language'] ) );
-
-		$terms  = array();
-		$return = array();
-
-		// Add current translation in list.
-		// Not in add term as term_id is not set.
-		if ( isset( $_GET['term_id'] ) && 'undefined' !== $_GET['term_id'] && $term_id = $this->model->term->get_translation( (int) $_GET['term_id'], $translation_language ) ) {
-			$terms = array( get_term( $term_id, $taxonomy ) );
-		}
-
-		// It is more efficient to use one common query for all languages as soon as there are more than 2.
-		$all_terms = get_terms( array( 'taxonomy' => $taxonomy, 'hide_empty' => false, 'lang' => '', 'name__like' => $s ) );
-		if ( is_array( $all_terms ) ) {
-			foreach ( $all_terms as $term ) {
-				$lang = $this->model->term->get_language( $term->term_id );
-
-				if ( $lang && $lang->slug == $translation_language->slug && ! $this->model->term->get_translation( $term->term_id, $term_language ) ) {
-					$terms[] = $term;
-				}
-			}
-		}
-
-		// Format the ajax response.
-		foreach ( $terms as $term ) {
-			if ( ! $term instanceof WP_Term ) {
-				continue;
-			}
-
-			$parents_list = get_term_parents_list(
-				$term->term_id,
-				$term->taxonomy,
-				array(
-					'separator' => ' > ',
-					'link'      => false,
-				)
-			);
-
-			if ( ! is_string( $parents_list ) ) {
-				continue;
-			}
-
-			$return[] = array(
-				'id'    => $term->term_id,
-				'value' => rtrim( $parents_list, ' >' ), // Trim the separator added at the end by WP.
-				'link'  => $this->links->get_edit_term_link_html( $term, $post_type ),
-			);
-		}
-
-		wp_die( wp_json_encode( $return ) );
-	}
-
 
 /** Function ajax_update_post_rows() called by wp_ajax hooks: {'pll_update_post_rows'} **/
 /** Parameters found in function ajax_update_post_rows(): {"post": ["post_type", "post_id", "screen", "translations"]} **/
@@ -232,40 +90,6 @@ function ajax_update_post_rows(): void {
 	}
 
 
-/** Function inline_edit_post() called by wp_ajax hooks: {'inline-save'} **/
-/** Parameters found in function inline_edit_post(): {"post": ["post_ID", "inline_lang_choice"], "request": ["_inline_edit"]} **/
-function inline_edit_post() {
-		if ( ! isset( $_POST['post_ID'], $_POST['inline_lang_choice'], $_REQUEST['_inline_edit'] ) ) {
-			return;
-		}
-
-		if ( ! wp_verify_nonce( $_REQUEST['_inline_edit'], 'inlineeditnonce' ) ) {
-			return;
-		}
-
-		$language = $this->model->get_language( sanitize_key( $_POST['inline_lang_choice'] ) );
-
-		if ( empty( $language ) ) {
-			return;
-		}
-
-		$user = Capabilities::get_user();
-		$user->can_translate_or_die( $language );
-
-		$post_id = (int) $_POST['post_ID'];
-
-		if ( ! $post_id || ! $user->has_cap( 'edit_post', $post_id ) ) {
-			return;
-		}
-
-		$this->model->post->set_language( $post_id, $language );
-	}
-
-
-/** Function deactivate_license() called by wp_ajax hooks: {'pll_deactivate_license'} **/
-/** No params detected :-/ **/
-
-
 /** Function ajax_update_term_rows() called by wp_ajax hooks: {'pll_update_term_rows'} **/
 /** Parameters found in function ajax_update_term_rows(): {"post": ["taxonomy", "term_id", "screen", "translations"]} **/
 function ajax_update_term_rows(): void {
@@ -342,86 +166,6 @@ function ajax_update_term_rows(): void {
 		}
 
 		$response->send();
-	}
-
-
-/** Function ajax_posts_not_translated() called by wp_ajax hooks: {'pll_posts_not_translated'} **/
-/** Parameters found in function ajax_posts_not_translated(): {"get": ["post_type", "post_language", "translation_language", "term", "pll_post_id"]} **/
-function ajax_posts_not_translated() {
-		check_ajax_referer( 'pll_language', '_pll_nonce' );
-
-		if ( ! isset( $_GET['post_type'], $_GET['post_language'], $_GET['translation_language'], $_GET['term'], $_GET['pll_post_id'] ) ) {
-			wp_die( 0 );
-		}
-
-		$post_type = sanitize_key( $_GET['post_type'] );
-
-		if ( ! post_type_exists( $post_type ) ) {
-			wp_die( 0 );
-		}
-
-		$term = wp_unslash( $_GET['term'] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
-
-		$post_language = $this->model->get_language( sanitize_key( $_GET['post_language'] ) );
-		$translation_language = $this->model->get_language( sanitize_key( $_GET['translation_language'] ) );
-
-		$return = array();
-
-		$untranslated_posts = $this->model->post->get_untranslated( $post_type, $post_language, $translation_language, $term );
-
-		// format output
-		foreach ( $untranslated_posts as $post ) {
-			$return[] = array(
-				'id'    => $post->ID,
-				'value' => $post->post_title,
-				'link'  => $this->links->get_edit_post_link_html( $post ),
-			);
-		}
-
-		// Add current translation in list
-		if ( $post_id = $this->model->post->get_translation( (int) $_GET['pll_post_id'], $translation_language ) ) {
-			$post = get_post( $post_id );
-
-			if ( ! empty( $post ) ) {
-				array_unshift(
-					$return,
-					array(
-						'id'    => $post_id,
-						'value' => $post->post_title,
-						'link'  => $this->links->get_edit_post_link_html( $post ),
-					)
-				);
-			}
-		}
-
-		wp_die( wp_json_encode( $return ) );
-	}
-
-
-/** Function save_options() called by wp_ajax hooks: {'pll_save_options'} **/
-/** Parameters found in function save_options(): {"post": ["module", "licenses"]} **/
-function save_options() {
-		check_ajax_referer( 'pll_options', '_pll_nonce' );
-		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_die( -1 );
-		}
-
-		if ( isset( $_POST['module'] ) && $this->module === $_POST['module'] && ! empty( $_POST['licenses'] ) ) {
-			$x = new WP_Ajax_Response();
-			foreach ( $this->items as $item ) {
-				if ( ! empty( $_POST['licenses'][ $item->id ] ) ) {
-					$updated_item = $item->activate_license( sanitize_key( $_POST['licenses'][ $item->id ] ) );
-					$x->Add( array( 'what' => 'license-update', 'data' => $item->id, 'supplemental' => array( 'html' => $this->get_row( $updated_item ) ) ) );
-				}
-			}
-
-			// Updated message
-			pll_add_notice( new WP_Error( 'settings_updated', __( 'Settings saved.', 'polylang' ), 'success' ) );
-			ob_start();
-			settings_errors( 'polylang' );
-			$x->Add( array( 'what' => 'success', 'data' => ob_get_clean() ) );
-			$x->send();
-		}
 	}
 
 
@@ -538,6 +282,262 @@ function post_lang_choice() {
 		$x->Add( array( 'what' => 'permalink', 'data' => get_sample_permalink_html( $post->ID ) ) );
 
 		$x->send();
+	}
+
+
+/** Function save_options() called by wp_ajax hooks: {'pll_save_options'} **/
+/** Parameters found in function save_options(): {"post": ["module", "licenses"]} **/
+function save_options() {
+		check_ajax_referer( 'pll_options', '_pll_nonce' );
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_die( -1 );
+		}
+
+		if ( isset( $_POST['module'] ) && $this->module === $_POST['module'] && ! empty( $_POST['licenses'] ) ) {
+			$x = new WP_Ajax_Response();
+			foreach ( $this->items as $item ) {
+				if ( ! empty( $_POST['licenses'][ $item->id ] ) ) {
+					$updated_item = $item->activate_license( sanitize_key( $_POST['licenses'][ $item->id ] ) );
+					$x->Add( array( 'what' => 'license-update', 'data' => $item->id, 'supplemental' => array( 'html' => $this->get_row( $updated_item ) ) ) );
+				}
+			}
+
+			// Updated message
+			pll_add_notice( new WP_Error( 'settings_updated', __( 'Settings saved.', 'polylang' ), 'success' ) );
+			ob_start();
+			settings_errors( 'polylang' );
+			$x->Add( array( 'what' => 'success', 'data' => ob_get_clean() ) );
+			$x->send();
+		}
+	}
+
+
+/** Function term_lang_choice() called by wp_ajax hooks: {'term_lang_choice'} **/
+/** Parameters found in function term_lang_choice(): {"post": ["taxonomy", "post_type", "lang", "term_id"]} **/
+function term_lang_choice() {
+		check_ajax_referer( 'pll_language', '_pll_nonce' );
+
+		if ( ! isset( $_POST['taxonomy'], $_POST['post_type'], $_POST['lang'] ) ) {
+			wp_die( 0 );
+		}
+
+		$lang      = $this->model->get_language( sanitize_key( $_POST['lang'] ) );
+		$taxonomy  = sanitize_key( $_POST['taxonomy'] );
+		$post_type = sanitize_key( $_POST['post_type'] );
+
+		if ( empty( $lang ) || ! post_type_exists( $post_type ) || ! taxonomy_exists( $taxonomy ) ) {
+			wp_die( 0 );
+		}
+
+		if ( ! empty( $_POST['term_id'] ) ) {
+			$term = get_term( (int) $_POST['term_id'], $taxonomy ); // phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UnusedVariable
+			$term = $term instanceof WP_Term ? $term : null;
+		}
+
+		ob_start();
+		include __DIR__ . '/view-translations-term.php';
+		$x = new WP_Ajax_Response( array( 'what' => 'translations', 'data' => ob_get_contents() ) );
+		ob_end_clean();
+
+		// Parent dropdown list ( only for hierarchical taxonomies )
+		// $args copied from edit_tags.php except echo
+		if ( is_taxonomy_hierarchical( $taxonomy ) ) {
+			$args = array(
+				'hide_empty'       => 0,
+				'hide_if_empty'    => false,
+				'taxonomy'         => $taxonomy,
+				'name'             => 'parent',
+				'orderby'          => 'name',
+				'hierarchical'     => true,
+				'show_option_none' => __( 'None', 'polylang' ),
+				'echo'             => 0,
+			);
+			$x->Add( array( 'what' => 'parent', 'data' => wp_dropdown_categories( $args ) ) );
+		}
+
+		// Tag cloud
+		// Tests copied from edit_tags.php
+		else {
+			$tax = get_taxonomy( $taxonomy );
+			if ( ! empty( $tax ) && ! is_null( $tax->labels->popular_items ) ) {
+				$args = array( 'taxonomy' => $taxonomy, 'echo' => false );
+				if ( current_user_can( $tax->cap->edit_terms ) ) {
+					$args = array_merge( $args, array( 'link' => 'edit' ) );
+				}
+
+				$tag_cloud = wp_tag_cloud( $args );
+
+				if ( ! empty( $tag_cloud ) ) {
+					/** @phpstan-var non-falsy-string $tag_cloud */
+					$html = sprintf( '<div class="tagcloud"><h2>%1$s</h2>%2$s</div>', esc_html( $tax->labels->popular_items ), $tag_cloud );
+					$x->Add( array( 'what' => 'tag_cloud', 'data' => $html ) );
+				}
+			}
+		}
+
+		// Flag
+		$x->Add( array( 'what' => 'flag', 'data' => empty( $lang->flag ) ? esc_html( $lang->slug ) : $lang->flag ) );
+
+		$x->send();
+	}
+
+
+/** Function ajax_posts_not_translated() called by wp_ajax hooks: {'pll_posts_not_translated'} **/
+/** Parameters found in function ajax_posts_not_translated(): {"get": ["post_type", "post_language", "translation_language", "term", "pll_post_id"]} **/
+function ajax_posts_not_translated() {
+		check_ajax_referer( 'pll_language', '_pll_nonce' );
+
+		if ( ! isset( $_GET['post_type'], $_GET['post_language'], $_GET['translation_language'], $_GET['term'], $_GET['pll_post_id'] ) ) {
+			wp_die( 0 );
+		}
+
+		$post_type = sanitize_key( $_GET['post_type'] );
+
+		if ( ! post_type_exists( $post_type ) ) {
+			wp_die( 0 );
+		}
+
+		$term = wp_unslash( $_GET['term'] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
+
+		$post_language = $this->model->get_language( sanitize_key( $_GET['post_language'] ) );
+		$translation_language = $this->model->get_language( sanitize_key( $_GET['translation_language'] ) );
+
+		$return = array();
+
+		$untranslated_posts = $this->model->post->get_untranslated( $post_type, $post_language, $translation_language, $term );
+
+		// format output
+		foreach ( $untranslated_posts as $post ) {
+			$return[] = array(
+				'id'    => $post->ID,
+				'value' => $post->post_title,
+				'link'  => $this->links->get_edit_post_link_html( $post ),
+			);
+		}
+
+		// Add current translation in list
+		if ( $post_id = $this->model->post->get_translation( (int) $_GET['pll_post_id'], $translation_language ) ) {
+			$post = get_post( $post_id );
+
+			if ( ! empty( $post ) ) {
+				array_unshift(
+					$return,
+					array(
+						'id'    => $post_id,
+						'value' => $post->post_title,
+						'link'  => $this->links->get_edit_post_link_html( $post ),
+					)
+				);
+			}
+		}
+
+		wp_die( wp_json_encode( $return ) );
+	}
+
+
+/** Function inline_edit_post() called by wp_ajax hooks: {'inline-save'} **/
+/** Parameters found in function inline_edit_post(): {"post": ["post_ID", "inline_lang_choice"], "request": ["_inline_edit"]} **/
+function inline_edit_post() {
+		if ( ! isset( $_POST['post_ID'], $_POST['inline_lang_choice'], $_REQUEST['_inline_edit'] ) ) {
+			return;
+		}
+
+		if ( ! wp_verify_nonce( $_REQUEST['_inline_edit'], 'inlineeditnonce' ) ) {
+			return;
+		}
+
+		$language = $this->model->get_language( sanitize_key( $_POST['inline_lang_choice'] ) );
+
+		if ( empty( $language ) ) {
+			return;
+		}
+
+		$user = Capabilities::get_user();
+		$user->can_translate_or_die( $language );
+
+		$post_id = (int) $_POST['post_ID'];
+
+		if ( ! $post_id || ! $user->has_cap( 'edit_post', $post_id ) ) {
+			return;
+		}
+
+		$this->model->post->set_language( $post_id, $language );
+	}
+
+
+/** Function deactivate_license() called by wp_ajax hooks: {'pll_deactivate_license'} **/
+/** No params detected :-/ **/
+
+
+/** Function ajax_terms_not_translated() called by wp_ajax hooks: {'pll_terms_not_translated'} **/
+/** Parameters found in function ajax_terms_not_translated(): {"get": ["term", "post_type", "taxonomy", "term_language", "translation_language", "term_id"]} **/
+function ajax_terms_not_translated() {
+		check_ajax_referer( 'pll_language', '_pll_nonce' );
+
+		if ( ! isset( $_GET['term'], $_GET['post_type'], $_GET['taxonomy'], $_GET['term_language'], $_GET['translation_language'] ) ) {
+			wp_die( 0 );
+		}
+
+		/** @var string */
+		$s = wp_unslash( $_GET['term'] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
+		$post_type = sanitize_key( $_GET['post_type'] );
+		$taxonomy  = sanitize_key( $_GET['taxonomy'] );
+
+		if ( ! post_type_exists( $post_type ) || ! taxonomy_exists( $taxonomy ) ) {
+			wp_die( 0 );
+		}
+
+		$term_language = $this->model->get_language( sanitize_key( $_GET['term_language'] ) );
+		$translation_language = $this->model->get_language( sanitize_key( $_GET['translation_language'] ) );
+
+		$terms  = array();
+		$return = array();
+
+		// Add current translation in list.
+		// Not in add term as term_id is not set.
+		if ( isset( $_GET['term_id'] ) && 'undefined' !== $_GET['term_id'] && $term_id = $this->model->term->get_translation( (int) $_GET['term_id'], $translation_language ) ) {
+			$terms = array( get_term( $term_id, $taxonomy ) );
+		}
+
+		// It is more efficient to use one common query for all languages as soon as there are more than 2.
+		$all_terms = get_terms( array( 'taxonomy' => $taxonomy, 'hide_empty' => false, 'lang' => '', 'name__like' => $s ) );
+		if ( is_array( $all_terms ) ) {
+			foreach ( $all_terms as $term ) {
+				$lang = $this->model->term->get_language( $term->term_id );
+
+				if ( $lang && $lang->slug == $translation_language->slug && ! $this->model->term->get_translation( $term->term_id, $term_language ) ) {
+					$terms[] = $term;
+				}
+			}
+		}
+
+		// Format the ajax response.
+		foreach ( $terms as $term ) {
+			if ( ! $term instanceof WP_Term ) {
+				continue;
+			}
+
+			$parents_list = get_term_parents_list(
+				$term->term_id,
+				$term->taxonomy,
+				array(
+					'separator' => ' > ',
+					'link'      => false,
+				)
+			);
+
+			if ( ! is_string( $parents_list ) ) {
+				continue;
+			}
+
+			$return[] = array(
+				'id'    => $term->term_id,
+				'value' => rtrim( $parents_list, ' >' ), // Trim the separator added at the end by WP.
+				'link'  => $this->links->get_edit_term_link_html( $term, $post_type ),
+			);
+		}
+
+		wp_die( wp_json_encode( $return ) );
 	}
 
 

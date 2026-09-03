@@ -5,11 +5,22 @@
 *Found functions:4
 *Extracted functions:4
 *Total parameter names extracted: 3
-*Overview: {'wordfence::ajax_lh_callback': {'wordfence_lh', 'nopriv_wordfence_lh'}, 'wordfence::ajax_doScan_callback': {'nopriv_wordfence_doScan', 'wordfence_doScan'}, 'wordfence::ajax_wafStatus_callback': {'nopriv_wordfence_wafStatus', 'wordfence_wafStatus'}, 'wordfence::ajax_testAjax_callback': {'nopriv_wordfence_testAjax', 'wordfence_testAjax'}}
+*Overview: {'wordfence::ajax_wafStatus_callback': {'nopriv_wordfence_wafStatus', 'wordfence_wafStatus'}, 'wordfence::ajax_lh_callback': {'nopriv_wordfence_lh', 'wordfence_lh'}, 'wordfence::ajax_testAjax_callback': {'nopriv_wordfence_testAjax', 'wordfence_testAjax'}, 'wordfence::ajax_doScan_callback': {'wordfence_doScan', 'nopriv_wordfence_doScan'}}
 *
 ***/
 
-/** Function wordfence::ajax_lh_callback() called by wp_ajax hooks: {'wordfence_lh', 'nopriv_wordfence_lh'} **/
+/** Function wordfence::ajax_wafStatus_callback() called by wp_ajax hooks: {'nopriv_wordfence_wafStatus', 'wordfence_wafStatus'} **/
+/** Parameters found in function wordfence::ajax_wafStatus_callback(): {"request": ["nonce"]} **/
+function ajax_wafStatus_callback() {
+		if (!empty($_REQUEST['nonce']) && hash_equals($_REQUEST['nonce'], wfConfig::get('wafStatusCallbackNonce', ''))) {
+			wfConfig::set('wafStatusCallbackNonce', '');
+			wfUtils::send_json(array('active' => WFWAF_AUTO_PREPEND, 'subdirectory' => WFWAF_SUBDIRECTORY_INSTALL));
+		}
+		wfUtils::send_json(false);
+	}
+
+
+/** Function wordfence::ajax_lh_callback() called by wp_ajax hooks: {'nopriv_wordfence_lh', 'wordfence_lh'} **/
 /** Parameters found in function wordfence::ajax_lh_callback(): {"server": ["HTTP_USER_AGENT"], "get": ["hid"]} **/
 function ajax_lh_callback(){
 		self::getLog()->canLogHit = false;
@@ -44,22 +55,11 @@ function ajax_lh_callback(){
 	}
 
 
-/** Function wordfence::ajax_doScan_callback() called by wp_ajax hooks: {'nopriv_wordfence_doScan', 'wordfence_doScan'} **/
+/** Function wordfence::ajax_testAjax_callback() called by wp_ajax hooks: {'nopriv_wordfence_testAjax', 'wordfence_testAjax'} **/
 /** No params detected :-/ **/
 
 
-/** Function wordfence::ajax_wafStatus_callback() called by wp_ajax hooks: {'nopriv_wordfence_wafStatus', 'wordfence_wafStatus'} **/
-/** Parameters found in function wordfence::ajax_wafStatus_callback(): {"request": ["nonce"]} **/
-function ajax_wafStatus_callback() {
-		if (!empty($_REQUEST['nonce']) && hash_equals($_REQUEST['nonce'], wfConfig::get('wafStatusCallbackNonce', ''))) {
-			wfConfig::set('wafStatusCallbackNonce', '');
-			wfUtils::send_json(array('active' => WFWAF_AUTO_PREPEND, 'subdirectory' => WFWAF_SUBDIRECTORY_INSTALL));
-		}
-		wfUtils::send_json(false);
-	}
-
-
-/** Function wordfence::ajax_testAjax_callback() called by wp_ajax hooks: {'nopriv_wordfence_testAjax', 'wordfence_testAjax'} **/
+/** Function wordfence::ajax_doScan_callback() called by wp_ajax hooks: {'wordfence_doScan', 'nopriv_wordfence_doScan'} **/
 /** No params detected :-/ **/
 
 

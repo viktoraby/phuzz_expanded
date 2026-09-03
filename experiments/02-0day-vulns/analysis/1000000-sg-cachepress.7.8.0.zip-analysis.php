@@ -5,11 +5,23 @@
 *Found functions:5
 *Extracted functions:5
 *Total parameter names extracted: 2
-*Overview: {'start_optimization': {'siteground_optimizer_start_webp_conversion', 'nopriv_siteground_optimizer_start_image_optimization', 'siteground_optimizer_start_image_optimization'}, 'purge_cache': {'admin_bar_purge_cache'}, 'hide_memcache_notice': {'dismiss_memcache_notice'}, 'hide_cache_plugins_notice': {'dismiss_cache_plugins_notice'}, 'hide_blocking_plugins_notice': {'dismiss_blocking_plugins_notice'}}
+*Overview: {'hide_cache_plugins_notice': {'dismiss_cache_plugins_notice'}, 'start_optimization': {'siteground_optimizer_start_webp_conversion', 'nopriv_siteground_optimizer_start_image_optimization', 'siteground_optimizer_start_image_optimization'}, 'hide_memcache_notice': {'dismiss_memcache_notice'}, 'hide_blocking_plugins_notice': {'dismiss_blocking_plugins_notice'}, 'purge_cache': {'admin_bar_purge_cache'}}
 *
 ***/
 
+/** Function hide_cache_plugins_notice() called by wp_ajax hooks: {'dismiss_cache_plugins_notice'} **/
+/** No params detected :-/ **/
+
+
 /** Function start_optimization() called by wp_ajax hooks: {'siteground_optimizer_start_webp_conversion', 'nopriv_siteground_optimizer_start_image_optimization', 'siteground_optimizer_start_image_optimization'} **/
+/** No params detected :-/ **/
+
+
+/** Function hide_memcache_notice() called by wp_ajax hooks: {'dismiss_memcache_notice'} **/
+/** No params detected :-/ **/
+
+
+/** Function hide_blocking_plugins_notice() called by wp_ajax hooks: {'dismiss_blocking_plugins_notice'} **/
 /** No params detected :-/ **/
 
 
@@ -37,17 +49,5 @@ function purge_cache() {
 		wp_safe_redirect( $_SERVER['HTTP_REFERER'] );
 		exit;
 	}
-
-
-/** Function hide_memcache_notice() called by wp_ajax hooks: {'dismiss_memcache_notice'} **/
-/** No params detected :-/ **/
-
-
-/** Function hide_cache_plugins_notice() called by wp_ajax hooks: {'dismiss_cache_plugins_notice'} **/
-/** No params detected :-/ **/
-
-
-/** Function hide_blocking_plugins_notice() called by wp_ajax hooks: {'dismiss_blocking_plugins_notice'} **/
-/** No params detected :-/ **/
 
 
