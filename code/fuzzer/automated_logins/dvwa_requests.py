@@ -3,6 +3,7 @@ import os
 
 import requests
 
+
 def main():
     s = requests.Session()
 

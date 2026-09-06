@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 
-import os
-import sys
 import json
-import subprocess
+import os
 import pprint
+import subprocess
+import sys
+from urllib.parse import parse_qsl, urlparse
+
 from phuzz import Phuzz
-from urllib.parse import urlparse, parse_qsl, urlunparse
 
 config_path = sys.argv[1]
 output = sys.argv[2]

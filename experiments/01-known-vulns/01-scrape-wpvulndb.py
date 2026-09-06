@@ -1,9 +1,10 @@
-import requests
+import json
+import random
 import string
 import time
-import random
 import traceback
-import json
+
+import requests
 from bs4 import BeautifulSoup
 
 BASEURL = "https://wpscan.com/plugins"
@@ -58,9 +59,9 @@ for category in categories:
 			page_id += 1
 			print("waiting before request to next page")
 			time.sleep(random.randint(5,10))
-		except NoResultsException as e:
+		except NoResultsException:
 			page_error = True
-		except Exception as e:
+		except Exception:
 			print("Error occurred")
 			traceback.print_exc()
 			time.sleep(random.randint(60,120))

@@ -1,6 +1,5 @@
 import json
 
-
 FILE="vulnerable-endpoints.txt"
 
 VULNTYPES={}
@@ -30,10 +29,9 @@ with open("vulnerable-endpoints-json-errors.txt","w") as f:
 	for error in ERRORS:
 		f.write(f"{error}\n")
 
-for vulntype in VULNTYPES.keys():
+for vulntype in VULNTYPES:
 	with open(f"vulnerable-endpoints-{vulntype}.txt","w") as f:
 		f.write(f"# {vulntype} / Files: {len(VULNTYPES[vulntype])} / Candidates total: {VULN_COUNTER[vulntype]}\n")
-		for vuln in sorted(VULNTYPES[vulntype]):
-			f.write(f"{vuln}\n")
+		f.writelines(f"{vuln}\n" for vuln in sorted(VULNTYPES[vulntype]))
 
 print(f"Total candidates: {ALL_CANDIDATES_COUNTER}")

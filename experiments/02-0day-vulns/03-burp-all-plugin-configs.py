@@ -1,10 +1,9 @@
+import glob
 import os
-import re
 import shutil
 import subprocess
-import glob
-import sys
 import time
+
 import requests
 
 
@@ -65,8 +64,8 @@ def main():
 
     for leaf_dir in leaf_dirs:
         print("Leaf dir is: ", leaf_dir)
-        docker_composes = glob.glob(f"docker-compose*.yml", root_dir=leaf_dir)
-        fuzzer_configs = glob.glob(f"fuzzer-config*.json", root_dir=leaf_dir)
+        docker_composes = glob.glob("docker-compose*.yml", root_dir=leaf_dir)
+        fuzzer_configs = glob.glob("fuzzer-config*.json", root_dir=leaf_dir)
 
         fuzzed_functions = list(map(lambda s: s.replace("docker-compose.","").replace(".yml",""), docker_composes))
 
@@ -130,7 +129,7 @@ def main():
                 break
             time.sleep(5) # Give the Webserver time to come up
             #run_docker_command(f"build {' '.join(fuzzer_names)}", os.path.abspath(DIRS['code']), docker_compose_name)
-            run_docker_command(f"up -d --force-recreate burpsuite", os.path.abspath(DIRS['code']), docker_compose_name) # should terminate after t=180s
+            run_docker_command("up -d --force-recreate burpsuite", os.path.abspath(DIRS['code']), docker_compose_name) # should terminate after t=180s
             time.sleep(FUZZ_TIME) # Run fuzzers for 180s
             time.sleep(60) # Give some time for startup and tear-down
             run_docker_command(f"kill {' '.join(the_containers)}", os.path.abspath(DIRS['code']), docker_compose_name)

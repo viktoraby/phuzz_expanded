@@ -1,5 +1,4 @@
 import json
-import sys
 
 VPATHFILE = "../vulnerable-candidates-debuginfo-PathTraversal.txt"
 VULNPATHS = []
@@ -27,7 +26,7 @@ with open(VCFILE) as f:
 			line = "../" + line.strip()
 			candidates = json.load(open(line))
 			print(line)
-		except Exception as e:
+		except Exception:
 			print("failed to open file: ", line)
 			continue
 		for candidate in candidates['PathTraversal']:

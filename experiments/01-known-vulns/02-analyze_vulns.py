@@ -1,9 +1,9 @@
-import json
-import io
 import csv
-from queue import PriorityQueue
-from datetime import datetime
+import io
+import json
 from collections import Counter
+from datetime import datetime
+from queue import PriorityQueue
 
 with open("01-vulns.json") as f:
 	vuln_data = json.load(f)
@@ -31,7 +31,7 @@ keywords = {
 	'XXE': ['xml', 'XML', 'xxe', 'external entity']
 }
 categories = {}
-for keyword in keywords.keys():
+for keyword in keywords:
 	categories[keyword] = []
 
 skip_words = ['Stored XSS','Stored Cross-Site Scripting', 'Unauthorised AJAX Calls via Freemius',
@@ -72,7 +72,7 @@ while pq.qsize():
 
 	found_category = False
 	skip = False
-	for vuln_type in keywords.keys():
+	for vuln_type in keywords:
 		for keyword in keywords[vuln_type]:
 			if keyword.lower() in lower_vuln_desc:
 				#print("keyword: ", keyword)
@@ -90,7 +90,7 @@ while pq.qsize():
 		if not skip:
 			try:
 				wpvulncategories.update([lower_vuln_desc])
-			except Exception as e:
+			except Exception:
 				print(lower_vuln_desc)
 	else:
 		if not skip:

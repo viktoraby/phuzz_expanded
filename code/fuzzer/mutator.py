@@ -1,4 +1,5 @@
 import random
+
 import utils
 
 #######
@@ -8,7 +9,7 @@ import utils
 ########
 
 
-class ParamMutator():
+class ParamMutator:
     def mutate(self, string):
         pass
 
@@ -274,7 +275,7 @@ class SuperRandomMutator(ParamMutator):
 ########
 
 
-class Mutator():
+class Mutator:
     def __init__(self):
         self.param_mutators = []
 

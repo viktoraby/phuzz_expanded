@@ -2,7 +2,6 @@ import argparse
 import glob
 import os
 import re
-from typing import List
 
 
 def get_template(application_type, coverage_path) -> str:
@@ -145,7 +144,7 @@ def generate_sync_tmpfs(config_name: str) -> str:
 """
 
 
-def generate_sync_tmpfses(configs: List[dict]) -> str:
+def generate_sync_tmpfses(configs: list[dict]) -> str:
     return "".join(
         [
             generate_sync_tmpfs(config["config_name"])

@@ -1,6 +1,6 @@
 
-import os
 import json
+import os
 
 FILEMAP = {
 	'opre': 'vulnerable-endpoints-OpenRedirect.txt',
@@ -32,7 +32,7 @@ def params2str(d, with_val=True):
 
 	return s
 
-for vulncat in FILEMAP.keys():
+for vulncat in FILEMAP:
 	with open(FILEMAP[vulncat]) as f:
 		param_set = {}
 		debug_set = {}

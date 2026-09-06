@@ -1,13 +1,11 @@
-import os
-import re
 import argparse
-import sys
 import codecs
 import io
 import json
+import os
+import re
+import sys
 from zipfile import ZipFile
-from typing import List, Optional
-from functools import reduce
 
 codecs.register_error("strict", codecs.ignore_errors)
 
@@ -36,7 +34,7 @@ def extract_param_names(function_code: str):
             params[vector].append(param_name)
     return params
 
-def extract_function(file_content: str, function_name: str) -> Optional[str]:
+def extract_function(file_content: str, function_name: str) -> str | None:
     pattern = r"function[\s]+" + re.escape(function_name) + r"\s*?\([\s\S]*?\)[\s\S]*?\{"
     match = re.search(pattern, file_content, flags=re.DOTALL)
     if match:
@@ -64,7 +62,7 @@ def extract_function_from_zip(inmemzip, function_name):
             return function_name, function_code
 
 
-def _extract_wp_actions(prefix, file_content: str) -> List[str]:
+def _extract_wp_actions(prefix, file_content: str) -> list[str]:
     pattern = r"add_action\s*\(\s*[\'|\"]"+prefix+r"([^\'\"]+)[\'|\"],.*?[\'|\"]([^\'|\"]+)[\'|\"].*?\)"
     return re.findall(pattern, file_content, flags=re.DOTALL)
 
@@ -245,7 +243,7 @@ __SYNC_TMPFSES__
 
 
 def docker_compose_generate_sync_tmpfs(config_name: str) -> str:
-    return f"""  sync-tmpfs:
+    return """  sync-tmpfs:
     driver: local
     driver_opts:
       type: "tmpfs"
@@ -254,7 +252,7 @@ def docker_compose_generate_sync_tmpfs(config_name: str) -> str:
 """
 
 
-def docker_compose_generate_sync_tmpfses(configs: List[dict]) -> str:
+def docker_compose_generate_sync_tmpfses(configs: list[dict]) -> str:
     return "".join(
         [
             docker_compose_generate_sync_tmpfs(config)
@@ -430,7 +428,7 @@ def main():
         sio.write(
             f"/** Function {hook_func}() called by wp_ajax hooks: {hook_names} **/\n"
         )
-        if not hook_func in extracted_functions_map.keys():
+        if not hook_func in extracted_functions_map:
             sio.write("/** No function found :-/ **/")
         elif not hook_func in extracted_param_names or not extracted_param_names[hook_func]:
             sio.write("/** No params detected :-/ **/")

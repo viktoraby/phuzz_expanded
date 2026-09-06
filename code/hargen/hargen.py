@@ -7,7 +7,7 @@ import sys
 from urllib.parse import unquote, urlparse, urlunparse
 
 
-class HARRequest():
+class HARRequest:
     def __init__(self, raw_request):
         self.raw_request = raw_request
         self.request_url = raw_request.get('url', '')
@@ -49,7 +49,7 @@ class HARRequest():
             return f"{o.scheme}://{o.hostname}{o.path}"
 
 
-class HARGen():
+class HARGen:
 
     def __init__(self, args):
         self.args = args
@@ -129,8 +129,8 @@ class HARGen():
 
                 new_url = []
                 for i, e in enumerate(uf):
-                    if uf[i]:
-                        new_url.append(uf[i])
+                    if e:
+                        new_url.append(e)
                     else:
                         new_url.append(ru[i])
 
@@ -174,7 +174,7 @@ class HARGen():
             self.set_body(har_request)
 
             fpath = os.path.join(
-                self.args.out_dir, self.args.out_prefix + '{:0>4}'.format(counter) + ".json")
+                self.args.out_dir, self.args.out_prefix + f'{counter:0>4}' + ".json")
             with open(fpath, "w") as w:
                 config = self.generate_config(har_request)
                 w.write(json.dumps(config, indent=2))

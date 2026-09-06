@@ -1,7 +1,8 @@
 import glob
 import re
-import requests
 import time
+
+import requests
 
 
 def get_php_files():

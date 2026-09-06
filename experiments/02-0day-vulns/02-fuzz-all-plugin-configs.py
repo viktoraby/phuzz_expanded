@@ -1,10 +1,9 @@
+import glob
 import os
-import re
 import shutil
 import subprocess
-import glob
-import sys
 import time
+
 import requests
 
 
@@ -65,8 +64,8 @@ def main():
 
     for leaf_dir in leaf_dirs:
         print("Leaf dir is: ", leaf_dir)
-        docker_composes = glob.glob(f"docker-compose*.yml", root_dir=leaf_dir)
-        fuzzer_configs = glob.glob(f"fuzzer-config*.json", root_dir=leaf_dir)
+        docker_composes = glob.glob("docker-compose*.yml", root_dir=leaf_dir)
+        fuzzer_configs = glob.glob("fuzzer-config*.json", root_dir=leaf_dir)
 
         fuzzed_functions = list(map(lambda s: s.replace("docker-compose.","").replace(".yml",""), docker_composes))
 

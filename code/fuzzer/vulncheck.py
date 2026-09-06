@@ -1,18 +1,17 @@
 import html
+import json
 import os
-import re
+import urllib.parse as urlparse
+from difflib import SequenceMatcher
 
 import bleach
 import esprima
-import urllib.parse as urlparse
-import json
+import requests
 from bs4 import BeautifulSoup, element
-from difflib import SequenceMatcher
 from utils import fuzz_open
 
-import requests
 
-class VulnCheck():
+class VulnCheck:
     NAME = "Example"
 
     def check(self, candidate):
@@ -752,7 +751,7 @@ class BrokenParamBasedNoSQLiVulnCheck(VulnCheck):
                             return True
         return False
             
-class VulnChecker():
+class VulnChecker:
     def __init__(self):
         self.vuln_checkers = []
 
