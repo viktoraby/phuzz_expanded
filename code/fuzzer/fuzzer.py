@@ -1,33 +1,27 @@
-import argparse
 import copy
+import glob
 import importlib
 import json
 import os
 import random
-import sys
 import re
-import time
-import urllib.parse as urlparse
-import glob
 import shutil
 import sys
+import time
+import urllib.parse as urlparse
 
 sys.path.insert(0, 'automated_logins')
 
-from queue import PriorityQueue
-from urllib.parse import urlencode
+from collections import ChainMap
 from itertools import product
-from functools import reduce
-from collections import ChainMap, Counter
 
-import traceback
 import requests
 import utils
 from candidate import Candidate
-from mutator import DefaultMutator, EmptyQueueMutator, SingleMutator
+from mutator import DefaultMutator, SingleMutator
 from scoring import DefaultScoringFormula
-from vulncheck import DefaultVulnChecker, ParamBasedVulnChecker
 from utils import fuzz_open
+from vulncheck import ParamBasedVulnChecker
 
 #def print(*args, **kwargs):
 #    pass
@@ -131,7 +125,7 @@ class Fuzzer:
             self._open(
                 os.path.join(
                     self.output_dir,
-                    f"vulnerable-candidates.json",
+                    "vulnerable-candidates.json",
                 )
             ),
             "w",
@@ -167,7 +161,7 @@ class Fuzzer:
             self._open(
                 os.path.join(
                     self.output_dir,
-                    f"exceptions-and-errors.json",
+                    "exceptions-and-errors.json",
                 )
             ),
             "w",
@@ -218,7 +212,7 @@ class Fuzzer:
         # Make sure that 'print_timestamps' is set
         self.config['print_timestamps'] = self.config.get('print_timestamps', False)
 
-        if "login" in self.config and self.config["login"]:
+        if self.config.get("login"):
             login_cookies = self.login()
             for k,v in login_cookies.items():
                 if 'cookies' in self.config and 'login' in self.config['cookies']:
@@ -318,7 +312,7 @@ class Fuzzer:
             sys.exit(f"Failed to parse fuzzer config: {config_path}")
 
         if not self.config["target"].startswith("http"):
-            sys.exit(f"Target does not start with http!")
+            sys.exit("Target does not start with http!")
 
         if "login" in self.config and not os.path.exists(
             os.path.join("./automated_logins", f"{self.config['login']}.py")

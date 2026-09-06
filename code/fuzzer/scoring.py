@@ -1,4 +1,4 @@
-class ScoringFormula():
+class ScoringFormula:
     def calculate_score(self, candidate):
         pass
     def calculate_priority(self, candidate):

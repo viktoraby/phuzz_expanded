@@ -1,7 +1,6 @@
 import argparse
 import json
 import os
-import queue
 import subprocess
 import time
 import urllib.parse
@@ -142,8 +141,8 @@ class RequestExtractor:
                     continue
                 print(f"Adding new URL to queue: {new_url}")
                 self.queue.append(new_url)
-            except Exception as e:
-                print(f"Error getting href")
+            except Exception:
+                print("Error getting href")
                 self.page.screenshot(path=f"screenshots/{time.time()}_clickable_interaction_error.png")
                 print("Screenshot captured for clickable interaction error.")
 

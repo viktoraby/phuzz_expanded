@@ -1,12 +1,14 @@
+import json
 import re
 import sys
-import json
-from itertools import product
 from collections import ChainMap
-#from ConfigParser import _Chainmap as ChainMap
+from itertools import product
 
-from urllib.parse import urlparse, parse_qsl, urlunparse
+#from ConfigParser import _Chainmap as ChainMap
+from urllib.parse import parse_qsl, urlparse, urlunparse
+
 import requests
+
 
 class Phuzz:
 

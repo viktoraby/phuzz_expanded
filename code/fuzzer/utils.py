@@ -1,7 +1,7 @@
-import os
-import random
-import json
 import gzip
+import json
+import os
+
 
 def fuzz_open(path, mode="r"):
     if os.environ["FUZZER_COMPRESS"] == "1":

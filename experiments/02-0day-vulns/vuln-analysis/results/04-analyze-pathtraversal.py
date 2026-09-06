@@ -1,5 +1,4 @@
 import json
-import sys
 
 vulnpluginsfile = "analysis-pathtraversal-2-vulnplugins.txt"
 OUTFILE = "analysis-pathtraversal-3-vulnplugins-funcs.txt"

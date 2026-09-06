@@ -1,13 +1,13 @@
+import html
 import json
 import sys
-import html
 
 anal_1_results_file = "analysis-pathtraversal-1-vulnfuncs.txt"
 OUTFILE = "analysis-pathtraversal-2-vulnplugins.txt"
 
 PLUGINS = {}
 
-class ExitCount(object):
+class ExitCount:
 
 	def __init__(self, max_count, cb):
 		self.count = 0

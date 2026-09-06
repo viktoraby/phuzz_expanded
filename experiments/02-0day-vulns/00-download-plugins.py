@@ -1,9 +1,9 @@
-import requests
-import time
-import random
-import urllib.request
-import zipfile
 import os
+import random
+import time
+import urllib.request
+
+import requests
 
 MAX_PAGES = 350
 CURRENT_PAGE = 1
@@ -36,7 +36,7 @@ while CURRENT_PAGE <= MAX_PAGES:
                 print(f"[*] Starting download: {plugin['download_link']}")
                 #urllib.request.urlretrieve(plugin['download_link'], DESTFILE)
                 urllib.request.urlretrieve(plugin['download_link'], DESTDIR + str(plugin['active_installs']) + "-" +  plugin['download_link'].replace("https://downloads.wordpress.org/plugin/", ""))
-                print(f"[+] Downloaded")
+                print("[+] Downloaded")
 
             except Exception as e:
                 print(e)

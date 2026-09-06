@@ -1,14 +1,7 @@
-import os
-import re
-import argparse
-import sys
 import codecs
-import io
-import json
+import os
+import sys
 from zipfile import ZipFile
-from typing import List, Optional
-from functools import reduce
-from collections import Counter
 
 codecs.register_error("strict", codecs.ignore_errors)
 
@@ -40,7 +33,7 @@ def main():
 
         for file in inmemzip.keys():
             # inmemzip[file]
-            for func in counters.keys():
+            for func in counters:
                 if func in inmemzip[file]:
                     counters[func].update([plugin_zip_name])
 
