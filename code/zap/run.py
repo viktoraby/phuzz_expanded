@@ -114,4 +114,4 @@ with open("/tmp/openapi.json", "w") as f:
 cmd = ["zap-api-scan.py", "-t", "/tmp/openapi.json", "-f", "openapi", "-r", f"{output_dir}/result.html"]
 #cmd = ["zap-api-scan.py"]
 print(cmd)
-subprocess.run(cmd)
+subprocess.run(cmd, check=False)
