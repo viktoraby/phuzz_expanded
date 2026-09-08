@@ -9,7 +9,11 @@ from utils import fuzz_open
 
 
 class Candidate:
-    def __init__(self,  parent=None, score=0, priority=0, http_target="", http_method="GET", fixed_params={}, fuzz_params={}, fuzz_weights={}, fuzzer_id=-1, is_initial_candidate=False, mutated_param_type=None, mutated_param_name=None):
+    def __init__(self, parent=None, score=0, priority=0, http_target="", http_method="GET", fixed_params=None, fuzz_params=None, fuzz_weights=None, fuzzer_id=-1, is_initial_candidate=False, mutated_param_type=None, mutated_param_name=None):
+        fixed_params = {} if fixed_params is None else fixed_params
+        fuzz_params = {} if fuzz_params is None else fuzz_params
+        fuzz_weights = {} if fuzz_weights is None else fuzz_weights
+        
         self.coverage_id = str(int(time.time())) + "-" + str(uuid4())
         self.parent = parent
         self.score = score
