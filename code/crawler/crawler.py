@@ -5,6 +5,7 @@ import subprocess
 import time
 import urllib.parse
 
+from playwright.sync_api import Error as PlaywrightError
 from playwright.sync_api import sync_playwright
 
 
@@ -30,7 +31,7 @@ class RequestExtractor:
         try:
             _ = self.context.pages
             return True
-        except Exception as e:
+        except PlaywrightError as e:
             print(f"Error checking context state: {e}")
             return False
 
@@ -63,7 +64,7 @@ class RequestExtractor:
                 try:
                     btn.click()
                     self.page.wait_for_timeout(self.timeout)
-                except Exception as e:
+                except PlaywrightError as e:
                     print(f"Error clicking button: {e}")
                     self.page.screenshot(path=f"screenshots/{time.time()}_button_click_error.png")
                     print("Screenshot captured for button click error.")
@@ -74,7 +75,7 @@ class RequestExtractor:
                 try:
                     btn.click()
                     self.page.wait_for_timeout(self.timeout)
-                except Exception as e:
+                except PlaywrightError as e:
                     print(f"Error clicking submit: {e}")
                     self.page.screenshot(path=f"screenshots/{time.time()}_submit_click_error.png")
                     print("Screenshot captured for submit click error.")
@@ -87,7 +88,7 @@ class RequestExtractor:
             self.page.evaluate(
                 "() => { window.scrollTo(0, document.body.scrollHeight); }")
             self.page.wait_for_timeout(self.timeout)
-        except Exception as e:
+        except PlaywrightError as e:
             print(f"Error scrolling page: {e}")
             self.page.screenshot(path=f"screenshots/{time.time()}_scroll_error.png")
             print("Screenshot captured for scroll error.")
@@ -141,8 +142,8 @@ class RequestExtractor:
                     continue
                 print(f"Adding new URL to queue: {new_url}")
                 self.queue.append(new_url)
-            except Exception:
-                print("Error getting href")
+            except PlaywrightError as e:
+                print(f"Error getting href: {e}")
                 self.page.screenshot(path=f"screenshots/{time.time()}_clickable_interaction_error.png")
                 print("Screenshot captured for clickable interaction error.")
 
@@ -184,10 +185,11 @@ class RequestExtractor:
                         if not self.is_context_alive():
                             print("Context was destroyed, breaking out...")
                             break
-                    except Exception as e:
+                    except PlaywrightError as e:
                         print(f"Error navigating to {current_url}: {e}")
-                        self.page.screenshot(path=f"screenshots/{time.time()}_navigation_error.png")
-                        print("Screenshot captured for navigation error.")
+                        if self.is_context_alive():
+                            self.page.screenshot(path=f"screenshots/{time.time()}_navigation_error.png")
+                            print("Screenshot captured for navigation error.")
 
             finally:
                 if self.is_context_alive():
