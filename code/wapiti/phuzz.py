@@ -35,7 +35,7 @@ class Phuzz:
         self.weight_body_params = 0.25
 
     def _param_tuple_to_dict(self, tpl):
-        return dict(ChainMap(*list(map(lambda x: {x['name']: x['value']}, tpl))))
+        return dict(ChainMap(*[{x['name']: x['value']} for x in tpl]))
 
     # Taken from fuzzer/fuzzer.py
     def load_config(self):

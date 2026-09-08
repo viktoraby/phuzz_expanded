@@ -107,7 +107,8 @@ def extract_hit_paths(coverage_report):
         # PCOV coverage
         else:
             #       x = (line_no, hit_info) -> (49, -1|1) -> We only want hit lines with 1
-            lines = sorted(map(lambda y: y[0], filter(lambda x: x[1] > 0, coverage_report[file].items())))
+            lines = sorted(y[0] for y in coverage_report[file].items() if y[1] > 0)
+
             paths = [{"lines": [int(x) for x in lines], "hit":1 }]
             hit_paths.append({file: paths})
 

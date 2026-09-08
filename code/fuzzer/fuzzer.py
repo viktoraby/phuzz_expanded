@@ -338,10 +338,10 @@ class Fuzzer:
         return login_cookies
 
     def _param_tuple_to_dict(self, tpl):
-        return dict(ChainMap(*list(map(lambda x: {x['name']: x['value']}, tpl))))
+        return dict(ChainMap(*[{x['name']: x['value']} for x in tpl]))
+
 
     def generate_initial_candidates(self):
-
         print("Fixed headers", self.fixed_headers)
         print("Fixed Cookies", self.fixed_cookies)
         print("Fixed Query Params", self.fixed_query_params)
@@ -537,11 +537,10 @@ class Fuzzer:
 
 
     def ff_mutate(self, c):
-
         mutator = SingleMutator()
 
         choice_keys = list(filter(lambda x: c.fuzz_params[x], c.fuzz_params))
-        choice_weights = list(map(lambda x: c.fuzz_weights[x], choice_keys))
+        choice_weights = [c.fuzz_weights[x] for x in choice_keys]
         if not choice_keys or not choice_weights:
             return None
         param_type = random.choices(choice_keys, weights=choice_weights)[0]
@@ -660,7 +659,7 @@ class Fuzzer:
     def ff_sync_candidates(self):
         sync_path = "/sync-tmpfs/"
 
-        file_hashes = set(map(lambda x: x.replace(sync_path,"").replace(".json", ""), glob.glob(sync_path + "[a-z0-9]*.json")))
+        file_hashes = {x.replace(sync_path, "").replace(".json", "") for x in glob.glob(sync_path + "[a-z0-9]*.json")}
 
         new_hashes = file_hashes.difference(self.seen_mutations)
 
@@ -729,15 +728,12 @@ class Fuzzer:
         print("Synced new candidates (total / new / interesting): ", sync_total, sync_new, sync_interesting)
 
         choose_offset = 0
-        round_time = time.time()
         while True:
             sync_total, sync_new, sync_interesting = self.ff_sync_candidates()
             #print("Synced new candidates (total / new / interesting): ", sync_total, sync_new, sync_interesting)
 
             candidate = self.ff_choose_next(choose_offset)
             choose_offset += 1
-            candidate_hash = candidate.get_params_hash()
-            #print("Candidate priority / score: ", candidate.priority, candidate.score, candidate_hash, candidate.fuzz_params)
 
             energy = self.calculate_energy(candidate)
             #print(energy)
@@ -765,13 +761,6 @@ class Fuzzer:
 
                 self.ff_send_request(mutated_candidate)
                 counter += 1
-
-                if counter % 100 == 0:
-                    time_diff = time.time() - round_time
-                    #print(
-                    #    f"Performance: {time_diff}s for 0.1k reqs -> {1.0/(time_diff/100)} reqs/s"
-                    #)
-                    round_time = time.time()
 
                 self.ff_get_coverage(mutated_candidate)
                 self.calculate_score(mutated_candidate)

@@ -60,14 +60,12 @@ def main():
 
     leaf_dirs = [d for d in find_leaf_directories(DIRS["configs"]) if "output" not in d.split(os.sep)]
 
-    copied_plugins = set()
-
     for leaf_dir in leaf_dirs:
         print("Leaf dir is: ", leaf_dir)
         docker_composes = glob.glob("docker-compose*.yml", root_dir=leaf_dir)
         fuzzer_configs = glob.glob("fuzzer-config*.json", root_dir=leaf_dir)
 
-        fuzzed_functions = list(map(lambda s: s.replace("docker-compose.","").replace(".yml",""), docker_composes))
+        fuzzed_functions = [s.replace("docker-compose.", "").replace(".yml", "") for s in docker_composes]
 
         assert len(docker_composes) == len(fuzzer_configs)
 
@@ -104,8 +102,7 @@ def main():
                 os.remove(os.path.join(DIRS['fuzzer_output'],f))
 
             print("Generating fuzzer names...")
-            fuzzer_base_name = '-'.join(plugin_file_name.replace(".zip","").split("-")[1:]).split(".")[0]
-            fuzzer_names = list(map(lambda i: f"fuzzer-{i}",N_FUZZERS))
+            fuzzer_names = [f"fuzzer-{i}" for i in N_FUZZERS]
             with open(src_docker_compose_path) as f:
                 data = f.read()
                 for fuzzer_name in fuzzer_names:
