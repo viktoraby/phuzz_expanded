@@ -72,14 +72,14 @@ while pq.qsize():
 
 	found_category = False
 	skip = False
-	for vuln_type in keywords:
-		for keyword in keywords[vuln_type]:
-			if keyword.lower() in lower_vuln_desc:
-				#print("keyword: ", keyword)
-				found_category = vuln_type
-				break
-		if found_category:
-			break
+	for vuln_type, vuln_keywords in keywords.items():
+    for keyword in vuln_keywords:
+        if keyword.lower() in lower_vuln_desc:
+            #print("keyword: ", keyword)
+            found_category = vuln_type
+            break
+    if found_category:
+        break
 
 	for skip_word in skip_words:
 		if skip_word.lower() in lower_vuln_desc:
@@ -105,15 +105,15 @@ sio_csv = io.StringIO()
 csvwriter = csv.writer(sio_csv, delimiter=",")
 csvwriter.writerow(["Category", "Date", "Vuln", "Link"])
 
-for category in categories:
-	s = "\n#### Category: " + str(category) + " " + str(len(categories[category]))
-	sio.write(s + "\n")
-	#print(s)
-	for vuln in categories[category]:
-		s = vuln['date'] + " " + vuln['vuln'] + " " + "https://wpscan.com/" + vuln['href']
-		sio.write(s + "\n")
-		#print(s)
-		csvwriter.writerow([category, vuln['date'], vuln['vuln'],"https://wpscan.com/" + vuln['href']])
+for category, vulns in categories.items():
+    s = "\n#### Category: " + str(category) + " " + str(len(vulns))
+    sio.write(s + "\n")
+    #print(s)
+    for vuln in vulns:
+        s = vuln['date'] + " " + vuln['vuln'] + " " + "https://wpscan.com/" + vuln['href']
+        sio.write(s + "\n")
+        #print(s)
+        csvwriter.writerow([category, vuln['date'], vuln['vuln'], "https://wpscan.com/" + vuln['href']])
 
 with open("02-analyzed_vulns.txt", "w") as f:
 	f.write(sio.getvalue())
