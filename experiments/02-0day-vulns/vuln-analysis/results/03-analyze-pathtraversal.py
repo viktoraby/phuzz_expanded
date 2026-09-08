@@ -35,9 +35,9 @@ def exit():
 
 exitcnt = ExitCount(max_count=2500, cb=exit)
 
-FALSE_POSITIVES = set([
-	'file_exists:/var/www/html/wp-content/themes/twentytwentythree/functions.php'
-])
+FALSE_POSITIVES = {
+    'file_exists:/var/www/html/wp-content/themes/twentytwentythree/functions.php'
+}
 
 with open(anal_1_results_file) as f:
 	for line in f:
