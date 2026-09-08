@@ -73,11 +73,11 @@ while pq.qsize():
 	found_category = False
 	skip = False
 	for vuln_type, vuln_keywords in keywords.items():
-    for keyword in vuln_keywords:
-        if keyword.lower() in lower_vuln_desc:
-            #print("keyword: ", keyword)
-            found_category = vuln_type
-            break
+    	for keyword in vuln_keywords:
+        	if keyword.lower() in lower_vuln_desc:
+            	#print("keyword: ", keyword)
+            	found_category = vuln_type
+            	break
     if found_category:
         break
 
