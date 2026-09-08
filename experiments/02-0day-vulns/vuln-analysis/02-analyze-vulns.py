@@ -28,7 +28,7 @@ def params2str(d, with_val=True):
 		if with_val:
 			s += json.dumps(d[t])
 		else:
-			s += json.dumps(sorted(list(d[t].keys())))
+			s += json.dumps(sorted(d[t].keys()))
 
 	return s
 
@@ -100,5 +100,5 @@ for vulncat in FILEMAP:
 
 			if debug_set[the_key]:
 				with open(df_path,"w") as of:
-					for dline in sorted(list(debug_set[the_key])):
+					for dline in sorted(debug_set[the_key]):
 						of.write(f"{dline}\n")
