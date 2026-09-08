@@ -11,8 +11,8 @@ def get_file_path(file_name):
 def main():
     s = requests.Session()
 
-    r = s.post("http://web/users/login.php",
-               data={"username": "scanner1", "password": "scanner1"})
+    s.post("http://web/users/login.php",
+            data={"username": "scanner1", "password": "scanner1"})
 
     cookies = s.cookies.get_dict()
 

@@ -7,11 +7,11 @@ import requests
 def main():
     s = requests.Session()
 
-    r = s.post("http://web/setup.php",
-               data={"create_db": "Create / Reset Database"})
+    s.post("http://web/setup.php",
+            data={"create_db": "Create / Reset Database"})
 
-    r = s.post("http://web/login.php",
-               data={"username": "admin", "password": "password", "Login": "Login"})
+    s.post("http://web/login.php",
+            data={"username": "admin", "password": "password", "Login": "Login"})
 
     cookies = s.cookies.get_dict()
 
