@@ -11,7 +11,7 @@ class DefaultScoringFormula(ScoringFormula):
     def calculate_score(self, candidate):
         hit_counter=0
         for path in candidate.new_paths:
-            filename, lines = path.split('::::')
+            _, lines = path.split('::::')
             hit_counter += lines.count("_")
 
         return hit_counter + len(candidate.paths)
