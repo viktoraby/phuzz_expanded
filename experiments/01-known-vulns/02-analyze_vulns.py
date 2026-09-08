@@ -77,9 +77,9 @@ while pq.qsize():
         	if keyword.lower() in lower_vuln_desc:
             	#print("keyword: ", keyword)
             	found_category = vuln_type
-            	break
-    if found_category:
-        break
+            	break		
+    	if found_category:
+        	break
 
 	for skip_word in skip_words:
 		if skip_word.lower() in lower_vuln_desc:
