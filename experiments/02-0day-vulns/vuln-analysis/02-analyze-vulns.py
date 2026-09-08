@@ -32,8 +32,8 @@ def params2str(d, with_val=True):
 
 	return s
 
-for vulncat in FILEMAP:
-	with open(FILEMAP[vulncat]) as f:
+for vulncat, file_path in FILEMAP.items():
+	with open(file_path) as f:
 		param_set = {}
 		debug_set = {}
 

@@ -31,15 +31,17 @@ def main():
 
         for file in inmemzip.keys():
             # inmemzip[file]
-            for func in counters:
+            for func, counter in counters.items():
                 if func in inmemzip[file]:
-                    counters[func].update([plugin_zip_name])
+                    counter.update([plugin_zip_name])
+
 
     print(counters)
     total = set()
-    for counter in counters:
-        print(counter, len(counters[counter]))
-        total |= counters[counter]
+    for counter, values in counters.items():
+        print(counter, len(values))
+        total |= values
+        
     print(total, len(total))
 
 if __name__ == "__main__":
