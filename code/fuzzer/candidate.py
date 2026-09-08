@@ -123,12 +123,12 @@ class Candidate:
         
         s = f"{self.http_target}:{self.http_method}"
         
-        for k in self.fixed_params.keys():
+        for k in self.fixed_params:
             if k in ['cookies']: # May contain session values, so do not use it for the hash
                 continue 
             s += '__'.join(['{}:{}'.format(*kv)
                 for kv in sorted(self.fixed_params[k].items())])
-        for k in self.fuzz_params.keys():
+        for k in self.fuzz_params:
             s += '__'.join(['{}:{}'.format(*kv)
                 for kv in sorted(self.fuzz_params[k].items())])
         self.hash = hashlib.md5(s.encode()).hexdigest()
@@ -161,7 +161,7 @@ class Candidate:
         with fuzz_open(self.get_sync_file(candidate_hash=candidate_hash)) as f:
             d = json.load(f)
 
-        for k in d.keys():
+        for k in d:
             setattr(self, k, d[k])
         self.parent = None
         

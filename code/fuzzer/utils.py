@@ -43,16 +43,15 @@ def coverage_report_has_lines(coverage_report_for_file):
 
 
 def get_executed_lines(coverage_report, file_name):
-    for x in coverage_report[file_name]["lines"].keys():
-        if coverage_report[file_name]["lines"][x] > 0:
+    for x, hit_count in coverage_report[file_name]["lines"].items():
+        if hit_count > 0:
             yield x
 
 def stringify_hit_or_line(file, path):
-    try:
-        return f'{file}::::{"_".join([str(x) for x in path["path"]])}'
-    except:
-        return f'{file}::::{"_".join([str(x) for x in path["lines"]])}'
+    if "path" in path:
+        return f'{file}::::{"_".join(str(x) for x in path["path"])}'
 
+    return f'{file}::::{"_".join(str(x) for x in path["lines"])}'
 
 def stringify_hit_paths(hit_paths):
     return [
@@ -88,7 +87,7 @@ def get_executed_paths(coverage_report, file_name, function):
 
 def extract_hit_paths(coverage_report):
     hit_paths = []
-    for file in coverage_report.keys():
+    for file in coverage_report:
         if "__fuzzer__" in file:
             continue
         if file == "__time__":
