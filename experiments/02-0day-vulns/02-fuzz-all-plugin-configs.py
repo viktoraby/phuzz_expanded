@@ -28,7 +28,8 @@ def run_docker_compose_in_directory(leaf_dir):
                 "docker compose", "-f",
                 os.path.join(leaf_dir, compose_file),
                 "up",
-            ]
+            ],
+            check=False
         )
 
 def run_docker_command(cmd, working_dir, docker_compose_file):
@@ -38,7 +39,7 @@ def run_docker_command(cmd, working_dir, docker_compose_file):
     try:
         the_cmd = ["docker","compose", "-f", docker_compose_file] + cmd.split(" ")
         print("Running: ", the_cmd)
-        subprocess.run(the_cmd)
+        subprocess.run(the_cmd, check=False)
     except Exception as e:
         print(e)
 

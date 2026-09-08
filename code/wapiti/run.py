@@ -51,4 +51,4 @@ cmd = [
 ]
 cmd += args
 print(cmd)
-subprocess.run(cmd)
+subprocess.run(cmd, check=False)

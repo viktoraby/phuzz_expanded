@@ -107,7 +107,7 @@ class RequestExtractor:
             return []
 
         os.environ["FUZZER_COOKIE_PATH"] = self.cookie_path
-        subprocess.run(["python3", self.login_script_path], check=True)
+        subprocess.run(["python3", self.login_script_path], check=False)
         print("Ran login script")
 
         #cookie_filename = (

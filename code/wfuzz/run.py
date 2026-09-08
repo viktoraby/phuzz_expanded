@@ -48,4 +48,4 @@ URL = preq.url.replace("fuzz", "FUZZ")
 cmd = ["wfuzz", "-A", "-Z", "-f", f"{output_dir}/result.html,html", "-w", "./wordlist.txt", "--no-cache", "-u", URL]
 cmd += args
 print(cmd)
-subprocess.run(cmd)
+subprocess.run(cmd, check=False)
