@@ -29,8 +29,6 @@ def main():
 
         inmemzip = read_zip_to_memory(plugin_zip_path)
 
-        plugin_wppath_name = list(inmemzip.keys())[0].split("/")[0] 
-
         for file in inmemzip.keys():
             # inmemzip[file]
             for func in counters:

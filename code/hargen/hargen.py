@@ -231,26 +231,22 @@ class HARGen:
         set_include = getattr(self.args, f"set_{fuzz_type}_include", None)
 
         if fuzz_type == "cookies" and self.args.login_cookies:
-            login_cookies = list(
-                map(lambda x: x.lower(), self.args.login_cookies.split(',')))
+            login_cookies = [x.lower() for x in self.args.login_cookies.split(',')]
         else:
             login_cookies = []
 
         if fuzz_include:
-            fuzz_include_list = list(
-                map(lambda x: x.lower(), fuzz_include.split(',')))
+            fuzz_include_list = [x.lower() for x in fuzz_include.split(',')]
         else:
             fuzz_include_list = []
 
         if fuzz_exclude:
-            fuzz_exclude_list = list(
-                map(lambda x: x.lower(), fuzz_exclude.split(',')))
+            fuzz_exclude_list = [x.lower() for x in fuzz_exclude.split(',')]
         else:
             fuzz_exclude_list = []
 
         if set_include:
-            set_include_list = list(
-                map(lambda x: x.lower(), set_include.split(',')))
+            set_include_list = [x.lower() for x in set_include.split(',')]
         else:
             set_include_list = []
 
@@ -293,26 +289,22 @@ class HARGen:
         fuzz_include = getattr(self.args, f"fuzz_{fuzz_type}_include", None)
 
         if fuzz_type == "cookies" and self.args.login_cookies:
-            login_cookies = list(
-                map(lambda x: x.lower(), self.args.login_cookies.split(',')))
+            login_cookies = [x.lower() for x in self.args.login_cookies.split(',')]
         else:
             login_cookies = []
 
         if set_include:
-            set_include_list = list(
-                map(lambda x: x.lower(), set_include.split(',')))
+            set_include_list = [x.lower() for x in set_include.split(',')]
         else:
             set_include_list = []
 
         if set_exclude:
-            set_exclude_list = list(
-                map(lambda x: x.lower(), set_exclude.split(',')))
+            set_exclude_list = [x.lower() for x in set_exclude.split(',')]
         else:
             set_exclude_list = []
 
         if fuzz_include:
-            fuzz_include_list = list(
-                map(lambda x: x.lower(), fuzz_include.split(',')))
+            fuzz_include_list = [x.lower() for x in fuzz_include.split(',')]
         else:
             fuzz_include_list = []
 

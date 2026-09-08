@@ -68,8 +68,8 @@ def _extract_wp_actions(prefix, file_content: str) -> list[str]:
 
 def extract_wp_priv_nopriv_actions(file_content):
     all_actions_map = _extract_wp_actions("wp_ajax_", file_content)
-    priv_actions_functions = list(filter(lambda action: '_nopriv_' not in action, map(lambda y: y[1], all_actions_map)))
-    nopriv_actions_functions = list(map(lambda x: x.replace("_nopriv_", ""), filter(lambda action: '_nopriv_' in action, map(lambda y: y[1], all_actions_map))))
+    priv_actions_functions = [action for _, action in all_actions_map if '_nopriv_' not in action]
+    nopriv_actions_functions = [action.replace("_nopriv_", "") for _, action in all_actions_map if '_nopriv_' in action]
     # if all_actions_map:
     #     print("map",all_actions_map)
     #     print("priv",priv_actions_functions)
