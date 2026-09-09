@@ -5,11 +5,11 @@
 *Found functions:9
 *Extracted functions:6
 *Total parameter names extracted: 4
-*Overview: {'handle_installation': {'inisev_installation', 'inisev_installation_widget'}, 'HTTP_X_REQUESTED_WITH': {'cdp_action_handling'}, 'nonce': {'tifm_save_decision'}, 'dismiss_banner': {'dismiss_new_bb_banner'}, 'activate_plugins': {'analyst_notification_dismiss'}, 'install_bmi': {'install_bmi'}, 'noticeAjax': {'tifm_notice_actions'}, 'handle_review_action': {'inisev_review'}, 'activate_bmi': {'activate_bmi'}}
+*Overview: {'handle_installation': {'inisev_installation_widget', 'inisev_installation'}, 'activate_bmi': {'activate_bmi'}, 'HTTP_X_REQUESTED_WITH': {'cdp_action_handling'}, 'handle_review_action': {'inisev_review'}, 'install_bmi': {'install_bmi'}, 'nonce': {'tifm_save_decision'}, 'dismiss_banner': {'dismiss_new_bb_banner'}, 'activate_plugins': {'analyst_notification_dismiss'}, 'noticeAjax': {'tifm_notice_actions'}}
 *
 ***/
 
-/** Function handle_installation() called by wp_ajax hooks: {'inisev_installation', 'inisev_installation_widget'} **/
+/** Function handle_installation() called by wp_ajax hooks: {'inisev_installation_widget', 'inisev_installation'} **/
 /** Parameters found in function handle_installation(): {"post": ["slug"]} **/
 function handle_installation() {
 
@@ -49,8 +49,58 @@ function handle_installation() {
         }
 
 
+/** Function activate_bmi() called by wp_ajax hooks: {'activate_bmi'} **/
+/** No params detected :-/ **/
+
+
 /** Function HTTP_X_REQUESTED_WITH() called by wp_ajax hooks: {'cdp_action_handling'} **/
 /** No function found :-/ **/
+
+
+/** Function handle_review_action() called by wp_ajax hooks: {'inisev_review'} **/
+/** Parameters found in function handle_review_action(): {"post": ["slug", "mode"]} **/
+function handle_review_action() {
+
+          if (check_ajax_referer('inisev_review_dismiss', 'nonce', false) === false) {
+            return wp_send_json_error();
+          }
+
+          $slug = sanitize_text_field($_POST['slug']);
+          $mode = sanitize_text_field($_POST['mode']);
+
+          if (!empty($_POST['slug']) && isset($mode) && in_array($mode, ['dismiss', 'remind'])) {
+            $option_name = $this->option_name;
+            $data = get_option($option_name, false);
+            if ($data != false) {
+
+              $uid = get_current_user_id();
+
+              if (!array_key_exists('users', $data)) $data['users'] = [];
+              if (!array_key_exists($uid, $data['users'])) $data['users'][$uid] = [];
+              if (!array_key_exists($slug, $data['users'][$uid])) $data['users'][$uid][$slug] = [];
+
+              $data['users'][$uid]['delay_between'] = strtotime($this->time_between);
+
+              if ($mode == 'remind') {
+                $data['users'][$uid][$slug]['remind'] = strtotime($this->remind_time);
+              }
+
+              if ($mode == 'dismiss') {
+                $data['users'][$uid][$slug]['dismiss'] = true;
+              }
+
+              update_option($option_name, $data);
+
+              wp_send_json_success();
+
+            } else wp_send_json_error();
+          } else wp_send_json_error();
+
+        }
+
+
+/** Function install_bmi() called by wp_ajax hooks: {'install_bmi'} **/
+/** No params detected :-/ **/
 
 
 /** Function nonce() called by wp_ajax hooks: {'tifm_save_decision'} **/
@@ -85,10 +135,6 @@ function dismiss_banner()
 
 /** Function activate_plugins() called by wp_ajax hooks: {'analyst_notification_dismiss'} **/
 /** No function found :-/ **/
-
-
-/** Function install_bmi() called by wp_ajax hooks: {'install_bmi'} **/
-/** No params detected :-/ **/
 
 
 /** Function noticeAjax() called by wp_ajax hooks: {'tifm_notice_actions'} **/
@@ -138,51 +184,5 @@ function noticeAjax() {
           }
 
         }
-
-
-/** Function handle_review_action() called by wp_ajax hooks: {'inisev_review'} **/
-/** Parameters found in function handle_review_action(): {"post": ["slug", "mode"]} **/
-function handle_review_action() {
-
-          if (check_ajax_referer('inisev_review_dismiss', 'nonce', false) === false) {
-            return wp_send_json_error();
-          }
-
-          $slug = sanitize_text_field($_POST['slug']);
-          $mode = sanitize_text_field($_POST['mode']);
-
-          if (!empty($_POST['slug']) && isset($mode) && in_array($mode, ['dismiss', 'remind'])) {
-            $option_name = $this->option_name;
-            $data = get_option($option_name, false);
-            if ($data != false) {
-
-              $uid = get_current_user_id();
-
-              if (!array_key_exists('users', $data)) $data['users'] = [];
-              if (!array_key_exists($uid, $data['users'])) $data['users'][$uid] = [];
-              if (!array_key_exists($slug, $data['users'][$uid])) $data['users'][$uid][$slug] = [];
-
-              $data['users'][$uid]['delay_between'] = strtotime($this->time_between);
-
-              if ($mode == 'remind') {
-                $data['users'][$uid][$slug]['remind'] = strtotime($this->remind_time);
-              }
-
-              if ($mode == 'dismiss') {
-                $data['users'][$uid][$slug]['dismiss'] = true;
-              }
-
-              update_option($option_name, $data);
-
-              wp_send_json_success();
-
-            } else wp_send_json_error();
-          } else wp_send_json_error();
-
-        }
-
-
-/** Function activate_bmi() called by wp_ajax hooks: {'activate_bmi'} **/
-/** No params detected :-/ **/
 
 

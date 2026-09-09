@@ -5,11 +5,11 @@
 *Found functions:1
 *Extracted functions:1
 *Total parameter names extracted: 1
-*Overview: {'dismissNotice': {'aioseo-blc-dismiss-not-connected', 'aioseo-blc-dismiss-review-plugin-cta'}}
+*Overview: {'dismissNotice': {'aioseo-blc-dismiss-review-plugin-cta', 'aioseo-blc-dismiss-not-connected'}}
 *
 ***/
 
-/** Function dismissNotice() called by wp_ajax hooks: {'aioseo-blc-dismiss-not-connected', 'aioseo-blc-dismiss-review-plugin-cta'} **/
+/** Function dismissNotice() called by wp_ajax hooks: {'aioseo-blc-dismiss-review-plugin-cta', 'aioseo-blc-dismiss-not-connected'} **/
 /** Parameters found in function dismissNotice(): {"post": ["action"]} **/
 function dismissNotice() {
 		if ( ! isset( $_POST['action'] ) || 'aioseo-blc-dismiss-not-connected' !== $_POST['action'] ) {

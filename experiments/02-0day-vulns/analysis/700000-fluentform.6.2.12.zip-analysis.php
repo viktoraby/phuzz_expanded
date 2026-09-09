@@ -5,44 +5,12 @@
 *Found functions:14
 *Extracted functions:13
 *Total parameter names extracted: 3
-*Overview: {'routeAjaxEndpoints': {'fluentform_user_payment_endpoints'}, 'handleBulkAction': {'fluentform-do_entry_bulk_actions_payment'}, 'importForms': {'fluentform-migrator-import-forms'}, 'getFilters': {'fluentform_get_all_payments_entries_filters'}, 'fluentform_dashboard_access': {'fluentform_select_group_ajax_data'}, 'buildForm': {'fluentform_ai_create_form'}, 'getFormsByKey': {'fluentform-migrator-get-forms-by-key'}, 'getPayments': {'fluentform_get_payments'}, 'getMigratorData': {'fluentform-migrator-get-migrator-data'}, 'confirmScaPayment': {'fluentform_sca_inline_confirm_payment', 'nopriv_fluentform_sca_inline_confirm_payment'}, 'fetchInterestGroups': {'fluentform_mailchimp_interest_groups'}, 'importEntries': {'fluentform-migrator-import-entries'}, 'confirmScaSetupIntentsPayment': {'nopriv_fluentform_sca_inline_confirm_payment_setup_intents', 'fluentform_sca_inline_confirm_payment_setup_intents'}, 'handleAjaxEndpoints': {'fluentform_handle_payment_ajax_endpoint'}}
+*Overview: {'fluentform_dashboard_access': {'fluentform_select_group_ajax_data'}, 'confirmScaPayment': {'fluentform_sca_inline_confirm_payment', 'nopriv_fluentform_sca_inline_confirm_payment'}, 'getFilters': {'fluentform_get_all_payments_entries_filters'}, 'routeAjaxEndpoints': {'fluentform_user_payment_endpoints'}, 'getFormsByKey': {'fluentform-migrator-get-forms-by-key'}, 'getMigratorData': {'fluentform-migrator-get-migrator-data'}, 'fetchInterestGroups': {'fluentform_mailchimp_interest_groups'}, 'getPayments': {'fluentform_get_payments'}, 'handleBulkAction': {'fluentform-do_entry_bulk_actions_payment'}, 'importForms': {'fluentform-migrator-import-forms'}, 'importEntries': {'fluentform-migrator-import-entries'}, 'confirmScaSetupIntentsPayment': {'nopriv_fluentform_sca_inline_confirm_payment_setup_intents', 'fluentform_sca_inline_confirm_payment_setup_intents'}, 'handleAjaxEndpoints': {'fluentform_handle_payment_ajax_endpoint'}, 'buildForm': {'fluentform_ai_create_form'}}
 *
 ***/
 
-/** Function routeAjaxEndpoints() called by wp_ajax hooks: {'fluentform_user_payment_endpoints'} **/
-/** No params detected :-/ **/
-
-
-/** Function handleBulkAction() called by wp_ajax hooks: {'fluentform-do_entry_bulk_actions_payment'} **/
-/** No params detected :-/ **/
-
-
-/** Function importForms() called by wp_ajax hooks: {'fluentform-migrator-import-forms'} **/
-/** No params detected :-/ **/
-
-
-/** Function getFilters() called by wp_ajax hooks: {'fluentform_get_all_payments_entries_filters'} **/
-/** No params detected :-/ **/
-
-
 /** Function fluentform_dashboard_access() called by wp_ajax hooks: {'fluentform_select_group_ajax_data'} **/
 /** No function found :-/ **/
-
-
-/** Function buildForm() called by wp_ajax hooks: {'fluentform_ai_create_form'} **/
-/** No params detected :-/ **/
-
-
-/** Function getFormsByKey() called by wp_ajax hooks: {'fluentform-migrator-get-forms-by-key'} **/
-/** No params detected :-/ **/
-
-
-/** Function getPayments() called by wp_ajax hooks: {'fluentform_get_payments'} **/
-/** No params detected :-/ **/
-
-
-/** Function getMigratorData() called by wp_ajax hooks: {'fluentform-migrator-get-migrator-data'} **/
-/** No params detected :-/ **/
 
 
 /** Function confirmScaPayment() called by wp_ajax hooks: {'fluentform_sca_inline_confirm_payment', 'nopriv_fluentform_sca_inline_confirm_payment'} **/
@@ -142,7 +110,35 @@ function confirmScaPayment()
     }
 
 
+/** Function getFilters() called by wp_ajax hooks: {'fluentform_get_all_payments_entries_filters'} **/
+/** No params detected :-/ **/
+
+
+/** Function routeAjaxEndpoints() called by wp_ajax hooks: {'fluentform_user_payment_endpoints'} **/
+/** No params detected :-/ **/
+
+
+/** Function getFormsByKey() called by wp_ajax hooks: {'fluentform-migrator-get-forms-by-key'} **/
+/** No params detected :-/ **/
+
+
+/** Function getMigratorData() called by wp_ajax hooks: {'fluentform-migrator-get-migrator-data'} **/
+/** No params detected :-/ **/
+
+
 /** Function fetchInterestGroups() called by wp_ajax hooks: {'fluentform_mailchimp_interest_groups'} **/
+/** No params detected :-/ **/
+
+
+/** Function getPayments() called by wp_ajax hooks: {'fluentform_get_payments'} **/
+/** No params detected :-/ **/
+
+
+/** Function handleBulkAction() called by wp_ajax hooks: {'fluentform-do_entry_bulk_actions_payment'} **/
+/** No params detected :-/ **/
+
+
+/** Function importForms() called by wp_ajax hooks: {'fluentform-migrator-import-forms'} **/
 /** No params detected :-/ **/
 
 
@@ -218,5 +214,9 @@ function handleAjaxEndpoints()
 
         (new AjaxEndpoints())->handleEndpoint($route);
     }
+
+
+/** Function buildForm() called by wp_ajax hooks: {'fluentform_ai_create_form'} **/
+/** No params detected :-/ **/
 
 

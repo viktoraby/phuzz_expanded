@@ -1,0 +1,49 @@
+{
+  "target": "http://web/wp-admin/admin-ajax.php",
+  "methods": [
+    "POST"
+  ],
+  "body_params": {
+    "weight": 1,
+    "fixed": [
+      "saswp_security_nonce"
+    ],
+    "fuzz": [
+      "message",
+      "email",
+      "premium_cus",
+      "name"
+    ],
+    "data": [
+      {
+        "name": "saswp_security_nonce",
+        "value": "fuzz"
+      },
+      {
+        "name": "email",
+        "value": "fuzz"
+      },
+      {
+        "name": "premium_cus",
+        "value": "fuzz"
+      },
+      {
+        "name": "name",
+        "value": "fuzz"
+      }
+    ]
+  },
+  "query_params": {
+    "weight": 1,
+    "fixed": [
+      "action"
+    ],
+    "fuzz": [],
+    "data": [
+      {
+        "name": "action",
+        "value": "saswp_send_query_message"
+      }
+    ]
+  }
+}

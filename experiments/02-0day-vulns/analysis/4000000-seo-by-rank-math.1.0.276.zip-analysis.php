@@ -5,15 +5,11 @@
 *Found functions:2
 *Extracted functions:2
 *Total parameter names extracted: 1
-*Overview: {'notice_dismissible': {'wp_helpers_notice_dismissible'}, 'oembed_handler': {'cmb2_oembed_handler', 'nopriv_cmb2_oembed_handler'}}
+*Overview: {'oembed_handler': {'nopriv_cmb2_oembed_handler', 'cmb2_oembed_handler'}, 'notice_dismissible': {'wp_helpers_notice_dismissible'}}
 *
 ***/
 
-/** Function notice_dismissible() called by wp_ajax hooks: {'wp_helpers_notice_dismissible'} **/
-/** No params detected :-/ **/
-
-
-/** Function oembed_handler() called by wp_ajax hooks: {'cmb2_oembed_handler', 'nopriv_cmb2_oembed_handler'} **/
+/** Function oembed_handler() called by wp_ajax hooks: {'nopriv_cmb2_oembed_handler', 'cmb2_oembed_handler'} **/
 /** Parameters found in function oembed_handler(): {"request": ["cmb2_ajax_nonce", "oembed_url", "oembed_width", "object_id", "object_type", "field_id"]} **/
 function oembed_handler() {
 
@@ -54,5 +50,9 @@ function oembed_handler() {
 
 		wp_send_json_success( $html );
 	}
+
+
+/** Function notice_dismissible() called by wp_ajax hooks: {'wp_helpers_notice_dismissible'} **/
+/** No params detected :-/ **/
 
 

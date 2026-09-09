@@ -5,7 +5,7 @@
 *Found functions:3
 *Extracted functions:3
 *Total parameter names extracted: 3
-*Overview: {'handleDisconnect': {'prli_stripe_connect_disconnect'}, 'handleRefresh': {'prli_stripe_connect_refresh'}, 'handleUpdateCreds': {'prli_stripe_connect_update_creds'}}
+*Overview: {'handleDisconnect': {'prli_stripe_connect_disconnect'}, 'handleUpdateCreds': {'prli_stripe_connect_update_creds'}, 'handleRefresh': {'prli_stripe_connect_refresh'}}
 *
 ***/
 
@@ -29,38 +29,6 @@ function handleDisconnect(): void
         Fee::forgetAccountCountry();
 
         wp_safe_redirect(self::optionsReturnUrl('disconnected'));
-        exit;
-    }
-
-
-/** Function handleRefresh() called by wp_ajax hooks: {'prli_stripe_connect_refresh'} **/
-/** Parameters found in function handleRefresh(): {"get": ["_wpnonce"]} **/
-function handleRefresh(): void
-    {
-        if (!isset($_GET['_wpnonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash((string) $_GET['_wpnonce'])), 'stripe-refresh')) {
-            wp_die(esc_html__('Sorry, the refresh failed.', 'pretty-link'));
-        }
-        if (!current_user_can(Page::capability())) {
-            wp_die(esc_html__('Sorry, you don\'t have permission to do this.', 'pretty-link'));
-        }
-
-        $methodId = Connect::METHOD_ID;
-        $siteUuid = (string) get_option('prli_authenticator_site_uuid');
-        $jwt      = Jwt::encode(['site_uuid' => $siteUuid]);
-
-        $response = wp_remote_post(Connect::SERVICE_URL . "/api/refresh/{$methodId}", [
-            'headers' => Jwt::header($jwt, Connect::SERVICE_DOMAIN),
-        ]);
-
-        $body = json_decode(wp_remote_retrieve_body($response), true);
-
-        if (!is_array($body) || ($body['connect_status'] ?? '') !== 'refreshed') {
-            wp_die(esc_html__('Sorry, the refresh failed.', 'pretty-link'));
-        }
-
-        self::persistCredentials($body);
-
-        wp_safe_redirect(self::optionsReturnUrl('refreshed'));
         exit;
     }
 
@@ -110,6 +78,38 @@ function handleUpdateCreds(): void
         }
 
         wp_safe_redirect(self::optionsReturnUrl($action));
+        exit;
+    }
+
+
+/** Function handleRefresh() called by wp_ajax hooks: {'prli_stripe_connect_refresh'} **/
+/** Parameters found in function handleRefresh(): {"get": ["_wpnonce"]} **/
+function handleRefresh(): void
+    {
+        if (!isset($_GET['_wpnonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash((string) $_GET['_wpnonce'])), 'stripe-refresh')) {
+            wp_die(esc_html__('Sorry, the refresh failed.', 'pretty-link'));
+        }
+        if (!current_user_can(Page::capability())) {
+            wp_die(esc_html__('Sorry, you don\'t have permission to do this.', 'pretty-link'));
+        }
+
+        $methodId = Connect::METHOD_ID;
+        $siteUuid = (string) get_option('prli_authenticator_site_uuid');
+        $jwt      = Jwt::encode(['site_uuid' => $siteUuid]);
+
+        $response = wp_remote_post(Connect::SERVICE_URL . "/api/refresh/{$methodId}", [
+            'headers' => Jwt::header($jwt, Connect::SERVICE_DOMAIN),
+        ]);
+
+        $body = json_decode(wp_remote_retrieve_body($response), true);
+
+        if (!is_array($body) || ($body['connect_status'] ?? '') !== 'refreshed') {
+            wp_die(esc_html__('Sorry, the refresh failed.', 'pretty-link'));
+        }
+
+        self::persistCredentials($body);
+
+        wp_safe_redirect(self::optionsReturnUrl('refreshed'));
         exit;
     }
 

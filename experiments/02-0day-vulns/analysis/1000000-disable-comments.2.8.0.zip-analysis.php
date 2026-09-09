@@ -5,9 +5,76 @@
 *Found functions:3
 *Extracted functions:3
 *Total parameter names extracted: 4
-*Overview: {'disable_comments_settings': {'disable_comments_save_settings'}, 'get_sub_sites': {'get_sub_sites'}, 'delete_comments_settings': {'disable_comments_delete_comments'}}
+*Overview: {'delete_comments_settings': {'disable_comments_delete_comments'}, 'disable_comments_settings': {'disable_comments_save_settings'}, 'get_sub_sites': {'get_sub_sites'}}
 *
 ***/
+
+/** Function delete_comments_settings() called by wp_ajax hooks: {'disable_comments_delete_comments'} **/
+/** Parameters found in function delete_comments_settings(): {"post": ["nonce"]} **/
+function delete_comments_settings($_args = array()) {
+		global $deletedPostTypeNames;
+		$log = '';
+		$nonce = (isset($_POST['nonce']) ? sanitize_text_field(wp_unslash($_POST['nonce'])) : '');
+
+		if (($this->is_CLI && !empty($_args)) || wp_verify_nonce($nonce, 'disable_comments_save_settings')) {
+			// Resolve context ONCE — used for both cap check and deletion routing.
+			$is_network_ctx = $this->is_network_admin_ajax_context();
+
+			if (!$this->is_CLI) {
+				if ($is_network_ctx) {
+					$required_cap = 'manage_network_plugins';
+				} elseif ($this->networkactive && $this->sitewide_settings === '1') {
+					$required_cap = 'manage_network_plugins';
+				} else {
+					$required_cap = 'manage_options';
+				}
+				if (!current_user_can($required_cap)) {
+					wp_send_json_error(['message' => 'Insufficient permissions.'], 403);
+				}
+			}
+
+			$formArray = $this->get_form_array_escaped($_args);
+
+			if ($is_network_ctx && function_exists('get_sites') && class_exists('WP_Site_Query')) {
+				$sites = get_sites([
+					'number' => 0,
+					'fields' => 'ids',
+				]);
+				foreach ($sites as $blog_id) {
+					// $formArray['disabled_sites'] ids don't include "site_" prefix.
+					if (!empty($formArray['disabled_sites']) && !empty($formArray['disabled_sites']["site_$blog_id"])) {
+						switch_to_blog($blog_id);
+						if (!is_super_admin() && !current_user_can('manage_options')) {
+							restore_current_blog();
+							continue;
+						}
+						$log = $this->delete_comments($_args, $is_network_ctx);
+						// Purge while this site is still switched in: per-site
+						// integrations only clear the site they run in, so a
+						// purge after the loop would miss every subsite.
+						$this->purge_page_caches();
+						restore_current_blog();
+					}
+				}
+			} else {
+				$log = $this->delete_comments($_args, $is_network_ctx);
+
+				// Deleted comments stay visible in cached pages, and so do
+				// their counts, so the same purge applies here.
+				$this->purge_page_caches();
+			}
+		}
+		// message
+		$deletedPostTypeNames = array_unique((array) $deletedPostTypeNames);
+		$message = (count($deletedPostTypeNames) == 0 ? $log . '.' : $log . ' for ' . implode(", ", $deletedPostTypeNames) . '.');
+		if (!$this->is_CLI) {
+			wp_send_json_success(array('message' => $message));
+			wp_die();
+		} else {
+			return $log;
+		}
+	}
+
 
 /** Function disable_comments_settings() called by wp_ajax hooks: {'disable_comments_save_settings'} **/
 /** Parameters found in function disable_comments_settings(): {"post": ["nonce"]} **/
@@ -182,73 +249,6 @@ function get_sub_sites() {
 			];
 		}
 		wp_send_json(['data' => $_sub_sites, 'totalNumber' => $totalNumber]);
-	}
-
-
-/** Function delete_comments_settings() called by wp_ajax hooks: {'disable_comments_delete_comments'} **/
-/** Parameters found in function delete_comments_settings(): {"post": ["nonce"]} **/
-function delete_comments_settings($_args = array()) {
-		global $deletedPostTypeNames;
-		$log = '';
-		$nonce = (isset($_POST['nonce']) ? sanitize_text_field(wp_unslash($_POST['nonce'])) : '');
-
-		if (($this->is_CLI && !empty($_args)) || wp_verify_nonce($nonce, 'disable_comments_save_settings')) {
-			// Resolve context ONCE — used for both cap check and deletion routing.
-			$is_network_ctx = $this->is_network_admin_ajax_context();
-
-			if (!$this->is_CLI) {
-				if ($is_network_ctx) {
-					$required_cap = 'manage_network_plugins';
-				} elseif ($this->networkactive && $this->sitewide_settings === '1') {
-					$required_cap = 'manage_network_plugins';
-				} else {
-					$required_cap = 'manage_options';
-				}
-				if (!current_user_can($required_cap)) {
-					wp_send_json_error(['message' => 'Insufficient permissions.'], 403);
-				}
-			}
-
-			$formArray = $this->get_form_array_escaped($_args);
-
-			if ($is_network_ctx && function_exists('get_sites') && class_exists('WP_Site_Query')) {
-				$sites = get_sites([
-					'number' => 0,
-					'fields' => 'ids',
-				]);
-				foreach ($sites as $blog_id) {
-					// $formArray['disabled_sites'] ids don't include "site_" prefix.
-					if (!empty($formArray['disabled_sites']) && !empty($formArray['disabled_sites']["site_$blog_id"])) {
-						switch_to_blog($blog_id);
-						if (!is_super_admin() && !current_user_can('manage_options')) {
-							restore_current_blog();
-							continue;
-						}
-						$log = $this->delete_comments($_args, $is_network_ctx);
-						// Purge while this site is still switched in: per-site
-						// integrations only clear the site they run in, so a
-						// purge after the loop would miss every subsite.
-						$this->purge_page_caches();
-						restore_current_blog();
-					}
-				}
-			} else {
-				$log = $this->delete_comments($_args, $is_network_ctx);
-
-				// Deleted comments stay visible in cached pages, and so do
-				// their counts, so the same purge applies here.
-				$this->purge_page_caches();
-			}
-		}
-		// message
-		$deletedPostTypeNames = array_unique((array) $deletedPostTypeNames);
-		$message = (count($deletedPostTypeNames) == 0 ? $log . '.' : $log . ' for ' . implode(", ", $deletedPostTypeNames) . '.');
-		if (!$this->is_CLI) {
-			wp_send_json_success(array('message' => $message));
-			wp_die();
-		} else {
-			return $log;
-		}
 	}
 
 

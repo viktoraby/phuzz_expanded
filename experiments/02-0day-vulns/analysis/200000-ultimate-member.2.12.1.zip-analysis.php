@@ -5,49 +5,119 @@
 *Found functions:30
 *Extracted functions:30
 *Total parameter names extracted: 31
-*Overview: {'ajax_paginate': {'um_ajax_paginate'}, 'ajax_resize_image': {'um_resize_image', 'nopriv_um_resize_image'}, 'load_posts': {'um_ajax_paginate_posts', 'nopriv_um_ajax_paginate_posts'}, 'same_page_update_ajax': {'um_same_page_update'}, 'ajax_image_upload': {'nopriv_um_imageupload', 'um_imageupload'}, 'dismiss_notice': {'um_dismiss_notice'}, 'search_widget_request': {'um_search_widget_request', 'nopriv_um_search_widget_request'}, 'ajax_delete_cover_photo': {'um_delete_cover_photo'}, 'ajax_select_options': {'nopriv_um_select_options', 'um_select_options'}, 'ultimatemember_rated': {'um_rated'}, 'ajax_scanner': {'um_secure_scan_affected_users'}, 'um_request_user_data': {'um_request_user_data'}, 'ajax_remove_file': {'um_remove_file', 'nopriv_um_remove_file'}, 'update_order': {'um_update_order'}, 'default_filter_settings': {'um_member_directory_default_filter_settings'}, 'dynamic_modal_content': {'um_dynamic_modal_content'}, 'ajax_delete_profile_photo': {'um_delete_profile_photo'}, 'ajax_get_members': {'nopriv_um_get_members', 'um_get_members'}, 'ajax_file_upload': {'nopriv_um_fileupload', 'um_fileupload'}, 'get_icons': {'um_get_icons'}, 'update_field': {'um_update_field'}, 'ajax_get_packages': {'um_get_packages'}, 'get_users': {'um_get_users'}, 'ajax_muted_action': {'um_muted_action'}, 'ajax_run_package': {'um_run_package'}, 'get_pages_list': {'um_get_pages_list'}, 'do_ajax_action': {'um_do_ajax_action'}, 'populate_dropdown_options': {'um_populate_dropdown_options'}, 'update_builder': {'um_update_builder'}, 'load_comments': {'nopriv_um_ajax_paginate_comments', 'um_ajax_paginate_comments'}}
+*Overview: {'ajax_scanner': {'um_secure_scan_affected_users'}, 'ajax_resize_image': {'nopriv_um_resize_image', 'um_resize_image'}, 'ajax_run_package': {'um_run_package'}, 'load_posts': {'um_ajax_paginate_posts', 'nopriv_um_ajax_paginate_posts'}, 'get_icons': {'um_get_icons'}, 'ajax_select_options': {'um_select_options', 'nopriv_um_select_options'}, 'dynamic_modal_content': {'um_dynamic_modal_content'}, 'ajax_delete_profile_photo': {'um_delete_profile_photo'}, 'same_page_update_ajax': {'um_same_page_update'}, 'ajax_get_packages': {'um_get_packages'}, 'ajax_delete_cover_photo': {'um_delete_cover_photo'}, 'update_order': {'um_update_order'}, 'load_comments': {'nopriv_um_ajax_paginate_comments', 'um_ajax_paginate_comments'}, 'ultimatemember_rated': {'um_rated'}, 'ajax_get_members': {'nopriv_um_get_members', 'um_get_members'}, 'get_users': {'um_get_users'}, 'populate_dropdown_options': {'um_populate_dropdown_options'}, 'ajax_paginate': {'um_ajax_paginate'}, 'dismiss_notice': {'um_dismiss_notice'}, 'search_widget_request': {'um_search_widget_request', 'nopriv_um_search_widget_request'}, 'update_builder': {'um_update_builder'}, 'ajax_file_upload': {'um_fileupload', 'nopriv_um_fileupload'}, 'ajax_image_upload': {'um_imageupload', 'nopriv_um_imageupload'}, 'update_field': {'um_update_field'}, 'um_request_user_data': {'um_request_user_data'}, 'ajax_remove_file': {'nopriv_um_remove_file', 'um_remove_file'}, 'ajax_muted_action': {'um_muted_action'}, 'do_ajax_action': {'um_do_ajax_action'}, 'default_filter_settings': {'um_member_directory_default_filter_settings'}, 'get_pages_list': {'um_get_pages_list'}}
 *
 ***/
 
-/** Function ajax_paginate() called by wp_ajax hooks: {'um_ajax_paginate'} **/
-/** Parameters found in function ajax_paginate(): {"request": ["hook", "args"]} **/
-function ajax_paginate() {
-			UM()->check_ajax_nonce();
-
-			// phpcs:disable WordPress.Security.NonceVerification
-			if ( ! isset( $_REQUEST['hook'] ) ) {
-				wp_send_json_error( __( 'Invalid hook.', 'ultimate-member' ) );
-			}
-			$hook = sanitize_key( $_REQUEST['hook'] );
-
-			$args = ! empty( $_REQUEST['args'] ) ? $_REQUEST['args'] : array();
-			// phpcs:enable WordPress.Security.NonceVerification
-
-			ob_start();
-
-			/**
-			 * Fires on posts loading by AJAX in User Profile tabs.
-			 *
-			 * @since 1.3.x
-			 * @hook  um_ajax_load_posts__{$hook}
-			 *
-			 * @param {array} $args Request.
-			 *
-			 * @example <caption>Make any custom action on when posts loading by AJAX in User Profile.</caption>
-			 * function my_ajax_load_posts( $args ) {
-			 *     // your code here
-			 * }
-			 * add_action( 'um_ajax_load_posts__{$hook}', 'my_ajax_load_posts', 10, 1 );
-			 */
-			do_action( "um_ajax_load_posts__{$hook}", $args );
-
-			$output = ob_get_clean();
-			// @todo: investigate using WP_KSES
-			die( $output );
+/** Function ajax_scanner() called by wp_ajax hooks: {'um_secure_scan_affected_users'} **/
+/** Parameters found in function ajax_scanner(): {"request": ["nonce", "last_scanned_capability", "capabilities"]} **/
+function ajax_scanner() {
+		if ( ! wp_verify_nonce( $_REQUEST['nonce'], 'um-admin-nonce' ) || ! current_user_can( 'manage_options' ) ) {
+			wp_die( esc_attr__( 'Security Check', 'ultimate-member' ) );
 		}
 
+		$last_scanned_capability = sanitize_key( $_REQUEST['last_scanned_capability'] );
 
-/** Function ajax_resize_image() called by wp_ajax hooks: {'um_resize_image', 'nopriv_um_resize_image'} **/
+		if ( empty( $last_scanned_capability ) ) {
+			delete_option( 'um_secure_scanned_details' );
+			update_option( 'um_secure_scan_status', 'started' );
+			update_option( 'um_secure_last_time_scanned', current_time( 'mysql', true ) );
+		}
+
+		$scan_details = get_option( 'um_secure_scanned_details', array() );
+
+		if ( ! empty( $_REQUEST['capabilities'] ) ) {
+			$request_capabilities = is_array( $_REQUEST['capabilities'] ) ? $_REQUEST['capabilities'] : array( $_REQUEST['capabilities'] );
+			$arr_banned_caps      = array_map( 'sanitize_key', $request_capabilities );
+		} else {
+			$arr_banned_caps = UM()->options()->get( 'banned_capabilities' );
+		}
+
+		$proceed       = false;
+		$completed     = false;
+		$message       = '';
+		$scanned_cap   = '';
+		$user_affected = false;
+		$count_users   = 0;
+
+		$last_element = end( $arr_banned_caps );
+
+		foreach ( $arr_banned_caps as $cap ) {
+
+			if ( empty( $last_scanned_capability ) ) {
+				$proceed = true;
+			} else {
+				if ( $last_scanned_capability === $cap ) { // if this was the last capability, skip this and proceed the next loop.
+					$proceed = true;
+					continue;
+				}
+			}
+
+			if ( ! $proceed ) {
+				continue;
+			}
+
+			$args          = array(
+				'capability'   => $cap,
+				'role__not_in' => array( 'administrator' ),
+				'fields'       => 'ids',
+			);
+			$wp_user_query = new WP_User_Query( $args );
+			$count_users   = $wp_user_query->get_total();
+			if ( $count_users <= 0 ) {
+				// translators: %s capability name
+				$message = wp_kses( sprintf( __( '<strong>`%s`</strong> <span style="color:green">is safe.</span>', 'ultimate-member' ), $cap ), UM()->get_allowed_html( 'admin_notice' ) );
+			} else {
+				$user_affected = true;
+				// translators: %1$s capability name, has affected %2$d user account
+				$message = wp_kses( sprintf( _n( '<strong>`%1$s`</strong> <span style="color:red">has affected %2$d user account.</span>', '<strong>`%1$s`</strong> <span style="color:red">has affected %2$d user accounts.</span>', $count_users, 'ultimate-member' ), $cap, $count_users ), UM()->get_allowed_html( 'admin_notice' ) );
+			}
+
+			if ( $last_element === $cap ) {
+				$completed = true;
+				update_option( 'um_secure_scan_status', 'completed' );
+			}
+
+			$scanned_cap = $cap;
+
+			break;
+		}
+
+		if ( $user_affected ) {
+			$scan_details['affected_caps'][] = $scanned_cap;
+
+			$scan_details['scanned_caps'][ $scanned_cap ] = array(
+				'total_affected_users' => $count_users,
+				'users'                => $wp_user_query->get_results(),
+			);
+
+			if ( ! isset( $scan_details['scanned_caps']['total_all_cap_flagged'] ) ) {
+				$scan_details['scanned_caps']['total_all_cap_flagged'] = 1;
+			} else {
+				++$scan_details['scanned_caps']['total_all_cap_flagged'];
+			}
+		}
+
+		if ( ! isset( $scan_details['scanned_caps']['total_all_affected_users'] ) ) {
+			$scan_details['scanned_caps']['total_all_affected_users'] = absint( $count_users );
+		} else {
+			$scan_details['scanned_caps']['total_all_affected_users'] = absint( $scan_details['scanned_caps']['total_all_affected_users'] ) + absint( $count_users );
+		}
+
+		update_option( 'um_secure_scanned_details', $scan_details );
+
+		wp_send_json_success(
+			array(
+				'last_scanned_capability' => $scanned_cap,
+				'message'                 => $message,
+				'completed'               => $completed,
+				'recommendations'         => $completed ? wp_kses( $this->scan_recommendations(), UM()->get_allowed_html( 'templates' ) ) : '',
+			)
+		);
+	}
+
+
+/** Function ajax_resize_image() called by wp_ajax hooks: {'nopriv_um_resize_image', 'um_resize_image'} **/
 /** Parameters found in function ajax_resize_image(): {"request": ["src", "coord", "key", "user_id"], "post": ["set_id", "set_mode"]} **/
 function ajax_resize_image() {
 			UM()->check_ajax_nonce();
@@ -184,6 +254,32 @@ function ajax_resize_image() {
 		}
 
 
+/** Function ajax_run_package() called by wp_ajax hooks: {'um_run_package'} **/
+/** Parameters found in function ajax_run_package(): {"post": ["pack"]} **/
+function ajax_run_package() {
+			UM()->admin()->check_ajax_nonce();
+
+			if ( empty( $_POST['pack'] ) ) {
+				exit('');
+			} else {
+				$pack = sanitize_text_field( $_POST['pack'] );
+				if ( in_array( $pack, $this->necessary_packages, true ) ) {
+					$file = $this->packages_dir . $pack . DIRECTORY_SEPARATOR . 'init.php';
+					if ( file_exists( $file ) ) {
+						ob_start();
+						include_once $file;
+						ob_get_flush();
+						exit;
+					} else {
+						exit('');
+					}
+				} else {
+					exit('');
+				}
+			}
+		}
+
+
 /** Function load_posts() called by wp_ajax hooks: {'um_ajax_paginate_posts', 'nopriv_um_ajax_paginate_posts'} **/
 /** Parameters found in function load_posts(): {"post": ["author", "page"]} **/
 function load_posts() {
@@ -235,462 +331,47 @@ function load_posts() {
 		}
 
 
-/** Function same_page_update_ajax() called by wp_ajax hooks: {'um_same_page_update'} **/
-/** Parameters found in function same_page_update_ajax(): {"post": ["cb_func", "page"]} **/
-function same_page_update_ajax() {
-			UM()->admin()->check_ajax_nonce();
+/** Function get_icons() called by wp_ajax hooks: {'um_get_icons'} **/
+/** Parameters found in function get_icons(): {"request": ["search", "page"]} **/
+function get_icons() {
+		UM()->admin()->check_ajax_nonce();
 
-			if ( empty( $_POST['cb_func'] ) ) {
-				wp_send_json_error( __( 'Wrong callback', 'ultimate-member' ) );
-			}
+		$search_request = ! empty( $_REQUEST['search'] ) ? sanitize_text_field( $_REQUEST['search'] ) : '';
+		$page           = ! empty( $_REQUEST['page'] ) ? absint( $_REQUEST['page'] ) : 1;
+		$per_page       = 50;
 
-			$cb_func = sanitize_key( $_POST['cb_func'] );
+		UM()->setup()->set_icons_options();
 
-			if ( 'um_usermeta_fields' === $cb_func ) {
-				//first install metatable
-				global $wpdb;
-
-				$metakeys = array();
-				foreach ( UM()->builtin()->all_user_fields as $all_user_field ) {
-					if ( ! array_key_exists( 'metakey', $all_user_field ) ) {
-						continue;
-					}
-					$metakeys[] = $all_user_field['metakey'];
-				}
-
-				$metakeys = apply_filters( 'um_metadata_same_page_update_ajax', $metakeys, UM()->builtin()->all_user_fields );
-
-				if ( is_multisite() ) {
-					$sites = get_sites( array( 'fields' => 'ids' ) );
-					foreach ( $sites as $blog_id ) {
-						$metakeys[] = $wpdb->get_blog_prefix( $blog_id ) . 'capabilities';
-						$metakeys[] = 'wc_money_spent_' . rtrim( $wpdb->get_blog_prefix( $blog_id ), '_' ); // Is used since Woocommerce 9.1.0
-						$metakeys[] = 'wc_order_count_' . rtrim( $wpdb->get_blog_prefix( $blog_id ), '_' ); // Is used since Woocommerce 9.1.0 TODO remove as soon as used 'um_wc_order_count_'
-					}
-				} else {
-					$blog_id    = get_current_blog_id();
-					$metakeys[] = $wpdb->get_blog_prefix( $blog_id ) . 'capabilities';
-					$metakeys[] = 'wc_money_spent_' . rtrim( $wpdb->get_blog_prefix( $blog_id ), '_' ); // Is used since Woocommerce 9.1.0
-					$metakeys[] = 'wc_order_count_' . rtrim( $wpdb->get_blog_prefix( $blog_id ), '_' ); // Is used since Woocommerce 9.1.0 TODO remove as soon as used 'um_wc_order_count_'
-				}
-
-				// Member directory data
-				$metakeys[] = 'um_member_directory_data';
-				$metakeys[] = '_um_verified';
-				$metakeys[] = '_money_spent'; // Legacy since Woocommerce 9.1.0. TODO remove as soon as stop support Woo below 9.1.0 version
-				$metakeys[] = '_completed';
-				$metakeys[] = '_reviews_avg';
-
-				//myCred meta
-				if ( function_exists( 'mycred_get_types' ) ) {
-					$mycred_types = mycred_get_types();
-					if ( ! empty( $mycred_types ) ) {
-						foreach ( array_keys( $mycred_types ) as $point_type ) {
-							$metakeys[] = $point_type;
+		$um_icons_list = get_option( 'um_icons_list' );
+		if ( ! empty( $search_request ) ) {
+			$um_icons_list = array_filter(
+				$um_icons_list,
+				function( $item ) use ( $search_request ) {
+					$result = array_filter(
+						$item['search'],
+						function( $search_item ) use ( $search_request ) {
+							return stripos( $search_item, $search_request ) !== false;
 						}
-					}
-				}
-
-				$sortby_custom_keys = $wpdb->get_col( "SELECT DISTINCT meta_value FROM {$wpdb->postmeta} WHERE meta_key='_um_sortby_custom'" );
-				if ( empty( $sortby_custom_keys ) ) {
-					$sortby_custom_keys = array();
-				}
-
-				$sortby_custom_keys2 = $wpdb->get_col( "SELECT meta_value FROM {$wpdb->postmeta} WHERE meta_key='_um_sorting_fields'" );
-				if ( ! empty( $sortby_custom_keys2 ) ) {
-					foreach ( $sortby_custom_keys2 as $custom_val ) {
-						$custom_val = maybe_unserialize( $custom_val );
-
-						foreach ( $custom_val as $sort_value ) {
-							if ( is_array( $sort_value ) ) {
-								$field_keys           = array_keys( $sort_value );
-								$sortby_custom_keys[] = $field_keys[0];
-							}
-						}
-					}
-				}
-
-				if ( ! empty( $sortby_custom_keys ) ) {
-					$sortby_custom_keys = array_unique( $sortby_custom_keys );
-					$metakeys           = array_merge( $metakeys, $sortby_custom_keys );
-				}
-
-				$skip_fields = UM()->builtin()->get_fields_without_metakey();
-				$skip_fields = array_merge( $skip_fields, UM()->member_directory()::$core_search_fields );
-
-				$real_usermeta = $wpdb->get_col( "SELECT DISTINCT meta_key FROM {$wpdb->usermeta}" );
-				$real_usermeta = ! empty( $real_usermeta ) ? $real_usermeta : array();
-				$real_usermeta = array_merge( $real_usermeta, array( 'um_member_directory_data' ) );
-
-				if ( ! empty( $sortby_custom_keys ) ) {
-					$real_usermeta = array_merge( $real_usermeta, $sortby_custom_keys );
-				}
-
-				$wp_usermeta_option = array_intersect( array_diff( $metakeys, $skip_fields ), $real_usermeta );
-
-				update_option( 'um_usermeta_fields', array_values( $wp_usermeta_option ) );
-
-				update_option( 'um_member_directory_update_meta', time() );
-
-				UM()->options()->update( 'member_directory_own_table', true );
-
-				wp_send_json_success();
-			} elseif ( 'um_get_metadata' === $cb_func ) {
-				global $wpdb;
-
-				$wp_usermeta_option = get_option( 'um_usermeta_fields', array() );
-
-				$count = $wpdb->get_var(
-					"SELECT COUNT(*)
-					FROM {$wpdb->usermeta}
-					WHERE meta_key IN ('" . implode( "','", $wp_usermeta_option ) . "')"
-				);
-
-				wp_send_json_success( array( 'count' => $count ) );
-			} elseif ( 'um_update_metadata_per_page' === $cb_func ) {
-
-				if ( empty( $_POST['page'] ) ) {
-					wp_send_json_error( __( 'Wrong data', 'ultimate-member' ) );
-				}
-
-				$per_page           = 500;
-				$wp_usermeta_option = get_option( 'um_usermeta_fields', array() );
-
-				global $wpdb;
-				$metadata = $wpdb->get_results(
-					$wpdb->prepare(
-						"SELECT *
-						FROM {$wpdb->usermeta}
-						WHERE meta_key IN ('" . implode( "','", $wp_usermeta_option ) . "')
-						LIMIT %d, %d",
-						( absint( $_POST['page'] ) - 1 ) * $per_page,
-						$per_page
-					),
-					ARRAY_A
-				);
-
-				$values = array();
-				foreach ( $metadata as $metarow ) {
-					$values[] = $wpdb->prepare( '(%d, %s, %s)', $metarow['user_id'], $metarow['meta_key'], $metarow['meta_value'] );
-				}
-
-				// maybe create table.
-				$table_name = $wpdb->prefix . 'um_metadata';
-				$query      = $wpdb->prepare(
-					'SHOW TABLES LIKE %s',
-					$wpdb->esc_like( $table_name )
-				);
-				if ( $wpdb->get_var( $query ) !== $table_name ) {
-					UM()->setup()->create_db();
-				}
-
-				if ( ! empty( $values ) ) {
-					$wpdb->query(
-						"INSERT INTO
-						{$wpdb->prefix}um_metadata(user_id, um_key, um_value)
-						VALUES " . implode( ',', $values )
 					);
+					return count( $result ) > 0;
 				}
-
-				$from = ( absint( $_POST['page'] ) * $per_page ) - $per_page + 1;
-				$to   = absint( $_POST['page'] ) * $per_page;
-				// translators: %1$s is a metadata from name; %2$s is a metadata to.
-				wp_send_json_success( array( 'message' => sprintf( __( 'Metadata from %1$s to %2$s was upgraded successfully...', 'ultimate-member' ), $from, $to ) ) );
-			} else {
-				do_action( 'um_same_page_update_ajax_action', $cb_func );
-			}
+			);
 		}
 
+		$total_count = count( $um_icons_list );
 
-/** Function ajax_image_upload() called by wp_ajax hooks: {'nopriv_um_imageupload', 'um_imageupload'} **/
-/** Parameters found in function ajax_image_upload(): {"post": ["key", "user_id", "timestamp", "_wpnonce", "set_id", "set_mode"]} **/
-function ajax_image_upload() {
-			if ( UM()->is_rate_limited( 'upload_image' ) ) {
-				wp_send_json_error( __( 'Too many requests', 'ultimate-member' ) );
-			}
+		$um_icons_list = array_slice( $um_icons_list, $per_page * ( $page - 1 ), $per_page );
 
-			$ret['error'] = null;
-			$ret          = array();
-
-			if ( empty( $_POST['key'] ) ) {
-				$ret['error'] = esc_html__( 'Invalid image key', 'ultimate-member' );
-				wp_send_json_error( $ret );
-			}
-
-			$id      = sanitize_text_field( $_POST['key'] );
-			$user_id = empty( $_POST['user_id'] ) ? null : absint( $_POST['user_id'] );
-
-			/**
-			 * Filters the custom validation marker for 3rd-party uploader.
-			 *
-			 * @param {bool}   $custom_validation Custom validation marker. Is null by default. Keep null for UM core validation.
-			 * @param {string} $id                Uploader field key.
-			 * @param {int}    $user_id           User ID.
-			 *
-			 * @return {bool} Custom validation marker.
-			 *
-			 * @since 2.9.1
-			 * @hook um_image_upload_validation
-			 *
-			 * @example <caption>Custom validation.</caption>
-			 * function my_um_image_upload_validation( $custom_validation, $id, $user_id ) {
-			 *     // your code here
-			 *     $ret['error'] = esc_html__( 'Error code', 'ultimate-member' );
-			 *     wp_send_json_error( $ret );
-			 *     return true;
-			 * }
-			 * add_filter( 'um_image_upload_validation', 'my_um_image_upload_validation', 10, 3 );
-			 */
-			$custom_validation = apply_filters( 'um_image_upload_validation', null, $id, $user_id );
-			if ( is_null( $custom_validation ) ) {
-				/**
-				 * Filters image upload checking nonce.
-				 *
-				 * @param {bool} $verify_nonce Verify nonce marker. Default true.
-				 *
-				 * @return {bool} Verify nonce marker.
-				 *
-				 * @since 1.3.x
-				 * @hook um_image_upload_nonce
-				 *
-				 * @example <caption>Disable checking nonce on image upload.</caption>
-				 * function my_image_upload_nonce( $verify_nonce ) {
-				 *     // your code here
-				 *     $verify_nonce = false;
-				 *     return $verify_nonce;
-				 * }
-				 * add_filter( 'um_image_upload_nonce', 'my_image_upload_nonce' );
-				 */
-				$um_image_upload_nonce = apply_filters( 'um_image_upload_nonce', true );
-				if ( $um_image_upload_nonce ) {
-					$timestamp = absint( $_POST['timestamp'] );
-					$nonce     = sanitize_text_field( $_POST['_wpnonce'] );
-					if ( ! wp_verify_nonce( $nonce, "um_upload_nonce-{$timestamp}" ) && is_user_logged_in() ) {
-						// This nonce is not valid.
-						$ret['error'] = esc_html__( 'Invalid nonce', 'ultimate-member' );
-						wp_send_json_error( $ret );
-					}
-				}
-
-				if ( $user_id && is_user_logged_in() && ! UM()->roles()->um_current_user_can( 'edit', $user_id ) ) {
-					$ret['error'] = esc_html__( 'You have no permission to edit this user', 'ultimate-member' );
-					wp_send_json_error( $ret );
-				}
-
-				if ( $user_id && ! is_user_logged_in() ) {
-					$ret['error'] = esc_html__( 'Please login to edit this user', 'ultimate-member' );
-					wp_send_json_error( $ret );
-				}
-
-				$form_id = absint( $_POST['set_id'] );
-				$mode    = sanitize_key( $_POST['set_mode'] );
-
-				UM()->fields()->set_id   = $form_id;
-				UM()->fields()->set_mode = $mode;
-
-				if ( ! is_user_logged_in() && 'profile' === $mode ) {
-					$ret['error'] = esc_html__( 'You have no permission to edit user profile', 'ultimate-member' );
-					wp_send_json_error( $ret );
-				}
-
-				if ( null !== $user_id && 'register' === $mode ) {
-					$ret['error'] = esc_html__( 'User has to be empty on registration', 'ultimate-member' );
-					wp_send_json_error( $ret );
-				}
-
-				$form_post = get_post( $form_id );
-				// Invalid post ID. Maybe post doesn't exist.
-				if ( empty( $form_post ) ) {
-					$ret['error'] = esc_html__( 'Invalid form ID', 'ultimate-member' );
-					wp_send_json_error( $ret );
-				}
-
-				if ( 'um_form' !== $form_post->post_type ) {
-					$ret['error'] = esc_html__( 'Invalid form post type', 'ultimate-member' );
-					wp_send_json_error( $ret );
-				}
-
-				$form_status = get_post_status( $form_id );
-				if ( 'publish' !== $form_status ) {
-					$ret['error'] = esc_html__( 'Invalid form status', 'ultimate-member' );
-					wp_send_json_error( $ret );
-				}
-
-				$post_data = UM()->query()->post_data( $form_id );
-				if ( ! array_key_exists( 'mode', $post_data ) || $mode !== $post_data['mode'] ) {
-					$ret['error'] = esc_html__( 'Invalid form type', 'ultimate-member' );
-					wp_send_json_error( $ret );
-				}
-
-				// For profiles only.
-				if ( 'profile' === $mode && ! empty( $post_data['use_custom_settings'] ) && ! empty( $post_data['role'] ) ) {
-					// Option "Apply custom settings to this form". Option "Make this profile form role-specific".
-					// Show the first Profile Form with role selected, don't show profile forms below the page with other role-specific setting.
-					$current_user_roles = UM()->roles()->get_all_user_roles( $user_id );
-					if ( empty( $current_user_roles ) ) {
-						$ret['error'] = esc_html__( 'You have no permission to edit this user through this form', 'ultimate-member' );
-						wp_send_json_error( $ret );
-					}
-
-					$post_data['role'] = maybe_unserialize( $post_data['role'] );
-
-					if ( is_array( $post_data['role'] ) ) {
-						if ( ! count( array_intersect( $post_data['role'], $current_user_roles ) ) ) {
-							$ret['error'] = esc_html__( 'You have no permission to edit this user through this form', 'ultimate-member' );
-							wp_send_json_error( $ret );
-						}
-					} elseif ( ! in_array( $post_data['role'], $current_user_roles, true ) ) {
-						$ret['error'] = esc_html__( 'You have no permission to edit this user through this form', 'ultimate-member' );
-						wp_send_json_error( $ret );
-					}
-				}
-
-				if ( ! array_key_exists( 'custom_fields', $post_data ) || empty( $post_data['custom_fields'] ) ) {
-					$ret['error'] = esc_html__( 'Invalid form fields', 'ultimate-member' );
-					wp_send_json_error( $ret );
-				}
-
-				$custom_fields = maybe_unserialize( $post_data['custom_fields'] );
-				if ( ! is_array( $custom_fields ) || ! array_key_exists( $id, $custom_fields ) ) {
-					if ( ! ( 'profile' === $mode && in_array( $id, array( 'cover_photo', 'profile_photo' ), true ) ) ) {
-						$ret['error'] = esc_html__( 'Invalid field metakey', 'ultimate-member' );
-						wp_send_json_error( $ret );
-					}
-				}
-
-				if ( 'profile' === $mode ) {
-					if ( in_array( $id, array( 'cover_photo', 'profile_photo' ), true ) ) {
-						if ( 'profile_photo' === $id ) {
-							$disable_photo_uploader = empty( $post_data['use_custom_settings'] ) ? UM()->options()->get( 'disable_profile_photo_upload' ) : $post_data['disable_photo_upload'];
-							if ( $disable_photo_uploader ) {
-								$ret['error'] = esc_html__( 'You have no permission to edit this field', 'ultimate-member' );
-								wp_send_json_error( $ret );
-							}
-						} else {
-							$cover_enabled_uploader = empty( $post_data['use_custom_settings'] ) ? UM()->options()->get( 'profile_cover_enabled' ) : $post_data['cover_enabled'];
-							if ( ! $cover_enabled_uploader ) {
-								$ret['error'] = esc_html__( 'You have no permission to edit this field', 'ultimate-member' );
-								wp_send_json_error( $ret );
-							}
-						}
-					} elseif ( ! um_can_edit_field( $custom_fields[ $id ] ) ) {
-						$ret['error'] = esc_html__( 'You have no permission to edit this field', 'ultimate-member' );
-						wp_send_json_error( $ret );
-					}
-				}
-			}
-
-			if ( isset( $_FILES[ $id ]['name'] ) ) {
-				if ( ! is_array( $_FILES[ $id ]['name'] ) ) {
-					UM()->uploader()->replace_upload_dir = true;
-
-					$uploaded = UM()->uploader()->upload_image( $_FILES[ $id ], $user_id, $id );
-
-					UM()->uploader()->replace_upload_dir = false;
-
-					if ( isset( $uploaded['error'] ) ) {
-						$ret['error'] = $uploaded['error'];
-					} else {
-						$ret[] = $uploaded['handle_upload'];
-					}
-				}
-			} else {
-				$ret['error'] = esc_html__( 'A theme or plugin compatibility issue', 'ultimate-member' );
-			}
-
-			wp_send_json_success( $ret );
-		}
-
-
-/** Function dismiss_notice() called by wp_ajax hooks: {'um_dismiss_notice'} **/
-/** Parameters found in function dismiss_notice(): {"post": ["key"]} **/
-function dismiss_notice() {
-			UM()->admin()->check_ajax_nonce();
-
-			if ( empty( $_POST['key'] ) ) {
-				wp_send_json_error( __( 'Wrong Data', 'ultimate-member' ) );
-			}
-
-			$this->dismiss( sanitize_key( $_POST['key'] ) );
-
-			wp_send_json_success();
-		}
-
-
-/** Function search_widget_request() called by wp_ajax hooks: {'um_search_widget_request', 'nopriv_um_search_widget_request'} **/
-/** Parameters found in function search_widget_request(): {"post": ["search"]} **/
-function search_widget_request() {
-		check_ajax_referer( 'um_search_widget_request' );
-
-		if ( ! UM()->options()->get( 'members_page' ) ) {
-			wp_send_json_error( __( 'No members page enabled', 'ultimate-member' ) );
-		}
-
-		$member_directory_ids = array();
-
-		$page_id = UM()->config()->permalinks['members'];
-		if ( ! empty( $page_id ) ) {
-			$member_directory_ids = UM()->member_directory()->get_member_directory_id( $page_id );
-		}
-
-		if ( empty( $member_directory_ids ) ) {
-			wp_send_json_error( __( 'No members page enabled', 'ultimate-member' ) );
-		}
-
-		$url = um_get_predefined_page_url( 'members' );
-
-		$search = isset( $_POST['search'] ) ? sanitize_text_field( $_POST['search'] ) : '';
-		if ( empty( $search ) ) {
-			wp_send_json_success( array( 'url' => $url ) );
-		}
-
-		// Current user priority role
-		$priority_user_role = false;
-		if ( is_user_logged_in() ) {
-			$priority_user_role = UM()->roles()->get_priority_user_role( get_current_user_id() );
-		}
-
-		foreach ( $member_directory_ids as $directory_id ) {
-			$directory_data = UM()->query()->post_data( $directory_id );
-
-			if ( isset( $directory_data['roles_can_search'] ) ) {
-				$directory_data['roles_can_search'] = maybe_unserialize( $directory_data['roles_can_search'] );
-			}
-
-			$show_search = empty( $directory_data['roles_can_search'] ) || ( ! empty( $priority_user_role ) && in_array( $priority_user_role, $directory_data['roles_can_search'], true ) );
-			if ( empty( $directory_data['search'] ) || ! $show_search ) {
-				continue;
-			}
-
-			$hash = UM()->member_directory()->get_directory_hash( $directory_id );
-
-			$url = add_query_arg( array( 'search_' . $hash => $search ), $url );
-		}
-
-		wp_send_json_success( array( 'url' => $url ) );
+		wp_send_json_success(
+			array(
+				'icons'       => $um_icons_list,
+				'total_count' => $total_count,
+			)
+		);
 	}
 
 
-/** Function ajax_delete_cover_photo() called by wp_ajax hooks: {'um_delete_cover_photo'} **/
-/** Parameters found in function ajax_delete_cover_photo(): {"request": ["user_id"]} **/
-function ajax_delete_cover_photo() {
-			UM()->check_ajax_nonce();
-
-			if ( ! array_key_exists( 'user_id', $_REQUEST ) ) {
-				wp_send_json_error( __( 'Invalid data', 'ultimate-member' ) );
-			}
-
-			$user_id = absint( $_REQUEST['user_id'] );
-
-			if ( ! UM()->roles()->um_current_user_can( 'edit', $user_id ) ) {
-				die( esc_html__( 'You can not edit this user', 'ultimate-member' ) );
-			}
-
-			UM()->files()->delete_core_user_photo( $user_id, 'cover_photo' );
-		}
-
-
-/** Function ajax_select_options() called by wp_ajax hooks: {'nopriv_um_select_options', 'um_select_options'} **/
+/** Function ajax_select_options() called by wp_ajax hooks: {'um_select_options', 'nopriv_um_select_options'} **/
 /** Parameters found in function ajax_select_options(): {"post": ["child_callback", "form_id", "child_name"]} **/
 function ajax_select_options() {
 			UM()->check_ajax_nonce();
@@ -830,374 +511,6 @@ function ajax_select_options() {
 				// phpcs:enable WordPress.Security.NonceVerification
 				wp_send_json( $arr_options );
 			}
-		}
-
-
-/** Function ultimatemember_rated() called by wp_ajax hooks: {'um_rated'} **/
-/** No params detected :-/ **/
-
-
-/** Function ajax_scanner() called by wp_ajax hooks: {'um_secure_scan_affected_users'} **/
-/** Parameters found in function ajax_scanner(): {"request": ["nonce", "last_scanned_capability", "capabilities"]} **/
-function ajax_scanner() {
-		if ( ! wp_verify_nonce( $_REQUEST['nonce'], 'um-admin-nonce' ) || ! current_user_can( 'manage_options' ) ) {
-			wp_die( esc_attr__( 'Security Check', 'ultimate-member' ) );
-		}
-
-		$last_scanned_capability = sanitize_key( $_REQUEST['last_scanned_capability'] );
-
-		if ( empty( $last_scanned_capability ) ) {
-			delete_option( 'um_secure_scanned_details' );
-			update_option( 'um_secure_scan_status', 'started' );
-			update_option( 'um_secure_last_time_scanned', current_time( 'mysql', true ) );
-		}
-
-		$scan_details = get_option( 'um_secure_scanned_details', array() );
-
-		if ( ! empty( $_REQUEST['capabilities'] ) ) {
-			$request_capabilities = is_array( $_REQUEST['capabilities'] ) ? $_REQUEST['capabilities'] : array( $_REQUEST['capabilities'] );
-			$arr_banned_caps      = array_map( 'sanitize_key', $request_capabilities );
-		} else {
-			$arr_banned_caps = UM()->options()->get( 'banned_capabilities' );
-		}
-
-		$proceed       = false;
-		$completed     = false;
-		$message       = '';
-		$scanned_cap   = '';
-		$user_affected = false;
-		$count_users   = 0;
-
-		$last_element = end( $arr_banned_caps );
-
-		foreach ( $arr_banned_caps as $cap ) {
-
-			if ( empty( $last_scanned_capability ) ) {
-				$proceed = true;
-			} else {
-				if ( $last_scanned_capability === $cap ) { // if this was the last capability, skip this and proceed the next loop.
-					$proceed = true;
-					continue;
-				}
-			}
-
-			if ( ! $proceed ) {
-				continue;
-			}
-
-			$args          = array(
-				'capability'   => $cap,
-				'role__not_in' => array( 'administrator' ),
-				'fields'       => 'ids',
-			);
-			$wp_user_query = new WP_User_Query( $args );
-			$count_users   = $wp_user_query->get_total();
-			if ( $count_users <= 0 ) {
-				// translators: %s capability name
-				$message = wp_kses( sprintf( __( '<strong>`%s`</strong> <span style="color:green">is safe.</span>', 'ultimate-member' ), $cap ), UM()->get_allowed_html( 'admin_notice' ) );
-			} else {
-				$user_affected = true;
-				// translators: %1$s capability name, has affected %2$d user account
-				$message = wp_kses( sprintf( _n( '<strong>`%1$s`</strong> <span style="color:red">has affected %2$d user account.</span>', '<strong>`%1$s`</strong> <span style="color:red">has affected %2$d user accounts.</span>', $count_users, 'ultimate-member' ), $cap, $count_users ), UM()->get_allowed_html( 'admin_notice' ) );
-			}
-
-			if ( $last_element === $cap ) {
-				$completed = true;
-				update_option( 'um_secure_scan_status', 'completed' );
-			}
-
-			$scanned_cap = $cap;
-
-			break;
-		}
-
-		if ( $user_affected ) {
-			$scan_details['affected_caps'][] = $scanned_cap;
-
-			$scan_details['scanned_caps'][ $scanned_cap ] = array(
-				'total_affected_users' => $count_users,
-				'users'                => $wp_user_query->get_results(),
-			);
-
-			if ( ! isset( $scan_details['scanned_caps']['total_all_cap_flagged'] ) ) {
-				$scan_details['scanned_caps']['total_all_cap_flagged'] = 1;
-			} else {
-				++$scan_details['scanned_caps']['total_all_cap_flagged'];
-			}
-		}
-
-		if ( ! isset( $scan_details['scanned_caps']['total_all_affected_users'] ) ) {
-			$scan_details['scanned_caps']['total_all_affected_users'] = absint( $count_users );
-		} else {
-			$scan_details['scanned_caps']['total_all_affected_users'] = absint( $scan_details['scanned_caps']['total_all_affected_users'] ) + absint( $count_users );
-		}
-
-		update_option( 'um_secure_scanned_details', $scan_details );
-
-		wp_send_json_success(
-			array(
-				'last_scanned_capability' => $scanned_cap,
-				'message'                 => $message,
-				'completed'               => $completed,
-				'recommendations'         => $completed ? wp_kses( $this->scan_recommendations(), UM()->get_allowed_html( 'templates' ) ) : '',
-			)
-		);
-	}
-
-
-/** Function um_request_user_data() called by wp_ajax hooks: {'um_request_user_data'} **/
-/** Parameters found in function um_request_user_data(): {"post": ["request_action", "password"]} **/
-function um_request_user_data() {
-	UM()->check_ajax_nonce();
-
-	if ( ! isset( $_POST['request_action'] ) ) {
-		wp_send_json_error( __( 'Wrong request.', 'ultimate-member' ) );
-	}
-
-	$user_id        = get_current_user_id();
-	$password       = ! empty( $_POST['password'] ) ? sanitize_text_field( $_POST['password'] ) : '';
-	$user           = get_userdata( $user_id );
-	$hash           = $user->data->user_pass;
-	$request_action = sanitize_key( $_POST['request_action'] );
-
-	if ( 'um-export-data' === $request_action ) {
-		if ( UM()->account()->current_password_is_required( 'privacy_download_data' ) ) {
-			if ( ! wp_check_password( $password, $hash ) ) {
-				$answer = esc_html__( 'The password you entered is incorrect.', 'ultimate-member' );
-				wp_send_json_success( array( 'answer' => $answer ) );
-			}
-		}
-	} elseif ( 'um-erase-data' === $request_action ) {
-		if ( UM()->account()->current_password_is_required( 'privacy_erase_data' ) ) {
-			if ( ! wp_check_password( $password, $hash ) ) {
-				$answer = esc_html__( 'The password you entered is incorrect.', 'ultimate-member' );
-				wp_send_json_success( array( 'answer' => $answer ) );
-			}
-		}
-	}
-
-	if ( 'um-export-data' === $request_action ) {
-		$request_id = wp_create_user_request( $user->data->user_email, 'export_personal_data' );
-	} elseif ( 'um-erase-data' === $request_action ) {
-		$request_id = wp_create_user_request( $user->data->user_email, 'remove_personal_data' );
-	}
-
-	if ( ! isset( $request_id ) || empty( $request_id ) ) {
-		wp_send_json_error( __( 'Wrong request.', 'ultimate-member' ) );
-	}
-
-	if ( is_wp_error( $request_id ) ) {
-		$answer = esc_html( $request_id->get_error_message() );
-	} else {
-		wp_send_user_request( $request_id );
-		if ( 'um-export-data' === $request_action ) {
-			$answer = esc_html__( 'A confirmation email has been sent to your email. Click the link within the email to confirm your export request.', 'ultimate-member' );
-		} elseif ( 'um-erase-data' === $request_action ) {
-			$answer = esc_html__( 'A confirmation email has been sent to your email. Click the link within the email to confirm your deletion request.', 'ultimate-member' );
-		}
-	}
-
-	wp_send_json_success( array( 'answer' => $answer ) );
-}
-
-
-/** Function ajax_remove_file() called by wp_ajax hooks: {'um_remove_file', 'nopriv_um_remove_file'} **/
-/** Parameters found in function ajax_remove_file(): {"post": ["src", "mode", "user_id", "filename"]} **/
-function ajax_remove_file() {
-			UM()->check_ajax_nonce();
-
-			if ( UM()->is_rate_limited( 'remove_file' ) ) {
-				wp_send_json_error( __( 'Too many requests', 'ultimate-member' ) );
-			}
-
-			if ( empty( $_POST['src'] ) ) {
-				wp_send_json_error( __( 'Wrong path', 'ultimate-member' ) );
-			}
-
-			if ( empty( $_POST['mode'] ) ) {
-				wp_send_json_error( __( 'Wrong mode', 'ultimate-member' ) );
-			}
-
-			$src = esc_url_raw( $_POST['src'] );
-			if ( strstr( $src, '?' ) ) {
-				$splitted = explode( '?', $src );
-				$src = $splitted[0];
-			}
-
-			$mode = sanitize_key( $_POST['mode'] );
-
-			if ( $mode == 'register' || empty( $_POST['user_id'] ) ) {
-				$is_temp = um_is_temp_upload( $src );
-				if ( ! $is_temp ) {
-					wp_send_json_success();
-				}
-			} else {
-				$user_id = absint( $_POST['user_id'] );
-
-				if ( ! UM()->roles()->um_current_user_can( 'edit', $user_id ) ) {
-					wp_send_json_error( __( 'You have no permission to edit this user', 'ultimate-member' ) );
-				}
-
-				$is_temp = um_is_temp_upload( $src );
-				if ( ! $is_temp ) {
-					if ( ! empty( $_POST['filename'] ) && file_exists( UM()->uploader()->get_upload_user_base_dir( $user_id ) . DIRECTORY_SEPARATOR . sanitize_file_name( $_POST['filename'] ) ) ) {
-						wp_send_json_success();
-					}
-				}
-			}
-
-			if ( $this->delete_file( $src ) ) {
-				wp_send_json_success();
-			} else {
-				wp_send_json_error( __( 'You have no permission to delete this file', 'ultimate-member' ) );
-			}
-		}
-
-
-/** Function update_order() called by wp_ajax hooks: {'um_update_order'} **/
-/** Parameters found in function update_order(): {"post": ["form_id"]} **/
-function update_order() {
-			UM()->admin()->check_ajax_nonce();
-			// phpcs:disable WordPress.Security.NonceVerification -- already verified here
-
-			if ( ! is_user_logged_in() || ! current_user_can( 'manage_options' ) ) {
-				wp_send_json_error( __( 'Please login as administrator', 'ultimate-member' ) );
-			}
-
-			if ( empty( $_POST['form_id'] ) ) {
-				wp_send_json_error( __( 'Invalid form ID.', 'ultimate-member' ) );
-			}
-
-			$form_id = absint( $_POST['form_id'] );
-			if ( empty( $form_id ) ) {
-				wp_send_json_error( __( 'Invalid form ID.', 'ultimate-member' ) );
-			}
-
-			$fields = UM()->query()->get_attr( 'custom_fields', $form_id );
-
-			$this->row_data   = get_option( 'um_form_rowdata_' . $form_id, array() );
-			$this->exist_rows = array();
-
-			if ( ! empty( $fields ) ) {
-				foreach ( $fields as $key => $array ) {
-					if ( 'row' === $array['type'] ) {
-						$this->row_data[ $key ] = $array;
-						unset( $fields[ $key ] );
-					}
-				}
-			} else {
-				$fields = array();
-			}
-
-			foreach ( $_POST as $key => $value ) {
-				// don't use sanitize_key here because of a key can be in Uppercase
-				$key = sanitize_text_field( $key );
-
-				// adding rows
-				if ( 0 === strpos( $key, '_um_row_' ) ) {
-					$update_args = null;
-
-					$row_id = str_replace( '_um_row_', '', $key );
-
-					if ( false !== strpos( $_POST[ '_um_rowcols_' . $row_id . '_cols' ], ':' ) ) {
-						$cols = sanitize_text_field( $_POST[ '_um_rowcols_' . $row_id . '_cols' ] );
-					} else {
-						$cols = absint( $_POST[ '_um_rowcols_' . $row_id . '_cols' ] );
-					}
-
-					$row_array = array(
-						'type'     => 'row',
-						'id'       => sanitize_key( $value ),
-						'sub_rows' => absint( $_POST[ '_um_rowsub_' . $row_id . '_rows' ] ),
-						'cols'     => $cols,
-						'origin'   => sanitize_key( $_POST[ '_um_roworigin_' . $row_id . '_val' ] ),
-					);
-
-					$row_args = $row_array;
-
-					if ( isset( $this->row_data[ $row_array['origin'] ] ) ) {
-						foreach ( $this->row_data[ $row_array['origin'] ] as $k => $v ) {
-							if ( 'position' !== $k && 'metakey' !== $k ) {
-								$update_args[ $k ] = $v;
-							}
-						}
-						if ( isset( $update_args ) ) {
-							$row_args = array_merge( $update_args, $row_array );
-						}
-						$this->exist_rows[] = $key;
-					}
-
-					$fields[ $key ] = $row_args;
-				}
-
-				// change field position
-				if ( 0 === strpos( $key, 'um_position_' ) ) {
-					$field_key = str_replace( 'um_position_', '', $key );
-					if ( isset( $fields[ $field_key ] ) ) {
-						$fields[ $field_key ]['position'] = absint( $value );
-					}
-				}
-
-				// change field master row
-				if ( 0 === strpos( $key, 'um_row_' ) ) {
-					$field_key = str_replace( 'um_row_', '', $key );
-					if ( isset( $fields[ $field_key ] ) ) {
-						$fields[ $field_key ]['in_row'] = sanitize_key( $value );
-					}
-				}
-
-				// change field sub row
-				if ( 0 === strpos( $key, 'um_subrow_' ) ) {
-					$field_key = str_replace( 'um_subrow_', '', $key );
-					if ( isset( $fields[ $field_key ] ) ) {
-						$fields[ $field_key ]['in_sub_row'] = sanitize_key( $value );
-					}
-				}
-
-				// change field column
-				if ( 0 === strpos( $key, 'um_col_' ) ) {
-					$field_key = str_replace( 'um_col_', '', $key );
-					if ( isset( $fields[ $field_key ] ) ) {
-						$fields[ $field_key ]['in_column'] = absint( $value );
-					}
-				}
-
-				// add field to group
-				if ( 0 === strpos( $key, 'um_group_' ) ) {
-					$field_key = str_replace( 'um_group_', '', $key );
-					if ( isset( $fields[ $field_key ] ) ) {
-						$fields[ $field_key ]['in_group'] = ! empty( $value ) ? absint( $value ) : '';
-					}
-				}
-			}
-
-			foreach ( $this->row_data as $k => $v ) {
-				if ( ! in_array( $k, $this->exist_rows, true ) ) {
-					unset( $this->row_data[ $k ] );
-				}
-			}
-
-			update_option( 'um_existing_rows_' . $form_id, $this->exist_rows );
-
-			update_option( 'um_form_rowdata_' . $form_id, $this->row_data );
-
-			UM()->query()->update_attr( 'custom_fields', $form_id, $fields );
-			// phpcs:enable WordPress.Security.NonceVerification -- already verified here
-		}
-
-
-/** Function default_filter_settings() called by wp_ajax hooks: {'um_member_directory_default_filter_settings'} **/
-/** Parameters found in function default_filter_settings(): {"request": ["key", "directory_id"]} **/
-function default_filter_settings() {
-			UM()->admin()->check_ajax_nonce();
-
-			// we can't use function "sanitize_key" because it changes uppercase to lowercase
-			$filter_key = sanitize_text_field( $_REQUEST['key'] );
-			$directory_id = absint( $_REQUEST['directory_id'] );
-
-			$html = $this->show_filter( $filter_key, array( 'form_id' => $directory_id ), false, true );
-
-			wp_send_json_success( array( 'field_html' => $html ) );
 		}
 
 
@@ -1588,6 +901,357 @@ function ajax_delete_profile_photo() {
 
 			UM()->files()->delete_core_user_photo( $user_id, 'profile_photo' );
 		}
+
+
+/** Function same_page_update_ajax() called by wp_ajax hooks: {'um_same_page_update'} **/
+/** Parameters found in function same_page_update_ajax(): {"post": ["cb_func", "page"]} **/
+function same_page_update_ajax() {
+			UM()->admin()->check_ajax_nonce();
+
+			if ( empty( $_POST['cb_func'] ) ) {
+				wp_send_json_error( __( 'Wrong callback', 'ultimate-member' ) );
+			}
+
+			$cb_func = sanitize_key( $_POST['cb_func'] );
+
+			if ( 'um_usermeta_fields' === $cb_func ) {
+				//first install metatable
+				global $wpdb;
+
+				$metakeys = array();
+				foreach ( UM()->builtin()->all_user_fields as $all_user_field ) {
+					if ( ! array_key_exists( 'metakey', $all_user_field ) ) {
+						continue;
+					}
+					$metakeys[] = $all_user_field['metakey'];
+				}
+
+				$metakeys = apply_filters( 'um_metadata_same_page_update_ajax', $metakeys, UM()->builtin()->all_user_fields );
+
+				if ( is_multisite() ) {
+					$sites = get_sites( array( 'fields' => 'ids' ) );
+					foreach ( $sites as $blog_id ) {
+						$metakeys[] = $wpdb->get_blog_prefix( $blog_id ) . 'capabilities';
+						$metakeys[] = 'wc_money_spent_' . rtrim( $wpdb->get_blog_prefix( $blog_id ), '_' ); // Is used since Woocommerce 9.1.0
+						$metakeys[] = 'wc_order_count_' . rtrim( $wpdb->get_blog_prefix( $blog_id ), '_' ); // Is used since Woocommerce 9.1.0 TODO remove as soon as used 'um_wc_order_count_'
+					}
+				} else {
+					$blog_id    = get_current_blog_id();
+					$metakeys[] = $wpdb->get_blog_prefix( $blog_id ) . 'capabilities';
+					$metakeys[] = 'wc_money_spent_' . rtrim( $wpdb->get_blog_prefix( $blog_id ), '_' ); // Is used since Woocommerce 9.1.0
+					$metakeys[] = 'wc_order_count_' . rtrim( $wpdb->get_blog_prefix( $blog_id ), '_' ); // Is used since Woocommerce 9.1.0 TODO remove as soon as used 'um_wc_order_count_'
+				}
+
+				// Member directory data
+				$metakeys[] = 'um_member_directory_data';
+				$metakeys[] = '_um_verified';
+				$metakeys[] = '_money_spent'; // Legacy since Woocommerce 9.1.0. TODO remove as soon as stop support Woo below 9.1.0 version
+				$metakeys[] = '_completed';
+				$metakeys[] = '_reviews_avg';
+
+				//myCred meta
+				if ( function_exists( 'mycred_get_types' ) ) {
+					$mycred_types = mycred_get_types();
+					if ( ! empty( $mycred_types ) ) {
+						foreach ( array_keys( $mycred_types ) as $point_type ) {
+							$metakeys[] = $point_type;
+						}
+					}
+				}
+
+				$sortby_custom_keys = $wpdb->get_col( "SELECT DISTINCT meta_value FROM {$wpdb->postmeta} WHERE meta_key='_um_sortby_custom'" );
+				if ( empty( $sortby_custom_keys ) ) {
+					$sortby_custom_keys = array();
+				}
+
+				$sortby_custom_keys2 = $wpdb->get_col( "SELECT meta_value FROM {$wpdb->postmeta} WHERE meta_key='_um_sorting_fields'" );
+				if ( ! empty( $sortby_custom_keys2 ) ) {
+					foreach ( $sortby_custom_keys2 as $custom_val ) {
+						$custom_val = maybe_unserialize( $custom_val );
+
+						foreach ( $custom_val as $sort_value ) {
+							if ( is_array( $sort_value ) ) {
+								$field_keys           = array_keys( $sort_value );
+								$sortby_custom_keys[] = $field_keys[0];
+							}
+						}
+					}
+				}
+
+				if ( ! empty( $sortby_custom_keys ) ) {
+					$sortby_custom_keys = array_unique( $sortby_custom_keys );
+					$metakeys           = array_merge( $metakeys, $sortby_custom_keys );
+				}
+
+				$skip_fields = UM()->builtin()->get_fields_without_metakey();
+				$skip_fields = array_merge( $skip_fields, UM()->member_directory()::$core_search_fields );
+
+				$real_usermeta = $wpdb->get_col( "SELECT DISTINCT meta_key FROM {$wpdb->usermeta}" );
+				$real_usermeta = ! empty( $real_usermeta ) ? $real_usermeta : array();
+				$real_usermeta = array_merge( $real_usermeta, array( 'um_member_directory_data' ) );
+
+				if ( ! empty( $sortby_custom_keys ) ) {
+					$real_usermeta = array_merge( $real_usermeta, $sortby_custom_keys );
+				}
+
+				$wp_usermeta_option = array_intersect( array_diff( $metakeys, $skip_fields ), $real_usermeta );
+
+				update_option( 'um_usermeta_fields', array_values( $wp_usermeta_option ) );
+
+				update_option( 'um_member_directory_update_meta', time() );
+
+				UM()->options()->update( 'member_directory_own_table', true );
+
+				wp_send_json_success();
+			} elseif ( 'um_get_metadata' === $cb_func ) {
+				global $wpdb;
+
+				$wp_usermeta_option = get_option( 'um_usermeta_fields', array() );
+
+				$count = $wpdb->get_var(
+					"SELECT COUNT(*)
+					FROM {$wpdb->usermeta}
+					WHERE meta_key IN ('" . implode( "','", $wp_usermeta_option ) . "')"
+				);
+
+				wp_send_json_success( array( 'count' => $count ) );
+			} elseif ( 'um_update_metadata_per_page' === $cb_func ) {
+
+				if ( empty( $_POST['page'] ) ) {
+					wp_send_json_error( __( 'Wrong data', 'ultimate-member' ) );
+				}
+
+				$per_page           = 500;
+				$wp_usermeta_option = get_option( 'um_usermeta_fields', array() );
+
+				global $wpdb;
+				$metadata = $wpdb->get_results(
+					$wpdb->prepare(
+						"SELECT *
+						FROM {$wpdb->usermeta}
+						WHERE meta_key IN ('" . implode( "','", $wp_usermeta_option ) . "')
+						LIMIT %d, %d",
+						( absint( $_POST['page'] ) - 1 ) * $per_page,
+						$per_page
+					),
+					ARRAY_A
+				);
+
+				$values = array();
+				foreach ( $metadata as $metarow ) {
+					$values[] = $wpdb->prepare( '(%d, %s, %s)', $metarow['user_id'], $metarow['meta_key'], $metarow['meta_value'] );
+				}
+
+				// maybe create table.
+				$table_name = $wpdb->prefix . 'um_metadata';
+				$query      = $wpdb->prepare(
+					'SHOW TABLES LIKE %s',
+					$wpdb->esc_like( $table_name )
+				);
+				if ( $wpdb->get_var( $query ) !== $table_name ) {
+					UM()->setup()->create_db();
+				}
+
+				if ( ! empty( $values ) ) {
+					$wpdb->query(
+						"INSERT INTO
+						{$wpdb->prefix}um_metadata(user_id, um_key, um_value)
+						VALUES " . implode( ',', $values )
+					);
+				}
+
+				$from = ( absint( $_POST['page'] ) * $per_page ) - $per_page + 1;
+				$to   = absint( $_POST['page'] ) * $per_page;
+				// translators: %1$s is a metadata from name; %2$s is a metadata to.
+				wp_send_json_success( array( 'message' => sprintf( __( 'Metadata from %1$s to %2$s was upgraded successfully...', 'ultimate-member' ), $from, $to ) ) );
+			} else {
+				do_action( 'um_same_page_update_ajax_action', $cb_func );
+			}
+		}
+
+
+/** Function ajax_get_packages() called by wp_ajax hooks: {'um_get_packages'} **/
+/** No params detected :-/ **/
+
+
+/** Function ajax_delete_cover_photo() called by wp_ajax hooks: {'um_delete_cover_photo'} **/
+/** Parameters found in function ajax_delete_cover_photo(): {"request": ["user_id"]} **/
+function ajax_delete_cover_photo() {
+			UM()->check_ajax_nonce();
+
+			if ( ! array_key_exists( 'user_id', $_REQUEST ) ) {
+				wp_send_json_error( __( 'Invalid data', 'ultimate-member' ) );
+			}
+
+			$user_id = absint( $_REQUEST['user_id'] );
+
+			if ( ! UM()->roles()->um_current_user_can( 'edit', $user_id ) ) {
+				die( esc_html__( 'You can not edit this user', 'ultimate-member' ) );
+			}
+
+			UM()->files()->delete_core_user_photo( $user_id, 'cover_photo' );
+		}
+
+
+/** Function update_order() called by wp_ajax hooks: {'um_update_order'} **/
+/** Parameters found in function update_order(): {"post": ["form_id"]} **/
+function update_order() {
+			UM()->admin()->check_ajax_nonce();
+			// phpcs:disable WordPress.Security.NonceVerification -- already verified here
+
+			if ( ! is_user_logged_in() || ! current_user_can( 'manage_options' ) ) {
+				wp_send_json_error( __( 'Please login as administrator', 'ultimate-member' ) );
+			}
+
+			if ( empty( $_POST['form_id'] ) ) {
+				wp_send_json_error( __( 'Invalid form ID.', 'ultimate-member' ) );
+			}
+
+			$form_id = absint( $_POST['form_id'] );
+			if ( empty( $form_id ) ) {
+				wp_send_json_error( __( 'Invalid form ID.', 'ultimate-member' ) );
+			}
+
+			$fields = UM()->query()->get_attr( 'custom_fields', $form_id );
+
+			$this->row_data   = get_option( 'um_form_rowdata_' . $form_id, array() );
+			$this->exist_rows = array();
+
+			if ( ! empty( $fields ) ) {
+				foreach ( $fields as $key => $array ) {
+					if ( 'row' === $array['type'] ) {
+						$this->row_data[ $key ] = $array;
+						unset( $fields[ $key ] );
+					}
+				}
+			} else {
+				$fields = array();
+			}
+
+			foreach ( $_POST as $key => $value ) {
+				// don't use sanitize_key here because of a key can be in Uppercase
+				$key = sanitize_text_field( $key );
+
+				// adding rows
+				if ( 0 === strpos( $key, '_um_row_' ) ) {
+					$update_args = null;
+
+					$row_id = str_replace( '_um_row_', '', $key );
+
+					if ( false !== strpos( $_POST[ '_um_rowcols_' . $row_id . '_cols' ], ':' ) ) {
+						$cols = sanitize_text_field( $_POST[ '_um_rowcols_' . $row_id . '_cols' ] );
+					} else {
+						$cols = absint( $_POST[ '_um_rowcols_' . $row_id . '_cols' ] );
+					}
+
+					$row_array = array(
+						'type'     => 'row',
+						'id'       => sanitize_key( $value ),
+						'sub_rows' => absint( $_POST[ '_um_rowsub_' . $row_id . '_rows' ] ),
+						'cols'     => $cols,
+						'origin'   => sanitize_key( $_POST[ '_um_roworigin_' . $row_id . '_val' ] ),
+					);
+
+					$row_args = $row_array;
+
+					if ( isset( $this->row_data[ $row_array['origin'] ] ) ) {
+						foreach ( $this->row_data[ $row_array['origin'] ] as $k => $v ) {
+							if ( 'position' !== $k && 'metakey' !== $k ) {
+								$update_args[ $k ] = $v;
+							}
+						}
+						if ( isset( $update_args ) ) {
+							$row_args = array_merge( $update_args, $row_array );
+						}
+						$this->exist_rows[] = $key;
+					}
+
+					$fields[ $key ] = $row_args;
+				}
+
+				// change field position
+				if ( 0 === strpos( $key, 'um_position_' ) ) {
+					$field_key = str_replace( 'um_position_', '', $key );
+					if ( isset( $fields[ $field_key ] ) ) {
+						$fields[ $field_key ]['position'] = absint( $value );
+					}
+				}
+
+				// change field master row
+				if ( 0 === strpos( $key, 'um_row_' ) ) {
+					$field_key = str_replace( 'um_row_', '', $key );
+					if ( isset( $fields[ $field_key ] ) ) {
+						$fields[ $field_key ]['in_row'] = sanitize_key( $value );
+					}
+				}
+
+				// change field sub row
+				if ( 0 === strpos( $key, 'um_subrow_' ) ) {
+					$field_key = str_replace( 'um_subrow_', '', $key );
+					if ( isset( $fields[ $field_key ] ) ) {
+						$fields[ $field_key ]['in_sub_row'] = sanitize_key( $value );
+					}
+				}
+
+				// change field column
+				if ( 0 === strpos( $key, 'um_col_' ) ) {
+					$field_key = str_replace( 'um_col_', '', $key );
+					if ( isset( $fields[ $field_key ] ) ) {
+						$fields[ $field_key ]['in_column'] = absint( $value );
+					}
+				}
+
+				// add field to group
+				if ( 0 === strpos( $key, 'um_group_' ) ) {
+					$field_key = str_replace( 'um_group_', '', $key );
+					if ( isset( $fields[ $field_key ] ) ) {
+						$fields[ $field_key ]['in_group'] = ! empty( $value ) ? absint( $value ) : '';
+					}
+				}
+			}
+
+			foreach ( $this->row_data as $k => $v ) {
+				if ( ! in_array( $k, $this->exist_rows, true ) ) {
+					unset( $this->row_data[ $k ] );
+				}
+			}
+
+			update_option( 'um_existing_rows_' . $form_id, $this->exist_rows );
+
+			update_option( 'um_form_rowdata_' . $form_id, $this->row_data );
+
+			UM()->query()->update_attr( 'custom_fields', $form_id, $fields );
+			// phpcs:enable WordPress.Security.NonceVerification -- already verified here
+		}
+
+
+/** Function load_comments() called by wp_ajax hooks: {'nopriv_um_ajax_paginate_comments', 'um_ajax_paginate_comments'} **/
+/** Parameters found in function load_comments(): {"post": ["user_id", "page"]} **/
+function load_comments() {
+			UM()->check_ajax_nonce();
+
+			if ( UM()->is_rate_limited( 'paginate_comments' ) ) {
+				wp_send_json_error( __( 'Too many requests', 'ultimate-member' ) );
+			}
+
+			$user_id = ! empty( $_POST['user_id'] ) ? absint( $_POST['user_id'] ) : get_current_user_id();
+			$page = ! empty( $_POST['page'] ) ? absint( $_POST['page'] ) : 0;
+
+			$comments = get_comments( array(
+				'number'        => 10,
+				'offset'        => ( $page - 1 ) * 10,
+				'user_id'       => $user_id,
+				'post_status'   => array('publish'),
+				'type__not_in'  => apply_filters( 'um_excluded_comment_types', array('') ),
+			) );
+
+			UM()->get_template( 'profile/comments.php', '', array( 'comments' => $comments ), true );
+			wp_die();
+		}
+
+
+/** Function ultimatemember_rated() called by wp_ajax hooks: {'um_rated'} **/
+/** No params detected :-/ **/
 
 
 /** Function ajax_get_members() called by wp_ajax hooks: {'nopriv_um_get_members', 'um_get_members'} **/
@@ -2143,7 +1807,216 @@ function ajax_get_members() {
 		}
 
 
-/** Function ajax_file_upload() called by wp_ajax hooks: {'nopriv_um_fileupload', 'um_fileupload'} **/
+/** Function get_users() called by wp_ajax hooks: {'um_get_users'} **/
+/** Parameters found in function get_users(): {"request": ["search", "page", "avatar"]} **/
+function get_users() {
+		UM()->admin()->check_ajax_nonce();
+
+		$search_request = ! empty( $_REQUEST['search'] ) ? sanitize_text_field( $_REQUEST['search'] ) : '';
+		$page           = ! empty( $_REQUEST['page'] ) ? absint( $_REQUEST['page'] ) : 1;
+		$per_page       = 20;
+
+		$args = array(
+			'fields' => array( 'ID', 'user_login' ),
+			'paged'  => $page,
+			'number' => $per_page,
+		);
+
+		if ( ! empty( $search_request ) ) {
+			$args['search'] = '*' . $search_request . '*';
+		}
+
+		$args = apply_filters( 'um_get_users_list_ajax_args', $args );
+
+		$users_query = new \WP_User_Query( $args );
+		$users       = $users_query->get_results();
+		$total_count = $users_query->get_total();
+
+		if ( ! empty( $_REQUEST['avatar'] ) ) {
+			foreach ( $users as $key => $user ) {
+				$url                = get_avatar_url( $user->ID );
+				$users[ $key ]->img = $url;
+			}
+		}
+
+		wp_send_json_success(
+			array(
+				'users'       => $users,
+				'total_count' => $total_count,
+			)
+		);
+	}
+
+
+/** Function populate_dropdown_options() called by wp_ajax hooks: {'um_populate_dropdown_options'} **/
+/** Parameters found in function populate_dropdown_options(): {"post": ["um_option_callback"]} **/
+function populate_dropdown_options() {
+			UM()->admin()->check_ajax_nonce();
+
+			if ( ! is_user_logged_in() || ! current_user_can( 'manage_options' ) ) {
+				wp_send_json_error( __( 'This is not possible for security reasons.', 'ultimate-member' ) );
+			}
+
+			$arr_options = array();
+
+			// we can not use `sanitize_key()` because it removes backslash needed for namespace and uppercase symbols
+			$um_callback_func = sanitize_text_field( $_POST['um_option_callback'] );
+			// removed added by sanitize slashes for the namespaces
+			$um_callback_func = wp_unslash( $um_callback_func );
+
+			if ( empty( $um_callback_func ) ) {
+				$arr_options['status'] = 'empty';
+				$arr_options['function_name'] = $um_callback_func;
+				$arr_options['function_exists'] = function_exists( $um_callback_func );
+			}
+
+			if ( UM()->fields()->is_source_blacklisted( $um_callback_func ) ) {
+				wp_send_json_error( __( 'This is not possible for security reasons. Don\'t use internal PHP functions.', 'ultimate-member' ) );
+			}
+
+			$arr_options['data'] = array();
+			if ( function_exists( $um_callback_func ) ) {
+				$arr_options['data'] = call_user_func( $um_callback_func );
+			}
+
+			wp_send_json( $arr_options );
+		}
+
+
+/** Function ajax_paginate() called by wp_ajax hooks: {'um_ajax_paginate'} **/
+/** Parameters found in function ajax_paginate(): {"request": ["hook", "args"]} **/
+function ajax_paginate() {
+			UM()->check_ajax_nonce();
+
+			// phpcs:disable WordPress.Security.NonceVerification
+			if ( ! isset( $_REQUEST['hook'] ) ) {
+				wp_send_json_error( __( 'Invalid hook.', 'ultimate-member' ) );
+			}
+			$hook = sanitize_key( $_REQUEST['hook'] );
+
+			$args = ! empty( $_REQUEST['args'] ) ? $_REQUEST['args'] : array();
+			// phpcs:enable WordPress.Security.NonceVerification
+
+			ob_start();
+
+			/**
+			 * Fires on posts loading by AJAX in User Profile tabs.
+			 *
+			 * @since 1.3.x
+			 * @hook  um_ajax_load_posts__{$hook}
+			 *
+			 * @param {array} $args Request.
+			 *
+			 * @example <caption>Make any custom action on when posts loading by AJAX in User Profile.</caption>
+			 * function my_ajax_load_posts( $args ) {
+			 *     // your code here
+			 * }
+			 * add_action( 'um_ajax_load_posts__{$hook}', 'my_ajax_load_posts', 10, 1 );
+			 */
+			do_action( "um_ajax_load_posts__{$hook}", $args );
+
+			$output = ob_get_clean();
+			// @todo: investigate using WP_KSES
+			die( $output );
+		}
+
+
+/** Function dismiss_notice() called by wp_ajax hooks: {'um_dismiss_notice'} **/
+/** Parameters found in function dismiss_notice(): {"post": ["key"]} **/
+function dismiss_notice() {
+			UM()->admin()->check_ajax_nonce();
+
+			if ( empty( $_POST['key'] ) ) {
+				wp_send_json_error( __( 'Wrong Data', 'ultimate-member' ) );
+			}
+
+			$this->dismiss( sanitize_key( $_POST['key'] ) );
+
+			wp_send_json_success();
+		}
+
+
+/** Function search_widget_request() called by wp_ajax hooks: {'um_search_widget_request', 'nopriv_um_search_widget_request'} **/
+/** Parameters found in function search_widget_request(): {"post": ["search"]} **/
+function search_widget_request() {
+		check_ajax_referer( 'um_search_widget_request' );
+
+		if ( ! UM()->options()->get( 'members_page' ) ) {
+			wp_send_json_error( __( 'No members page enabled', 'ultimate-member' ) );
+		}
+
+		$member_directory_ids = array();
+
+		$page_id = UM()->config()->permalinks['members'];
+		if ( ! empty( $page_id ) ) {
+			$member_directory_ids = UM()->member_directory()->get_member_directory_id( $page_id );
+		}
+
+		if ( empty( $member_directory_ids ) ) {
+			wp_send_json_error( __( 'No members page enabled', 'ultimate-member' ) );
+		}
+
+		$url = um_get_predefined_page_url( 'members' );
+
+		$search = isset( $_POST['search'] ) ? sanitize_text_field( $_POST['search'] ) : '';
+		if ( empty( $search ) ) {
+			wp_send_json_success( array( 'url' => $url ) );
+		}
+
+		// Current user priority role
+		$priority_user_role = false;
+		if ( is_user_logged_in() ) {
+			$priority_user_role = UM()->roles()->get_priority_user_role( get_current_user_id() );
+		}
+
+		foreach ( $member_directory_ids as $directory_id ) {
+			$directory_data = UM()->query()->post_data( $directory_id );
+
+			if ( isset( $directory_data['roles_can_search'] ) ) {
+				$directory_data['roles_can_search'] = maybe_unserialize( $directory_data['roles_can_search'] );
+			}
+
+			$show_search = empty( $directory_data['roles_can_search'] ) || ( ! empty( $priority_user_role ) && in_array( $priority_user_role, $directory_data['roles_can_search'], true ) );
+			if ( empty( $directory_data['search'] ) || ! $show_search ) {
+				continue;
+			}
+
+			$hash = UM()->member_directory()->get_directory_hash( $directory_id );
+
+			$url = add_query_arg( array( 'search_' . $hash => $search ), $url );
+		}
+
+		wp_send_json_success( array( 'url' => $url ) );
+	}
+
+
+/** Function update_builder() called by wp_ajax hooks: {'um_update_builder'} **/
+/** Parameters found in function update_builder(): {"post": ["form_id"]} **/
+function update_builder() {
+			UM()->admin()->check_ajax_nonce();
+
+			if ( ! is_user_logged_in() || ! current_user_can( 'manage_options' ) ) {
+				wp_send_json_error( __( 'Please login as administrator', 'ultimate-member' ) );
+			}
+
+			ob_start();
+
+			$this->form_id = absint( $_POST['form_id'] );
+
+			$this->show_builder();
+
+			$output = ob_get_clean();
+
+			if ( is_array( $output ) ) {
+				print_r( $output );
+			} else {
+				echo $output;
+			}
+			die;
+		}
+
+
+/** Function ajax_file_upload() called by wp_ajax hooks: {'um_fileupload', 'nopriv_um_fileupload'} **/
 /** Parameters found in function ajax_file_upload(): {"post": ["_wpnonce", "timestamp", "user_id", "set_id", "set_mode", "key"]} **/
 function ajax_file_upload() {
 			if ( UM()->is_rate_limited( 'upload_file' ) ) {
@@ -2302,44 +2175,204 @@ function ajax_file_upload() {
 		}
 
 
-/** Function get_icons() called by wp_ajax hooks: {'um_get_icons'} **/
-/** Parameters found in function get_icons(): {"request": ["search", "page"]} **/
-function get_icons() {
-		UM()->admin()->check_ajax_nonce();
+/** Function ajax_image_upload() called by wp_ajax hooks: {'um_imageupload', 'nopriv_um_imageupload'} **/
+/** Parameters found in function ajax_image_upload(): {"post": ["key", "user_id", "timestamp", "_wpnonce", "set_id", "set_mode"]} **/
+function ajax_image_upload() {
+			if ( UM()->is_rate_limited( 'upload_image' ) ) {
+				wp_send_json_error( __( 'Too many requests', 'ultimate-member' ) );
+			}
 
-		$search_request = ! empty( $_REQUEST['search'] ) ? sanitize_text_field( $_REQUEST['search'] ) : '';
-		$page           = ! empty( $_REQUEST['page'] ) ? absint( $_REQUEST['page'] ) : 1;
-		$per_page       = 50;
+			$ret['error'] = null;
+			$ret          = array();
 
-		UM()->setup()->set_icons_options();
+			if ( empty( $_POST['key'] ) ) {
+				$ret['error'] = esc_html__( 'Invalid image key', 'ultimate-member' );
+				wp_send_json_error( $ret );
+			}
 
-		$um_icons_list = get_option( 'um_icons_list' );
-		if ( ! empty( $search_request ) ) {
-			$um_icons_list = array_filter(
-				$um_icons_list,
-				function( $item ) use ( $search_request ) {
-					$result = array_filter(
-						$item['search'],
-						function( $search_item ) use ( $search_request ) {
-							return stripos( $search_item, $search_request ) !== false;
-						}
-					);
-					return count( $result ) > 0;
+			$id      = sanitize_text_field( $_POST['key'] );
+			$user_id = empty( $_POST['user_id'] ) ? null : absint( $_POST['user_id'] );
+
+			/**
+			 * Filters the custom validation marker for 3rd-party uploader.
+			 *
+			 * @param {bool}   $custom_validation Custom validation marker. Is null by default. Keep null for UM core validation.
+			 * @param {string} $id                Uploader field key.
+			 * @param {int}    $user_id           User ID.
+			 *
+			 * @return {bool} Custom validation marker.
+			 *
+			 * @since 2.9.1
+			 * @hook um_image_upload_validation
+			 *
+			 * @example <caption>Custom validation.</caption>
+			 * function my_um_image_upload_validation( $custom_validation, $id, $user_id ) {
+			 *     // your code here
+			 *     $ret['error'] = esc_html__( 'Error code', 'ultimate-member' );
+			 *     wp_send_json_error( $ret );
+			 *     return true;
+			 * }
+			 * add_filter( 'um_image_upload_validation', 'my_um_image_upload_validation', 10, 3 );
+			 */
+			$custom_validation = apply_filters( 'um_image_upload_validation', null, $id, $user_id );
+			if ( is_null( $custom_validation ) ) {
+				/**
+				 * Filters image upload checking nonce.
+				 *
+				 * @param {bool} $verify_nonce Verify nonce marker. Default true.
+				 *
+				 * @return {bool} Verify nonce marker.
+				 *
+				 * @since 1.3.x
+				 * @hook um_image_upload_nonce
+				 *
+				 * @example <caption>Disable checking nonce on image upload.</caption>
+				 * function my_image_upload_nonce( $verify_nonce ) {
+				 *     // your code here
+				 *     $verify_nonce = false;
+				 *     return $verify_nonce;
+				 * }
+				 * add_filter( 'um_image_upload_nonce', 'my_image_upload_nonce' );
+				 */
+				$um_image_upload_nonce = apply_filters( 'um_image_upload_nonce', true );
+				if ( $um_image_upload_nonce ) {
+					$timestamp = absint( $_POST['timestamp'] );
+					$nonce     = sanitize_text_field( $_POST['_wpnonce'] );
+					if ( ! wp_verify_nonce( $nonce, "um_upload_nonce-{$timestamp}" ) && is_user_logged_in() ) {
+						// This nonce is not valid.
+						$ret['error'] = esc_html__( 'Invalid nonce', 'ultimate-member' );
+						wp_send_json_error( $ret );
+					}
 				}
-			);
+
+				if ( $user_id && is_user_logged_in() && ! UM()->roles()->um_current_user_can( 'edit', $user_id ) ) {
+					$ret['error'] = esc_html__( 'You have no permission to edit this user', 'ultimate-member' );
+					wp_send_json_error( $ret );
+				}
+
+				if ( $user_id && ! is_user_logged_in() ) {
+					$ret['error'] = esc_html__( 'Please login to edit this user', 'ultimate-member' );
+					wp_send_json_error( $ret );
+				}
+
+				$form_id = absint( $_POST['set_id'] );
+				$mode    = sanitize_key( $_POST['set_mode'] );
+
+				UM()->fields()->set_id   = $form_id;
+				UM()->fields()->set_mode = $mode;
+
+				if ( ! is_user_logged_in() && 'profile' === $mode ) {
+					$ret['error'] = esc_html__( 'You have no permission to edit user profile', 'ultimate-member' );
+					wp_send_json_error( $ret );
+				}
+
+				if ( null !== $user_id && 'register' === $mode ) {
+					$ret['error'] = esc_html__( 'User has to be empty on registration', 'ultimate-member' );
+					wp_send_json_error( $ret );
+				}
+
+				$form_post = get_post( $form_id );
+				// Invalid post ID. Maybe post doesn't exist.
+				if ( empty( $form_post ) ) {
+					$ret['error'] = esc_html__( 'Invalid form ID', 'ultimate-member' );
+					wp_send_json_error( $ret );
+				}
+
+				if ( 'um_form' !== $form_post->post_type ) {
+					$ret['error'] = esc_html__( 'Invalid form post type', 'ultimate-member' );
+					wp_send_json_error( $ret );
+				}
+
+				$form_status = get_post_status( $form_id );
+				if ( 'publish' !== $form_status ) {
+					$ret['error'] = esc_html__( 'Invalid form status', 'ultimate-member' );
+					wp_send_json_error( $ret );
+				}
+
+				$post_data = UM()->query()->post_data( $form_id );
+				if ( ! array_key_exists( 'mode', $post_data ) || $mode !== $post_data['mode'] ) {
+					$ret['error'] = esc_html__( 'Invalid form type', 'ultimate-member' );
+					wp_send_json_error( $ret );
+				}
+
+				// For profiles only.
+				if ( 'profile' === $mode && ! empty( $post_data['use_custom_settings'] ) && ! empty( $post_data['role'] ) ) {
+					// Option "Apply custom settings to this form". Option "Make this profile form role-specific".
+					// Show the first Profile Form with role selected, don't show profile forms below the page with other role-specific setting.
+					$current_user_roles = UM()->roles()->get_all_user_roles( $user_id );
+					if ( empty( $current_user_roles ) ) {
+						$ret['error'] = esc_html__( 'You have no permission to edit this user through this form', 'ultimate-member' );
+						wp_send_json_error( $ret );
+					}
+
+					$post_data['role'] = maybe_unserialize( $post_data['role'] );
+
+					if ( is_array( $post_data['role'] ) ) {
+						if ( ! count( array_intersect( $post_data['role'], $current_user_roles ) ) ) {
+							$ret['error'] = esc_html__( 'You have no permission to edit this user through this form', 'ultimate-member' );
+							wp_send_json_error( $ret );
+						}
+					} elseif ( ! in_array( $post_data['role'], $current_user_roles, true ) ) {
+						$ret['error'] = esc_html__( 'You have no permission to edit this user through this form', 'ultimate-member' );
+						wp_send_json_error( $ret );
+					}
+				}
+
+				if ( ! array_key_exists( 'custom_fields', $post_data ) || empty( $post_data['custom_fields'] ) ) {
+					$ret['error'] = esc_html__( 'Invalid form fields', 'ultimate-member' );
+					wp_send_json_error( $ret );
+				}
+
+				$custom_fields = maybe_unserialize( $post_data['custom_fields'] );
+				if ( ! is_array( $custom_fields ) || ! array_key_exists( $id, $custom_fields ) ) {
+					if ( ! ( 'profile' === $mode && in_array( $id, array( 'cover_photo', 'profile_photo' ), true ) ) ) {
+						$ret['error'] = esc_html__( 'Invalid field metakey', 'ultimate-member' );
+						wp_send_json_error( $ret );
+					}
+				}
+
+				if ( 'profile' === $mode ) {
+					if ( in_array( $id, array( 'cover_photo', 'profile_photo' ), true ) ) {
+						if ( 'profile_photo' === $id ) {
+							$disable_photo_uploader = empty( $post_data['use_custom_settings'] ) ? UM()->options()->get( 'disable_profile_photo_upload' ) : $post_data['disable_photo_upload'];
+							if ( $disable_photo_uploader ) {
+								$ret['error'] = esc_html__( 'You have no permission to edit this field', 'ultimate-member' );
+								wp_send_json_error( $ret );
+							}
+						} else {
+							$cover_enabled_uploader = empty( $post_data['use_custom_settings'] ) ? UM()->options()->get( 'profile_cover_enabled' ) : $post_data['cover_enabled'];
+							if ( ! $cover_enabled_uploader ) {
+								$ret['error'] = esc_html__( 'You have no permission to edit this field', 'ultimate-member' );
+								wp_send_json_error( $ret );
+							}
+						}
+					} elseif ( ! um_can_edit_field( $custom_fields[ $id ] ) ) {
+						$ret['error'] = esc_html__( 'You have no permission to edit this field', 'ultimate-member' );
+						wp_send_json_error( $ret );
+					}
+				}
+			}
+
+			if ( isset( $_FILES[ $id ]['name'] ) ) {
+				if ( ! is_array( $_FILES[ $id ]['name'] ) ) {
+					UM()->uploader()->replace_upload_dir = true;
+
+					$uploaded = UM()->uploader()->upload_image( $_FILES[ $id ], $user_id, $id );
+
+					UM()->uploader()->replace_upload_dir = false;
+
+					if ( isset( $uploaded['error'] ) ) {
+						$ret['error'] = $uploaded['error'];
+					} else {
+						$ret[] = $uploaded['handle_upload'];
+					}
+				}
+			} else {
+				$ret['error'] = esc_html__( 'A theme or plugin compatibility issue', 'ultimate-member' );
+			}
+
+			wp_send_json_success( $ret );
 		}
-
-		$total_count = count( $um_icons_list );
-
-		$um_icons_list = array_slice( $um_icons_list, $per_page * ( $page - 1 ), $per_page );
-
-		wp_send_json_success(
-			array(
-				'icons'       => $um_icons_list,
-				'total_count' => $total_count,
-			)
-		);
-	}
 
 
 /** Function update_field() called by wp_ajax hooks: {'um_update_field'} **/
@@ -2476,49 +2509,113 @@ function update_field() {
 		}
 
 
-/** Function ajax_get_packages() called by wp_ajax hooks: {'um_get_packages'} **/
-/** No params detected :-/ **/
+/** Function um_request_user_data() called by wp_ajax hooks: {'um_request_user_data'} **/
+/** Parameters found in function um_request_user_data(): {"post": ["request_action", "password"]} **/
+function um_request_user_data() {
+	UM()->check_ajax_nonce();
 
+	if ( ! isset( $_POST['request_action'] ) ) {
+		wp_send_json_error( __( 'Wrong request.', 'ultimate-member' ) );
+	}
 
-/** Function get_users() called by wp_ajax hooks: {'um_get_users'} **/
-/** Parameters found in function get_users(): {"request": ["search", "page", "avatar"]} **/
-function get_users() {
-		UM()->admin()->check_ajax_nonce();
+	$user_id        = get_current_user_id();
+	$password       = ! empty( $_POST['password'] ) ? sanitize_text_field( $_POST['password'] ) : '';
+	$user           = get_userdata( $user_id );
+	$hash           = $user->data->user_pass;
+	$request_action = sanitize_key( $_POST['request_action'] );
 
-		$search_request = ! empty( $_REQUEST['search'] ) ? sanitize_text_field( $_REQUEST['search'] ) : '';
-		$page           = ! empty( $_REQUEST['page'] ) ? absint( $_REQUEST['page'] ) : 1;
-		$per_page       = 20;
-
-		$args = array(
-			'fields' => array( 'ID', 'user_login' ),
-			'paged'  => $page,
-			'number' => $per_page,
-		);
-
-		if ( ! empty( $search_request ) ) {
-			$args['search'] = '*' . $search_request . '*';
-		}
-
-		$args = apply_filters( 'um_get_users_list_ajax_args', $args );
-
-		$users_query = new \WP_User_Query( $args );
-		$users       = $users_query->get_results();
-		$total_count = $users_query->get_total();
-
-		if ( ! empty( $_REQUEST['avatar'] ) ) {
-			foreach ( $users as $key => $user ) {
-				$url                = get_avatar_url( $user->ID );
-				$users[ $key ]->img = $url;
+	if ( 'um-export-data' === $request_action ) {
+		if ( UM()->account()->current_password_is_required( 'privacy_download_data' ) ) {
+			if ( ! wp_check_password( $password, $hash ) ) {
+				$answer = esc_html__( 'The password you entered is incorrect.', 'ultimate-member' );
+				wp_send_json_success( array( 'answer' => $answer ) );
 			}
 		}
-
-		wp_send_json_success(
-			array(
-				'users'       => $users,
-				'total_count' => $total_count,
-			)
-		);
+	} elseif ( 'um-erase-data' === $request_action ) {
+		if ( UM()->account()->current_password_is_required( 'privacy_erase_data' ) ) {
+			if ( ! wp_check_password( $password, $hash ) ) {
+				$answer = esc_html__( 'The password you entered is incorrect.', 'ultimate-member' );
+				wp_send_json_success( array( 'answer' => $answer ) );
+			}
+		}
 	}
+
+	if ( 'um-export-data' === $request_action ) {
+		$request_id = wp_create_user_request( $user->data->user_email, 'export_personal_data' );
+	} elseif ( 'um-erase-data' === $request_action ) {
+		$request_id = wp_create_user_request( $user->data->user_email, 'remove_personal_data' );
+	}
+
+	if ( ! isset( $request_id ) || empty( $request_id ) ) {
+		wp_send_json_error( __( 'Wrong request.', 'ultimate-member' ) );
+	}
+
+	if ( is_wp_error( $request_id ) ) {
+		$answer = esc_html( $request_id->get_error_message() );
+	} else {
+		wp_send_user_request( $request_id );
+		if ( 'um-export-data' === $request_action ) {
+			$answer = esc_html__( 'A confirmation email has been sent to your email. Click the link within the email to confirm your export request.', 'ultimate-member' );
+		} elseif ( 'um-erase-data' === $request_action ) {
+			$answer = esc_html__( 'A confirmation email has been sent to your email. Click the link within the email to confirm your deletion request.', 'ultimate-member' );
+		}
+	}
+
+	wp_send_json_success( array( 'answer' => $answer ) );
+}
+
+
+/** Function ajax_remove_file() called by wp_ajax hooks: {'nopriv_um_remove_file', 'um_remove_file'} **/
+/** Parameters found in function ajax_remove_file(): {"post": ["src", "mode", "user_id", "filename"]} **/
+function ajax_remove_file() {
+			UM()->check_ajax_nonce();
+
+			if ( UM()->is_rate_limited( 'remove_file' ) ) {
+				wp_send_json_error( __( 'Too many requests', 'ultimate-member' ) );
+			}
+
+			if ( empty( $_POST['src'] ) ) {
+				wp_send_json_error( __( 'Wrong path', 'ultimate-member' ) );
+			}
+
+			if ( empty( $_POST['mode'] ) ) {
+				wp_send_json_error( __( 'Wrong mode', 'ultimate-member' ) );
+			}
+
+			$src = esc_url_raw( $_POST['src'] );
+			if ( strstr( $src, '?' ) ) {
+				$splitted = explode( '?', $src );
+				$src = $splitted[0];
+			}
+
+			$mode = sanitize_key( $_POST['mode'] );
+
+			if ( $mode == 'register' || empty( $_POST['user_id'] ) ) {
+				$is_temp = um_is_temp_upload( $src );
+				if ( ! $is_temp ) {
+					wp_send_json_success();
+				}
+			} else {
+				$user_id = absint( $_POST['user_id'] );
+
+				if ( ! UM()->roles()->um_current_user_can( 'edit', $user_id ) ) {
+					wp_send_json_error( __( 'You have no permission to edit this user', 'ultimate-member' ) );
+				}
+
+				$is_temp = um_is_temp_upload( $src );
+				if ( ! $is_temp ) {
+					if ( ! empty( $_POST['filename'] ) && file_exists( UM()->uploader()->get_upload_user_base_dir( $user_id ) . DIRECTORY_SEPARATOR . sanitize_file_name( $_POST['filename'] ) ) ) {
+						wp_send_json_success();
+					}
+				}
+			}
+
+			if ( $this->delete_file( $src ) ) {
+				wp_send_json_success();
+			} else {
+				wp_send_json_error( __( 'You have no permission to delete this file', 'ultimate-member' ) );
+			}
+		}
 
 
 /** Function ajax_muted_action() called by wp_ajax hooks: {'um_muted_action'} **/
@@ -2558,29 +2655,71 @@ function ajax_muted_action() {
 		}
 
 
-/** Function ajax_run_package() called by wp_ajax hooks: {'um_run_package'} **/
-/** Parameters found in function ajax_run_package(): {"post": ["pack"]} **/
-function ajax_run_package() {
+/** Function do_ajax_action() called by wp_ajax hooks: {'um_do_ajax_action'} **/
+/** Parameters found in function do_ajax_action(): {"post": ["act_id", "in_row", "in_sub_row", "in_column", "in_group", "arg1", "arg2"]} **/
+function do_ajax_action() {
 			UM()->admin()->check_ajax_nonce();
 
-			if ( empty( $_POST['pack'] ) ) {
-				exit('');
-			} else {
-				$pack = sanitize_text_field( $_POST['pack'] );
-				if ( in_array( $pack, $this->necessary_packages, true ) ) {
-					$file = $this->packages_dir . $pack . DIRECTORY_SEPARATOR . 'init.php';
-					if ( file_exists( $file ) ) {
-						ob_start();
-						include_once $file;
-						ob_get_flush();
-						exit;
-					} else {
-						exit('');
-					}
-				} else {
-					exit('');
-				}
+			// phpcs:disable WordPress.Security.NonceVerification
+			if ( ! is_user_logged_in() || ! current_user_can( 'manage_options' ) ) {
+				wp_send_json_error( __( 'Please login as administrator.', 'ultimate-member' ) );
 			}
+
+			if ( ! isset( $_POST['act_id'] ) ) {
+				wp_send_json_error( __( 'Invalid action.', 'ultimate-member' ) );
+			}
+
+			$in_row   = isset( $_POST['in_row'] ) ? absint( $_POST['in_row'] ) : 0;
+			$position = array(
+				'in_row'     => '_um_row_' . ( $in_row + 1 ),
+				'in_sub_row' => isset( $_POST['in_sub_row'] ) ? absint( $_POST['in_sub_row'] ) : '',
+				'in_column'  => isset( $_POST['in_column'] ) ? absint( $_POST['in_column'] ) : '',
+				'in_group'   => isset( $_POST['in_group'] ) ? absint( $_POST['in_group'] ) : '',
+			);
+
+			switch ( sanitize_key( $_POST['act_id'] ) ) {
+				case 'um_admin_duplicate_field':
+					// arg1 is a field metakey(id)
+					// arg2 is a form ID.
+					$this->duplicate_field( sanitize_text_field( $_POST['arg1'] ), absint( $_POST['arg2'] ) );
+					break;
+				case 'um_admin_remove_field_global':
+					// arg1 is a field metakey(id)
+					$this->delete_field_from_db( sanitize_text_field( $_POST['arg1'] ) );
+					break;
+				case 'um_admin_remove_field':
+					// arg1 is a field metakey(id)
+					// arg2 is a form ID.
+					$this->delete_field_from_form( sanitize_text_field( $_POST['arg1'] ), absint( $_POST['arg2'] ) );
+					break;
+				case 'um_admin_add_field_from_predefined':
+					// arg1 is a field metakey(id)
+					// arg2 is a form ID.
+					$this->add_field_from_predefined( sanitize_text_field( $_POST['arg1'] ), absint( $_POST['arg2'] ), $position );
+					break;
+				case 'um_admin_add_field_from_list':
+					// arg1 is a field metakey(id)
+					// arg2 is a form ID.
+					$this->add_field_from_list( sanitize_text_field( $_POST['arg1'] ), absint( $_POST['arg2'] ), $position );
+					break;
+			}
+			// phpcs:enable WordPress.Security.NonceVerification
+			wp_send_json_success();
+		}
+
+
+/** Function default_filter_settings() called by wp_ajax hooks: {'um_member_directory_default_filter_settings'} **/
+/** Parameters found in function default_filter_settings(): {"request": ["key", "directory_id"]} **/
+function default_filter_settings() {
+			UM()->admin()->check_ajax_nonce();
+
+			// we can't use function "sanitize_key" because it changes uppercase to lowercase
+			$filter_key = sanitize_text_field( $_REQUEST['key'] );
+			$directory_id = absint( $_REQUEST['directory_id'] );
+
+			$html = $this->show_filter( $filter_key, array( 'form_id' => $directory_id ), false, true );
+
+			wp_send_json_success( array( 'field_html' => $html ) );
 		}
 
 
@@ -2660,144 +2799,5 @@ function get_pages_list() {
 
 		wp_send_json( $return );
 	}
-
-
-/** Function do_ajax_action() called by wp_ajax hooks: {'um_do_ajax_action'} **/
-/** Parameters found in function do_ajax_action(): {"post": ["act_id", "in_row", "in_sub_row", "in_column", "in_group", "arg1", "arg2"]} **/
-function do_ajax_action() {
-			UM()->admin()->check_ajax_nonce();
-
-			// phpcs:disable WordPress.Security.NonceVerification
-			if ( ! is_user_logged_in() || ! current_user_can( 'manage_options' ) ) {
-				wp_send_json_error( __( 'Please login as administrator.', 'ultimate-member' ) );
-			}
-
-			if ( ! isset( $_POST['act_id'] ) ) {
-				wp_send_json_error( __( 'Invalid action.', 'ultimate-member' ) );
-			}
-
-			$in_row   = isset( $_POST['in_row'] ) ? absint( $_POST['in_row'] ) : 0;
-			$position = array(
-				'in_row'     => '_um_row_' . ( $in_row + 1 ),
-				'in_sub_row' => isset( $_POST['in_sub_row'] ) ? absint( $_POST['in_sub_row'] ) : '',
-				'in_column'  => isset( $_POST['in_column'] ) ? absint( $_POST['in_column'] ) : '',
-				'in_group'   => isset( $_POST['in_group'] ) ? absint( $_POST['in_group'] ) : '',
-			);
-
-			switch ( sanitize_key( $_POST['act_id'] ) ) {
-				case 'um_admin_duplicate_field':
-					// arg1 is a field metakey(id)
-					// arg2 is a form ID.
-					$this->duplicate_field( sanitize_text_field( $_POST['arg1'] ), absint( $_POST['arg2'] ) );
-					break;
-				case 'um_admin_remove_field_global':
-					// arg1 is a field metakey(id)
-					$this->delete_field_from_db( sanitize_text_field( $_POST['arg1'] ) );
-					break;
-				case 'um_admin_remove_field':
-					// arg1 is a field metakey(id)
-					// arg2 is a form ID.
-					$this->delete_field_from_form( sanitize_text_field( $_POST['arg1'] ), absint( $_POST['arg2'] ) );
-					break;
-				case 'um_admin_add_field_from_predefined':
-					// arg1 is a field metakey(id)
-					// arg2 is a form ID.
-					$this->add_field_from_predefined( sanitize_text_field( $_POST['arg1'] ), absint( $_POST['arg2'] ), $position );
-					break;
-				case 'um_admin_add_field_from_list':
-					// arg1 is a field metakey(id)
-					// arg2 is a form ID.
-					$this->add_field_from_list( sanitize_text_field( $_POST['arg1'] ), absint( $_POST['arg2'] ), $position );
-					break;
-			}
-			// phpcs:enable WordPress.Security.NonceVerification
-			wp_send_json_success();
-		}
-
-
-/** Function populate_dropdown_options() called by wp_ajax hooks: {'um_populate_dropdown_options'} **/
-/** Parameters found in function populate_dropdown_options(): {"post": ["um_option_callback"]} **/
-function populate_dropdown_options() {
-			UM()->admin()->check_ajax_nonce();
-
-			if ( ! is_user_logged_in() || ! current_user_can( 'manage_options' ) ) {
-				wp_send_json_error( __( 'This is not possible for security reasons.', 'ultimate-member' ) );
-			}
-
-			$arr_options = array();
-
-			// we can not use `sanitize_key()` because it removes backslash needed for namespace and uppercase symbols
-			$um_callback_func = sanitize_text_field( $_POST['um_option_callback'] );
-			// removed added by sanitize slashes for the namespaces
-			$um_callback_func = wp_unslash( $um_callback_func );
-
-			if ( empty( $um_callback_func ) ) {
-				$arr_options['status'] = 'empty';
-				$arr_options['function_name'] = $um_callback_func;
-				$arr_options['function_exists'] = function_exists( $um_callback_func );
-			}
-
-			if ( UM()->fields()->is_source_blacklisted( $um_callback_func ) ) {
-				wp_send_json_error( __( 'This is not possible for security reasons. Don\'t use internal PHP functions.', 'ultimate-member' ) );
-			}
-
-			$arr_options['data'] = array();
-			if ( function_exists( $um_callback_func ) ) {
-				$arr_options['data'] = call_user_func( $um_callback_func );
-			}
-
-			wp_send_json( $arr_options );
-		}
-
-
-/** Function update_builder() called by wp_ajax hooks: {'um_update_builder'} **/
-/** Parameters found in function update_builder(): {"post": ["form_id"]} **/
-function update_builder() {
-			UM()->admin()->check_ajax_nonce();
-
-			if ( ! is_user_logged_in() || ! current_user_can( 'manage_options' ) ) {
-				wp_send_json_error( __( 'Please login as administrator', 'ultimate-member' ) );
-			}
-
-			ob_start();
-
-			$this->form_id = absint( $_POST['form_id'] );
-
-			$this->show_builder();
-
-			$output = ob_get_clean();
-
-			if ( is_array( $output ) ) {
-				print_r( $output );
-			} else {
-				echo $output;
-			}
-			die;
-		}
-
-
-/** Function load_comments() called by wp_ajax hooks: {'nopriv_um_ajax_paginate_comments', 'um_ajax_paginate_comments'} **/
-/** Parameters found in function load_comments(): {"post": ["user_id", "page"]} **/
-function load_comments() {
-			UM()->check_ajax_nonce();
-
-			if ( UM()->is_rate_limited( 'paginate_comments' ) ) {
-				wp_send_json_error( __( 'Too many requests', 'ultimate-member' ) );
-			}
-
-			$user_id = ! empty( $_POST['user_id'] ) ? absint( $_POST['user_id'] ) : get_current_user_id();
-			$page = ! empty( $_POST['page'] ) ? absint( $_POST['page'] ) : 0;
-
-			$comments = get_comments( array(
-				'number'        => 10,
-				'offset'        => ( $page - 1 ) * 10,
-				'user_id'       => $user_id,
-				'post_status'   => array('publish'),
-				'type__not_in'  => apply_filters( 'um_excluded_comment_types', array('') ),
-			) );
-
-			UM()->get_template( 'profile/comments.php', '', array( 'comments' => $comments ), true );
-			wp_die();
-		}
 
 

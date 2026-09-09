@@ -5,234 +5,27 @@
 *Found functions:48
 *Extracted functions:48
 *Total parameter names extracted: 43
-*Overview: {'pagelayer_givejs': {'pagelayer_givejs'}, 'pagelayer_create_post_autosave': {'pagelayer_create_post_autosave'}, 'pagelayer_get_section_shortcodes': {'pagelayer_get_section_shortcodes'}, 'pagelayer_get_section_blocks': {'pagelayer_get_section_blocks'}, 'pagelayer_get_post_tags': {'pagelayer_get_post_tags'}, 'pagelayer_set_jscss_giver': {'pagelayer_set_jscss_giver'}, 'pagelayer_save_content': {'pagelayer_save_content'}, 'pagelayer_apply_revision': {'pagelayer_apply_revision'}, 'pagelayer_fetch_site_title': {'pagelayer_fetch_site_title'}, 'pagelayer_save_templ_content': {'pagelayer_save_templ_content'}, 'pagelayer_contact_submit': {'pagelayer_contact_submit', 'nopriv_pagelayer_contact_submit'}, 'pagelayer_get_taxonomy_list': {'pagelayer_get_taxonomy_list'}, 'pagelayer_save_template': {'pagelayer_save_template'}, 'pagelayer_mcp_generate_app_password': {'pagelayer_mcp_generate_app_password'}, 'pagelayer_products_ajax': {'pagelayer_products_ajax'}, 'pagelayer_pro_dismiss_expired_licenses': {'pagelayer_pro_dismiss_expired_licenses'}, 'pagelayer_activate_recommended_plugin': {'pagelayer_activate_plugin'}, 'pagelayer_fetch_sidebar': {'pagelayer_fetch_sidebar'}, 'pagelayer_search_ids': {'pagelayer_search_ids'}, 'pagelayer_product_categories': {'pagelayer_product_categories'}, 'pagelayer_custom_font': {'pagelayer_custom_font'}, 'pagelayer_mcp_save_test_status': {'pagelayer_mcp_save_test_status'}, 'pagelayer_fetch_primary_menu': {'pagelayer_fetch_primary_menu'}, 'pagelayer_close_plugin_update_notice': {'pagelayer_close_update_notice'}, 'pagelayer_do_shortcodes': {'pagelayer_do_shortcodes'}, 'pagelayer_update_site_title': {'pagelayer_update_site_title'}, 'pagelayer_fetch_featured_img': {'pagelayer_fetch_featured_img'}, 'pagelayer_login_submit': {'pagelayer_login_submit', 'nopriv_pagelayer_login_submit'}, 'pagelayer_handle_markdown': {'pagelayer_handle_markdown'}, 'pagelayer_trash_post': {'pagelayer_trash_post'}, 'pagelayer_mcp_save_image_api_key': {'pagelayer_mcp_save_image_api_key'}, 'pagelayer_delete_revision': {'pagelayer_delete_revision'}, 'pagelayer_post_nav': {'pagelayer_post_nav'}, 'pagelayer_mcp_adapter_action': {'pagelayer_mcp_adapter_action'}, 'pagelayer_wp_widget_ajax': {'pagelayer_wp_widget'}, 'pagelayer_get_pages_list': {'pagelayer_get_pages_list'}, 'pagelayer_get_cat_checkboxes': {'pagelayer_get_cat_checkboxes'}, 'pagelayer_export_template': {'pagelayer_export_template'}, 'pagelayer_posts_data': {'pagelayer_posts_data'}, 'pagelayer_infinite_posts': {'nopriv_pagelayer_infinite_posts', 'pagelayer_infinite_posts'}, 'pagelayer_install_recommended_plugin': {'pagelayer_install_plugin'}, 'pagelayer_fetch_posts': {'pagelayer_fetch_posts'}, 'pagelayer_post_comment': {'pagelayer_post_comment'}, 'pagelayer_mcp_test_connection': {'pagelayer_mcp_test_connection'}, 'pagelayer_get_revision': {'pagelayer_get_revision'}, 'pagelayer_archive_posts_data': {'pagelayer_archive_posts_data'}, 'pagelayer_post_info': {'pagelayer_post_info'}, 'pagelayer_givecss': {'nopriv_pagelayer_givecss', 'pagelayer_givecss'}}
+*Overview: {'pagelayer_get_cat_checkboxes': {'pagelayer_get_cat_checkboxes'}, 'pagelayer_posts_data': {'pagelayer_posts_data'}, 'pagelayer_archive_posts_data': {'pagelayer_archive_posts_data'}, 'pagelayer_delete_revision': {'pagelayer_delete_revision'}, 'pagelayer_search_ids': {'pagelayer_search_ids'}, 'pagelayer_trash_post': {'pagelayer_trash_post'}, 'pagelayer_update_site_title': {'pagelayer_update_site_title'}, 'pagelayer_product_categories': {'pagelayer_product_categories'}, 'pagelayer_fetch_primary_menu': {'pagelayer_fetch_primary_menu'}, 'pagelayer_get_pages_list': {'pagelayer_get_pages_list'}, 'pagelayer_get_post_tags': {'pagelayer_get_post_tags'}, 'pagelayer_mcp_generate_app_password': {'pagelayer_mcp_generate_app_password'}, 'pagelayer_pro_dismiss_expired_licenses': {'pagelayer_pro_dismiss_expired_licenses'}, 'pagelayer_custom_font': {'pagelayer_custom_font'}, 'pagelayer_fetch_featured_img': {'pagelayer_fetch_featured_img'}, 'pagelayer_givecss': {'pagelayer_givecss', 'nopriv_pagelayer_givecss'}, 'pagelayer_post_nav': {'pagelayer_post_nav'}, 'pagelayer_infinite_posts': {'nopriv_pagelayer_infinite_posts', 'pagelayer_infinite_posts'}, 'pagelayer_export_template': {'pagelayer_export_template'}, 'pagelayer_post_info': {'pagelayer_post_info'}, 'pagelayer_create_post_autosave': {'pagelayer_create_post_autosave'}, 'pagelayer_handle_markdown': {'pagelayer_handle_markdown'}, 'pagelayer_login_submit': {'pagelayer_login_submit', 'nopriv_pagelayer_login_submit'}, 'pagelayer_save_content': {'pagelayer_save_content'}, 'pagelayer_fetch_sidebar': {'pagelayer_fetch_sidebar'}, 'pagelayer_set_jscss_giver': {'pagelayer_set_jscss_giver'}, 'pagelayer_fetch_site_title': {'pagelayer_fetch_site_title'}, 'pagelayer_get_revision': {'pagelayer_get_revision'}, 'pagelayer_contact_submit': {'nopriv_pagelayer_contact_submit', 'pagelayer_contact_submit'}, 'pagelayer_get_section_blocks': {'pagelayer_get_section_blocks'}, 'pagelayer_activate_recommended_plugin': {'pagelayer_activate_plugin'}, 'pagelayer_givejs': {'pagelayer_givejs'}, 'pagelayer_apply_revision': {'pagelayer_apply_revision'}, 'pagelayer_close_plugin_update_notice': {'pagelayer_close_update_notice'}, 'pagelayer_get_section_shortcodes': {'pagelayer_get_section_shortcodes'}, 'pagelayer_wp_widget_ajax': {'pagelayer_wp_widget'}, 'pagelayer_fetch_posts': {'pagelayer_fetch_posts'}, 'pagelayer_mcp_test_connection': {'pagelayer_mcp_test_connection'}, 'pagelayer_mcp_save_test_status': {'pagelayer_mcp_save_test_status'}, 'pagelayer_save_template': {'pagelayer_save_template'}, 'pagelayer_products_ajax': {'pagelayer_products_ajax'}, 'pagelayer_do_shortcodes': {'pagelayer_do_shortcodes'}, 'pagelayer_post_comment': {'pagelayer_post_comment'}, 'pagelayer_save_templ_content': {'pagelayer_save_templ_content'}, 'pagelayer_install_recommended_plugin': {'pagelayer_install_plugin'}, 'pagelayer_get_taxonomy_list': {'pagelayer_get_taxonomy_list'}, 'pagelayer_mcp_adapter_action': {'pagelayer_mcp_adapter_action'}, 'pagelayer_mcp_save_image_api_key': {'pagelayer_mcp_save_image_api_key'}}
 *
 ***/
 
-/** Function pagelayer_givejs() called by wp_ajax hooks: {'pagelayer_givejs'} **/
-/** No params detected :-/ **/
-
-
-/** Function pagelayer_create_post_autosave() called by wp_ajax hooks: {'pagelayer_create_post_autosave'} **/
-/** Parameters found in function pagelayer_create_post_autosave(): {"get": ["postID"], "request": ["pagelayer_post_content"]} **/
-function pagelayer_create_post_autosave(){
-
-	// Some AJAX security
-	check_ajax_referer('pagelayer_ajax', 'pagelayer_nonce');
-	
-	$ret = array();
-	$postID = (int) $_GET['postID'];	
-	$content = $_REQUEST['pagelayer_post_content'];
-	
-	// Decode base64 data
-	$content = base64_decode($content);
-	$content = wp_slash($content);
-	
-	// Are you allowed to edit ?
-	if(!pagelayer_user_can_edit($postID)){
-		$ret['error'][] =  __pl('no_permission');
-		pagelayer_json_output($ret);
-	}
-	
-	if(empty($postID)){
-		$ret['error'] =  __pl('invalid_post_id');
-	}else{
-		
-		$post = array(
-			'post_ID' => $postID,
-			'post_content' => $content,
-		);
-		
-		$ret['id'] = wp_create_post_autosave($post);
-	}
-	
-	$ret['url'] = get_preview_post_link($postID);
-	
-	pagelayer_json_output($ret);
-	
-}
-
-
-/** Function pagelayer_get_section_shortcodes() called by wp_ajax hooks: {'pagelayer_get_section_shortcodes'} **/
-/** Parameters found in function pagelayer_get_section_shortcodes(): {"request": ["pagelayer_section_id", "postID"]} **/
-function pagelayer_get_section_shortcodes(){
-	
-	global $pagelayer;
+/** Function pagelayer_get_cat_checkboxes() called by wp_ajax hooks: {'pagelayer_get_cat_checkboxes'} **/
+/** Parameters found in function pagelayer_get_cat_checkboxes(): {"post": ["postid", "new_cat"]} **/
+function pagelayer_get_cat_checkboxes(){
 	
 	// Some AJAX security
 	check_ajax_referer('pagelayer_ajax', 'pagelayer_nonce');
-	
-	if(!current_user_can('edit_posts')){
-		$ret['error'][] = __pl('no_permission');
-		pagelayer_json_output($ret);
-	}
-	
-	$data = '';
-	if(isset($_REQUEST['pagelayer_section_id'])){
-		
-		$get_url = PAGELAYER_API.'/library.php?give_id='.sanitize_text_field($_REQUEST['pagelayer_section_id']).(!empty($pagelayer->license['license']) ? '&license='.$pagelayer->license['license'] : '').'&url='.rawurlencode(site_url());
-		
-		// For SitePad users
-		if(function_exists('get_softaculous_file')){
-			$get_url = get_softaculous_file($get_url, 1);
-		}
-		
-		$fetch = wp_remote_get($get_url, array('timeout' => 60));
-		
-		if ( is_array( $fetch ) && ! is_wp_error( $fetch ) && isset( $fetch['body'] ) ) {
-			$data = json_decode( $fetch['body'], true ); // use the content
-		}else{
-			$data['error'] = __pl('The response was malformed');
-			pagelayer_json_output($data);
-		}
-	}
-	
-	if(isset($_REQUEST['postID'])){
-		$post_id = (int) $_REQUEST['postID'];
-		
-		if(!empty($post_id)){
-			$post = get_post( $post_id );
-			// Need to make the reviews post global 
-			if ( !empty( $post ) ) {
-				$GLOBALS['post'] = $post;
-				
-				$GLOBALS['wp_query'] = new WP_Query([
-					'post_type' => $GLOBALS['post']->post_type,
-					'post__in' => array($post_id),
-				]);
-			}
-		}
-	}
-	
-	// Upload the images if any in the shortcode
-	preg_match_all('/"'.preg_quote('{{pl_lib_images}}', '/').'([^"]*)"/is', $data['code'], $matches);
-	
-	foreach($matches[0] as $k => $v){
-		$image_url = trim($v, '"\'');
-		$urls[$image_url] = $image_url;
-	}
-	
-	foreach($urls as $k => $image_url){
-		
-		$file = basename($image_url);
-		$id = 0;
-		
-		// Upload this
-		if(!empty($data[$file])){
-			
-			$id = pagelayer_upload_media($file, base64_decode($data[$file]));
-			
-			if(!empty($id)){
-				$data['code'] = str_replace('"'.$image_url.'"', '"'.$id.'"', $data['code']);
-			}
-		}
-		
-	}
-
-	// Load shortcodes
-	pagelayer_load_shortcodes();
-	
-	if(!empty($data['code'])){
-		$data['code'] = pagelayer_the_content($data['code'], true);
-	}
-	
-	pagelayer_json_output($data);
-
-}
-
-
-/** Function pagelayer_get_section_blocks() called by wp_ajax hooks: {'pagelayer_get_section_blocks'} **/
-/** Parameters found in function pagelayer_get_section_blocks(): {"request": ["pagelayer_section_id"]} **/
-function pagelayer_get_section_blocks(){
-	
-	global $pagelayer;
-	
-	// Some AJAX security
-	check_ajax_referer('pagelayer_ajax', 'pagelayer_nonce');
-	
-	if(!current_user_can('edit_posts')){
-		$ret['error'][] = __pl('no_permission');
-		pagelayer_json_output($ret);
-	}
-	
-	$data = '';
-	if(isset($_REQUEST['pagelayer_section_id'])){
-		
-		$get_url = PAGELAYER_API.'/library.php?give_id='.sanitize_text_field($_REQUEST['pagelayer_section_id']).(!empty($pagelayer->license['license']) ? '&license='.$pagelayer->license['license'] : '').'&url='.rawurlencode(site_url());
-		
-		// For SitePad users
-		if(function_exists('get_softaculous_file')){
-			$get_url = get_softaculous_file($get_url, 1);
-		}
-		
-		$fetch = wp_remote_get($get_url, array('timeout' => 60));
-		
-		if ( is_array( $fetch ) && ! is_wp_error( $fetch ) && isset( $fetch['body'] ) ) {
-			$data = json_decode( $fetch['body'], true ); // use the content
-		}else{
-			$data['error'] = __pl('The response was malformed');
-			pagelayer_json_output($data);
-		}
-	}
-	
-	// Upload the images if any in the shortcode
-	preg_match_all('/"'.preg_quote('{{pl_lib_images}}', '/').'([^"]*)"/is', $data['code'], $matches);
-	
-	foreach($matches[0] as $k => $v){
-		$image_url = trim($v, '"\'');
-		$urls[$image_url] = $image_url;
-	}
-	
-	foreach($urls as $k => $image_url){
-		
-		$file = basename($image_url);
-		$id = 0;
-		
-		// Upload this
-		if(!empty($data[$file])){
-			
-			$id = pagelayer_upload_media($file, base64_decode($data[$file]));
-			
-			if(!empty($id)){
-				$data['code'] = str_replace('"'.$image_url.'"', '"'.$id.'"', $data['code']);
-			}
-		}
-		
-	}
-	
-	if ( false !== strpos( $data['code'], '[pl_' ) ) {
-		// Load shortcodes
-		pagelayer_load_shortcodes();
-		
-		// Load Parse Shortcodes
-		include_once(PAGELAYER_DIR.'/main/parse-shortcodes.php');
-		
-		$data['code'] = pagelayer_do_shortcode_to_block($data['code']);
-	}
-	
-	$data['code'] = pagelayer_add_tmp_atts($data['code']);
-	
-	pagelayer_json_output($data);
-
-}
-
-
-/** Function pagelayer_get_post_tags() called by wp_ajax hooks: {'pagelayer_get_post_tags'} **/
-/** Parameters found in function pagelayer_get_post_tags(): {"post": ["postid", "new_tag"]} **/
-function pagelayer_get_post_tags(){
-	
-	// Some AJAX security
-	check_ajax_referer('pagelayer_ajax', 'pagelayer_nonce');	
 	
 	$ret = [];
-	$tag_name = '';
+	$cat_name = '';
 	
 	if(!current_user_can('manage_categories')){		
 		$ret['error'] = __pl('no_permission');
 		pagelayer_json_output($ret);
 	}
-	
-	if(empty($_POST['postid']) || !is_numeric($_POST['postid']) ){
+
+	if(empty($_POST['postid']) || !is_numeric($_POST['postid'])){
+		$ret['error'] = __pl('invalid_post_id');
 		pagelayer_json_output($ret);
 	}
 	
@@ -244,328 +37,73 @@ function pagelayer_get_post_tags(){
 		pagelayer_json_output($ret);
 	}
 	
-	$tag_name = pagelayer_post_type_tag($post->post_type);
+	$cat_name = pagelayer_post_type_category($post->post_type);
 	
-	if(!empty($_POST['new_tag'])){
-		$ret['tag_id'] = wp_insert_term($_POST['new_tag'], $tag_name);
-		$ret['tag_id'] = $ret['tag_id']['term_id'];
+	if(!empty($_POST['new_cat'])){
+		parse_str($_POST['new_cat'], $formdata);
+		$ret['new_cat_id'] = wp_insert_category([
+			'taxonomy' => $cat_name,
+			'cat_name' => $formdata['category_name'],
+			'category_parent' => (($formdata['pagelayer_cat_parent'] == 0) ? '' : $formdata['pagelayer_cat_parent'])
+		]);
 	}
 	
-	$ret += pagelayer_post_tags($post);
+	$ret += pagelayer_post_cats($post);
 	
 	pagelayer_json_output($ret);
 	
 }
 
 
-/** Function pagelayer_set_jscss_giver() called by wp_ajax hooks: {'pagelayer_set_jscss_giver'} **/
-/** Parameters found in function pagelayer_set_jscss_giver(): {"request": ["set"]} **/
-function pagelayer_set_jscss_giver(){
-	global $wpdb;
+/** Function pagelayer_posts_data() called by wp_ajax hooks: {'pagelayer_posts_data'} **/
+/** No params detected :-/ **/
 
+
+/** Function pagelayer_archive_posts_data() called by wp_ajax hooks: {'pagelayer_archive_posts_data'} **/
+/** Parameters found in function pagelayer_archive_posts_data(): {"post": ["atts"]} **/
+function pagelayer_archive_posts_data(){
+	
 	// Some AJAX security
 	check_ajax_referer('pagelayer_ajax', 'pagelayer_nonce');
 	
-	if( !current_user_can('manage_options') ){
-		$ret['error'] =  __pl('no_permission');
-		pagelayer_json_output($ret);
+	// Set excerpt length
+	if(!empty($_POST['atts']['exc_length'])){
+		$exc_length = (int) $_POST['atts']['exc_length'];
+		add_filter( 'excerpt_length', function($length) use($exc_length){
+			return $exc_length;
+		}, 999 );
 	}
 	
-	$val = (int) @$_REQUEST['set'];
+	// Load shortcodes
+	pagelayer_load_shortcodes();
 	
-	if(in_array($val, [1, -1])){
-		update_option('pagelayer_enable_giver', $val);
+	foreach($_POST['atts'] as $k => $v){
+		$v = pagelayer_maybe_implode($v);
+		$r[] = esc_html($k).'="'.pagelayer_escapeHTML($v).'"';
 	}
 	
-	$ret['success'] =  1;
-	pagelayer_json_output($ret);
+	$string = implode(' ', $r);
+	if(preg_match('/\]/is', $string)){
+		die('Hacking Attempt');
+	}
+	
+	$sc = '[pl_archive_posts '.$string.'][/pl_archive_posts]';
+	
+	echo pagelayer_the_content($sc);
+	wp_die();
 }
 
 
-/** Function pagelayer_save_content() called by wp_ajax hooks: {'pagelayer_save_content'} **/
-/** Parameters found in function pagelayer_save_content(): {"post": ["pagelayer_update_content"], "get": ["postID"], "request": ["post_sticky", "post_author", "comment_status", "ping_status", "featured_image", "post_category", "post_tags", "contacts", "copyright", "global_widgets", "pagelayer_nav_items", "pagelayer_customizer_options"]} **/
-function pagelayer_save_content(){
-
-	// Some AJAX security
-	check_ajax_referer('pagelayer_ajax', 'pagelayer_nonce');
-
-	$content = $_POST['pagelayer_update_content'];
-
-	$postID = (int) $_GET['postID'];
+/** Function pagelayer_delete_revision() called by wp_ajax hooks: {'pagelayer_delete_revision'} **/
+/** Parameters found in function pagelayer_delete_revision(): {"request": ["revisionID"]} **/
+function pagelayer_delete_revision() {
 	
-	if(empty($postID)){
-		$msg['error'] = __pl('invalid_post_id');
-		pagelayer_json_output($msg);
-	}
-	
-	$_post = get_post($postID);
-	
-	// Post found ?
-	if(empty($_post)){
-		$msg['error'] = __pl('invalid_post_id');
-		pagelayer_json_output($msg);
-	}
-	
-	// Get the post type and its capabilities
-	$post_type = $_post->post_type;
-	$post_type_obj = get_post_type_object($post_type);
-	
-	// Are you allowed to edit ?
-	if(!pagelayer_user_can_edit($postID)){
-		$msg['error'][] =  __pl('no_permission');
-		pagelayer_json_output($msg);
-	}
-	
-	// Check if the post exists	
-	if(!empty($postID)){
-		
-		$content = base64_decode($content);
-		
-		/*if(!pagelayer_is_utf8($content)){
-			$content = utf8_encode($content);
-		}*/
-		
-		$is_xss = pagelayer_xss_content($content);
-		 
-		if(!pagelayer_user_can_add_js_content() && strlen($is_xss) > 0){
-			$msg['error'][] =  __pl('xss_found').' - '.$is_xss;
-			pagelayer_json_output($msg);
-		}
-		
-		// Is comment mode?
-		if(pagelayer_is_comment_mode()){
-			global $pagelayer_comment_errors, $pagelayer_comment_alerts;
-			$content = pagelayer_extract_comment_atts($postID, $content);			
-		}
-		
-		// Add slash to save data in post
-		$content = wp_slash($content);
-		
-		$post = array(
-			'ID' => $postID,
-			'post_content' => $content,
-		);
-		
-		// Any properties ?
-		$allowed = ['post_title', 'post_name', 'post_excerpt', 'post_status', 'post_password', 'post_date', 'post_parent', 'menu_order'];
-
-		foreach($allowed as $k){
-			if(isset($_REQUEST[$k])){
-				$post[$k] = sanitize_text_field($_REQUEST[$k]);
-			}
-		}
-		
-		// Restrict contributors from setting 'publish' or modifying unauthorized fields
-		$current_user_can_publish = current_user_can($post_type_obj->cap->publish_posts);
-		if(!$current_user_can_publish){
-			if(!in_array($post['post_status'], ['draft', 'pending'])){
-				$post['post_status'] = 'pending'; // Force pending status
-			}
-		}
-		
-		if(!empty($post['post_password'])){
-			if($_REQUEST['post_sticky'] == true){
-				$msg['error'] = __pl('post_pass_with_sticky_err');
-				pagelayer_json_output($msg);
-			}
-			
-			// Prevent unauthorized password protection
-			$can_protect = current_user_can($post_type_obj->cap->edit_private_posts);
-			if(!$can_protect){
-				$msg['error'][] = __pl('no_permission_to_set_password');
-				pagelayer_json_output($msg);
-			}
-		}
-		
-		// Prevent unauthorized modification of `post_author`
-		if(isset($_REQUEST['post_author']) && $_REQUEST['post_author'] != $_post->post_author){
-
-			$edit_others_posts = current_user_can($post_type_obj->cap->edit_others_posts);
-
-			if($edit_others_posts){
-				$post['post_author'] = (int) $_REQUEST['post_author'];
-			}else{
-				$msg['error'][] = __pl('no_permission_to_change_author');
-				pagelayer_json_output($msg);
-			}
-		}
-
-		$post['comment_status'] = !empty($_REQUEST['comment_status']) ? 'open' : 'closed';
-		$post['ping_status'] = !empty($_REQUEST['ping_status']) ? 'open' : 'closed';
-		$post['post_status'] = empty($post['post_status']) ? $_post->post_status : $post['post_status'];
-		
-		if(!empty($post['post_status']) && $post['post_status'] == 'publish'){
-			
-			// Allowed to publish pages ?
-			if($_post->post_type == 'page' && !current_user_can('publish_pages')){
-				$msg['error'][] =  __pl('no_publish_permission');
-				pagelayer_json_output($msg);
-			}
-			
-			// Allowed to publish posts ?
-			if($_post->post_type == 'post' && !current_user_can('publish_posts')){
-				$post['post_status'] = 'pending';
-			}
-		}
-		
-		if(!empty($post['post_password'])){
-			$post['post_password'] = (in_array($post['post_status'], array('pass_protected', 'publish')) ? $post['post_password'] : '');
-			$post['post_status'] = 'publish';
-		}else{	
-			$post['post_status'] = ($post['post_status'] == 'pass_protected') ? 'publish' : $post['post_status'];
-			$post['post_password'] = '';
-		}
-		
-		// Set post GMT time
-		if(!empty($post['post_date']) && '0000-00-00 00:00:00' !== $post['post_date']){
-			$post['post_date_gmt'] = get_gmt_from_date( $post['post_date'] );
-			
-			if( in_array($post['post_status'], array('future', 'publish')) && $_post->post_date_gmt === '0000-00-00 00:00:00' ){
-				$post['edit_date'] = true;
-			}
-		}
-		
-		$_REQUEST['featured_image'] = (int) $_REQUEST['featured_image'];
-		if(!empty($_REQUEST['featured_image'])){
-			set_post_thumbnail($postID, $_REQUEST['featured_image']);
-		}else{
-			delete_post_thumbnail($postID);
-		}
-		
-		if(!isset($_REQUEST['post_category'])){
-			$_REQUEST['post_category'] = '';
-		}
-		
-		if(!isset($_REQUEST['post_tags'])){
-			$_REQUEST['post_tags'] = '';
-		}
-		
-		if($_post->post_type == 'post'){
-			$post['post_category'] = pagelayer_sanitize_text_field($_REQUEST['post_category']);
-			
-			$post['tags_input'] = pagelayer_sanitize_text_field($_REQUEST['post_tags']);
-		}else{
-			$cat_name = pagelayer_post_type_category($_post->post_type);
-			if($cat_name){
-				$post['tax_input'][$cat_name] = pagelayer_sanitize_text_field($_REQUEST['post_category']);				
-			}			
-			
-			$tag_name = pagelayer_post_type_tag($_post->post_type);
-			if($tag_name){
-				$post['tax_input'][$tag_name] = pagelayer_sanitize_text_field($_REQUEST['post_tags']);				
-			}	
-		}
-		
-		if(isset($_REQUEST['post_sticky']) && !empty($_REQUEST['post_sticky'])){
-			stick_post( $postID );
-		}else{
-			if(is_sticky($postID)){
-				unstick_post( $postID );
-			}
-		}
-			
-		// Any contact templates ?
-		if(!empty($_REQUEST['contacts']) && current_user_can('activate_plugins')){
-			update_post_meta($postID, 'pagelayer_contact_templates', $_REQUEST['contacts']);
-		}else{
-			delete_post_meta($postID, 'pagelayer_contact_templates');
-		}
-		
-		// Save copyright
-		if(isset($_REQUEST['copyright']) && current_user_can('manage_options')){
-			update_option('pagelayer-copyright', wp_unslash($_REQUEST['copyright']));	
-		}
-		
-		// Apply a filter
-		$post = apply_filters('pagelayer_save_content', $post);
-		
-		// Update the post into the database
-		$ret = wp_update_post($post, true);
-		
-		// Render the post
-		//update_post_meta($postID, 'pagelayer_rendered_post', pagelayer_get_post_content($postID));
-
-		if (is_wp_error($ret)) {
-			$errors = $ret->get_error_messages();			
-			$msg['error'] = __pl('post_update_err').' : '.implode('', $errors);
-		}else{
-			
-			// Get the updated post
-			$_post = get_post($postID);
-			
-			// Is this a Pagelayer post
-			$data = get_post_meta($postID, 'pagelayer-data', true);
-
-			if(empty($data)){
-				
-				// Convert to pagelayer accessed post
-				if(!add_post_meta($postID, 'pagelayer-data', time(), true)){
-					update_post_meta($postID, 'pagelayer-data', time());
-				}
-			}
-			
-			if(!empty($pagelayer_comment_alerts)){
-				$msg['comment_alerts'] = $pagelayer_comment_alerts;
-			}
-			
-			if(!empty($pagelayer_comment_errors)){
-				$msg['error'][] = 'Comment Mode errrors found !';
-				$msg['comment_errors'] = $pagelayer_comment_errors;
-			}
-			
-			$msg['success'] = __pl('post_update_success');
-		}
-		
-	}else{
-		$msg['error'] = __pl('post_update_err');
-	}
-	
-	$msg['post_status'] = (empty($_post->post_password)) ? $_post->post_status : 'pass_protected';
-	
-	// Save global widgets data
-	if(!empty($_REQUEST['global_widgets'])){
-		pagelayer_save_templ_content(true);
-	}
-	
-	// Save nav menu data
-	if(!empty($_REQUEST['pagelayer_nav_items']) && current_user_can('edit_theme_options')){
-		$menu_items = (array) $_REQUEST['pagelayer_nav_items'];
-		foreach($menu_items as $items){
-			pagelayer_save_nav_menu_items($items);
-		}
-	}
-	
-	// Save Customizer data
-	if(!empty($_REQUEST['pagelayer_customizer_options']) && current_user_can('edit_theme_options')){
-		
-		$customizer_options = wp_unslash($_REQUEST['pagelayer_customizer_options']);
-		$customizer_options = json_decode($customizer_options, true);
-		
-		// Add current post type
-		$customizer_options['pagelayer_current_post_type'] = $_post->post_type;
-		
-		pagelayer_save_customizer_options($customizer_options);
-	}
-	
-	pagelayer_json_output($msg);
-	
-}
-
-
-/** Function pagelayer_apply_revision() called by wp_ajax hooks: {'pagelayer_apply_revision'} **/
-/** Parameters found in function pagelayer_apply_revision(): {"request": ["revisionID"]} **/
-function pagelayer_apply_revision(){
-
 	// Some AJAX security
 	check_ajax_referer('pagelayer_ajax', 'pagelayer_nonce');
 
 	$revisionID = (int) $_REQUEST['revisionID'];
 	$parID = wp_get_post_parent_id($revisionID);
 	$ret = array();
-	
-	if(empty($parID)){
-		$parID = $revisionID;
-	}
 	
 	// Are you allowed to edit ?
 	if(!pagelayer_user_can_edit($parID)){
@@ -576,429 +114,29 @@ function pagelayer_apply_revision(){
 	if(empty($revisionID)){
 		$ret['error'] =  __pl('invalid_post_id');
 	}else{
-		
-		$post = get_post( $revisionID );
-		
-		if ( empty( $post ) ) {
+
+		$revision = get_post( $revisionID );
+
+		if ( empty( $revision ) ) {
 			$ret['error'] =  __pl('invalid_revision');
-			pagelayer_json_output($ret);
-		}
-		
-		// Need to make the reviews post global 
-		$GLOBALS['post'] = $post;
-		$GLOBALS['wp_query'] = new WP_Query([
-			'post_type' => $GLOBALS['post']->post_type,
-			'post__in' => array($parID),
-		]);
-		
-		// Need to reload the shortcodes
-		pagelayer_load_shortcodes();
-		
-		$ret['id'] = $revisionID;
-		$ret['content'] = pagelayer_the_content($post->post_content, true);
-		
-		if(is_wp_error($post)) {
-			$ret['error'] =  __pl('rev_load_error');
 		}else{
-			$ret['success'] = __pl('rev_load_success');
+
+			if ( ! current_user_can( 'delete_post', $parID ) ) {
+					$ret['error'] =  __pl('access_denied');
+					pagelayer_json_output($ret);
+			}
+
+			$deleted = wp_delete_post_revision( $revision->ID );
+
+			if ( ! $deleted || is_wp_error( $deleted ) ) {
+				$ret['error'] =  __pl('delete_rev_error');
+			}else{
+				$ret['success'] =  __pl('delete_rev_success');
+			}
 		}
-		
-		wp_reset_postdata();
 	}
 	
 	pagelayer_json_output($ret);
-	
-}
-
-
-/** Function pagelayer_fetch_site_title() called by wp_ajax hooks: {'pagelayer_fetch_site_title'} **/
-/** No params detected :-/ **/
-
-
-/** Function pagelayer_save_templ_content() called by wp_ajax hooks: {'pagelayer_save_templ_content'} **/
-/** Parameters found in function pagelayer_save_templ_content(): {"request": ["postID", "global_widgets"]} **/
-function pagelayer_save_templ_content($echo = false){
-	
-	// Some AJAX security
-	check_ajax_referer('pagelayer_ajax', 'pagelayer_nonce');
-	
-	if ( ! current_user_can( get_post_type_object( 'pagelayer-template' )->cap->create_posts ) ) {
-		$ret['error'][$g_post_id] = __pl('no_permission');	
-		pagelayer_json_output($ret);
-		return false;
-	}
-	
-	// Are you allowed to edit ?
-	if(!pagelayer_user_can_edit($_REQUEST['postID'])){
-		$msg['error'][] =  __pl('no_permission');
-		pagelayer_json_output($msg);
-	}
-	
-	$ret = array();
-	
-	// Save global widgets data
-	if(empty($_REQUEST['global_widgets'])){
-		$ret['error'][] = 'No widgets given';	
-		pagelayer_json_output($ret);
-		return false;
-	}
-	
-	$global_widgets = $_REQUEST['global_widgets'];
-
-	foreach($global_widgets as $key => $value){
-		
-		$g_post_id = (int) $value['post_id'];
-		
-		// Are you allowed to edit ?
-		if(!empty($g_post_id) && !pagelayer_user_can_edit($g_post_id)){
-			$ret['error'][$g_post_id] =  __pl('no_permission').' : '.$g_post_id;
-			continue;
-		}
-		
-		// Decode base64 data
-		$value['content'] = base64_decode($value['content']);
-		
-		$is_xss = pagelayer_xss_content($value['content']);
-		 
-		if(!current_user_can('manage_options') && strlen($is_xss) > 0){
-			$ret['error'][$g_post_id] =  __pl('xss_found').' - '.$is_xss;
-			pagelayer_json_output($ret);
-		}
-		
-		// Add slash to save data in post
-		$value['content'] = wp_slash($value['content']);
-		
-		// We need to create the post
-		if(empty($value['post_id'])){
-			
-			$g_ret = wp_insert_post([
-				'post_type' => 'pagelayer-template',
-				'post_title' => $value['title'],
-				'post_content' => $value['content'],
-				'post_status' => 'publish',
-				'comment_status' => 'closed',
-				'ping_status' => 'closed'
-			]);
-			
-			$g_post_id = $g_ret;
-			
-			// Save our template metas
-			update_post_meta($g_post_id, 'pagelayer_template_type', $value['type']);
-			update_post_meta($g_post_id, 'pagelayer-data', time());
-			
-		}else if(!empty($value['content'])){
-			
-			// Save global widget content
-			$post = array(
-				'ID' => $g_post_id,
-				'post_title' => $value['title'],
-				'post_content' => $value['content'],
-			);
-			
-			wp_update_post($post);
-		}
-		
-		if(is_wp_error($g_post_id)){
-			$ret['error'][$g_post_id] = __pl('template_update_err');
-		}else{
-			$ret['success'][$g_post_id] = __pl('template_update_success');
-		}
-	}
-	
-	if(!$echo){ 
-		pagelayer_json_output($ret);
-	}else{
-		return $ret;
-	}
-}
-
-
-/** Function pagelayer_contact_submit() called by wp_ajax hooks: {'pagelayer_contact_submit', 'nopriv_pagelayer_contact_submit'} **/
-/** No params detected :-/ **/
-
-
-/** Function pagelayer_get_taxonomy_list() called by wp_ajax hooks: {'pagelayer_get_taxonomy_list'} **/
-/** Parameters found in function pagelayer_get_taxonomy_list(): {"post": ["post_order", "order", "empty", "hier", "type", "depth"]} **/
-function pagelayer_get_taxonomy_list(){
-	
-	// Some AJAX security
-	check_ajax_referer('pagelayer_ajax', 'pagelayer_nonce');
-	
-	if(!current_user_can('edit_posts')){
-		echo __pl('no_permission');
-		wp_die();
-	}
-	
-	$args = array(
-		'title_li' => 0,
-		'orderby' => $_POST['post_order'],
-		'order' => $_POST['order'],
-		'style' => '',
-		'hide_empty' => $_POST['empty'],
-		'echo' => false,
-		'hierarchical' => (empty($_POST['hier']) || $_POST['hier'] == null ? '' : $_POST['hier']),
-		'taxonomy' => $_POST['type'],
-		'depth' => (empty($_POST['depth']) || $_POST['depth'] == null ? '' : $_POST['depth']),		
-	);
-
-	$taxonomies = get_categories( $args );
-	
-	$option = '<ul>';	
-	foreach ( $taxonomies as $taxonomy ) {
-		$option .= '<li class="pagelayer-sitemap-list-item" data-postID="'.$taxonomy->term_id.'"><a class="pagelayer-ele-link" href="'.get_term_link($taxonomy->term_id).'">'.$taxonomy->name.'</a></li>';
-	}
-	$option .= '</ul>'; 
-	
-	echo $option;
-	wp_die();	
-}
-
-
-/** Function pagelayer_save_template() called by wp_ajax hooks: {'pagelayer_save_template'} **/
-/** Parameters found in function pagelayer_save_template(): {"get": ["postID"], "post": ["pagelayer_template_type", "pagelayer_lib_title", "pagelayer_condition_type", "pagelayer_condition_name", "pagelayer_condition_sub_template", "pagelayer_condition_id"]} **/
-function pagelayer_save_template() {
-	
-	// Some AJAX security
-	check_ajax_referer('pagelayer_builder', 'pagelayer_nonce');
-	
-	$done = [];
-	
-	$post_id = (int) $_GET['postID'];
-
-	// Are you allowed to edit ?
-	if(!empty($post_id) && !pagelayer_user_can_edit($post_id)){
-		$done['error'][] =  __pl('no_permission');
-		pagelayer_json_output($done);
-	}
-	
-	// We need to create the post
-	if(empty($post_id)){
-	
-		if (!current_user_can('edit_posts')) {
-			$done['error'] =  __pl('access_denied');
-			pagelayer_json_output($done);
-		}
-	
-		// Get the template type
-		if(empty($_POST['pagelayer_template_type'])){
-			$done['error'] = __pl('temp_error_type');
-			pagelayer_json_output($done);
-		}
-		
-		$ret = wp_insert_post([
-			'post_title' => $_POST['pagelayer_lib_title'],
-			'post_type' => 'pagelayer-template',
-			'post_status' => 'publish',
-			'comment_status' => 'closed',
-			'ping_status' => 'closed'
-		]);
-		
-		// An error occured
-		if(is_wp_error($ret)){
-			$done['error'] = __pl('temp_error').' : '.$ret->get_error_message();
-			pagelayer_json_output($done);
-		}
-		
-		$post_id = $ret;
-		$done['id'] = $post_id;
-		
-		// Save our template type
-		$ret = update_post_meta($post_id, 'pagelayer_template_type', $_POST['pagelayer_template_type']);
-		
-	}
-	
-	// The ID in consideration
-	$done['id'] = $post_id;
-	
-	// Check if the post title in not empty
-	if(!empty($_POST['pagelayer_lib_title'])){
-		
-		$post = array(
-					'ID' => $post_id,
-					'post_title' => $_POST['pagelayer_lib_title'],
-				);
-
-		// Update the post into the database
-		$ret = wp_update_post($post);
-		
-	}
-	
-	// Save template library display conditions
-	$condi_array = array();
-	$condi_len = count($_POST['pagelayer_condition_type']);
-	if($_POST['pagelayer_template_type'] != 'section'){
-		for( $i =0; $i < $condi_len; $i++ ){
-			$condi_array[$i] = array(
-				'type' => $_POST['pagelayer_condition_type'][$i],
-				'template' => $_POST['pagelayer_condition_name'][$i],
-				'sub_template' => $_POST['pagelayer_condition_sub_template'][$i],
-				'id' => $_POST['pagelayer_condition_id'][$i],
-			);
-		}
-	}
-	//print_r($condi_array);
-	
-	$ret = update_post_meta($post_id, 'pagelayer_template_conditions', $condi_array);
-	
-	if(is_wp_error($post_id)){
-		$done['error'] = __pl('temp_error').' : '.$ret->get_error_message();
-	}else{
-		$done['success'] =  __pl('temp_update_success');
-	}
-
-	pagelayer_json_output($done);
-	
-}
-
-
-/** Function pagelayer_mcp_generate_app_password() called by wp_ajax hooks: {'pagelayer_mcp_generate_app_password'} **/
-/** No params detected :-/ **/
-
-
-/** Function pagelayer_products_ajax() called by wp_ajax hooks: {'pagelayer_products_ajax'} **/
-/** Parameters found in function pagelayer_products_ajax(): {"post": ["atts"]} **/
-function pagelayer_products_ajax(){
-	
-	// Some AJAX security
-	check_ajax_referer('pagelayer_ajax', 'pagelayer_nonce');
-	
-	if ( WC()->session ) {
-		wc_print_notices();
-	}
-	
-	$no_found = $_POST['atts']['no_found'];
-	
-	$attributes = '';
-	$type = $_POST['atts']['source'];
-	$attributes .= ' columns="'. $_POST['atts']['columns'] .'" ';
-	$attributes .= ' rows="'. $_POST['atts']['rows'] .'" ';
-	$attributes .= ' paginate="'. (!empty($_POST['atts']['paginate']) ? true : false) .'" ';
-	$attributes .= ' orderby="'. $_POST['atts']['orderby'] .'" ';
-	$attributes .= ' order="'. $_POST['atts']['order'] .'" ';	
-	$attributes .= ' cache="false" ';	
-	
-	// Hide the catalog order
-	if( empty($_POST['atts']['allow_order']) ){
-		remove_action( 'woocommerce_before_shop_loop', 'woocommerce_catalog_ordering', 30 );
-	}
-	
-	// Hide the result count
-	if( empty($_POST['atts']['show_result']) ){
-		remove_action( 'woocommerce_before_shop_loop', 'woocommerce_result_count', 20 );
-	}
-	
-	if( $type == 'by_id' ){
-		$type = 'products';
-		$attributes .= ' ids="'. (!empty($_POST['atts']['ids']) ? $_POST['atts']['ids'] : '') .'" ';	
-	}elseif( $type == 'pagelayer_current_query' ){
-		
-		$atts['paginate'] = (!empty($_POST['atts']['paginate']) ? true : false);
-		$atts['cache'] = false;
-				
-		$type = 'pagelayer_current_query';
-		
-		// Set the current query
-		add_action( 'woocommerce_shortcode_products_query', 'pagelayer_shortcode_current_query', 10, 10);
-		
-		// If product not found
-		add_action( "woocommerce_shortcode_{$type}_loop_no_results", function ($attributes) use ($no_found){
-			echo '<div class="pagelayer-product-no-found">'.$no_found.'</div>';
-		} );
-		
-		// Get the products list
-		$shortcode = new WC_Shortcode_Products( $atts, $type );
-			
-		echo $shortcode->get_content();
-		return true;
-	}
-		
-	$shortcode = '['.$type.' '. $attributes .']';
-	
-	$content = pagelayer_the_content($shortcode);
-	
-	// If product not found
-	if('<div class="woocommerce columns-'.$_POST['atts']['columns'] .' "></div>' == $content){
-		$content = '<div class="pagelayer-product-no-found">'. $no_found .'</div>';
-	}
-	
-	echo $content;
-		
-	wp_die();
-}
-
-
-/** Function pagelayer_pro_dismiss_expired_licenses() called by wp_ajax hooks: {'pagelayer_pro_dismiss_expired_licenses'} **/
-/** No params detected :-/ **/
-
-
-/** Function pagelayer_activate_recommended_plugin() called by wp_ajax hooks: {'pagelayer_activate_plugin'} **/
-/** Parameters found in function pagelayer_activate_recommended_plugin(): {"request": ["plugin"]} **/
-function pagelayer_activate_recommended_plugin(){
-	check_ajax_referer('pagelayer_recommended_plugins', 'security');
-	
-	if(!current_user_can('activate_plugins')){
-		wp_send_json_error(array('message' => __('You do not have permission to activate plugins.', 'pagelayer')));
-	}
-	
-	$slug = !empty($_REQUEST['plugin']) ? sanitize_text_field(wp_unslash($_REQUEST['plugin'])) : '';
-	if(empty($slug)){
-		wp_send_json_error(array('message' => __('Plugin slug is required.', 'pagelayer')));
-	}
-	
-	if(!function_exists('get_plugins')){
-		require_once ABSPATH . 'wp-admin/includes/plugin.php';
-	}
-	
-	$all_plugins = get_plugins();
-	$plugin_path = '';
-	foreach($all_plugins as $path => $data){
-		if(strpos($path, $slug . '/') === 0){
-			$plugin_path = $path;
-			break;
-		}
-	}
-	
-	if(empty($plugin_path)){
-		wp_send_json_error(array('message' => __('Plugin not found.', 'pagelayer')));
-	}
-	
-	$result = activate_plugin($plugin_path);
-	if(is_wp_error($result)){
-		wp_send_json_error(array('message' => $result->get_error_message()));
-	}
-	
-	wp_send_json_success(array('message' => __('Plugin activated successfully.', 'pagelayer')));
-}
-
-
-/** Function pagelayer_fetch_sidebar() called by wp_ajax hooks: {'pagelayer_fetch_sidebar'} **/
-/** Parameters found in function pagelayer_fetch_sidebar(): {"request": ["sidebar"]} **/
-function pagelayer_fetch_sidebar(){
-	
-	global $wp_registered_sidebars;
-
-	// Some AJAX security
-	check_ajax_referer('pagelayer_ajax', 'pagelayer_nonce');
-	
-	// Create a list
-	$pagelayer_wp_widgets = array();
-	
-	foreach($wp_registered_sidebars as $v){
-		$pagelayer_wp_widgets[$v['id']] = $v['name'];
-	}
-	
-	$id = @$_REQUEST['sidebar'];
-		
-	if(function_exists('dynamic_sidebar') && !empty($pagelayer_wp_widgets[$id])) {
-		ob_start();
-		dynamic_sidebar($id);
-		$result = ob_get_clean();
-	}else{
-		$result =  __pl('no_widget_area');
-	}
-	
-	echo $result;
-	wp_die();
 	
 }
 
@@ -1107,6 +245,55 @@ function pagelayer_search_ids() {
 }
 
 
+/** Function pagelayer_trash_post() called by wp_ajax hooks: {'pagelayer_trash_post'} **/
+/** Parameters found in function pagelayer_trash_post(): {"post": ["postid"]} **/
+function pagelayer_trash_post(){
+		
+	// Some AJAX security
+	check_ajax_referer('pagelayer_ajax', 'pagelayer_nonce');
+	
+	$ret = [];
+	
+	if(empty($_POST['postid']) && !is_numeric($_POST['postid'])){
+		$ret = ['error' => __pl('invalid_post_id')];
+		pagelayer_json_output($ret);
+	}
+
+	if(!current_user_can( 'delete_post', $_POST['postid'] )){
+		$ret = ['error' => __pl('no_permission')];
+		pagelayer_json_output($ret);
+	}
+
+	$ret['url'] = admin_url('/edit.php?post_type=') .get_post_type($_POST['postid']);
+	
+	wp_trash_post($_POST['postid']);	
+	
+	pagelayer_json_output($ret);
+	
+}
+
+
+/** Function pagelayer_update_site_title() called by wp_ajax hooks: {'pagelayer_update_site_title'} **/
+/** Parameters found in function pagelayer_update_site_title(): {"post": ["site_title"]} **/
+function pagelayer_update_site_title(){
+	global $wpdb;
+
+	// Some AJAX security
+	check_ajax_referer('pagelayer_ajax', 'pagelayer_nonce');
+
+	$site_title = $_POST['site_title'];
+	
+	if(!current_user_can('manage_options')){
+		$ret['error'][] = __pl('no_permission');
+		pagelayer_json_output($ret);
+	}
+
+	update_option('blogname', $site_title);
+	
+	wp_die();
+}
+
+
 /** Function pagelayer_product_categories() called by wp_ajax hooks: {'pagelayer_product_categories'} **/
 /** Parameters found in function pagelayer_product_categories(): {"post": ["atts"]} **/
 function pagelayer_product_categories(){
@@ -1136,6 +323,129 @@ function pagelayer_product_categories(){
 		
 	wp_die();
 }
+
+
+/** Function pagelayer_fetch_primary_menu() called by wp_ajax hooks: {'pagelayer_fetch_primary_menu'} **/
+/** Parameters found in function pagelayer_fetch_primary_menu(): {"post": ["nav_list"], "request": ["postID"]} **/
+function pagelayer_fetch_primary_menu(){
+
+	// Some AJAX security
+	check_ajax_referer('pagelayer_ajax', 'pagelayer_nonce');
+	
+	if(isset($_POST['nav_list'])){
+		$_POST['nav_list'] = (int) $_POST['nav_list'];
+		
+		// Load Pagelayer nav menu walker
+		include_once(PAGELAYER_DIR.'/main/nav_walker.php');
+		
+		$postID = (int) $_REQUEST['postID'];
+		
+		// To on live mode
+		$GLOBALS['post'] = get_post($postID);
+		$GLOBALS['wp_query'] = new WP_Query([
+			'post_type' => $GLOBALS['post']->post_type,
+			'post__in' => array($postID),
+		]);
+		
+		// Load short
+		pagelayer_load_shortcodes();
+		
+		wp_nav_menu([
+			'menu'   => wp_get_nav_menu_object($_POST['nav_list']),
+			'menu_id' => $_POST["nav_list"],
+			'menu_class' => 'pagelayer-wp_menu-ul',
+			'walker' => new Pagelayer_Walker_Nav_Menu(),
+			//'theme_location' => 'primary',
+			'echo'	 => true,
+		]);
+	}
+	
+	wp_die();
+}
+
+
+/** Function pagelayer_get_pages_list() called by wp_ajax hooks: {'pagelayer_get_pages_list'} **/
+/** Parameters found in function pagelayer_get_pages_list(): {"post": ["type", "post_order", "order", "hier", "depth"]} **/
+function pagelayer_get_pages_list(){
+
+	// Some AJAX security
+	check_ajax_referer('pagelayer_ajax', 'pagelayer_nonce');
+	
+	if(!current_user_can('edit_posts')){
+		echo __pl('no_permission');
+		wp_die();
+	}
+	
+	$args = array(
+		'post_type' => sanitize_text_field($_POST['type']),
+		'orderby' => sanitize_text_field($_POST['post_order']),
+		'order' => sanitize_text_field($_POST['order']),
+		'hierarchical' => (empty($_POST['hier']) || $_POST['hier'] == null ? '' : sanitize_text_field($_POST['hier'])),
+		'number' => (empty($_POST['depth']) || $_POST['depth'] == null ? '' : sanitize_text_field($_POST['depth'])),
+		'posts_per_page' => -1,
+	);
+	
+	$option = '<ul>';
+	$pages = new WP_Query($args);
+	$posts = $pages->posts;
+	foreach ( $posts as $page ) {
+		$option .= '<li class="pagelayer-sitemap-list-item" data-postID="'.$page->ID.'"><a class="pagelayer-ele-link" href="'.$page->guid.'">'.$page->post_name.'</a></li>';
+	}
+	$option .= '</ul>';
+	
+	echo $option;
+
+	wp_die();
+}
+
+
+/** Function pagelayer_get_post_tags() called by wp_ajax hooks: {'pagelayer_get_post_tags'} **/
+/** Parameters found in function pagelayer_get_post_tags(): {"post": ["postid", "new_tag"]} **/
+function pagelayer_get_post_tags(){
+	
+	// Some AJAX security
+	check_ajax_referer('pagelayer_ajax', 'pagelayer_nonce');	
+	
+	$ret = [];
+	$tag_name = '';
+	
+	if(!current_user_can('manage_categories')){		
+		$ret['error'] = __pl('no_permission');
+		pagelayer_json_output($ret);
+	}
+	
+	if(empty($_POST['postid']) || !is_numeric($_POST['postid']) ){
+		pagelayer_json_output($ret);
+	}
+	
+	$post = (int) $_POST['postid'];
+	$post = get_post($post);
+	
+	if(empty($post) || is_wp_error($post)){
+		$ret['error'] = __pl('invalid_post_id');
+		pagelayer_json_output($ret);
+	}
+	
+	$tag_name = pagelayer_post_type_tag($post->post_type);
+	
+	if(!empty($_POST['new_tag'])){
+		$ret['tag_id'] = wp_insert_term($_POST['new_tag'], $tag_name);
+		$ret['tag_id'] = $ret['tag_id']['term_id'];
+	}
+	
+	$ret += pagelayer_post_tags($post);
+	
+	pagelayer_json_output($ret);
+	
+}
+
+
+/** Function pagelayer_mcp_generate_app_password() called by wp_ajax hooks: {'pagelayer_mcp_generate_app_password'} **/
+/** No params detected :-/ **/
+
+
+/** Function pagelayer_pro_dismiss_expired_licenses() called by wp_ajax hooks: {'pagelayer_pro_dismiss_expired_licenses'} **/
+/** No params detected :-/ **/
 
 
 /** Function pagelayer_custom_font() called by wp_ajax hooks: {'pagelayer_custom_font'} **/
@@ -1183,121 +493,6 @@ function pagelayer_custom_font(){
 }
 
 
-/** Function pagelayer_mcp_save_test_status() called by wp_ajax hooks: {'pagelayer_mcp_save_test_status'} **/
-/** Parameters found in function pagelayer_mcp_save_test_status(): {"post": ["ok", "message"]} **/
-function pagelayer_mcp_save_test_status() {
-	include_once(PAGELAYER_DIR.'/main/abilities.php');
-	check_ajax_referer('pagelayer_mcp_nonce', 'nonce');
-
-	if(!current_user_can('manage_options')){
-		wp_send_json_error(__('You do not have permission to do that.', 'pagelayer'));
-	}
-
-	$ok = !empty($_POST['ok']);
-	$message = !empty($_POST['message']) ? sanitize_text_field(wp_unslash($_POST['message'])) : '';
-
-	Pagelayer_Abilities::save_test_connection_status($ok, $message);
-
-	wp_send_json_success();
-}
-
-
-/** Function pagelayer_fetch_primary_menu() called by wp_ajax hooks: {'pagelayer_fetch_primary_menu'} **/
-/** Parameters found in function pagelayer_fetch_primary_menu(): {"post": ["nav_list"], "request": ["postID"]} **/
-function pagelayer_fetch_primary_menu(){
-
-	// Some AJAX security
-	check_ajax_referer('pagelayer_ajax', 'pagelayer_nonce');
-	
-	if(isset($_POST['nav_list'])){
-		$_POST['nav_list'] = (int) $_POST['nav_list'];
-		
-		// Load Pagelayer nav menu walker
-		include_once(PAGELAYER_DIR.'/main/nav_walker.php');
-		
-		$postID = (int) $_REQUEST['postID'];
-		
-		// To on live mode
-		$GLOBALS['post'] = get_post($postID);
-		$GLOBALS['wp_query'] = new WP_Query([
-			'post_type' => $GLOBALS['post']->post_type,
-			'post__in' => array($postID),
-		]);
-		
-		// Load short
-		pagelayer_load_shortcodes();
-		
-		wp_nav_menu([
-			'menu'   => wp_get_nav_menu_object($_POST['nav_list']),
-			'menu_id' => $_POST["nav_list"],
-			'menu_class' => 'pagelayer-wp_menu-ul',
-			'walker' => new Pagelayer_Walker_Nav_Menu(),
-			//'theme_location' => 'primary',
-			'echo'	 => true,
-		]);
-	}
-	
-	wp_die();
-}
-
-
-/** Function pagelayer_close_plugin_update_notice() called by wp_ajax hooks: {'pagelayer_close_update_notice'} **/
-/** No params detected :-/ **/
-
-
-/** Function pagelayer_do_shortcodes() called by wp_ajax hooks: {'pagelayer_do_shortcodes'} **/
-/** Parameters found in function pagelayer_do_shortcodes(): {"request": ["shortcode_data"]} **/
-function pagelayer_do_shortcodes(){
-
-	// Some AJAX security
-	check_ajax_referer('pagelayer_ajax', 'pagelayer_nonce');
-	
-	if(!current_user_can('edit_posts')){// TODO : WooCommerce
-		$ret['error'][] = __pl('no_permission');
-		pagelayer_json_output($ret);
-	}
-	
-	$data = '';
-	if(isset($_REQUEST['shortcode_data'])){
-		$data = stripslashes($_REQUEST['shortcode_data']);
-	}
-
-	// Load shortcodes
-	pagelayer_load_shortcodes();
-
-	$data = pagelayer_the_content($data);
-	
-	// Create the HTML object
-	$node = pagelayerQuery::parseStr($data);
-	$node->query('.pagelayer-ele')->removeClass('pagelayer-ele');
-	echo $node->html();
-	
-	wp_die();
-	
-}
-
-
-/** Function pagelayer_update_site_title() called by wp_ajax hooks: {'pagelayer_update_site_title'} **/
-/** Parameters found in function pagelayer_update_site_title(): {"post": ["site_title"]} **/
-function pagelayer_update_site_title(){
-	global $wpdb;
-
-	// Some AJAX security
-	check_ajax_referer('pagelayer_ajax', 'pagelayer_nonce');
-
-	$site_title = $_POST['site_title'];
-	
-	if(!current_user_can('manage_options')){
-		$ret['error'][] = __pl('no_permission');
-		pagelayer_json_output($ret);
-	}
-
-	update_option('blogname', $site_title);
-	
-	wp_die();
-}
-
-
 /** Function pagelayer_fetch_featured_img() called by wp_ajax hooks: {'pagelayer_fetch_featured_img'} **/
 /** Parameters found in function pagelayer_fetch_featured_img(): {"post": ["post_id"]} **/
 function pagelayer_fetch_featured_img(){
@@ -1318,189 +513,8 @@ function pagelayer_fetch_featured_img(){
 }
 
 
-/** Function pagelayer_login_submit() called by wp_ajax hooks: {'pagelayer_login_submit', 'nopriv_pagelayer_login_submit'} **/
-/** Parameters found in function pagelayer_login_submit(): {"request": ["username", "password", "remember_me", "logout_url", "login_url"]} **/
-function pagelayer_login_submit(){
-	
-	// Some AJAX security
-	check_ajax_referer('pagelayer_global', 'pagelayer_nonce');
-
-	$creds = array();
-	$creds['user_login'] = $_REQUEST['username'];
-	$creds['user_password'] = $_REQUEST['password'];
-	$creds['remember'] = $_REQUEST['remember_me'];
-	
-	// Login the user
-	$user = wp_signon( $creds, false );	
-	
-	if ( is_wp_error($user) ){
-		$data['error'] = $user->get_error_message();
-	}else{
-	
-		// If After logout URL, then save
-		if(!empty($_REQUEST['logout_url'])){
-			update_user_option($user->ID, 'pagelayer_logout_url', sanitize_url($_REQUEST['logout_url']));
-		}
-	
-		$data['redirect'] = (empty($_REQUEST['login_url']) ? '' : sanitize_url($_REQUEST['login_url']));
-		$data['error'] = '';
-	}
-
-	pagelayer_json_output($data);
-	
-}
-
-
-/** Function pagelayer_handle_markdown() called by wp_ajax hooks: {'pagelayer_handle_markdown'} **/
-/** Parameters found in function pagelayer_handle_markdown(): {"post": ["data"]} **/
-function pagelayer_handle_markdown(){
-
-	check_ajax_referer('pagelayer_ajax', 'pagelayer_nonce');
-
-	if(!defined('PAGELAYER_PRO_VERSION')){
-		wp_send_json_error(['message' => __('Markdown feature requires Pagelayer Pro.', 'pagelayer')]);
-		return;
-	}
-
-	include_once(PAGELAYER_PRO_DIR.'/main/premium_functions.php');
-
-	$raw_atts = isset($_POST['data']) && is_array($_POST['data']) ? wp_unslash($_POST['data']) : [];
-	$atts = [];
-
-	foreach($raw_atts as $key => $value){
-		$clean_key = sanitize_key($key);
-
-		// Check for invalid UTF-8 to prevent database errors
-		if(in_array($clean_key, ['markdown_text_file', 'markdown_text_url', 'active_markdown_text'])){
-			$atts[$clean_key] = wp_check_invalid_utf8($value);
-		} else{
-			$atts[$clean_key] = sanitize_text_field($value);
-		}
-	}
-
-	$fetched = pagelayer_get_markdown_content($atts);
-	$current_text = $fetched['text'];
-	$default_text = __pl('Select a Markdown file or enter a URL to load content.');
-	
-	// Compile HTML
-	$html = '';
-	if(!empty($fetched['is_error'])){
-		$html = '<div class="pagelayer-markdown-error">' . esc_html($current_text) . '</div>';
-	} else if($current_text === $default_text){
-		$html = '<div class="pagelayer-markdown-placeholder">' . $default_text . '</div>';
-	} else if(function_exists('pagelayer_markdown_to_html')){
-		$html = pagelayer_markdown_to_html($current_text);
-	}
-	
-	$wp['html'] = wp_kses_post($html);
-	$wp['raw_text'] = $current_text;
-	$wp['is_error'] = !empty($fetched['is_error']);
-
-	pagelayer_json_output($wp);
-
-	wp_die();
-}
-
-
-/** Function pagelayer_trash_post() called by wp_ajax hooks: {'pagelayer_trash_post'} **/
-/** Parameters found in function pagelayer_trash_post(): {"post": ["postid"]} **/
-function pagelayer_trash_post(){
-		
-	// Some AJAX security
-	check_ajax_referer('pagelayer_ajax', 'pagelayer_nonce');
-	
-	$ret = [];
-	
-	if(empty($_POST['postid']) && !is_numeric($_POST['postid'])){
-		$ret = ['error' => __pl('invalid_post_id')];
-		pagelayer_json_output($ret);
-	}
-
-	if(!current_user_can( 'delete_post', $_POST['postid'] )){
-		$ret = ['error' => __pl('no_permission')];
-		pagelayer_json_output($ret);
-	}
-
-	$ret['url'] = admin_url('/edit.php?post_type=') .get_post_type($_POST['postid']);
-	
-	wp_trash_post($_POST['postid']);	
-	
-	pagelayer_json_output($ret);
-	
-}
-
-
-/** Function pagelayer_mcp_save_image_api_key() called by wp_ajax hooks: {'pagelayer_mcp_save_image_api_key'} **/
-/** Parameters found in function pagelayer_mcp_save_image_api_key(): {"post": ["provider", "api_key"]} **/
-function pagelayer_mcp_save_image_api_key() {
-	check_ajax_referer('pagelayer_mcp_nonce', 'nonce');
-
-	if(!current_user_can('manage_options')){
-		wp_send_json_error(array('message' => __('You do not have permission to do that.', 'pagelayer')));
-	}
-
-	$provider = !empty($_POST['provider']) ? sanitize_key(wp_unslash($_POST['provider'])) : '';
-	$api_key  = !empty($_POST['api_key']) ? sanitize_text_field(wp_unslash($_POST['api_key'])) : '';
-
-	if(empty($api_key)){
-		wp_send_json_error(array('message' => __('An API key is required.', 'pagelayer')));
-	}
-
-	if($provider !== 'pexels'){
-		wp_send_json_error(array('message' => __('Unsupported image provider.', 'pagelayer')));
-	}
-
-	update_option('pagelayer_pexels_api_key', $api_key, false);
-
-	wp_send_json_success(array('message' => __('Image search API key saved.', 'pagelayer')));
-}
-
-
-/** Function pagelayer_delete_revision() called by wp_ajax hooks: {'pagelayer_delete_revision'} **/
-/** Parameters found in function pagelayer_delete_revision(): {"request": ["revisionID"]} **/
-function pagelayer_delete_revision() {
-	
-	// Some AJAX security
-	check_ajax_referer('pagelayer_ajax', 'pagelayer_nonce');
-
-	$revisionID = (int) $_REQUEST['revisionID'];
-	$parID = wp_get_post_parent_id($revisionID);
-	$ret = array();
-	
-	// Are you allowed to edit ?
-	if(!pagelayer_user_can_edit($parID)){
-		$ret['error'][] =  __pl('no_permission');
-		pagelayer_json_output($ret);
-	}
-	
-	if(empty($revisionID)){
-		$ret['error'] =  __pl('invalid_post_id');
-	}else{
-
-		$revision = get_post( $revisionID );
-
-		if ( empty( $revision ) ) {
-			$ret['error'] =  __pl('invalid_revision');
-		}else{
-
-			if ( ! current_user_can( 'delete_post', $parID ) ) {
-					$ret['error'] =  __pl('access_denied');
-					pagelayer_json_output($ret);
-			}
-
-			$deleted = wp_delete_post_revision( $revision->ID );
-
-			if ( ! $deleted || is_wp_error( $deleted ) ) {
-				$ret['error'] =  __pl('delete_rev_error');
-			}else{
-				$ret['success'] =  __pl('delete_rev_success');
-			}
-		}
-	}
-	
-	pagelayer_json_output($ret);
-	
-}
+/** Function pagelayer_givecss() called by wp_ajax hooks: {'pagelayer_givecss', 'nopriv_pagelayer_givecss'} **/
+/** No params detected :-/ **/
 
 
 /** Function pagelayer_post_nav() called by wp_ajax hooks: {'pagelayer_post_nav'} **/
@@ -1554,263 +568,8 @@ function pagelayer_post_nav() {
 }
 
 
-/** Function pagelayer_mcp_adapter_action() called by wp_ajax hooks: {'pagelayer_mcp_adapter_action'} **/
-/** Parameters found in function pagelayer_mcp_adapter_action(): {"post": ["type"]} **/
-function pagelayer_mcp_adapter_action() {
-	include_once(PAGELAYER_DIR.'/main/abilities.php');
-	check_ajax_referer('pagelayer_mcp_nonce', 'nonce');
-
-	if(!current_user_can('manage_options')){
-		wp_send_json_error('Unauthorized');
-	}
-
-	$type = isset($_POST['type']) ? sanitize_text_field($_POST['type']) : '';
-
-	if(!function_exists('get_plugins')){
-		require_once ABSPATH . 'wp-admin/includes/plugin.php';
-	}
-
-	if ($type === 'install') {
-		include_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
-		include_once ABSPATH . 'wp-admin/includes/file.php';
-
-		// The MCP Adapter is hosted on GitHub, not WordPress.org, so fetch the download URL from the GitHub API
-		$download_url = Pagelayer_Abilities::get_mcp_adapter_download_url();
-
-		$upgrader = new \Plugin_Upgrader(new \Automatic_Upgrader_Skin());
-		$installed = $upgrader->install($download_url);
-
-		if(is_wp_error($installed)){
-			wp_send_json_error($installed->get_error_message());
-		}elseif(!$installed){
-			wp_send_json_error('Installation failed. The MCP Adapter plugin is downloaded from GitHub. Please check your server can reach github.com.');
-		}
-
-		$plugin_file = Pagelayer_Abilities::get_installed_mcp_adapter_file();
-		if($plugin_file){
-			activate_plugin($plugin_file);
-			wp_send_json_success('Installed and activated');
-		}
-		wp_send_json_success('Installed but not activated');
-
-	} elseif ($type === 'activate') {
-		$plugin_file = Pagelayer_Abilities::get_installed_mcp_adapter_file();
-		if($plugin_file){
-			$result = activate_plugin($plugin_file);
-			if(is_wp_error($result)){
-				wp_send_json_error($result->get_error_message());
-			}
-			wp_send_json_success('Activated');
-		}
-		wp_send_json_error('Plugin not found');
-	}
-
-	wp_send_json_error('Invalid action');
-}
-
-
-/** Function pagelayer_wp_widget_ajax() called by wp_ajax hooks: {'pagelayer_wp_widget'} **/
-/** Parameters found in function pagelayer_wp_widget_ajax(): {"post": ["tag", "widget_data", "values"]} **/
-function pagelayer_wp_widget_ajax(){
-
-	global $pagelayer;
-
-	// Some AJAX security
-	check_ajax_referer('pagelayer_ajax', 'pagelayer_nonce');
-	
-	if(!current_user_can('edit_theme_options')){		
-		$ret['error'][] = __pl('no_permission');
-		pagelayer_json_output($ret);
-	}
-	
-	pagelayer_load_shortcodes();
-	
-	header('Content-Type: application/json');
-	
-	$ret = [];
-	$tag = @$_POST['tag'];
-	//pagelayer_print($pagelayer->shortcodes[$tag]);
-	
-	// No tag ?
-	if(empty($pagelayer->shortcodes[$tag])){
-		$ret['error'][] =  __pl('no_tag');
-		pagelayer_json_output($ret);
-	}
-	
-	// Include the widgets
-	$widgets = ABSPATH . 'site-admin/includes/widgets.php';
-	$widgets = file_exists($widgets) ? $widgets : ABSPATH . 'wp-admin/includes/widgets.php';
-	require_once($widgets);
-	
-	$class = $pagelayer->shortcodes[$tag]['widget'];
-	
-	// Check the widget class exists ?
-	if(empty($class) || !class_exists($class)){
-		$ret['error'][] =  __pl('no_widget_class');
-		pagelayer_json_output($ret);
-	}
-	
-	$instance = [];
-	$widget = new $class();
-	$widget->_set('pagelayer-widget-1234567890');
-	
-	// Is there any existing data ?
-	if(!empty($_POST['widget_data'])){
-		$json = json_decode(stripslashes($_POST['widget_data']), true);
-		//pagelayer_print($json);die();
-		if(!empty($json)){
-			$instance = $json;
-		}
-	}
-
-	// Are there any form values ?
-	if(!empty($_POST['values'])){		
-		parse_str(stripslashes($_POST['values']), $data);
-		//pagelayer_print($data);die();
-		
-		// Any data ?
-		if(!empty($data)){
-		
-			// Rss widget checkboxes fix
-			if(!empty($data['widget-rss'])){
-				$data['widget-rss']['pagelayer-widget-1234567890']['show_summary'] = empty($data['widget-rss']['pagelayer-widget-1234567890']['show_summary'])? 0 : 1;
-				$data['widget-rss']['pagelayer-widget-1234567890']['show_author'] = empty($data['widget-rss']['pagelayer-widget-1234567890']['show_author'])? 0 : 1;
-				$data['widget-rss']['pagelayer-widget-1234567890']['show_date'] = empty($data['widget-rss']['pagelayer-widget-1234567890']['show_date'])? 0 : 1;				
-			}
-			
-			// First key is useless
-			$data = current($data);
-			
-			// Do we still have valid data ?
-			if(!empty($data)){
-				
-				// 2nd key is useless and just over-ride instance
-				$instance = current($data);
-				
-			}
-		}
-	}
-	
-	// Settings instance For Text widget
-	if($widget->id_base == 'text'){
-		$instance['visual'] = false;
-		$instance['legacy'] = false;
-	}
-	
-	// Get the form
-	ob_start();
-	$widget->form($instance);
-	$ret['form'] = ob_get_contents();
-	ob_end_clean();
-	
-	// Get the html
-	ob_start();
-	$widget->widget([], $instance);
-	$ret['html'] = ob_get_contents();
-	ob_end_clean();
-	
-	// Widget data to set
-	if(!empty($instance)){
-		$ret['widget_data'] = $instance;
-	}
-	
-	// Custom html widget form elements
-	if(!empty($widget) && $widget->name=='Custom HTML'){
-		$custom_html = explode('>', $ret['form']);
-	
-		$custom_html[0] = '<label for="widget-custom_html-pagelayer-widget-1234567890-title">Title:</label>'.$custom_html[0];
-		$custom_html[0] = str_replace('type="hidden"', 'type="text"',$custom_html[0]);
-		
-		$custom_html[1] = '<label for="widget-custom_html-pagelayer-widget-1234567890-content">Content:</label>'.$custom_html[1];
-		$custom_html[1] = str_replace('hidden', '', $custom_html[1]);
-		
-		$ret['form'] = implode('>', $custom_html);
-	}
-	
-	pagelayer_json_output($ret);
-	
-}
-
-
-/** Function pagelayer_get_pages_list() called by wp_ajax hooks: {'pagelayer_get_pages_list'} **/
-/** Parameters found in function pagelayer_get_pages_list(): {"post": ["type", "post_order", "order", "hier", "depth"]} **/
-function pagelayer_get_pages_list(){
-
-	// Some AJAX security
-	check_ajax_referer('pagelayer_ajax', 'pagelayer_nonce');
-	
-	if(!current_user_can('edit_posts')){
-		echo __pl('no_permission');
-		wp_die();
-	}
-	
-	$args = array(
-		'post_type' => sanitize_text_field($_POST['type']),
-		'orderby' => sanitize_text_field($_POST['post_order']),
-		'order' => sanitize_text_field($_POST['order']),
-		'hierarchical' => (empty($_POST['hier']) || $_POST['hier'] == null ? '' : sanitize_text_field($_POST['hier'])),
-		'number' => (empty($_POST['depth']) || $_POST['depth'] == null ? '' : sanitize_text_field($_POST['depth'])),
-		'posts_per_page' => -1,
-	);
-	
-	$option = '<ul>';
-	$pages = new WP_Query($args);
-	$posts = $pages->posts;
-	foreach ( $posts as $page ) {
-		$option .= '<li class="pagelayer-sitemap-list-item" data-postID="'.$page->ID.'"><a class="pagelayer-ele-link" href="'.$page->guid.'">'.$page->post_name.'</a></li>';
-	}
-	$option .= '</ul>';
-	
-	echo $option;
-
-	wp_die();
-}
-
-
-/** Function pagelayer_get_cat_checkboxes() called by wp_ajax hooks: {'pagelayer_get_cat_checkboxes'} **/
-/** Parameters found in function pagelayer_get_cat_checkboxes(): {"post": ["postid", "new_cat"]} **/
-function pagelayer_get_cat_checkboxes(){
-	
-	// Some AJAX security
-	check_ajax_referer('pagelayer_ajax', 'pagelayer_nonce');
-	
-	$ret = [];
-	$cat_name = '';
-	
-	if(!current_user_can('manage_categories')){		
-		$ret['error'] = __pl('no_permission');
-		pagelayer_json_output($ret);
-	}
-
-	if(empty($_POST['postid']) || !is_numeric($_POST['postid'])){
-		$ret['error'] = __pl('invalid_post_id');
-		pagelayer_json_output($ret);
-	}
-	
-	$post = (int) $_POST['postid'];
-	$post = get_post($post);
-	
-	if(empty($post) || is_wp_error($post)){
-		$ret['error'] = __pl('invalid_post_id');
-		pagelayer_json_output($ret);
-	}
-	
-	$cat_name = pagelayer_post_type_category($post->post_type);
-	
-	if(!empty($_POST['new_cat'])){
-		parse_str($_POST['new_cat'], $formdata);
-		$ret['new_cat_id'] = wp_insert_category([
-			'taxonomy' => $cat_name,
-			'cat_name' => $formdata['category_name'],
-			'category_parent' => (($formdata['pagelayer_cat_parent'] == 0) ? '' : $formdata['pagelayer_cat_parent'])
-		]);
-	}
-	
-	$ret += pagelayer_post_cats($post);
-	
-	pagelayer_json_output($ret);
-	
-}
+/** Function pagelayer_infinite_posts() called by wp_ajax hooks: {'nopriv_pagelayer_infinite_posts', 'pagelayer_infinite_posts'} **/
+/** No params detected :-/ **/
 
 
 /** Function pagelayer_export_template() called by wp_ajax hooks: {'pagelayer_export_template'} **/
@@ -2107,21 +866,577 @@ function pagelayer_export_template(){
 }
 
 
-/** Function pagelayer_posts_data() called by wp_ajax hooks: {'pagelayer_posts_data'} **/
+/** Function pagelayer_post_info() called by wp_ajax hooks: {'pagelayer_post_info'} **/
+/** Parameters found in function pagelayer_post_info(): {"request": ["postID", "el"]} **/
+function pagelayer_post_info() {
+	global $post;
+	
+	// Some AJAX security
+	check_ajax_referer('pagelayer_ajax', 'pagelayer_nonce');
+
+	if(!isset($_REQUEST['postID']) || !isset($_REQUEST['el'])){
+		return true;
+	}
+	
+	$el['atts'] = $_REQUEST['el'];
+	
+	$GLOBALS['post'] = get_post($_REQUEST['postID']);
+	
+	// Load shortcodes
+	pagelayer_load_shortcodes();
+	
+	pagelayer_sc_post_info_list($el);
+	
+	pagelayer_json_output($el['atts']);
+		
+}
+
+
+/** Function pagelayer_create_post_autosave() called by wp_ajax hooks: {'pagelayer_create_post_autosave'} **/
+/** Parameters found in function pagelayer_create_post_autosave(): {"get": ["postID"], "request": ["pagelayer_post_content"]} **/
+function pagelayer_create_post_autosave(){
+
+	// Some AJAX security
+	check_ajax_referer('pagelayer_ajax', 'pagelayer_nonce');
+	
+	$ret = array();
+	$postID = (int) $_GET['postID'];	
+	$content = $_REQUEST['pagelayer_post_content'];
+	
+	// Decode base64 data
+	$content = base64_decode($content);
+	$content = wp_slash($content);
+	
+	// Are you allowed to edit ?
+	if(!pagelayer_user_can_edit($postID)){
+		$ret['error'][] =  __pl('no_permission');
+		pagelayer_json_output($ret);
+	}
+	
+	if(empty($postID)){
+		$ret['error'] =  __pl('invalid_post_id');
+	}else{
+		
+		$post = array(
+			'post_ID' => $postID,
+			'post_content' => $content,
+		);
+		
+		$ret['id'] = wp_create_post_autosave($post);
+	}
+	
+	$ret['url'] = get_preview_post_link($postID);
+	
+	pagelayer_json_output($ret);
+	
+}
+
+
+/** Function pagelayer_handle_markdown() called by wp_ajax hooks: {'pagelayer_handle_markdown'} **/
+/** Parameters found in function pagelayer_handle_markdown(): {"post": ["data"]} **/
+function pagelayer_handle_markdown(){
+
+	check_ajax_referer('pagelayer_ajax', 'pagelayer_nonce');
+
+	if(!defined('PAGELAYER_PRO_VERSION')){
+		wp_send_json_error(['message' => __('Markdown feature requires Pagelayer Pro.', 'pagelayer')]);
+		return;
+	}
+
+	include_once(PAGELAYER_PRO_DIR.'/main/premium_functions.php');
+
+	$raw_atts = isset($_POST['data']) && is_array($_POST['data']) ? wp_unslash($_POST['data']) : [];
+	$atts = [];
+
+	foreach($raw_atts as $key => $value){
+		$clean_key = sanitize_key($key);
+
+		// Check for invalid UTF-8 to prevent database errors
+		if(in_array($clean_key, ['markdown_text_file', 'markdown_text_url', 'active_markdown_text'])){
+			$atts[$clean_key] = wp_check_invalid_utf8($value);
+		} else{
+			$atts[$clean_key] = sanitize_text_field($value);
+		}
+	}
+
+	$fetched = pagelayer_get_markdown_content($atts);
+	$current_text = $fetched['text'];
+	$default_text = __pl('Select a Markdown file or enter a URL to load content.');
+	
+	// Compile HTML
+	$html = '';
+	if(!empty($fetched['is_error'])){
+		$html = '<div class="pagelayer-markdown-error">' . esc_html($current_text) . '</div>';
+	} else if($current_text === $default_text){
+		$html = '<div class="pagelayer-markdown-placeholder">' . $default_text . '</div>';
+	} else if(function_exists('pagelayer_markdown_to_html')){
+		$html = pagelayer_markdown_to_html($current_text);
+	}
+	
+	$wp['html'] = wp_kses_post($html);
+	$wp['raw_text'] = $current_text;
+	$wp['is_error'] = !empty($fetched['is_error']);
+
+	pagelayer_json_output($wp);
+
+	wp_die();
+}
+
+
+/** Function pagelayer_login_submit() called by wp_ajax hooks: {'pagelayer_login_submit', 'nopriv_pagelayer_login_submit'} **/
+/** Parameters found in function pagelayer_login_submit(): {"request": ["username", "password", "remember_me", "logout_url", "login_url"]} **/
+function pagelayer_login_submit(){
+	
+	// Some AJAX security
+	check_ajax_referer('pagelayer_global', 'pagelayer_nonce');
+
+	$creds = array();
+	$creds['user_login'] = $_REQUEST['username'];
+	$creds['user_password'] = $_REQUEST['password'];
+	$creds['remember'] = $_REQUEST['remember_me'];
+	
+	// Login the user
+	$user = wp_signon( $creds, false );	
+	
+	if ( is_wp_error($user) ){
+		$data['error'] = $user->get_error_message();
+	}else{
+	
+		// If After logout URL, then save
+		if(!empty($_REQUEST['logout_url'])){
+			update_user_option($user->ID, 'pagelayer_logout_url', sanitize_url($_REQUEST['logout_url']));
+		}
+	
+		$data['redirect'] = (empty($_REQUEST['login_url']) ? '' : sanitize_url($_REQUEST['login_url']));
+		$data['error'] = '';
+	}
+
+	pagelayer_json_output($data);
+	
+}
+
+
+/** Function pagelayer_save_content() called by wp_ajax hooks: {'pagelayer_save_content'} **/
+/** Parameters found in function pagelayer_save_content(): {"post": ["pagelayer_update_content"], "get": ["postID"], "request": ["post_sticky", "post_author", "comment_status", "ping_status", "featured_image", "post_category", "post_tags", "contacts", "copyright", "global_widgets", "pagelayer_nav_items", "pagelayer_customizer_options"]} **/
+function pagelayer_save_content(){
+
+	// Some AJAX security
+	check_ajax_referer('pagelayer_ajax', 'pagelayer_nonce');
+
+	$content = $_POST['pagelayer_update_content'];
+
+	$postID = (int) $_GET['postID'];
+	
+	if(empty($postID)){
+		$msg['error'] = __pl('invalid_post_id');
+		pagelayer_json_output($msg);
+	}
+	
+	$_post = get_post($postID);
+	
+	// Post found ?
+	if(empty($_post)){
+		$msg['error'] = __pl('invalid_post_id');
+		pagelayer_json_output($msg);
+	}
+	
+	// Get the post type and its capabilities
+	$post_type = $_post->post_type;
+	$post_type_obj = get_post_type_object($post_type);
+	
+	// Are you allowed to edit ?
+	if(!pagelayer_user_can_edit($postID)){
+		$msg['error'][] =  __pl('no_permission');
+		pagelayer_json_output($msg);
+	}
+	
+	// Check if the post exists	
+	if(!empty($postID)){
+		
+		$content = base64_decode($content);
+		
+		/*if(!pagelayer_is_utf8($content)){
+			$content = utf8_encode($content);
+		}*/
+		
+		$is_xss = pagelayer_xss_content($content);
+		 
+		if(!pagelayer_user_can_add_js_content() && strlen($is_xss) > 0){
+			$msg['error'][] =  __pl('xss_found').' - '.$is_xss;
+			pagelayer_json_output($msg);
+		}
+		
+		// Is comment mode?
+		if(pagelayer_is_comment_mode()){
+			global $pagelayer_comment_errors, $pagelayer_comment_alerts;
+			$content = pagelayer_extract_comment_atts($postID, $content);			
+		}
+		
+		// Add slash to save data in post
+		$content = wp_slash($content);
+		
+		$post = array(
+			'ID' => $postID,
+			'post_content' => $content,
+		);
+		
+		// Any properties ?
+		$allowed = ['post_title', 'post_name', 'post_excerpt', 'post_status', 'post_password', 'post_date', 'post_parent', 'menu_order'];
+
+		foreach($allowed as $k){
+			if(isset($_REQUEST[$k])){
+				$post[$k] = sanitize_text_field($_REQUEST[$k]);
+			}
+		}
+		
+		// Restrict contributors from setting 'publish' or modifying unauthorized fields
+		$current_user_can_publish = current_user_can($post_type_obj->cap->publish_posts);
+		if(!$current_user_can_publish){
+			if(!in_array($post['post_status'], ['draft', 'pending'])){
+				$post['post_status'] = 'pending'; // Force pending status
+			}
+		}
+		
+		if(!empty($post['post_password'])){
+			if($_REQUEST['post_sticky'] == true){
+				$msg['error'] = __pl('post_pass_with_sticky_err');
+				pagelayer_json_output($msg);
+			}
+			
+			// Prevent unauthorized password protection
+			$can_protect = current_user_can($post_type_obj->cap->edit_private_posts);
+			if(!$can_protect){
+				$msg['error'][] = __pl('no_permission_to_set_password');
+				pagelayer_json_output($msg);
+			}
+		}
+		
+		// Prevent unauthorized modification of `post_author`
+		if(isset($_REQUEST['post_author']) && $_REQUEST['post_author'] != $_post->post_author){
+
+			$edit_others_posts = current_user_can($post_type_obj->cap->edit_others_posts);
+
+			if($edit_others_posts){
+				$post['post_author'] = (int) $_REQUEST['post_author'];
+			}else{
+				$msg['error'][] = __pl('no_permission_to_change_author');
+				pagelayer_json_output($msg);
+			}
+		}
+
+		$post['comment_status'] = !empty($_REQUEST['comment_status']) ? 'open' : 'closed';
+		$post['ping_status'] = !empty($_REQUEST['ping_status']) ? 'open' : 'closed';
+		$post['post_status'] = empty($post['post_status']) ? $_post->post_status : $post['post_status'];
+		
+		if(!empty($post['post_status']) && $post['post_status'] == 'publish'){
+			
+			// Allowed to publish pages ?
+			if($_post->post_type == 'page' && !current_user_can('publish_pages')){
+				$msg['error'][] =  __pl('no_publish_permission');
+				pagelayer_json_output($msg);
+			}
+			
+			// Allowed to publish posts ?
+			if($_post->post_type == 'post' && !current_user_can('publish_posts')){
+				$post['post_status'] = 'pending';
+			}
+		}
+		
+		if(!empty($post['post_password'])){
+			$post['post_password'] = (in_array($post['post_status'], array('pass_protected', 'publish')) ? $post['post_password'] : '');
+			$post['post_status'] = 'publish';
+		}else{	
+			$post['post_status'] = ($post['post_status'] == 'pass_protected') ? 'publish' : $post['post_status'];
+			$post['post_password'] = '';
+		}
+		
+		// Set post GMT time
+		if(!empty($post['post_date']) && '0000-00-00 00:00:00' !== $post['post_date']){
+			$post['post_date_gmt'] = get_gmt_from_date( $post['post_date'] );
+			
+			if( in_array($post['post_status'], array('future', 'publish')) && $_post->post_date_gmt === '0000-00-00 00:00:00' ){
+				$post['edit_date'] = true;
+			}
+		}
+		
+		$_REQUEST['featured_image'] = (int) $_REQUEST['featured_image'];
+		if(!empty($_REQUEST['featured_image'])){
+			set_post_thumbnail($postID, $_REQUEST['featured_image']);
+		}else{
+			delete_post_thumbnail($postID);
+		}
+		
+		if(!isset($_REQUEST['post_category'])){
+			$_REQUEST['post_category'] = '';
+		}
+		
+		if(!isset($_REQUEST['post_tags'])){
+			$_REQUEST['post_tags'] = '';
+		}
+		
+		if($_post->post_type == 'post'){
+			$post['post_category'] = pagelayer_sanitize_text_field($_REQUEST['post_category']);
+			
+			$post['tags_input'] = pagelayer_sanitize_text_field($_REQUEST['post_tags']);
+		}else{
+			$cat_name = pagelayer_post_type_category($_post->post_type);
+			if($cat_name){
+				$post['tax_input'][$cat_name] = pagelayer_sanitize_text_field($_REQUEST['post_category']);				
+			}			
+			
+			$tag_name = pagelayer_post_type_tag($_post->post_type);
+			if($tag_name){
+				$post['tax_input'][$tag_name] = pagelayer_sanitize_text_field($_REQUEST['post_tags']);				
+			}	
+		}
+		
+		if(isset($_REQUEST['post_sticky']) && !empty($_REQUEST['post_sticky'])){
+			stick_post( $postID );
+		}else{
+			if(is_sticky($postID)){
+				unstick_post( $postID );
+			}
+		}
+			
+		// Any contact templates ?
+		if(!empty($_REQUEST['contacts']) && current_user_can('activate_plugins')){
+			update_post_meta($postID, 'pagelayer_contact_templates', $_REQUEST['contacts']);
+		}else{
+			delete_post_meta($postID, 'pagelayer_contact_templates');
+		}
+		
+		// Save copyright
+		if(isset($_REQUEST['copyright']) && current_user_can('manage_options')){
+			update_option('pagelayer-copyright', wp_unslash($_REQUEST['copyright']));	
+		}
+		
+		// Apply a filter
+		$post = apply_filters('pagelayer_save_content', $post);
+		
+		// Update the post into the database
+		$ret = wp_update_post($post, true);
+		
+		// Render the post
+		//update_post_meta($postID, 'pagelayer_rendered_post', pagelayer_get_post_content($postID));
+
+		if (is_wp_error($ret)) {
+			$errors = $ret->get_error_messages();			
+			$msg['error'] = __pl('post_update_err').' : '.implode('', $errors);
+		}else{
+			
+			// Get the updated post
+			$_post = get_post($postID);
+			
+			// Is this a Pagelayer post
+			$data = get_post_meta($postID, 'pagelayer-data', true);
+
+			if(empty($data)){
+				
+				// Convert to pagelayer accessed post
+				if(!add_post_meta($postID, 'pagelayer-data', time(), true)){
+					update_post_meta($postID, 'pagelayer-data', time());
+				}
+			}
+			
+			if(!empty($pagelayer_comment_alerts)){
+				$msg['comment_alerts'] = $pagelayer_comment_alerts;
+			}
+			
+			if(!empty($pagelayer_comment_errors)){
+				$msg['error'][] = 'Comment Mode errrors found !';
+				$msg['comment_errors'] = $pagelayer_comment_errors;
+			}
+			
+			$msg['success'] = __pl('post_update_success');
+		}
+		
+	}else{
+		$msg['error'] = __pl('post_update_err');
+	}
+	
+	$msg['post_status'] = (empty($_post->post_password)) ? $_post->post_status : 'pass_protected';
+	
+	// Save global widgets data
+	if(!empty($_REQUEST['global_widgets'])){
+		pagelayer_save_templ_content(true);
+	}
+	
+	// Save nav menu data
+	if(!empty($_REQUEST['pagelayer_nav_items']) && current_user_can('edit_theme_options')){
+		$menu_items = (array) $_REQUEST['pagelayer_nav_items'];
+		foreach($menu_items as $items){
+			pagelayer_save_nav_menu_items($items);
+		}
+	}
+	
+	// Save Customizer data
+	if(!empty($_REQUEST['pagelayer_customizer_options']) && current_user_can('edit_theme_options')){
+		
+		$customizer_options = wp_unslash($_REQUEST['pagelayer_customizer_options']);
+		$customizer_options = json_decode($customizer_options, true);
+		
+		// Add current post type
+		$customizer_options['pagelayer_current_post_type'] = $_post->post_type;
+		
+		pagelayer_save_customizer_options($customizer_options);
+	}
+	
+	pagelayer_json_output($msg);
+	
+}
+
+
+/** Function pagelayer_fetch_sidebar() called by wp_ajax hooks: {'pagelayer_fetch_sidebar'} **/
+/** Parameters found in function pagelayer_fetch_sidebar(): {"request": ["sidebar"]} **/
+function pagelayer_fetch_sidebar(){
+	
+	global $wp_registered_sidebars;
+
+	// Some AJAX security
+	check_ajax_referer('pagelayer_ajax', 'pagelayer_nonce');
+	
+	// Create a list
+	$pagelayer_wp_widgets = array();
+	
+	foreach($wp_registered_sidebars as $v){
+		$pagelayer_wp_widgets[$v['id']] = $v['name'];
+	}
+	
+	$id = @$_REQUEST['sidebar'];
+		
+	if(function_exists('dynamic_sidebar') && !empty($pagelayer_wp_widgets[$id])) {
+		ob_start();
+		dynamic_sidebar($id);
+		$result = ob_get_clean();
+	}else{
+		$result =  __pl('no_widget_area');
+	}
+	
+	echo $result;
+	wp_die();
+	
+}
+
+
+/** Function pagelayer_set_jscss_giver() called by wp_ajax hooks: {'pagelayer_set_jscss_giver'} **/
+/** Parameters found in function pagelayer_set_jscss_giver(): {"request": ["set"]} **/
+function pagelayer_set_jscss_giver(){
+	global $wpdb;
+
+	// Some AJAX security
+	check_ajax_referer('pagelayer_ajax', 'pagelayer_nonce');
+	
+	if( !current_user_can('manage_options') ){
+		$ret['error'] =  __pl('no_permission');
+		pagelayer_json_output($ret);
+	}
+	
+	$val = (int) @$_REQUEST['set'];
+	
+	if(in_array($val, [1, -1])){
+		update_option('pagelayer_enable_giver', $val);
+	}
+	
+	$ret['success'] =  1;
+	pagelayer_json_output($ret);
+}
+
+
+/** Function pagelayer_fetch_site_title() called by wp_ajax hooks: {'pagelayer_fetch_site_title'} **/
 /** No params detected :-/ **/
 
 
-/** Function pagelayer_infinite_posts() called by wp_ajax hooks: {'nopriv_pagelayer_infinite_posts', 'pagelayer_infinite_posts'} **/
+/** Function pagelayer_get_revision() called by wp_ajax hooks: {'pagelayer_get_revision'} **/
 /** No params detected :-/ **/
 
 
-/** Function pagelayer_install_recommended_plugin() called by wp_ajax hooks: {'pagelayer_install_plugin'} **/
-/** Parameters found in function pagelayer_install_recommended_plugin(): {"request": ["plugin"]} **/
-function pagelayer_install_recommended_plugin(){
+/** Function pagelayer_contact_submit() called by wp_ajax hooks: {'nopriv_pagelayer_contact_submit', 'pagelayer_contact_submit'} **/
+/** No params detected :-/ **/
+
+
+/** Function pagelayer_get_section_blocks() called by wp_ajax hooks: {'pagelayer_get_section_blocks'} **/
+/** Parameters found in function pagelayer_get_section_blocks(): {"request": ["pagelayer_section_id"]} **/
+function pagelayer_get_section_blocks(){
+	
+	global $pagelayer;
+	
+	// Some AJAX security
+	check_ajax_referer('pagelayer_ajax', 'pagelayer_nonce');
+	
+	if(!current_user_can('edit_posts')){
+		$ret['error'][] = __pl('no_permission');
+		pagelayer_json_output($ret);
+	}
+	
+	$data = '';
+	if(isset($_REQUEST['pagelayer_section_id'])){
+		
+		$get_url = PAGELAYER_API.'/library.php?give_id='.sanitize_text_field($_REQUEST['pagelayer_section_id']).(!empty($pagelayer->license['license']) ? '&license='.$pagelayer->license['license'] : '').'&url='.rawurlencode(site_url());
+		
+		// For SitePad users
+		if(function_exists('get_softaculous_file')){
+			$get_url = get_softaculous_file($get_url, 1);
+		}
+		
+		$fetch = wp_remote_get($get_url, array('timeout' => 60));
+		
+		if ( is_array( $fetch ) && ! is_wp_error( $fetch ) && isset( $fetch['body'] ) ) {
+			$data = json_decode( $fetch['body'], true ); // use the content
+		}else{
+			$data['error'] = __pl('The response was malformed');
+			pagelayer_json_output($data);
+		}
+	}
+	
+	// Upload the images if any in the shortcode
+	preg_match_all('/"'.preg_quote('{{pl_lib_images}}', '/').'([^"]*)"/is', $data['code'], $matches);
+	
+	foreach($matches[0] as $k => $v){
+		$image_url = trim($v, '"\'');
+		$urls[$image_url] = $image_url;
+	}
+	
+	foreach($urls as $k => $image_url){
+		
+		$file = basename($image_url);
+		$id = 0;
+		
+		// Upload this
+		if(!empty($data[$file])){
+			
+			$id = pagelayer_upload_media($file, base64_decode($data[$file]));
+			
+			if(!empty($id)){
+				$data['code'] = str_replace('"'.$image_url.'"', '"'.$id.'"', $data['code']);
+			}
+		}
+		
+	}
+	
+	if ( false !== strpos( $data['code'], '[pl_' ) ) {
+		// Load shortcodes
+		pagelayer_load_shortcodes();
+		
+		// Load Parse Shortcodes
+		include_once(PAGELAYER_DIR.'/main/parse-shortcodes.php');
+		
+		$data['code'] = pagelayer_do_shortcode_to_block($data['code']);
+	}
+	
+	$data['code'] = pagelayer_add_tmp_atts($data['code']);
+	
+	pagelayer_json_output($data);
+
+}
+
+
+/** Function pagelayer_activate_recommended_plugin() called by wp_ajax hooks: {'pagelayer_activate_plugin'} **/
+/** Parameters found in function pagelayer_activate_recommended_plugin(): {"request": ["plugin"]} **/
+function pagelayer_activate_recommended_plugin(){
 	check_ajax_referer('pagelayer_recommended_plugins', 'security');
-
-	if(!current_user_can('install_plugins')){
-		wp_send_json_error(array('message' => __('You do not have permission to install plugins.', 'pagelayer')));
+	
+	if(!current_user_can('activate_plugins')){
+		wp_send_json_error(array('message' => __('You do not have permission to activate plugins.', 'pagelayer')));
 	}
 	
 	$slug = !empty($_REQUEST['plugin']) ? sanitize_text_field(wp_unslash($_REQUEST['plugin'])) : '';
@@ -2129,92 +1444,312 @@ function pagelayer_install_recommended_plugin(){
 		wp_send_json_error(array('message' => __('Plugin slug is required.', 'pagelayer')));
 	}
 	
-	require_once ABSPATH . 'wp-admin/includes/plugin-install.php';
-	require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
-	require_once ABSPATH . 'wp-admin/includes/plugin.php';
-	require_once ABSPATH . 'wp-admin/includes/file.php';
-	
-	// Initialize WP_Filesystem - required before Plugin_Upgrader can write files
-	$creds = request_filesystem_credentials(site_url() . '/wp-admin/', '', false, false, null);
-	if(!WP_Filesystem($creds)){
-		wp_send_json_error(array('message' => __('Could not initialize filesystem. Please check file permissions.', 'pagelayer')));
-	}
-	
-	$api = plugins_api('plugin_information', array('slug' => $slug, 'fields' => array('sections' => false)));
-	
-	if(is_wp_error($api)){
-		wp_send_json_error(array('message' => $api->get_error_message()));
-	}
-	
-	// Use Automatic_Upgrader_Skin (silent); buffer any stray output to keep response clean JSON
-	$skin = new \Automatic_Upgrader_Skin();
-	$upgrader = new \Plugin_Upgrader($skin);
-	
-	ob_start();
-	$result = $upgrader->install($api->download_link);
-	ob_end_clean();
-	
-	if(is_wp_error($result)){
-		wp_send_json_error(array('message' => $result->get_error_message()));
-	}
-	if($result === false || $result === null){
-		$error_msgs = $skin->get_upgrade_messages();
-		$msg = !empty($error_msgs) ? implode(' ', $error_msgs) : __('Plugin installation failed. Please check file permissions.', 'pagelayer');
-		wp_send_json_error(array('message' => $msg));
+	if(!function_exists('get_plugins')){
+		require_once ABSPATH . 'wp-admin/includes/plugin.php';
 	}
 	
 	$all_plugins = get_plugins();
-	$installed_plugin = '';
+	$plugin_path = '';
 	foreach($all_plugins as $path => $data){
 		if(strpos($path, $slug . '/') === 0){
-			$installed_plugin = $path;
+			$plugin_path = $path;
 			break;
 		}
 	}
 	
-	if(empty($installed_plugin)){
-		wp_send_json_error(array('message' => __('Plugin installed but could not be located for activation.', 'pagelayer')));
+	if(empty($plugin_path)){
+		wp_send_json_error(array('message' => __('Plugin not found.', 'pagelayer')));
 	}
 	
-	$result = activate_plugin($installed_plugin);
+	$result = activate_plugin($plugin_path);
 	if(is_wp_error($result)){
 		wp_send_json_error(array('message' => $result->get_error_message()));
 	}
 	
-	wp_send_json_success(array('message' => __('Plugin installed and activated successfully.', 'pagelayer')));
+	wp_send_json_success(array('message' => __('Plugin activated successfully.', 'pagelayer')));
+}
+
+
+/** Function pagelayer_givejs() called by wp_ajax hooks: {'pagelayer_givejs'} **/
+/** No params detected :-/ **/
+
+
+/** Function pagelayer_apply_revision() called by wp_ajax hooks: {'pagelayer_apply_revision'} **/
+/** Parameters found in function pagelayer_apply_revision(): {"request": ["revisionID"]} **/
+function pagelayer_apply_revision(){
+
+	// Some AJAX security
+	check_ajax_referer('pagelayer_ajax', 'pagelayer_nonce');
+
+	$revisionID = (int) $_REQUEST['revisionID'];
+	$parID = wp_get_post_parent_id($revisionID);
+	$ret = array();
+	
+	if(empty($parID)){
+		$parID = $revisionID;
+	}
+	
+	// Are you allowed to edit ?
+	if(!pagelayer_user_can_edit($parID)){
+		$ret['error'][] =  __pl('no_permission');
+		pagelayer_json_output($ret);
+	}
+	
+	if(empty($revisionID)){
+		$ret['error'] =  __pl('invalid_post_id');
+	}else{
+		
+		$post = get_post( $revisionID );
+		
+		if ( empty( $post ) ) {
+			$ret['error'] =  __pl('invalid_revision');
+			pagelayer_json_output($ret);
+		}
+		
+		// Need to make the reviews post global 
+		$GLOBALS['post'] = $post;
+		$GLOBALS['wp_query'] = new WP_Query([
+			'post_type' => $GLOBALS['post']->post_type,
+			'post__in' => array($parID),
+		]);
+		
+		// Need to reload the shortcodes
+		pagelayer_load_shortcodes();
+		
+		$ret['id'] = $revisionID;
+		$ret['content'] = pagelayer_the_content($post->post_content, true);
+		
+		if(is_wp_error($post)) {
+			$ret['error'] =  __pl('rev_load_error');
+		}else{
+			$ret['success'] = __pl('rev_load_success');
+		}
+		
+		wp_reset_postdata();
+	}
+	
+	pagelayer_json_output($ret);
+	
+}
+
+
+/** Function pagelayer_close_plugin_update_notice() called by wp_ajax hooks: {'pagelayer_close_update_notice'} **/
+/** No params detected :-/ **/
+
+
+/** Function pagelayer_get_section_shortcodes() called by wp_ajax hooks: {'pagelayer_get_section_shortcodes'} **/
+/** Parameters found in function pagelayer_get_section_shortcodes(): {"request": ["pagelayer_section_id", "postID"]} **/
+function pagelayer_get_section_shortcodes(){
+	
+	global $pagelayer;
+	
+	// Some AJAX security
+	check_ajax_referer('pagelayer_ajax', 'pagelayer_nonce');
+	
+	if(!current_user_can('edit_posts')){
+		$ret['error'][] = __pl('no_permission');
+		pagelayer_json_output($ret);
+	}
+	
+	$data = '';
+	if(isset($_REQUEST['pagelayer_section_id'])){
+		
+		$get_url = PAGELAYER_API.'/library.php?give_id='.sanitize_text_field($_REQUEST['pagelayer_section_id']).(!empty($pagelayer->license['license']) ? '&license='.$pagelayer->license['license'] : '').'&url='.rawurlencode(site_url());
+		
+		// For SitePad users
+		if(function_exists('get_softaculous_file')){
+			$get_url = get_softaculous_file($get_url, 1);
+		}
+		
+		$fetch = wp_remote_get($get_url, array('timeout' => 60));
+		
+		if ( is_array( $fetch ) && ! is_wp_error( $fetch ) && isset( $fetch['body'] ) ) {
+			$data = json_decode( $fetch['body'], true ); // use the content
+		}else{
+			$data['error'] = __pl('The response was malformed');
+			pagelayer_json_output($data);
+		}
+	}
+	
+	if(isset($_REQUEST['postID'])){
+		$post_id = (int) $_REQUEST['postID'];
+		
+		if(!empty($post_id)){
+			$post = get_post( $post_id );
+			// Need to make the reviews post global 
+			if ( !empty( $post ) ) {
+				$GLOBALS['post'] = $post;
+				
+				$GLOBALS['wp_query'] = new WP_Query([
+					'post_type' => $GLOBALS['post']->post_type,
+					'post__in' => array($post_id),
+				]);
+			}
+		}
+	}
+	
+	// Upload the images if any in the shortcode
+	preg_match_all('/"'.preg_quote('{{pl_lib_images}}', '/').'([^"]*)"/is', $data['code'], $matches);
+	
+	foreach($matches[0] as $k => $v){
+		$image_url = trim($v, '"\'');
+		$urls[$image_url] = $image_url;
+	}
+	
+	foreach($urls as $k => $image_url){
+		
+		$file = basename($image_url);
+		$id = 0;
+		
+		// Upload this
+		if(!empty($data[$file])){
+			
+			$id = pagelayer_upload_media($file, base64_decode($data[$file]));
+			
+			if(!empty($id)){
+				$data['code'] = str_replace('"'.$image_url.'"', '"'.$id.'"', $data['code']);
+			}
+		}
+		
+	}
+
+	// Load shortcodes
+	pagelayer_load_shortcodes();
+	
+	if(!empty($data['code'])){
+		$data['code'] = pagelayer_the_content($data['code'], true);
+	}
+	
+	pagelayer_json_output($data);
+
+}
+
+
+/** Function pagelayer_wp_widget_ajax() called by wp_ajax hooks: {'pagelayer_wp_widget'} **/
+/** Parameters found in function pagelayer_wp_widget_ajax(): {"post": ["tag", "widget_data", "values"]} **/
+function pagelayer_wp_widget_ajax(){
+
+	global $pagelayer;
+
+	// Some AJAX security
+	check_ajax_referer('pagelayer_ajax', 'pagelayer_nonce');
+	
+	if(!current_user_can('edit_theme_options')){		
+		$ret['error'][] = __pl('no_permission');
+		pagelayer_json_output($ret);
+	}
+	
+	pagelayer_load_shortcodes();
+	
+	header('Content-Type: application/json');
+	
+	$ret = [];
+	$tag = @$_POST['tag'];
+	//pagelayer_print($pagelayer->shortcodes[$tag]);
+	
+	// No tag ?
+	if(empty($pagelayer->shortcodes[$tag])){
+		$ret['error'][] =  __pl('no_tag');
+		pagelayer_json_output($ret);
+	}
+	
+	// Include the widgets
+	$widgets = ABSPATH . 'site-admin/includes/widgets.php';
+	$widgets = file_exists($widgets) ? $widgets : ABSPATH . 'wp-admin/includes/widgets.php';
+	require_once($widgets);
+	
+	$class = $pagelayer->shortcodes[$tag]['widget'];
+	
+	// Check the widget class exists ?
+	if(empty($class) || !class_exists($class)){
+		$ret['error'][] =  __pl('no_widget_class');
+		pagelayer_json_output($ret);
+	}
+	
+	$instance = [];
+	$widget = new $class();
+	$widget->_set('pagelayer-widget-1234567890');
+	
+	// Is there any existing data ?
+	if(!empty($_POST['widget_data'])){
+		$json = json_decode(stripslashes($_POST['widget_data']), true);
+		//pagelayer_print($json);die();
+		if(!empty($json)){
+			$instance = $json;
+		}
+	}
+
+	// Are there any form values ?
+	if(!empty($_POST['values'])){		
+		parse_str(stripslashes($_POST['values']), $data);
+		//pagelayer_print($data);die();
+		
+		// Any data ?
+		if(!empty($data)){
+		
+			// Rss widget checkboxes fix
+			if(!empty($data['widget-rss'])){
+				$data['widget-rss']['pagelayer-widget-1234567890']['show_summary'] = empty($data['widget-rss']['pagelayer-widget-1234567890']['show_summary'])? 0 : 1;
+				$data['widget-rss']['pagelayer-widget-1234567890']['show_author'] = empty($data['widget-rss']['pagelayer-widget-1234567890']['show_author'])? 0 : 1;
+				$data['widget-rss']['pagelayer-widget-1234567890']['show_date'] = empty($data['widget-rss']['pagelayer-widget-1234567890']['show_date'])? 0 : 1;				
+			}
+			
+			// First key is useless
+			$data = current($data);
+			
+			// Do we still have valid data ?
+			if(!empty($data)){
+				
+				// 2nd key is useless and just over-ride instance
+				$instance = current($data);
+				
+			}
+		}
+	}
+	
+	// Settings instance For Text widget
+	if($widget->id_base == 'text'){
+		$instance['visual'] = false;
+		$instance['legacy'] = false;
+	}
+	
+	// Get the form
+	ob_start();
+	$widget->form($instance);
+	$ret['form'] = ob_get_contents();
+	ob_end_clean();
+	
+	// Get the html
+	ob_start();
+	$widget->widget([], $instance);
+	$ret['html'] = ob_get_contents();
+	ob_end_clean();
+	
+	// Widget data to set
+	if(!empty($instance)){
+		$ret['widget_data'] = $instance;
+	}
+	
+	// Custom html widget form elements
+	if(!empty($widget) && $widget->name=='Custom HTML'){
+		$custom_html = explode('>', $ret['form']);
+	
+		$custom_html[0] = '<label for="widget-custom_html-pagelayer-widget-1234567890-title">Title:</label>'.$custom_html[0];
+		$custom_html[0] = str_replace('type="hidden"', 'type="text"',$custom_html[0]);
+		
+		$custom_html[1] = '<label for="widget-custom_html-pagelayer-widget-1234567890-content">Content:</label>'.$custom_html[1];
+		$custom_html[1] = str_replace('hidden', '', $custom_html[1]);
+		
+		$ret['form'] = implode('>', $custom_html);
+	}
+	
+	pagelayer_json_output($ret);
+	
 }
 
 
 /** Function pagelayer_fetch_posts() called by wp_ajax hooks: {'pagelayer_fetch_posts'} **/
 /** No params detected :-/ **/
-
-
-/** Function pagelayer_post_comment() called by wp_ajax hooks: {'pagelayer_post_comment'} **/
-/** Parameters found in function pagelayer_post_comment(): {"request": ["postID"]} **/
-function pagelayer_post_comment() {
-	global $post;
-	
-	// Some AJAX security
-	check_ajax_referer('pagelayer_ajax', 'pagelayer_nonce');
-	
-	if(!isset($_REQUEST['postID'])){
-		return true;
-	}
-	
-	$GLOBALS['post'] = get_post($_REQUEST['postID']);
-	$GLOBALS['withcomments'] = true;
-	
-	// Load shortcodes
-	pagelayer_load_shortcodes();
-	
-	$el = [];
-	pagelayer_sc_post_comment($el);
-	
-	echo $el['atts']['post_comment'];
-	
-	wp_die();
-		
-}
 
 
 /** Function pagelayer_mcp_test_connection() called by wp_ajax hooks: {'pagelayer_mcp_test_connection'} **/
@@ -2340,72 +1875,537 @@ function pagelayer_mcp_test_connection() {
 }
 
 
-/** Function pagelayer_get_revision() called by wp_ajax hooks: {'pagelayer_get_revision'} **/
-/** No params detected :-/ **/
+/** Function pagelayer_mcp_save_test_status() called by wp_ajax hooks: {'pagelayer_mcp_save_test_status'} **/
+/** Parameters found in function pagelayer_mcp_save_test_status(): {"post": ["ok", "message"]} **/
+function pagelayer_mcp_save_test_status() {
+	include_once(PAGELAYER_DIR.'/main/abilities.php');
+	check_ajax_referer('pagelayer_mcp_nonce', 'nonce');
+
+	if(!current_user_can('manage_options')){
+		wp_send_json_error(__('You do not have permission to do that.', 'pagelayer'));
+	}
+
+	$ok = !empty($_POST['ok']);
+	$message = !empty($_POST['message']) ? sanitize_text_field(wp_unslash($_POST['message'])) : '';
+
+	Pagelayer_Abilities::save_test_connection_status($ok, $message);
+
+	wp_send_json_success();
+}
 
 
-/** Function pagelayer_archive_posts_data() called by wp_ajax hooks: {'pagelayer_archive_posts_data'} **/
-/** Parameters found in function pagelayer_archive_posts_data(): {"post": ["atts"]} **/
-function pagelayer_archive_posts_data(){
+/** Function pagelayer_save_template() called by wp_ajax hooks: {'pagelayer_save_template'} **/
+/** Parameters found in function pagelayer_save_template(): {"get": ["postID"], "post": ["pagelayer_template_type", "pagelayer_lib_title", "pagelayer_condition_type", "pagelayer_condition_name", "pagelayer_condition_sub_template", "pagelayer_condition_id"]} **/
+function pagelayer_save_template() {
+	
+	// Some AJAX security
+	check_ajax_referer('pagelayer_builder', 'pagelayer_nonce');
+	
+	$done = [];
+	
+	$post_id = (int) $_GET['postID'];
+
+	// Are you allowed to edit ?
+	if(!empty($post_id) && !pagelayer_user_can_edit($post_id)){
+		$done['error'][] =  __pl('no_permission');
+		pagelayer_json_output($done);
+	}
+	
+	// We need to create the post
+	if(empty($post_id)){
+	
+		if (!current_user_can('edit_posts')) {
+			$done['error'] =  __pl('access_denied');
+			pagelayer_json_output($done);
+		}
+	
+		// Get the template type
+		if(empty($_POST['pagelayer_template_type'])){
+			$done['error'] = __pl('temp_error_type');
+			pagelayer_json_output($done);
+		}
+		
+		$ret = wp_insert_post([
+			'post_title' => $_POST['pagelayer_lib_title'],
+			'post_type' => 'pagelayer-template',
+			'post_status' => 'publish',
+			'comment_status' => 'closed',
+			'ping_status' => 'closed'
+		]);
+		
+		// An error occured
+		if(is_wp_error($ret)){
+			$done['error'] = __pl('temp_error').' : '.$ret->get_error_message();
+			pagelayer_json_output($done);
+		}
+		
+		$post_id = $ret;
+		$done['id'] = $post_id;
+		
+		// Save our template type
+		$ret = update_post_meta($post_id, 'pagelayer_template_type', $_POST['pagelayer_template_type']);
+		
+	}
+	
+	// The ID in consideration
+	$done['id'] = $post_id;
+	
+	// Check if the post title in not empty
+	if(!empty($_POST['pagelayer_lib_title'])){
+		
+		$post = array(
+					'ID' => $post_id,
+					'post_title' => $_POST['pagelayer_lib_title'],
+				);
+
+		// Update the post into the database
+		$ret = wp_update_post($post);
+		
+	}
+	
+	// Save template library display conditions
+	$condi_array = array();
+	$condi_len = count($_POST['pagelayer_condition_type']);
+	if($_POST['pagelayer_template_type'] != 'section'){
+		for( $i =0; $i < $condi_len; $i++ ){
+			$condi_array[$i] = array(
+				'type' => $_POST['pagelayer_condition_type'][$i],
+				'template' => $_POST['pagelayer_condition_name'][$i],
+				'sub_template' => $_POST['pagelayer_condition_sub_template'][$i],
+				'id' => $_POST['pagelayer_condition_id'][$i],
+			);
+		}
+	}
+	//print_r($condi_array);
+	
+	$ret = update_post_meta($post_id, 'pagelayer_template_conditions', $condi_array);
+	
+	if(is_wp_error($post_id)){
+		$done['error'] = __pl('temp_error').' : '.$ret->get_error_message();
+	}else{
+		$done['success'] =  __pl('temp_update_success');
+	}
+
+	pagelayer_json_output($done);
+	
+}
+
+
+/** Function pagelayer_products_ajax() called by wp_ajax hooks: {'pagelayer_products_ajax'} **/
+/** Parameters found in function pagelayer_products_ajax(): {"post": ["atts"]} **/
+function pagelayer_products_ajax(){
 	
 	// Some AJAX security
 	check_ajax_referer('pagelayer_ajax', 'pagelayer_nonce');
 	
-	// Set excerpt length
-	if(!empty($_POST['atts']['exc_length'])){
-		$exc_length = (int) $_POST['atts']['exc_length'];
-		add_filter( 'excerpt_length', function($length) use($exc_length){
-			return $exc_length;
-		}, 999 );
+	if ( WC()->session ) {
+		wc_print_notices();
 	}
 	
-	// Load shortcodes
-	pagelayer_load_shortcodes();
+	$no_found = $_POST['atts']['no_found'];
 	
-	foreach($_POST['atts'] as $k => $v){
-		$v = pagelayer_maybe_implode($v);
-		$r[] = esc_html($k).'="'.pagelayer_escapeHTML($v).'"';
+	$attributes = '';
+	$type = $_POST['atts']['source'];
+	$attributes .= ' columns="'. $_POST['atts']['columns'] .'" ';
+	$attributes .= ' rows="'. $_POST['atts']['rows'] .'" ';
+	$attributes .= ' paginate="'. (!empty($_POST['atts']['paginate']) ? true : false) .'" ';
+	$attributes .= ' orderby="'. $_POST['atts']['orderby'] .'" ';
+	$attributes .= ' order="'. $_POST['atts']['order'] .'" ';	
+	$attributes .= ' cache="false" ';	
+	
+	// Hide the catalog order
+	if( empty($_POST['atts']['allow_order']) ){
+		remove_action( 'woocommerce_before_shop_loop', 'woocommerce_catalog_ordering', 30 );
 	}
 	
-	$string = implode(' ', $r);
-	if(preg_match('/\]/is', $string)){
-		die('Hacking Attempt');
+	// Hide the result count
+	if( empty($_POST['atts']['show_result']) ){
+		remove_action( 'woocommerce_before_shop_loop', 'woocommerce_result_count', 20 );
 	}
 	
-	$sc = '[pl_archive_posts '.$string.'][/pl_archive_posts]';
+	if( $type == 'by_id' ){
+		$type = 'products';
+		$attributes .= ' ids="'. (!empty($_POST['atts']['ids']) ? $_POST['atts']['ids'] : '') .'" ';	
+	}elseif( $type == 'pagelayer_current_query' ){
+		
+		$atts['paginate'] = (!empty($_POST['atts']['paginate']) ? true : false);
+		$atts['cache'] = false;
+				
+		$type = 'pagelayer_current_query';
+		
+		// Set the current query
+		add_action( 'woocommerce_shortcode_products_query', 'pagelayer_shortcode_current_query', 10, 10);
+		
+		// If product not found
+		add_action( "woocommerce_shortcode_{$type}_loop_no_results", function ($attributes) use ($no_found){
+			echo '<div class="pagelayer-product-no-found">'.$no_found.'</div>';
+		} );
+		
+		// Get the products list
+		$shortcode = new WC_Shortcode_Products( $atts, $type );
+			
+		echo $shortcode->get_content();
+		return true;
+	}
+		
+	$shortcode = '['.$type.' '. $attributes .']';
 	
-	echo pagelayer_the_content($sc);
+	$content = pagelayer_the_content($shortcode);
+	
+	// If product not found
+	if('<div class="woocommerce columns-'.$_POST['atts']['columns'] .' "></div>' == $content){
+		$content = '<div class="pagelayer-product-no-found">'. $no_found .'</div>';
+	}
+	
+	echo $content;
+		
 	wp_die();
 }
 
 
-/** Function pagelayer_post_info() called by wp_ajax hooks: {'pagelayer_post_info'} **/
-/** Parameters found in function pagelayer_post_info(): {"request": ["postID", "el"]} **/
-function pagelayer_post_info() {
+/** Function pagelayer_do_shortcodes() called by wp_ajax hooks: {'pagelayer_do_shortcodes'} **/
+/** Parameters found in function pagelayer_do_shortcodes(): {"request": ["shortcode_data"]} **/
+function pagelayer_do_shortcodes(){
+
+	// Some AJAX security
+	check_ajax_referer('pagelayer_ajax', 'pagelayer_nonce');
+	
+	if(!current_user_can('edit_posts')){// TODO : WooCommerce
+		$ret['error'][] = __pl('no_permission');
+		pagelayer_json_output($ret);
+	}
+	
+	$data = '';
+	if(isset($_REQUEST['shortcode_data'])){
+		$data = stripslashes($_REQUEST['shortcode_data']);
+	}
+
+	// Load shortcodes
+	pagelayer_load_shortcodes();
+
+	$data = pagelayer_the_content($data);
+	
+	// Create the HTML object
+	$node = pagelayerQuery::parseStr($data);
+	$node->query('.pagelayer-ele')->removeClass('pagelayer-ele');
+	echo $node->html();
+	
+	wp_die();
+	
+}
+
+
+/** Function pagelayer_post_comment() called by wp_ajax hooks: {'pagelayer_post_comment'} **/
+/** Parameters found in function pagelayer_post_comment(): {"request": ["postID"]} **/
+function pagelayer_post_comment() {
 	global $post;
 	
 	// Some AJAX security
 	check_ajax_referer('pagelayer_ajax', 'pagelayer_nonce');
-
-	if(!isset($_REQUEST['postID']) || !isset($_REQUEST['el'])){
+	
+	if(!isset($_REQUEST['postID'])){
 		return true;
 	}
 	
-	$el['atts'] = $_REQUEST['el'];
-	
 	$GLOBALS['post'] = get_post($_REQUEST['postID']);
+	$GLOBALS['withcomments'] = true;
 	
 	// Load shortcodes
 	pagelayer_load_shortcodes();
 	
-	pagelayer_sc_post_info_list($el);
+	$el = [];
+	pagelayer_sc_post_comment($el);
 	
-	pagelayer_json_output($el['atts']);
+	echo $el['atts']['post_comment'];
+	
+	wp_die();
 		
 }
 
 
-/** Function pagelayer_givecss() called by wp_ajax hooks: {'nopriv_pagelayer_givecss', 'pagelayer_givecss'} **/
-/** No params detected :-/ **/
+/** Function pagelayer_save_templ_content() called by wp_ajax hooks: {'pagelayer_save_templ_content'} **/
+/** Parameters found in function pagelayer_save_templ_content(): {"request": ["postID", "global_widgets"]} **/
+function pagelayer_save_templ_content($echo = false){
+	
+	// Some AJAX security
+	check_ajax_referer('pagelayer_ajax', 'pagelayer_nonce');
+	
+	if ( ! current_user_can( get_post_type_object( 'pagelayer-template' )->cap->create_posts ) ) {
+		$ret['error'][$g_post_id] = __pl('no_permission');	
+		pagelayer_json_output($ret);
+		return false;
+	}
+	
+	// Are you allowed to edit ?
+	if(!pagelayer_user_can_edit($_REQUEST['postID'])){
+		$msg['error'][] =  __pl('no_permission');
+		pagelayer_json_output($msg);
+	}
+	
+	$ret = array();
+	
+	// Save global widgets data
+	if(empty($_REQUEST['global_widgets'])){
+		$ret['error'][] = 'No widgets given';	
+		pagelayer_json_output($ret);
+		return false;
+	}
+	
+	$global_widgets = $_REQUEST['global_widgets'];
+
+	foreach($global_widgets as $key => $value){
+		
+		$g_post_id = (int) $value['post_id'];
+		
+		// Are you allowed to edit ?
+		if(!empty($g_post_id) && !pagelayer_user_can_edit($g_post_id)){
+			$ret['error'][$g_post_id] =  __pl('no_permission').' : '.$g_post_id;
+			continue;
+		}
+		
+		// Decode base64 data
+		$value['content'] = base64_decode($value['content']);
+		
+		$is_xss = pagelayer_xss_content($value['content']);
+		 
+		if(!current_user_can('manage_options') && strlen($is_xss) > 0){
+			$ret['error'][$g_post_id] =  __pl('xss_found').' - '.$is_xss;
+			pagelayer_json_output($ret);
+		}
+		
+		// Add slash to save data in post
+		$value['content'] = wp_slash($value['content']);
+		
+		// We need to create the post
+		if(empty($value['post_id'])){
+			
+			$g_ret = wp_insert_post([
+				'post_type' => 'pagelayer-template',
+				'post_title' => $value['title'],
+				'post_content' => $value['content'],
+				'post_status' => 'publish',
+				'comment_status' => 'closed',
+				'ping_status' => 'closed'
+			]);
+			
+			$g_post_id = $g_ret;
+			
+			// Save our template metas
+			update_post_meta($g_post_id, 'pagelayer_template_type', $value['type']);
+			update_post_meta($g_post_id, 'pagelayer-data', time());
+			
+		}else if(!empty($value['content'])){
+			
+			// Save global widget content
+			$post = array(
+				'ID' => $g_post_id,
+				'post_title' => $value['title'],
+				'post_content' => $value['content'],
+			);
+			
+			wp_update_post($post);
+		}
+		
+		if(is_wp_error($g_post_id)){
+			$ret['error'][$g_post_id] = __pl('template_update_err');
+		}else{
+			$ret['success'][$g_post_id] = __pl('template_update_success');
+		}
+	}
+	
+	if(!$echo){ 
+		pagelayer_json_output($ret);
+	}else{
+		return $ret;
+	}
+}
+
+
+/** Function pagelayer_install_recommended_plugin() called by wp_ajax hooks: {'pagelayer_install_plugin'} **/
+/** Parameters found in function pagelayer_install_recommended_plugin(): {"request": ["plugin"]} **/
+function pagelayer_install_recommended_plugin(){
+	check_ajax_referer('pagelayer_recommended_plugins', 'security');
+
+	if(!current_user_can('install_plugins')){
+		wp_send_json_error(array('message' => __('You do not have permission to install plugins.', 'pagelayer')));
+	}
+	
+	$slug = !empty($_REQUEST['plugin']) ? sanitize_text_field(wp_unslash($_REQUEST['plugin'])) : '';
+	if(empty($slug)){
+		wp_send_json_error(array('message' => __('Plugin slug is required.', 'pagelayer')));
+	}
+	
+	require_once ABSPATH . 'wp-admin/includes/plugin-install.php';
+	require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
+	require_once ABSPATH . 'wp-admin/includes/plugin.php';
+	require_once ABSPATH . 'wp-admin/includes/file.php';
+	
+	// Initialize WP_Filesystem - required before Plugin_Upgrader can write files
+	$creds = request_filesystem_credentials(site_url() . '/wp-admin/', '', false, false, null);
+	if(!WP_Filesystem($creds)){
+		wp_send_json_error(array('message' => __('Could not initialize filesystem. Please check file permissions.', 'pagelayer')));
+	}
+	
+	$api = plugins_api('plugin_information', array('slug' => $slug, 'fields' => array('sections' => false)));
+	
+	if(is_wp_error($api)){
+		wp_send_json_error(array('message' => $api->get_error_message()));
+	}
+	
+	// Use Automatic_Upgrader_Skin (silent); buffer any stray output to keep response clean JSON
+	$skin = new \Automatic_Upgrader_Skin();
+	$upgrader = new \Plugin_Upgrader($skin);
+	
+	ob_start();
+	$result = $upgrader->install($api->download_link);
+	ob_end_clean();
+	
+	if(is_wp_error($result)){
+		wp_send_json_error(array('message' => $result->get_error_message()));
+	}
+	if($result === false || $result === null){
+		$error_msgs = $skin->get_upgrade_messages();
+		$msg = !empty($error_msgs) ? implode(' ', $error_msgs) : __('Plugin installation failed. Please check file permissions.', 'pagelayer');
+		wp_send_json_error(array('message' => $msg));
+	}
+	
+	$all_plugins = get_plugins();
+	$installed_plugin = '';
+	foreach($all_plugins as $path => $data){
+		if(strpos($path, $slug . '/') === 0){
+			$installed_plugin = $path;
+			break;
+		}
+	}
+	
+	if(empty($installed_plugin)){
+		wp_send_json_error(array('message' => __('Plugin installed but could not be located for activation.', 'pagelayer')));
+	}
+	
+	$result = activate_plugin($installed_plugin);
+	if(is_wp_error($result)){
+		wp_send_json_error(array('message' => $result->get_error_message()));
+	}
+	
+	wp_send_json_success(array('message' => __('Plugin installed and activated successfully.', 'pagelayer')));
+}
+
+
+/** Function pagelayer_get_taxonomy_list() called by wp_ajax hooks: {'pagelayer_get_taxonomy_list'} **/
+/** Parameters found in function pagelayer_get_taxonomy_list(): {"post": ["post_order", "order", "empty", "hier", "type", "depth"]} **/
+function pagelayer_get_taxonomy_list(){
+	
+	// Some AJAX security
+	check_ajax_referer('pagelayer_ajax', 'pagelayer_nonce');
+	
+	if(!current_user_can('edit_posts')){
+		echo __pl('no_permission');
+		wp_die();
+	}
+	
+	$args = array(
+		'title_li' => 0,
+		'orderby' => $_POST['post_order'],
+		'order' => $_POST['order'],
+		'style' => '',
+		'hide_empty' => $_POST['empty'],
+		'echo' => false,
+		'hierarchical' => (empty($_POST['hier']) || $_POST['hier'] == null ? '' : $_POST['hier']),
+		'taxonomy' => $_POST['type'],
+		'depth' => (empty($_POST['depth']) || $_POST['depth'] == null ? '' : $_POST['depth']),		
+	);
+
+	$taxonomies = get_categories( $args );
+	
+	$option = '<ul>';	
+	foreach ( $taxonomies as $taxonomy ) {
+		$option .= '<li class="pagelayer-sitemap-list-item" data-postID="'.$taxonomy->term_id.'"><a class="pagelayer-ele-link" href="'.get_term_link($taxonomy->term_id).'">'.$taxonomy->name.'</a></li>';
+	}
+	$option .= '</ul>'; 
+	
+	echo $option;
+	wp_die();	
+}
+
+
+/** Function pagelayer_mcp_adapter_action() called by wp_ajax hooks: {'pagelayer_mcp_adapter_action'} **/
+/** Parameters found in function pagelayer_mcp_adapter_action(): {"post": ["type"]} **/
+function pagelayer_mcp_adapter_action() {
+	include_once(PAGELAYER_DIR.'/main/abilities.php');
+	check_ajax_referer('pagelayer_mcp_nonce', 'nonce');
+
+	if(!current_user_can('manage_options')){
+		wp_send_json_error('Unauthorized');
+	}
+
+	$type = isset($_POST['type']) ? sanitize_text_field($_POST['type']) : '';
+
+	if(!function_exists('get_plugins')){
+		require_once ABSPATH . 'wp-admin/includes/plugin.php';
+	}
+
+	if ($type === 'install') {
+		include_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
+		include_once ABSPATH . 'wp-admin/includes/file.php';
+
+		// The MCP Adapter is hosted on GitHub, not WordPress.org, so fetch the download URL from the GitHub API
+		$download_url = Pagelayer_Abilities::get_mcp_adapter_download_url();
+
+		$upgrader = new \Plugin_Upgrader(new \Automatic_Upgrader_Skin());
+		$installed = $upgrader->install($download_url);
+
+		if(is_wp_error($installed)){
+			wp_send_json_error($installed->get_error_message());
+		}elseif(!$installed){
+			wp_send_json_error('Installation failed. The MCP Adapter plugin is downloaded from GitHub. Please check your server can reach github.com.');
+		}
+
+		$plugin_file = Pagelayer_Abilities::get_installed_mcp_adapter_file();
+		if($plugin_file){
+			activate_plugin($plugin_file);
+			wp_send_json_success('Installed and activated');
+		}
+		wp_send_json_success('Installed but not activated');
+
+	} elseif ($type === 'activate') {
+		$plugin_file = Pagelayer_Abilities::get_installed_mcp_adapter_file();
+		if($plugin_file){
+			$result = activate_plugin($plugin_file);
+			if(is_wp_error($result)){
+				wp_send_json_error($result->get_error_message());
+			}
+			wp_send_json_success('Activated');
+		}
+		wp_send_json_error('Plugin not found');
+	}
+
+	wp_send_json_error('Invalid action');
+}
+
+
+/** Function pagelayer_mcp_save_image_api_key() called by wp_ajax hooks: {'pagelayer_mcp_save_image_api_key'} **/
+/** Parameters found in function pagelayer_mcp_save_image_api_key(): {"post": ["provider", "api_key"]} **/
+function pagelayer_mcp_save_image_api_key() {
+	check_ajax_referer('pagelayer_mcp_nonce', 'nonce');
+
+	if(!current_user_can('manage_options')){
+		wp_send_json_error(array('message' => __('You do not have permission to do that.', 'pagelayer')));
+	}
+
+	$provider = !empty($_POST['provider']) ? sanitize_key(wp_unslash($_POST['provider'])) : '';
+	$api_key  = !empty($_POST['api_key']) ? sanitize_text_field(wp_unslash($_POST['api_key'])) : '';
+
+	if(empty($api_key)){
+		wp_send_json_error(array('message' => __('An API key is required.', 'pagelayer')));
+	}
+
+	if($provider !== 'pexels'){
+		wp_send_json_error(array('message' => __('Unsupported image provider.', 'pagelayer')));
+	}
+
+	update_option('pagelayer_pexels_api_key', $api_key, false);
+
+	wp_send_json_success(array('message' => __('Image search API key saved.', 'pagelayer')));
+}
 
 

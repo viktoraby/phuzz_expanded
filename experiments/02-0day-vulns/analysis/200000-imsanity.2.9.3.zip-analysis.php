@@ -5,13 +5,13 @@
 *Found functions:4
 *Extracted functions:4
 *Total parameter names extracted: 7
-*Overview: {'imsanity_ajax_finish': {'imsanity_bulk_complete'}, 'imsanity_ajax_remove_original': {'imsanity_remove_original'}, 'imsanity_get_images': {'imsanity_get_images'}, 'imsanity_ajax_resize': {'imsanity_resize_image'}}
+*Overview: {'imsanity_get_images': {'imsanity_get_images'}, 'imsanity_ajax_remove_original': {'imsanity_remove_original'}, 'imsanity_ajax_finish': {'imsanity_bulk_complete'}, 'imsanity_ajax_resize': {'imsanity_resize_image'}}
 *
 ***/
 
-/** Function imsanity_ajax_finish() called by wp_ajax hooks: {'imsanity_bulk_complete'} **/
-/** Parameters found in function imsanity_ajax_finish(): {"request": ["_wpnonce"]} **/
-function imsanity_ajax_finish() {
+/** Function imsanity_get_images() called by wp_ajax hooks: {'imsanity_get_images'} **/
+/** Parameters found in function imsanity_get_images(): {"request": ["_wpnonce"], "post": ["resume_id"]} **/
+function imsanity_get_images() {
 	$permissions = apply_filters( 'imsanity_admin_permissions', 'manage_options' );
 	if ( ! current_user_can( $permissions ) || empty( $_REQUEST['_wpnonce'] ) ) {
 		wp_send_json(
@@ -30,9 +30,12 @@ function imsanity_ajax_finish() {
 		);
 	}
 
-	update_option( 'imsanity_resume_id', 0, false );
-
-	die();
+	$resume_id = ! empty( $_POST['resume_id'] ) ? (int) $_POST['resume_id'] : PHP_INT_MAX;
+	global $wpdb;
+	// Load up all the image attachments we can find.
+	$attachments = $wpdb->get_col( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE ID < %d AND post_type = 'attachment' AND post_mime_type LIKE %s ORDER BY ID DESC", $resume_id, '%%image%%' ) );
+	array_walk( $attachments, 'intval' );
+	wp_send_json( $attachments );
 }
 
 
@@ -76,9 +79,9 @@ function imsanity_ajax_remove_original() {
 }
 
 
-/** Function imsanity_get_images() called by wp_ajax hooks: {'imsanity_get_images'} **/
-/** Parameters found in function imsanity_get_images(): {"request": ["_wpnonce"], "post": ["resume_id"]} **/
-function imsanity_get_images() {
+/** Function imsanity_ajax_finish() called by wp_ajax hooks: {'imsanity_bulk_complete'} **/
+/** Parameters found in function imsanity_ajax_finish(): {"request": ["_wpnonce"]} **/
+function imsanity_ajax_finish() {
 	$permissions = apply_filters( 'imsanity_admin_permissions', 'manage_options' );
 	if ( ! current_user_can( $permissions ) || empty( $_REQUEST['_wpnonce'] ) ) {
 		wp_send_json(
@@ -97,12 +100,9 @@ function imsanity_get_images() {
 		);
 	}
 
-	$resume_id = ! empty( $_POST['resume_id'] ) ? (int) $_POST['resume_id'] : PHP_INT_MAX;
-	global $wpdb;
-	// Load up all the image attachments we can find.
-	$attachments = $wpdb->get_col( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE ID < %d AND post_type = 'attachment' AND post_mime_type LIKE %s ORDER BY ID DESC", $resume_id, '%%image%%' ) );
-	array_walk( $attachments, 'intval' );
-	wp_send_json( $attachments );
+	update_option( 'imsanity_resume_id', 0, false );
+
+	die();
 }
 
 

@@ -5,33 +5,9 @@
 *Found functions:3
 *Extracted functions:3
 *Total parameter names extracted: 3
-*Overview: {'download_htaccess': {'mainwp_wordfence_download_htaccess'}, 'callback_change_destroy_user_session': {'destroy-sessions'}, 'download_archive': {'mainwp_backupbuddy_download_archive'}}
+*Overview: {'callback_change_destroy_user_session': {'destroy-sessions'}, 'download_archive': {'mainwp_backupbuddy_download_archive'}, 'download_htaccess': {'mainwp_wordfence_download_htaccess'}}
 *
 ***/
-
-/** Function download_htaccess() called by wp_ajax hooks: {'mainwp_wordfence_download_htaccess'} **/
-/** Parameters found in function download_htaccess(): {"get": ["_wpnonce"]} **/
-function download_htaccess() {
-        if ( ! isset( $_GET['_wpnonce'] ) || empty( $_GET['_wpnonce'] ) ) {
-            die( '-1' );
-        }
-
-        if ( ! MainWP_Utility::verify_nonce_without_session( $_GET['_wpnonce'], 'mainwp_download_htaccess' ) ) {
-            die( '-2' );
-        }
-
-        $url = site_url();
-        $url = preg_replace( '/^https?:\/\//i', '', $url );
-        $url = preg_replace( '/[^a-zA-Z0-9\.]+/', '_', $url );
-        $url = preg_replace( '/^_+/', '', $url );
-        $url = preg_replace( '/_+$/', '', $url );
-        header( 'Content-Type: application/octet-stream' );
-        header( 'Content-Disposition: attachment; filename="htaccess_Backup_for_' . $url . '.txt"' );
-        $file = \wfCache::getHtaccessPath();
-        readfile( $file );
-        die();
-    }
-
 
 /** Function callback_change_destroy_user_session() called by wp_ajax hooks: {'destroy-sessions'} **/
 /** Parameters found in function callback_change_destroy_user_session(): {"post": ["user_id", "nonce"]} **/
@@ -109,6 +85,30 @@ function download_archive() { // NOSONAR - WP compatible.
         } else {
             header( 'Location: ' . $download_url );
         }
+        die();
+    }
+
+
+/** Function download_htaccess() called by wp_ajax hooks: {'mainwp_wordfence_download_htaccess'} **/
+/** Parameters found in function download_htaccess(): {"get": ["_wpnonce"]} **/
+function download_htaccess() {
+        if ( ! isset( $_GET['_wpnonce'] ) || empty( $_GET['_wpnonce'] ) ) {
+            die( '-1' );
+        }
+
+        if ( ! MainWP_Utility::verify_nonce_without_session( $_GET['_wpnonce'], 'mainwp_download_htaccess' ) ) {
+            die( '-2' );
+        }
+
+        $url = site_url();
+        $url = preg_replace( '/^https?:\/\//i', '', $url );
+        $url = preg_replace( '/[^a-zA-Z0-9\.]+/', '_', $url );
+        $url = preg_replace( '/^_+/', '', $url );
+        $url = preg_replace( '/_+$/', '', $url );
+        header( 'Content-Type: application/octet-stream' );
+        header( 'Content-Disposition: attachment; filename="htaccess_Backup_for_' . $url . '.txt"' );
+        $file = \wfCache::getHtaccessPath();
+        readfile( $file );
         die();
     }
 

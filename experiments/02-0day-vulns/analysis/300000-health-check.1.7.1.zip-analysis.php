@@ -5,9 +5,13 @@
 *Found functions:4
 *Extracted functions:3
 *Total parameter names extracted: 2
-*Overview: {'view_file_diff': {'health-check-view-file-diff'}, 'run_files_integrity_check': {'health-check-files-integrity-check'}, 'Health_Check_Loopback': {'health-check-loopback-individual-plugins', 'health-check-loopback-no-plugins', 'health-check-loopback-default-theme'}, 'run_mail_check': {'health-check-mail-check'}}
+*Overview: {'Health_Check_Loopback': {'health-check-loopback-no-plugins', 'health-check-loopback-default-theme', 'health-check-loopback-individual-plugins'}, 'view_file_diff': {'health-check-view-file-diff'}, 'run_mail_check': {'health-check-mail-check'}, 'run_files_integrity_check': {'health-check-files-integrity-check'}}
 *
 ***/
+
+/** Function Health_Check_Loopback() called by wp_ajax hooks: {'health-check-loopback-no-plugins', 'health-check-loopback-default-theme', 'health-check-loopback-individual-plugins'} **/
+/** No function found :-/ **/
+
 
 /** Function view_file_diff() called by wp_ajax hooks: {'health-check-view-file-diff'} **/
 /** Parameters found in function view_file_diff(): {"post": ["file"]} **/
@@ -56,14 +60,6 @@ function view_file_diff() {
 
 		wp_die();
 	}
-
-
-/** Function run_files_integrity_check() called by wp_ajax hooks: {'health-check-files-integrity-check'} **/
-/** No params detected :-/ **/
-
-
-/** Function Health_Check_Loopback() called by wp_ajax hooks: {'health-check-loopback-individual-plugins', 'health-check-loopback-no-plugins', 'health-check-loopback-default-theme'} **/
-/** No function found :-/ **/
 
 
 /** Function run_mail_check() called by wp_ajax hooks: {'health-check-mail-check'} **/
@@ -142,5 +138,9 @@ function run_mail_check() {
 		wp_die();
 
 	}
+
+
+/** Function run_files_integrity_check() called by wp_ajax hooks: {'health-check-files-integrity-check'} **/
+/** No params detected :-/ **/
 
 

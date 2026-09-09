@@ -5,19 +5,15 @@
 *Found functions:8
 *Extracted functions:7
 *Total parameter names extracted: 2
-*Overview: {'ajax_first_folder_notice': {'fbv_first_folder_notice'}, 'filebird-themify': {'tb_load_editor'}, 'syncWPML': {'fbv_sync_wpml'}, 'savePostTypeSettings': {'fbv_save_post_type_settings'}, 'ajax_dismiss_plugin': {'yaymail_banner_dismiss'}, 'ajax_dismiss_column': {'yaymail_wc_settings_dismiss_column'}, 'ajax_install_activate_yaymail': {'yaymail_wc_settings_install_activate', 'yaymail_banner_install_activate'}, 'fbv_save_review': {'fbv_save_review'}}
+*Overview: {'ajax_install_activate_yaymail': {'yaymail_wc_settings_install_activate', 'yaymail_banner_install_activate'}, 'ajax_first_folder_notice': {'fbv_first_folder_notice'}, 'savePostTypeSettings': {'fbv_save_post_type_settings'}, 'ajax_dismiss_column': {'yaymail_wc_settings_dismiss_column'}, 'ajax_dismiss_plugin': {'yaymail_banner_dismiss'}, 'filebird-themify': {'tb_load_editor'}, 'syncWPML': {'fbv_sync_wpml'}, 'fbv_save_review': {'fbv_save_review'}}
 *
 ***/
 
-/** Function ajax_first_folder_notice() called by wp_ajax hooks: {'fbv_first_folder_notice'} **/
+/** Function ajax_install_activate_yaymail() called by wp_ajax hooks: {'yaymail_wc_settings_install_activate', 'yaymail_banner_install_activate'} **/
 /** No params detected :-/ **/
 
 
-/** Function filebird-themify() called by wp_ajax hooks: {'tb_load_editor'} **/
-/** No function found :-/ **/
-
-
-/** Function syncWPML() called by wp_ajax hooks: {'fbv_sync_wpml'} **/
+/** Function ajax_first_folder_notice() called by wp_ajax hooks: {'fbv_first_folder_notice'} **/
 /** No params detected :-/ **/
 
 
@@ -49,6 +45,10 @@ function savePostTypeSettings() {
 	}
 
 
+/** Function ajax_dismiss_column() called by wp_ajax hooks: {'yaymail_wc_settings_dismiss_column'} **/
+/** No params detected :-/ **/
+
+
 /** Function ajax_dismiss_plugin() called by wp_ajax hooks: {'yaymail_banner_dismiss'} **/
 /** Parameters found in function ajax_dismiss_plugin(): {"post": ["days"]} **/
 function ajax_dismiss_plugin() {
@@ -62,11 +62,11 @@ function ajax_dismiss_plugin() {
 		}
 
 
-/** Function ajax_dismiss_column() called by wp_ajax hooks: {'yaymail_wc_settings_dismiss_column'} **/
-/** No params detected :-/ **/
+/** Function filebird-themify() called by wp_ajax hooks: {'tb_load_editor'} **/
+/** No function found :-/ **/
 
 
-/** Function ajax_install_activate_yaymail() called by wp_ajax hooks: {'yaymail_wc_settings_install_activate', 'yaymail_banner_install_activate'} **/
+/** Function syncWPML() called by wp_ajax hooks: {'fbv_sync_wpml'} **/
 /** No params detected :-/ **/
 
 

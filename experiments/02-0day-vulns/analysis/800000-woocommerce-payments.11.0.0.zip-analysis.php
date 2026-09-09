@@ -5,53 +5,22 @@
 *Found functions:19
 *Extracted functions:19
 *Total parameter names extracted: 16
-*Overview: {'show_error_notice': {'nopriv_woopay_express_checkout_button_show_error_notice', 'woopay_express_checkout_button_show_error_notice'}, 'add_wc_price_args_filter_for_ajax': {'wc_bookings_calculate_costs', 'nopriv_wc_bookings_calculate_costs'}, 'theme_edit_ajax': {'edit-theme-plugin-file'}, 'update_order_status': {'update_order_status', 'nopriv_update_order_status'}, 'create_setup_intent_ajax': {'create_setup_intent'}, 'ajax_admin_set_woopay_appearance': {'wcpay_admin_set_woopay_appearance'}, 'disable_auto_renew': {'wcs_disable_auto_renew'}, '::check_product_variations_for_syncd_or_trial': {'wcs_product_has_trial_or_is_synced'}, '::ajax_upgrade': {'wcs_upgrade'}, 'ajax_get_user_payment_tokens': {'wcpay_get_user_payment_tokens'}, 'save_increased_price_lock': {'wcs_order_price_lock'}, 'enable_auto_renew': {'wcs_enable_auto_renew'}, 'validate_variation_deletion': {'wcs_validate_variation_deletion'}, 'ajax_tracks': {'jetpack_tracks', 'nopriv_platform_tracks', 'platform_tracks'}, '::remove_variations': {'woocommerce_remove_variation', 'woocommerce_remove_variations'}, '::maybe_update_one_time_shipping_on_variation_edits': {'wcs_update_one_time_shipping'}, 'get_customer_orders': {'wcs_get_customer_orders'}, 'ajax_tracks_id': {'get_identity', 'nopriv_get_identity'}, 'plugin_edit_ajax': {'edit-theme-plugin-file'}}
+*Overview: {'ajax_tracks_id': {'get_identity', 'nopriv_get_identity'}, 'plugin_edit_ajax': {'edit-theme-plugin-file'}, 'ajax_tracks': {'nopriv_platform_tracks', 'jetpack_tracks', 'platform_tracks'}, 'update_order_status': {'nopriv_update_order_status', 'update_order_status'}, 'enable_auto_renew': {'wcs_enable_auto_renew'}, 'show_error_notice': {'woopay_express_checkout_button_show_error_notice', 'nopriv_woopay_express_checkout_button_show_error_notice'}, '::remove_variations': {'woocommerce_remove_variation', 'woocommerce_remove_variations'}, 'validate_variation_deletion': {'wcs_validate_variation_deletion'}, 'theme_edit_ajax': {'edit-theme-plugin-file'}, 'get_customer_orders': {'wcs_get_customer_orders'}, 'ajax_admin_set_woopay_appearance': {'wcpay_admin_set_woopay_appearance'}, 'create_setup_intent_ajax': {'create_setup_intent'}, 'disable_auto_renew': {'wcs_disable_auto_renew'}, 'save_increased_price_lock': {'wcs_order_price_lock'}, 'add_wc_price_args_filter_for_ajax': {'wc_bookings_calculate_costs', 'nopriv_wc_bookings_calculate_costs'}, '::maybe_update_one_time_shipping_on_variation_edits': {'wcs_update_one_time_shipping'}, '::ajax_upgrade': {'wcs_upgrade'}, 'ajax_get_user_payment_tokens': {'wcpay_get_user_payment_tokens'}, '::check_product_variations_for_syncd_or_trial': {'wcs_product_has_trial_or_is_synced'}}
 *
 ***/
 
-/** Function show_error_notice() called by wp_ajax hooks: {'nopriv_woopay_express_checkout_button_show_error_notice', 'woopay_express_checkout_button_show_error_notice'} **/
-/** Parameters found in function show_error_notice(): {"post": ["message"]} **/
-function show_error_notice() {
-		$is_nonce_valid = check_ajax_referer( 'woopay_button_nonce', false, false );
-
-		if ( ! $is_nonce_valid ) {
-			wp_send_json_error(
-				__( 'You aren’t authorized to do that.', 'woocommerce-payments' ),
-				403
-			);
-		}
-
-		$message = isset( $_POST['message'] ) ? sanitize_text_field( wp_unslash( $_POST['message'] ) ) : '';
-
-		// $message has already been translated.
-		wc_add_notice( $message, 'error' );
-		$notice = wc_print_notices( true );
-
-		wp_send_json_success(
-			[
-				'notice' => $notice,
-			]
-		);
-
-		wp_die();
-	}
-
-
-/** Function add_wc_price_args_filter_for_ajax() called by wp_ajax hooks: {'wc_bookings_calculate_costs', 'nopriv_wc_bookings_calculate_costs'} **/
+/** Function ajax_tracks_id() called by wp_ajax hooks: {'get_identity', 'nopriv_get_identity'} **/
 /** No params detected :-/ **/
 
 
-/** Function theme_edit_ajax() called by wp_ajax hooks: {'edit-theme-plugin-file'} **/
-/** Parameters found in function theme_edit_ajax(): {"post": ["theme", "file", "newcontent", "nonce"]} **/
-function theme_edit_ajax() {
+/** Function plugin_edit_ajax() called by wp_ajax hooks: {'edit-theme-plugin-file'} **/
+/** Parameters found in function plugin_edit_ajax(): {"post": ["file", "newcontent", "nonce", "plugin"]} **/
+function plugin_edit_ajax() {
 		// This validation is based on wp_edit_theme_plugin_file().
-		if ( empty( $_POST['theme'] ) ) {
-			return;
-		}
-
 		if ( empty( $_POST['file'] ) ) {
 			return;
 		}
+
 		$file = wp_unslash( $_POST['file'] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Validated manually just after.
 		if ( 0 !== validate_file( $file ) ) {
 			return;
@@ -65,65 +34,28 @@ function theme_edit_ajax() {
 			return;
 		}
 
-		$stylesheet = wp_unslash( $_POST['theme'] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Validated manually just after.
-		if ( 0 !== validate_file( $stylesheet ) ) {
+		if ( empty( $_POST['plugin'] ) ) {
 			return;
 		}
 
-		if ( ! current_user_can( 'edit_themes' ) ) {
+		$plugin = wp_unslash( $_POST['plugin'] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Validated manually just after.
+		if ( ! current_user_can( 'edit_plugins' ) ) {
 			return;
 		}
 
-		$theme = wp_get_theme( $stylesheet );
-		if ( ! $theme->exists() ) {
+		if ( ! wp_verify_nonce( $_POST['nonce'], 'edit-plugin_' . $file ) ) { // phpcs:ignore WordPress.Security.ValidatedSanitizedInput -- WP core doesn't pre-sanitize nonces either.
+			return;
+		}
+		$plugins = get_plugins();
+		if ( ! array_key_exists( $plugin, $plugins ) ) {
 			return;
 		}
 
-		if ( ! wp_verify_nonce( $_POST['nonce'], 'edit-theme_' . $stylesheet . '_' . $file ) ) { // phpcs:ignore WordPress.Security.ValidatedSanitizedInput -- WP core doesn't pre-sanitize nonces either.
+		if ( 0 !== validate_file( $file, get_plugin_files( $plugin ) ) ) {
 			return;
 		}
 
-		if ( $theme->errors() && 'theme_no_stylesheet' === $theme->errors()->get_error_code() ) {
-			return;
-		}
-
-		$editable_extensions = wp_get_theme_file_editable_extensions( $theme );
-
-		$allowed_files = array();
-		foreach ( $editable_extensions as $type ) {
-			switch ( $type ) {
-				case 'php':
-					$allowed_files = array_merge( $allowed_files, $theme->get_files( 'php', -1 ) );
-					break;
-				case 'css':
-					$style_files                = $theme->get_files( 'css', -1 );
-					$allowed_files['style.css'] = $style_files['style.css'];
-					$allowed_files              = array_merge( $allowed_files, $style_files );
-					break;
-				default:
-					$allowed_files = array_merge( $allowed_files, $theme->get_files( $type, -1 ) );
-					break;
-			}
-		}
-
-		$real_file = $theme->get_stylesheet_directory() . '/' . $file;
-		if ( 0 !== validate_file( $real_file, $allowed_files ) ) {
-			return;
-		}
-
-		// Ensure file is real.
-		if ( ! is_file( $real_file ) ) {
-			return;
-		}
-
-		// Ensure file extension is allowed.
-		$extension = null;
-		if ( preg_match( '/\.([^.]+)$/', $real_file, $matches ) ) {
-			$extension = strtolower( $matches[1] );
-			if ( ! in_array( $extension, $editable_extensions, true ) ) {
-				return;
-			}
-		}
+		$real_file = WP_PLUGIN_DIR . '/' . $file;
 
 		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_is_writable
 		if ( ! is_writable( $real_file ) ) {
@@ -137,21 +69,49 @@ function theme_edit_ajax() {
 		}
 		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fclose
 		fclose( $file_pointer );
-
-		$theme_data = array(
-			'name'    => $theme->get( 'Name' ),
-			'version' => $theme->get( 'Version' ),
-			'uri'     => $theme->get( 'ThemeURI' ),
-		);
-
 		/**
-		 * This action is documented already in this file.
+		 * This action is documented already in this file
 		 */
-		do_action( 'jetpack_edited_theme', $stylesheet, $theme_data );
+		do_action( 'jetpack_edited_plugin', $plugin, $plugins[ $plugin ] );
 	}
 
 
-/** Function update_order_status() called by wp_ajax hooks: {'update_order_status', 'nopriv_update_order_status'} **/
+/** Function ajax_tracks() called by wp_ajax hooks: {'nopriv_platform_tracks', 'jetpack_tracks', 'platform_tracks'} **/
+/** Parameters found in function ajax_tracks(): {"request": ["tracksNonce", "tracksEventName", "tracksEventProp"]} **/
+function ajax_tracks() {
+		// Check for nonce.
+		if (
+			// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash
+			empty( $_REQUEST['tracksNonce'] ) || ! wp_verify_nonce( $_REQUEST['tracksNonce'], 'platform_tracks_nonce' )
+		) {
+			wp_send_json_error(
+				__( 'You aren’t authorized to do that.', 'woocommerce-payments' ),
+				403
+			);
+		}
+
+		if ( ! isset( $_REQUEST['tracksEventName'] ) ) {
+			wp_send_json_error(
+				__( 'No valid event name or type.', 'woocommerce-payments' ),
+				403
+			);
+		}
+
+		$tracks_data = [];
+		if ( isset( $_REQUEST['tracksEventProp'] ) ) {
+			// tracksEventProp is a JSON-encoded string.
+			$event_prop = json_decode( wc_clean( wp_unslash( $_REQUEST['tracksEventProp'] ) ), true );
+			if ( is_array( $event_prop ) ) {
+				$tracks_data = $event_prop;
+			}
+		}
+		$this->maybe_record_event( sanitize_text_field( wp_unslash( $_REQUEST['tracksEventName'] ) ), $tracks_data );
+
+		wp_send_json_success();
+	}
+
+
+/** Function update_order_status() called by wp_ajax hooks: {'nopriv_update_order_status', 'update_order_status'} **/
 /** Parameters found in function update_order_status(): {"post": ["order_id", "intent_id", "is_changing_payment", "should_save_payment_method"]} **/
 function update_order_status() {
 		$intent_id_received = null;
@@ -400,8 +360,244 @@ function update_order_status() {
 	}
 
 
-/** Function create_setup_intent_ajax() called by wp_ajax hooks: {'create_setup_intent'} **/
-/** No params detected :-/ **/
+/** Function enable_auto_renew() called by wp_ajax hooks: {'wcs_enable_auto_renew'} **/
+/** Parameters found in function enable_auto_renew(): {"post": ["subscription_id"]} **/
+function enable_auto_renew() {
+
+		if ( ! isset( $_POST['subscription_id'] ) ) {
+			return -1;
+		}
+
+		$subscription_id = absint( $_POST['subscription_id'] );
+		check_ajax_referer( "toggle-auto-renew-{$subscription_id}", 'security' );
+
+		$subscription = wcs_get_subscription( $subscription_id );
+
+		if ( wc_get_payment_gateway_by_order( $subscription ) && self::can_user_toggle_auto_renewal( $subscription ) ) {
+			$subscription->set_requires_manual_renewal( false );
+			$subscription->add_order_note( __( 'Customer turned on automatic renewals via their My Account page.', 'woocommerce-subscriptions' ) );
+			$subscription->save();
+
+			self::send_ajax_response( $subscription );
+		}
+	}
+
+
+/** Function show_error_notice() called by wp_ajax hooks: {'woopay_express_checkout_button_show_error_notice', 'nopriv_woopay_express_checkout_button_show_error_notice'} **/
+/** Parameters found in function show_error_notice(): {"post": ["message"]} **/
+function show_error_notice() {
+		$is_nonce_valid = check_ajax_referer( 'woopay_button_nonce', false, false );
+
+		if ( ! $is_nonce_valid ) {
+			wp_send_json_error(
+				__( 'You aren’t authorized to do that.', 'woocommerce-payments' ),
+				403
+			);
+		}
+
+		$message = isset( $_POST['message'] ) ? sanitize_text_field( wp_unslash( $_POST['message'] ) ) : '';
+
+		// $message has already been translated.
+		wc_add_notice( $message, 'error' );
+		$notice = wc_print_notices( true );
+
+		wp_send_json_success(
+			[
+				'notice' => $notice,
+			]
+		);
+
+		wp_die();
+	}
+
+
+/** Function ::remove_variations() called by wp_ajax hooks: {'woocommerce_remove_variation', 'woocommerce_remove_variations'} **/
+/** Parameters found in function ::remove_variations(): {"post": ["variation_id", "variation_ids"]} **/
+function remove_variations() {
+
+		if ( isset( $_POST['variation_id'] ) ) { // removing single variation
+
+			check_ajax_referer( 'delete-variation', 'security' );
+			$variation_ids = array( $_POST['variation_id'] );
+
+		} else {  // removing multiple variations
+
+			check_ajax_referer( 'delete-variations', 'security' );
+			$variation_ids = (array) $_POST['variation_ids'];
+
+		}
+
+		foreach ( $variation_ids as $index => $variation_id ) {
+
+			$variation_post = get_post( $variation_id );
+
+			if ( $variation_post && $variation_post->post_type == 'product_variation' ) {
+
+				$variation_product = wc_get_product( $variation_id );
+
+				if ( $variation_product && $variation_product->is_type( 'subscription_variation' ) ) {
+
+					wp_trash_post( $variation_id );
+
+					// Prevent WooCommerce deleting the variation
+					if ( isset( $_POST['variation_id'] ) ) {
+						die();
+					} else {
+						unset( $_POST['variation_ids'][ $index ] );
+					}
+				}
+			}
+		}
+	}
+
+
+/** Function validate_variation_deletion() called by wp_ajax hooks: {'wcs_validate_variation_deletion'} **/
+/** Parameters found in function validate_variation_deletion(): {"post": ["variation_id"]} **/
+function validate_variation_deletion() {
+		check_admin_referer( 'wc_subscriptions_admin', 'nonce' );
+
+		$variation_id  = absint( $_POST['variation_id'] );
+		$subscriptions = wcs_get_subscriptions_for_product( $variation_id, 'ids', array( 'limit' => 1 ) );
+
+		wp_send_json( array( 'can_remove' => empty( $subscriptions ) ? 'yes' : 'no' ) );
+	}
+
+
+/** Function theme_edit_ajax() called by wp_ajax hooks: {'edit-theme-plugin-file'} **/
+/** Parameters found in function theme_edit_ajax(): {"post": ["theme", "file", "newcontent", "nonce"]} **/
+function theme_edit_ajax() {
+		// This validation is based on wp_edit_theme_plugin_file().
+		if ( empty( $_POST['theme'] ) ) {
+			return;
+		}
+
+		if ( empty( $_POST['file'] ) ) {
+			return;
+		}
+		$file = wp_unslash( $_POST['file'] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Validated manually just after.
+		if ( 0 !== validate_file( $file ) ) {
+			return;
+		}
+
+		if ( ! isset( $_POST['newcontent'] ) ) {
+			return;
+		}
+
+		if ( ! isset( $_POST['nonce'] ) ) {
+			return;
+		}
+
+		$stylesheet = wp_unslash( $_POST['theme'] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Validated manually just after.
+		if ( 0 !== validate_file( $stylesheet ) ) {
+			return;
+		}
+
+		if ( ! current_user_can( 'edit_themes' ) ) {
+			return;
+		}
+
+		$theme = wp_get_theme( $stylesheet );
+		if ( ! $theme->exists() ) {
+			return;
+		}
+
+		if ( ! wp_verify_nonce( $_POST['nonce'], 'edit-theme_' . $stylesheet . '_' . $file ) ) { // phpcs:ignore WordPress.Security.ValidatedSanitizedInput -- WP core doesn't pre-sanitize nonces either.
+			return;
+		}
+
+		if ( $theme->errors() && 'theme_no_stylesheet' === $theme->errors()->get_error_code() ) {
+			return;
+		}
+
+		$editable_extensions = wp_get_theme_file_editable_extensions( $theme );
+
+		$allowed_files = array();
+		foreach ( $editable_extensions as $type ) {
+			switch ( $type ) {
+				case 'php':
+					$allowed_files = array_merge( $allowed_files, $theme->get_files( 'php', -1 ) );
+					break;
+				case 'css':
+					$style_files                = $theme->get_files( 'css', -1 );
+					$allowed_files['style.css'] = $style_files['style.css'];
+					$allowed_files              = array_merge( $allowed_files, $style_files );
+					break;
+				default:
+					$allowed_files = array_merge( $allowed_files, $theme->get_files( $type, -1 ) );
+					break;
+			}
+		}
+
+		$real_file = $theme->get_stylesheet_directory() . '/' . $file;
+		if ( 0 !== validate_file( $real_file, $allowed_files ) ) {
+			return;
+		}
+
+		// Ensure file is real.
+		if ( ! is_file( $real_file ) ) {
+			return;
+		}
+
+		// Ensure file extension is allowed.
+		$extension = null;
+		if ( preg_match( '/\.([^.]+)$/', $real_file, $matches ) ) {
+			$extension = strtolower( $matches[1] );
+			if ( ! in_array( $extension, $editable_extensions, true ) ) {
+				return;
+			}
+		}
+
+		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_is_writable
+		if ( ! is_writable( $real_file ) ) {
+			return;
+		}
+
+		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fopen
+		$file_pointer = fopen( $real_file, 'w+' );
+		if ( false === $file_pointer ) {
+			return;
+		}
+		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fclose
+		fclose( $file_pointer );
+
+		$theme_data = array(
+			'name'    => $theme->get( 'Name' ),
+			'version' => $theme->get( 'Version' ),
+			'uri'     => $theme->get( 'ThemeURI' ),
+		);
+
+		/**
+		 * This action is documented already in this file.
+		 */
+		do_action( 'jetpack_edited_theme', $stylesheet, $theme_data );
+	}
+
+
+/** Function get_customer_orders() called by wp_ajax hooks: {'wcs_get_customer_orders'} **/
+/** Parameters found in function get_customer_orders(): {"post": ["user_id"]} **/
+function get_customer_orders() {
+		check_ajax_referer( 'get-customer-orders', 'security' );
+
+		if ( ! current_user_can( 'edit_shop_orders' ) ) {
+			wp_die( -1 );
+		}
+
+		$customer_orders = array();
+		$user_id         = absint( $_POST['user_id'] ?? null );
+		$orders          = wc_get_orders(
+			array(
+				'customer'       => $user_id,
+				'post_type'      => 'shop_order',
+				'posts_per_page' => '-1',
+			)
+		);
+
+		foreach ( $orders as $order ) {
+			$customer_orders[ $order->get_id() ] = $order->get_order_number();
+		}
+
+		wp_send_json( $customer_orders );
+	}
 
 
 /** Function ajax_admin_set_woopay_appearance() called by wp_ajax hooks: {'wcpay_admin_set_woopay_appearance'} **/
@@ -451,6 +647,10 @@ function ajax_admin_set_woopay_appearance() {
 	}
 
 
+/** Function create_setup_intent_ajax() called by wp_ajax hooks: {'create_setup_intent'} **/
+/** No params detected :-/ **/
+
+
 /** Function disable_auto_renew() called by wp_ajax hooks: {'wcs_disable_auto_renew'} **/
 /** Parameters found in function disable_auto_renew(): {"post": ["subscription_id"]} **/
 function disable_auto_renew() {
@@ -474,38 +674,51 @@ function disable_auto_renew() {
 	}
 
 
-/** Function ::check_product_variations_for_syncd_or_trial() called by wp_ajax hooks: {'wcs_product_has_trial_or_is_synced'} **/
-/** Parameters found in function ::check_product_variations_for_syncd_or_trial(): {"post": ["product_id", "variations_checked"]} **/
-function check_product_variations_for_syncd_or_trial() {
+/** Function save_increased_price_lock() called by wp_ajax hooks: {'wcs_order_price_lock'} **/
+/** Parameters found in function save_increased_price_lock(): {"post": ["woocommerce_meta_nonce", "order_id", "wcs_order_price_lock"]} **/
+function save_increased_price_lock( $order_id = '' ) {
+
+		if ( empty( $_POST['woocommerce_meta_nonce'] ) || ! wp_verify_nonce( wc_clean( wp_unslash( $_POST['woocommerce_meta_nonce'] ) ), 'woocommerce_save_data' ) ) {
+			return;
+		}
+
+		$order = wc_get_order( wp_doing_ajax() && isset( $_POST['order_id'] ) ? absint( $_POST['order_id'] ) : $order_id );
+
+		if ( ! $order ) {
+			return;
+		}
+
+		if ( isset( $_POST['wcs_order_price_lock'] ) && 'yes' === wc_clean( wp_unslash( $_POST['wcs_order_price_lock'] ) ) ) {
+			$order->update_meta_data( '_manual_price_increases_locked', 'true' );
+			$order->save();
+		} elseif ( $order->meta_exists( '_manual_price_increases_locked' ) ) {
+			$order->delete_meta_data( '_manual_price_increases_locked' );
+			$order->save();
+		}
+	}
+
+
+/** Function add_wc_price_args_filter_for_ajax() called by wp_ajax hooks: {'wc_bookings_calculate_costs', 'nopriv_wc_bookings_calculate_costs'} **/
+/** No params detected :-/ **/
+
+
+/** Function ::maybe_update_one_time_shipping_on_variation_edits() called by wp_ajax hooks: {'wcs_update_one_time_shipping'} **/
+/** Parameters found in function ::maybe_update_one_time_shipping_on_variation_edits(): {"post": ["one_time_shipping_enabled", "one_time_shipping_selected", "product_id"]} **/
+function maybe_update_one_time_shipping_on_variation_edits() {
 
 		check_admin_referer( 'one_time_shipping', 'nonce' );
 
-		$product                = wc_get_product( $_POST['product_id'] );
-		$is_synced_or_has_trial = false;
+		$one_time_shipping_enabled      = $_POST['one_time_shipping_enabled'];
+		$one_time_shipping_selected     = $_POST['one_time_shipping_selected'];
+		$subscription_one_time_shipping = 'no';
 
-		if ( WC_Subscriptions_Product::is_subscription( $product ) ) {
-
-			foreach ( $product->get_children() as $variation_id ) {
-
-				if ( isset( $_POST['variations_checked'] ) && in_array( $variation_id, $_POST['variations_checked'] ) ) {
-					continue;
-				}
-
-				$variation_product = wc_get_product( $variation_id );
-
-				if ( WC_Subscriptions_Product::get_trial_length( $variation_product ) ) {
-					$is_synced_or_has_trial = true;
-					break;
-				}
-
-				if ( WC_Subscriptions_Synchroniser::is_product_synced( $variation_product ) ) {
-					$is_synced_or_has_trial = true;
-					break;
-				}
-			}
+		if ( 'false' !== $one_time_shipping_enabled && 'true' === $one_time_shipping_selected ) {
+			$subscription_one_time_shipping = 'yes';
 		}
 
-		wp_send_json( array( 'is_synced_or_has_trial' => $is_synced_or_has_trial ) );
+		update_post_meta( $_POST['product_id'], '_subscription_one_time_shipping', $subscription_one_time_shipping );
+
+		wp_send_json( array( 'one_time_shipping' => $subscription_one_time_shipping ) );
 	}
 
 
@@ -687,251 +900,38 @@ function ajax_get_user_payment_tokens() {
 	}
 
 
-/** Function save_increased_price_lock() called by wp_ajax hooks: {'wcs_order_price_lock'} **/
-/** Parameters found in function save_increased_price_lock(): {"post": ["woocommerce_meta_nonce", "order_id", "wcs_order_price_lock"]} **/
-function save_increased_price_lock( $order_id = '' ) {
-
-		if ( empty( $_POST['woocommerce_meta_nonce'] ) || ! wp_verify_nonce( wc_clean( wp_unslash( $_POST['woocommerce_meta_nonce'] ) ), 'woocommerce_save_data' ) ) {
-			return;
-		}
-
-		$order = wc_get_order( wp_doing_ajax() && isset( $_POST['order_id'] ) ? absint( $_POST['order_id'] ) : $order_id );
-
-		if ( ! $order ) {
-			return;
-		}
-
-		if ( isset( $_POST['wcs_order_price_lock'] ) && 'yes' === wc_clean( wp_unslash( $_POST['wcs_order_price_lock'] ) ) ) {
-			$order->update_meta_data( '_manual_price_increases_locked', 'true' );
-			$order->save();
-		} elseif ( $order->meta_exists( '_manual_price_increases_locked' ) ) {
-			$order->delete_meta_data( '_manual_price_increases_locked' );
-			$order->save();
-		}
-	}
-
-
-/** Function enable_auto_renew() called by wp_ajax hooks: {'wcs_enable_auto_renew'} **/
-/** Parameters found in function enable_auto_renew(): {"post": ["subscription_id"]} **/
-function enable_auto_renew() {
-
-		if ( ! isset( $_POST['subscription_id'] ) ) {
-			return -1;
-		}
-
-		$subscription_id = absint( $_POST['subscription_id'] );
-		check_ajax_referer( "toggle-auto-renew-{$subscription_id}", 'security' );
-
-		$subscription = wcs_get_subscription( $subscription_id );
-
-		if ( wc_get_payment_gateway_by_order( $subscription ) && self::can_user_toggle_auto_renewal( $subscription ) ) {
-			$subscription->set_requires_manual_renewal( false );
-			$subscription->add_order_note( __( 'Customer turned on automatic renewals via their My Account page.', 'woocommerce-subscriptions' ) );
-			$subscription->save();
-
-			self::send_ajax_response( $subscription );
-		}
-	}
-
-
-/** Function validate_variation_deletion() called by wp_ajax hooks: {'wcs_validate_variation_deletion'} **/
-/** Parameters found in function validate_variation_deletion(): {"post": ["variation_id"]} **/
-function validate_variation_deletion() {
-		check_admin_referer( 'wc_subscriptions_admin', 'nonce' );
-
-		$variation_id  = absint( $_POST['variation_id'] );
-		$subscriptions = wcs_get_subscriptions_for_product( $variation_id, 'ids', array( 'limit' => 1 ) );
-
-		wp_send_json( array( 'can_remove' => empty( $subscriptions ) ? 'yes' : 'no' ) );
-	}
-
-
-/** Function ajax_tracks() called by wp_ajax hooks: {'jetpack_tracks', 'nopriv_platform_tracks', 'platform_tracks'} **/
-/** Parameters found in function ajax_tracks(): {"request": ["tracksNonce", "tracksEventName", "tracksEventProp"]} **/
-function ajax_tracks() {
-		// Check for nonce.
-		if (
-			// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash
-			empty( $_REQUEST['tracksNonce'] ) || ! wp_verify_nonce( $_REQUEST['tracksNonce'], 'platform_tracks_nonce' )
-		) {
-			wp_send_json_error(
-				__( 'You aren’t authorized to do that.', 'woocommerce-payments' ),
-				403
-			);
-		}
-
-		if ( ! isset( $_REQUEST['tracksEventName'] ) ) {
-			wp_send_json_error(
-				__( 'No valid event name or type.', 'woocommerce-payments' ),
-				403
-			);
-		}
-
-		$tracks_data = [];
-		if ( isset( $_REQUEST['tracksEventProp'] ) ) {
-			// tracksEventProp is a JSON-encoded string.
-			$event_prop = json_decode( wc_clean( wp_unslash( $_REQUEST['tracksEventProp'] ) ), true );
-			if ( is_array( $event_prop ) ) {
-				$tracks_data = $event_prop;
-			}
-		}
-		$this->maybe_record_event( sanitize_text_field( wp_unslash( $_REQUEST['tracksEventName'] ) ), $tracks_data );
-
-		wp_send_json_success();
-	}
-
-
-/** Function ::remove_variations() called by wp_ajax hooks: {'woocommerce_remove_variation', 'woocommerce_remove_variations'} **/
-/** Parameters found in function ::remove_variations(): {"post": ["variation_id", "variation_ids"]} **/
-function remove_variations() {
-
-		if ( isset( $_POST['variation_id'] ) ) { // removing single variation
-
-			check_ajax_referer( 'delete-variation', 'security' );
-			$variation_ids = array( $_POST['variation_id'] );
-
-		} else {  // removing multiple variations
-
-			check_ajax_referer( 'delete-variations', 'security' );
-			$variation_ids = (array) $_POST['variation_ids'];
-
-		}
-
-		foreach ( $variation_ids as $index => $variation_id ) {
-
-			$variation_post = get_post( $variation_id );
-
-			if ( $variation_post && $variation_post->post_type == 'product_variation' ) {
-
-				$variation_product = wc_get_product( $variation_id );
-
-				if ( $variation_product && $variation_product->is_type( 'subscription_variation' ) ) {
-
-					wp_trash_post( $variation_id );
-
-					// Prevent WooCommerce deleting the variation
-					if ( isset( $_POST['variation_id'] ) ) {
-						die();
-					} else {
-						unset( $_POST['variation_ids'][ $index ] );
-					}
-				}
-			}
-		}
-	}
-
-
-/** Function ::maybe_update_one_time_shipping_on_variation_edits() called by wp_ajax hooks: {'wcs_update_one_time_shipping'} **/
-/** Parameters found in function ::maybe_update_one_time_shipping_on_variation_edits(): {"post": ["one_time_shipping_enabled", "one_time_shipping_selected", "product_id"]} **/
-function maybe_update_one_time_shipping_on_variation_edits() {
+/** Function ::check_product_variations_for_syncd_or_trial() called by wp_ajax hooks: {'wcs_product_has_trial_or_is_synced'} **/
+/** Parameters found in function ::check_product_variations_for_syncd_or_trial(): {"post": ["product_id", "variations_checked"]} **/
+function check_product_variations_for_syncd_or_trial() {
 
 		check_admin_referer( 'one_time_shipping', 'nonce' );
 
-		$one_time_shipping_enabled      = $_POST['one_time_shipping_enabled'];
-		$one_time_shipping_selected     = $_POST['one_time_shipping_selected'];
-		$subscription_one_time_shipping = 'no';
+		$product                = wc_get_product( $_POST['product_id'] );
+		$is_synced_or_has_trial = false;
 
-		if ( 'false' !== $one_time_shipping_enabled && 'true' === $one_time_shipping_selected ) {
-			$subscription_one_time_shipping = 'yes';
+		if ( WC_Subscriptions_Product::is_subscription( $product ) ) {
+
+			foreach ( $product->get_children() as $variation_id ) {
+
+				if ( isset( $_POST['variations_checked'] ) && in_array( $variation_id, $_POST['variations_checked'] ) ) {
+					continue;
+				}
+
+				$variation_product = wc_get_product( $variation_id );
+
+				if ( WC_Subscriptions_Product::get_trial_length( $variation_product ) ) {
+					$is_synced_or_has_trial = true;
+					break;
+				}
+
+				if ( WC_Subscriptions_Synchroniser::is_product_synced( $variation_product ) ) {
+					$is_synced_or_has_trial = true;
+					break;
+				}
+			}
 		}
 
-		update_post_meta( $_POST['product_id'], '_subscription_one_time_shipping', $subscription_one_time_shipping );
-
-		wp_send_json( array( 'one_time_shipping' => $subscription_one_time_shipping ) );
-	}
-
-
-/** Function get_customer_orders() called by wp_ajax hooks: {'wcs_get_customer_orders'} **/
-/** Parameters found in function get_customer_orders(): {"post": ["user_id"]} **/
-function get_customer_orders() {
-		check_ajax_referer( 'get-customer-orders', 'security' );
-
-		if ( ! current_user_can( 'edit_shop_orders' ) ) {
-			wp_die( -1 );
-		}
-
-		$customer_orders = array();
-		$user_id         = absint( $_POST['user_id'] ?? null );
-		$orders          = wc_get_orders(
-			array(
-				'customer'       => $user_id,
-				'post_type'      => 'shop_order',
-				'posts_per_page' => '-1',
-			)
-		);
-
-		foreach ( $orders as $order ) {
-			$customer_orders[ $order->get_id() ] = $order->get_order_number();
-		}
-
-		wp_send_json( $customer_orders );
-	}
-
-
-/** Function ajax_tracks_id() called by wp_ajax hooks: {'get_identity', 'nopriv_get_identity'} **/
-/** No params detected :-/ **/
-
-
-/** Function plugin_edit_ajax() called by wp_ajax hooks: {'edit-theme-plugin-file'} **/
-/** Parameters found in function plugin_edit_ajax(): {"post": ["file", "newcontent", "nonce", "plugin"]} **/
-function plugin_edit_ajax() {
-		// This validation is based on wp_edit_theme_plugin_file().
-		if ( empty( $_POST['file'] ) ) {
-			return;
-		}
-
-		$file = wp_unslash( $_POST['file'] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Validated manually just after.
-		if ( 0 !== validate_file( $file ) ) {
-			return;
-		}
-
-		if ( ! isset( $_POST['newcontent'] ) ) {
-			return;
-		}
-
-		if ( ! isset( $_POST['nonce'] ) ) {
-			return;
-		}
-
-		if ( empty( $_POST['plugin'] ) ) {
-			return;
-		}
-
-		$plugin = wp_unslash( $_POST['plugin'] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Validated manually just after.
-		if ( ! current_user_can( 'edit_plugins' ) ) {
-			return;
-		}
-
-		if ( ! wp_verify_nonce( $_POST['nonce'], 'edit-plugin_' . $file ) ) { // phpcs:ignore WordPress.Security.ValidatedSanitizedInput -- WP core doesn't pre-sanitize nonces either.
-			return;
-		}
-		$plugins = get_plugins();
-		if ( ! array_key_exists( $plugin, $plugins ) ) {
-			return;
-		}
-
-		if ( 0 !== validate_file( $file, get_plugin_files( $plugin ) ) ) {
-			return;
-		}
-
-		$real_file = WP_PLUGIN_DIR . '/' . $file;
-
-		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_is_writable
-		if ( ! is_writable( $real_file ) ) {
-			return;
-		}
-
-		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fopen
-		$file_pointer = fopen( $real_file, 'w+' );
-		if ( false === $file_pointer ) {
-			return;
-		}
-		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fclose
-		fclose( $file_pointer );
-		/**
-		 * This action is documented already in this file
-		 */
-		do_action( 'jetpack_edited_plugin', $plugin, $plugins[ $plugin ] );
+		wp_send_json( array( 'is_synced_or_has_trial' => $is_synced_or_has_trial ) );
 	}
 
 

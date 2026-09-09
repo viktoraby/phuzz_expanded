@@ -1,0 +1,64 @@
+{
+  "target": "http://web/wp-admin/admin-ajax.php",
+  "methods": [
+    "POST"
+  ],
+  "body_params": {
+    "weight": 1,
+    "fixed": [
+      "nonce"
+    ],
+    "fuzz": [
+      "njt_fs_list_user_restrictions",
+      "list_user_restrictions_alow_access",
+      "private_folder_access",
+      "private_url_folder_access",
+      "hide_paths",
+      "lock_files",
+      "can_upload_mime"
+    ],
+    "data": [
+      {
+        "name": "nonce",
+        "value": "fuzz"
+      },
+      {
+        "name": "list_user_restrictions_alow_access",
+        "value": "fuzz"
+      },
+      {
+        "name": "private_folder_access",
+        "value": "fuzz"
+      },
+      {
+        "name": "private_url_folder_access",
+        "value": "fuzz"
+      },
+      {
+        "name": "hide_paths",
+        "value": "fuzz"
+      },
+      {
+        "name": "lock_files",
+        "value": "fuzz"
+      },
+      {
+        "name": "can_upload_mime",
+        "value": "fuzz"
+      }
+    ]
+  },
+  "query_params": {
+    "weight": 1,
+    "fixed": [
+      "action"
+    ],
+    "fuzz": [],
+    "data": [
+      {
+        "name": "action",
+        "value": "njt_fs_save_setting_restrictions"
+      }
+    ]
+  }
+}
