@@ -139,7 +139,7 @@ class Fuzzer:
             'PathTraversal': self.pathtraversal_errors_folder,
             'XXE': self.xxe_errors_folder,
             'LDAP-Injection': self.ldapi_errors_folder,
-            'Server-Side-Template-Injection': self.ssti_errors_folder,
+            'SSTI': self.ssti_errors_folder,
             'HTTP-Header-Injection': self.httphi_errors_folder,
             'SSRF': self.ssrf_errors_folder,
             'NoSQL-Injection': self.nosqli_errors_folder,
