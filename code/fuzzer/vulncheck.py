@@ -74,9 +74,8 @@ class WebFuzzXSSVulnCheck(VulnCheck):
 
         if id_ not in WebFuzzXSSVulnCheck.FLAGGED_ELEMENTS[confidence][candidate_url]:
 
-            if not WebFuzzXSSVulnCheck.FLAGGED_ELEMENTS[WebFuzzXSSVulnCheck.CONFIDENCE_HIGH].get(candidate_url, []):
-                if confidence == WebFuzzXSSVulnCheck.CONFIDENCE_HIGH:
-                    self.xss_count += 1
+            if (not WebFuzzXSSVulnCheck.FLAGGED_ELEMENTS[WebFuzzXSSVulnCheck.CONFIDENCE_HIGH].get(candidate_url, []) and confidence == WebFuzzXSSVulnCheck.CONFIDENCE_HIGH):
+                self.xss_count += 1
 
             WebFuzzXSSVulnCheck.FLAGGED_ELEMENTS[confidence][candidate_url].add(id_)
 
@@ -113,16 +112,13 @@ class WebFuzzXSSVulnCheck(VulnCheck):
                 else:
                     confidence = max(res, confidence)
 
-        elif 'esprima.nodes.TaggedTemplateExpression' in str(type(node)):
-            if node.quasi.type == 'TemplateLiteral' and \
-               node.tag.name in ["alert", "prompt", "confirm"]:
-
-                res = self._webfuzz_xss_js_ast_traversal(node.quasi.quasis)
-                if res > WebFuzzXSSVulnCheck.CONFIDENCE_NONE:
-                    # 0xdeadbeef found in one of its arguments
-                    return WebFuzzXSSVulnCheck.CONFIDENCE_HIGH
-                else:
-                    confidence = max(res, confidence)
+        elif ('esprima.nodes.TaggedTemplateExpression' in str(type(node)) and node.quasi.type == 'TemplateLiteral' and node.tag.name in ["alert", "prompt", "confirm"]):
+            res = self._webfuzz_xss_js_ast_traversal(node.quasi.quasis)
+            if res > WebFuzzXSSVulnCheck.CONFIDENCE_NONE:
+                # 0xdeadbeef found in one of its arguments
+                return WebFuzzXSSVulnCheck.CONFIDENCE_HIGH
+            else:
+                confidence = max(res, confidence)
 
         if "esprima.nodes" in str(type(node)):
             for attr in dir(node):
@@ -132,9 +128,8 @@ class WebFuzzXSSVulnCheck(VulnCheck):
                 else:
                     confidence = max(res, confidence)
 
-        if type(node) == str:
-            if longest_str_match(node, "0xdeadbeef") >= 5:
-                confidence = max(WebFuzzXSSVulnCheck.CONFIDENCE_LOW, confidence)
+        if (type(node) == str and longest_str_match(node, "0xdeadbeef") >= 5):
+            confidence = max(WebFuzzXSSVulnCheck.CONFIDENCE_LOW, confidence)
 
         return confidence
 
@@ -213,7 +208,6 @@ class WebFuzzXSSVulnCheck(VulnCheck):
 
         return False
 
-
 class XSSVulnCheck(VulnCheck):
     NAME = "XSS"
 
@@ -222,12 +216,10 @@ class XSSVulnCheck(VulnCheck):
             return False
         for param_type in ['query_params', 'body_params', 'headers', 'cookies']:
             for param in candidate.fuzz_params[param_type].items():
-                if html.unescape(bleach.clean(param[1], strip=True)) != param[1]:
-                    if candidate.response.text.find(param[1]) != -1:
-                        candidate.vulns.append(self.NAME)
-                        return True
+                if (html.unescape(bleach.clean(param[1], strip=True)) != param[1] and candidate.response.text.find(param[1]) != -1):
+                    candidate.vulns.append(self.NAME)
+                    return True
         return False
-
 
 class SQLiVulnCheck(VulnCheck):
     NAME = "SQLi"
@@ -239,9 +231,7 @@ class SQLiVulnCheck(VulnCheck):
         sqli_file = os.path.join(
             self.mysql_errors_folder, f"{candidate.coverage_id}.json"
         )
-        if os.path.isfile(sqli_file):
-            return True
-        return False
+        return os.path.isfile(sqli_file)
 
 class ParamBasedSQLiVulnCheck(VulnCheck):
     NAME = "SQLi"
@@ -280,9 +270,7 @@ class CommandInjectionVulnCheck(VulnCheck):
         cmd_injection_file = os.path.join(
             self.shell_errors_folder, f"{candidate.coverage_id}.json"
         )
-        if os.path.isfile(cmd_injection_file):
-            return True
-        return False
+        return os.path.isfile(cmd_injection_file)
 
 class ParamBasedCommandInjectionVulnCheck(VulnCheck):
     NAME = "CommandInjection"
@@ -320,9 +308,7 @@ class UnserializeVulnCheck(VulnCheck):
         unserialize_file = os.path.join(
             self.unserialize_errors_folder, f"{candidate.coverage_id}.json"
         )
-        if os.path.isfile(unserialize_file):
-            return True
-        return False
+        return os.path.isfile(unserialize_file)
 
 class ParamBasedUnserializeVulnCheck(VulnCheck):
     NAME = "Unserialize"
@@ -360,9 +346,7 @@ class PathTraversalVulnCheck(VulnCheck):
         pathtraversal_file = os.path.join(
             self.pathtraversal_errors_folder, f"{candidate.coverage_id}.json"
         )
-        if os.path.isfile(pathtraversal_file):
-            return True
-        return False
+        return os.path.isfile(pathtraversal_file)
 
 class ParamBasedPathTraversalVulnCheck(VulnCheck):
     NAME = "PathTraversal"
@@ -453,9 +437,7 @@ class XXEVulnCheck(VulnCheck):
         xxe_file = os.path.join(
             self.xxe_errors_folder, f"{candidate.coverage_id}.json"
         )
-        if os.path.isfile(xxe_file):
-            return True
-        return False
+        return os.path.isfile(xxe_file)
 
 class ParamBasedXXEVulnCheck(VulnCheck):
     NAME = "XXE"
@@ -494,9 +476,7 @@ class LDAPVulnCheck(VulnCheck):
         ldap_injection_file = os.path.join(
             self.ldapi_errors_folder, f"{candidate.coverage_id}.json"
         )
-        if os.path.isfile(ldap_injection_file):
-            return True
-        return False
+        return os.path.isfile(ldap_injection_file)
     
 
 class ParamBasedLDAPVulnCheck(VulnCheck):
@@ -535,9 +515,7 @@ class SSTIVulnCheck(VulnCheck):
         ssti_file = os.path.join(
             self.ssti_errors_folder, f"{candidate.coverage_id}.json"
         )
-        if os.path.isfile(ssti_file):
-            return True
-        return False
+        return os.path.isfile(ssti_file)
     
 class BrokenParamBasedSSTIVulnCheck(VulnCheck):
     NAME = "SSTI"
@@ -578,10 +556,8 @@ class ParamBasedSSTIVulnCheck(VulnCheck):
 
         for param_type in candidate.fuzz_params:
             for param, value in candidate.fuzz_params[param_type].items():
-                if number1 in value and number2 in value:
-                    if candidate.response and rendered_value in candidate.response.text:
-                        return True
-
+                if (number1 in value and number2 in value and candidate.response and rendered_value in candidate.response.text):
+                    return True
         return False
     
 class HTTPHeaderInjectionVulnCheck(VulnCheck):
@@ -594,9 +570,7 @@ class HTTPHeaderInjectionVulnCheck(VulnCheck):
         http_header_injection_file = os.path.join(
             self.httphi_errors_folder, f"{candidate.coverage_id}.json"
         )
-        if os.path.isfile(http_header_injection_file):
-            return True
-        return False
+        return os.path.isfile(http_header_injection_file)
 
 class ParamBasedHTTPHeaderInjectionVulnCheck(VulnCheck):
     NAME = "HTTPHeaderInjection"
@@ -634,9 +608,7 @@ class SSRFVulnCheck(VulnCheck):
         ssrf_file = os.path.join(
             self.ssrf_errors_folder, f"{candidate.coverage_id}.json"
         )
-        if os.path.isfile(ssrf_file):
-            return True
-        return False
+        return os.path.isfile(ssrf_file)
 
 class ImageSSRFVulnCheck(VulnCheck):
     NAME = "SSRF"
@@ -721,9 +693,7 @@ class NoSQLiVulnCheck(VulnCheck):
         nosqli_file = os.path.join(
             self.nosqli_errors_folder, f"{candidate.coverage_id}.json"
         )
-        if os.path.isfile(nosqli_file):
-            return True
-        return False
+        return os.path.isfile(nosqli_file)
     
 class BrokenParamBasedNoSQLiVulnCheck(VulnCheck):
     NAME = "NoSQLi"

@@ -139,14 +139,12 @@ class HARGen:
                 # har_request.request_url.replace(self.args.url_target, self.args.url_fuzzer)
                 har_request.config_url = urlunparse(new_url)
 
-            if self.args.url_methods_include:
-                if not har_request.request_method in self.args.url_methods_include.split(","):
-                    print("Skipping request due to method include")
-                    continue
-            if self.args.url_methods_exclude:
-                if har_request.request_method in self.args.url_methods_exclude.split(","):
-                    print("Skipping request due to method exclude")
-                    continue
+            if (self.args.url_methods_include and not har_request.request_method in self.args.url_methods_include.split(",")):
+                print("Skipping request due to method include")
+                continue
+            if (self.args.url_methods_exclude and har_request.request_method in self.args.url_methods_exclude.split(",")):
+                print("Skipping request due to method exclude")
+                continue
 
             har_request.config_method = har_request.request_method
 
@@ -374,13 +372,12 @@ class HARGen:
                 sys.exit(f"HAR file {self.args.har_path} does not exist.")
             har_files = [self.args.har_path]
 
-        if self.args.out_dir:
-            if not os.path.exists(self.args.out_dir):
-                try:
-                    os.mkdir(self.args.out_dir)
-                    print(f"Created directory {self.args.out_dir}")
-                except:
-                    sys.exit(f"Failed to create directory {self.args.out_dir}")
+        if (self.args.out_dir and not os.path.exists(self.args.out_dir)):
+            try:
+                os.mkdir(self.args.out_dir)
+                print(f"Created directory {self.args.out_dir}")
+            except:
+                sys.exit(f"Failed to create directory {self.args.out_dir}")
 
         print(f"Found the {len(har_files)} har files: ")
         for har_file in har_files.copy():
