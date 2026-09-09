@@ -57,10 +57,7 @@ class WebFuzzXSSVulnCheck(VulnCheck):
         # https://github.com/ovanr/webFuzz/blob/v1.2.0/webFuzz/webFuzz/detector.py#L149
 
         raw_html = candidate.response.text
-        if self._webfuzz_misc_longest_str_match(raw_html, "0xdeadbeef") >= 5:
-            return True
-        else:
-            return False
+        return (self._webfuzz_misc_longest_str_match(raw_html, "0xdeadbeef") >= 5)
 
     def _webfuzz_xss_record_response(self, candidate, confidence, id_, elem_type, value):
 
@@ -85,11 +82,7 @@ class WebFuzzXSSVulnCheck(VulnCheck):
 
 
     def _webfuzz_xss_should_analyze(self, id_, url, elem_content):
-        if id_ not in WebFuzzXSSVulnCheck.FLAGGED_ELEMENTS[WebFuzzXSSVulnCheck.CONFIDENCE_HIGH].get(url, []) and \
-            self._webfuzz_misc_longest_str_match(elem_content, "0xdeadbeef") >= 5:
-            return True
-        else:
-            return False
+        return (id_ not in WebFuzzXSSVulnCheck.FLAGGED_ELEMENTS[WebFuzzXSSVulnCheck.CONFIDENCE_HIGH].get(url, []) and self._webfuzz_misc_longest_str_match(elem_content, "0xdeadbeef") >= 5)
 
     def _webfuzz_xss_js_ast_traversal(self, node):
         confidence = WebFuzzXSSVulnCheck.CONFIDENCE_NONE
@@ -203,10 +196,8 @@ class WebFuzzXSSVulnCheck(VulnCheck):
         if not self._webfuzz_xss_precheck(candidate):
             return False
 
-        if self._webfuzz_xss_scanner(candidate) > WebFuzzXSSVulnCheck.CONFIDENCE_NONE:
-            return True
+        return (self._webfuzz_xss_scanner(candidate) > WebFuzzXSSVulnCheck.CONFIDENCE_NONE)
 
-        return False
 
 class XSSVulnCheck(VulnCheck):
     NAME = "XSS"
