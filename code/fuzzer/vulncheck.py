@@ -456,7 +456,7 @@ class ParamBasedXXEVulnCheck(VulnCheck):
         return False
 
 class LDAPVulnCheck(VulnCheck):
-    NAME = "LDAP Injection"
+    NAME = "LDAP-Injection"
 
     def __init__(self, ldapi_errors_folder):
         self.ldapi_errors_folder = ldapi_errors_folder
@@ -468,7 +468,7 @@ class LDAPVulnCheck(VulnCheck):
         return os.path.isfile(ldap_injection_file)    
 
 class ParamBasedLDAPVulnCheck(VulnCheck):
-    NAME = "LDAP Injection"
+    NAME = "LDAP-Injection"
 
     def __init__(self, ldapi_errors_folder):
         self.ldapi_errors_folder = ldapi_errors_folder
@@ -549,7 +549,7 @@ class ParamBasedSSTIVulnCheck(VulnCheck):
         return False
     
 class HTTPHeaderInjectionVulnCheck(VulnCheck):
-    NAME = "HTTPHeaderInjection"
+    NAME = "HTTP-Header-Injection"
 
     def __init__(self, httphi_errors_folder):
         self.httphi_errors_folder = httphi_errors_folder
@@ -561,7 +561,7 @@ class HTTPHeaderInjectionVulnCheck(VulnCheck):
         return os.path.isfile(http_header_injection_file)
 
 class ParamBasedHTTPHeaderInjectionVulnCheck(VulnCheck):
-    NAME = "HTTPHeaderInjection"
+    NAME = "HTTP-Header-Injection"
 
     def __init__(self, httphi_errors_folder):
         self.httphi_errors_folder = httphi_errors_folder
@@ -672,7 +672,7 @@ class ParamBasedSSRFVulnCheck(VulnCheck):
         return False
 
 class NoSQLiVulnCheck(VulnCheck):
-    NAME = "NoSQLi"
+    NAME = "NoSQL-Injection"
 
     def __init__(self, nosqli_errors_folder):
         self.nosqli_errors_folder = nosqli_errors_folder
@@ -684,7 +684,7 @@ class NoSQLiVulnCheck(VulnCheck):
         return os.path.isfile(nosqli_file)
     
 class BrokenParamBasedNoSQLiVulnCheck(VulnCheck):
-    NAME = "NoSQLi"
+    NAME = "NoSQL-Injection"
 
     def __init__(self, nosqli_errors_folder):
         self.nosqli_errors_folder = nosqli_errors_folder
