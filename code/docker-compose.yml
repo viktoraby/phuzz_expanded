@@ -39,7 +39,7 @@ services:
       context: ./web
       dockerfile: Dockerfile
     environment:
-      APPLICATION_TYPE: dvwa
+      APPLICATION_TYPE: bwapp
       FUZZER_COVERAGE_PATH: /var/www/html/
       FUZZER_COMPRESS: 1
       REQUIRES_DB: 1
@@ -160,7 +160,7 @@ services:
     environment:
       PYTHONUNBUFFERED: 1
       FUZZER_NODE_ID: 1
-      FUZZER_CONFIG: dvwa/xss_r_high
+      FUZZER_CONFIG: bwapp/commandi
       FUZZER_CLEANUP: 1
       FUZZER_COMPRESS: 1
     volumes:
