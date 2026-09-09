@@ -5,11 +5,11 @@
 *Found functions:14
 *Extracted functions:14
 *Total parameter names extracted: 5
-*Overview: {'chaty_plugin_deactivate': {'chaty_plugin_deactivate'}, 'choose_social_handler': {'choose_social'}, 'chaty_front_form_save_data': {'nopriv_chaty_front_form_save_data', 'chaty_front_form_save_data'}, 'rename_chaty_widget': {'rename_chaty_widget'}, 'update_chaty_view': {'update_chaty_view', 'nopriv_update_chaty_view'}, 'wcp_admin_send_message_to_owner': {'wcp_admin_send_message_to_owner'}, 'update_channel_setting': {'update_channel_setting'}, 'hide_chaty_cta': {'hide_chaty_cta'}, 'change_chaty_widget_status': {'change_chaty_widget_status'}, 'update_popup_status': {'chaty_update_popup_status'}, 'update_status': {'chaty_update_status'}, 'get_chaty_settings': {'get_chaty_settings'}, 'get_chatway_status': {'get_chatway_status'}, 'remove_chaty_widget': {'remove_chaty_widget'}}
+*Overview: {'change_chaty_widget_status': {'change_chaty_widget_status'}, 'choose_social_handler': {'choose_social'}, 'update_popup_status': {'chaty_update_popup_status'}, 'chaty_plugin_deactivate': {'chaty_plugin_deactivate'}, 'update_channel_setting': {'update_channel_setting'}, 'wcp_admin_send_message_to_owner': {'wcp_admin_send_message_to_owner'}, 'remove_chaty_widget': {'remove_chaty_widget'}, 'hide_chaty_cta': {'hide_chaty_cta'}, 'get_chaty_settings': {'get_chaty_settings'}, 'update_chaty_view': {'nopriv_update_chaty_view', 'update_chaty_view'}, 'get_chatway_status': {'get_chatway_status'}, 'rename_chaty_widget': {'rename_chaty_widget'}, 'chaty_front_form_save_data': {'chaty_front_form_save_data', 'nopriv_chaty_front_form_save_data'}, 'update_status': {'chaty_update_status'}}
 *
 ***/
 
-/** Function chaty_plugin_deactivate() called by wp_ajax hooks: {'chaty_plugin_deactivate'} **/
+/** Function change_chaty_widget_status() called by wp_ajax hooks: {'change_chaty_widget_status'} **/
 /** No params detected :-/ **/
 
 
@@ -17,7 +17,69 @@
 /** No params detected :-/ **/
 
 
-/** Function chaty_front_form_save_data() called by wp_ajax hooks: {'nopriv_chaty_front_form_save_data', 'chaty_front_form_save_data'} **/
+/** Function update_popup_status() called by wp_ajax hooks: {'chaty_update_popup_status'} **/
+/** Parameters found in function update_popup_status(): {"request": ["nonce"]} **/
+function update_popup_status()
+    {
+        if (!empty($_REQUEST['nonce']) && wp_verify_nonce($_REQUEST['nonce'], 'chaty_update_popup_status')) {
+            update_option("chaty_intro_popup", "hide");
+        }
+
+        echo esc_attr("1");
+        die;
+
+    }
+
+
+/** Function chaty_plugin_deactivate() called by wp_ajax hooks: {'chaty_plugin_deactivate'} **/
+/** No params detected :-/ **/
+
+
+/** Function update_channel_setting() called by wp_ajax hooks: {'update_channel_setting'} **/
+/** Parameters found in function update_channel_setting(): {"request": ["nonce"]} **/
+function update_channel_setting()
+    {
+        if (!empty($_REQUEST['nonce']) && wp_verify_nonce($_REQUEST['nonce'], "Contact_Us-settings")) {
+            update_option("chaty_contact_us_setting", "hide");
+        }
+
+        echo esc_attr("1");
+        die;
+
+    }
+
+
+/** Function wcp_admin_send_message_to_owner() called by wp_ajax hooks: {'wcp_admin_send_message_to_owner'} **/
+/** No params detected :-/ **/
+
+
+/** Function remove_chaty_widget() called by wp_ajax hooks: {'remove_chaty_widget'} **/
+/** No params detected :-/ **/
+
+
+/** Function hide_chaty_cta() called by wp_ajax hooks: {'hide_chaty_cta'} **/
+/** No params detected :-/ **/
+
+
+/** Function get_chaty_settings() called by wp_ajax hooks: {'get_chaty_settings'} **/
+/** No params detected :-/ **/
+
+
+/** Function update_chaty_view() called by wp_ajax hooks: {'nopriv_update_chaty_view', 'update_chaty_view'} **/
+/** Parameters found in function update_chaty_view(): {"post": ["token"]} **/
+function update_chaty_view() {
+        if(isset($_POST['token'])) {
+            $token = sanitize_text_field($_POST['token']);
+            if(wp_verify_nonce($token, "update_chaty_view")) {
+                if(!get_option("chaty_views")) {
+                    add_option("chaty_views", 1);
+                }
+            }
+        }
+    }
+
+
+/** Function get_chatway_status() called by wp_ajax hooks: {'get_chatway_status'} **/
 /** No params detected :-/ **/
 
 
@@ -46,58 +108,8 @@ function rename_chaty_widget() {
     }
 
 
-/** Function update_chaty_view() called by wp_ajax hooks: {'update_chaty_view', 'nopriv_update_chaty_view'} **/
-/** Parameters found in function update_chaty_view(): {"post": ["token"]} **/
-function update_chaty_view() {
-        if(isset($_POST['token'])) {
-            $token = sanitize_text_field($_POST['token']);
-            if(wp_verify_nonce($token, "update_chaty_view")) {
-                if(!get_option("chaty_views")) {
-                    add_option("chaty_views", 1);
-                }
-            }
-        }
-    }
-
-
-/** Function wcp_admin_send_message_to_owner() called by wp_ajax hooks: {'wcp_admin_send_message_to_owner'} **/
+/** Function chaty_front_form_save_data() called by wp_ajax hooks: {'chaty_front_form_save_data', 'nopriv_chaty_front_form_save_data'} **/
 /** No params detected :-/ **/
-
-
-/** Function update_channel_setting() called by wp_ajax hooks: {'update_channel_setting'} **/
-/** Parameters found in function update_channel_setting(): {"request": ["nonce"]} **/
-function update_channel_setting()
-    {
-        if (!empty($_REQUEST['nonce']) && wp_verify_nonce($_REQUEST['nonce'], "Contact_Us-settings")) {
-            update_option("chaty_contact_us_setting", "hide");
-        }
-
-        echo esc_attr("1");
-        die;
-
-    }
-
-
-/** Function hide_chaty_cta() called by wp_ajax hooks: {'hide_chaty_cta'} **/
-/** No params detected :-/ **/
-
-
-/** Function change_chaty_widget_status() called by wp_ajax hooks: {'change_chaty_widget_status'} **/
-/** No params detected :-/ **/
-
-
-/** Function update_popup_status() called by wp_ajax hooks: {'chaty_update_popup_status'} **/
-/** Parameters found in function update_popup_status(): {"request": ["nonce"]} **/
-function update_popup_status()
-    {
-        if (!empty($_REQUEST['nonce']) && wp_verify_nonce($_REQUEST['nonce'], 'chaty_update_popup_status')) {
-            update_option("chaty_intro_popup", "hide");
-        }
-
-        echo esc_attr("1");
-        die;
-
-    }
 
 
 /** Function update_status() called by wp_ajax hooks: {'chaty_update_status'} **/
@@ -133,17 +145,5 @@ function update_status() {
         echo "1";
         die;
     }
-
-
-/** Function get_chaty_settings() called by wp_ajax hooks: {'get_chaty_settings'} **/
-/** No params detected :-/ **/
-
-
-/** Function get_chatway_status() called by wp_ajax hooks: {'get_chatway_status'} **/
-/** No params detected :-/ **/
-
-
-/** Function remove_chaty_widget() called by wp_ajax hooks: {'remove_chaty_widget'} **/
-/** No params detected :-/ **/
 
 

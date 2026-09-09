@@ -5,46 +5,106 @@
 *Found functions:14
 *Extracted functions:14
 *Total parameter names extracted: 10
-*Overview: {'save_fbe_settings': {'save_fbe_settings'}, 'fbl4b_clear_pixel': {'fbl4b_clear_pixel'}, 'delete_fbl4b_settings': {'delete_fbl4b_settings'}, 'save_capi_integration_status': {'save_capi_integration_status'}, 'save_capig': {'save_capig'}, 'injectAddToCartEventAjax': {'nopriv_edd_add_to_cart', 'edd_add_to_cart'}, 'send_capi_event': {'send_capi_event'}, 'delete_fbe_settings': {'delete_fbe_settings'}, 'save_capi_pii_caching_status': {'save_capi_pii_caching_status'}, 'save_capi_integration_events_filter': {'save_capi_integration_events_filter'}, 'save_fbl4b_settings': {'save_fbl4b_settings'}, 'fbl4b_fetch_business_id': {'fbl4b_fetch_business_id'}, 'fbl4b_fetch_pixels': {'fbl4b_fetch_pixels'}, 'fbl4b_validate_token': {'fbl4b_validate_token'}}
+*Overview: {'delete_fbl4b_settings': {'delete_fbl4b_settings'}, 'save_fbl4b_settings': {'save_fbl4b_settings'}, 'save_capi_integration_status': {'save_capi_integration_status'}, 'save_capig': {'save_capig'}, 'send_capi_event': {'send_capi_event'}, 'save_capi_integration_events_filter': {'save_capi_integration_events_filter'}, 'delete_fbe_settings': {'delete_fbe_settings'}, 'save_capi_pii_caching_status': {'save_capi_pii_caching_status'}, 'fbl4b_validate_token': {'fbl4b_validate_token'}, 'fbl4b_fetch_business_id': {'fbl4b_fetch_business_id'}, 'fbl4b_fetch_pixels': {'fbl4b_fetch_pixels'}, 'fbl4b_clear_pixel': {'fbl4b_clear_pixel'}, 'injectAddToCartEventAjax': {'edd_add_to_cart', 'nopriv_edd_add_to_cart'}, 'save_fbe_settings': {'save_fbe_settings'}}
 *
 ***/
 
-/** Function save_fbe_settings() called by wp_ajax hooks: {'save_fbe_settings'} **/
-/** Parameters found in function save_fbe_settings(): {"post": ["pixelId", "accessToken", "externalBusinessId"]} **/
-function save_fbe_settings() {
+/** Function delete_fbl4b_settings() called by wp_ajax hooks: {'delete_fbl4b_settings'} **/
+/** No params detected :-/ **/
+
+
+/** Function save_fbl4b_settings() called by wp_ajax hooks: {'save_fbl4b_settings'} **/
+/** Parameters found in function save_fbl4b_settings(): {"server": ["HTTP_AUTHORIZATION"], "post": ["pixelId", "pixelName", "businessId"]} **/
+function save_fbl4b_settings() {
         if ( ! current_user_can( 'manage_options' ) ) {
             return $this->handle_unauthorized_request();
         }
-        check_admin_referer(
-            FacebookPluginConfig::SAVE_FBE_SETTINGS_ACTION_NAME
-        );
-        $pixel_id             = sanitize_text_field(
+        check_admin_referer( 'save_fbl4b_settings' );
+
+        $access_token = '';
+        // Read access token from Authorization: Bearer header.
+        $auth_header = isset( $_SERVER['HTTP_AUTHORIZATION'] )
+            ? sanitize_text_field( wp_unslash( $_SERVER['HTTP_AUTHORIZATION'] ) )
+            : '';
+        if ( 0 === strpos( $auth_header, 'Bearer ' ) ) {
+            $access_token = substr( $auth_header, 7 );
+        }
+        $pixel_id    = sanitize_text_field(
             isset( $_POST['pixelId'] ) ?
             wp_unslash( $_POST['pixelId'] ) : ''
         );
-        $access_token         = sanitize_text_field(
-            isset( $_POST['accessToken'] ) ?
-            wp_unslash( $_POST['accessToken'] ) : ''
+        $pixel_name  = sanitize_text_field(
+            isset( $_POST['pixelName'] ) ?
+            wp_unslash( $_POST['pixelName'] ) : ''
         );
-        $external_business_id = sanitize_text_field(
-            isset( $_POST['externalBusinessId'] ) ?
-            wp_unslash( $_POST['externalBusinessId'] ) : ''
+        $business_id = sanitize_text_field(
+            isset( $_POST['businessId'] ) ?
+            wp_unslash( $_POST['businessId'] ) : ''
         );
-        if ( empty( $pixel_id )
-                || empty( $access_token )
-                || empty( $external_business_id ) ) {
-            return $this->handle_invalid_request();
+
+        if ( empty( $access_token ) ) {
+            // Partial update (e.g., pixel selection after initial save).
+            $existing = \get_option(
+                FacebookPluginConfig::FBL4B_SETTINGS_KEY,
+                array()
+            );
+            if ( empty( $existing ) ) {
+                return $this->handle_invalid_request();
+            }
+            if ( ! empty( $pixel_id ) ) {
+                $existing[ FacebookPluginConfig::FBL4B_PIXEL_ID_KEY ] = $pixel_id;
+            }
+            if ( ! empty( $pixel_name ) ) {
+                $existing[ FacebookPluginConfig::FBL4B_PIXEL_NAME_KEY ] =
+                    $pixel_name;
+            }
+            if ( ! empty( $business_id ) ) {
+                $existing[ FacebookPluginConfig::FBL4B_BUSINESS_ID_KEY ] =
+                    $business_id;
+            }
+            \update_option(
+                FacebookPluginConfig::FBL4B_SETTINGS_KEY,
+                $existing
+            );
+            // If FBL4B now has a pixel, mark MBE as not installed so
+            // Connection doesn't fall back to MBE after FBL4B disconnect.
+            if ( ! empty( $pixel_id ) ) {
+                $mbe_settings = \get_option(
+                    FacebookPluginConfig::SETTINGS_KEY,
+                    array()
+                );
+                if ( ! empty( $mbe_settings ) ) {
+                    $mbe_settings[ FacebookPluginConfig::IS_FBE_INSTALLED_KEY ] = '0';
+                    \update_option(
+                        FacebookPluginConfig::SETTINGS_KEY,
+                        $mbe_settings
+                    );
+                }
+            }
+            \delete_transient(
+                FacebookPluginConfig::CONNECTION_INVALID_TRANSIENT
+            );
+            delete_metadata(
+                'user',
+                0,
+                FacebookPluginConfig::ADMIN_IGNORE_CONNECTION_INVALID_NOTICE,
+                '',
+                true
+            );
+            return $this->handle_success_request( $existing );
         }
-        $settings = array(
-            FacebookPluginConfig::PIXEL_ID_KEY             => $pixel_id,
-            FacebookPluginConfig::ACCESS_TOKEN_KEY         => $access_token,
-            FacebookPluginConfig::EXTERNAL_BUSINESS_ID_KEY =>
-            $external_business_id,
-            FacebookPluginConfig::IS_FBE_INSTALLED_KEY     => '1',
+
+        // Initial save — encrypt and store the access token.
+        $fbl4b_settings = array(
+            FacebookPluginConfig::FBL4B_ACCESS_TOKEN_KEY =>
+                FacebookWordpressOptions::encrypt_token( $access_token ),
+            FacebookPluginConfig::FBL4B_PIXEL_ID_KEY     => $pixel_id,
+            FacebookPluginConfig::FBL4B_PIXEL_NAME_KEY   => $pixel_name,
+            FacebookPluginConfig::FBL4B_BUSINESS_ID_KEY  => $business_id,
         );
         \update_option(
-            FacebookPluginConfig::SETTINGS_KEY,
-            $settings
+            FacebookPluginConfig::FBL4B_SETTINGS_KEY,
+            $fbl4b_settings
         );
         \delete_transient(
             FacebookPluginConfig::CONNECTION_INVALID_TRANSIENT
@@ -56,16 +116,9 @@ function save_fbe_settings() {
             '',
             true
         );
-        return $this->handle_success_request( $settings );
+
+        return $this->handle_success_request( 'FBL4B settings saved' );
     }
-
-
-/** Function fbl4b_clear_pixel() called by wp_ajax hooks: {'fbl4b_clear_pixel'} **/
-/** No params detected :-/ **/
-
-
-/** Function delete_fbl4b_settings() called by wp_ajax hooks: {'delete_fbl4b_settings'} **/
-/** No params detected :-/ **/
 
 
 /** Function save_capi_integration_status() called by wp_ajax hooks: {'save_capi_integration_status'} **/
@@ -129,45 +182,6 @@ function save_capig() {
 
         \update_option( FacebookPluginConfig::CAPIG, $val );
         return $this->handle_success_request( $val );
-    }
-
-
-/** Function injectAddToCartEventAjax() called by wp_ajax hooks: {'nopriv_edd_add_to_cart', 'edd_add_to_cart'} **/
-/** Parameters found in function injectAddToCartEventAjax(): {"post": ["nonce", "download_id", "post_data"]} **/
-function injectAddToCartEventAjax() {
-        if ( isset( $_POST['nonce'] ) && isset( $_POST['download_id'] )
-            && isset( $_POST['post_data'] ) ) {
-            $download_id = absint( $_POST['download_id'] );
-            $nonce       = sanitize_text_field( wp_unslash( $_POST['nonce'] ) );
-            if ( wp_verify_nonce( $nonce, 'edd-add-to-cart-' . $download_id )
-            === false ) {
-                return;
-            }
-            parse_str( $_POST['post_data'], $post_data ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash
-            if ( isset( $post_data['facebook_event_id'] ) ) {
-                $event_id = $post_data['facebook_event_id'];
-            $server_event = ServerEventFactory::safe_create_event(
-                'AddToCart',
-                array( __CLASS__, 'createAddToCartEvent' ),
-                array( $download_id ),
-                self::TRACKING_NAME
-            );
-                $server_event->setEventId( $event_id );
-                FacebookServerSideEvent::get_instance()->track( $server_event );
-            }
-        }
-        parse_str( $_POST['post_data'], $post_data ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash
-        if ( isset( $post_data['facebook_event_id'] ) ) {
-            $event_id     = $post_data['facebook_event_id'];
-            $server_event = ServerEventFactory::safe_create_event(
-                'AddToCart',
-                array( __CLASS__, 'createAddToCartEvent' ),
-                array( $download_id ),
-                self::TRACKING_NAME
-            );
-            $server_event->setEventId( $event_id );
-            FacebookServerSideEvent::get_instance()->track( $server_event );
-        }
     }
 
 
@@ -317,42 +331,6 @@ function send_capi_event() {
     }
 
 
-/** Function delete_fbe_settings() called by wp_ajax hooks: {'delete_fbe_settings'} **/
-/** No params detected :-/ **/
-
-
-/** Function save_capi_pii_caching_status() called by wp_ajax hooks: {'save_capi_pii_caching_status'} **/
-/** Parameters found in function save_capi_pii_caching_status(): {"post": ["val"]} **/
-function save_capi_pii_caching_status() {
-        if ( ! current_user_can( 'manage_options' ) ) {
-            return $this->handle_unauthorized_request();
-        }
-
-        if ( empty( FacebookWordpressOptions::get_active_pixel_id() ) ) {
-            \update_option(
-                FacebookPluginConfig::CAPI_PII_CACHING_STATUS,
-                FacebookPluginConfig::CAPI_PII_CACHING_STATUS_DEFAULT
-            );
-            return $this->handle_invalid_request();
-        }
-
-        check_admin_referer(
-            FacebookPluginConfig::SAVE_CAPI_PII_CACHING_STATUS_ACTION_NAME
-        );
-        $val = sanitize_text_field(
-            isset( $_POST['val'] ) ?
-            wp_unslash( $_POST['val'] ) : ''
-        );
-
-        if ( ! ( '0' === $val || '1' === $val ) ) {
-            return $this->handle_invalid_request();
-        }
-
-        \update_option( FacebookPluginConfig::CAPI_PII_CACHING_STATUS, $val );
-        return $this->handle_success_request( $val );
-    }
-
-
 /** Function save_capi_integration_events_filter() called by wp_ajax hooks: {'save_capi_integration_events_filter'} **/
 /** Parameters found in function save_capi_integration_events_filter(): {"post": ["val"]} **/
 function save_capi_integration_events_filter() {
@@ -405,112 +383,44 @@ function save_capi_integration_events_filter() {
     }
 
 
-/** Function save_fbl4b_settings() called by wp_ajax hooks: {'save_fbl4b_settings'} **/
-/** Parameters found in function save_fbl4b_settings(): {"server": ["HTTP_AUTHORIZATION"], "post": ["pixelId", "pixelName", "businessId"]} **/
-function save_fbl4b_settings() {
+/** Function delete_fbe_settings() called by wp_ajax hooks: {'delete_fbe_settings'} **/
+/** No params detected :-/ **/
+
+
+/** Function save_capi_pii_caching_status() called by wp_ajax hooks: {'save_capi_pii_caching_status'} **/
+/** Parameters found in function save_capi_pii_caching_status(): {"post": ["val"]} **/
+function save_capi_pii_caching_status() {
         if ( ! current_user_can( 'manage_options' ) ) {
             return $this->handle_unauthorized_request();
         }
-        check_admin_referer( 'save_fbl4b_settings' );
 
-        $access_token = '';
-        // Read access token from Authorization: Bearer header.
-        $auth_header = isset( $_SERVER['HTTP_AUTHORIZATION'] )
-            ? sanitize_text_field( wp_unslash( $_SERVER['HTTP_AUTHORIZATION'] ) )
-            : '';
-        if ( 0 === strpos( $auth_header, 'Bearer ' ) ) {
-            $access_token = substr( $auth_header, 7 );
-        }
-        $pixel_id    = sanitize_text_field(
-            isset( $_POST['pixelId'] ) ?
-            wp_unslash( $_POST['pixelId'] ) : ''
-        );
-        $pixel_name  = sanitize_text_field(
-            isset( $_POST['pixelName'] ) ?
-            wp_unslash( $_POST['pixelName'] ) : ''
-        );
-        $business_id = sanitize_text_field(
-            isset( $_POST['businessId'] ) ?
-            wp_unslash( $_POST['businessId'] ) : ''
-        );
-
-        if ( empty( $access_token ) ) {
-            // Partial update (e.g., pixel selection after initial save).
-            $existing = \get_option(
-                FacebookPluginConfig::FBL4B_SETTINGS_KEY,
-                array()
-            );
-            if ( empty( $existing ) ) {
-                return $this->handle_invalid_request();
-            }
-            if ( ! empty( $pixel_id ) ) {
-                $existing[ FacebookPluginConfig::FBL4B_PIXEL_ID_KEY ] = $pixel_id;
-            }
-            if ( ! empty( $pixel_name ) ) {
-                $existing[ FacebookPluginConfig::FBL4B_PIXEL_NAME_KEY ] =
-                    $pixel_name;
-            }
-            if ( ! empty( $business_id ) ) {
-                $existing[ FacebookPluginConfig::FBL4B_BUSINESS_ID_KEY ] =
-                    $business_id;
-            }
+        if ( empty( FacebookWordpressOptions::get_active_pixel_id() ) ) {
             \update_option(
-                FacebookPluginConfig::FBL4B_SETTINGS_KEY,
-                $existing
+                FacebookPluginConfig::CAPI_PII_CACHING_STATUS,
+                FacebookPluginConfig::CAPI_PII_CACHING_STATUS_DEFAULT
             );
-            // If FBL4B now has a pixel, mark MBE as not installed so
-            // Connection doesn't fall back to MBE after FBL4B disconnect.
-            if ( ! empty( $pixel_id ) ) {
-                $mbe_settings = \get_option(
-                    FacebookPluginConfig::SETTINGS_KEY,
-                    array()
-                );
-                if ( ! empty( $mbe_settings ) ) {
-                    $mbe_settings[ FacebookPluginConfig::IS_FBE_INSTALLED_KEY ] = '0';
-                    \update_option(
-                        FacebookPluginConfig::SETTINGS_KEY,
-                        $mbe_settings
-                    );
-                }
-            }
-            \delete_transient(
-                FacebookPluginConfig::CONNECTION_INVALID_TRANSIENT
-            );
-            delete_metadata(
-                'user',
-                0,
-                FacebookPluginConfig::ADMIN_IGNORE_CONNECTION_INVALID_NOTICE,
-                '',
-                true
-            );
-            return $this->handle_success_request( $existing );
+            return $this->handle_invalid_request();
         }
 
-        // Initial save — encrypt and store the access token.
-        $fbl4b_settings = array(
-            FacebookPluginConfig::FBL4B_ACCESS_TOKEN_KEY =>
-                FacebookWordpressOptions::encrypt_token( $access_token ),
-            FacebookPluginConfig::FBL4B_PIXEL_ID_KEY     => $pixel_id,
-            FacebookPluginConfig::FBL4B_PIXEL_NAME_KEY   => $pixel_name,
-            FacebookPluginConfig::FBL4B_BUSINESS_ID_KEY  => $business_id,
+        check_admin_referer(
+            FacebookPluginConfig::SAVE_CAPI_PII_CACHING_STATUS_ACTION_NAME
         );
-        \update_option(
-            FacebookPluginConfig::FBL4B_SETTINGS_KEY,
-            $fbl4b_settings
-        );
-        \delete_transient(
-            FacebookPluginConfig::CONNECTION_INVALID_TRANSIENT
-        );
-        delete_metadata(
-            'user',
-            0,
-            FacebookPluginConfig::ADMIN_IGNORE_CONNECTION_INVALID_NOTICE,
-            '',
-            true
+        $val = sanitize_text_field(
+            isset( $_POST['val'] ) ?
+            wp_unslash( $_POST['val'] ) : ''
         );
 
-        return $this->handle_success_request( 'FBL4B settings saved' );
+        if ( ! ( '0' === $val || '1' === $val ) ) {
+            return $this->handle_invalid_request();
+        }
+
+        \update_option( FacebookPluginConfig::CAPI_PII_CACHING_STATUS, $val );
+        return $this->handle_success_request( $val );
     }
+
+
+/** Function fbl4b_validate_token() called by wp_ajax hooks: {'fbl4b_validate_token'} **/
+/** No params detected :-/ **/
 
 
 /** Function fbl4b_fetch_business_id() called by wp_ajax hooks: {'fbl4b_fetch_business_id'} **/
@@ -606,7 +516,97 @@ function fbl4b_fetch_pixels() {
     }
 
 
-/** Function fbl4b_validate_token() called by wp_ajax hooks: {'fbl4b_validate_token'} **/
+/** Function fbl4b_clear_pixel() called by wp_ajax hooks: {'fbl4b_clear_pixel'} **/
 /** No params detected :-/ **/
+
+
+/** Function injectAddToCartEventAjax() called by wp_ajax hooks: {'edd_add_to_cart', 'nopriv_edd_add_to_cart'} **/
+/** Parameters found in function injectAddToCartEventAjax(): {"post": ["nonce", "download_id", "post_data"]} **/
+function injectAddToCartEventAjax() {
+        if ( isset( $_POST['nonce'] ) && isset( $_POST['download_id'] )
+            && isset( $_POST['post_data'] ) ) {
+            $download_id = absint( $_POST['download_id'] );
+            $nonce       = sanitize_text_field( wp_unslash( $_POST['nonce'] ) );
+            if ( wp_verify_nonce( $nonce, 'edd-add-to-cart-' . $download_id )
+            === false ) {
+                return;
+            }
+            parse_str( $_POST['post_data'], $post_data ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash
+            if ( isset( $post_data['facebook_event_id'] ) ) {
+                $event_id = $post_data['facebook_event_id'];
+            $server_event = ServerEventFactory::safe_create_event(
+                'AddToCart',
+                array( __CLASS__, 'createAddToCartEvent' ),
+                array( $download_id ),
+                self::TRACKING_NAME
+            );
+                $server_event->setEventId( $event_id );
+                FacebookServerSideEvent::get_instance()->track( $server_event );
+            }
+        }
+        parse_str( $_POST['post_data'], $post_data ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash
+        if ( isset( $post_data['facebook_event_id'] ) ) {
+            $event_id     = $post_data['facebook_event_id'];
+            $server_event = ServerEventFactory::safe_create_event(
+                'AddToCart',
+                array( __CLASS__, 'createAddToCartEvent' ),
+                array( $download_id ),
+                self::TRACKING_NAME
+            );
+            $server_event->setEventId( $event_id );
+            FacebookServerSideEvent::get_instance()->track( $server_event );
+        }
+    }
+
+
+/** Function save_fbe_settings() called by wp_ajax hooks: {'save_fbe_settings'} **/
+/** Parameters found in function save_fbe_settings(): {"post": ["pixelId", "accessToken", "externalBusinessId"]} **/
+function save_fbe_settings() {
+        if ( ! current_user_can( 'manage_options' ) ) {
+            return $this->handle_unauthorized_request();
+        }
+        check_admin_referer(
+            FacebookPluginConfig::SAVE_FBE_SETTINGS_ACTION_NAME
+        );
+        $pixel_id             = sanitize_text_field(
+            isset( $_POST['pixelId'] ) ?
+            wp_unslash( $_POST['pixelId'] ) : ''
+        );
+        $access_token         = sanitize_text_field(
+            isset( $_POST['accessToken'] ) ?
+            wp_unslash( $_POST['accessToken'] ) : ''
+        );
+        $external_business_id = sanitize_text_field(
+            isset( $_POST['externalBusinessId'] ) ?
+            wp_unslash( $_POST['externalBusinessId'] ) : ''
+        );
+        if ( empty( $pixel_id )
+                || empty( $access_token )
+                || empty( $external_business_id ) ) {
+            return $this->handle_invalid_request();
+        }
+        $settings = array(
+            FacebookPluginConfig::PIXEL_ID_KEY             => $pixel_id,
+            FacebookPluginConfig::ACCESS_TOKEN_KEY         => $access_token,
+            FacebookPluginConfig::EXTERNAL_BUSINESS_ID_KEY =>
+            $external_business_id,
+            FacebookPluginConfig::IS_FBE_INSTALLED_KEY     => '1',
+        );
+        \update_option(
+            FacebookPluginConfig::SETTINGS_KEY,
+            $settings
+        );
+        \delete_transient(
+            FacebookPluginConfig::CONNECTION_INVALID_TRANSIENT
+        );
+        delete_metadata(
+            'user',
+            0,
+            FacebookPluginConfig::ADMIN_IGNORE_CONNECTION_INVALID_NOTICE,
+            '',
+            true
+        );
+        return $this->handle_success_request( $settings );
+    }
 
 

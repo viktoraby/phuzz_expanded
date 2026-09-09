@@ -5,9 +5,22 @@
 *Found functions:2
 *Extracted functions:2
 *Total parameter names extracted: 2
-*Overview: {'ajax_process_image': {'regeneratethumbnail'}, 'ajax_finish_regen': {'frt_finish_regen'}}
+*Overview: {'ajax_finish_regen': {'frt_finish_regen'}, 'ajax_process_image': {'regeneratethumbnail'}}
 *
 ***/
+
+/** Function ajax_finish_regen() called by wp_ajax hooks: {'frt_finish_regen'} **/
+/** Parameters found in function ajax_finish_regen(): {"request": ["frt_wpnonce"]} **/
+function ajax_finish_regen() {
+		if ( ! current_user_can( $this->capability ) ) {
+			wp_die();
+		}
+		if ( empty( $_REQUEST['frt_wpnonce'] ) || ! wp_verify_nonce( sanitize_key( $_REQUEST['frt_wpnonce'] ), 'force-regenerate-attachment' ) ) {
+			wp_die();
+		}
+		delete_option( 'frt_last_regenerated' );
+	}
+
 
 /** Function ajax_process_image() called by wp_ajax hooks: {'regeneratethumbnail'} **/
 /** Parameters found in function ajax_process_image(): {"request": ["id", "frt_wpnonce"]} **/
@@ -527,18 +540,5 @@ function ajax_process_image() {
 		);
 	}
 }
-
-
-/** Function ajax_finish_regen() called by wp_ajax hooks: {'frt_finish_regen'} **/
-/** Parameters found in function ajax_finish_regen(): {"request": ["frt_wpnonce"]} **/
-function ajax_finish_regen() {
-		if ( ! current_user_can( $this->capability ) ) {
-			wp_die();
-		}
-		if ( empty( $_REQUEST['frt_wpnonce'] ) || ! wp_verify_nonce( sanitize_key( $_REQUEST['frt_wpnonce'] ), 'force-regenerate-attachment' ) ) {
-			wp_die();
-		}
-		delete_option( 'frt_last_regenerated' );
-	}
 
 

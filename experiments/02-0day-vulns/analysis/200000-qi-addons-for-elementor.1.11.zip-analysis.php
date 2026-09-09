@@ -5,13 +5,9 @@
 *Found functions:5
 *Extracted functions:5
 *Total parameter names extracted: 3
-*Overview: {'handle_review_notice': {'qi_addons_for_elementor_review_notice'}, 'save_settings': {'qi_addons_for_elementor_action_settings_save_options'}, 'handle_notice': {'qi_addons_for_elementor_notice'}, 'save_widgets': {'qi_addons_for_elementor_action_framework_save_options'}, 'handle_deactivation': {'qi_addons_for_elementor_deactivation'}}
+*Overview: {'save_settings': {'qi_addons_for_elementor_action_settings_save_options'}, 'handle_notice': {'qi_addons_for_elementor_notice'}, 'handle_review_notice': {'qi_addons_for_elementor_review_notice'}, 'save_widgets': {'qi_addons_for_elementor_action_framework_save_options'}, 'handle_deactivation': {'qi_addons_for_elementor_deactivation'}}
 *
 ***/
-
-/** Function handle_review_notice() called by wp_ajax hooks: {'qi_addons_for_elementor_review_notice'} **/
-/** No params detected :-/ **/
-
 
 /** Function save_settings() called by wp_ajax hooks: {'qi_addons_for_elementor_action_settings_save_options'} **/
 /** Parameters found in function save_settings(): {"request": ["action", "qi_addons_for_elementor_swiper_new"]} **/
@@ -38,6 +34,10 @@ function save_settings() {
 
 
 /** Function handle_notice() called by wp_ajax hooks: {'qi_addons_for_elementor_notice'} **/
+/** No params detected :-/ **/
+
+
+/** Function handle_review_notice() called by wp_ajax hooks: {'qi_addons_for_elementor_review_notice'} **/
 /** No params detected :-/ **/
 
 

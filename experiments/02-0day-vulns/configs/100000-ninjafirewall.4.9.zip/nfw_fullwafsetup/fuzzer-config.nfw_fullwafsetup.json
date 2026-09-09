@@ -1,0 +1,52 @@
+{
+  "target": "http://web/wp-admin/admin-ajax.php",
+  "methods": [
+    "POST"
+  ],
+  "body_params": {
+    "weight": 1,
+    "fixed": [],
+    "fuzz": [
+      "httpserver",
+      "diy",
+      "exclude_waf_list",
+      "sandbox",
+      "initype"
+    ],
+    "data": [
+      {
+        "name": "httpserver",
+        "value": "fuzz"
+      },
+      {
+        "name": "diy",
+        "value": "fuzz"
+      },
+      {
+        "name": "exclude_waf_list",
+        "value": "fuzz"
+      },
+      {
+        "name": "sandbox",
+        "value": "fuzz"
+      },
+      {
+        "name": "initype",
+        "value": "fuzz"
+      }
+    ]
+  },
+  "query_params": {
+    "weight": 1,
+    "fixed": [
+      "action"
+    ],
+    "fuzz": [],
+    "data": [
+      {
+        "name": "action",
+        "value": "nfw_fullwafsetup"
+      }
+    ]
+  }
+}

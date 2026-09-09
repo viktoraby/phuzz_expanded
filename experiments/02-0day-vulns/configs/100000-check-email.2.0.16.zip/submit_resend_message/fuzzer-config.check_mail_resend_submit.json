@@ -1,0 +1,69 @@
+{
+  "target": "http://web/wp-admin/admin-ajax.php",
+  "methods": [
+    "POST"
+  ],
+  "body_params": {
+    "weight": 1,
+    "fixed": [
+      "ck_mail_security_nonce"
+    ],
+    "fuzz": [
+      "ckm_to",
+      "ckm_from",
+      "ckm_cc",
+      "ckm_bcc",
+      "ckm_content_type",
+      "ckm_reply_to",
+      "ckm_subject",
+      "ckm_message"
+    ],
+    "data": [
+      {
+        "name": "ck_mail_security_nonce",
+        "value": "fuzz"
+      },
+      {
+        "name": "ckm_from",
+        "value": "fuzz"
+      },
+      {
+        "name": "ckm_cc",
+        "value": "fuzz"
+      },
+      {
+        "name": "ckm_bcc",
+        "value": "fuzz"
+      },
+      {
+        "name": "ckm_content_type",
+        "value": "fuzz"
+      },
+      {
+        "name": "ckm_reply_to",
+        "value": "fuzz"
+      },
+      {
+        "name": "ckm_subject",
+        "value": "fuzz"
+      },
+      {
+        "name": "ckm_message",
+        "value": "fuzz"
+      }
+    ]
+  },
+  "query_params": {
+    "weight": 1,
+    "fixed": [
+      "action"
+    ],
+    "fuzz": [],
+    "data": [
+      {
+        "name": "action",
+        "value": "check_mail_resend_submit"
+      }
+    ]
+  }
+}

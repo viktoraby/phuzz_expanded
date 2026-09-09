@@ -5,9 +5,88 @@
 *Found functions:9
 *Extracted functions:9
 *Total parameter names extracted: 8
-*Overview: {'resend_email_code_profile_callback': {'resend_email_code_profile'}, 'process_ajax_destination_clear': {'rsp_upgrade_destination_clear'}, 'rsssl_resend_verification_email': {'rsssl_resend_verification_email'}, 'rsssl_handle_force_confirm_email': {'rsssl_force_confirm_email'}, 'start_email_validation_callback': {'change_method_to_email'}, 'process_ajax_activate_license': {'rsp_upgrade_activate_license'}, 'process_ajax_install_plugin': {'rsp_upgrade_install_plugin'}, 'process_ajax_activate_plugin': {'rsp_upgrade_activate_plugin'}, 'process_ajax_package_information': {'rsp_upgrade_package_information'}}
+*Overview: {'rsssl_handle_force_confirm_email': {'rsssl_force_confirm_email'}, 'rsssl_resend_verification_email': {'rsssl_resend_verification_email'}, 'process_ajax_install_plugin': {'rsp_upgrade_install_plugin'}, 'resend_email_code_profile_callback': {'resend_email_code_profile'}, 'start_email_validation_callback': {'change_method_to_email'}, 'process_ajax_activate_plugin': {'rsp_upgrade_activate_plugin'}, 'process_ajax_destination_clear': {'rsp_upgrade_destination_clear'}, 'process_ajax_package_information': {'rsp_upgrade_package_information'}, 'process_ajax_activate_license': {'rsp_upgrade_activate_license'}}
 *
 ***/
+
+/** Function rsssl_handle_force_confirm_email() called by wp_ajax hooks: {'rsssl_force_confirm_email'} **/
+/** Parameters found in function rsssl_handle_force_confirm_email(): {"post": ["rsssl_force_email_action_nonce"]} **/
+function rsssl_handle_force_confirm_email(): void {
+		if ( ! rsssl_user_can_manage() ) {
+			return;
+		}
+
+		if ( ! isset( $_POST['rsssl_force_email_action_nonce'] ) || ! wp_verify_nonce( $_POST['rsssl_force_email_action_nonce'], 'rsssl_force_confirm_email_nonce' ) ) {
+			wp_die();
+		}
+
+		update_option( 'rsssl_email_verification_status', 'completed', false );
+		wp_send_json_success();
+	}
+
+
+/** Function rsssl_resend_verification_email() called by wp_ajax hooks: {'rsssl_resend_verification_email'} **/
+/** Parameters found in function rsssl_resend_verification_email(): {"post": ["rsssl_resend_email_nonce"]} **/
+function rsssl_resend_verification_email() {
+        if ( ! rsssl_user_can_manage() ) {
+            return;
+        }
+
+        if ( ! isset( $_POST['rsssl_resend_email_nonce'] ) || ! wp_verify_nonce( $_POST['rsssl_resend_email_nonce'], 'rsssl_resend_verification_email_nonce' ) ) {
+            wp_die();
+        }
+
+        $mailer = new rsssl_mailer();
+        $mailer->send_verification_mail();
+
+        wp_send_json_success();
+    }
+
+
+/** Function process_ajax_install_plugin() called by wp_ajax hooks: {'rsp_upgrade_install_plugin'} **/
+/** Parameters found in function process_ajax_install_plugin(): {"get": ["token", "download_link"]} **/
+function process_ajax_install_plugin()
+        {
+            $message = '';
+
+            if ( !rsssl_user_can_manage() ) {
+                return [
+                    'success' => false,
+                    'message' => $message,
+                ];
+            }
+
+            if ( isset($_GET['token']) && wp_verify_nonce($_GET['token'], 'upgrade_to_pro_nonce') && isset($_GET['download_link']) ) {
+
+                $download_link = esc_url_raw($_GET['download_link']);
+                require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
+                include_once ABSPATH . 'wp-admin/includes/plugin-install.php';
+
+                $skin     = new WP_Ajax_Upgrader_Skin();
+                $upgrader = new Plugin_Upgrader( $skin );
+                $result   = $upgrader->install( $download_link );
+
+                if ( $result ) {
+                    $response = [
+                        'success' => true,
+                    ];
+                } else {
+                    if ( is_wp_error($result) ){
+                        $message = $result->get_error_message();
+                    }
+                    $response = [
+                        'success' => false,
+                        'message' => $message,
+                    ];
+                }
+
+                $response = json_encode($response);
+                header("Content-Type: application/json");
+                echo $response;
+                exit;
+            }
+        }
+
 
 /** Function resend_email_code_profile_callback() called by wp_ajax hooks: {'resend_email_code_profile'} **/
 /** Parameters found in function resend_email_code_profile_callback(): {"post": ["login_nonce"]} **/
@@ -29,6 +108,38 @@ function resend_email_code_profile_callback(): void
             $user = get_user_by( 'ID', $user_id );
             Rsssl_Two_Factor_Email::get_instance()->generate_and_email_token($user, true);
             wp_send_json_success( array( 'message' => __('Verification code re-sent', 'really-simple-ssl') ), 200 );
+        }
+
+
+/** Function start_email_validation_callback() called by wp_ajax hooks: {'change_method_to_email'} **/
+/** No params detected :-/ **/
+
+
+/** Function process_ajax_activate_plugin() called by wp_ajax hooks: {'rsp_upgrade_activate_plugin'} **/
+/** Parameters found in function process_ajax_activate_plugin(): {"get": ["token", "plugin"]} **/
+function process_ajax_activate_plugin()
+        {
+            if ( !rsssl_user_can_manage() ) {
+                return;
+            }
+
+            if ( isset($_GET['token']) && wp_verify_nonce($_GET['token'], 'upgrade_to_pro_nonce') && isset($_GET['plugin']) ) {
+                $networkwide = is_multisite() && rsssl_is_networkwide_active();
+                $result = activate_plugin( $this->slug, '', $networkwide  );
+                if ( !is_wp_error($result) ) {
+                    $response = [
+                        'success' => true,
+                    ];
+                } else {
+                    $response = [
+                        'success' => false,
+                    ];
+                }
+                $response = json_encode($response);
+                header("Content-Type: application/json");
+                echo $response;
+                exit;
+            }
         }
 
 
@@ -97,145 +208,6 @@ function process_ajax_destination_clear()
         }
 
 
-/** Function rsssl_resend_verification_email() called by wp_ajax hooks: {'rsssl_resend_verification_email'} **/
-/** Parameters found in function rsssl_resend_verification_email(): {"post": ["rsssl_resend_email_nonce"]} **/
-function rsssl_resend_verification_email() {
-        if ( ! rsssl_user_can_manage() ) {
-            return;
-        }
-
-        if ( ! isset( $_POST['rsssl_resend_email_nonce'] ) || ! wp_verify_nonce( $_POST['rsssl_resend_email_nonce'], 'rsssl_resend_verification_email_nonce' ) ) {
-            wp_die();
-        }
-
-        $mailer = new rsssl_mailer();
-        $mailer->send_verification_mail();
-
-        wp_send_json_success();
-    }
-
-
-/** Function rsssl_handle_force_confirm_email() called by wp_ajax hooks: {'rsssl_force_confirm_email'} **/
-/** Parameters found in function rsssl_handle_force_confirm_email(): {"post": ["rsssl_force_email_action_nonce"]} **/
-function rsssl_handle_force_confirm_email(): void {
-		if ( ! rsssl_user_can_manage() ) {
-			return;
-		}
-
-		if ( ! isset( $_POST['rsssl_force_email_action_nonce'] ) || ! wp_verify_nonce( $_POST['rsssl_force_email_action_nonce'], 'rsssl_force_confirm_email_nonce' ) ) {
-			wp_die();
-		}
-
-		update_option( 'rsssl_email_verification_status', 'completed', false );
-		wp_send_json_success();
-	}
-
-
-/** Function start_email_validation_callback() called by wp_ajax hooks: {'change_method_to_email'} **/
-/** No params detected :-/ **/
-
-
-/** Function process_ajax_activate_license() called by wp_ajax hooks: {'rsp_upgrade_activate_license'} **/
-/** Parameters found in function process_ajax_activate_license(): {"get": ["token", "license", "item_id"]} **/
-function process_ajax_activate_license()
-        {
-            $error = false;
-            $response = [
-                'success' => false,
-                'message' => '',
-            ];
-
-            if ( !rsssl_user_can_manage() ) {
-                $error = true;
-            }
-
-            if (!$error && isset($_GET['token']) && wp_verify_nonce($_GET['token'], 'upgrade_to_pro_nonce') && isset($_GET['license']) && isset($_GET['item_id']) ) {
-                $license  = sanitize_title($_GET['license']);
-                $item_id = (int) $_GET['item_id'];
-                $response = $this->validate($license, $item_id);
-                update_site_option($this->prefix.'auto_installed_license', $license);
-            }
-
-            $response = json_encode($response);
-            header("Content-Type: application/json");
-            echo $response;
-            exit;
-        }
-
-
-/** Function process_ajax_install_plugin() called by wp_ajax hooks: {'rsp_upgrade_install_plugin'} **/
-/** Parameters found in function process_ajax_install_plugin(): {"get": ["token", "download_link"]} **/
-function process_ajax_install_plugin()
-        {
-            $message = '';
-
-            if ( !rsssl_user_can_manage() ) {
-                return [
-                    'success' => false,
-                    'message' => $message,
-                ];
-            }
-
-            if ( isset($_GET['token']) && wp_verify_nonce($_GET['token'], 'upgrade_to_pro_nonce') && isset($_GET['download_link']) ) {
-
-                $download_link = esc_url_raw($_GET['download_link']);
-                require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
-                include_once ABSPATH . 'wp-admin/includes/plugin-install.php';
-
-                $skin     = new WP_Ajax_Upgrader_Skin();
-                $upgrader = new Plugin_Upgrader( $skin );
-                $result   = $upgrader->install( $download_link );
-
-                if ( $result ) {
-                    $response = [
-                        'success' => true,
-                    ];
-                } else {
-                    if ( is_wp_error($result) ){
-                        $message = $result->get_error_message();
-                    }
-                    $response = [
-                        'success' => false,
-                        'message' => $message,
-                    ];
-                }
-
-                $response = json_encode($response);
-                header("Content-Type: application/json");
-                echo $response;
-                exit;
-            }
-        }
-
-
-/** Function process_ajax_activate_plugin() called by wp_ajax hooks: {'rsp_upgrade_activate_plugin'} **/
-/** Parameters found in function process_ajax_activate_plugin(): {"get": ["token", "plugin"]} **/
-function process_ajax_activate_plugin()
-        {
-            if ( !rsssl_user_can_manage() ) {
-                return;
-            }
-
-            if ( isset($_GET['token']) && wp_verify_nonce($_GET['token'], 'upgrade_to_pro_nonce') && isset($_GET['plugin']) ) {
-                $networkwide = is_multisite() && rsssl_is_networkwide_active();
-                $result = activate_plugin( $this->slug, '', $networkwide  );
-                if ( !is_wp_error($result) ) {
-                    $response = [
-                        'success' => true,
-                    ];
-                } else {
-                    $response = [
-                        'success' => false,
-                    ];
-                }
-                $response = json_encode($response);
-                header("Content-Type: application/json");
-                echo $response;
-                exit;
-            }
-        }
-
-
 /** Function process_ajax_package_information() called by wp_ajax hooks: {'rsp_upgrade_package_information'} **/
 /** Parameters found in function process_ajax_package_information(): {"get": ["token", "license", "item_id"]} **/
 function process_ajax_package_information()
@@ -263,6 +235,34 @@ function process_ajax_package_information()
                 exit;
 
             }
+        }
+
+
+/** Function process_ajax_activate_license() called by wp_ajax hooks: {'rsp_upgrade_activate_license'} **/
+/** Parameters found in function process_ajax_activate_license(): {"get": ["token", "license", "item_id"]} **/
+function process_ajax_activate_license()
+        {
+            $error = false;
+            $response = [
+                'success' => false,
+                'message' => '',
+            ];
+
+            if ( !rsssl_user_can_manage() ) {
+                $error = true;
+            }
+
+            if (!$error && isset($_GET['token']) && wp_verify_nonce($_GET['token'], 'upgrade_to_pro_nonce') && isset($_GET['license']) && isset($_GET['item_id']) ) {
+                $license  = sanitize_title($_GET['license']);
+                $item_id = (int) $_GET['item_id'];
+                $response = $this->validate($license, $item_id);
+                update_site_option($this->prefix.'auto_installed_license', $license);
+            }
+
+            $response = json_encode($response);
+            header("Content-Type: application/json");
+            echo $response;
+            exit;
         }
 
 

@@ -5,11 +5,11 @@
 *Found functions:7
 *Extracted functions:7
 *Total parameter names extracted: 3
-*Overview: {'dismiss': {'she_dismiss_join_community_notice', 'she_dismiss_pro_launch_notice'}, 'she_nexter_extension_dismiss_promo': {'she_nexter_extension_dismiss_promo'}, 'she_install_wdkit': {'she_install_wdkit'}, 'she_deactivate_rateus_notice': {'she_deactivate_rateus_notice'}, 'she_dashboard_ajax_call': {'she_dashboard_ajax_call'}, 'she_check_plugin_status': {'she_check_plugin_status'}, 'she_design_scratch': {'she_insert_entry'}}
+*Overview: {'dismiss': {'she_dismiss_pro_launch_notice', 'she_dismiss_join_community_notice'}, 'she_install_wdkit': {'she_install_wdkit'}, 'she_design_scratch': {'she_insert_entry'}, 'she_deactivate_rateus_notice': {'she_deactivate_rateus_notice'}, 'she_dashboard_ajax_call': {'she_dashboard_ajax_call'}, 'she_check_plugin_status': {'she_check_plugin_status'}, 'she_nexter_extension_dismiss_promo': {'she_nexter_extension_dismiss_promo'}}
 *
 ***/
 
-/** Function dismiss() called by wp_ajax hooks: {'she_dismiss_join_community_notice', 'she_dismiss_pro_launch_notice'} **/
+/** Function dismiss() called by wp_ajax hooks: {'she_dismiss_pro_launch_notice', 'she_dismiss_join_community_notice'} **/
 /** Parameters found in function dismiss(): {"post": ["security"]} **/
 function dismiss() {
 			$security = ! empty( $_POST['security'] ) ? sanitize_text_field( wp_unslash( $_POST['security'] ) ) : '';
@@ -28,11 +28,11 @@ function dismiss() {
 		}
 
 
-/** Function she_nexter_extension_dismiss_promo() called by wp_ajax hooks: {'she_nexter_extension_dismiss_promo'} **/
+/** Function she_install_wdkit() called by wp_ajax hooks: {'she_install_wdkit'} **/
 /** No params detected :-/ **/
 
 
-/** Function she_install_wdkit() called by wp_ajax hooks: {'she_install_wdkit'} **/
+/** Function she_design_scratch() called by wp_ajax hooks: {'she_insert_entry'} **/
 /** No params detected :-/ **/
 
 
@@ -173,7 +173,7 @@ function she_dashboard_ajax_call() {
 /** No params detected :-/ **/
 
 
-/** Function she_design_scratch() called by wp_ajax hooks: {'she_insert_entry'} **/
+/** Function she_nexter_extension_dismiss_promo() called by wp_ajax hooks: {'she_nexter_extension_dismiss_promo'} **/
 /** No params detected :-/ **/
 
 

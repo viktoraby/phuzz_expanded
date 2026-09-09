@@ -5,45 +5,130 @@
 *Found functions:10
 *Extracted functions:10
 *Total parameter names extracted: 9
-*Overview: {'handle_test_email_ajax': {'pvc_send_test_email'}, 'save_bulk_post_views': {'save_bulk_post_views'}, 'ajax_column_chart': {'pvc_column_chart'}, 'check_post_js': {'nopriv_pvc-check-post', 'pvc-check-post'}, 'queue_count': {'nopriv_pvc-view-posts', 'pvc-view-posts'}, 'update_dashboard_user_options': {'pvc_dashboard_user_options'}, 'dashboard_post_most_viewed': {'pvc_dashboard_post_most_viewed'}, 'dashboard_post_views_chart': {'pvc_dashboard_post_views_chart'}, 'dismiss_notice': {'pvc_dismiss_notice'}, 'get_queue_runtime_data': {'nopriv_pvc-queue-runtime', 'pvc-queue-runtime'}}
+*Overview: {'get_queue_runtime_data': {'nopriv_pvc-queue-runtime', 'pvc-queue-runtime'}, 'dismiss_notice': {'pvc_dismiss_notice'}, 'update_dashboard_user_options': {'pvc_dashboard_user_options'}, 'save_bulk_post_views': {'save_bulk_post_views'}, 'ajax_column_chart': {'pvc_column_chart'}, 'check_post_js': {'pvc-check-post', 'nopriv_pvc-check-post'}, 'dashboard_post_most_viewed': {'pvc_dashboard_post_most_viewed'}, 'dashboard_post_views_chart': {'pvc_dashboard_post_views_chart'}, 'queue_count': {'nopriv_pvc-view-posts', 'pvc-view-posts'}, 'handle_test_email_ajax': {'pvc_send_test_email'}}
 *
 ***/
 
-/** Function handle_test_email_ajax() called by wp_ajax hooks: {'pvc_send_test_email'} **/
-/** Parameters found in function handle_test_email_ajax(): {"post": ["pvc_test_email_recipient"]} **/
-function handle_test_email_ajax() {
-		$capability = apply_filters( 'pvc_settings_capability', 'manage_options' );
+/** Function get_queue_runtime_data() called by wp_ajax hooks: {'nopriv_pvc-queue-runtime', 'pvc-queue-runtime'} **/
+/** No params detected :-/ **/
 
-		if ( ! current_user_can( $capability ) ) {
-			wp_send_json_error(
-				[
-					'code' => 'forbidden',
-					'message' => __( 'Sorry, you are not allowed to do that.', 'post-views-counter' )
-				],
-				403
-			);
+
+/** Function dismiss_notice() called by wp_ajax hooks: {'pvc_dismiss_notice'} **/
+/** Parameters found in function dismiss_notice(): {"request": ["nonce", "notice_action"]} **/
+function dismiss_notice() {
+			if ( ! current_user_can( 'install_plugins' ) )
+				return;
+
+			if ( isset( $_REQUEST['nonce'] ) && wp_verify_nonce( $_REQUEST['nonce'], 'pvc_dismiss_notice' ) ) {
+				$notice_action = empty( $_REQUEST['notice_action'] ) || $_REQUEST['notice_action'] === 'hide' ? 'hide' : sanitize_text_field( $_REQUEST['notice_action'] );
+
+				switch ( $notice_action ) {
+					// delay notice
+					case 'delay':
+						// set delay period to 1 week from now
+						$this->options['general'] = array_merge(
+							$this->options['general'],
+							[
+								'update_delay_date'	=> time() + 2 * WEEK_IN_SECONDS
+							]
+						);
+						update_option( 'post_views_counter_settings_general', $this->options['general'] );
+						break;
+
+					// hide notice
+					default:
+						$this->options['general'] = array_merge(
+							$this->options['general'],
+							[
+								'update_notice' => false
+							]
+						);
+						$this->options['general'] = array_merge(
+							$this->options['general'],
+							[
+								'update_delay_date' => 0
+							]
+						);
+
+						update_option( 'post_views_counter_settings_general', $this->options['general'] );
+				}
+			}
+
+			exit;
 		}
 
-		check_ajax_referer( 'pvc_send_test_email_ajax', 'nonce' );
 
-		$recipient = isset( $_POST['pvc_test_email_recipient'] ) ? sanitize_email( wp_unslash( $_POST['pvc_test_email_recipient'] ) ) : '';
-		$result = $this->send_test_email_request( $recipient );
+/** Function update_dashboard_user_options() called by wp_ajax hooks: {'pvc_dashboard_user_options'} **/
+/** Parameters found in function update_dashboard_user_options(): {"post": ["nonce", "options"]} **/
+function update_dashboard_user_options() {
+		if ( ! check_ajax_referer( 'pvc-dashboard-user-options', 'nonce' ) )
+			wp_die( __( 'You do not have permission to access this page.', 'post-views-counter' ) );
 
-		if ( ! empty( $result['success'] ) ) {
-			wp_send_json_success(
-				[
-					'message' => $result['message']
-				]
-			);
+		// valid data?
+		if ( isset( $_POST['nonce'], $_POST['options'] ) && ! empty( $_POST['options'] ) ) {
+			// get sanitized options
+			$update = map_deep( $_POST['options'], 'sanitize_text_field' );
+
+			// get user ID
+			$user_id = get_current_user_id();
+
+			// get user dashboard data
+			$user_options = get_user_meta( $user_id, 'pvc_dashboard', true );
+
+			// empty userdata?
+			if ( ! is_array( $user_options ) || empty( $user_options ) )
+				$user_options = [];
+
+			// empty post types?
+			if ( ! array_key_exists( 'post_types', $user_options ) || ! is_array( $user_options['post_types'] ) )
+				$user_options['post_types'] = [];
+
+			// hide post type?
+			if ( ! empty( $update['post_type'] ) ) {
+				// get allowed post types
+				$allowed_post_types = Post_Views_Counter()->options['general']['post_types_count'];
+
+				// simulate total post views as post type
+				$allowed_post_types[] = '_pvc_total_views';
+
+				if ( in_array( $update['post_type'], $allowed_post_types, true ) ) {
+					if ( isset( $update['hidden'] ) && $update['hidden'] === 'true' ) {
+						if ( ! in_array( $update['post_type'], $user_options['post_types'], true ) )
+							$user_options['post_types'][] = $update['post_type'];
+					} else {
+						if ( ( $key = array_search( $update['post_type'], $user_options['post_types'] ) ) !== false )
+							unset( $user_options['post_types'][$key] );
+					}
+				}
+			}
+
+			// empty menu items?
+			if ( ! array_key_exists( 'menu_items', $user_options ) || ! is_array( $user_options['menu_items'] ) )
+				$user_options['menu_items'] = [];
+
+			if ( ! empty( $update['menu_items'] ) && is_array( $update['menu_items'] ) ) {
+				$user_options['menu_items'] = [];
+
+				// get allowed menu items
+				$allowed_menu_items = array_column( $this->widget_items, 'id' );
+
+				foreach ( $update['menu_items'] as $menu_item => $hidden ) {
+					if ( in_array( $menu_item, $allowed_menu_items, true ) && $hidden === 'true' )
+						$user_options['menu_items'][] = $menu_item;
+				}
+			}
+
+			// filter user options
+			$user_options = apply_filters( 'pvc_update_dashboard_user_options', $user_options, $update, $user_id );
+
+			// update userdata
+			update_user_meta( $user_id, 'pvc_dashboard', $user_options );
+			
+			echo wp_send_json_success();
 		}
 
-		wp_send_json_error(
-			[
-				'code' => $result['code'],
-				'message' => $result['message']
-			],
-			$this->get_test_email_status_code( $result['code'] )
-		);
+		echo wp_send_json_error();
+		exit;
 	}
 
 
@@ -225,7 +310,7 @@ function ajax_column_chart() {
 	}
 
 
-/** Function check_post_js() called by wp_ajax hooks: {'nopriv_pvc-check-post', 'pvc-check-post'} **/
+/** Function check_post_js() called by wp_ajax hooks: {'pvc-check-post', 'nopriv_pvc-check-post'} **/
 /** Parameters found in function check_post_js(): {"post": ["action", "id", "storage_type", "storage_data", "pvc_nonce", "storage_data_all"]} **/
 function check_post_js() {
 		// check conditions
@@ -283,128 +368,6 @@ function check_post_js() {
 			]
 		);
 
-		exit;
-	}
-
-
-/** Function queue_count() called by wp_ajax hooks: {'nopriv_pvc-view-posts', 'pvc-view-posts'} **/
-/** Parameters found in function queue_count(): {"post": ["action", "ids", "pvc_nonce"]} **/
-function queue_count() {
-		// missing or invalid parameters?
-		if ( ! isset( $_POST['action'], $_POST['ids'], $_POST['pvc_nonce'] ) || $_POST['ids'] === '' || ! is_string( $_POST['ids'] ) )
-			wp_send_json_error( [
-				'code' => 'pvc_missing_parameters',
-				'message' => __( 'Missing or invalid queue parameters.', 'post-views-counter' )
-			], 400 );
-
-		// invalid nonce?
-		if ( ! wp_verify_nonce( $_POST['pvc_nonce'], 'pvc-view-posts' ) )
-			wp_send_json_error( [
-				'code' => 'pvc_invalid_nonce',
-				'message' => __( 'Security check failed.', 'post-views-counter' )
-			], 403 );
-
-		// get post ids
-		$ids = array_values( array_filter( array_map( 'intval', explode( ',', $_POST['ids'] ) ), function( $id ) {
-			return $id > 0;
-		} ) );
-
-		$counted = [];
-
-		if ( empty( $ids ) )
-			wp_send_json_error( [
-				'code' => 'pvc_invalid_post_ids',
-				'message' => __( 'No valid post IDs were provided.', 'post-views-counter' )
-			], 400 );
-
-		// turn on queue mode
-		$this->queue_mode = true;
-
-		foreach ( $ids as $id ) {
-			$counted[$id] = ! ( $this->check_post( $id ) === null );
-		}
-
-		// turn off queue mode
-		$this->queue_mode = false;
-
-		// preserve the existing flat success response contract
-		wp_send_json( [
-			'post_ids'	=> $ids,
-			'counted'	=> $counted
-		] );
-	}
-
-
-/** Function update_dashboard_user_options() called by wp_ajax hooks: {'pvc_dashboard_user_options'} **/
-/** Parameters found in function update_dashboard_user_options(): {"post": ["nonce", "options"]} **/
-function update_dashboard_user_options() {
-		if ( ! check_ajax_referer( 'pvc-dashboard-user-options', 'nonce' ) )
-			wp_die( __( 'You do not have permission to access this page.', 'post-views-counter' ) );
-
-		// valid data?
-		if ( isset( $_POST['nonce'], $_POST['options'] ) && ! empty( $_POST['options'] ) ) {
-			// get sanitized options
-			$update = map_deep( $_POST['options'], 'sanitize_text_field' );
-
-			// get user ID
-			$user_id = get_current_user_id();
-
-			// get user dashboard data
-			$user_options = get_user_meta( $user_id, 'pvc_dashboard', true );
-
-			// empty userdata?
-			if ( ! is_array( $user_options ) || empty( $user_options ) )
-				$user_options = [];
-
-			// empty post types?
-			if ( ! array_key_exists( 'post_types', $user_options ) || ! is_array( $user_options['post_types'] ) )
-				$user_options['post_types'] = [];
-
-			// hide post type?
-			if ( ! empty( $update['post_type'] ) ) {
-				// get allowed post types
-				$allowed_post_types = Post_Views_Counter()->options['general']['post_types_count'];
-
-				// simulate total post views as post type
-				$allowed_post_types[] = '_pvc_total_views';
-
-				if ( in_array( $update['post_type'], $allowed_post_types, true ) ) {
-					if ( isset( $update['hidden'] ) && $update['hidden'] === 'true' ) {
-						if ( ! in_array( $update['post_type'], $user_options['post_types'], true ) )
-							$user_options['post_types'][] = $update['post_type'];
-					} else {
-						if ( ( $key = array_search( $update['post_type'], $user_options['post_types'] ) ) !== false )
-							unset( $user_options['post_types'][$key] );
-					}
-				}
-			}
-
-			// empty menu items?
-			if ( ! array_key_exists( 'menu_items', $user_options ) || ! is_array( $user_options['menu_items'] ) )
-				$user_options['menu_items'] = [];
-
-			if ( ! empty( $update['menu_items'] ) && is_array( $update['menu_items'] ) ) {
-				$user_options['menu_items'] = [];
-
-				// get allowed menu items
-				$allowed_menu_items = array_column( $this->widget_items, 'id' );
-
-				foreach ( $update['menu_items'] as $menu_item => $hidden ) {
-					if ( in_array( $menu_item, $allowed_menu_items, true ) && $hidden === 'true' )
-						$user_options['menu_items'][] = $menu_item;
-				}
-			}
-
-			// filter user options
-			$user_options = apply_filters( 'pvc_update_dashboard_user_options', $user_options, $update, $user_id );
-
-			// update userdata
-			update_user_meta( $user_id, 'pvc_dashboard', $user_options );
-			
-			echo wp_send_json_success();
-		}
-
-		echo wp_send_json_error();
 		exit;
 	}
 
@@ -693,52 +656,89 @@ function dashboard_post_views_chart() {
 	}
 
 
-/** Function dismiss_notice() called by wp_ajax hooks: {'pvc_dismiss_notice'} **/
-/** Parameters found in function dismiss_notice(): {"request": ["nonce", "notice_action"]} **/
-function dismiss_notice() {
-			if ( ! current_user_can( 'install_plugins' ) )
-				return;
+/** Function queue_count() called by wp_ajax hooks: {'nopriv_pvc-view-posts', 'pvc-view-posts'} **/
+/** Parameters found in function queue_count(): {"post": ["action", "ids", "pvc_nonce"]} **/
+function queue_count() {
+		// missing or invalid parameters?
+		if ( ! isset( $_POST['action'], $_POST['ids'], $_POST['pvc_nonce'] ) || $_POST['ids'] === '' || ! is_string( $_POST['ids'] ) )
+			wp_send_json_error( [
+				'code' => 'pvc_missing_parameters',
+				'message' => __( 'Missing or invalid queue parameters.', 'post-views-counter' )
+			], 400 );
 
-			if ( isset( $_REQUEST['nonce'] ) && wp_verify_nonce( $_REQUEST['nonce'], 'pvc_dismiss_notice' ) ) {
-				$notice_action = empty( $_REQUEST['notice_action'] ) || $_REQUEST['notice_action'] === 'hide' ? 'hide' : sanitize_text_field( $_REQUEST['notice_action'] );
+		// invalid nonce?
+		if ( ! wp_verify_nonce( $_POST['pvc_nonce'], 'pvc-view-posts' ) )
+			wp_send_json_error( [
+				'code' => 'pvc_invalid_nonce',
+				'message' => __( 'Security check failed.', 'post-views-counter' )
+			], 403 );
 
-				switch ( $notice_action ) {
-					// delay notice
-					case 'delay':
-						// set delay period to 1 week from now
-						$this->options['general'] = array_merge(
-							$this->options['general'],
-							[
-								'update_delay_date'	=> time() + 2 * WEEK_IN_SECONDS
-							]
-						);
-						update_option( 'post_views_counter_settings_general', $this->options['general'] );
-						break;
+		// get post ids
+		$ids = array_values( array_filter( array_map( 'intval', explode( ',', $_POST['ids'] ) ), function( $id ) {
+			return $id > 0;
+		} ) );
 
-					// hide notice
-					default:
-						$this->options['general'] = array_merge(
-							$this->options['general'],
-							[
-								'update_notice' => false
-							]
-						);
-						$this->options['general'] = array_merge(
-							$this->options['general'],
-							[
-								'update_delay_date' => 0
-							]
-						);
+		$counted = [];
 
-						update_option( 'post_views_counter_settings_general', $this->options['general'] );
-				}
-			}
+		if ( empty( $ids ) )
+			wp_send_json_error( [
+				'code' => 'pvc_invalid_post_ids',
+				'message' => __( 'No valid post IDs were provided.', 'post-views-counter' )
+			], 400 );
 
-			exit;
+		// turn on queue mode
+		$this->queue_mode = true;
+
+		foreach ( $ids as $id ) {
+			$counted[$id] = ! ( $this->check_post( $id ) === null );
 		}
 
+		// turn off queue mode
+		$this->queue_mode = false;
 
-/** Function get_queue_runtime_data() called by wp_ajax hooks: {'nopriv_pvc-queue-runtime', 'pvc-queue-runtime'} **/
-/** No params detected :-/ **/
+		// preserve the existing flat success response contract
+		wp_send_json( [
+			'post_ids'	=> $ids,
+			'counted'	=> $counted
+		] );
+	}
+
+
+/** Function handle_test_email_ajax() called by wp_ajax hooks: {'pvc_send_test_email'} **/
+/** Parameters found in function handle_test_email_ajax(): {"post": ["pvc_test_email_recipient"]} **/
+function handle_test_email_ajax() {
+		$capability = apply_filters( 'pvc_settings_capability', 'manage_options' );
+
+		if ( ! current_user_can( $capability ) ) {
+			wp_send_json_error(
+				[
+					'code' => 'forbidden',
+					'message' => __( 'Sorry, you are not allowed to do that.', 'post-views-counter' )
+				],
+				403
+			);
+		}
+
+		check_ajax_referer( 'pvc_send_test_email_ajax', 'nonce' );
+
+		$recipient = isset( $_POST['pvc_test_email_recipient'] ) ? sanitize_email( wp_unslash( $_POST['pvc_test_email_recipient'] ) ) : '';
+		$result = $this->send_test_email_request( $recipient );
+
+		if ( ! empty( $result['success'] ) ) {
+			wp_send_json_success(
+				[
+					'message' => $result['message']
+				]
+			);
+		}
+
+		wp_send_json_error(
+			[
+				'code' => $result['code'],
+				'message' => $result['message']
+			],
+			$this->get_test_email_status_code( $result['code'] )
+		);
+	}
 
 

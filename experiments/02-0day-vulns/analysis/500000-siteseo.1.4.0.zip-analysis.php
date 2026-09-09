@@ -5,9 +5,45 @@
 *Found functions:18
 *Extracted functions:18
 *Total parameter names extracted: 11
-*Overview: {'\\SiteSEO\\Ajax::instant_indexing': {'siteseo_url_submitter_submit'}, '\\SiteSEO\\Ajax::generate_app_password': {'siteseo_generate_app_password'}, '\\SiteSEO\\Ajax::test_mcp_connection': {'siteseo_test_mcp_connection'}, '\\SiteSEO\\Ajax::resolve_variables': {'siteseo_resolve_variables'}, '\\SiteSEO\\Ajax::dismiss_intro': {'siteseo_dismiss_intro'}, '\\SiteSEO\\Ajax::save_toggle_state': {'siteseo_save_analytics_toggle', 'siteseo_save_advanced_toggle', 'siteseo_save_titles_meta_toggle', 'siteseo_save_sitemap_toggle', 'siteseo_save_indexing_toggle', 'siteseo_save_abilities', 'siteseo_save_social_toggle'}, '\\SiteSEO\\Ajax::save_test_status': {'siteseo_save_test_status'}, '\\SiteSEO\\Ajax::save_onboarding_settings': {'siteseo_save_onboarding_settings'}, '\\SiteSEO\\Ajax::install_mcp_adapter': {'siteseo_install_mcp_adapter'}, '\\SiteSEO\\Ajax::refresh_seo_analysis': {'siteseo_refresh_analysis'}, '\\SiteSEO\\Ajax::export_settings': {'siteseo_export_settings'}, '\\SiteSEO\\Ajax::handle_import': {'siteseo_migrate_seo'}, '\\SiteSEO\\Ajax::import_settings': {'siteseo_import_settings'}, '\\SiteSEO\\Ajax::generate_bing_api_key': {'siteseo_generate_bing_api_key'}, '\\SiteSEO\\Ajax::clear_indexing_history': {'siteseo_clear_indexing_history'}, '\\SiteSEO\\Ajax::close_update_notice': {'siteseo_close_update_notice'}, '\\SiteSEO\\Ajax::save_universal_metabox': {'siteseo_save_universal_metabox'}, '\\SiteSEO\\Ajax::reset_settings': {'siteseo_reset_settings'}}
+*Overview: {'\\SiteSEO\\Ajax::refresh_seo_analysis': {'siteseo_refresh_analysis'}, '\\SiteSEO\\Ajax::instant_indexing': {'siteseo_url_submitter_submit'}, '\\SiteSEO\\Ajax::save_onboarding_settings': {'siteseo_save_onboarding_settings'}, '\\SiteSEO\\Ajax::save_test_status': {'siteseo_save_test_status'}, '\\SiteSEO\\Ajax::handle_import': {'siteseo_migrate_seo'}, '\\SiteSEO\\Ajax::close_update_notice': {'siteseo_close_update_notice'}, '\\SiteSEO\\Ajax::export_settings': {'siteseo_export_settings'}, '\\SiteSEO\\Ajax::reset_settings': {'siteseo_reset_settings'}, '\\SiteSEO\\Ajax::generate_app_password': {'siteseo_generate_app_password'}, '\\SiteSEO\\Ajax::save_toggle_state': {'siteseo_save_titles_meta_toggle', 'siteseo_save_social_toggle', 'siteseo_save_advanced_toggle', 'siteseo_save_sitemap_toggle', 'siteseo_save_analytics_toggle', 'siteseo_save_indexing_toggle', 'siteseo_save_abilities'}, '\\SiteSEO\\Ajax::install_mcp_adapter': {'siteseo_install_mcp_adapter'}, '\\SiteSEO\\Ajax::save_universal_metabox': {'siteseo_save_universal_metabox'}, '\\SiteSEO\\Ajax::test_mcp_connection': {'siteseo_test_mcp_connection'}, '\\SiteSEO\\Ajax::import_settings': {'siteseo_import_settings'}, '\\SiteSEO\\Ajax::resolve_variables': {'siteseo_resolve_variables'}, '\\SiteSEO\\Ajax::generate_bing_api_key': {'siteseo_generate_bing_api_key'}, '\\SiteSEO\\Ajax::clear_indexing_history': {'siteseo_clear_indexing_history'}, '\\SiteSEO\\Ajax::dismiss_intro': {'siteseo_dismiss_intro'}}
 *
 ***/
+
+/** Function \SiteSEO\Ajax::refresh_seo_analysis() called by wp_ajax hooks: {'siteseo_refresh_analysis'} **/
+/** Parameters found in function \SiteSEO\Ajax::refresh_seo_analysis(): {"post": ["post_id", "post_type", "target_keywords"]} **/
+function refresh_seo_analysis(){
+
+		check_ajax_referer('siteseo_admin_nonce', 'nonce');
+
+		if(!current_user_can('siteseo_manage')){
+			wp_send_json_error(['message' => esc_html__('Insufficient permissions', 'siteseo')]);
+		}
+
+		$post_id = isset($_POST['post_id']) ? intval($_POST['post_id']) : 0;
+		$post_type = isset($_POST['post_type']) ? sanitize_text_field(wp_unslash($_POST['post_type'])) : '';
+		$target_keywords = isset($_POST['target_keywords']) ? sanitize_text_field(wp_unslash($_POST['target_keywords'])) : '';
+		
+		$post = get_post($post_id);
+		if(!$post || !current_user_can('edit_post', $post_id)){
+			wp_send_json_error(['message' => __('Invalid post or insufficient permissions', 'siteseo')]);
+		}
+		
+		update_post_meta($post_id, '_siteseo_analysis_target_kw', $target_keywords);
+	
+		$analysis_data = \SiteSEO\Metaboxes\Analysis::perform_seo_analysis($post);
+
+		update_post_meta($post_id, '_siteseo_analysis_data', $analysis_data);
+
+		ob_start();
+		\SiteSEO\Metaboxes\Analysis::display_seo_analysis($post);
+		$analysis_html = ob_get_clean();
+
+		wp_send_json_success([
+			'html' => $analysis_html,
+			'analysis_data' => $analysis_data
+		]);
+	}
+
 
 /** Function \SiteSEO\Ajax::instant_indexing() called by wp_ajax hooks: {'siteseo_url_submitter_submit'} **/
 /** Parameters found in function \SiteSEO\Ajax::instant_indexing(): {"post": ["search_engine", "urls"]} **/
@@ -65,193 +101,6 @@ function instant_indexing(){
 			wp_send_json_error(['message' => $e->getMessage()]);
 		}
     }
-
-
-/** Function \SiteSEO\Ajax::generate_app_password() called by wp_ajax hooks: {'siteseo_generate_app_password'} **/
-/** No params detected :-/ **/
-
-
-/** Function \SiteSEO\Ajax::test_mcp_connection() called by wp_ajax hooks: {'siteseo_test_mcp_connection'} **/
-/** Parameters found in function \SiteSEO\Ajax::test_mcp_connection(): {"post": ["username", "password"]} **/
-function test_mcp_connection(){
-		check_ajax_referer('siteseo_admin_nonce', 'nonce');
-
-		if(!current_user_can('manage_options')){
-			wp_send_json_error(__('You do not have permission to test the connection.', 'siteseo'));
-		}
-
-		$start  = microtime(true);
-		$url    = trailingslashit(home_url()) . ltrim(\SiteSEO\Settings\Abilities::$ABILITIES_ENDPOINT, '/');
-
-		// Server-side reachability check. The plaintext Application Password
-		// lives only in the browser's memory (shown once on generation), so the
-		// authoritative authenticated test runs client-side. This fallback only
-		// verifies the endpoint is reachable and returns a parsable payload.
-		$username = isset($_POST['username']) ? sanitize_text_field(wp_unslash($_POST['username'])) : '';
-		$password = isset($_POST['password']) ? sanitize_text_field(wp_unslash($_POST['password'])) : '';
-		
-		$response = wp_remote_get($url, [
-			'headers' => [
-				'Accept' => 'application/json',
-				'Authorization' => 'Basic ' . base64_encode($username . ':' . $password),
-			],
-		]);
-
-		$elapsed = round((microtime(true) - $start) * 1000);
-
-		if(is_wp_error($response)){
-			$message = sprintf(__('Could not reach the abilities endpoint (%s).', 'siteseo'), $response->get_error_message());
-			\SiteSEO\Settings\Abilities::save_test_connection_status(false, $message);
-			wp_send_json_error([
-				'message' => $message,
-			]);
-		}
-
-		$code = wp_remote_retrieve_response_code($response);
-		$body = json_decode(wp_remote_retrieve_body($response), true);
-
-		if($code >= 200 && $code < 300 && is_array($body)){
-			$siteseo_abilities = 0;
-			foreach($body as $ability){
-				$name = isset($ability['name']) ? $ability['name'] : (isset($ability['id']) ? $ability['id'] : '');
-				if(is_string($name) && strpos($name, 'siteseo-') === 0){
-					$siteseo_abilities++;
-				}
-			}
-
-			$message = sprintf(__('Authenticated with your Application Password and discovered %1$d SiteSEO abilities in %2$dms. Your site is ready to connect an AI client below.', 'siteseo'), $siteseo_abilities, $elapsed);
-
-			\SiteSEO\Settings\Abilities::save_test_connection_status(true, $message);
-
-			wp_send_json_success([
-				'message'    => $message,
-				'abilities'  => $siteseo_abilities,
-				'elapsed_ms' => $elapsed,
-			]);
-		}
-
-		if($code === 401 || $code === 403){
-			$message = __('Your Application Password was rejected — it may have been revoked. Generate a new one and test again.', 'siteseo');
-			\SiteSEO\Settings\Abilities::save_test_connection_status(false, $message);
-			wp_send_json_error([
-				'message' => $message,
-			]);
-		}
-
-		$message = sprintf(__('The abilities endpoint responded with status %1$d. Check the MCP Adapter is active and try again.', 'siteseo'), $code);
-		\SiteSEO\Settings\Abilities::save_test_connection_status(false, $message);
-		wp_send_json_error([
-			'message' => $message,
-		]);
-	}
-
-
-/** Function \SiteSEO\Ajax::resolve_variables() called by wp_ajax hooks: {'siteseo_resolve_variables'} **/
-/** Parameters found in function \SiteSEO\Ajax::resolve_variables(): {"post": ["content", "post_id"]} **/
-function resolve_variables(){
-		check_ajax_referer('siteseo_admin_nonce', 'nonce');
-		
-		if(!current_user_can('siteseo_manage')){
-			wp_send_json_error(__('You do not have required permission to edit this file.', 'siteseo'));
-		}
-
-		if(empty($_POST['content']) || empty($_POST['post_id'])){
-			wp_send_json_error(__('The required content or ID is empty', 'siteseo'));
-		}
-		
-		global $post, $wp_query;
-		
-		$post_id = (int) sanitize_text_field(wp_unslash($_POST['post_id']));
-		$content = sanitize_text_field(wp_unslash($_POST['content']));
-		
-		if(!current_user_can('edit_post', $post_id)){
-			wp_send_json_error(__('You do not have permission to access this post', 'siteseo'));
-		}
-
-		$tmp_post = $post;
-		$post = get_post($post_id);
-		$replaced_content = \SiteSEO\TitlesMetas::replace_variables($content, true);
-		$post = $tmp_post;
-
-		wp_send_json_success($replaced_content);
-	}
-
-
-/** Function \SiteSEO\Ajax::dismiss_intro() called by wp_ajax hooks: {'siteseo_dismiss_intro'} **/
-/** No params detected :-/ **/
-
-
-/** Function \SiteSEO\Ajax::save_toggle_state() called by wp_ajax hooks: {'siteseo_save_analytics_toggle', 'siteseo_save_advanced_toggle', 'siteseo_save_titles_meta_toggle', 'siteseo_save_sitemap_toggle', 'siteseo_save_indexing_toggle', 'siteseo_save_abilities', 'siteseo_save_social_toggle'} **/
-/** Parameters found in function \SiteSEO\Ajax::save_toggle_state(): {"post": ["action", "toggle_value"]} **/
-function save_toggle_state(){
-
-		check_ajax_referer('siteseo_toggle_nonce', 'nonce');
-
-		if(!current_user_can('manage_options')){
-			wp_send_json_error(['message' => esc_html__('Insufficient permissions', 'siteseo')]);
-		}
-		
-		$action = isset($_POST['action']) ? sanitize_text_field(wp_unslash($_POST['action'])) : '';
-		switch($action){
-			case 'siteseo_save_titles_meta_toggle':
-				$toggle_key = 'toggle-titles';
-				break;
-			case 'siteseo_save_sitemap_toggle':
-				$toggle_key = 'toggle-xml-sitemap';
-				break;
-			case 'siteseo_save_indexing_toggle':
-				$toggle_key = 'toggle-instant-indexing';
-				break;
-			case 'siteseo_save_advanced_toggle':
-				$toggle_key = 'toggle-advanced';
-				break;
-			case 'siteseo_save_social_toggle':
-				$toggle_key = 'toggle-social';
-				break;
-			case 'siteseo_save_analytics_toggle':
-				$toggle_key = 'toggle-google-analytics';
-				break;
-			case 'siteseo_save_abilities':
-				$toggle_key = 'toggle-abilities';
-				break;
-			default:
-				wp_send_json_error(['message' => __('Invalid action', 'siteseo')]);
-				return;
-		}
-
-		$toggle_value = isset($_POST['toggle_value']) ? sanitize_text_field(wp_unslash($_POST['toggle_value'])) : '0';
-
-		$options = get_option('siteseo_toggle', []);
-		$options[$toggle_key] = $toggle_value;
-		$updated = update_option('siteseo_toggle', $options);
-
-		if($updated){
-			wp_send_json_success([
-				'message' => ucfirst($toggle_key) . ' toggle state saved successfully',
-				'value' => $toggle_value
-			]);
-		}
-
-		wp_send_json_error(['message' => __('Failed to save toggle state', 'siteseo')]);
-	}
-
-
-/** Function \SiteSEO\Ajax::save_test_status() called by wp_ajax hooks: {'siteseo_save_test_status'} **/
-/** Parameters found in function \SiteSEO\Ajax::save_test_status(): {"post": ["ok", "message"]} **/
-function save_test_status(){
-		check_ajax_referer('siteseo_admin_nonce', 'nonce');
-
-		if(!current_user_can('manage_options')){
-			wp_send_json_error(__('You do not have permission to do that.', 'siteseo'));
-		}
-
-		$ok      = !empty($_POST['ok']);
-		$message = !empty($_POST['message']) ? sanitize_text_field(wp_unslash($_POST['message'])) : '';
-
-		\SiteSEO\Settings\Abilities::save_test_connection_status($ok, $message);
-
-		wp_send_json_success();
-	}
 
 
 /** Function \SiteSEO\Ajax::save_onboarding_settings() called by wp_ajax hooks: {'siteseo_save_onboarding_settings'} **/
@@ -389,6 +238,142 @@ function save_onboarding_settings(){
 	}
 
 
+/** Function \SiteSEO\Ajax::save_test_status() called by wp_ajax hooks: {'siteseo_save_test_status'} **/
+/** Parameters found in function \SiteSEO\Ajax::save_test_status(): {"post": ["ok", "message"]} **/
+function save_test_status(){
+		check_ajax_referer('siteseo_admin_nonce', 'nonce');
+
+		if(!current_user_can('manage_options')){
+			wp_send_json_error(__('You do not have permission to do that.', 'siteseo'));
+		}
+
+		$ok      = !empty($_POST['ok']);
+		$message = !empty($_POST['message']) ? sanitize_text_field(wp_unslash($_POST['message'])) : '';
+
+		\SiteSEO\Settings\Abilities::save_test_connection_status($ok, $message);
+
+		wp_send_json_success();
+	}
+
+
+/** Function \SiteSEO\Ajax::handle_import() called by wp_ajax hooks: {'siteseo_migrate_seo'} **/
+/** Parameters found in function \SiteSEO\Ajax::handle_import(): {"post": ["plugin"]} **/
+function handle_import(){
+		check_ajax_referer('siteseo_admin_nonce', 'nonce');
+		
+		if(!siteseo_user_can('manage_options')){
+			wp_send_json_error(['message' => esc_html__('Insufficient permissions', 'siteseo')]);
+		}
+		
+		$plugin = !empty($_POST['plugin']) ? sanitize_text_field(wp_unslash($_POST['plugin'])) : '';
+		
+		switch($plugin){
+			case 'wordpress-seo':
+				$result = \SiteSEO\Import::yoast_seo();
+				break;
+			case 'all-in-one-seo-pack':
+				$result = \SiteSEO\Import::aio_seo();
+				break;
+			case 'autodescription':
+				$result = \SiteSEO\Import::seo_framework();
+				break;
+			case 'wp-seopress':
+				$result = \SiteSEO\Import::seo_press();
+				break;
+			case 'seo-by-rank-math':
+				$result = \SiteSEO\Import::rank_math();
+				break;
+			case 'slim-seo':
+				$result = \SiteSEO\Import::slim_seo();
+				break;
+			case 'surerank':
+				$result = \SiteSEO\Import::surerank();
+				break;
+			default:
+				throw new \Exception('Invalid plugin selected');
+		}
+		
+		if(empty($result)){
+			wp_send_json_error(['message' => __('Invalid plugin selected', 'siteseo')]);
+		}
+		
+
+		update_option('siteseo_last_migration_log', $result['log'], false);
+		wp_send_json_success(['message' => $result['message']]);
+	}
+
+
+/** Function \SiteSEO\Ajax::close_update_notice() called by wp_ajax hooks: {'siteseo_close_update_notice'} **/
+/** No params detected :-/ **/
+
+
+/** Function \SiteSEO\Ajax::export_settings() called by wp_ajax hooks: {'siteseo_export_settings'} **/
+/** No params detected :-/ **/
+
+
+/** Function \SiteSEO\Ajax::reset_settings() called by wp_ajax hooks: {'siteseo_reset_settings'} **/
+/** No params detected :-/ **/
+
+
+/** Function \SiteSEO\Ajax::generate_app_password() called by wp_ajax hooks: {'siteseo_generate_app_password'} **/
+/** No params detected :-/ **/
+
+
+/** Function \SiteSEO\Ajax::save_toggle_state() called by wp_ajax hooks: {'siteseo_save_titles_meta_toggle', 'siteseo_save_social_toggle', 'siteseo_save_advanced_toggle', 'siteseo_save_sitemap_toggle', 'siteseo_save_analytics_toggle', 'siteseo_save_indexing_toggle', 'siteseo_save_abilities'} **/
+/** Parameters found in function \SiteSEO\Ajax::save_toggle_state(): {"post": ["action", "toggle_value"]} **/
+function save_toggle_state(){
+
+		check_ajax_referer('siteseo_toggle_nonce', 'nonce');
+
+		if(!current_user_can('manage_options')){
+			wp_send_json_error(['message' => esc_html__('Insufficient permissions', 'siteseo')]);
+		}
+		
+		$action = isset($_POST['action']) ? sanitize_text_field(wp_unslash($_POST['action'])) : '';
+		switch($action){
+			case 'siteseo_save_titles_meta_toggle':
+				$toggle_key = 'toggle-titles';
+				break;
+			case 'siteseo_save_sitemap_toggle':
+				$toggle_key = 'toggle-xml-sitemap';
+				break;
+			case 'siteseo_save_indexing_toggle':
+				$toggle_key = 'toggle-instant-indexing';
+				break;
+			case 'siteseo_save_advanced_toggle':
+				$toggle_key = 'toggle-advanced';
+				break;
+			case 'siteseo_save_social_toggle':
+				$toggle_key = 'toggle-social';
+				break;
+			case 'siteseo_save_analytics_toggle':
+				$toggle_key = 'toggle-google-analytics';
+				break;
+			case 'siteseo_save_abilities':
+				$toggle_key = 'toggle-abilities';
+				break;
+			default:
+				wp_send_json_error(['message' => __('Invalid action', 'siteseo')]);
+				return;
+		}
+
+		$toggle_value = isset($_POST['toggle_value']) ? sanitize_text_field(wp_unslash($_POST['toggle_value'])) : '0';
+
+		$options = get_option('siteseo_toggle', []);
+		$options[$toggle_key] = $toggle_value;
+		$updated = update_option('siteseo_toggle', $options);
+
+		if($updated){
+			wp_send_json_success([
+				'message' => ucfirst($toggle_key) . ' toggle state saved successfully',
+				'value' => $toggle_value
+			]);
+		}
+
+		wp_send_json_error(['message' => __('Failed to save toggle state', 'siteseo')]);
+	}
+
+
 /** Function \SiteSEO\Ajax::install_mcp_adapter() called by wp_ajax hooks: {'siteseo_install_mcp_adapter'} **/
 /** Parameters found in function \SiteSEO\Ajax::install_mcp_adapter(): {"post": ["adapter_action"]} **/
 function install_mcp_adapter(){
@@ -473,90 +458,103 @@ function install_mcp_adapter(){
 	}
 
 
-/** Function \SiteSEO\Ajax::refresh_seo_analysis() called by wp_ajax hooks: {'siteseo_refresh_analysis'} **/
-/** Parameters found in function \SiteSEO\Ajax::refresh_seo_analysis(): {"post": ["post_id", "post_type", "target_keywords"]} **/
-function refresh_seo_analysis(){
+/** Function \SiteSEO\Ajax::save_universal_metabox() called by wp_ajax hooks: {'siteseo_save_universal_metabox'} **/
+/** Parameters found in function \SiteSEO\Ajax::save_universal_metabox(): {"post": ["post_id"]} **/
+function save_universal_metabox(){
+		check_ajax_referer('siteseo_universal_nonce', 'security');
+		
+		if(!current_user_can('siteseo_manage') || !siteseo_user_can_metabox()){
+			wp_send_json_error(__('You do not have required permission to edit this file.', 'siteseo'));
+		}
+		
+		if(empty($_POST['post_id'])){
+			wp_send_json_error(__('Post ID not found', 'siteseo'));
+		}
+		
+		$post_id = sanitize_text_field(wp_unslash($_POST['post_id']));
 
-		check_ajax_referer('siteseo_admin_nonce', 'nonce');
-
-		if(!current_user_can('siteseo_manage')){
-			wp_send_json_error(['message' => esc_html__('Insufficient permissions', 'siteseo')]);
+		if(!current_user_can('edit_post', $post_id)){
+			wp_send_json_error(__('You do not have required permission to edit this file.', 'siteseo'));
 		}
 
-		$post_id = isset($_POST['post_id']) ? intval($_POST['post_id']) : 0;
-		$post_type = isset($_POST['post_type']) ? sanitize_text_field(wp_unslash($_POST['post_type'])) : '';
-		$target_keywords = isset($_POST['target_keywords']) ? sanitize_text_field(wp_unslash($_POST['target_keywords'])) : '';
-		
 		$post = get_post($post_id);
-		if(!$post || !current_user_can('edit_post', $post_id)){
-			wp_send_json_error(['message' => __('Invalid post or insufficient permissions', 'siteseo')]);
-		}
 		
-		update_post_meta($post_id, '_siteseo_analysis_target_kw', $target_keywords);
-	
-		$analysis_data = \SiteSEO\Metaboxes\Analysis::perform_seo_analysis($post);
-
-		update_post_meta($post_id, '_siteseo_analysis_data', $analysis_data);
-
-		ob_start();
-		\SiteSEO\Metaboxes\Analysis::display_seo_analysis($post);
-		$analysis_html = ob_get_clean();
-
-		wp_send_json_success([
-			'html' => $analysis_html,
-			'analysis_data' => $analysis_data
-		]);
+		\SiteSEO\Metaboxes\Settings::save_metabox($post_id, $post);
 	}
 
 
-/** Function \SiteSEO\Ajax::export_settings() called by wp_ajax hooks: {'siteseo_export_settings'} **/
-/** No params detected :-/ **/
-
-
-/** Function \SiteSEO\Ajax::handle_import() called by wp_ajax hooks: {'siteseo_migrate_seo'} **/
-/** Parameters found in function \SiteSEO\Ajax::handle_import(): {"post": ["plugin"]} **/
-function handle_import(){
+/** Function \SiteSEO\Ajax::test_mcp_connection() called by wp_ajax hooks: {'siteseo_test_mcp_connection'} **/
+/** Parameters found in function \SiteSEO\Ajax::test_mcp_connection(): {"post": ["username", "password"]} **/
+function test_mcp_connection(){
 		check_ajax_referer('siteseo_admin_nonce', 'nonce');
-		
-		if(!siteseo_user_can('manage_options')){
-			wp_send_json_error(['message' => esc_html__('Insufficient permissions', 'siteseo')]);
-		}
-		
-		$plugin = !empty($_POST['plugin']) ? sanitize_text_field(wp_unslash($_POST['plugin'])) : '';
-		
-		switch($plugin){
-			case 'wordpress-seo':
-				$result = \SiteSEO\Import::yoast_seo();
-				break;
-			case 'all-in-one-seo-pack':
-				$result = \SiteSEO\Import::aio_seo();
-				break;
-			case 'autodescription':
-				$result = \SiteSEO\Import::seo_framework();
-				break;
-			case 'wp-seopress':
-				$result = \SiteSEO\Import::seo_press();
-				break;
-			case 'seo-by-rank-math':
-				$result = \SiteSEO\Import::rank_math();
-				break;
-			case 'slim-seo':
-				$result = \SiteSEO\Import::slim_seo();
-				break;
-			case 'surerank':
-				$result = \SiteSEO\Import::surerank();
-				break;
-			default:
-				throw new \Exception('Invalid plugin selected');
-		}
-		
-		if(empty($result)){
-			wp_send_json_error(['message' => __('Invalid plugin selected', 'siteseo')]);
-		}
-		
 
-		update_option('siteseo_last_migration_log', $result['log'], false);
-		wp_send_json_success(['message' => $result['message']]);
+		if(!current_user_can('manage_options')){
+			wp_send_json_error(__('You do not have permission to test the connection.', 'siteseo'));
+		}
+
+		$start  = microtime(true);
+		$url    = trailingslashit(home_url()) . ltrim(\SiteSEO\Settings\Abilities::$ABILITIES_ENDPOINT, '/');
+
+		// Server-side reachability check. The plaintext Application Password
+		// lives only in the browser's memory (shown once on generation), so the
+		// authoritative authenticated test runs client-side. This fallback only
+		// verifies the endpoint is reachable and returns a parsable payload.
+		$username = isset($_POST['username']) ? sanitize_text_field(wp_unslash($_POST['username'])) : '';
+		$password = isset($_POST['password']) ? sanitize_text_field(wp_unslash($_POST['password'])) : '';
+		
+		$response = wp_remote_get($url, [
+			'headers' => [
+				'Accept' => 'application/json',
+				'Authorization' => 'Basic ' . base64_encode($username . ':' . $password),
+			],
+		]);
+
+		$elapsed = round((microtime(true) - $start) * 1000);
+
+		if(is_wp_error($response)){
+			$message = sprintf(__('Could not reach the abilities endpoint (%s).', 'siteseo'), $response->get_error_message());
+			\SiteSEO\Settings\Abilities::save_test_connection_status(false, $message);
+			wp_send_json_error([
+				'message' => $message,
+			]);
+		}
+
+		$code = wp_remote_retrieve_response_code($response);
+		$body = json_decode(wp_remote_retrieve_body($response), true);
+
+		if($code >= 200 && $code < 300 && is_array($body)){
+			$siteseo_abilities = 0;
+			foreach($body as $ability){
+				$name = isset($ability['name']) ? $ability['name'] : (isset($ability['id']) ? $ability['id'] : '');
+				if(is_string($name) && strpos($name, 'siteseo-') === 0){
+					$siteseo_abilities++;
+				}
+			}
+
+			$message = sprintf(__('Authenticated with your Application Password and discovered %1$d SiteSEO abilities in %2$dms. Your site is ready to connect an AI client below.', 'siteseo'), $siteseo_abilities, $elapsed);
+
+			\SiteSEO\Settings\Abilities::save_test_connection_status(true, $message);
+
+			wp_send_json_success([
+				'message'    => $message,
+				'abilities'  => $siteseo_abilities,
+				'elapsed_ms' => $elapsed,
+			]);
+		}
+
+		if($code === 401 || $code === 403){
+			$message = __('Your Application Password was rejected — it may have been revoked. Generate a new one and test again.', 'siteseo');
+			\SiteSEO\Settings\Abilities::save_test_connection_status(false, $message);
+			wp_send_json_error([
+				'message' => $message,
+			]);
+		}
+
+		$message = sprintf(__('The abilities endpoint responded with status %1$d. Check the MCP Adapter is active and try again.', 'siteseo'), $code);
+		\SiteSEO\Settings\Abilities::save_test_connection_status(false, $message);
+		wp_send_json_error([
+			'message' => $message,
+		]);
 	}
 
 
@@ -650,6 +648,37 @@ function import_settings(){
 	}
 
 
+/** Function \SiteSEO\Ajax::resolve_variables() called by wp_ajax hooks: {'siteseo_resolve_variables'} **/
+/** Parameters found in function \SiteSEO\Ajax::resolve_variables(): {"post": ["content", "post_id"]} **/
+function resolve_variables(){
+		check_ajax_referer('siteseo_admin_nonce', 'nonce');
+		
+		if(!current_user_can('siteseo_manage')){
+			wp_send_json_error(__('You do not have required permission to edit this file.', 'siteseo'));
+		}
+
+		if(empty($_POST['content']) || empty($_POST['post_id'])){
+			wp_send_json_error(__('The required content or ID is empty', 'siteseo'));
+		}
+		
+		global $post, $wp_query;
+		
+		$post_id = (int) sanitize_text_field(wp_unslash($_POST['post_id']));
+		$content = sanitize_text_field(wp_unslash($_POST['content']));
+		
+		if(!current_user_can('edit_post', $post_id)){
+			wp_send_json_error(__('You do not have permission to access this post', 'siteseo'));
+		}
+
+		$tmp_post = $post;
+		$post = get_post($post_id);
+		$replaced_content = \SiteSEO\TitlesMetas::replace_variables($content, true);
+		$post = $tmp_post;
+
+		wp_send_json_success($replaced_content);
+	}
+
+
 /** Function \SiteSEO\Ajax::generate_bing_api_key() called by wp_ajax hooks: {'siteseo_generate_bing_api_key'} **/
 /** No params detected :-/ **/
 
@@ -658,36 +687,7 @@ function import_settings(){
 /** No params detected :-/ **/
 
 
-/** Function \SiteSEO\Ajax::close_update_notice() called by wp_ajax hooks: {'siteseo_close_update_notice'} **/
-/** No params detected :-/ **/
-
-
-/** Function \SiteSEO\Ajax::save_universal_metabox() called by wp_ajax hooks: {'siteseo_save_universal_metabox'} **/
-/** Parameters found in function \SiteSEO\Ajax::save_universal_metabox(): {"post": ["post_id"]} **/
-function save_universal_metabox(){
-		check_ajax_referer('siteseo_universal_nonce', 'security');
-		
-		if(!current_user_can('siteseo_manage') || !siteseo_user_can_metabox()){
-			wp_send_json_error(__('You do not have required permission to edit this file.', 'siteseo'));
-		}
-		
-		if(empty($_POST['post_id'])){
-			wp_send_json_error(__('Post ID not found', 'siteseo'));
-		}
-		
-		$post_id = sanitize_text_field(wp_unslash($_POST['post_id']));
-
-		if(!current_user_can('edit_post', $post_id)){
-			wp_send_json_error(__('You do not have required permission to edit this file.', 'siteseo'));
-		}
-
-		$post = get_post($post_id);
-		
-		\SiteSEO\Metaboxes\Settings::save_metabox($post_id, $post);
-	}
-
-
-/** Function \SiteSEO\Ajax::reset_settings() called by wp_ajax hooks: {'siteseo_reset_settings'} **/
+/** Function \SiteSEO\Ajax::dismiss_intro() called by wp_ajax hooks: {'siteseo_dismiss_intro'} **/
 /** No params detected :-/ **/
 
 

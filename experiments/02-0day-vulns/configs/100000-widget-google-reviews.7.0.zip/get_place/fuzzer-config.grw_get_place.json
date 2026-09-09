@@ -1,0 +1,44 @@
+{
+  "target": "http://web/wp-admin/admin-ajax.php",
+  "methods": [
+    "POST"
+  ],
+  "body_params": {
+    "weight": 1,
+    "fixed": [
+      "grw_nonce"
+    ],
+    "fuzz": [
+      "lang",
+      "pid",
+      "token"
+    ],
+    "data": [
+      {
+        "name": "grw_nonce",
+        "value": "fuzz"
+      },
+      {
+        "name": "pid",
+        "value": "fuzz"
+      },
+      {
+        "name": "token",
+        "value": "fuzz"
+      }
+    ]
+  },
+  "query_params": {
+    "weight": 1,
+    "fixed": [
+      "action"
+    ],
+    "fuzz": [],
+    "data": [
+      {
+        "name": "action",
+        "value": "grw_get_place"
+      }
+    ]
+  }
+}

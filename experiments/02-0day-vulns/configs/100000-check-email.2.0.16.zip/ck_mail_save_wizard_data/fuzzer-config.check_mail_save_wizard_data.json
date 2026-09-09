@@ -1,0 +1,39 @@
+{
+  "target": "http://web/wp-admin/admin-ajax.php",
+  "methods": [
+    "POST"
+  ],
+  "body_params": {
+    "weight": 1,
+    "fixed": [
+      "ck_mail_security_nonce"
+    ],
+    "fuzz": [
+      "enable_dashboard_widget",
+      "default_format_for_message"
+    ],
+    "data": [
+      {
+        "name": "ck_mail_security_nonce",
+        "value": "fuzz"
+      },
+      {
+        "name": "default_format_for_message",
+        "value": "fuzz"
+      }
+    ]
+  },
+  "query_params": {
+    "weight": 1,
+    "fixed": [
+      "action"
+    ],
+    "fuzz": [],
+    "data": [
+      {
+        "name": "action",
+        "value": "check_mail_save_wizard_data"
+      }
+    ]
+  }
+}

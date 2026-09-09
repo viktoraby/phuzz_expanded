@@ -5,11 +5,19 @@
 *Found functions:5
 *Extracted functions:5
 *Total parameter names extracted: 1
-*Overview: {'ajax_disable_dashboard_hiding_confirmation': {'ws_ame_disable_dashboard_hiding_confirmation'}, 'ajax_get_page_details': {'ws_ame_get_page_details'}, 'ajax_get_pages': {'ws_ame_get_pages'}, 'ajax_hide_hint': {'ws_ame_hide_hint'}, 'ajax_set_test_configuration': {'ws_ame_set_test_configuration'}}
+*Overview: {'ajax_disable_dashboard_hiding_confirmation': {'ws_ame_disable_dashboard_hiding_confirmation'}, 'ajax_set_test_configuration': {'ws_ame_set_test_configuration'}, 'ajax_get_pages': {'ws_ame_get_pages'}, 'ajax_get_page_details': {'ws_ame_get_page_details'}, 'ajax_hide_hint': {'ws_ame_hide_hint'}}
 *
 ***/
 
 /** Function ajax_disable_dashboard_hiding_confirmation() called by wp_ajax hooks: {'ws_ame_disable_dashboard_hiding_confirmation'} **/
+/** No params detected :-/ **/
+
+
+/** Function ajax_set_test_configuration() called by wp_ajax hooks: {'ws_ame_set_test_configuration'} **/
+/** No params detected :-/ **/
+
+
+/** Function ajax_get_pages() called by wp_ajax hooks: {'ws_ame_get_pages'} **/
 /** No params detected :-/ **/
 
 
@@ -48,15 +56,7 @@ function ajax_get_page_details() {
 	}
 
 
-/** Function ajax_get_pages() called by wp_ajax hooks: {'ws_ame_get_pages'} **/
-/** No params detected :-/ **/
-
-
 /** Function ajax_hide_hint() called by wp_ajax hooks: {'ws_ame_hide_hint'} **/
-/** No params detected :-/ **/
-
-
-/** Function ajax_set_test_configuration() called by wp_ajax hooks: {'ws_ame_set_test_configuration'} **/
 /** No params detected :-/ **/
 
 

@@ -1,0 +1,40 @@
+{
+  "target": "http://web/wp-admin/admin-ajax.php",
+  "methods": [
+    "GET"
+  ],
+  "query_params": {
+    "weight": 1,
+    "fixed": [
+      "action",
+      "saswp_security_nonce"
+    ],
+    "fuzz": [
+      "offset",
+      "paged",
+      "data_type"
+    ],
+    "data": [
+      {
+        "name": "action",
+        "value": "saswp_get_reviews_on_load"
+      },
+      {
+        "name": "saswp_security_nonce",
+        "value": "fuzz"
+      },
+      {
+        "name": "offset",
+        "value": "fuzz"
+      },
+      {
+        "name": "paged",
+        "value": "fuzz"
+      },
+      {
+        "name": "data_type",
+        "value": "fuzz"
+      }
+    ]
+  }
+}

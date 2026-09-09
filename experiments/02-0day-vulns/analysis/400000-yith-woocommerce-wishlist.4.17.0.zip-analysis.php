@@ -5,13 +5,9 @@
 *Found functions:6
 *Extracted functions:5
 *Total parameter names extracted: 4
-*Overview: {'YITH_WCWL_Ajax_Handler': {'save_title', 'nopriv_add_to_wishlist', 'reload_wishlist_and_adding_elem', 'add_to_wishlist', 'delete_item', 'load_mobile', 'nopriv_save_title', 'nopriv_delete_item', 'remove_from_wishlist', 'nopriv_load_mobile', 'nopriv_reload_wishlist_and_adding_elem', 'load_fragments', 'nopriv_load_fragments', 'nopriv_remove_from_wishlist'}, 'do_shortcode': {'yith_plugin_fw_gutenberg_do_shortcode'}, 'save_options': {'yith_bh_onboarding'}, 'save_toggle_element_options': {'yith_plugin_fw_save_toggle_element'}, 'create_log_file': {'yith_create_log_file'}, 'save_toggle_element': {'yith_plugin_fw_save_toggle_element_metabox'}}
+*Overview: {'do_shortcode': {'yith_plugin_fw_gutenberg_do_shortcode'}, 'YITH_WCWL_Ajax_Handler': {'nopriv_add_to_wishlist', 'nopriv_save_title', 'add_to_wishlist', 'nopriv_load_mobile', 'load_fragments', 'reload_wishlist_and_adding_elem', 'delete_item', 'load_mobile', 'nopriv_reload_wishlist_and_adding_elem', 'nopriv_load_fragments', 'remove_from_wishlist', 'save_title', 'nopriv_delete_item', 'nopriv_remove_from_wishlist'}, 'save_toggle_element_options': {'yith_plugin_fw_save_toggle_element'}, 'create_log_file': {'yith_create_log_file'}, 'save_options': {'yith_bh_onboarding'}, 'save_toggle_element': {'yith_plugin_fw_save_toggle_element_metabox'}}
 *
 ***/
-
-/** Function YITH_WCWL_Ajax_Handler() called by wp_ajax hooks: {'save_title', 'nopriv_add_to_wishlist', 'reload_wishlist_and_adding_elem', 'add_to_wishlist', 'delete_item', 'load_mobile', 'nopriv_save_title', 'nopriv_delete_item', 'remove_from_wishlist', 'nopriv_load_mobile', 'nopriv_reload_wishlist_and_adding_elem', 'load_fragments', 'nopriv_load_fragments', 'nopriv_remove_from_wishlist'} **/
-/** No function found :-/ **/
-
 
 /** Function do_shortcode() called by wp_ajax hooks: {'yith_plugin_fw_gutenberg_do_shortcode'} **/
 /** Parameters found in function do_shortcode(): {"request": ["context", "shortcode"]} **/
@@ -50,33 +46,8 @@ function do_shortcode() {
 		}
 
 
-/** Function save_options() called by wp_ajax hooks: {'yith_bh_onboarding'} **/
-/** Parameters found in function save_options(): {"request": ["tab"]} **/
-function save_options() {
-			check_ajax_referer( 'yith-bh-onboarding-save-options' );
-			if ( ! isset( $_REQUEST['yith-plugin'], $_REQUEST['tab'] ) ) {
-				wp_send_json_error( __( 'It is not possible save the options', 'yith-plugin-fw' ) );
-			}
-
-			$slug   = sanitize_text_field( wp_unslash( $_REQUEST['yith-plugin'] ) );
-			$posted = $_REQUEST;
-			// the options are filtered by each plugin.
-			$options = apply_filters( 'yith_bh_onboarding_' . $slug, array() );
-			$tab     = $posted['tab'];
-
-			if ( apply_filters( 'yith_bh_onboarding_save_options_' . $slug, isset( $options['tabs'][ $tab ]['options'] ), $posted ) ) {
-				foreach ( $options['tabs'][ $tab ]['options'] as $single_option ) {
-					if ( isset( $posted[ $single_option['id'] ] ) ) {
-						$value = $posted[ $single_option['id'] ] ?? false;
-						$value = YIT_Plugin_Panel_WooCommerce::sanitize_option( $value, $single_option, $value );
-						$value = apply_filters( 'yith_bh_onboarding_save_option_value', $value, $single_option, $slug );
-						update_option( $single_option['id'], $value );
-					}
-				}
-			}
-
-			wp_send_json_success();
-		}
+/** Function YITH_WCWL_Ajax_Handler() called by wp_ajax hooks: {'nopriv_add_to_wishlist', 'nopriv_save_title', 'add_to_wishlist', 'nopriv_load_mobile', 'load_fragments', 'reload_wishlist_and_adding_elem', 'delete_item', 'load_mobile', 'nopriv_reload_wishlist_and_adding_elem', 'nopriv_load_fragments', 'remove_from_wishlist', 'save_title', 'nopriv_delete_item', 'nopriv_remove_from_wishlist'} **/
+/** No function found :-/ **/
 
 
 /** Function save_toggle_element_options() called by wp_ajax hooks: {'yith_plugin_fw_save_toggle_element'} **/
@@ -126,6 +97,35 @@ function create_log_file() {
 			} catch ( Exception $e ) {
 				wp_send_json( array( 'file' => false ) );
 			}
+		}
+
+
+/** Function save_options() called by wp_ajax hooks: {'yith_bh_onboarding'} **/
+/** Parameters found in function save_options(): {"request": ["tab"]} **/
+function save_options() {
+			check_ajax_referer( 'yith-bh-onboarding-save-options' );
+			if ( ! isset( $_REQUEST['yith-plugin'], $_REQUEST['tab'] ) ) {
+				wp_send_json_error( __( 'It is not possible save the options', 'yith-plugin-fw' ) );
+			}
+
+			$slug   = sanitize_text_field( wp_unslash( $_REQUEST['yith-plugin'] ) );
+			$posted = $_REQUEST;
+			// the options are filtered by each plugin.
+			$options = apply_filters( 'yith_bh_onboarding_' . $slug, array() );
+			$tab     = $posted['tab'];
+
+			if ( apply_filters( 'yith_bh_onboarding_save_options_' . $slug, isset( $options['tabs'][ $tab ]['options'] ), $posted ) ) {
+				foreach ( $options['tabs'][ $tab ]['options'] as $single_option ) {
+					if ( isset( $posted[ $single_option['id'] ] ) ) {
+						$value = $posted[ $single_option['id'] ] ?? false;
+						$value = YIT_Plugin_Panel_WooCommerce::sanitize_option( $value, $single_option, $value );
+						$value = apply_filters( 'yith_bh_onboarding_save_option_value', $value, $single_option, $slug );
+						update_option( $single_option['id'], $value );
+					}
+				}
+			}
+
+			wp_send_json_success();
 		}
 
 

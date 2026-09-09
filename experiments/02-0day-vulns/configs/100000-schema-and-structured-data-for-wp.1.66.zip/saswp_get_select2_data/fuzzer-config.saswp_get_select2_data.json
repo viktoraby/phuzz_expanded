@@ -1,0 +1,35 @@
+{
+  "target": "http://web/wp-admin/admin-ajax.php",
+  "methods": [
+    "GET"
+  ],
+  "query_params": {
+    "weight": 1,
+    "fixed": [
+      "action",
+      "saswp_security_nonce"
+    ],
+    "fuzz": [
+      "q",
+      "type"
+    ],
+    "data": [
+      {
+        "name": "action",
+        "value": "saswp_get_select2_data"
+      },
+      {
+        "name": "saswp_security_nonce",
+        "value": "fuzz"
+      },
+      {
+        "name": "q",
+        "value": "fuzz"
+      },
+      {
+        "name": "type",
+        "value": "fuzz"
+      }
+    ]
+  }
+}

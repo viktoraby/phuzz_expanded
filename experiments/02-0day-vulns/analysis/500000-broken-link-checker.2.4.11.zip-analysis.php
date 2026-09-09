@@ -5,196 +5,11 @@
 *Found functions:13
 *Extracted functions:13
 *Total parameter names extracted: 7
-*Overview: {'ajax_undismiss': {'blc_undismiss'}, 'ajax_work': {'blc_work'}, 'ajax_unlink': {'blc_unlink'}, 'ajax_full_status': {'blc_full_status'}, 'ajax_recheck': {'blc_recheck'}, 'ajax_dismiss': {'blc_dismiss'}, 'ajax_link_details': {'blc_link_details'}, 'ajax_dashboard_status': {'blc_dashboard_status'}, 'ajax_current_load': {'blc_current_load'}, 'ajax_edit': {'blc_edit'}, 'dismiss_multisite_notification': {'wpmudev_blc_multisite_notification_dismiss'}, 'ajax_discard': {'blc_discard'}, 'ajax_deredirect': {'blc_deredirect'}}
+*Overview: {'ajax_dismiss': {'blc_dismiss'}, 'ajax_edit': {'blc_edit'}, 'ajax_dashboard_status': {'blc_dashboard_status'}, 'ajax_discard': {'blc_discard'}, 'ajax_full_status': {'blc_full_status'}, 'ajax_undismiss': {'blc_undismiss'}, 'ajax_recheck': {'blc_recheck'}, 'ajax_link_details': {'blc_link_details'}, 'ajax_current_load': {'blc_current_load'}, 'ajax_work': {'blc_work'}, 'dismiss_multisite_notification': {'wpmudev_blc_multisite_notification_dismiss'}, 'ajax_deredirect': {'blc_deredirect'}, 'ajax_unlink': {'blc_unlink'}}
 *
 ***/
 
-/** Function ajax_undismiss() called by wp_ajax hooks: {'blc_undismiss'} **/
-/** No params detected :-/ **/
-
-
-/** Function ajax_work() called by wp_ajax hooks: {'blc_work'} **/
-/** No params detected :-/ **/
-
-
-/** Function ajax_unlink() called by wp_ajax hooks: {'blc_unlink'} **/
-/** Parameters found in function ajax_unlink(): {"post": ["link_id"]} **/
-function ajax_unlink() {
-			if ( ! current_user_can( 'edit_others_posts' ) || ! check_ajax_referer( 'blc_unlink', false, false ) ) {
-				die(
-				json_encode(
-					array(
-						'error' => __( "You're not allowed to do that!", 'broken-link-checker' ),
-					)
-				)
-				);
-			}
-
-			if ( isset( $_POST['link_id'] ) ) {
-				//Load the link
-				$link = new blcLink( intval( $_POST['link_id'] ) );
-
-				if ( ! $link->valid() ) {
-					die(
-					json_encode(
-						array(
-							'error' => sprintf( __( "Oops, I can't find the link %d", 'broken-link-checker' ), intval( $_POST['link_id'] ) ),
-						)
-					)
-					);
-				}
-
-				//Try and unlink it
-				$rez = $link->unlink();
-
-				if ( false === $rez ) {
-					die(
-					json_encode(
-						array(
-							'error' => __( 'An unexpected error occured!', 'broken-link-checker' ),
-						)
-					)
-					);
-				} else {
-					$response = array(
-						'cnt_okay'  => $rez['cnt_okay'],
-						'cnt_error' => $rez['cnt_error'],
-						'errors'    => array(),
-					);
-					foreach ( $rez['errors'] as $error ) {
-						/** @var WP_Error $error */
-						array_push( $response['errors'], implode( ', ', $error->get_error_messages() ) );
-					}
-
-					die( json_encode( $response ) );
-				}
-			} else {
-				die(
-				json_encode(
-					array(
-						'error' => __( 'Error : link_id not specified', 'broken-link-checker' ),
-					)
-				)
-				);
-			}
-		}
-
-
-/** Function ajax_full_status() called by wp_ajax hooks: {'blc_full_status'} **/
-/** No params detected :-/ **/
-
-
-/** Function ajax_recheck() called by wp_ajax hooks: {'blc_recheck'} **/
-/** Parameters found in function ajax_recheck(): {"post": ["link_id"]} **/
-function ajax_recheck() {
-			if ( ! current_user_can( 'edit_others_posts' ) || ! check_ajax_referer( 'blc_recheck', false, false ) ) {
-				die(
-				json_encode(
-					array(
-						'error' => __( "You're not allowed to do that!", 'broken-link-checker' ),
-					)
-				)
-				);
-			}
-
-			if ( ! isset( $_POST['link_id'] ) || ! is_numeric( $_POST['link_id'] ) ) {
-				die(
-				json_encode(
-					array(
-						'error' => __( 'Error : link_id not specified', 'broken-link-checker' ),
-					)
-				)
-				);
-			}
-
-			$id   = intval( $_POST['link_id'] );
-			$link = new blcLink( $id );
-
-			if ( ! $link->valid() ) {
-				die(
-				json_encode(
-					array(
-						'error' => sprintf( __( "Oops, I can't find the link %d", 'broken-link-checker' ), $id ),
-					)
-				)
-				);
-			}
-
-			$transactionManager = TransactionManager::getInstance();
-			$transactionManager->start();
-
-			//In case the immediate check fails, this will ensure the link is checked during the next work() run.
-			$link->last_check_attempt  = 0;
-			$link->isOptionLinkChanged = true;
-			$link->save();
-
-			//Check the link and save the results.
-			$link->check( true );
-
-			$transactionManager->commit();
-
-			$status   = $link->analyse_status();
-			$response = array(
-				'status_text'    => $status['text'],
-				'status_code'    => $status['code'],
-				'http_code'      => empty( $link->http_code ) ? '' : $link->http_code,
-				'redirect_count' => $link->redirect_count,
-				'final_url'      => $link->final_url,
-			);
-
-			die( json_encode( $response ) );
-		}
-
-
 /** Function ajax_dismiss() called by wp_ajax hooks: {'blc_dismiss'} **/
-/** No params detected :-/ **/
-
-
-/** Function ajax_link_details() called by wp_ajax hooks: {'blc_link_details'} **/
-/** Parameters found in function ajax_link_details(): {"get": ["link_id"], "post": ["link_id"]} **/
-function ajax_link_details() {
-			global $wpdb;
-			/* @var wpdb $wpdb */
-
-			if ( ! current_user_can( 'edit_others_posts' ) ) {
-				die( __( "You don't have sufficient privileges to access this information!", 'broken-link-checker' ) );
-			}
-
-			//FB::log("Loading link details via AJAX");
-
-			if ( isset( $_GET['link_id'] ) ) {
-				//FB::info("Link ID found in GET");
-				$link_id = intval( $_GET['link_id'] );
-			} elseif ( isset( $_POST['link_id'] ) ) {
-				//FB::info("Link ID found in POST");
-				$link_id = intval( $_POST['link_id'] );
-			} else {
-				//FB::error('Link ID not specified, you hacking bastard.');
-				die( __( 'Error : link ID not specified', 'broken-link-checker' ) );
-			}
-
-			//Load the link.
-			$link = new blcLink( $link_id );
-
-			if ( ! $link->is_new ) {
-				//FB::info($link, 'Link loaded');
-				if ( ! class_exists( 'blcTablePrinter' ) ) {
-					require dirname( $this->loader ) . '/includes/admin/table-printer.php';
-				}
-				blcTablePrinter::details_row_contents( $link );
-				die();
-			} else {
-				printf( __( 'Failed to load link details (%s)', 'broken-link-checker' ), $wpdb->last_error );
-				die();
-			}
-		}
-
-
-/** Function ajax_dashboard_status() called by wp_ajax hooks: {'blc_dashboard_status'} **/
-/** No params detected :-/ **/
-
-
-/** Function ajax_current_load() called by wp_ajax hooks: {'blc_current_load'} **/
 /** No params detected :-/ **/
 
 
@@ -321,7 +136,7 @@ function ajax_edit() {
 		}
 
 
-/** Function dismiss_multisite_notification() called by wp_ajax hooks: {'wpmudev_blc_multisite_notification_dismiss'} **/
+/** Function ajax_dashboard_status() called by wp_ajax hooks: {'blc_dashboard_status'} **/
 /** No params detected :-/ **/
 
 
@@ -363,6 +178,128 @@ function ajax_discard() {
 				die( __( 'Error : link_id not specified', 'broken-link-checker' ) );
 			}
 		}
+
+
+/** Function ajax_full_status() called by wp_ajax hooks: {'blc_full_status'} **/
+/** No params detected :-/ **/
+
+
+/** Function ajax_undismiss() called by wp_ajax hooks: {'blc_undismiss'} **/
+/** No params detected :-/ **/
+
+
+/** Function ajax_recheck() called by wp_ajax hooks: {'blc_recheck'} **/
+/** Parameters found in function ajax_recheck(): {"post": ["link_id"]} **/
+function ajax_recheck() {
+			if ( ! current_user_can( 'edit_others_posts' ) || ! check_ajax_referer( 'blc_recheck', false, false ) ) {
+				die(
+				json_encode(
+					array(
+						'error' => __( "You're not allowed to do that!", 'broken-link-checker' ),
+					)
+				)
+				);
+			}
+
+			if ( ! isset( $_POST['link_id'] ) || ! is_numeric( $_POST['link_id'] ) ) {
+				die(
+				json_encode(
+					array(
+						'error' => __( 'Error : link_id not specified', 'broken-link-checker' ),
+					)
+				)
+				);
+			}
+
+			$id   = intval( $_POST['link_id'] );
+			$link = new blcLink( $id );
+
+			if ( ! $link->valid() ) {
+				die(
+				json_encode(
+					array(
+						'error' => sprintf( __( "Oops, I can't find the link %d", 'broken-link-checker' ), $id ),
+					)
+				)
+				);
+			}
+
+			$transactionManager = TransactionManager::getInstance();
+			$transactionManager->start();
+
+			//In case the immediate check fails, this will ensure the link is checked during the next work() run.
+			$link->last_check_attempt  = 0;
+			$link->isOptionLinkChanged = true;
+			$link->save();
+
+			//Check the link and save the results.
+			$link->check( true );
+
+			$transactionManager->commit();
+
+			$status   = $link->analyse_status();
+			$response = array(
+				'status_text'    => $status['text'],
+				'status_code'    => $status['code'],
+				'http_code'      => empty( $link->http_code ) ? '' : $link->http_code,
+				'redirect_count' => $link->redirect_count,
+				'final_url'      => $link->final_url,
+			);
+
+			die( json_encode( $response ) );
+		}
+
+
+/** Function ajax_link_details() called by wp_ajax hooks: {'blc_link_details'} **/
+/** Parameters found in function ajax_link_details(): {"get": ["link_id"], "post": ["link_id"]} **/
+function ajax_link_details() {
+			global $wpdb;
+			/* @var wpdb $wpdb */
+
+			if ( ! current_user_can( 'edit_others_posts' ) ) {
+				die( __( "You don't have sufficient privileges to access this information!", 'broken-link-checker' ) );
+			}
+
+			//FB::log("Loading link details via AJAX");
+
+			if ( isset( $_GET['link_id'] ) ) {
+				//FB::info("Link ID found in GET");
+				$link_id = intval( $_GET['link_id'] );
+			} elseif ( isset( $_POST['link_id'] ) ) {
+				//FB::info("Link ID found in POST");
+				$link_id = intval( $_POST['link_id'] );
+			} else {
+				//FB::error('Link ID not specified, you hacking bastard.');
+				die( __( 'Error : link ID not specified', 'broken-link-checker' ) );
+			}
+
+			//Load the link.
+			$link = new blcLink( $link_id );
+
+			if ( ! $link->is_new ) {
+				//FB::info($link, 'Link loaded');
+				if ( ! class_exists( 'blcTablePrinter' ) ) {
+					require dirname( $this->loader ) . '/includes/admin/table-printer.php';
+				}
+				blcTablePrinter::details_row_contents( $link );
+				die();
+			} else {
+				printf( __( 'Failed to load link details (%s)', 'broken-link-checker' ), $wpdb->last_error );
+				die();
+			}
+		}
+
+
+/** Function ajax_current_load() called by wp_ajax hooks: {'blc_current_load'} **/
+/** No params detected :-/ **/
+
+
+/** Function ajax_work() called by wp_ajax hooks: {'blc_work'} **/
+/** No params detected :-/ **/
+
+
+/** Function dismiss_multisite_notification() called by wp_ajax hooks: {'wpmudev_blc_multisite_notification_dismiss'} **/
+/** No params detected :-/ **/
 
 
 /** Function ajax_deredirect() called by wp_ajax hooks: {'blc_deredirect'} **/
@@ -442,6 +379,69 @@ function ajax_deredirect() {
 			}
 
 			die( json_encode( $response ) );
+		}
+
+
+/** Function ajax_unlink() called by wp_ajax hooks: {'blc_unlink'} **/
+/** Parameters found in function ajax_unlink(): {"post": ["link_id"]} **/
+function ajax_unlink() {
+			if ( ! current_user_can( 'edit_others_posts' ) || ! check_ajax_referer( 'blc_unlink', false, false ) ) {
+				die(
+				json_encode(
+					array(
+						'error' => __( "You're not allowed to do that!", 'broken-link-checker' ),
+					)
+				)
+				);
+			}
+
+			if ( isset( $_POST['link_id'] ) ) {
+				//Load the link
+				$link = new blcLink( intval( $_POST['link_id'] ) );
+
+				if ( ! $link->valid() ) {
+					die(
+					json_encode(
+						array(
+							'error' => sprintf( __( "Oops, I can't find the link %d", 'broken-link-checker' ), intval( $_POST['link_id'] ) ),
+						)
+					)
+					);
+				}
+
+				//Try and unlink it
+				$rez = $link->unlink();
+
+				if ( false === $rez ) {
+					die(
+					json_encode(
+						array(
+							'error' => __( 'An unexpected error occured!', 'broken-link-checker' ),
+						)
+					)
+					);
+				} else {
+					$response = array(
+						'cnt_okay'  => $rez['cnt_okay'],
+						'cnt_error' => $rez['cnt_error'],
+						'errors'    => array(),
+					);
+					foreach ( $rez['errors'] as $error ) {
+						/** @var WP_Error $error */
+						array_push( $response['errors'], implode( ', ', $error->get_error_messages() ) );
+					}
+
+					die( json_encode( $response ) );
+				}
+			} else {
+				die(
+				json_encode(
+					array(
+						'error' => __( 'Error : link_id not specified', 'broken-link-checker' ),
+					)
+				)
+				);
+			}
 		}
 
 

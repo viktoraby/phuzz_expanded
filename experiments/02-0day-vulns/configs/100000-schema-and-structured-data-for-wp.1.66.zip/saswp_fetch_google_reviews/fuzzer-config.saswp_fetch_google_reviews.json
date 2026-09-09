@@ -1,0 +1,64 @@
+{
+  "target": "http://web/wp-admin/admin-ajax.php",
+  "methods": [
+    "POST"
+  ],
+  "body_params": {
+    "weight": 1,
+    "fixed": [
+      "saswp_security_nonce"
+    ],
+    "fuzz": [
+      "reviews_api",
+      "reviews_api_status",
+      "location",
+      "language",
+      "g_api",
+      "premium_status",
+      "blocks"
+    ],
+    "data": [
+      {
+        "name": "saswp_security_nonce",
+        "value": "fuzz"
+      },
+      {
+        "name": "reviews_api_status",
+        "value": "fuzz"
+      },
+      {
+        "name": "location",
+        "value": "fuzz"
+      },
+      {
+        "name": "language",
+        "value": "fuzz"
+      },
+      {
+        "name": "g_api",
+        "value": "fuzz"
+      },
+      {
+        "name": "premium_status",
+        "value": "fuzz"
+      },
+      {
+        "name": "blocks",
+        "value": "fuzz"
+      }
+    ]
+  },
+  "query_params": {
+    "weight": 1,
+    "fixed": [
+      "action"
+    ],
+    "fuzz": [],
+    "data": [
+      {
+        "name": "action",
+        "value": "saswp_fetch_google_reviews"
+      }
+    ]
+  }
+}

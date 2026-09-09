@@ -5,69 +5,54 @@
 *Found functions:7
 *Extracted functions:7
 *Total parameter names extracted: 7
-*Overview: {'handle_ajax_requests': {'aios_ajax'}, 'shared_ajax': {'simbatfa_shared_ajax'}, 'get_antibot_keys': {'nopriv_get_antibot_keys'}, 'ajax': {'tfa_frontend'}, 'wp_ajax_updraftcentral_receivepublickey': {'nopriv_updraftcentral_receivepublickey', 'updraftcentral_receivepublickey'}, 'tfaInitLogin': {'simbatfa-init-otp', 'nopriv_simbatfa-init-otp'}, 'updraft_central_ajax_handler': {'updraft_central_ajax'}}
+*Overview: {'tfaInitLogin': {'nopriv_simbatfa-init-otp', 'simbatfa-init-otp'}, 'ajax': {'tfa_frontend'}, 'get_antibot_keys': {'nopriv_get_antibot_keys'}, 'handle_ajax_requests': {'aios_ajax'}, 'shared_ajax': {'simbatfa_shared_ajax'}, 'wp_ajax_updraftcentral_receivepublickey': {'nopriv_updraftcentral_receivepublickey', 'updraftcentral_receivepublickey'}, 'updraft_central_ajax_handler': {'updraft_central_ajax'}}
 *
 ***/
 
-/** Function handle_ajax_requests() called by wp_ajax hooks: {'aios_ajax'} **/
-/** No params detected :-/ **/
+/** Function tfaInitLogin() called by wp_ajax hooks: {'nopriv_simbatfa-init-otp', 'simbatfa-init-otp'} **/
+/** Parameters found in function tfaInitLogin(): {"post": ["user"], "cookie": ["simbatfa_trust_token"]} **/
+function tfaInitLogin() {
 
+		if (empty($_POST['user'])) die('Security check (2).');
 
-/** Function shared_ajax() called by wp_ajax hooks: {'simbatfa_shared_ajax'} **/
-/** Parameters found in function shared_ajax(): {"post": ["subaction", "nonce", "device_id"]} **/
-function shared_ajax() {
+		if (defined('TWO_FACTOR_DISABLE') && TWO_FACTOR_DISABLE) {
+			$res = array('result' => false, 'user_can_trust' => false);
+		} else {
 
-		if (empty($_POST['subaction']) || empty($_POST['nonce']) || !is_user_logged_in() || !wp_verify_nonce($_POST['nonce'], 'tfa_shared_nonce')) die('Security check (3).');
+			if (!function_exists('sanitize_user')) require_once ABSPATH.WPINC.'/formatting.php';
 
-		global $current_user;
+			// WP's password-checking sanitizes the supplied user, so we must do the same to check if TFA is enabled for them
+			$auth_info = array('log' => sanitize_user(stripslashes((string)$_POST['user'])));
 
-		$subaction = $_POST['subaction'];
+			if (!empty($_COOKIE['simbatfa_trust_token'])) $auth_info['trust_token'] = (string) $_COOKIE['simbatfa_trust_token'];
 
-		if ('refreshotp' == $subaction) {
-
-			$code = $this->get_controller('totp')->get_current_code($current_user->ID);
-
-			if (false === $code) die(json_encode(array('code' => '')));
-
-			die(json_encode(array('code' => $code)));
-
-		} elseif ('untrust_device' == $subaction && isset($_POST['device_id'])) {
-			$this->untrust_device(stripslashes($_POST['device_id']));
-			ob_start();
-			$this->include_template('trusted-devices-inner-box.php', array('trusted_devices' => $this->user_get_trusted_devices()));
-			echo json_encode(array('trusted_list' => ob_get_clean()));
+			$res = $this->pre_auth($auth_info, 'array');
 		}
 
-		exit;
-
-	}
-
-
-/** Function get_antibot_keys() called by wp_ajax hooks: {'nopriv_get_antibot_keys'} **/
-/** Parameters found in function get_antibot_keys(): {"post": ["nonce"]} **/
-function get_antibot_keys() {
-		global $aio_wp_security;
-		
-		$response = array(
-			'status' => 'success',
-			'data' => array(),
+		$results = array(
+			'jsonstarter' => 'justhere',
+			'status' => $res['result'],
 		);
 
-		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- PCP warning. It is the nonce.
-		$nonce = empty($_POST['nonce']) ? '' : sanitize_key(wp_unslash($_POST['nonce']));
-		if (!wp_verify_nonce($nonce, 'wp-security-ajax-nonce')) {
-			$response['status'] = false;
-			$response['error_code'] = 'invalid_nonce';
-			$response['error_message'] = 'Invalid nonce (wp-security-ajax-nonce) provided for this action.';
-		} else {
-			$key_map_arr = AIOWPSecurity_Comment::generate_antibot_keys(true);
-			$response['data'] = $key_map_arr[0];
-			if ('1' == $aio_wp_security->configs->get_value('aiowps_spambot_detect_usecookies')) {
-				AIOWPSecurity_Comment::insert_antibot_keys_in_cookie();
-			}
+		if (!empty($res['user_can_trust'])) {
+			$results['user_can_trust'] = 1;
+			if (!empty($res['user_already_trusted'])) $results['user_already_trusted'] = 1;
 		}
-		
-		echo wp_json_encode($response);
+
+
+		if (!empty($this->output_buffering)) {
+			if (!empty($this->logged)) {
+				$results['php_output'] = $this->logged;
+			}
+			restore_error_handler();
+			$buffered = ob_get_clean();
+			if ($buffered) $results['extra_output'] = $buffered;
+		}
+
+		$results = apply_filters('simbatfa_check_tfa_requirements_ajax_response', $results);
+
+		echo json_encode($results);
+
 		exit;
 	}
 
@@ -135,6 +120,69 @@ function ajax() {
 	}
 
 
+/** Function get_antibot_keys() called by wp_ajax hooks: {'nopriv_get_antibot_keys'} **/
+/** Parameters found in function get_antibot_keys(): {"post": ["nonce"]} **/
+function get_antibot_keys() {
+		global $aio_wp_security;
+		
+		$response = array(
+			'status' => 'success',
+			'data' => array(),
+		);
+
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- PCP warning. It is the nonce.
+		$nonce = empty($_POST['nonce']) ? '' : sanitize_key(wp_unslash($_POST['nonce']));
+		if (!wp_verify_nonce($nonce, 'wp-security-ajax-nonce')) {
+			$response['status'] = false;
+			$response['error_code'] = 'invalid_nonce';
+			$response['error_message'] = 'Invalid nonce (wp-security-ajax-nonce) provided for this action.';
+		} else {
+			$key_map_arr = AIOWPSecurity_Comment::generate_antibot_keys(true);
+			$response['data'] = $key_map_arr[0];
+			if ('1' == $aio_wp_security->configs->get_value('aiowps_spambot_detect_usecookies')) {
+				AIOWPSecurity_Comment::insert_antibot_keys_in_cookie();
+			}
+		}
+		
+		echo wp_json_encode($response);
+		exit;
+	}
+
+
+/** Function handle_ajax_requests() called by wp_ajax hooks: {'aios_ajax'} **/
+/** No params detected :-/ **/
+
+
+/** Function shared_ajax() called by wp_ajax hooks: {'simbatfa_shared_ajax'} **/
+/** Parameters found in function shared_ajax(): {"post": ["subaction", "nonce", "device_id"]} **/
+function shared_ajax() {
+
+		if (empty($_POST['subaction']) || empty($_POST['nonce']) || !is_user_logged_in() || !wp_verify_nonce($_POST['nonce'], 'tfa_shared_nonce')) die('Security check (3).');
+
+		global $current_user;
+
+		$subaction = $_POST['subaction'];
+
+		if ('refreshotp' == $subaction) {
+
+			$code = $this->get_controller('totp')->get_current_code($current_user->ID);
+
+			if (false === $code) die(json_encode(array('code' => '')));
+
+			die(json_encode(array('code' => $code)));
+
+		} elseif ('untrust_device' == $subaction && isset($_POST['device_id'])) {
+			$this->untrust_device(stripslashes($_POST['device_id']));
+			ob_start();
+			$this->include_template('trusted-devices-inner-box.php', array('trusted_devices' => $this->user_get_trusted_devices()));
+			echo json_encode(array('trusted_list' => ob_get_clean()));
+		}
+
+		exit;
+
+	}
+
+
 /** Function wp_ajax_updraftcentral_receivepublickey() called by wp_ajax hooks: {'nopriv_updraftcentral_receivepublickey', 'updraftcentral_receivepublickey'} **/
 /** Parameters found in function wp_ajax_updraftcentral_receivepublickey(): {"get": ["_wpnonce", "public_key", "updraft_key_index"]} **/
 function wp_ajax_updraftcentral_receivepublickey() {
@@ -195,54 +243,6 @@ function wp_ajax_updraftcentral_receivepublickey() {
 		</p></div></div>
 		<?php
 		die;
-	}
-
-
-/** Function tfaInitLogin() called by wp_ajax hooks: {'simbatfa-init-otp', 'nopriv_simbatfa-init-otp'} **/
-/** Parameters found in function tfaInitLogin(): {"post": ["user"], "cookie": ["simbatfa_trust_token"]} **/
-function tfaInitLogin() {
-
-		if (empty($_POST['user'])) die('Security check (2).');
-
-		if (defined('TWO_FACTOR_DISABLE') && TWO_FACTOR_DISABLE) {
-			$res = array('result' => false, 'user_can_trust' => false);
-		} else {
-
-			if (!function_exists('sanitize_user')) require_once ABSPATH.WPINC.'/formatting.php';
-
-			// WP's password-checking sanitizes the supplied user, so we must do the same to check if TFA is enabled for them
-			$auth_info = array('log' => sanitize_user(stripslashes((string)$_POST['user'])));
-
-			if (!empty($_COOKIE['simbatfa_trust_token'])) $auth_info['trust_token'] = (string) $_COOKIE['simbatfa_trust_token'];
-
-			$res = $this->pre_auth($auth_info, 'array');
-		}
-
-		$results = array(
-			'jsonstarter' => 'justhere',
-			'status' => $res['result'],
-		);
-
-		if (!empty($res['user_can_trust'])) {
-			$results['user_can_trust'] = 1;
-			if (!empty($res['user_already_trusted'])) $results['user_already_trusted'] = 1;
-		}
-
-
-		if (!empty($this->output_buffering)) {
-			if (!empty($this->logged)) {
-				$results['php_output'] = $this->logged;
-			}
-			restore_error_handler();
-			$buffered = ob_get_clean();
-			if ($buffered) $results['extra_output'] = $buffered;
-		}
-
-		$results = apply_filters('simbatfa_check_tfa_requirements_ajax_response', $results);
-
-		echo json_encode($results);
-
-		exit;
 	}
 
 

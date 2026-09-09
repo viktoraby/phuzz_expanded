@@ -1,0 +1,53 @@
+{
+  "target": "http://web/wp-admin/admin-ajax.php",
+  "methods": [
+    "POST"
+  ],
+  "body_params": {
+    "weight": 1,
+    "fixed": [
+      "saswp_rf_form_nonce"
+    ],
+    "fuzz": [],
+    "data": [
+      {
+        "name": "saswp_rf_form_nonce",
+        "value": "fuzz"
+      }
+    ]
+  },
+  "query_params": {
+    "weight": 1,
+    "fixed": [
+      "action"
+    ],
+    "fuzz": [
+      "sort_by",
+      "filter_by",
+      "current_page",
+      "max_page"
+    ],
+    "data": [
+      {
+        "name": "action",
+        "value": "saswp_rf_template_pagination"
+      },
+      {
+        "name": "sort_by",
+        "value": "fuzz"
+      },
+      {
+        "name": "filter_by",
+        "value": "fuzz"
+      },
+      {
+        "name": "current_page",
+        "value": "fuzz"
+      },
+      {
+        "name": "max_page",
+        "value": "fuzz"
+      }
+    ]
+  }
+}

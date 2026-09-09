@@ -5,60 +5,133 @@
 *Found functions:27
 *Extracted functions:23
 *Total parameter names extracted: 18
-*Overview: {'test_api_key': {'test_api_key'}, 'gettext_get_translations': {'trp_get_translations_gettext'}, 'replace_in_dictionary': {'trp_glossary_replace_in_dictionary'}, 'ajax_get_similar_string_translation': {'trp_get_similar_string_translation'}, 'edit_term': {'trp_glossary_edit_term'}, 'ajax_get_terms': {'trp_glossary_get_terms'}, 'ajax_save_language_switcher': {'trp_language_switcher_save'}, 'gettext_save_translations': {'trp_save_translations_gettext'}, 'save_translations': {'trp_save_translations_regular'}, 'trp_dismiss_gettext_notice': {'trp_dismiss_gettext_notice'}, 'Content-Type: text/javascript': {'trp-block-ls-shortcode.js'}, 'gettext': {'trp_string_translation_get_missing_gettext_strings', 'trp_string_translation_get_strings_by_original_ids_gettext'}, 'trp_ai_recheck_quota': {'trp_ai_recheck_quota'}, 'save_editor_user_meta': {'trp_save_editor_user_meta'}, 'scan_gettext': {'trp_scan_gettext'}, 'ajax_disable_legacy_language_switcher': {'trp_disable_legacy_language_switcher'}, 'ajax_mark_forum_posts_read': {'trp_mark_forum_posts_read'}, 'process_js_strings_in_translation_editor': {'trp_process_js_strings_in_translation_editor'}, 'delete_term': {'trp_glossary_delete_term'}, 'ajax_get_forum_posts': {'trp_get_forum_posts'}, 'split_translation_block': {'trp_split_translation_block'}, 'create_translation_block': {'trp_create_translation_block'}, 'add_term': {'trp_glossary_add_term'}, 'trp_update_database': {'trp_update_database'}, 'install_plugins_request': {'trp_install_plugins'}, 'get_translations': {'nopriv_trp_get_translations_regular', 'trp_get_translations_regular'}, 'search_dictionary': {'trp_glossary_search_dictionary'}}
+*Overview: {'edit_term': {'trp_glossary_edit_term'}, 'add_term': {'trp_glossary_add_term'}, 'ajax_get_forum_posts': {'trp_get_forum_posts'}, 'gettext_save_translations': {'trp_save_translations_gettext'}, 'delete_term': {'trp_glossary_delete_term'}, 'gettext': {'trp_string_translation_get_missing_gettext_strings', 'trp_string_translation_get_strings_by_original_ids_gettext'}, 'replace_in_dictionary': {'trp_glossary_replace_in_dictionary'}, 'test_api_key': {'test_api_key'}, 'gettext_get_translations': {'trp_get_translations_gettext'}, 'trp_dismiss_gettext_notice': {'trp_dismiss_gettext_notice'}, 'scan_gettext': {'trp_scan_gettext'}, 'ajax_get_similar_string_translation': {'trp_get_similar_string_translation'}, 'ajax_mark_forum_posts_read': {'trp_mark_forum_posts_read'}, 'search_dictionary': {'trp_glossary_search_dictionary'}, 'ajax_get_terms': {'trp_glossary_get_terms'}, 'ajax_disable_legacy_language_switcher': {'trp_disable_legacy_language_switcher'}, 'split_translation_block': {'trp_split_translation_block'}, 'ajax_save_language_switcher': {'trp_language_switcher_save'}, 'get_translations': {'trp_get_translations_regular', 'nopriv_trp_get_translations_regular'}, 'save_editor_user_meta': {'trp_save_editor_user_meta'}, 'install_plugins_request': {'trp_install_plugins'}, 'create_translation_block': {'trp_create_translation_block'}, 'process_js_strings_in_translation_editor': {'trp_process_js_strings_in_translation_editor'}, 'save_translations': {'trp_save_translations_regular'}, 'Content-Type: text/javascript': {'trp-block-ls-shortcode.js'}, 'trp_ai_recheck_quota': {'trp_ai_recheck_quota'}, 'trp_update_database': {'trp_update_database'}}
 *
 ***/
 
-/** Function test_api_key() called by wp_ajax hooks: {'test_api_key'} **/
+/** Function edit_term() called by wp_ajax hooks: {'trp_glossary_edit_term'} **/
+/** Parameters found in function edit_term(): {"post": ["original_term"]} **/
+function edit_term() {
+        $this->verify_request( self::EDIT_TERM_ACTION );
+
+        $original_term = isset( $_POST['original_term'] ) ? trim( sanitize_text_field( wp_unslash( $_POST['original_term'] ) ) ) : '';
+
+        list( $default_term, $translations ) = $this->parse_submitted_term();
+
+        $glossary = $this->get_glossary();
+
+        if ( $original_term === '' || ! array_key_exists( $original_term, $glossary ) ) {
+            wp_send_json_error( array( 'message' => esc_html__( 'The term you are trying to edit no longer exists. Please reload the page.', 'translatepress-multilingual' ) ) );
+        }
+
+        // Renaming to a key that already belongs to a different term is a duplicate.
+        if ( $default_term !== $original_term && array_key_exists( $default_term, $glossary ) ) {
+            wp_send_json_error( array( 'message' => sprintf(
+                /* translators: %s is the glossary term. */
+                esc_html__( 'The term “%s” already exists in the glossary.', 'translatepress-multilingual' ),
+                $default_term
+            ) ) );
+        }
+
+        // Rebuild preserving the original row position, swapping the key in place.
+        $updated = array();
+        foreach ( $glossary as $key => $value ) {
+            if ( $key === $original_term ) {
+                $updated[ $default_term ] = $translations;
+            } else {
+                $updated[ $key ] = $value;
+            }
+        }
+
+        update_option( self::OPTION_NAME, $updated, false );
+
+        wp_send_json_success( array(
+            'original_term' => $original_term,
+            'term'          => $default_term,
+            'translations'  => $translations,
+        ) );
+    }
+
+
+/** Function add_term() called by wp_ajax hooks: {'trp_glossary_add_term'} **/
 /** No params detected :-/ **/
 
 
-/** Function gettext_get_translations() called by wp_ajax hooks: {'trp_get_translations_gettext'} **/
-/** Parameters found in function gettext_get_translations(): {"post": ["action", "string_ids", "language"]} **/
-function gettext_get_translations() {
-		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
-			if ( isset( $_POST['action'] ) && $_POST['action'] === 'trp_get_translations_gettext' && ! empty( $_POST['string_ids'] ) && ! empty( $_POST['language'] ) && in_array( $_POST['language'], $this->settings['translation-languages'] ) ) {
-				check_ajax_referer( 'gettext_get_translations', 'security' );
-				if ( ! empty( $_POST['string_ids'] ) ) {
-					$gettext_string_ids = json_decode( stripslashes( $_POST['string_ids'] ) ); /* phpcs:ignore */ /* sanitized when inserting in db */
-				}
-				else {
-					$gettext_string_ids = array();
-				}
-
-				$current_language = sanitize_text_field( $_POST['language'] );
-				$dictionaries     = array();
-
-				if ( is_array( $gettext_string_ids ) ) {
-
-					$trp = TRP_Translate_Press::get_trp_instance();
-					if ( ! $this->trp_query ) {
-						$this->trp_query = $trp->get_component( 'query' );
-					}
-					if ( ! $this->translation_manager ) {
-						$this->translation_manager = $trp->get_component( 'translation_manager' );
-					}
+/** Function ajax_get_forum_posts() called by wp_ajax hooks: {'trp_get_forum_posts'} **/
+/** No params detected :-/ **/
 
 
-					$dictionaries[ $current_language ] = $this->trp_query->get_gettext_string_rows_by_ids( $gettext_string_ids, $current_language );
+/** Function gettext_save_translations() called by wp_ajax hooks: {'trp_save_translations_gettext'} **/
+/** Parameters found in function gettext_save_translations(): {"post": ["action", "strings"]} **/
+function gettext_save_translations(){
+		if ( defined( 'DOING_AJAX' ) && DOING_AJAX && current_user_can( apply_filters( 'trp_translating_capability', 'manage_options' ) ) ) {
+			if (isset($_POST['action']) && $_POST['action'] === 'trp_save_translations_gettext' && !empty($_POST['strings'])) {
+				check_ajax_referer( 'gettext_save_translations', 'security' );
+				$strings = json_decode(stripslashes($_POST['strings']));/* phpcs:ignore */ /* properly sanitized bellow */
+				$update_strings = array();
+				foreach ( $strings as $language => $language_strings ) {
+					if ( in_array( $language, $this->settings['translation-languages'] ) ) {
+						$update_strings[ $language ] = array();
+						foreach( $language_strings as $string ) {
+							if ( isset( $string->id ) && is_numeric( $string->id ) ) {
+								$translated = trp_sanitize_string( $string->translated );
+								$status     = ! empty( $translated ) ? TRP_Query::HUMAN_REVIEWED : TRP_Query::NOT_TRANSLATED;
 
-					/* build the original id array */
-					$original_ids            = array();
-					if ( ! empty( $dictionaries[ $current_language ] ) ) {
-						foreach ( $dictionaries[ $current_language ] as $current_language_string ) {
-							/* searching by original id */
-							$original_ids[] = (int)$current_language_string['ot_id'];
+								array_push($update_strings[ $language ], array(
+									'id' => (int)$string->id,
+                                    'original' => trp_sanitize_string( $string->original, false ),
+									'translated' => $translated,
+									'domain' => sanitize_text_field( $string->domain ),
+									'status' => $status,
+									'plural_form' => (int)$string->plural_form,
+									'context' => $string->context
+								));
+							}
 						}
 					}
-					echo trp_safe_json_encode( array( // phpcs:ignore
-						'originalIds' => $original_ids,
-					) );
-
 				}
+
+				if ( ! $this->trp_query ) {
+					$trp = TRP_Translate_Press::get_trp_instance();
+					$this->trp_query = $trp->get_component( 'query' );
+				}
+
+				foreach( $update_strings as $language => $update_string_array ) {
+                    $gettext_insert_update = $this->trp_query->get_query_component('gettext_insert_update');
+                    $gettext_insert_update->update_gettext_strings( $update_string_array, $language, array('id','translated', 'status') );
+                    $this->trp_query->remove_possible_duplicates($update_string_array, $language, 'gettext');
+				}
+
+                do_action('trp_save_editor_translations_gettext_strings', $update_strings, $this->settings);
 			}
 		}
+		echo trp_safe_json_encode( $update_strings );//phpcs:ignore
 		wp_die();
 	}
+
+
+/** Function delete_term() called by wp_ajax hooks: {'trp_glossary_delete_term'} **/
+/** Parameters found in function delete_term(): {"post": ["term"]} **/
+function delete_term() {
+        $this->verify_request( self::DELETE_TERM_ACTION );
+
+        $term = isset( $_POST['term'] ) ? trim( sanitize_text_field( wp_unslash( $_POST['term'] ) ) ) : '';
+
+        $glossary = $this->get_glossary();
+
+        if ( $term === '' || ! array_key_exists( $term, $glossary ) ) {
+            wp_send_json_error( array( 'message' => esc_html__( 'The term you are trying to delete no longer exists. Please reload the page.', 'translatepress-multilingual' ) ) );
+        }
+
+        unset( $glossary[ $term ] );
+        update_option( self::OPTION_NAME, $glossary, false );
+
+        wp_send_json_success( array( 'term' => $term ) );
+    }
+
+
+/** Function gettext() called by wp_ajax hooks: {'trp_string_translation_get_missing_gettext_strings', 'trp_string_translation_get_strings_by_original_ids_gettext'} **/
+/** No function found :-/ **/
 
 
 /** Function replace_in_dictionary() called by wp_ajax hooks: {'trp_glossary_replace_in_dictionary'} **/
@@ -195,6 +268,77 @@ function replace_in_dictionary() {
     }
 
 
+/** Function test_api_key() called by wp_ajax hooks: {'test_api_key'} **/
+/** No params detected :-/ **/
+
+
+/** Function gettext_get_translations() called by wp_ajax hooks: {'trp_get_translations_gettext'} **/
+/** Parameters found in function gettext_get_translations(): {"post": ["action", "string_ids", "language"]} **/
+function gettext_get_translations() {
+		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
+			if ( isset( $_POST['action'] ) && $_POST['action'] === 'trp_get_translations_gettext' && ! empty( $_POST['string_ids'] ) && ! empty( $_POST['language'] ) && in_array( $_POST['language'], $this->settings['translation-languages'] ) ) {
+				check_ajax_referer( 'gettext_get_translations', 'security' );
+				if ( ! empty( $_POST['string_ids'] ) ) {
+					$gettext_string_ids = json_decode( stripslashes( $_POST['string_ids'] ) ); /* phpcs:ignore */ /* sanitized when inserting in db */
+				}
+				else {
+					$gettext_string_ids = array();
+				}
+
+				$current_language = sanitize_text_field( $_POST['language'] );
+				$dictionaries     = array();
+
+				if ( is_array( $gettext_string_ids ) ) {
+
+					$trp = TRP_Translate_Press::get_trp_instance();
+					if ( ! $this->trp_query ) {
+						$this->trp_query = $trp->get_component( 'query' );
+					}
+					if ( ! $this->translation_manager ) {
+						$this->translation_manager = $trp->get_component( 'translation_manager' );
+					}
+
+
+					$dictionaries[ $current_language ] = $this->trp_query->get_gettext_string_rows_by_ids( $gettext_string_ids, $current_language );
+
+					/* build the original id array */
+					$original_ids            = array();
+					if ( ! empty( $dictionaries[ $current_language ] ) ) {
+						foreach ( $dictionaries[ $current_language ] as $current_language_string ) {
+							/* searching by original id */
+							$original_ids[] = (int)$current_language_string['ot_id'];
+						}
+					}
+					echo trp_safe_json_encode( array( // phpcs:ignore
+						'originalIds' => $original_ids,
+					) );
+
+				}
+			}
+		}
+		wp_die();
+	}
+
+
+/** Function trp_dismiss_gettext_notice() called by wp_ajax hooks: {'trp_dismiss_gettext_notice'} **/
+/** No function found :-/ **/
+
+
+/** Function scan_gettext() called by wp_ajax hooks: {'trp_scan_gettext'} **/
+/** Parameters found in function scan_gettext(): {"post": ["action"]} **/
+function scan_gettext() {
+		if ( defined( 'DOING_AJAX' ) && DOING_AJAX && current_user_can( apply_filters( 'trp_translating_capability', 'manage_options' ) ) ) {
+			if ( isset( $_POST['action'] ) && $_POST['action'] === 'trp_scan_gettext' ) {
+				check_ajax_referer( 'scangettextnonce', 'security' );
+				$status = $this->scan();
+				echo trp_safe_json_encode( $status ); //phpcs:ignore
+
+			}
+		}
+		wp_die();
+	}
+
+
 /** Function ajax_get_similar_string_translation() called by wp_ajax hooks: {'trp_get_similar_string_translation'} **/
 /** Parameters found in function ajax_get_similar_string_translation(): {"post": ["action", "original_string", "language", "type", "number"]} **/
 function ajax_get_similar_string_translation(){
@@ -242,52 +386,135 @@ function ajax_get_similar_string_translation(){
     }
 
 
-/** Function edit_term() called by wp_ajax hooks: {'trp_glossary_edit_term'} **/
-/** Parameters found in function edit_term(): {"post": ["original_term"]} **/
-function edit_term() {
-        $this->verify_request( self::EDIT_TERM_ACTION );
+/** Function ajax_mark_forum_posts_read() called by wp_ajax hooks: {'trp_mark_forum_posts_read'} **/
+/** No params detected :-/ **/
 
-        $original_term = isset( $_POST['original_term'] ) ? trim( sanitize_text_field( wp_unslash( $_POST['original_term'] ) ) ) : '';
 
-        list( $default_term, $translations ) = $this->parse_submitted_term();
+/** Function search_dictionary() called by wp_ajax hooks: {'trp_glossary_search_dictionary'} **/
+/** Parameters found in function search_dictionary(): {"post": ["term", "lang", "page"]} **/
+function search_dictionary() {
+        $this->verify_request( self::SEARCH_ACTION );
 
-        $glossary = $this->get_glossary();
+        global $wpdb;
 
-        if ( $original_term === '' || ! array_key_exists( $original_term, $glossary ) ) {
-            wp_send_json_error( array( 'message' => esc_html__( 'The term you are trying to edit no longer exists. Please reload the page.', 'translatepress-multilingual' ) ) );
+        $term      = isset( $_POST['term'] ) ? trim( sanitize_text_field( wp_unslash( $_POST['term'] ) ) ) : '';
+        $only_lang = isset( $_POST['lang'] ) ? sanitize_text_field( wp_unslash( $_POST['lang'] ) ) : '';
+        $page      = isset( $_POST['page'] ) ? max( 1, absint( $_POST['page'] ) ) : 1;
+        $per_page  = self::SEARCH_PER_PAGE;
+
+        $query          = $this->get_query();
+        $language_names = $this->get_english_language_names();
+
+        // Fetching one language's page (pagination click) vs. all languages (initial search).
+        $languages = $this->get_target_language_codes();
+        if ( $only_lang !== '' ) {
+            $languages = in_array( $only_lang, $languages, true ) ? array( $only_lang ) : array();
         }
 
-        // Renaming to a key that already belongs to a different term is a duplicate.
-        if ( $default_term !== $original_term && array_key_exists( $default_term, $glossary ) ) {
-            wp_send_json_error( array( 'message' => sprintf(
-                /* translators: %s is the glossary term. */
-                esc_html__( 'The term “%s” already exists in the glossary.', 'translatepress-multilingual' ),
-                $default_term
-            ) ) );
-        }
+        $results = array();
 
-        // Rebuild preserving the original row position, swapping the key in place.
-        $updated = array();
-        foreach ( $glossary as $key => $value ) {
-            if ( $key === $original_term ) {
-                $updated[ $default_term ] = $translations;
-            } else {
-                $updated[ $key ] = $value;
+        if ( $term !== '' && $query ) {
+            $like = '%' . $wpdb->esc_like( mb_strtolower( $term, 'UTF-8' ) ) . '%';
+
+            foreach ( $languages as $lang ) {
+                $entries = array();
+                $total   = 0;
+                $table   = $query->get_table_name( $lang );
+
+                if ( $this->dictionary_table_exists( $table ) ) {
+                    $total = (int) $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(*) FROM `{$table}` WHERE LOWER(original) LIKE %s AND translated IS NOT NULL AND translated <> ''", $like ) ); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- table name built from known prefix + validated language codes.
+
+                    $offset = ( $page - 1 ) * $per_page;
+                    $rows   = $wpdb->get_results( $wpdb->prepare( "SELECT original, translated FROM `{$table}` WHERE LOWER(original) LIKE %s AND translated IS NOT NULL AND translated <> '' ORDER BY id ASC LIMIT %d OFFSET %d", $like, $per_page, $offset ) ); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- table name built from known prefix + validated language codes.
+                    foreach ( (array) $rows as $row ) {
+                        $entries[] = array(
+                            'original'   => $row->original,
+                            'translated' => $row->translated,
+                        );
+                    }
+                }
+
+                $results[] = array(
+                    'code'     => $lang,
+                    'name'     => isset( $language_names[ $lang ] ) ? $language_names[ $lang ] : $lang,
+                    'entries'  => $entries,
+                    'total'    => $total,
+                    'page'     => $page,
+                    'per_page' => $per_page,
+                );
             }
         }
 
-        update_option( self::OPTION_NAME, $updated, false );
-
-        wp_send_json_success( array(
-            'original_term' => $original_term,
-            'term'          => $default_term,
-            'translations'  => $translations,
-        ) );
+        wp_send_json_success( array( 'results' => $results, 'per_page' => $per_page ) );
     }
 
 
 /** Function ajax_get_terms() called by wp_ajax hooks: {'trp_glossary_get_terms'} **/
 /** No params detected :-/ **/
+
+
+/** Function ajax_disable_legacy_language_switcher() called by wp_ajax hooks: {'trp_disable_legacy_language_switcher'} **/
+/** Parameters found in function ajax_disable_legacy_language_switcher(): {"post": ["nonce"]} **/
+function ajax_disable_legacy_language_switcher(): void {
+        if ( ! current_user_can( apply_filters( 'trp_settings_capability', 'manage_options' ) ) ) {
+            wp_send_json_error( __( 'Permission denied.', 'translatepress-multilingual' ), 403 );
+        }
+
+        $nonce = isset( $_POST['nonce'] )
+            ? sanitize_text_field( wp_unslash( $_POST['nonce'] ) )
+            : '';
+
+        if ( ! wp_verify_nonce( $nonce, 'trp_disable_legacy' ) ) {
+            wp_send_json_error( __( 'Invalid nonce.', 'translatepress-multilingual' ), 403 );
+        }
+
+        $adv = get_option( 'trp_advanced_settings', [] );
+        if ( ! is_array( $adv ) ) {
+            $adv = [];
+        }
+
+        // Flip legacy OFF
+        $adv['load_legacy_language_switcher'] = 'no';
+        update_option( 'trp_advanced_settings', $adv );
+
+        TRP_Plugin_Notifications::get_instance()->dismiss_notification( 'trp_ls_v2_intro' );
+
+        wp_send_json_success( __( 'Legacy disabled.', 'translatepress-multilingual' ) );
+    }
+
+
+/** Function split_translation_block() called by wp_ajax hooks: {'trp_split_translation_block'} **/
+/** Parameters found in function split_translation_block(): {"post": ["action", "strings"]} **/
+function split_translation_block() {
+        if ( defined( 'DOING_AJAX' ) && DOING_AJAX && current_user_can( apply_filters( 'trp_translating_capability', 'manage_options' ) ) ) {
+            check_ajax_referer( 'split_translation_block', 'security' );
+
+			if ( isset( $_POST['action'] ) && $_POST['action'] === 'trp_split_translation_block' && ! empty( $_POST['strings'] ) ) {
+                $raw_original_array = json_decode( stripslashes( $_POST['strings'] ) ); /* phpcs:ignore */ /* sanitized downstream */
+				$trp = TRP_Translate_Press::get_trp_instance();
+				if ( ! $this->trp_query ) {
+					$this->trp_query = $trp->get_component( 'query' );
+				}
+				$deprecated_block_type = $this->trp_query->get_constant_block_type_deprecated();
+				$originals = array();
+				foreach( $raw_original_array as $original ){
+					$originals[] = trp_sanitize_string( $original, false );
+				}
+
+				// even inactive languages ( not in $this->settings['translation-languages'] array ) will be updated
+				$all_languages_table_names = $this->trp_query->get_all_table_names( $this->settings['default-language'], array() );
+				$rows_affected = $this->trp_query->update_translation_blocks_by_original( $all_languages_table_names, $originals, $deprecated_block_type );
+				if ( $rows_affected == 0 ){
+					// do updates individually if it fails
+					foreach ( $all_languages_table_names as $table_name ){
+						$this->trp_query->update_translation_blocks_by_original( array( $table_name ), $originals, $deprecated_block_type );
+					}
+				}
+			}
+        }
+
+        die();
+	}
 
 
 /** Function ajax_save_language_switcher() called by wp_ajax hooks: {'trp_language_switcher_save'} **/
@@ -326,114 +553,42 @@ function ajax_save_language_switcher(): void {
     }
 
 
-/** Function gettext_save_translations() called by wp_ajax hooks: {'trp_save_translations_gettext'} **/
-/** Parameters found in function gettext_save_translations(): {"post": ["action", "strings"]} **/
-function gettext_save_translations(){
-		if ( defined( 'DOING_AJAX' ) && DOING_AJAX && current_user_can( apply_filters( 'trp_translating_capability', 'manage_options' ) ) ) {
-			if (isset($_POST['action']) && $_POST['action'] === 'trp_save_translations_gettext' && !empty($_POST['strings'])) {
-				check_ajax_referer( 'gettext_save_translations', 'security' );
-				$strings = json_decode(stripslashes($_POST['strings']));/* phpcs:ignore */ /* properly sanitized bellow */
-				$update_strings = array();
-				foreach ( $strings as $language => $language_strings ) {
-					if ( in_array( $language, $this->settings['translation-languages'] ) ) {
-						$update_strings[ $language ] = array();
-						foreach( $language_strings as $string ) {
-							if ( isset( $string->id ) && is_numeric( $string->id ) ) {
-								$translated = trp_sanitize_string( $string->translated );
-								$status     = ! empty( $translated ) ? TRP_Query::HUMAN_REVIEWED : TRP_Query::NOT_TRANSLATED;
+/** Function get_translations() called by wp_ajax hooks: {'trp_get_translations_regular', 'nopriv_trp_get_translations_regular'} **/
+/** Parameters found in function get_translations(): {"post": ["action", "language", "originals", "skip_machine_translation", "string_ids", "dynamic_strings"]} **/
+function get_translations() {
+		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
+			check_ajax_referer( 'get_translations', 'security' );
+			if ( isset( $_POST['action'] ) && $_POST['action'] === 'trp_get_translations_regular' && !empty( $_POST['language'] ) && in_array( $_POST['language'], $this->settings['translation-languages'] ) ) {
+				$originals = (empty($_POST['originals']) )? array() : json_decode(stripslashes($_POST['originals'])); /* phpcs:ignore */ /* sanitized downstream */
+				$skip_machine_translation = (empty($_POST['skip_machine_translation']) )? array() : json_decode(stripslashes($_POST['skip_machine_translation'])); /* phpcs:ignore */ /* sanitized downstream */
+				$ids = (empty($_POST['string_ids']) )? array() : json_decode(stripslashes($_POST['string_ids'])); /* phpcs:ignore */ /* sanitized downstream */
+				if ( is_array( $skip_machine_translation ) ) {
+                    if ( is_array( $ids ) || is_array( $originals ) ) {
+                        $trp = TRP_Translate_Press::get_trp_instance();
+                        if ( !$this->trp_query ) {
+                            $this->trp_query = $trp->get_component( 'query' );
+                        }
+                        if ( !$this->translation_manager ) {
+                            $this->translation_manager = $trp->get_component( 'translation_manager' );
+                        }
+                        $block_type   = $this->trp_query->get_constant_block_type_regular_string();
+                        $dictionaries = $this->get_translation_for_strings( $ids, $originals, $block_type, $skip_machine_translation );
 
-								array_push($update_strings[ $language ], array(
-									'id' => (int)$string->id,
-                                    'original' => trp_sanitize_string( $string->original, false ),
-									'translated' => $translated,
-									'domain' => sanitize_text_field( $string->domain ),
-									'status' => $status,
-									'plural_form' => (int)$string->plural_form,
-									'context' => $string->context
-								));
-							}
-						}
-					}
-				}
+                        $localized_text = $this->translation_manager->string_groups();
+                        $string_group   = __( 'Others', 'translatepress-multilingual' ); // this type is not registered in the string types because it will be overwritten by the content in data-trp-node-type
+                        if ( isset( $_POST['dynamic_strings'] ) && $_POST['dynamic_strings'] === 'true' ) {
+                            $string_group = $localized_text['dynamicstrings'];
+                        }
+                        $dictionary_by_original = trp_sort_dictionary_by_original( $dictionaries, 'regular', $string_group, sanitize_text_field( $_POST['language'] ) );
 
-				if ( ! $this->trp_query ) {
-					$trp = TRP_Translate_Press::get_trp_instance();
-					$this->trp_query = $trp->get_component( 'query' );
-				}
-
-				foreach( $update_strings as $language => $update_string_array ) {
-                    $gettext_insert_update = $this->trp_query->get_query_component('gettext_insert_update');
-                    $gettext_insert_update->update_gettext_strings( $update_string_array, $language, array('id','translated', 'status') );
-                    $this->trp_query->remove_possible_duplicates($update_string_array, $language, 'gettext');
-				}
-
-                do_action('trp_save_editor_translations_gettext_strings', $update_strings, $this->settings);
-			}
-		}
-		echo trp_safe_json_encode( $update_strings );//phpcs:ignore
-		wp_die();
-	}
-
-
-/** Function save_translations() called by wp_ajax hooks: {'trp_save_translations_regular'} **/
-/** Parameters found in function save_translations(): {"post": ["action", "strings"]} **/
-function save_translations(){
-		if ( defined( 'DOING_AJAX' ) && DOING_AJAX && current_user_can( apply_filters( 'trp_translating_capability', 'manage_options' ) ) ) {
-			check_ajax_referer( 'save_translations', 'security' );
-			if ( isset( $_POST['action'] ) && $_POST['action'] === 'trp_save_translations_regular' && !empty( $_POST['strings'] ) ) {
-				$strings = json_decode(stripslashes($_POST['strings'])); /* phpcs:ignore */ /* sanitized downstream */
-				$update_strings = $this->save_translations_of_strings( $strings );
-			}
-		}
-		echo trp_safe_json_encode( $update_strings ); // phpcs:ignore
-		die();
-	}
-
-
-/** Function trp_dismiss_gettext_notice() called by wp_ajax hooks: {'trp_dismiss_gettext_notice'} **/
-/** No function found :-/ **/
-
-
-/** Function Content-Type: text/javascript() called by wp_ajax hooks: {'trp-block-ls-shortcode.js'} **/
-/** No function found :-/ **/
-
-
-/** Function gettext() called by wp_ajax hooks: {'trp_string_translation_get_missing_gettext_strings', 'trp_string_translation_get_strings_by_original_ids_gettext'} **/
-/** No function found :-/ **/
-
-
-/** Function trp_ai_recheck_quota() called by wp_ajax hooks: {'trp_ai_recheck_quota'} **/
-/** Parameters found in function trp_ai_recheck_quota(): {"post": ["action"]} **/
-function trp_ai_recheck_quota(){
-    if ( defined( 'DOING_AJAX' ) && DOING_AJAX && current_user_can( apply_filters( 'trp_translating_capability', 'manage_options' ) ) ) {
-        if ( isset( $_POST['action'] ) && $_POST['action'] === 'trp_ai_recheck_quota' ) {
-            $nonce_okay = check_ajax_referer( 'trp-tpai-recheck', 'nonce' );
-            if ( $nonce_okay ){
-                $license = trim( (string) get_option( 'trp_license_key', '' ) );
-                $status  = get_option( 'trp_license_status' );
-
-                if ( $status === 'valid' ) {
-                    $response = trp_mtapi_sync_license_call( $license );
-                    if ( is_array( $response ) && ! is_wp_error( $response ) && isset( $response['response'] ) &&
-                        isset( $response['response']['code']) && $response['response']['code'] == 200 ) {
-
-                        $mtapi_url = (defined('MTAPI_URL')  ? MTAPI_URL : 'https://mtapi.translatepress.com' );
-
-                        require_once("class-mtapi-customer.php");
-                        $mtapi_server = new TRP_MTAPI_Customer($mtapi_url);
-                        $site_status = $mtapi_server->lookup_site($license, home_url());
-
-                        $site_status['quota'] = isset ( $site_status['quota'] ) ? $site_status['quota'] : 0;
-                        $quota = intval(ceil($site_status['quota'] / 5));
-                        echo trp_safe_json_encode( ['quota' => $quota ] ); //phpcs:ignore
+                        echo trp_safe_json_encode( $dictionary_by_original );//phpcs:ignore
                     }
                 }
-            }
+			}
+		}
 
-        }
-    }
-    wp_die();
-}
+		wp_die();
+	}
 
 
 /** Function save_editor_user_meta() called by wp_ajax hooks: {'trp_save_editor_user_meta'} **/
@@ -457,115 +612,29 @@ function save_editor_user_meta() {
     }
 
 
-/** Function scan_gettext() called by wp_ajax hooks: {'trp_scan_gettext'} **/
-/** Parameters found in function scan_gettext(): {"post": ["action"]} **/
-function scan_gettext() {
-		if ( defined( 'DOING_AJAX' ) && DOING_AJAX && current_user_can( apply_filters( 'trp_translating_capability', 'manage_options' ) ) ) {
-			if ( isset( $_POST['action'] ) && $_POST['action'] === 'trp_scan_gettext' ) {
-				check_ajax_referer( 'scangettextnonce', 'security' );
-				$status = $this->scan();
-				echo trp_safe_json_encode( $status ); //phpcs:ignore
-
-			}
-		}
-		wp_die();
-	}
-
-
-/** Function ajax_disable_legacy_language_switcher() called by wp_ajax hooks: {'trp_disable_legacy_language_switcher'} **/
-/** Parameters found in function ajax_disable_legacy_language_switcher(): {"post": ["nonce"]} **/
-function ajax_disable_legacy_language_switcher(): void {
-        if ( ! current_user_can( apply_filters( 'trp_settings_capability', 'manage_options' ) ) ) {
-            wp_send_json_error( __( 'Permission denied.', 'translatepress-multilingual' ), 403 );
+/** Function install_plugins_request() called by wp_ajax hooks: {'trp_install_plugins'} **/
+/** Parameters found in function install_plugins_request(): {"post": ["action", "plugin_slug"]} **/
+function install_plugins_request(){
+        if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
+            check_ajax_referer( 'trp_install_plugins', 'security' );
+            if ( ! current_user_can( 'install_plugins' ) ) {
+                wp_die( -1, 403 );
+            }
+            if ( isset( $_POST['action'] ) && $_POST['action'] === 'trp_install_plugins' && !empty( $_POST['plugin_slug'] ) ) {
+                $plugin_slug = sanitize_text_field($_POST['plugin_slug']);
+                $short_slugs = $this->get_plugin_slugs();
+                if ( isset( $short_slugs[$plugin_slug]) ){
+                    if ( $this->install_upgrade_activate($plugin_slug) ){
+                        $message = esc_html__('Active', 'translatepress-multilingual');
+                    }else{
+                        $message = wp_kses( sprintf( __('Could not install. Try again from <a href="%s" >Plugins Dashboard.</a>', 'translatepress-multilingual'), admin_url('plugins.php') ), array('a' => array( 'href' => array() ) ) );
+                    }
+                    wp_die( trp_safe_json_encode( $message ));//phpcs:ignore
+                }
+            }
         }
-
-        $nonce = isset( $_POST['nonce'] )
-            ? sanitize_text_field( wp_unslash( $_POST['nonce'] ) )
-            : '';
-
-        if ( ! wp_verify_nonce( $nonce, 'trp_disable_legacy' ) ) {
-            wp_send_json_error( __( 'Invalid nonce.', 'translatepress-multilingual' ), 403 );
-        }
-
-        $adv = get_option( 'trp_advanced_settings', [] );
-        if ( ! is_array( $adv ) ) {
-            $adv = [];
-        }
-
-        // Flip legacy OFF
-        $adv['load_legacy_language_switcher'] = 'no';
-        update_option( 'trp_advanced_settings', $adv );
-
-        TRP_Plugin_Notifications::get_instance()->dismiss_notification( 'trp_ls_v2_intro' );
-
-        wp_send_json_success( __( 'Legacy disabled.', 'translatepress-multilingual' ) );
+        wp_die();
     }
-
-
-/** Function ajax_mark_forum_posts_read() called by wp_ajax hooks: {'trp_mark_forum_posts_read'} **/
-/** No params detected :-/ **/
-
-
-/** Function process_js_strings_in_translation_editor() called by wp_ajax hooks: {'trp_process_js_strings_in_translation_editor'} **/
-/** No function found :-/ **/
-
-
-/** Function delete_term() called by wp_ajax hooks: {'trp_glossary_delete_term'} **/
-/** Parameters found in function delete_term(): {"post": ["term"]} **/
-function delete_term() {
-        $this->verify_request( self::DELETE_TERM_ACTION );
-
-        $term = isset( $_POST['term'] ) ? trim( sanitize_text_field( wp_unslash( $_POST['term'] ) ) ) : '';
-
-        $glossary = $this->get_glossary();
-
-        if ( $term === '' || ! array_key_exists( $term, $glossary ) ) {
-            wp_send_json_error( array( 'message' => esc_html__( 'The term you are trying to delete no longer exists. Please reload the page.', 'translatepress-multilingual' ) ) );
-        }
-
-        unset( $glossary[ $term ] );
-        update_option( self::OPTION_NAME, $glossary, false );
-
-        wp_send_json_success( array( 'term' => $term ) );
-    }
-
-
-/** Function ajax_get_forum_posts() called by wp_ajax hooks: {'trp_get_forum_posts'} **/
-/** No params detected :-/ **/
-
-
-/** Function split_translation_block() called by wp_ajax hooks: {'trp_split_translation_block'} **/
-/** Parameters found in function split_translation_block(): {"post": ["action", "strings"]} **/
-function split_translation_block() {
-        if ( defined( 'DOING_AJAX' ) && DOING_AJAX && current_user_can( apply_filters( 'trp_translating_capability', 'manage_options' ) ) ) {
-            check_ajax_referer( 'split_translation_block', 'security' );
-
-			if ( isset( $_POST['action'] ) && $_POST['action'] === 'trp_split_translation_block' && ! empty( $_POST['strings'] ) ) {
-                $raw_original_array = json_decode( stripslashes( $_POST['strings'] ) ); /* phpcs:ignore */ /* sanitized downstream */
-				$trp = TRP_Translate_Press::get_trp_instance();
-				if ( ! $this->trp_query ) {
-					$this->trp_query = $trp->get_component( 'query' );
-				}
-				$deprecated_block_type = $this->trp_query->get_constant_block_type_deprecated();
-				$originals = array();
-				foreach( $raw_original_array as $original ){
-					$originals[] = trp_sanitize_string( $original, false );
-				}
-
-				// even inactive languages ( not in $this->settings['translation-languages'] array ) will be updated
-				$all_languages_table_names = $this->trp_query->get_all_table_names( $this->settings['default-language'], array() );
-				$rows_affected = $this->trp_query->update_translation_blocks_by_original( $all_languages_table_names, $originals, $deprecated_block_type );
-				if ( $rows_affected == 0 ){
-					// do updates individually if it fails
-					foreach ( $all_languages_table_names as $table_name ){
-						$this->trp_query->update_translation_blocks_by_original( array( $table_name ), $originals, $deprecated_block_type );
-					}
-				}
-			}
-        }
-
-        die();
-	}
 
 
 /** Function create_translation_block() called by wp_ajax hooks: {'trp_create_translation_block'} **/
@@ -665,8 +734,61 @@ function create_translation_block(){
 	}
 
 
-/** Function add_term() called by wp_ajax hooks: {'trp_glossary_add_term'} **/
-/** No params detected :-/ **/
+/** Function process_js_strings_in_translation_editor() called by wp_ajax hooks: {'trp_process_js_strings_in_translation_editor'} **/
+/** No function found :-/ **/
+
+
+/** Function save_translations() called by wp_ajax hooks: {'trp_save_translations_regular'} **/
+/** Parameters found in function save_translations(): {"post": ["action", "strings"]} **/
+function save_translations(){
+		if ( defined( 'DOING_AJAX' ) && DOING_AJAX && current_user_can( apply_filters( 'trp_translating_capability', 'manage_options' ) ) ) {
+			check_ajax_referer( 'save_translations', 'security' );
+			if ( isset( $_POST['action'] ) && $_POST['action'] === 'trp_save_translations_regular' && !empty( $_POST['strings'] ) ) {
+				$strings = json_decode(stripslashes($_POST['strings'])); /* phpcs:ignore */ /* sanitized downstream */
+				$update_strings = $this->save_translations_of_strings( $strings );
+			}
+		}
+		echo trp_safe_json_encode( $update_strings ); // phpcs:ignore
+		die();
+	}
+
+
+/** Function Content-Type: text/javascript() called by wp_ajax hooks: {'trp-block-ls-shortcode.js'} **/
+/** No function found :-/ **/
+
+
+/** Function trp_ai_recheck_quota() called by wp_ajax hooks: {'trp_ai_recheck_quota'} **/
+/** Parameters found in function trp_ai_recheck_quota(): {"post": ["action"]} **/
+function trp_ai_recheck_quota(){
+    if ( defined( 'DOING_AJAX' ) && DOING_AJAX && current_user_can( apply_filters( 'trp_translating_capability', 'manage_options' ) ) ) {
+        if ( isset( $_POST['action'] ) && $_POST['action'] === 'trp_ai_recheck_quota' ) {
+            $nonce_okay = check_ajax_referer( 'trp-tpai-recheck', 'nonce' );
+            if ( $nonce_okay ){
+                $license = trim( (string) get_option( 'trp_license_key', '' ) );
+                $status  = get_option( 'trp_license_status' );
+
+                if ( $status === 'valid' ) {
+                    $response = trp_mtapi_sync_license_call( $license );
+                    if ( is_array( $response ) && ! is_wp_error( $response ) && isset( $response['response'] ) &&
+                        isset( $response['response']['code']) && $response['response']['code'] == 200 ) {
+
+                        $mtapi_url = (defined('MTAPI_URL')  ? MTAPI_URL : 'https://mtapi.translatepress.com' );
+
+                        require_once("class-mtapi-customer.php");
+                        $mtapi_server = new TRP_MTAPI_Customer($mtapi_url);
+                        $site_status = $mtapi_server->lookup_site($license, home_url());
+
+                        $site_status['quota'] = isset ( $site_status['quota'] ) ? $site_status['quota'] : 0;
+                        $quota = intval(ceil($site_status['quota'] / 5));
+                        echo trp_safe_json_encode( ['quota' => $quota ] ); //phpcs:ignore
+                    }
+                }
+            }
+
+        }
+    }
+    wp_die();
+}
 
 
 /** Function trp_update_database() called by wp_ajax hooks: {'trp_update_database'} **/
@@ -824,127 +946,5 @@ function trp_update_database(){
 		echo( json_encode( $query_arguments ));
 		wp_die();
 	}
-
-
-/** Function install_plugins_request() called by wp_ajax hooks: {'trp_install_plugins'} **/
-/** Parameters found in function install_plugins_request(): {"post": ["action", "plugin_slug"]} **/
-function install_plugins_request(){
-        if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
-            check_ajax_referer( 'trp_install_plugins', 'security' );
-            if ( ! current_user_can( 'install_plugins' ) ) {
-                wp_die( -1, 403 );
-            }
-            if ( isset( $_POST['action'] ) && $_POST['action'] === 'trp_install_plugins' && !empty( $_POST['plugin_slug'] ) ) {
-                $plugin_slug = sanitize_text_field($_POST['plugin_slug']);
-                $short_slugs = $this->get_plugin_slugs();
-                if ( isset( $short_slugs[$plugin_slug]) ){
-                    if ( $this->install_upgrade_activate($plugin_slug) ){
-                        $message = esc_html__('Active', 'translatepress-multilingual');
-                    }else{
-                        $message = wp_kses( sprintf( __('Could not install. Try again from <a href="%s" >Plugins Dashboard.</a>', 'translatepress-multilingual'), admin_url('plugins.php') ), array('a' => array( 'href' => array() ) ) );
-                    }
-                    wp_die( trp_safe_json_encode( $message ));//phpcs:ignore
-                }
-            }
-        }
-        wp_die();
-    }
-
-
-/** Function get_translations() called by wp_ajax hooks: {'nopriv_trp_get_translations_regular', 'trp_get_translations_regular'} **/
-/** Parameters found in function get_translations(): {"post": ["action", "language", "originals", "skip_machine_translation", "string_ids", "dynamic_strings"]} **/
-function get_translations() {
-		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
-			check_ajax_referer( 'get_translations', 'security' );
-			if ( isset( $_POST['action'] ) && $_POST['action'] === 'trp_get_translations_regular' && !empty( $_POST['language'] ) && in_array( $_POST['language'], $this->settings['translation-languages'] ) ) {
-				$originals = (empty($_POST['originals']) )? array() : json_decode(stripslashes($_POST['originals'])); /* phpcs:ignore */ /* sanitized downstream */
-				$skip_machine_translation = (empty($_POST['skip_machine_translation']) )? array() : json_decode(stripslashes($_POST['skip_machine_translation'])); /* phpcs:ignore */ /* sanitized downstream */
-				$ids = (empty($_POST['string_ids']) )? array() : json_decode(stripslashes($_POST['string_ids'])); /* phpcs:ignore */ /* sanitized downstream */
-				if ( is_array( $skip_machine_translation ) ) {
-                    if ( is_array( $ids ) || is_array( $originals ) ) {
-                        $trp = TRP_Translate_Press::get_trp_instance();
-                        if ( !$this->trp_query ) {
-                            $this->trp_query = $trp->get_component( 'query' );
-                        }
-                        if ( !$this->translation_manager ) {
-                            $this->translation_manager = $trp->get_component( 'translation_manager' );
-                        }
-                        $block_type   = $this->trp_query->get_constant_block_type_regular_string();
-                        $dictionaries = $this->get_translation_for_strings( $ids, $originals, $block_type, $skip_machine_translation );
-
-                        $localized_text = $this->translation_manager->string_groups();
-                        $string_group   = __( 'Others', 'translatepress-multilingual' ); // this type is not registered in the string types because it will be overwritten by the content in data-trp-node-type
-                        if ( isset( $_POST['dynamic_strings'] ) && $_POST['dynamic_strings'] === 'true' ) {
-                            $string_group = $localized_text['dynamicstrings'];
-                        }
-                        $dictionary_by_original = trp_sort_dictionary_by_original( $dictionaries, 'regular', $string_group, sanitize_text_field( $_POST['language'] ) );
-
-                        echo trp_safe_json_encode( $dictionary_by_original );//phpcs:ignore
-                    }
-                }
-			}
-		}
-
-		wp_die();
-	}
-
-
-/** Function search_dictionary() called by wp_ajax hooks: {'trp_glossary_search_dictionary'} **/
-/** Parameters found in function search_dictionary(): {"post": ["term", "lang", "page"]} **/
-function search_dictionary() {
-        $this->verify_request( self::SEARCH_ACTION );
-
-        global $wpdb;
-
-        $term      = isset( $_POST['term'] ) ? trim( sanitize_text_field( wp_unslash( $_POST['term'] ) ) ) : '';
-        $only_lang = isset( $_POST['lang'] ) ? sanitize_text_field( wp_unslash( $_POST['lang'] ) ) : '';
-        $page      = isset( $_POST['page'] ) ? max( 1, absint( $_POST['page'] ) ) : 1;
-        $per_page  = self::SEARCH_PER_PAGE;
-
-        $query          = $this->get_query();
-        $language_names = $this->get_english_language_names();
-
-        // Fetching one language's page (pagination click) vs. all languages (initial search).
-        $languages = $this->get_target_language_codes();
-        if ( $only_lang !== '' ) {
-            $languages = in_array( $only_lang, $languages, true ) ? array( $only_lang ) : array();
-        }
-
-        $results = array();
-
-        if ( $term !== '' && $query ) {
-            $like = '%' . $wpdb->esc_like( mb_strtolower( $term, 'UTF-8' ) ) . '%';
-
-            foreach ( $languages as $lang ) {
-                $entries = array();
-                $total   = 0;
-                $table   = $query->get_table_name( $lang );
-
-                if ( $this->dictionary_table_exists( $table ) ) {
-                    $total = (int) $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(*) FROM `{$table}` WHERE LOWER(original) LIKE %s AND translated IS NOT NULL AND translated <> ''", $like ) ); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- table name built from known prefix + validated language codes.
-
-                    $offset = ( $page - 1 ) * $per_page;
-                    $rows   = $wpdb->get_results( $wpdb->prepare( "SELECT original, translated FROM `{$table}` WHERE LOWER(original) LIKE %s AND translated IS NOT NULL AND translated <> '' ORDER BY id ASC LIMIT %d OFFSET %d", $like, $per_page, $offset ) ); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- table name built from known prefix + validated language codes.
-                    foreach ( (array) $rows as $row ) {
-                        $entries[] = array(
-                            'original'   => $row->original,
-                            'translated' => $row->translated,
-                        );
-                    }
-                }
-
-                $results[] = array(
-                    'code'     => $lang,
-                    'name'     => isset( $language_names[ $lang ] ) ? $language_names[ $lang ] : $lang,
-                    'entries'  => $entries,
-                    'total'    => $total,
-                    'page'     => $page,
-                    'per_page' => $per_page,
-                );
-            }
-        }
-
-        wp_send_json_success( array( 'results' => $results, 'per_page' => $per_page ) );
-    }
 
 

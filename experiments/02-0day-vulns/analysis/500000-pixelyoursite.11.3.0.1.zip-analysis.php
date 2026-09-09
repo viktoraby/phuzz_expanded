@@ -5,43 +5,20 @@
 *Found functions:10
 *Extracted functions:6
 *Total parameter names extracted: 6
-*Overview: {'PixelYourSite\\adminNoticeDismissHandler': {'pys_notice_dismiss'}, 'catchAjaxEvent': {'nopriv_pys_api_event', 'pys_api_event'}, 'PixelYourSite\\getAjaxTransformTitle': {'get_transform_title', 'nopriv_get_transform_title'}, 'allCloseNotice': {'pys_fixed_notice_opt_dismiss'}, 'pys_optin_add': {'pys_optin_add'}, 'PixelYourSite\\adminCapiNudgeDismissHandler': {'pys_capi_nudge_dismiss'}, 'get_pbid_ajax': {'nopriv_pys_get_pbid', 'pys_get_pbid'}, 'catchOnCloseNotice': {'pys_fixed_notice_dismiss'}, 'PixelYourSite\\adminNoticeCAPIDismissHandler': {'pys_notice_CAPI_dismiss'}, 'ajaxGetGdprFiltersValues': {'pys_get_gdpr_filters_values', 'nopriv_pys_get_gdpr_filters_values'}}
+*Overview: {'PixelYourSite\\adminCapiNudgeDismissHandler': {'pys_capi_nudge_dismiss'}, 'PixelYourSite\\adminNoticeCAPIDismissHandler': {'pys_notice_CAPI_dismiss'}, 'ajaxGetGdprFiltersValues': {'pys_get_gdpr_filters_values', 'nopriv_pys_get_gdpr_filters_values'}, 'allCloseNotice': {'pys_fixed_notice_opt_dismiss'}, 'PixelYourSite\\adminNoticeDismissHandler': {'pys_notice_dismiss'}, 'get_pbid_ajax': {'nopriv_pys_get_pbid', 'pys_get_pbid'}, 'pys_optin_add': {'pys_optin_add'}, 'PixelYourSite\\getAjaxTransformTitle': {'get_transform_title', 'nopriv_get_transform_title'}, 'catchOnCloseNotice': {'pys_fixed_notice_dismiss'}, 'catchAjaxEvent': {'nopriv_pys_api_event', 'pys_api_event'}}
 *
 ***/
 
-/** Function PixelYourSite\adminNoticeDismissHandler() called by wp_ajax hooks: {'pys_notice_dismiss'} **/
+/** Function PixelYourSite\adminCapiNudgeDismissHandler() called by wp_ajax hooks: {'pys_capi_nudge_dismiss'} **/
 /** No function found :-/ **/
 
 
-/** Function catchAjaxEvent() called by wp_ajax hooks: {'nopriv_pys_api_event', 'pys_api_event'} **/
-/** Parameters found in function catchAjaxEvent(): {"post": ["event", "data", "ids", "eventID", "woo_order", "edd_order"], "request": ["ajax_event"]} **/
-function catchAjaxEvent() {
-        PYS()->getLog()->debug('catchAjaxEvent send fb server from ajax');
-        $event = $_POST['event'];
-        $data = isset($_POST['data']) ? $_POST['data'] : array();
-        $ids = $_POST['ids'];
-        $eventID = $_POST['eventID'];
-        $wooOrder = isset($_POST['woo_order']) ? $_POST['woo_order'] : null;
-        $eddOrder = isset($_POST['edd_order']) ? $_POST['edd_order'] : null;
-
-
-        if ( empty( $_REQUEST['ajax_event'] ) || !wp_verify_nonce( $_REQUEST['ajax_event'], 'ajax-event-nonce' ) ) {
-            wp_die();
-            return;
-        }
-
-        if($event == "hCR") $event="CompleteRegistration"; // de mask completer registration event if it was hidden
-
-        $singleEvent = $this->dataToSingleEvent($event,$data,$eventID,$ids,$wooOrder,$eddOrder);
-
-        $this->sendEventsNow([$singleEvent]);
-
-        wp_die();
-    }
-
-
-/** Function PixelYourSite\getAjaxTransformTitle() called by wp_ajax hooks: {'get_transform_title', 'nopriv_get_transform_title'} **/
+/** Function PixelYourSite\adminNoticeCAPIDismissHandler() called by wp_ajax hooks: {'pys_notice_CAPI_dismiss'} **/
 /** No function found :-/ **/
+
+
+/** Function ajaxGetGdprFiltersValues() called by wp_ajax hooks: {'pys_get_gdpr_filters_values', 'nopriv_pys_get_gdpr_filters_values'} **/
+/** No params detected :-/ **/
 
 
 /** Function allCloseNotice() called by wp_ajax hooks: {'pys_fixed_notice_opt_dismiss'} **/
@@ -71,6 +48,14 @@ function allCloseNotice(){
         echo json_encode($dismissedSlugs);
         die();
     }
+
+
+/** Function PixelYourSite\adminNoticeDismissHandler() called by wp_ajax hooks: {'pys_notice_dismiss'} **/
+/** No function found :-/ **/
+
+
+/** Function get_pbid_ajax() called by wp_ajax hooks: {'nopriv_pys_get_pbid', 'pys_get_pbid'} **/
+/** No params detected :-/ **/
 
 
 /** Function pys_optin_add() called by wp_ajax hooks: {'pys_optin_add'} **/
@@ -115,12 +100,8 @@ function pys_optin_add()
     }
 
 
-/** Function PixelYourSite\adminCapiNudgeDismissHandler() called by wp_ajax hooks: {'pys_capi_nudge_dismiss'} **/
+/** Function PixelYourSite\getAjaxTransformTitle() called by wp_ajax hooks: {'get_transform_title', 'nopriv_get_transform_title'} **/
 /** No function found :-/ **/
-
-
-/** Function get_pbid_ajax() called by wp_ajax hooks: {'nopriv_pys_get_pbid', 'pys_get_pbid'} **/
-/** No params detected :-/ **/
 
 
 /** Function catchOnCloseNotice() called by wp_ajax hooks: {'pys_fixed_notice_dismiss'} **/
@@ -152,11 +133,30 @@ function  catchOnCloseNotice() {
     }
 
 
-/** Function PixelYourSite\adminNoticeCAPIDismissHandler() called by wp_ajax hooks: {'pys_notice_CAPI_dismiss'} **/
-/** No function found :-/ **/
+/** Function catchAjaxEvent() called by wp_ajax hooks: {'nopriv_pys_api_event', 'pys_api_event'} **/
+/** Parameters found in function catchAjaxEvent(): {"post": ["event", "data", "ids", "eventID", "woo_order", "edd_order"], "request": ["ajax_event"]} **/
+function catchAjaxEvent() {
+        PYS()->getLog()->debug('catchAjaxEvent send fb server from ajax');
+        $event = $_POST['event'];
+        $data = isset($_POST['data']) ? $_POST['data'] : array();
+        $ids = $_POST['ids'];
+        $eventID = $_POST['eventID'];
+        $wooOrder = isset($_POST['woo_order']) ? $_POST['woo_order'] : null;
+        $eddOrder = isset($_POST['edd_order']) ? $_POST['edd_order'] : null;
 
 
-/** Function ajaxGetGdprFiltersValues() called by wp_ajax hooks: {'pys_get_gdpr_filters_values', 'nopriv_pys_get_gdpr_filters_values'} **/
-/** No params detected :-/ **/
+        if ( empty( $_REQUEST['ajax_event'] ) || !wp_verify_nonce( $_REQUEST['ajax_event'], 'ajax-event-nonce' ) ) {
+            wp_die();
+            return;
+        }
+
+        if($event == "hCR") $event="CompleteRegistration"; // de mask completer registration event if it was hidden
+
+        $singleEvent = $this->dataToSingleEvent($event,$data,$eventID,$ids,$wooOrder,$eddOrder);
+
+        $this->sendEventsNow([$singleEvent]);
+
+        wp_die();
+    }
 
 

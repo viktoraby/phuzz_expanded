@@ -18,6 +18,11 @@ DESTFILE = DESTDIR + "download.zip"
 if not os.path.exists(DESTDIR):
     os.mkdir(DESTDIR)
 
+for filename in os.listdir(DESTDIR):
+    filepath = os.path.join(DESTDIR, filename)
+    if os.path.isfile(filepath):
+        os.remove(filepath)
+
 session = requests.Session()
 
 

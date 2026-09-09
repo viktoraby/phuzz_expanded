@@ -1,0 +1,44 @@
+{
+  "target": "http://web/wp-admin/admin-ajax.php",
+  "methods": [
+    "POST"
+  ],
+  "body_params": {
+    "weight": 1,
+    "fixed": [
+      "_nonce"
+    ],
+    "fuzz": [
+      "access_token",
+      "account_type",
+      "user_id"
+    ],
+    "data": [
+      {
+        "name": "_nonce",
+        "value": "fuzz"
+      },
+      {
+        "name": "account_type",
+        "value": "fuzz"
+      },
+      {
+        "name": "user_id",
+        "value": "fuzz"
+      }
+    ]
+  },
+  "query_params": {
+    "weight": 1,
+    "fixed": [
+      "action"
+    ],
+    "fuzz": [],
+    "data": [
+      {
+        "name": "action",
+        "value": "sync_instagram_data_ajax"
+      }
+    ]
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "target": "http://web/wp-admin/admin-ajax.php",
+  "methods": [
+    "POST"
+  ],
+  "body_params": {
+    "weight": 1,
+    "fixed": [
+      "nonce"
+    ],
+    "fuzz": [
+      "email",
+      "destination_key",
+      "source_key",
+      "site_info"
+    ],
+    "data": [
+      {
+        "name": "nonce",
+        "value": "fuzz"
+      },
+      {
+        "name": "destination_key",
+        "value": "fuzz"
+      },
+      {
+        "name": "source_key",
+        "value": "fuzz"
+      },
+      {
+        "name": "site_info",
+        "value": "fuzz"
+      }
+    ]
+  },
+  "query_params": {
+    "weight": 1,
+    "fixed": [
+      "action"
+    ],
+    "fuzz": [],
+    "data": [
+      {
+        "name": "action",
+        "value": "mg_initiate_migration"
+      }
+    ]
+  }
+}

@@ -5,9 +5,91 @@
 *Found functions:2
 *Extracted functions:2
 *Total parameter names extracted: 3
-*Overview: {'ai_ajax_backend': {'ai_ajax_backend'}, 'ai_ajax': {'nopriv_ai_ajax', 'ai_ajax'}}
+*Overview: {'ai_ajax': {'nopriv_ai_ajax', 'ai_ajax'}, 'ai_ajax_backend': {'ai_ajax_backend'}}
 *
 ***/
+
+/** Function ai_ajax() called by wp_ajax hooks: {'nopriv_ai_ajax', 'ai_ajax'} **/
+/** Parameters found in function ai_ajax(): {"get": ["block", "cookie_check", "cookie_check_url", "virtual"]} **/
+function ai_ajax () {
+  global $ai_wp_data;
+
+//  check_ajax_referer ("adinserter_data", "ai_check");
+//  check_admin_referer ("adinserter_data", "ai_check");
+
+  if (isset ($_POST ["adsense-ad-units"])) {
+    if (defined ('AI_ADSENSE_API')) {
+      adsense_ad_name ();
+    }
+  }
+
+  elseif (isset ($_GET ["block"])) {
+    $block = sanitize_text_field ((int) $_GET ["block"]);
+    if (is_numeric ($block) && $block >= 1 && $block <= 96) {
+      global $block_object;
+      $block = $block_object [$block];
+      if (isset ($_GET ["cookie_check"]) && $_GET ["cookie_check"] == 1) {
+        $block->client_side_cookie_check = true;
+      }
+      if (isset ($_GET ["cookie_check_url"]) && $_GET ["cookie_check_url"] == 1) {
+        $block->client_side_cookie_check_url = true;
+      }
+      if (isset ($_GET ["hide-debug-labels"]) && $_GET ["hide-debug-labels"] == 1) {
+        $block->hide_debug_labels = true;
+      }
+      set_user ();
+      if (!$block->check_page_types_lists_users ()) {
+        wp_die ();
+      }
+      if ($block->get_iframe ())
+        echo $block->get_iframe_page ();
+    }
+  }
+
+  elseif (isset ($_GET ["ads-txt"])) {
+    $ads_txt = get_option (AI_ADS_TXT_NAME);
+    if ($ads_txt === false) {
+      wp_die ('File not found', 404);
+    }
+
+    header ('Content-Type: text/plain');
+    echo esc_html ($ads_txt);
+    wp_die ();
+  }
+
+  elseif (isset ($_GET ["remote-ads-txt"]) && !function_exists ('ai_ajax_processing_2')) {
+    if (get_remote_debugging ()) {
+      // Read-only access
+      if ($_GET ["remote-ads-txt"] == 'save') {
+        wp_die ();
+      }
+
+      $_GET ["virtual"] = get_option (AI_ADS_TXT_NAME) !== false ? '1' : '0';
+
+      ads_txt (sanitize_text_field ($_GET ["remote-ads-txt"]));
+    }
+  }
+
+  // only for ajax request - overriden by ai_wp_hook check
+  elseif (isset ($_GET ["ai-get-settings"])) {
+    if (get_remote_debugging ()) {
+      ai_write_settings_string ();
+    } else wp_die ('Sorry, you are not allowed to do that.', 423);
+  }
+
+  elseif (isset ($_GET ["check-page"])) {
+    if (get_remote_debugging ()) {
+      ai_check_page ();
+    }
+  }
+
+  elseif (function_exists ('ai_ajax_processing_2')) {
+    ai_ajax_processing_2 ();
+  }
+
+  wp_die ();
+}
+
 
 /** Function ai_ajax_backend() called by wp_ajax hooks: {'ai_ajax_backend'} **/
 /** Parameters found in function ai_ajax_backend(): {"get": ["connect", "save", "delete", "image", "css", "js", "rating", "list", "all", "start", "end", "active", "settings", "update", "block_class_name", "block_class", "block_number_class", "block_name_class", "inline_styles"], "post": ["preview", "name", "code", "alignment", "horizontal", "vertical", "horizontal_margin", "vertical_margin", "animation", "alignment_css", "custom_css", "php", "close", "background", "body_background", "background_image", "background_color", "background_size", "background_repeat", "label", "sticky_block", "sticky_height", "read_only", "iframe", "check", "count", "rotate", "viewport", "fallback", "slot_id", "edit", "placeholder", "block", "notice", "click"]} **/
@@ -339,88 +421,6 @@ function ai_ajax_backend () {
 
   elseif (function_exists ('ai_ajax_backend_2')) {
     ai_ajax_backend_2 ();
-  }
-
-  wp_die ();
-}
-
-
-/** Function ai_ajax() called by wp_ajax hooks: {'nopriv_ai_ajax', 'ai_ajax'} **/
-/** Parameters found in function ai_ajax(): {"get": ["block", "cookie_check", "cookie_check_url", "virtual"]} **/
-function ai_ajax () {
-  global $ai_wp_data;
-
-//  check_ajax_referer ("adinserter_data", "ai_check");
-//  check_admin_referer ("adinserter_data", "ai_check");
-
-  if (isset ($_POST ["adsense-ad-units"])) {
-    if (defined ('AI_ADSENSE_API')) {
-      adsense_ad_name ();
-    }
-  }
-
-  elseif (isset ($_GET ["block"])) {
-    $block = sanitize_text_field ((int) $_GET ["block"]);
-    if (is_numeric ($block) && $block >= 1 && $block <= 96) {
-      global $block_object;
-      $block = $block_object [$block];
-      if (isset ($_GET ["cookie_check"]) && $_GET ["cookie_check"] == 1) {
-        $block->client_side_cookie_check = true;
-      }
-      if (isset ($_GET ["cookie_check_url"]) && $_GET ["cookie_check_url"] == 1) {
-        $block->client_side_cookie_check_url = true;
-      }
-      if (isset ($_GET ["hide-debug-labels"]) && $_GET ["hide-debug-labels"] == 1) {
-        $block->hide_debug_labels = true;
-      }
-      set_user ();
-      if (!$block->check_page_types_lists_users ()) {
-        wp_die ();
-      }
-      if ($block->get_iframe ())
-        echo $block->get_iframe_page ();
-    }
-  }
-
-  elseif (isset ($_GET ["ads-txt"])) {
-    $ads_txt = get_option (AI_ADS_TXT_NAME);
-    if ($ads_txt === false) {
-      wp_die ('File not found', 404);
-    }
-
-    header ('Content-Type: text/plain');
-    echo esc_html ($ads_txt);
-    wp_die ();
-  }
-
-  elseif (isset ($_GET ["remote-ads-txt"]) && !function_exists ('ai_ajax_processing_2')) {
-    if (get_remote_debugging ()) {
-      // Read-only access
-      if ($_GET ["remote-ads-txt"] == 'save') {
-        wp_die ();
-      }
-
-      $_GET ["virtual"] = get_option (AI_ADS_TXT_NAME) !== false ? '1' : '0';
-
-      ads_txt (sanitize_text_field ($_GET ["remote-ads-txt"]));
-    }
-  }
-
-  // only for ajax request - overriden by ai_wp_hook check
-  elseif (isset ($_GET ["ai-get-settings"])) {
-    if (get_remote_debugging ()) {
-      ai_write_settings_string ();
-    } else wp_die ('Sorry, you are not allowed to do that.', 423);
-  }
-
-  elseif (isset ($_GET ["check-page"])) {
-    if (get_remote_debugging ()) {
-      ai_check_page ();
-    }
-  }
-
-  elseif (function_exists ('ai_ajax_processing_2')) {
-    ai_ajax_processing_2 ();
   }
 
   wp_die ();

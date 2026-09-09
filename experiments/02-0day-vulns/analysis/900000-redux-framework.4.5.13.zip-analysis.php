@@ -5,7 +5,7 @@
 *Found functions:6
 *Extracted functions:6
 *Total parameter names extracted: 5
-*Overview: {'get_icons': {'redux_get_icons'}, 'ajax': {'redux_custom_fonts', 'redux_hide_admin_notice'}, 'google_fonts_update': {'redux_update_google_fonts'}, 'redux_delete_widget_area_area': {'redux_delete_widget_area'}, 'parse_ajax': {'redux_color_schemes'}, 'timer': {'redux_custom_font_timer'}}
+*Overview: {'get_icons': {'redux_get_icons'}, 'redux_delete_widget_area_area': {'redux_delete_widget_area'}, 'google_fonts_update': {'redux_update_google_fonts'}, 'parse_ajax': {'redux_color_schemes'}, 'ajax': {'redux_hide_admin_notice', 'redux_custom_fonts'}, 'timer': {'redux_custom_font_timer'}}
 *
 ***/
 
@@ -86,39 +86,6 @@ function get_icons() {
 		}
 
 
-/** Function ajax() called by wp_ajax hooks: {'redux_custom_fonts', 'redux_hide_admin_notice'} **/
-/** Parameters found in function ajax(): {"post": ["id", "nonce"]} **/
-function ajax() {
-			global $current_user;
-
-			$core = $this->core();
-
-			if ( ! is_user_logged_in() && ! is_admin() && ! current_user_can( $core->args['page_permissions'] ) ) {
-				wp_die( esc_html__( 'You do not have permission to perform this action.', 'redux-framework' ) );
-			}
-
-			if ( isset( $_POST['id'] ) ) {
-				// Get the notice id.
-				$id = explode( '&', sanitize_text_field( wp_unslash( $_POST['id'] ) ) ); // phpcs:ignore WordPress.Security.NonceVerification
-				$id = $id[0];
-
-				// Get the user id.
-				$userid = $current_user->ID;
-
-				if ( ! isset( $_POST['nonce'] ) || ( ! wp_verify_nonce( sanitize_key( wp_unslash( $_POST['nonce'] ) ), $id . $userid . 'nonce' ) ) ) {
-					die( 0 );
-				} else {
-					// Add the dismissed request to the user meta.
-					update_user_meta( $userid, 'ignore_' . $id, true );
-				}
-			}
-		}
-
-
-/** Function google_fonts_update() called by wp_ajax hooks: {'redux_update_google_fonts'} **/
-/** No params detected :-/ **/
-
-
 /** Function redux_delete_widget_area_area() called by wp_ajax hooks: {'redux_delete_widget_area'} **/
 /** Parameters found in function redux_delete_widget_area_area(): {"post": ["_wpnonce", "name"]} **/
 function redux_delete_widget_area_area() {
@@ -143,6 +110,10 @@ function redux_delete_widget_area_area() {
 
 			die();
 		}
+
+
+/** Function google_fonts_update() called by wp_ajax hooks: {'redux_update_google_fonts'} **/
+/** No params detected :-/ **/
 
 
 /** Function parse_ajax() called by wp_ajax hooks: {'redux_color_schemes'} **/
@@ -175,6 +146,35 @@ function parse_ajax() {
 				$this->download_schemes();
 			} elseif ( 'import' === $type ) {
 				$this->import_schemes();
+			}
+		}
+
+
+/** Function ajax() called by wp_ajax hooks: {'redux_hide_admin_notice', 'redux_custom_fonts'} **/
+/** Parameters found in function ajax(): {"post": ["id", "nonce"]} **/
+function ajax() {
+			global $current_user;
+
+			$core = $this->core();
+
+			if ( ! is_user_logged_in() && ! is_admin() && ! current_user_can( $core->args['page_permissions'] ) ) {
+				wp_die( esc_html__( 'You do not have permission to perform this action.', 'redux-framework' ) );
+			}
+
+			if ( isset( $_POST['id'] ) ) {
+				// Get the notice id.
+				$id = explode( '&', sanitize_text_field( wp_unslash( $_POST['id'] ) ) ); // phpcs:ignore WordPress.Security.NonceVerification
+				$id = $id[0];
+
+				// Get the user id.
+				$userid = $current_user->ID;
+
+				if ( ! isset( $_POST['nonce'] ) || ( ! wp_verify_nonce( sanitize_key( wp_unslash( $_POST['nonce'] ) ), $id . $userid . 'nonce' ) ) ) {
+					die( 0 );
+				} else {
+					// Add the dismissed request to the user meta.
+					update_user_meta( $userid, 'ignore_' . $id, true );
+				}
 			}
 		}
 

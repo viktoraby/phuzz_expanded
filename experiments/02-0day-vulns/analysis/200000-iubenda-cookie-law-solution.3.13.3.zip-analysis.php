@@ -5,11 +5,47 @@
 *Found functions:17
 *Extracted functions:17
 *Total parameter names extracted: 0
-*Overview: {'cons_ajax_save': {'save_cons_options'}, 'pp_ajax_save': {'save_pp_options'}, 'quick_generator_api': {'quick_generator_api'}, 'toggle_services': {'toggle_services'}, 'cs_ajax_save': {'save_cs_options'}, 'force_reload_radar_config': {'force_reload_radar_config'}, 'dismiss_rating_notice': {'iubenda_dismiss_rating_notice'}, 'tc_ajax_save': {'save_tc_options'}, 'get_frontpage_main_box': {'frontpage_main_box'}, 'get_dashboard_compliance_content': {'dashboard_compliance'}, 'synchronize_products': {'synchronize_products'}, 'iub_dismiss_general_notice': {'iubenda_dismiss_general_notice'}, 'plugin_settings_ajax_save': {'save_plugin_settings_options'}, 'integrate_setup': {'integrate_setup'}, 'auto_detect_forms': {'auto_detect_forms'}, 'ask_radar_to_send_request': {'radar_percentage_reload'}, 'check_frontend_auto_blocking_by_code': {'check_frontend_auto_blocking_status'}}
+*Overview: {'cs_ajax_save': {'save_cs_options'}, 'get_frontpage_main_box': {'frontpage_main_box'}, 'integrate_setup': {'integrate_setup'}, 'iub_dismiss_general_notice': {'iubenda_dismiss_general_notice'}, 'plugin_settings_ajax_save': {'save_plugin_settings_options'}, 'ask_radar_to_send_request': {'radar_percentage_reload'}, 'get_dashboard_compliance_content': {'dashboard_compliance'}, 'cons_ajax_save': {'save_cons_options'}, 'check_frontend_auto_blocking_by_code': {'check_frontend_auto_blocking_status'}, 'auto_detect_forms': {'auto_detect_forms'}, 'pp_ajax_save': {'save_pp_options'}, 'quick_generator_api': {'quick_generator_api'}, 'toggle_services': {'toggle_services'}, 'tc_ajax_save': {'save_tc_options'}, 'force_reload_radar_config': {'force_reload_radar_config'}, 'synchronize_products': {'synchronize_products'}, 'dismiss_rating_notice': {'iubenda_dismiss_rating_notice'}}
 *
 ***/
 
+/** Function cs_ajax_save() called by wp_ajax hooks: {'save_cs_options'} **/
+/** No params detected :-/ **/
+
+
+/** Function get_frontpage_main_box() called by wp_ajax hooks: {'frontpage_main_box'} **/
+/** No params detected :-/ **/
+
+
+/** Function integrate_setup() called by wp_ajax hooks: {'integrate_setup'} **/
+/** No params detected :-/ **/
+
+
+/** Function iub_dismiss_general_notice() called by wp_ajax hooks: {'iubenda_dismiss_general_notice'} **/
+/** No params detected :-/ **/
+
+
+/** Function plugin_settings_ajax_save() called by wp_ajax hooks: {'save_plugin_settings_options'} **/
+/** No params detected :-/ **/
+
+
+/** Function ask_radar_to_send_request() called by wp_ajax hooks: {'radar_percentage_reload'} **/
+/** No params detected :-/ **/
+
+
+/** Function get_dashboard_compliance_content() called by wp_ajax hooks: {'dashboard_compliance'} **/
+/** No params detected :-/ **/
+
+
 /** Function cons_ajax_save() called by wp_ajax hooks: {'save_cons_options'} **/
+/** No params detected :-/ **/
+
+
+/** Function check_frontend_auto_blocking_by_code() called by wp_ajax hooks: {'check_frontend_auto_blocking_status'} **/
+/** No params detected :-/ **/
+
+
+/** Function auto_detect_forms() called by wp_ajax hooks: {'auto_detect_forms'} **/
 /** No params detected :-/ **/
 
 
@@ -25,7 +61,7 @@
 /** No params detected :-/ **/
 
 
-/** Function cs_ajax_save() called by wp_ajax hooks: {'save_cs_options'} **/
+/** Function tc_ajax_save() called by wp_ajax hooks: {'save_tc_options'} **/
 /** No params detected :-/ **/
 
 
@@ -33,47 +69,11 @@
 /** No params detected :-/ **/
 
 
-/** Function dismiss_rating_notice() called by wp_ajax hooks: {'iubenda_dismiss_rating_notice'} **/
-/** No params detected :-/ **/
-
-
-/** Function tc_ajax_save() called by wp_ajax hooks: {'save_tc_options'} **/
-/** No params detected :-/ **/
-
-
-/** Function get_frontpage_main_box() called by wp_ajax hooks: {'frontpage_main_box'} **/
-/** No params detected :-/ **/
-
-
-/** Function get_dashboard_compliance_content() called by wp_ajax hooks: {'dashboard_compliance'} **/
-/** No params detected :-/ **/
-
-
 /** Function synchronize_products() called by wp_ajax hooks: {'synchronize_products'} **/
 /** No params detected :-/ **/
 
 
-/** Function iub_dismiss_general_notice() called by wp_ajax hooks: {'iubenda_dismiss_general_notice'} **/
-/** No params detected :-/ **/
-
-
-/** Function plugin_settings_ajax_save() called by wp_ajax hooks: {'save_plugin_settings_options'} **/
-/** No params detected :-/ **/
-
-
-/** Function integrate_setup() called by wp_ajax hooks: {'integrate_setup'} **/
-/** No params detected :-/ **/
-
-
-/** Function auto_detect_forms() called by wp_ajax hooks: {'auto_detect_forms'} **/
-/** No params detected :-/ **/
-
-
-/** Function ask_radar_to_send_request() called by wp_ajax hooks: {'radar_percentage_reload'} **/
-/** No params detected :-/ **/
-
-
-/** Function check_frontend_auto_blocking_by_code() called by wp_ajax hooks: {'check_frontend_auto_blocking_status'} **/
+/** Function dismiss_rating_notice() called by wp_ajax hooks: {'iubenda_dismiss_rating_notice'} **/
 /** No params detected :-/ **/
 
 

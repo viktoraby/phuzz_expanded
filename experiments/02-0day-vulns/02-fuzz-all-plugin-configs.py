@@ -148,18 +148,6 @@ def main():
             os.remove(dst_fuzzer_config_path)
             os.remove(dst_plugin_file_path)
 
-            if not os.path.isfile(dst_docker_compose_path):
-                print(f"WARNING: Compose file does not exist: {dst_docker_compose_path}")
-                continue
-
-            if not os.path.isfile(dst_fuzzer_config_path):
-                print(f"WARNING: Fuzzer config does not exist: {dst_fuzzer_config_path}")
-                continue
-
-            if not os.path.isfile(dst_plugin_file_path):
-                print(f"WARNING: Plugin file does not exist: {dst_plugin_file_path}")
-                continue
-
             print("Finished. Waiting a bit")
             time.sleep(1)
 
