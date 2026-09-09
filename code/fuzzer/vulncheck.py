@@ -244,12 +244,11 @@ class ParamBasedSQLiVulnCheck(VulnCheck):
             for error_param in error['params']:
                 if not error_param:
                     continue
-                for vuln_type in candidate.fuzz_params.keys():
-                    for pkey, pval in candidate.fuzz_params[vuln_type].items():
+                for params in candidate.fuzz_params.values():
+                    for pval in params.values():
                         if pval in error_param:
                             return True
         return False
-
 
 class CommandInjectionVulnCheck(VulnCheck):
     NAME = "CommandInjection"
@@ -283,8 +282,8 @@ class ParamBasedCommandInjectionVulnCheck(VulnCheck):
             for error_param in error['params']:
                 if not error_param:
                     continue
-                for vuln_type in candidate.fuzz_params.keys():
-                    for pkey, pval in candidate.fuzz_params[vuln_type].items():
+                for params in candidate.fuzz_params.values():
+                    for pval in params.values():
                         if pval in error_param:
                             return True
         return False
@@ -321,8 +320,8 @@ class ParamBasedUnserializeVulnCheck(VulnCheck):
             for error_param in error['params']:
                 if not error_param:
                     continue
-                for vuln_type in candidate.fuzz_params.keys():
-                    for pkey, pval in candidate.fuzz_params[vuln_type].items():
+                for params in candidate.fuzz_params.values():
+                    for pval in params.values():
                         if pval in error_param:
                             return True
         return False
@@ -359,8 +358,8 @@ class ParamBasedPathTraversalVulnCheck(VulnCheck):
             for error_param in error['params']:
                 if not error_param:
                     continue
-                for vuln_type in candidate.fuzz_params.keys():
-                    for pkey, pval in candidate.fuzz_params[vuln_type].items():
+                for params in candidate.fuzz_params.values():
+                    for pval in params.values():
                         if pval in error_param:
                             return True
         return False
@@ -391,8 +390,8 @@ class WebPathBasedPathTraversalVulnCheck(VulnCheck):
                     continue
                 if error_param in self.web_paths:
                     continue
-                for vuln_type in candidate.fuzz_params.keys():
-                    for pkey, pval in candidate.fuzz_params[vuln_type].items():
+                for params in candidate.fuzz_params.values():
+                    for pval in params.values():
                         if pval in error_param:
                             return True
         return False
@@ -409,8 +408,8 @@ class OpenRedirectVulnCheck(VulnCheck):
             if 300 <= resp.status_code < 400 and 'Location' in resp.headers:
                 dest_url = resp.headers['Location']
                 dest_url_parts = list(urlparse.urlparse(dest_url))
-                for vuln_type in candidate.fuzz_params.keys():
-                    for pkey, pval in candidate.fuzz_params[vuln_type].items():
+                for params in candidate.fuzz_params.values():
+                    for pval in params.values():
                         pval_parts = list(urlparse.urlparse(pval))
                         if pval == dest_url or pval in dest_url_parts or dest_url_parts == pval_parts:
                             return True
@@ -450,12 +449,11 @@ class ParamBasedXXEVulnCheck(VulnCheck):
             for error_param in error['params']:
                 if not error_param:
                     continue
-                for vuln_type in candidate.fuzz_params.keys():
-                    for pkey, pval in candidate.fuzz_params[vuln_type].items():
+                for params in candidate.fuzz_params.values():
+                    for pval in params.values():
                         if pval in error_param:
                             return True
         return False
-
 
 class LDAPVulnCheck(VulnCheck):
     NAME = "LDAP Injection"
@@ -467,8 +465,7 @@ class LDAPVulnCheck(VulnCheck):
         ldap_injection_file = os.path.join(
             self.ldapi_errors_folder, f"{candidate.coverage_id}.json"
         )
-        return os.path.isfile(ldap_injection_file)
-    
+        return os.path.isfile(ldap_injection_file)    
 
 class ParamBasedLDAPVulnCheck(VulnCheck):
     NAME = "LDAP Injection"
@@ -490,8 +487,8 @@ class ParamBasedLDAPVulnCheck(VulnCheck):
             for error_param in error['params']:
                 if not error_param:
                     continue
-                for vuln_type in candidate.fuzz_params.keys():
-                    for pkey, pval in candidate.fuzz_params[vuln_type].items():
+                for params in candidate.fuzz_params.values():
+                    for pval in params.values():
                         if pval in error_param:
                             return True
         return False
@@ -528,8 +525,8 @@ class BrokenParamBasedSSTIVulnCheck(VulnCheck):
             for error_param in error['params']:
                 if not error_param:
                     continue
-                for vuln_type in candidate.fuzz_params.keys():
-                    for pkey, pval in candidate.fuzz_params[vuln_type].items():
+                for params in candidate.fuzz_params.values():
+                    for pval in params.values():
                         if pval in error_param:
                             return True
         return False
@@ -545,8 +542,8 @@ class ParamBasedSSTIVulnCheck(VulnCheck):
         number2 = "99991"
         rendered_value = "9989200891"
 
-        for param_type in candidate.fuzz_params:
-            for param, value in candidate.fuzz_params[param_type].items():
+        for params in candidate.fuzz_params.values():
+            for value in params.values():
                 if (number1 in value and number2 in value and candidate.response and rendered_value in candidate.response.text):
                     return True
         return False
@@ -583,8 +580,8 @@ class ParamBasedHTTPHeaderInjectionVulnCheck(VulnCheck):
             for error_param in error['params']:
                 if not error_param:
                     continue
-                for vuln_type in candidate.fuzz_params.keys():
-                    for pkey, pval in candidate.fuzz_params[vuln_type].items():
+                for params in candidate.fuzz_params.values():
+                    for pval in params.values():
                         if pval in error_param:
                             return True
         return False
@@ -668,8 +665,8 @@ class ParamBasedSSRFVulnCheck(VulnCheck):
             for error_param in error['params']:
                 if not error_param:
                     continue
-                for vuln_type in candidate.fuzz_params.keys():
-                    for pkey, pval in candidate.fuzz_params[vuln_type].items():
+                for params in candidate.fuzz_params.values():
+                    for pval in params.values():
                         if pval in error_param:
                             return True
         return False
@@ -706,8 +703,8 @@ class BrokenParamBasedNoSQLiVulnCheck(VulnCheck):
             for error_param in error['params']:
                 if not error_param:
                     continue
-                for vuln_type in candidate.fuzz_params.keys():
-                    for pkey, pval in candidate.fuzz_params[vuln_type].items():
+                for params in candidate.fuzz_params.values():
+                    for pval in params.values():
                         if pval in error_param:
                             return True
         return False
@@ -718,7 +715,6 @@ class VulnChecker:
 
     def vuln_check(self, candidate):
         pass
-
 
 class DefaultVulnChecker(VulnChecker):
     def __init__(self, mysql_errors_folder=None, shell_errors_folder=None, unserialize_errors_folder=None, pathtraversal_errors_folder=None, xxe_errors_folder=None, ldapi_errors_folder=None, ssti_errors_folder=None, httphi_errors_folder=None, ssrf_errors_folder=None, nosqli_errors_folder=None):
