@@ -1,22 +1,48 @@
-Fuzzing of Known Vulns
-===========================
+# Fuzzing of Known Vulnerabilities
 
-In this experiment, we compare PHUZZ against other vulnerability scanners (BurpSuite Pro, ZAP, WackoPicko, WFuzz) with a diverse set of web applications with known vulnerabilities.
+This experiment evaluates PHUZZ_EXPANDED against established vulnerability scanners using a set of known vulnerabilities in intentionally vulnerable web applications.
 
-We use the following web applications:
+The evaluation compares the following scanners:
 
-- bWAPP provides 30 vulnerabilities
-- DVWA provides 18 vulnerabilities
-- XVWA provides 10 vulnerabilities
-- WackoPickko provides 7 vulnerabilities
-- WordPress with 22 vulnerable plugins
+- PHUZZ_EXPANDED
+- BurpSuite Professional
+- OWASP ZAP
+- Wapiti
 
-For WordPress, we use the following 22 plugins, which we find using `01-scrape-wpvulndb.py` and `02-analyze_vulns.py`.
+## Test Applications and Vulnerabilities
 
-![WP Plugin Vulnerabilities](../../doc/known-wp-plugin-vulns.png)
+We evaluate 16 known vulnerability cases across four applications or test environments:
 
-Then, we created configuration files in `../../code/fuzzer/configs/` to intialize the fuzzers with the vulnerable endpoint and the necessary parameters, while setting the vulnerable parameter(s) to the value of `fuzz`. For the blackbox scanners, we develop wrapper scripts that parse the configuration file and bring the HTTP request or command line arguments into a format understand by the respective vulnerability scanner. All scanners are given up to 300s to detect the vulnerabilities.
+- bWAPP
+- NoSQL
+- Testsuite
+- XVWA
 
-For each scanner and vulnerability, we initialize the database with `docker-compose up -d` and web server `docker-compose up web --force-recreate`, as well as the respective fuzzer's container.
- 
-See the `known-vulns.csv` for the results.
+The tested vulnerability types include:
+
+- HTTP Header Injection
+- LDAP Injection
+- SSRF (Server-Side Request Forgery)
+- NoSQL Injection
+- SSTI (Server-Side Template Injection)
+
+The complete test cases and scanner results are documented in `known-vulns.csv`.
+
+## Experiment Configuration
+
+For each vulnerability, configuration files are maintained in `../../code/fuzzer/configs/`. These configurations initialize the fuzzers with the vulnerable endpoint and the required parameters. Vulnerable parameter values are replaced with the value `fuzz`.
+
+BurpSuite Professional, OWASP ZAP, and Wapiti were tested manually against the same vulnerability cases.
+
+## Results
+
+The file `known-vulns.csv` contains the tested vulnerability cases and the corresponding detection results for all four scanners.
+
+## Auxiliary Scripts
+
+The `scripts/` directory contains two optional Python scripts for collecting and classifying known WordPress plugin vulnerabilities:
+
+- `01-scrape-wpvulndb.py`: Retrieves vulnerability information from WPScan.
+- `02-analyze_vulns.py`: Filters and classifies the collected vulnerabilities into predefined categories.
+
+These scripts are auxiliary research tools and are not required to execute the vulnerability tests documented in `known-vulns.csv`.
