@@ -46,6 +46,7 @@ def download_plugin(plugin):
     except Exception as e:
         print(f"[-] Download failed: {plugin['name']} - {e}")
 
+open("plugin-download.log", "w").close()
 
 with ThreadPoolExecutor(max_workers=DOWNLOAD_WORKERS) as executor:
 
